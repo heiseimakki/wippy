@@ -1,0 +1,99 @@
+<meta charset="utf-8">
+<script>
+/* PC・タブレットでも スマホの大きさで あそぶ：広い画面なら、スマホ型のわくの中に ゲームを入れる */
+(function(){try{
+  var wide=Math.min(screen.width,innerWidth)>=700&&innerWidth>=700;
+  if(!wide||window.name==='wippy-phone')return;
+  window.__PCWRAP=true;
+  /* このあとの ゲーム本体は 読みこまない（わくの中で 動かす） */
+  document.write('<plaintext style="display:none">');
+  var build=function(){
+    document.documentElement.style.cssText='height:100%;background:#1d1108';
+    var b=document.body||document.documentElement.appendChild(document.createElement('body'));
+    b.style.cssText='margin:0;height:100%;display:grid;place-items:center;overflow:hidden;background:radial-gradient(ellipse at 50% 40%,#5a3418,#1d1108 70%)';
+    var f=document.createElement('iframe');f.name='wippy-phone';f.setAttribute('allow','autoplay');
+    var fit=function(){var h=Math.min(innerHeight-24,932),w=Math.round(Math.min(430,h*0.4618));f.style.cssText='width:'+w+'px;height:'+h+'px;border:0;border-radius:28px;box-shadow:0 0 0 6px #2b1a0e,0 0 0 9px #c99a4a,0 18px 50px rgba(0,0,0,.7);background:#000;display:block'};
+    fit();addEventListener('resize',fit);b.appendChild(f);
+    fetch(location.href).then(function(r){return r.text()}).then(function(t){f.srcdoc=t}).catch(function(){f.src=location.href});
+  };
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',build);else build();
+}catch(e){}})();
+</script>
+<title>賞金稼ぎの旅</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=M+PLUS+Rounded+1c:wght@500;800&display=swap">
+<style>
+html,body{margin:0;background:#000}
+#preboot{position:fixed;inset:0;z-index:2147483000;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#000;color:#fff;font-family:-apple-system,"Hiragino Sans","Helvetica Neue",sans-serif;transition:opacity .5s}
+#preboot.done{opacity:0;pointer-events:none}
+#preboot .pc1{font-size:11px;letter-spacing:.5em;opacity:0;animation:pcIn 1s ease .2s forwards;color:#bfae8a}
+#preboot .pc2{margin-top:10px;font-size:min(7vw,30px);font-weight:300;letter-spacing:.35em;padding-left:.35em;opacity:0;animation:pcIn 1.2s ease .5s forwards}
+#preboot .pc3{margin-top:8px;font-size:11px;letter-spacing:.5em;opacity:0;animation:pcIn 1s ease .9s forwards;color:#bfae8a}
+#preboot .pcl{position:absolute;bottom:calc(10vh + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:pcIn .8s ease 1.4s forwards}
+#preboot .pcbar{width:120px;height:2px;background:rgba(255,255,255,.15);overflow:hidden}
+#preboot #pbf{height:100%;width:3%;background:#e9c46a;transition:width .2s}
+#preboot #pbp{font-size:10px;letter-spacing:.2em;color:#8a7a5a}
+@keyframes pcIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+</style>
+
+
+<div id="preboot"><div class="pc1">PRESENTED BY</div><div class="pc2">HEISEIMAKKI</div><div class="pc3">— 2026 —</div><div class="pcl"><div class="pcbar"><div id="pbf"></div></div><div id="pbp">ゲームが はじまるよ</div></div></div>
+<div id="app"></div>
+<div id="stage" hidden></div>
+<div class="sheet" id="sheet" hidden></div>
+<div class="modal" id="modal" hidden></div>
+<svg id="hair" hidden></svg>
+<button class="mute" id="mute" aria-label="音のオン・オフ">🔊</button><button class="mute" id="vtog" aria-label="声のオン・オフ" style="bottom:calc(max(8px,env(safe-area-inset-bottom,0px)) + 46px)">🗣</button>
+<audio id="bgm" src="audio/bgm_town.mp3" loop preload="none"></audio>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <radialGradient id="cg" cx="38%" cy="32%" r="75%"><stop offset="0" stop-color="#fff2b0"/><stop offset=".45" stop-color="#ffcd3c"/><stop offset="1" stop-color="#d8920f"/></radialGradient>
+  <symbol id="coin" viewBox="0 0 100 100"><circle cx="50" cy="50" r="48" fill="#b97b12"/><circle cx="50" cy="50" r="43" fill="url(#cg)"/>
+    <path d="M50 24 L57.6 41.2 L76.2 42.9 L62.2 55.2 L66.3 73.5 L50 63.9 L33.7 73.5 L37.8 55.2 L23.8 42.9 L42.4 41.2 Z" fill="#e9a91c" stroke="#a96d0c" stroke-width="3" stroke-linejoin="round"/></symbol>
+</defs></svg>
+<script>
+/* 10/28：セーブを クラウドにも 保存する。ブラウザの データが 消えても、つぎに ひらいたとき もどす */
+(function(){var C=null;try{C=window.claude||(parent!==window&&parent.claude)||null}catch(e){}
+var col=null,pend={},busy={},tm=null;
+function ok(k){return typeof k==='string'&&k.indexOf('wippy')===0}
+function enc(k){return k.replace(/[^A-Za-z0-9_-]/g,'_')}
+function ls(k,v){try{if(v===undefined)return localStorage.getItem(k);if(v===null)localStorage.removeItem(k);else localStorage.setItem(k,v)}catch(e){return null}}
+function newer(a,b){try{return (JSON.parse(a).last||0)>(JSON.parse(b).last||0)}catch(e){return false}}
+function sync(){return Promise.all([C.use('db'),C.use('user')]).then(function(a){var db=a[0],u=a[1];if(!db||!u)return null;return u.id().then(function(id){return id?db.collection('data/users/'+id):null})})
+  .then(function(c){if(!c)return false;col=c;return c.get().then(function(s){(s.docs||[]).forEach(function(d){var o=d.data&&d.data();if(!o||!ok(o.k)||typeof o.v!=='string')return;var cur=ls(o.k);
+      if(cur==null)ls(o.k,o.v);else if(/slot/.test(o.k)&&newer(o.v,cur))ls(o.k,o.v)});
+    try{for(var i=0;i<localStorage.length;i++){var k=localStorage.key(i);if(ok(k)&&!(s.docs||[]).some(function(d){return d.id===enc(k)}))pend[k]=1}}catch(e){}flush();return true})}).catch(function(){return false})}
+/* はじめは 何も きかない（おしらせが 出ない）。せっていで「クラウドに のこす」を おしたら 許可を もらう */
+function perm(){return C&&C.use?C.use('permissions').catch(function(){return null}):Promise.resolve(null)}
+window.__cloudReady=new Promise(function(res){var to=setTimeout(res,6000),fin=function(){clearTimeout(to);res()};
+  perm().then(function(pm){if(!pm)return fin();return pm.state().then(function(m){if(m&&m.db==='granted'&&m.user==='granted')return sync().then(fin);fin()})}).catch(fin)});
+window.__cloudOn=function(){return !!col};
+window.__cloudEnable=function(){return perm().then(function(pm){if(!pm)return false;return pm.request(['db','user']).then(function(m){if(m&&m.db==='granted'&&m.user==='granted')return sync();return false})}).catch(function(){return false})};
+function put(k){if(!col||busy[k])return;var v=ls(k);busy[k]=1;delete pend[k];var r=col.doc(enc(k));
+  var p=v==null?r.delete():(v.length>240000?Promise.resolve():r.set({k:k,v:v,t:Date.now()}));
+  p.catch(function(){}).then(function(){busy[k]=0;if(pend[k])put(k)})}
+function flush(){clearTimeout(tm);Object.keys(pend).forEach(put)}
+window.__cloudPut=function(k){if(!ok(k))return;pend[k]=1;clearTimeout(tm);tm=setTimeout(flush,1500)};
+document.addEventListener('visibilitychange',function(){if(document.hidden)flush()});
+addEventListener('pagehide',flush);
+})();
+</script>
+<script>
+/* 10/26：ダウンロードが とまったら、自動で やりなおす（3回まで）。それでも だめなら やさしく おしらせ */
+(function(){var T=2749359,V='1113630f',bar=document.getElementById('pbf'),pc=document.getElementById('pbp'),best=0,tries=0,fin=false;
+function set(p){p=Math.max(.03,Math.min(1,p));if(p>best)best=p;bar.style.width=(best*100)+'%';pc.textContent='ゲームが はじまるよ  '+Math.floor(best*100)+'%'}
+function done(){var pb=document.getElementById('preboot');if(pb){pb.classList.add('done');setTimeout(function(){pb.parentNode&&pb.parentNode.removeChild(pb)},400)}}
+function run(t){if(fin)return;fin=true;var i=t.indexOf('\n'),D=JSON.parse(t.slice(0,i));t=t.slice(i+1).replace(/@@D(\d+)@@/g,function(m,k){return D[+k]});var go=function(){var s=document.createElement('script');s.text=t;document.body.appendChild(s);done()};var w=window.__cloudReady;if(w&&w.then){pc.textContent='セーブを たしかめてるよ…';w.then(go,go)}else go()}
+function sorry(){var l=document.querySelector('#preboot .pcl');if(!l)return;l.innerHTML='<div style="font-size:14px;line-height:1.8;text-align:center;color:#fff;letter-spacing:.05em">とまっちゃった みたい… ごめんね💦<br>ブラウザを 1回 こうしんして<br>もう一度 ためしてみてね！</div><button id="pbr" style="margin-top:10px;font:700 15px sans-serif;padding:10px 26px;border-radius:999px;border:0;background:#e9c46a;color:#3a2412">もう一度 よみこむ</button>';
+  var b=document.getElementById('pbr');if(b)b.onclick=function(){location.reload()}}
+function attempt(){if(fin)return;tries++;var ctl=window.AbortController?new AbortController():null,last=Date.now(),got=0,ch=[];
+  var wd=setInterval(function(){if(fin){clearInterval(wd);return}if(Date.now()-last>9000){clearInterval(wd);try{ctl&&ctl.abort()}catch(e){}retry()}},1000);
+  function retry(){if(fin)return;if(tries>=4){sorry();return}pc.textContent='ちょっと まってね… もう一度 よみこむよ';setTimeout(attempt,600)}
+  var url='game.js?v='+V+(tries>1?'&r='+tries:'');
+  try{fetch(url,ctl?{signal:ctl.signal}:{}).then(function(r){if(!r.ok)throw 0;if(!r.body||!r.body.getReader||!window.TextDecoder)return r.text().then(function(t){clearInterval(wd);run(t)});
+    var rd=r.body.getReader();function pump(){return rd.read().then(function(x){last=Date.now();if(x.done){clearInterval(wd);var b=new Uint8Array(got),o=0;ch.forEach(function(c){b.set(c,o);o+=c.length});return run(new TextDecoder('utf-8').decode(b))}
+    ch.push(x.value);got+=x.value.length;set(got/T);return pump()})}return pump()}).catch(function(){clearInterval(wd);retry()})}
+  catch(e){clearInterval(wd);var x=new XMLHttpRequest();x.open('GET',url);x.onprogress=function(e){last=Date.now();if(e.loaded)set(e.loaded/T)};x.onload=function(){run(x.responseText)};x.onerror=retry;x.send()}}
+attempt()})();
+</script>
+
