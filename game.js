@@ -9571,6 +9571,25 @@ if(typeof xRelease==='function'){const _xr=xRelease;xRelease=async function(sd,m
 {const _bt2=bounceTo;bounceTo=async function(sd,m){try{if(HUMAN&&CFX._bc==='bounce'){const els=sd.board.filter(x=>x.hp>0).map(uEl).filter(Boolean);const te=uEl(m);if(els.length>1&&te)await CFX.roulette(els,te)}}catch(e){}return _bt2.apply(this,arguments)}}
 /* 10/29：さいごに もう一度、キーワードの 絵を あてる（あとから 足された 行も） */
 {const _elZ=effList;effList=function(id,lv){const L=_elZ.apply(this,arguments);try{return L.map(x=>(KW_IMG[x[1]]&&!(typeof x[0]==='string'&&x[0].includes('<img')))?[`<img class="kwi" src="ui/u_${KW_IMG[x[1]]}.png" alt="">`,...x.slice(1)]:x)}catch(e){return L}}}
+/* 10/29：セーブの ひっこし（コピー → べつの アドレス・べつの スマホで はりつけ） */
+const MOVE={keys(){const o={};try{for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(k&&/^wippy/.test(k))o[k]=localStorage.getItem(k)}}catch(e){}return o},
+ b64(u8){let s='';for(let i=0;i<u8.length;i+=8192)s+=String.fromCharCode.apply(null,u8.subarray(i,i+8192));return btoa(s)},
+ unb64(t){const s=atob(t),u=new Uint8Array(s.length);for(let i=0;i<s.length;i++)u[i]=s.charCodeAt(i);return u},
+ async pack(){const raw=new TextEncoder().encode(JSON.stringify(MOVE.keys()));if(window.CompressionStream){const z=await new Response(new Blob([raw]).stream().pipeThrough(new CompressionStream('gzip'))).arrayBuffer();return 'WPY1:'+MOVE.b64(new Uint8Array(z))}return 'WPY0:'+MOVE.b64(raw)},
+ async unpack(t){t=(t||'').replace(/\s+/g,'');const m=t.match(/^WPY([01]):(.+)$/);if(!m)throw 0;let u=MOVE.unb64(m[2]);if(m[1]==='1'){u=new Uint8Array(await new Response(new Blob([u]).stream().pipeThrough(new DecompressionStream('gzip'))).arrayBuffer())}const o=JSON.parse(new TextDecoder().decode(u));if(!o||typeof o!=='object')throw 0;return o},
+ async copyOut(){const code=await MOVE.pack();modal(`<h2>セーブの ひっこし</h2><p style="font-size:13px;line-height:1.7">この コードを コピーして、あたらしい ところの「ひっこしコードを はりつける」に いれてね。</p><textarea id="mvc" readonly style="width:100%;height:110px;font-size:11px;border-radius:10px;padding:8px;word-break:break-all">${code}</textarea><div id="mvm" style="font-size:12px;min-height:18px;margin:4px 0;color:#2a7a2a"></div><button class="btn" id="mvcp" style="width:100%">コピーする</button><button class="btn ghost" id="mvx" style="width:100%;margin-top:8px">とじる</button>`);
+   const ta=$('mvc'),msg=$('mvm');$('mvx').onclick=()=>closeModal();
+   $('mvcp').onclick=async()=>{let ok=false;try{await navigator.clipboard.writeText(code);ok=(await navigator.clipboard.readText().catch(()=>code))===code}catch(e){}if(!ok){try{ta.focus();ta.select();ta.setSelectionRange(0,code.length);ok=document.execCommand('copy')}catch(e){}}msg.textContent=ok?'コピーしたよ！':'長おしで コピーしてね';if(!ok){ta.focus();ta.select()}}},
+ pasteIn(){modal(`<h2>ひっこしコードを はりつける</h2><p style="font-size:13px;line-height:1.7">コピーした コードを ここに はってね。<br>いまの セーブは 上書きされるよ。</p><textarea id="mvi" style="width:100%;height:110px;font-size:11px;border-radius:10px;padding:8px"></textarea><div id="mvm" style="font-size:12px;min-height:18px;margin:4px 0;color:#b03a2a"></div><button class="btn" id="mvgo" style="width:100%">よみこむ</button><button class="btn ghost" id="mvx" style="width:100%;margin-top:8px">やめる</button>`);
+   $('mvx').onclick=()=>closeModal();let sure=false;
+   $('mvgo').onclick=async()=>{const msg=$('mvm');let o;try{o=await MOVE.unpack($('mvi').value)}catch(e){msg.textContent='コードが ちがうみたい。もう一度 コピーしてね';return}
+     if(!sure){sure=true;msg.textContent='もう一度 おすと、この セーブに 入れかわるよ';$('mvgo').textContent='入れかえる！';return}
+     try{for(const k in o)if(/^wippy/.test(k)&&typeof o[k]==='string'){localStorage.setItem(k,o[k]);try{window.__cloudPut&&window.__cloudPut(k)}catch(e){}}}catch(e){msg.textContent='入れられなかった…';return}
+     msg.style.color='#2a7a2a';msg.textContent='ひっこし できたよ！ はじめから よみこむね';setTimeout(()=>location.reload(),900)}}};
+window.MOVE=MOVE;
+{const _os2=openSettings;openSettings=function(){_os2.apply(this,arguments);try{const ok=$('ok');if(!ok)return;const w=document.createElement('div');w.style.cssText='display:flex;gap:6px;margin-top:8px';
+  w.innerHTML='<button class="btn ghost" style="flex:1;font-size:13px">セーブを コピー<br><small>（ひっこし用）</small></button><button class="btn ghost" style="flex:1;font-size:13px">ひっこしコードを<br><small>はりつける</small></button>';
+  const [a,b]=w.querySelectorAll('button');a.onclick=()=>{SFX.tap&&SFX.tap();MOVE.copyOut()};b.onclick=()=>{SFX.tap&&SFX.tap();MOVE.pasteIn()};ok.before(w)}catch(e){}}}
 
 
 /* =====================================================================
