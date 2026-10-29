@@ -9649,6 +9649,8 @@ window.SEP=SEP;['touchend','click','keydown'].forEach(ev=>document.addEventListe
 {const MAPK={heal:'cure',tauntUp:'taunt',shieldUp:'shield',summon:'summon',coin:'coin',hit:'hit',crit:'crit',swish:'swish',whoosh:'swish',sparkle:'sparkle',reviveUp:'revive',poof:'poof',fanfare:'fanfare',tap:'tap',win:'win',lose:'lose',chime:'chime',poison:'bubble'};
  for(const k in MAPK){const f=SFX[k];SFX[k]=function(){if(typeof HUMAN!=='undefined'&&HUMAN&&SEP.play(MAPK[k]))return;return f&&f.apply(this,arguments)}}
  SFX.boom=function(){if(!SEP.play('boom'))(SFX.thunder&&SFX.thunder())}}
+/* 10/29：マップぜんたい（地図ボタン）の 背景を そのステージの マップに */
+try{new MutationObserver(ms=>{for(const m of ms)for(const n of m.addedNodes){if(n.nodeType===1&&n.classList&&n.classList.contains('mapall')){try{const bx=n.querySelector('.mbox');if(bx&&R&&typeof mapOf==='function')bx.style.backgroundImage=`url(${mapOf(R.sid)})`}catch(e){}}}}).observe(document.body,{childList:true})}catch(e){}
 
 
 /* =====================================================================
