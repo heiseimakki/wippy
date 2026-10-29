@@ -79,10 +79,10 @@ const LIST=[
   {k:'kenzan',n:'見参！',d:'カードを 出した しゅんかん',stage:{foes:S1.foes,mine:[{art:'dog'},{art:'eagle',atk:6,hp:7}]},total:2700,build(){const u=U(3);F.darken({t:150,d:2700});const t=enter(u);
    F.at(t,()=>F.rays(pos(u).x,pos(u).y,{t,d:2100}));F.at(t,()=>{const p=pos(u);F.burst(p.x,p.y,{t,n:24,im:['x_spark','x_star'],sp:7,sz:.25});F.flash({t,d:240,a:.85})});
    F.slam('見参！',F.dims().W/2,MID()-6,{t:t+120,d:2200,sub:'空から 見まもっておる！'});F.keyf(u,{t,d:2000,fn:(u,k)=>{u.glow=Math.sin(k*Math.PI)}})}},
-  {k:'yarare',n:'やられたら',d:'たおれた ときに 出る 効果',stage:{foes:S1.foes,mine:[{art:'new03',atk:4,hp:1},{art:'juko'}]},total:4600,build(){const u=U(2);ko(u,300);const p0=pos(u);
-   F.at(1150,()=>{F.icon('u_k_dr',p0.x,p0.y,{t:1150,d:1300,sz:70,bob:4});F.ring(p0.x,p0.y,{t:1150,col:'170,120,255',r1:90})});
-   F.slam('やられたら',F.dims().W/2,MID()-6,{t:1350,d:1500,size:42,grad:['#f0e0ff','#c99aff','#8a5ad0','#5a2aa0'],stroke:'#1e0a3a',sub:'のろいの 手紙が とんでいく…'});
-   F.at(2050,()=>{const tg=pos(U(0));F.shot(p0,tg,{t:2050,d:750,im:'x_card',sz:34,arc:90,trail:'190,140,255',onHit:tt=>{}})});hitAt(U(0),2800,1,{im:'x_skull'})}},
+  {k:'yarare',n:'やられたら',d:'たおれた ときに 出る 効果',stage:{foes:S1.foes,mine:[{art:'new03',atk:4,hp:1},{art:'juko'}]},total:2600,build(){const u=U(2);ko(u,100);const p0=pos(u);
+   F.at(520,()=>{F.icon('u_k_dr',p0.x,p0.y,{t:520,d:900,sz:70,bob:4});F.ring(p0.x,p0.y,{t:520,col:'170,120,255',r1:90})});
+   F.slam('やられたら',F.dims().W/2,MID()-6,{t:560,d:1500,size:42,grad:['#f0e0ff','#c99aff','#8a5ad0','#5a2aa0'],stroke:'#1e0a3a',sub:'のろいの 手紙！'});
+   F.at(950,()=>{const tg=pos(U(0));F.shot(p0,tg,{t:950,d:480,im:'x_card',sz:34,arc:90,trail:'190,140,255'})});hitAt(U(0),1430,1,{im:'x_skull'})}},
   {k:'irua',n:'いるあいだ',d:'出した時と 毎ターンの はじめに 力を くばる',stage:{foes:S1.foes,mine:[{art:'dog'},{art:'juko',kw:['taunt']},{art:'jacka'}]},total:6400,build(){const u=U(4);const {W,H}=F.dims();const t0=enter(u);
    const pulse=(t,lab)=>{F.at(t,tt=>{const p=pos(u);F.ring(p.x,p.y,{t:tt,col:'255,215,90',r1:W*.45,w:8,d:900});F.ring(p.x,p.y,{t:tt+180,col:'255,255,255',r1:W*.35,w:4,d:800});F.dots(p.x,p.y,{t:tt,n:20,col:'255,220,120',area:80,up:2});
      [2,3].forEach((i,j)=>{const v=U(i),q=pos(v);F.shot(p,q,{t:tt+120+j*80,d:320,im:'x_star',sz:22,trail:'255,215,90'});F.at(tt+440+j*80,t2=>{F.burst(q.x,q.y,{t:t2,n:6,im:'x_star',sp:3,g:-.05,life:900,sz:.18});F.keyf(v,{t:t2,d:700,fn:(v,k)=>{v.glow=Math.sin(k*Math.PI);v.sc=1+.12*Math.sin(k*Math.PI)}});if(lab){F.floatTxt(lab,q.x,q.y-q.y*0-40,{t:t2,col:'#ffe066',size:18});v.atk+=1;v.up=1;v.marks=['x_star']}})})});
