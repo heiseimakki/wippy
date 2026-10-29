@@ -178,17 +178,13 @@ const LIST=[
   {k:'kw_twice',n:'2回攻撃',d:'1ターンに 2回',stage:S1,total:2600,build(){const a=U(2),t=U(0);const pa=pos(a),pt=pos(t);[0,1].forEach(i=>{const s=300+i*650;F.keyf(a,{t:s,d:180,fn:(u,k)=>{u.ox=(pt.x-pa.x)*E.io(k);u.oy=(pt.y-pa.y)*E.io(k)}});F.at(s+180,tt=>{F.icon('x_pow',pt.x,pt.y,{t:tt,d:320,sz:70});F.shake({t:tt,p:6});F.floatTxt(i?'2回目！':'1回目',pt.x+t.rw*.95,pt.y+t.rh*.1,{t:tt,size:18,col:'#ffd27a',rise:18})});hitAt(t,s+180,1);F.keyf(a,{t:s+190,d:300,fn:(u,k)=>{u.ox=(pt.x-pa.x)*(1-E.o(k));u.oy=(pt.y-pa.y)*(1-E.o(k))}})})}},
   {k:'kw_stealth',n:'かくれんぼ',d:'自分から 攻撃するまで ねらわれない',stage:{foes:S1.foes,mine:[{art:'new03',atk:4,hp:1}]},total:2400,build(){const u=U(2);F.keyf(u,{t:300,d:600,fn:(u,k)=>{u.alpha=1-k*.6}});F.keyf(u,{t:900,d:1300,fn:(u,k,tt)=>{u.alpha=.4+.1*Math.sin(tt/150);u.ox=Math.sin(tt/300)*3}});F.at(300,tt=>F.smoke(pos(u).x,pos(u).y+10,{t:tt,col:'200,200,220',n:10}))}},
   {k:'kw_thorns',n:'トゲ',d:'攻撃してきた あいてに ダメージ',stage:{foes:[{art:'jab'}],mine:[{art:'sabota',atk:1,hp:3}]},total:2400,build(){const a=U(0),t=U(1);const pa=pos(a),pt=pos(t);F.keyf(a,{t:300,d:200,fn:(u,k)=>{u.ox=(pt.x-pa.x)*E.io(k)*.85;u.oy=(pt.y-pa.y)*E.io(k)*.85}});hitAt(t,500,2);F.at(520,tt=>{F.burst(pt.x,pt.y-10,{t:tt,n:12,im:'x_claw',sp:6,dir:-Math.PI/2,spread:1.6,life:500,sz:.22})});hitAt(a,600,1,{im:'x_claw'});F.keyf(a,{t:620,d:650,fn:(u,k)=>{u.tint=k>=1?null:`rgba(255,40,40,${.45*(1-k*.7)})`;u.ox+=k>=1?0:Math.sin(k*70)*3.5*(1-k)}});F.at(620,tt=>F.floatTxt('トゲ！',pos(a).x+a.rw*.8,pos(a).y,{t:tt,size:16,col:'#ffb0b0',rise:16}));F.keyf(a,{t:520,d:400,fn:(u,k)=>{u.ox=(pt.x-pa.x)*.85*(1-E.o(k));u.oy=(pt.y-pa.y)*.85*(1-E.o(k))}})}},
-  {k:'kw_revive',n:'1回復活',d:'いちど ちゃんと やられてから、すぐ 立ち上がる',stage:{foes:S1.foes,mine:[{art:'zombie',atk:1,hp:1}]},total:4200,build(){const u=U(2),a=U(0);const pa=pos(a),pu=pos(u);
-   /* まず こうげきされて ふつうに やられる */
-   F.keyf(a,{t:250,d:180,fn:(v,k)=>{v.ox=(pu.x-pa.x)*E.io(k)*.85;v.oy=(pu.y-pa.y)*E.io(k)*.85}});F.at(430,tt=>{F.burst(pu.x,pu.y,{t:tt,n:8,im:'x_pow',sp:5,life:500,sz:.3});F.shake({t:tt,p:8})});hitAt(u,430,1);
-   F.keyf(a,{t:440,d:380,fn:(v,k)=>{v.ox=(pu.x-pa.x)*.85*(1-E.o(k));v.oy=(pu.y-pa.y)*.85*(1-E.o(k))}});
-   const end=ko(u,800);
-   /* 一瞬 しーん…→ 光の柱 → もどってくる */
-   const t1=end+350;F.at(t1,tt=>{const p=pos(u);F.flash({t:tt,d:300,col:'255,245,200',a:.5});F.rays(p.x,p.y,{t:tt,d:1500,n:12,len:260,a:.45});F.icon('x_halo',p.x,p.y-u.rh/2-14,{t:tt,d:1700,sz:56,bob:3});F.dots(p.x,p.y+u.rh*.5,{t:tt,n:40,col:'255,240,200',up:3.2,life:1300,area:70})});
-   F.at(t1+250,()=>{u.gray=0;u.rot=0;u.ox=0;u.oy=0;u.hp=1});
-   F.tween(u,{t:t1+250,d:500,sc:1.15,alpha:1,e:E.b});F.tween(u,{t:t1+750,d:250,sc:1,e:E.io});
-   F.keyf(u,{t:t1+250,d:1400,fn:(v,k)=>{v.glow=Math.sin(k*Math.PI);v.glowC='255,240,180'}});
-   F.at(t1+550,tt=>{const p=pos(u);F.ring(p.x,p.y,{t:tt,col:'255,240,180',r1:110});F.floatTxt('ふっかつ！',p.x,p.y-u.rh/2-30,{t:tt,col:'#ffe9a0',size:24})})}},
+  {k:'kw_revive',n:'1回復活',d:'やられそうに なっても、もう一度 立ち上がる',stage:{foes:S1.foes,mine:[{art:'zombie',atk:1,hp:1}]},total:3600,build(){const u=U(2),a=U(0);
+   const h=lunge(a,u,250,{d:180,frac:.85});hitFx(u,h,1,{icon:'x_pow',isz:70,shake:7});
+   /* たおれかける（グレーに なって かたむく） */F.keyf(u,{t:h+150,d:550,fn:(v,k)=>{v.gray=k;v.rot=.35*E.o(k);v.oy=16*E.o(k);v.sc=1-.08*k}});
+   /* 天使の 輪と 光の つぶ */F.at(h+800,tt=>{const p=pos(u);F.icon('x_halo',p.x,p.y-u.rh/2-12,{t:tt,d:1500,sz:56,bob:3});F.dots(p.x,p.y+u.rh*.4,{t:tt,n:36,col:'255,240,200',up:3,life:1300,area:70});F.flash({t:tt,d:250,col:'255,245,210',a:.35})});
+   /* もう一度 立ち上がる */F.keyf(u,{t:h+1100,d:650,fn:(v,k)=>{v.gray=1-k;v.rot=.35*(1-E.o(k));v.oy=16*(1-E.o(k))-Math.sin(k*Math.PI)*18;v.sc=.92+.08*k+.12*Math.sin(k*Math.PI);v.glow=Math.sin(k*Math.PI);v.glowC='255,240,180'}});
+   F.at(h+1760,()=>{u.gray=0;u.rot=0;u.oy=0;u.ox=0;u.sc=1;u.glow=0;u.tint=null;u.hp=1});
+   F.at(h+1500,tt=>{const p=pos(u);F.ring(p.x,p.y,{t:tt,col:'255,240,180',r1:100});F.floatTxt('ふっかつ！',p.x,p.y-u.rh/2-30,{t:tt,col:'#ffe9a0',size:24})})}},
   {k:'kw_deadly',n:'必殺',d:'戦った あいてを 一発で',stage:{foes:[{art:'eagle',atk:6,hp:7}],mine:[{art:'kurogoke',atk:2,hp:2}]},total:2600,build(){const a=U(1),t=U(0);const pa=pos(a),pt=pos(t);F.darken({t:200,d:1600,a:.55});F.keyf(a,{t:500,d:150,fn:(u,k)=>{u.ox=(pt.x-pa.x)*E.io(k);u.oy=(pt.y-pa.y)*E.io(k)}});F.at(650,tt=>{F.flash({t:tt,d:250,col:'255,255,255',a:.9});F.icon('x_skull',pt.x,pt.y,{t:tt,d:700,sz:90});F.burst(pt.x,pt.y,{t:tt,n:8,im:'x_slash',sp:7,life:450,sz:.24,orient:true})});F.keyf(a,{t:660,d:300,fn:(u,k)=>{u.ox=(pt.x-pa.x)*(1-E.o(k));u.oy=(pt.y-pa.y)*(1-E.o(k))}});ko(t,900)}},
  ]},
  {cat:'じょうたい',items:[
