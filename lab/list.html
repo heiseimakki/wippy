@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<title>演出リスト</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=M+PLUS+Rounded+1c:wght@500;800;900&display=swap">
+<style>
+*{box-sizing:border-box;touch-action:manipulation}
+body{margin:0;background:#1d1108;color:#fff;font-family:"M PLUS Rounded 1c",sans-serif}
+header{position:sticky;top:0;background:#1d1108;padding:10px 12px 8px;z-index:2;border-bottom:1px solid #4a3020}
+header b{font-family:"Dela Gothic One";font-size:19px;color:#ffcd3c}
+header a{float:right;color:#ffe9b0;font-weight:800;font-size:13px;text-decoration:none;border:2px solid #a07a4a;border-radius:10px;padding:3px 9px}
+.f{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
+.f input{flex:1;min-width:120px;font:800 14px inherit;padding:7px 10px;border-radius:10px;border:2px solid #6b4a2a;background:#2b1a0e;color:#fff}
+.f button{font:800 12px inherit;padding:6px 10px;border-radius:999px;border:2px solid #6b4a2a;background:#2b1a0e;color:#e8d3b0}
+.f button.on{background:#ffcd3c;color:#3a2412;border-color:#ffcd3c}
+#n{font-size:11px;color:#c9b08a;margin-top:6px}
+main{padding:8px 12px 30px;display:grid;gap:8px}
+.c{background:rgba(40,20,8,.9);border:2px solid #6b4a2a;border-radius:12px;padding:8px 10px}
+.c h3{margin:0;font-size:15px;font-weight:900}.c h3 i{font-style:normal;font-size:11px;color:#c9b08a;margin-left:6px}
+.c p{margin:4px 0 0;font-size:12px;color:#e8d3b0;line-height:1.5}
+.c .t{display:inline-block;font-size:11px;font-weight:900;border-radius:6px;padding:1px 6px;margin-right:4px}
+.atk{background:#7a2a1a}.idea{background:#2a4a6a}.st{background:#3a5a2a}
+</style></head><body>
+<header><a href="./">← 演出ずかん</a><b>演出リスト</b>
+<div class="f"><input id="q" placeholder="名前・効果で さがす"><button data-f="all" class="on">ぜんぶ</button><button data-f="sp">専用演出</button><button data-f="none">いま 演出なし</button></div><div id="n"></div></header>
+<main id="m"></main>
+<script>
+function parse(t){const R=[];let r=[],f='',q=false;for(let i=0;i<t.length;i++){const ch=t[i];if(q){if(ch=='"'){if(t[i+1]=='"'){f+='"';i++}else q=false}else f+=ch}else if(ch=='"')q=true;else if(ch==','){r.push(f);f=''}else if(ch=='\n'){r.push(f);R.push(r);r=[];f=''}else if(ch!='\r')f+=ch}if(f||r.length){r.push(f);R.push(r)}return R}
+let rows=[],flt='all';
+const esc=s=>String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'})[c]);
+function draw(){const q=document.getElementById('q').value.trim();const L=rows.filter(r=>(!q||r.join(' ').includes(q))&&(flt=='all'||(flt=='sp'&&/専用/.test(r[8]))||(flt=='none'&&r[4]=='なし')));
+ document.getElementById('n').textContent=L.length+'人';
+ document.getElementById('m').innerHTML=L.map(r=>`<div class="c"><h3>${esc(r[1])}<i>${esc(r[2])}・${esc(r[0])}</i></h3><p>${esc(r[3])}</p><p><span class="t atk">こうげき</span>${esc(r[6])}<small style="color:#a89070">（いま：${esc(r[5])}）</small></p>${r[7]?`<p><span class="t idea">効果の 演出</span>${esc(r[7])}</p>`:''}<p><span class="t st">${esc(r[8])}</span>いまの 専用演出：${esc(r[4])}</p></div>`).join('')}
+fetch('fxlist.csv?v='+Date.now()).then(r=>r.text()).then(t=>{rows=parse(t).slice(1).filter(r=>r.length>5);draw()});
+document.getElementById('q').oninput=draw;
+document.querySelectorAll('[data-f]').forEach(b=>b.onclick=()=>{flt=b.dataset.f;document.querySelectorAll('[data-f]').forEach(x=>x.classList.toggle('on',x===b));draw()});
+</script></body></html>
