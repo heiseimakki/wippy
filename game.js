@@ -9248,6 +9248,15 @@ Object.assign(XT,{
  ikoku:[['aura','我に つづけ！ ほかの なかまは +1/+1']],
  adara:[['aura','聖なる 光で、ほかの なかまが うける ダメージを 1 へらす']],
 });
+/* 10/29：アプリを とじたり ほかの 画面に したら 音を ぜんぶ 止める（iPhoneで うらで なりつづけた） */
+(()=>{const resumeList=[];const stopAll=()=>{try{document.querySelectorAll('audio,video').forEach(a=>{if(!a.paused){resumeList.push(a);a.pause()}})}catch(e){}
+  try{if(typeof FP!=='undefined'&&FP&&!FP.paused){resumeList.push(FP);FP.pause()}}catch(e){}
+  try{if(typeof AC!=='undefined'&&AC&&AC.state==='running')AC.suspend().catch(()=>{})}catch(e){}
+  try{if(navigator.mediaSession)navigator.mediaSession.playbackState='paused'}catch(e){}};
+  document.addEventListener('visibilitychange',()=>{if(document.hidden)stopAll()},true);
+  addEventListener('pagehide',stopAll,true);addEventListener('freeze',stopAll,true);
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden){resumeList.length=0}});
+  try{if(navigator.mediaSession){['play','pause','stop','seekbackward','seekforward','previoustrack','nexttrack'].forEach(a=>{try{navigator.mediaSession.setActionHandler(a,a==='play'?null:()=>stopAll())}catch(e){}})}}catch(e){}})();
 
 
 /* =====================================================================
