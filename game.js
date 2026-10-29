@@ -2951,9 +2951,11 @@ function entranceFx(m,from,mine){const el=uEl(m);if(!el||!HUMAN)return Promise.r
   await sleep(250);
   B._spDone=null;
   {const el=uEl(m);if(el){speak(d.s,m.id,'v_'+m.id+'_s');sayBubble(el,d.s,!isMe(sd))}}
-  await sleep(isMe(sd)?650:450);await kwFx(m);
-  quietOn();try{await battlecry(sd,m,c)}finally{if(B)B._spDone=null}
-  quietOff();await cleanup();if(HUMAN)renderBattle();return true}}
+  await sleep(isMe(sd)?650:450);
+  /* 10/29：見参が あるなら 見参を さきに。そのあとで ほかの マーク（みず など） */
+  if(d.bc){quietOn();try{await battlecry(sd,m,c)}finally{if(B)B._spDone=null}quietOff();if(B&&!B.over&&m.hp>0&&sd.board.includes(m)){await sleep(1500);await kwFx(m)}}
+  else{await kwFx(m);quietOn();try{await battlecry(sd,m,c)}finally{if(B)B._spDone=null}quietOff()}
+  await cleanup();if(HUMAN)renderBattle();return true}}
 
 /* ---- 長い曲（mp3）で鳴らす：タイトル・マップ・オープニング。町は #bgm ---- */
 const MFILE={title:'audio/bgm_title.mp3',map:'audio/bgm_map.mp3',mapnight:'audio/bgm_map.mp3',story:'audio/western_story_short.mp3'};
