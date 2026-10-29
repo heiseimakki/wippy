@@ -256,8 +256,36 @@ const LIST=[
   {k:'a_tongue',n:'ベロで ペチッ',d:'カエル',stage:SA('new17',1),total:1800,build(){const a=U(1),t=U(0);
    F.at(300,tt=>{F.overlay(a,{t:tt,d:520,draw:(x,y,r,e)=>{const c=F.ctx();const pt=pos(t);const k=e<260?E.o(e/260):1-E.io((e-260)/260);const ex=x+(pt.x-x)*k,ey=y-a.rh*.15+(pt.y-y+a.rh*.15)*k;c.save();c.lineCap='round';c.strokeStyle='#e86a8a';c.lineWidth=10;c.beginPath();c.moveTo(x,y-a.rh*.15);c.lineTo(ex,ey);c.stroke();c.fillStyle='#ff8aa8';c.beginPath();c.arc(ex,ey,10,0,7);c.fill();c.restore()}})});hitFx(t,560,1,{icon:'x_hit',isz:50,shake:3,txt:'ペチッ'})}},
  ]},
+
+ {cat:'キャラ専用',items:[
+  {k:'c_dig',n:'もぐる（砂クジラ）',d:'砂に もぐって、出てくる時 あいて ぜんいんに 2ダメージ',stage:{foes:S2.foes,mine:[{art:'dog'},{art:'new191',atk:3,hp:4}]},total:5200,build(){const u=U(4);const {W}=F.dims();const base=()=>u.by+u.rh*.5;
+   F.at(250,tt=>{const p=pos(u);F.floatTxt('ボエ〜〜！',p.x,p.y-u.rh*.6,{t:tt,size:20,col:'#ffe6b0',rise:20})});
+   /* 砂へ もぐる */F.at(700,tt=>{F.burst(u.bx,base(),{t:tt,n:10,im:'fx:04_08',sp:3,g:.12,up:3,life:900,sz:.22,add_:false,dir:-Math.PI/2,spread:2.2});F.shake({t:tt,p:4,d:600})});
+   F.keyf(u,{t:700,d:800,fn:(v,k)=>{v.oy=v.rh*k;v.clipB=k;v.rot=Math.sin(k*18)*.05*(1-k)}});
+   /* 砂の 下を うごく（砂の もりあがりが 左右に） */
+   F.overlay(u,{t:1500,d:1500,draw:(x,y,r,e)=>{const c=F.ctx(),I=F.ui('fx:04_10');if(!I.complete)return;const k=e/1500;const mx=u.bx+Math.sin(k*Math.PI*2)*u.rw*.8;const s=u.rw*.9;c.save();c.globalAlpha=Math.min(1,e/200,(1500-e)/200);c.drawImage(I,mx-s/2,base()-s*.55,s,s*.6);c.restore()}});
+   F.at(1600,tt=>F.floatTxt('もぐってる…（ねらわれない）',W/2,u.by-u.rh*.2,{t:tt,size:15,col:'#ffe6b0',rise:10}));
+   F.slam('ターンの はじめ',W/2,MID()-6,{t:2400,d:1300,size:30,from:1.6});
+   /* ザバーン！と 出てくる */const T=3300;F.at(T,tt=>{const ef=F.place(F.bd().units[0].parentNode);F.flash({t:tt,d:200,col:'255,230,180',a:.5});F.shake({t:tt,p:12,d:500});
+     F.burst(u.bx,base(),{t:tt,n:14,im:'fx:04_08',sp:6,g:.15,up:5,life:1000,sz:.3,add_:false,dir:-Math.PI/2,spread:1.6});
+     F.shot({x:u.bx,y:base()},{x:W/2,y:ef.y},{t:tt+100,d:400,im:'fx:04_10',sz:60,scale:1.6,trail:'220,190,130'})});
+   F.keyf(u,{t:T,d:500,fn:(v,k)=>{v.clipB=1-k;v.oy=v.rh*(1-k)-Math.sin(k*Math.PI)*60;v.sc=1+.15*Math.sin(k*Math.PI)}});F.at(T+520,()=>{u.clipB=0;u.oy=0;u.sc=1});
+   [0,1,2].forEach(i=>{F.at(T+500+i*60,tt=>{const p=pos(U(i));F.burst(p.x,p.y+U(i).rh*.3,{t:tt,n:6,im:'fx:04_08',sp:3,g:.12,life:700,sz:.18,add_:false})});hitAt(U(i),T+500+i*60,2,{im:'x_hit'})})}},
+  {k:'c_sink',n:'しずむ（ぬまぬまゾンビ）',d:'やられたら ぬまに しずんで、2ターン後に もどってくる',stage:{foes:S1.foes,mine:[{art:'new151',atk:2,hp:1},{art:'dog'}]},total:6400,build(){const u=U(2),a=U(0);const {W}=F.dims();const MUD='sepia(1) saturate(1.6) hue-rotate(40deg) brightness(.6)';const base=()=>u.by+u.rh*.5;
+   const h=lunge(a,u,250,{d:180,frac:.85});hitFx(u,h,1,{icon:'x_pow',isz:70,shake:6});
+   /* ぬまが ひろがって ずぶずぶ… */
+   F.overlay(u,{t:h+200,d:4300,draw:(x,y,r,e)=>{const c=F.ctx(),I=F.ui('fx:06_26');if(!I.complete)return;const k=Math.min(1,e/400,(4300-e)/400);const s=u.rw*1.6;c.save();c.globalAlpha=.9*k;c.filter=MUD;c.drawImage(I,u.bx-s/2,base()-s*.22,s,s*.44);c.restore()}});
+   F.keyf(u,{t:h+400,d:1300,fn:(v,k)=>{v.oy=v.rh*E.io(k);v.clipB=E.io(k);v.rot=Math.sin(k*22)*.06*(1-k);v.gray=.3*k}});
+   F.at(h+400,tt=>F.floatTxt('ずぶずぶ…',u.bx,u.by-u.rh*.6,{t:tt,size:17,col:'#d8e8b0',rise:16}));
+   /* あわが ぶくぶく */F.overlay(u,{t:h+500,d:3800,draw:(x,y,r,e)=>{const c=F.ctx(),I=F.ui('fx:06_23');if(!I.complete)return;c.save();c.filter=MUD;for(let i=0;i<4;i++){const k=((e/1300)+i/4)%1;const s=10+10*k;c.globalAlpha=Math.sin(k*Math.PI)*.95;c.drawImage(I,u.bx-u.rw*.35+i*u.rw*.23+Math.sin(k*6+i)*4-s/2,base()-k*u.rh*.5-s/2,s,s)}c.restore()}});
+   F.at(h+1900,tt=>F.floatTxt('ぬまの 中… あと 2ターン',u.bx,base()-30,{t:tt,size:15,col:'#d8e8b0',rise:6}));
+   F.slam('ターンの はじめ',W/2,MID()-6,{t:h+2700,d:1300,size:30,from:1.6});
+   /* はい出てくる */const T=h+4100;F.at(T,tt=>{F.burst(u.bx,base(),{t:tt,n:10,im:'fx:04_11',sp:4,g:.2,up:3,life:800,sz:.22,add_:false,dir:-Math.PI/2,spread:2.4});F.shake({t:tt,p:5})});
+   F.keyf(u,{t:T,d:900,fn:(v,k)=>{v.oy=v.rh*(1-E.o(k));v.clipB=1-E.o(k);v.gray=.3*(1-k);v.rot=Math.sin(k*14)*.08*(1-k)}});F.at(T+920,()=>{u.clipB=0;u.oy=0;u.rot=0;u.gray=0;u.hp=1});
+   F.at(T+500,tt=>F.floatTxt('もどってきた！',u.bx,u.by-u.rh*.6,{t:tt,size:20,col:'#c8ffb0'}))}},
+ ]},
  {cat:'これから 作る',items:[
-  {k:'s1',n:'キャラ専用 演出',d:'302人の リスト（演出リスト ページ）',soon:1},{k:'s1a',n:'もぐる（砂クジラ）',d:'すなに もぐって せびれ → ザバーン',soon:1},{k:'s1b',n:'しずむ（ぬまぬまゾンビ）',d:'あわ ぶくぶく → ぬまへ → はい出る',soon:1},{k:'s2',n:'ボス登場',d:'',soon:1},{k:'s3',n:'勝った！／まけた',d:'',soon:1},{k:'s4',n:'合成・しんか・かくせい',d:'',soon:1},{k:'s5',n:'天気（はれ・あめ・ゆき・すな）',d:'',soon:1},{k:'s6',n:'お金・カードを 手に入れる',d:'',soon:1}]},
+  {k:'s1',n:'キャラ専用 演出',d:'302人の リスト（演出リスト ページ）',soon:1},{k:'s2',n:'ボス登場',d:'',soon:1},{k:'s3',n:'勝った！／まけた',d:'',soon:1},{k:'s4',n:'合成・しんか・かくせい',d:'',soon:1},{k:'s5',n:'天気（はれ・あめ・ゆき・すな）',d:'',soon:1},{k:'s6',n:'お金・カードを 手に入れる',d:'',soon:1}]},
 ];
 const ALL=LIST.flatMap(c=>c.items.filter(i=>!i.soon));
 const menu=document.getElementById('menu');

@@ -28,7 +28,7 @@ function measure(){[...units,heroes.foe,heroes.me].forEach(u=>{if(!u||!u.el)retu
 const P=u=>({x:u.x*W+u.ox,y:u.y*H+u.oy});
 const place=(el)=>{const r=el.getBoundingClientRect();return {x:r.left+r.width/2,y:r.top+r.height/2,w:r.width,h:r.height}};
 function apply(u){const el=u.el;if(!el)return;const dx=u.x*W-u.bx+u.ox,dy=u.y*H-u.by+u.oy;
-  el.style.transform=`translate(${dx+shX}px,${dy+shY}px) rotate(${u.rot}rad) scale(${u.sc})`;el.style.opacity=u.hidden?0:u.alpha;
+  el.style.transform=`translate(${dx+shX}px,${dy+shY}px) rotate(${u.rot}rad) scale(${u.sc})`;el.style.opacity=u.hidden?0:u.alpha;el.style.clipPath=u.clipB?`inset(-30% -30% ${(u.clipB*100).toFixed(1)}% -30%)`:'';
   const f=[];if(u.gray)f.push(`grayscale(${u.gray}) brightness(${1-u.gray*.4})`);if(u.glow>0)f.push(`drop-shadow(0 0 ${8+14*u.glow}px rgba(${u.glowC},${Math.min(1,u.glow)}))`);el.style.filter=f.join(' ')||'none';
   const t=el.querySelector('.fxt');if(t)t.style.background=u.tint||'transparent';
   const a=el.querySelector('.stat.a'),h=el.querySelector('.stat.h,.hp');if(a&&u.atk!=null&&a.textContent!=String(u.atk))a.textContent=u.atk;if(a)a.classList.toggle('up',!!u.up);if(h&&u.hp!=null&&h.textContent!=String(u.hp))h.textContent=u.hp;
