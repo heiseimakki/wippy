@@ -9513,7 +9513,22 @@ async function unko(fromEl,boardEl){if(!ensure()||!fromEl||!boardEl)return;begin
   at(560,()=>{const t0=tt0(560),fy=to.y+r.height*.3,fly=(i,T)=>{const e=(T-t0)/SP();if(e<0||e>1900)return;const I=ui('fx:11_02');if(!I.complete)return;const a2=e/300+i*3;c.save();c.globalAlpha=Math.min(1,(1900-e)/250);c.drawImage(I,to.x+Math.cos(a2)*36-10,fy-14+Math.sin(a2*1.3)*10-10,20,20);c.restore()};add({end:t0+dd(1900),draw(T){fly(0,T)}});icon('fx:11_01',to.x,fy,{t:560,d:1900,sz:56});add({top:1,end:t0+dd(1900),draw(T){fly(1,T)}});slam('ふんだ！',W/2,to.y-30,{t:620,d:1200,size:34,from:1.6,grad:['#fff0d0','#e0b070','#a06a30','#6a4020']});S.squish()});await wait(700)}
 function glitch(){if(!ensure())return;begin();slam('文字化け！',W/2,H*.42,{t:0,d:1300,size:38,grad:['#f0e0ff','#c99aff','#8a5ad0','#5a2aa0'],stroke:'#1e0a3a'});flash({t:0,d:220,col:'180,120,255',a:.4});const a=document.getElementById('app');if(a){let n=0;const iv=setInterval(()=>{a.style.filter=n%2?'':`hue-rotate(${(Math.random()*90-45)|0}deg)`;if(++n>8){clearInterval(iv);a.style.filter=''}},90)}S.safe(()=>{for(let i=0;i<6;i++)tone(200+Math.random()*1800,.05,{vol:.05,at:i*.06,type:'square'})})}
 function unlock(el){if(!ensure()||!el)return;begin();const u=wrap(el),p=pos(u);icon('fx:new/lock_open',p.x,p.y-u.rh*.15,{t:0,d:1000,sz:66});burst(p.x,p.y,{t:200,n:8,im:'x_spark',sp:4,life:700,sz:.16});S.safe(()=>{SFX.lock?SFX.lock():tone(1400,.08,{vol:.08,type:'square'});SFX.chime&&SFX.chime()})}
-return {burn,unlock,digIn,emerge,coin,roulette,hanage,unko,glitch,kwFlair,drFx,thorn,auraPulse,attack,hit,kenzan,ko,revive,shotTo,bottleTo,freezeU,blow,summonPop,shieldBreak,deadly,aoe,textAt,heal:el=>{if(!ensure()||!el)return;begin();healU(wrap(el));S.heal()},buff:el=>{if(!ensure()||!el)return;begin();buffU(wrap(el))},down:el=>{if(!ensure()||!el)return;begin();const u=wrap(el);keyf(u,{t:0,d:600,fn:(v,k)=>{v.tint=k>=1?null:`rgba(60,90,200,${.3*(1-k)})`;v.oy=k>=1?0:6*Math.sin(k*Math.PI)}});S.down()},poison:el=>{if(!ensure()||!el)return;begin();poisonU(wrap(el))},kindOf,on:true}})();
+/* 10/29：キャラ専用 第2弾（とりかえっこ・けとばし・ねがいごと・もらう・ふうせん） */
+function rectOf(sel){const e=document.querySelector(sel);if(!e)return null;const r=e.getBoundingClientRect();if(!r.width)return null;return {x:r.left+r.width/2,y:r.top+r.height/2,w:r.width,h:r.height}}
+async function trade(){if(!ensure())return;begin();const mh=rectOf('#hand'),fh=rectOf('.fh');if(!mh||!fh)return;for(let i=0;i<4;i++){shot({x:mh.x+(i-1.5)*mh.w*.22,y:mh.y},{x:fh.x,y:fh.y},{t:i*80,d:560,im:'fx:09_25',sz:26,scale:1.6,arc:70,trail:'255,230,180',tilt:(i-1.5)*.3});shot({x:fh.x,y:fh.y},{x:mh.x+(i-1.5)*mh.w*.22,y:mh.y},{t:40+i*80,d:560,im:'w_cardback',sz:26,scale:1.6,arc:-70,trail:'200,200,255',tilt:(i-1.5)*-.3})}
+  S.safe(()=>{for(let i=0;i<6;i++)SFX.flip&&setTimeout(()=>SFX.flip(),i*90)});at(700,()=>{const c0={x:W/2,y:(mh.y+fh.y)/2};floatTxt('とりかえっこ！',c0.x,c0.y,{t:700,size:22,col:'#ffe066'})});await wait(1100)}
+async function kickOut(mEl,tEl){if(!ensure()||!mEl||!tEl)return;begin();const a=wrap(mEl),t=wrap(tEl),pa=pos(a),pt=pos(t);const dk=rectOf('.fside .deckpile')||{x:W-30,y:40};
+  keyf(a,{t:0,d:160,fn:(u,q)=>{u.ox=(pt.x-pa.x)*.7*E.io(q);u.oy=(pt.y-pa.y)*.7*E.io(q)}});keyf(a,{t:170,d:300,fn:(u,q)=>{u.ox=(pt.x-pa.x)*.7*(1-E.o(q));u.oy=(pt.y-pa.y)*.7*(1-E.o(q))}});
+  at(160,()=>{icon('x_pow',pt.x,pt.y,{t:160,d:300,sz:70});shake({t:160,p:7});S.thud()});
+  keyf(t,{t:180,d:700,fn:(u,q)=>{u.ox=(dk.x-pt.x)*E.io(q);u.oy=(dk.y-pt.y)*E.io(q)-Math.sin(q*Math.PI)*60;u.rot=q*7;u.sc=1-.82*q;u.alpha=q>=1?0:1-.3*q;if(q>=1)tEl.style.visibility='hidden'}});
+  at(200,()=>S.whoosh());await wait(950)}
+async function wish(){if(!ensure())return;begin();const mh=rectOf('#hand')||{x:W/2,y:H*.85};shot({x:-40,y:H*.12},{x:mh.x,y:mh.y-20},{t:0,d:650,im:'fx:03_28',sz:40,scale:1.6,trail:'255,240,180',aim:true});at(650,()=>{burst(mh.x,mh.y-20,{t:650,n:10,im:'x_star',sp:4,life:700,sz:.16});flash({t:650,d:160,col:'255,250,220',a:.35})});S.safe(()=>{tone(1568,.5,{vol:.05,slide:2400,type:'sine'});setTimeout(()=>SFX.sparkle&&SFX.sparkle(),650)});await wait(850)}
+async function steal(mEl,mine){if(!ensure()||!mEl)return;begin();const a=wrap(mEl),pa=pos(a);const mh=rectOf('#hand')||{x:W/2,y:H*.85},fh=rectOf('.fh')||{x:W-30,y:50};const from=mine?fh:mh,to=mine?mh:fh;
+  shot({x:from.x,y:from.y},pa,{t:0,d:420,im:mine?'w_cardback':'fx:09_25',sz:26,scale:1.6,arc:40,trail:'255,220,160'});shot(pa,{x:to.x,y:to.y},{t:520,d:420,im:mine?'w_cardback':'fx:09_25',sz:26,scale:1.6,arc:40,trail:'255,220,160'});
+  keyf(a,{t:380,d:260,fn:(u,q)=>{u.sc=q>=1?1:1+.1*Math.sin(q*Math.PI)}});at(420,()=>{floatTxt('もらった！',pa.x,pa.y-a.rh*.7,{t:420,size:16,col:'#ffe066'});S.safe(()=>SFX.swish&&SFX.swish())});await wait(1000)}
+function balloon(el){if(!ensure()||!el)return;begin();const u=wrap(el);const I=ui('fx:09_27');overlay(u,{t:0,d:1800,draw:(x,y,uu,e)=>{if(!I.complete)return;const k=Math.min(1,e/500);const s=46;c.save();c.globalAlpha=Math.min(1,(1800-e)/300);c.translate(x+Math.sin(e/300)*4,y-uu.rh*.55-30*k);c.rotate(Math.sin(e/350)*.12);c.drawImage(I,-s/2,-s*.6,s,s*1.2);c.restore()}});keyf(u,{t:0,d:1800,fn:(v,q)=>{v.oy=q>=1?0:-14*Math.sin(Math.min(1,q*1.6)*Math.PI/2)*(q>.8?(1-q)/.2:1)}});S.safe(()=>tone(700,.35,{vol:.05,slide:1100,type:'sine'}))}
+
+return {trade,kickOut,wish,steal,balloon,burn,unlock,digIn,emerge,coin,roulette,hanage,unko,glitch,kwFlair,drFx,thorn,auraPulse,attack,hit,kenzan,ko,revive,shotTo,bottleTo,freezeU,blow,summonPop,shieldBreak,deadly,aoe,textAt,heal:el=>{if(!ensure()||!el)return;begin();healU(wrap(el));S.heal()},buff:el=>{if(!ensure()||!el)return;begin();buffU(wrap(el))},down:el=>{if(!ensure()||!el)return;begin();const u=wrap(el);keyf(u,{t:0,d:600,fn:(v,k)=>{v.tint=k>=1?null:`rgba(60,90,200,${.3*(1-k)})`;v.oy=k>=1?0:6*Math.sin(k*Math.PI)}});S.down()},poison:el=>{if(!ensure()||!el)return;begin();poisonU(wrap(el))},kindOf,on:true}})();
 window.CFX=CFX;
 /* ---- ゲームへの つなぎ ---- */
 if(typeof battlecry==='function'){const _bcC=battlecry;battlecry=async function(sd,m,c){const d=C[c&&c.id]||{};const pm=CFX._m,pb=CFX._bc;CFX._m=m;CFX._bc=d.bc;
@@ -9593,6 +9608,14 @@ window.MOVE=MOVE;
 {const _os2=openSettings;openSettings=function(){_os2.apply(this,arguments);try{const ok=$('ok');if(!ok)return;const w=document.createElement('div');w.style.cssText='display:flex;gap:6px;margin-top:8px';
   w.innerHTML='<button class="btn ghost" style="flex:1;font-size:13px">セーブを コピー<br><small>（ひっこし用）</small></button><button class="btn ghost" style="flex:1;font-size:13px">ひっこしコードを<br><small>はりつける</small></button>';
   const [a,b]=w.querySelectorAll('button');a.onclick=()=>{SFX.tap&&SFX.tap();MOVE.copyOut()};b.onclick=()=>{SFX.tap&&SFX.tap();MOVE.pasteIn()};ok.before(w)}catch(e){}}}
+
+/* 第2弾の フック */
+if(typeof NEWBC!=='undefined'){const W2=(name,pre,post)=>{const f=NEWBC[name];if(!f)return;NEWBC[name]=async function(sd,m,c,o){try{if(HUMAN&&window.CFX&&pre)await pre(sd,m,c,o)}catch(e){}const r=await f.apply(this,arguments);try{if(HUMAN&&window.CFX&&post)await post(sd,m,c,o)}catch(e){}return r}};
+ W2('trade',async()=>{await CFX.trade()});
+ W2('kick',async(sd,m,c,o)=>{const t=strongest(o.board.filter(e=>e.hp>0));if(t)await CFX.kickOut(uEl(m),uEl(t))});
+ W2('wish',async(sd,m)=>{if(roomOf(sd)>0&&sd.hand.some(x=>C[x.id]&&!C[x.id].spell))await CFX.wish()});
+ W2('steal',async(sd,m,c,o)=>{if(o.hand.length)await CFX.steal(uEl(m),isMe(sd))});
+ W2('balloon',null,async(sd,m)=>{const t=sd.board.find(x=>x.hp>0&&x.kw&&x.kw.has('stealth')&&x!==m)||m;const e=uEl(t);if(e)CFX.balloon(e)});}
 
 
 /* =====================================================================
