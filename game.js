@@ -9528,7 +9528,18 @@ async function steal(mEl,mine){if(!ensure()||!mEl)return;begin();const a=wrap(mE
   keyf(a,{t:380,d:260,fn:(u,q)=>{u.sc=q>=1?1:1+.1*Math.sin(q*Math.PI)}});at(420,()=>{floatTxt('もらった！',pa.x,pa.y-a.rh*.7,{t:420,size:16,col:'#ffe066'});S.safe(()=>SFX.swish&&SFX.swish())});await wait(1000)}
 function balloon(el){if(!ensure()||!el)return;begin();const u=wrap(el);const I=ui('fx:09_27');overlay(u,{t:0,d:1800,draw:(x,y,uu,e)=>{if(!I.complete)return;const k=Math.min(1,e/500);const s=46;c.save();c.globalAlpha=Math.min(1,(1800-e)/300);c.translate(x+Math.sin(e/300)*4,y-uu.rh*.55-30*k);c.rotate(Math.sin(e/350)*.12);c.drawImage(I,-s/2,-s*.6,s,s*1.2);c.restore()}});keyf(u,{t:0,d:1800,fn:(v,q)=>{v.oy=q>=1?0:-14*Math.sin(Math.min(1,q*1.6)*Math.PI/2)*(q>.8?(1-q)/.2:1)}});S.safe(()=>tone(700,.35,{vol:.05,slide:1100,type:'sine'}))}
 
-return {trade,kickOut,wish,steal,balloon,burn,unlock,digIn,emerge,coin,roulette,hanage,unko,glitch,kwFlair,drFx,thorn,auraPulse,attack,hit,kenzan,ko,revive,shotTo,bottleTo,freezeU,blow,summonPop,shieldBreak,deadly,aoe,textAt,heal:el=>{if(!ensure()||!el)return;begin();healU(wrap(el));S.heal()},buff:el=>{if(!ensure()||!el)return;begin();buffU(wrap(el))},down:el=>{if(!ensure()||!el)return;begin();const u=wrap(el);keyf(u,{t:0,d:600,fn:(v,k)=>{v.tint=k>=1?null:`rgba(60,90,200,${.3*(1-k)})`;v.oy=k>=1?0:6*Math.sin(k*Math.PI)}});S.down()},poison:el=>{if(!ensure()||!el)return;begin();poisonU(wrap(el))},kindOf,on:true}})();
+/* 10/29：コイン ちゃりーん（手に入れた コインが カウンターへ とぶ）・光の柱で ふっかつ */
+function coinFly(n,fromEl){if(!ensure())return;begin();const to=rectOf('#coins');if(!to)return;let from;if(fromEl){const r=fromEl.getBoundingClientRect();from={x:r.left+r.width/2,y:r.top+r.height/2}}else from={x:W/2,y:H*.45};
+  const k=Math.min(6,Math.max(1,n));for(let i=0;i<k;i++)shot({x:from.x+(i-(k-1)/2)*14,y:from.y},{x:to.x-to.w*.3,y:to.y},{t:i*90,d:520,im:'fx:new/coin_tilt',sz:20,scale:1.4,arc:60,trail:'255,215,90'});
+  at(520+(k-1)*90,()=>{burst(to.x-to.w*.3,to.y,{t:520+(k-1)*90,n:6,im:'x_star',sp:3,life:500,sz:.12});floatTxt('+'+n,to.x+to.w*.1,to.y-to.h*.9,{t:520+(k-1)*90,size:16,col:'#ffe066'})});
+  for(let i=0;i<k;i++)at(520+i*90,()=>S.safe(()=>{SFX.coin?SFX.coin():tone(1568,.1,{vol:.06})}))}
+function pillar(el){if(!ensure()||!el)return;begin();const u=wrap(el),p=pos(u);const I=ui('fx:03_19');
+  add({end:tt0(0)+dd(1300),draw(T){const e=(T-tt0(0))/SP();if(e<0||e>1300||!I.complete)return;const a=Math.min(1,e/250,(1300-e)/400);const w=u.rw*1.3,h=H*.55;c.save();c.globalAlpha=a*.9;c.globalCompositeOperation='lighter';c.drawImage(I,p.x-w/2,p.y+u.rh*.45-h,w,h);c.restore()}});
+  shot({x:p.x+40,y:p.y-H*.35},{x:p.x,y:p.y},{t:200,d:700,im:'fx:03_08',sz:30,scale:1.4,arc:-40,trail:'200,230,255'});
+  keyf(u,{t:0,d:900,fn:(v,q)=>{v.alpha=q>=1?1:Math.min(1,q*1.4);v.glow=q>=1?0:Math.sin(q*Math.PI);v.glowC='220,240,255'}});
+  at(900,()=>{burst(p.x,p.y,{t:900,n:8,im:'x_spark',sp:4,life:600,sz:.16})});S.safe(()=>{SFX.reviveUp?SFX.reviveUp():tone(880,.6,{vol:.05,slide:1760,type:'sine'})})}
+
+return {coinFly,pillar,trade,kickOut,wish,steal,balloon,burn,unlock,digIn,emerge,coin,roulette,hanage,unko,glitch,kwFlair,drFx,thorn,auraPulse,attack,hit,kenzan,ko,revive,shotTo,bottleTo,freezeU,blow,summonPop,shieldBreak,deadly,aoe,textAt,heal:el=>{if(!ensure()||!el)return;begin();healU(wrap(el));S.heal()},buff:el=>{if(!ensure()||!el)return;begin();buffU(wrap(el))},down:el=>{if(!ensure()||!el)return;begin();const u=wrap(el);keyf(u,{t:0,d:600,fn:(v,k)=>{v.tint=k>=1?null:`rgba(60,90,200,${.3*(1-k)})`;v.oy=k>=1?0:6*Math.sin(k*Math.PI)}});S.down()},poison:el=>{if(!ensure()||!el)return;begin();poisonU(wrap(el))},kindOf,on:true}})();
 window.CFX=CFX;
 /* ---- ゲームへの つなぎ ---- */
 if(typeof battlecry==='function'){const _bcC=battlecry;battlecry=async function(sd,m,c){const d=C[c&&c.id]||{};const pm=CFX._m,pb=CFX._bc;CFX._m=m;CFX._bc=d.bc;
@@ -9621,6 +9632,12 @@ const FAV={happy:['smile','wink','laugh','shy','relief','star','carrot','dreamy'
  rnd(){FAV.set('smile')}};
 try{if(!window.__PCWRAP){FAV.rnd()}}catch(e){}
 /* ファビコンは ずっと にっこり（ばめんで かえない） */
+
+/* コインが ふえたら カウンターへ ちゃりーん（ターンの はじめの 回復は のぞく） */
+{let lc=null,lb=null;if(typeof startTurn==='function'){const _st=startTurn;startTurn=async function(){if(B)B._refill=1;try{return await _st.apply(this,arguments)}finally{if(B){B._refill=0;lc=B.me.coin}}}}
+ const _rb=renderBattle;renderBattle=function(){const r=_rb.apply(this,arguments);try{if(B&&HUMAN&&window.CFX){if(lb!==B){lb=B;lc=B.me.coin}else{const c=B.me.coin;if(lc!=null&&c>lc&&!B._refill){const src=CFX._m&&B.me.board.includes(CFX._m)?uEl(CFX._m):null;CFX.coinFly(c-lc,src)}lc=c}}}catch(e){}return r}}
+/* よみがえる（raise・recall）は 光の柱 */
+{const _bcP=battlecry;battlecry=async function(sd,m,c){const d=C[c&&c.id]||{};const want=HUMAN&&(d.bc==='raise'||d.bc==='recall');const before=want?new Set(sd.board):null;const r=await _bcP.apply(this,arguments);try{if(want){const nu=sd.board.filter(x=>!before.has(x)&&x!==m&&x.hp>0);nu.forEach((x,i)=>setTimeout(()=>{const e=uEl(x);if(e)CFX.pillar(e)},i*250))}}catch(e){}return r}}
 
 
 /* =====================================================================

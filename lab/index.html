@@ -348,6 +348,13 @@ const LIST=[
   {k:'c_balloon',n:'ふうせん（ふうせんベティ）',d:'いちばん強い なかまが ふうせんで うかんで かくれる',stage:{foes:S1.foes,mine:[{art:'betty',atk:2,hp:3},{art:'juko',atk:3,hp:4}]},total:2400,build(){const u=U(3);
    ovF(u,{t:300,d:1800,draw:(x,y,r,e)=>{const c=F.ctx(),I=F.ui('fx:09_27');if(!I.complete)return;const k=Math.min(1,e/500);const s=46;c.save();c.globalAlpha=Math.min(1,(1800-e)/300);c.translate(x+Math.sin(e/300)*4,y-u.rh*.55-30*k);c.rotate(Math.sin(e/350)*.12);c.drawImage(I,-s/2,-s*.6,s,s*1.2);c.restore()}});
    F.keyf(u,{t:300,d:1800,fn:(v,q)=>{v.oy=q>=1?0:-14*Math.sin(Math.min(1,q*1.6)*Math.PI/2)*(q>.8?(1-q)/.2:1);v.alpha=q>=1?.6:1-.4*Math.min(1,q*2)}});F.at(2100,()=>{u.el.classList.add('stealth')})}},
+  {k:'c_coin2',n:'コイン ちゃりーん（金ほりガンテツ など）',d:'もらった コインが コイン置き場へ とんでいく',stage:{foes:S1.foes,mine:[{art:'gantetsu',atk:2,hp:3}]},total:2000,build(){const a=U(2),pa=pos(a);const co=F.place(F.bd().hand.ownerDocument.getElementById('coins'));
+   for(let i=0;i<3;i++)F.shot({x:pa.x+(i-1)*14,y:pa.y},{x:co.x-co.w*.3,y:co.y},{t:300+i*90,d:520,im:'fx:new/coin_tilt',sz:20,scale:1.4,arc:60,trail:'255,215,90'});
+   F.at(1000,tt=>{F.burst(co.x-co.w*.3,co.y,{t:tt,n:6,im:'x_star',sp:3,life:500,sz:.12});F.floatTxt('+3',co.x+co.w*.1,co.y-co.h*.9,{t:tt,size:16,col:'#ffe066'})})}},
+  {k:'c_pillar',n:'光の柱で ふっかつ（セレスティア など）',d:'光の 柱 → たましいが もどって なかまが よみがえる',stage:{foes:S1.foes,mine:[{art:'celestia',atk:5,hp:6},{art:'dog',hidden:true}]},total:2400,build(){const u=U(3),{H}=F.dims();
+   ovF(u,{t:300,d:1300,draw:(x,y,r,e)=>{const c=F.ctx(),I=F.ui('fx:03_19');if(!I.complete)return;const a=Math.min(1,e/250,(1300-e)/400);const w=u.rw*1.3,h=H*.55;c.save();c.globalAlpha=a*.9;c.globalCompositeOperation='lighter';c.drawImage(I,x-w/2,y+u.rh*.45-h,w,h);c.restore()}});
+   F.at(500,tt=>{const p=pos(u);F.shot({x:p.x+40,y:p.y-H*.35},{x:p.x,y:p.y},{t:tt,d:700,im:'fx:03_08',sz:30,scale:1.4,arc:-40,trail:'200,230,255'})});
+   F.at(1150,()=>{u.hidden=false;u.alpha=0});F.keyf(u,{t:1150,d:600,fn:(v,q)=>{v.alpha=q;v.glow=Math.sin(q*Math.PI);v.glowC='220,240,255'}});F.at(1200,tt=>{const p=pos(u);F.burst(p.x,p.y,{t:tt,n:8,im:'x_spark',sp:4,life:600,sz:.16})})}},
  ]},
  {cat:'これから 作る',items:[
   {k:'s1',n:'キャラ専用 演出',d:'302人の リスト（演出リスト ページ）',soon:1},{k:'s2',n:'ボス登場',d:'',soon:1},{k:'s3',n:'勝った！／まけた',d:'',soon:1},{k:'s4',n:'合成・しんか・かくせい',d:'',soon:1},{k:'s5',n:'天気（はれ・あめ・ゆき・すな）',d:'',soon:1},{k:'s6',n:'お金・カードを 手に入れる',d:'',soon:1}]},
@@ -370,7 +377,7 @@ if(window.SE){const {S:SS,SFX:SX,SND,TXT,tone:TN,noise:NZ}=SE;const se=(t,f)=>F.
 
  /* 自動で 鳴らない ものに 音を たす */
  const tick=()=>TN(1400,.04,{vol:.08,type:'square'});
- const EXTRA={hero:se=>{se(700,()=>SX.crit&&SX.crit())},
+ const EXTRA={c_coin2:se=>{[820,910,1000].forEach(t=>se(t,()=>SX.coin&&SX.coin()))},c_pillar:se=>{se(300,()=>SX.reviveUp?SX.reviveUp():SS.revive())},hero:se=>{se(700,()=>SX.crit&&SX.crit())},
   bc_draw:se=>{se(400,()=>SX.flip&&SX.flip());se(1200,()=>SX.flip&&SX.flip())},
   c_coin:se=>{for(let i=0;i<9;i++)se(300+i*130,()=>TN(1800+i*60,.03,{vol:.06,type:'square'}));se(1500,()=>SX.coin&&SX.coin());for(let i=0;i<9;i++)se(4300+i*130,()=>TN(1800+i*60,.03,{vol:.06,type:'square'}));se(5500,SS.down)},c_dig:se=>{se(300,()=>NZ(.6,{vol:.2,freq:700}))},bc_summon:se=>{se(300,SS.poof);se(500,()=>SX.sparkle&&SX.sparkle())},bc_summon_z:se=>{se(300,SS.ghost)},
   kw_taunt:se=>{se(300,()=>SX.place&&SX.place())},kw_quick:se=>{se(250,()=>{TN(600,.12,{vol:.08,slide:1800,type:'sine'});SX.shot&&SX.shot()})},
