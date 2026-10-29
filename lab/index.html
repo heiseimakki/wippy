@@ -6,7 +6,7 @@
 <style>
 :root{--ink:#3a2412;--gold:#ffcd3c;--panel:rgba(40,20,8,.88)}
 *{box-sizing:border-box;touch-action:manipulation}
-html,body{margin:0;height:100%;background:#1d1108;color:#fff;font-family:"M PLUS Rounded 1c",sans-serif;overflow:hidden}
+html,body{margin:0;height:100%;height:100dvh;overscroll-behavior:none;background:#1d1108;color:#fff;font-family:"M PLUS Rounded 1c",sans-serif;overflow:hidden}
 #wrap{position:relative;max-width:430px;height:100%;margin:0 auto;display:flex;flex-direction:column}
 header{padding:12px 14px 6px;text-align:center}
 header b{font-family:"Dela Gothic One";font-size:21px;color:var(--gold);letter-spacing:.04em}
@@ -20,7 +20,7 @@ header p{margin:3px 0 0;font-size:12px;color:#e8d3b0}
 .it small{display:block;font-size:10.5px;color:#d9c4a0;line-height:1.35;margin-top:2px}
 .it.new{border-color:#ffcd3c;box-shadow:0 0 10px rgba(255,205,60,.4)}
 .it.soon{opacity:.45;pointer-events:none}
-#player{position:absolute;inset:0;display:none;flex-direction:column;background:#1d1108}
+#player{position:fixed;inset:0;display:none;flex-direction:column;background:#1d1108}
 #player.on{display:flex}
 .ptop{display:flex;align-items:center;gap:8px;padding:10px 12px 4px}
 .ptop button{font:900 14px inherit;border:2px solid #a07a4a;background:rgba(255,255,255,.08);color:#ffe9b0;border-radius:10px;padding:6px 12px}
@@ -53,6 +53,7 @@ header p{margin:3px 0 0;font-size:12px;color:#e8d3b0}
     <div class="ptop"><button id="back">← もくじ</button><div class="ttl"><b id="pt"></b><small id="pd"></small></div><div class="mini"><button id="prev">◀</button><button id="again">もう一度</button><button id="next">▶</button><button id="seb">音 ON</button></div></div>
   </div>
 </div>
+<script>try{history.scrollRestoration='manual'}catch(e){}addEventListener('load',()=>{scrollTo(0,0);setTimeout(()=>scrollTo(0,0),300)});addEventListener('resize',()=>scrollTo(0,0))</script>
 <script src="fx.js"></script>
 <script src="se.js"></script>
 <script>
@@ -368,7 +369,7 @@ menu.innerHTML=LIST.map(c=>`<div class="cat">${c.cat}<i>${c.items.filter(i=>!i.s
  +`<div class="cat" style="margin-top:16px">くらべる</div><div class="grid"><a class="it new" href="list.html" style="text-decoration:none"><b>演出リスト（302人）</b><small>キャラごとの こうげき・効果の 演出アイデア</small></a><a class="it" href="kenzan.html" style="text-decoration:none"><b>見参！ いま↔新しい</b><small>前に 作った くらべページ</small></a></div>`;
 const pl=document.getElementById('player');let cur=0;
 const BF=document.getElementById('bf');let bfReady=new Promise(r=>{const ck=()=>{try{if(BF.contentWindow.BD&&BF.contentDocument.readyState==='complete')return r()}catch(e){}setTimeout(ck,100)};ck()});
-function open(i){cur=(i+ALL.length)%ALL.length;const it=ALL[cur];document.getElementById('pt').textContent=it.n;document.getElementById('pd').textContent=it.d;pl.classList.add('on');try{location.hash=it.k}catch(e){}bfReady.then(()=>setTimeout(()=>{F.init(document.getElementById('cv'),BF);F.play(it,it.total||2600)},60))}
+function open(i){cur=(i+ALL.length)%ALL.length;const it=ALL[cur];document.getElementById('pt').textContent=it.n;document.getElementById('pd').textContent=it.d;pl.classList.add('on');try{history.replaceState(null,'','#'+it.k)}catch(e){}bfReady.then(()=>setTimeout(()=>{F.init(document.getElementById('cv'),BF);F.play(it,it.total||2600)},60))}
 menu.querySelectorAll('[data-k]').forEach(b=>b.onclick=()=>open(ALL.findIndex(x=>x.k===b.dataset.k)));
 document.getElementById('back').onclick=()=>{pl.classList.remove('on');try{history.replaceState(null,'',location.pathname)}catch(e){}};
 document.getElementById('again').onclick=()=>open(cur);document.getElementById('prev').onclick=()=>open(cur-1);document.getElementById('next').onclick=()=>open(cur+1);
