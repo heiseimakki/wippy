@@ -133,7 +133,7 @@ const LIST=[
   {k:'bc_aoe_fire',n:'ぜんたい ダメージ（炎）',d:'炎の 見参・ばくはつ など',stage:S2,total:2800,build(){const {W}=F.dims();const ef=F.place(F.bd().units[0].parentNode);runup(U(3));
    F.tint({t:400,d:1500,col:'255,70,20',a:.24});
    F.at(450,tt=>{F.ring(W/2,ef.y,{t:tt,r1:W*.75,w:16,col:'255,140,60',d:700});F.shake({t:tt,p:10,d:500});F.flash({t:tt,d:200,col:'255,180,90',a:.5})});
-   [0,1,2].forEach(i=>{F.at(500+i*70,tt=>{const p=pos(U(i));F.icon('x_pow',p.x,p.y,{t:tt,d:360,sz:76,filter:'hue-rotate(-20deg) saturate(1.4)'})});hitAt(U(i),530+i*70,1,{im:'x_hit'})})}},
+   [0,1,2].forEach(i=>{F.at(500+i*70,tt=>{const p=pos(U(i));F.burst(p.x,p.y,{t:tt,n:7,im:'x_fire',sp:4.5,g:.12,up:1.5,life:650,sz:.17,shrink:true})});hitAt(U(i),530+i*70,1,{im:'x_hit'})})}},
   {k:'bc_aoe_water',n:'ぜんたい ダメージ（水）',d:'水の 見参・大雨 など',stage:S2,total:2900,build(){const {W}=F.dims();const ef=F.place(F.bd().units[0].parentNode);runup(U(3));
    F.tint({t:400,d:1600,col:'40,120,255',a:.24});
    /* 上から 水の つぶが ざーっと ふる */for(let i=0;i<14;i++){const x=W*(.08+.84*Math.random());F.shot({x,y:ef.y-ef.h*1.4},{x:x+10,y:ef.y+ef.h*.3*(Math.random()-.2)},{t:450+i*35,d:300,im:'x_sweat',sz:10,trail:'150,200,255'})}
@@ -366,7 +366,7 @@ window.LABSE_ON=true;try{window.LABSE_ON=localStorage.getItem('lab-se')!=='0'}ca
 {const SEb=document.getElementById('seb');const upd=()=>{SEb.textContent=window.LABSE_ON?'音 ON':'音 OFF';SEb.classList.toggle('off',!window.LABSE_ON)};upd();SEb.onclick=()=>{window.LABSE_ON=!window.LABSE_ON;try{localStorage.setItem('lab-se',window.LABSE_ON?'1':'0')}catch(e){}if(window.SE)SE.ac();upd()}}
 if(window.SE){const {S:SS,SFX:SX,SND,TXT,tone:TN,noise:NZ}=SE;const se=(t,f)=>F.at(t||0,()=>{if(!window.LABSE_ON)return;try{f()}catch(e){}});
  const T2K={};for(const k in TXT)T2K[TXT[k]]=k;
- const _shot=F.shot;F.shot=function(a,b,o={}){se(o.t,()=>SX.whoosh&&SX.whoosh());return _shot.apply(this,arguments)};
+ const _shot=F.shot;F.shot=function(a,b,o={}){if(!/sweat|06_1/.test(String(o.im||'')))se(o.t,()=>SX.whoosh&&SX.whoosh());return _shot.apply(this,arguments)};
  const _slam=F.slam;F.slam=function(str,x,y,o={}){se(o.t,()=>{if(/^[123]$/.test(str))TN(880,.08,{vol:.1});else if(/バン/.test(str))SX.shot();else if(/やられたら/.test(str))SS.ghost();else if(/ふんだ/.test(str))SS.squish();else if(/うら/.test(str))SS.down();else if(/文字化け/.test(str))for(let i=0;i<6;i++)TN(200+Math.random()*1800,.05,{vol:.05,at:i*.06,type:'square'});else SS.kenzan()});return _slam.apply(this,arguments)};
  const _ft=F.floatTxt;F.floatTxt=function(str,x,y,o={}){const k=T2K[str];if(k&&SND[k])se(o.t,SND[k]);else if(/^\+\d/.test(str))se(o.t,()=>SX.sparkle&&SX.sparkle());else if(/^攻撃-/.test(str))se(o.t,SS.down);else if(/パリーン/.test(str))se(o.t,SS.glass);else if(/^Z/.test(str)){}else if(/勝ち/.test(str))se(o.t,()=>SX.win&&SX.win());return _ft.apply(this,arguments)};
  const _hit=hitAt;hitAt=function(u,t,n,o){se(t,()=>SX.hit&&SX.hit());return _hit.apply(this,arguments)};
@@ -377,15 +377,16 @@ if(window.SE){const {S:SS,SFX:SX,SND,TXT,tone:TN,noise:NZ}=SE;const se=(t,f)=>F.
 
  /* 自動で 鳴らない ものに 音を たす */
  const tick=()=>TN(1400,.04,{vol:.08,type:'square'});
- const EXTRA={c_coin2:se=>{[820,910,1000].forEach(t=>se(t,()=>SX.coin&&SX.coin()))},c_pillar:se=>{se(300,()=>SX.reviveUp?SX.reviveUp():SS.revive())},hero:se=>{se(700,()=>SX.crit&&SX.crit())},
+ const P=k=>()=>SE.playS&&SE.playS(k);
+ const EXTRA={irua:se=>{},kw_taunt:se=>{se(300,P('taunt'))},bc_heal:se=>{se(300,P('cure'))},bc_aoe_fire:se=>{se(450,P('fire'));se(520,P('firewhoosh'))},bc_aoe_water:se=>{se(420,P('rain'));[770,830,890].forEach(t=>se(t,P('water')))},c_coin2:se=>{[820,910,1000].forEach(t=>se(t,()=>SX.coin&&SX.coin()))},c_pillar:se=>{se(300,()=>SX.reviveUp?SX.reviveUp():SS.revive())},hero:se=>{se(630,()=>SX.crit&&SX.crit())},
   bc_draw:se=>{se(400,()=>SX.flip&&SX.flip());se(1200,()=>SX.flip&&SX.flip())},
-  c_coin:se=>{for(let i=0;i<9;i++)se(300+i*130,()=>TN(1800+i*60,.03,{vol:.06,type:'square'}));se(1500,()=>SX.coin&&SX.coin());for(let i=0;i<9;i++)se(4300+i*130,()=>TN(1800+i*60,.03,{vol:.06,type:'square'}));se(5500,SS.down)},c_dig:se=>{se(300,()=>NZ(.6,{vol:.2,freq:700}))},bc_summon:se=>{se(300,SS.poof);se(500,()=>SX.sparkle&&SX.sparkle())},bc_summon_z:se=>{se(300,SS.ghost)},
+  c_coin:se=>{for(let i=0;i<9;i++)se(300+i*130,()=>TN(1800+i*60,.03,{vol:.06,type:'square'}));se(1500,()=>SX.coin&&SX.coin());for(let i=0;i<9;i++)se(4300+i*130,()=>TN(1800+i*60,.03,{vol:.06,type:'square'}));se(5500,SS.down)},c_dig:se=>{se(300,()=>NZ(.6,{vol:.2,freq:700}))},bc_summon:se=>{se(300,SS.poof);se(300,P('summon'));se(500,()=>SX.sparkle&&SX.sparkle())},bc_summon_z:se=>{se(300,SS.ghost)},
   kw_taunt:se=>{se(300,()=>SX.place&&SX.place())},kw_quick:se=>{se(250,()=>{TN(600,.12,{vol:.08,slide:1800,type:'sine'});SX.shot&&SX.shot()})},
   st_sleep:se=>{[200,1600,3000,4400,5800,7200,8600].forEach(t=>se(t,()=>TN(320,.5,{vol:.04,slide:240,type:'sine'})))},
   st_jail:se=>{se(300,SS.creak);se(560,()=>TN(500,.08,{vol:.1,type:'square'}));se(2750,()=>{SX.coin&&SX.coin();SX.sparkle&&SX.sparkle()})},
   c_roulette:se=>{let t=300;[0,1,2,0,1,2,0,1,2,0,1].forEach((i,j)=>{se(t,tick);t+=90+j*j*9});se(t,()=>SX.ding&&SX.ding());se(t+700,SS.whoosh)},
   bc_stun:se=>{se(1000,SS.glass);se(1300,SS.hiccup)},bc_freeze:se=>{se(1000,SS.ice)},bc_poison:se=>{se(1000,SS.bubble)},
-  kw_stealth:se=>{se(300,SS.whoosh)},kw_revive:se=>{se(1200,SS.revive)},kw_shield:se=>{}};
+  kw_stealth:se=>{se(300,SS.whoosh)},kw_revive:se=>{se(1200,SS.revive)},kw_shield:se=>{se(0,P('shield'))}};
  ALL.forEach(it=>{const x=EXTRA[it.k];if(!x||!it.build)return;const b0=it.build;it.build=function(){const r=b0.apply(this,arguments);x(se);return r}});
 }
 menu.innerHTML=LIST.map(c=>`<div class="cat">${c.cat}<i>${c.items.filter(i=>!i.soon).length?c.items.filter(i=>!i.soon).length+'こ':'じゅんび中'}</i></div><div class="grid">${c.items.map(i=>`<button class="it ${i.soon?'soon':''}" data-k="${i.k}"><b>${i.n}</b><small>${i.d||'じゅんび中'}</small></button>`).join('')}</div>`).join('')

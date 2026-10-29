@@ -9457,18 +9457,18 @@ function deadly(el){if(!ensure()||!el)return;begin();const u=wrap(el),p=pos(u);d
   return wait(1650)}
 function aoe(els,style,cel){if(!ensure()||!els.length)return;begin();const us=els.map(wrap);const xs=us.map(u=>u.bx),ys=us.map(u=>u.by);const cx=(Math.min(...xs)+Math.max(...xs))/2,cy=ys.reduce((a,b)=>a+b,0)/ys.length;
   /* 10/29：やった子が うしろに 助走 → もとの 位置に もどる 瞬間に ドン */let O=0;if(cel){const cu=wrap(cel);const dir=Math.sign(cu.by-cy)||1;keyf(cu,{t:0,d:330,fn:(v,k)=>{v.oy=26*dir*E.io(k);v.sc=1-.06*k}});keyf(cu,{t:330,d:140,fn:(v,k)=>{v.oy=k>=1?0:26*dir*(1-E.o(k))-8*dir*Math.sin(k*Math.PI);v.sc=k>=1?1:.94+.1*Math.sin(k*Math.PI)+.06*k}});O=450}const ob=bs;bs+=dd(O);
-  if(style==='fire'){tint({t:0,d:1200,col:'255,70,20',a:.22});ring(cx,cy,{t:60,r1:W*.7,w:16,col:'255,140,60',d:650});us.forEach((u,i)=>icon('x_pow',u.bx,u.by,{t:80+i*60,d:340,sz:66,filter:'hue-rotate(-20deg) saturate(1.4)'}));noise(.5,{vol:.25,freq:900})}
-  else if(style==='water'){tint({t:0,d:1200,col:'40,120,255',a:.22});for(let i=0;i<10;i++){const x=W*(.08+.84*Math.random());shot({x,y:cy-160},{x:x+10,y:cy+30*(Math.random()-.2)},{t:i*30,d:280,im:'fx:06_17',sz:10,trail:'150,200,255'})}ring(cx,cy,{t:300,r1:W*.65,w:12,col:'140,200,255',d:600});us.forEach((u,i)=>burst(u.bx,u.by,{t:300+i*60,n:8,im:'fx:06_18',sp:4,g:.18,life:650,sz:.26,add_:false}));S.water()}
+  if(style==='fire'){tint({t:0,d:1200,col:'255,70,20',a:.22});ring(cx,cy,{t:60,r1:W*.7,w:16,col:'255,140,60',d:650});us.forEach((u,i)=>burst(u.bx,u.by,{t:80+i*60,n:7,im:'x_fire',sp:4.5,g:.12,up:1.5,life:650,sz:.17,shrink:true}));if(!(window.SEP&&SEP.play('fire')))noise(.5,{vol:.25,freq:900});at(120,()=>window.SEP&&SEP.play('firewhoosh',.7))}
+  else if(style==='water'){tint({t:0,d:1200,col:'40,120,255',a:.22});for(let i=0;i<10;i++){const x=W*(.08+.84*Math.random());shot({x,y:cy-160},{x:x+10,y:cy+30*(Math.random()-.2)},{t:i*30,d:280,im:'fx:06_17',sz:10,trail:'150,200,255'})}ring(cx,cy,{t:300,r1:W*.65,w:12,col:'140,200,255',d:600});us.forEach((u,i)=>burst(u.bx,u.by,{t:300+i*60,n:8,im:'fx:06_18',sp:4,g:.18,life:650,sz:.26,add_:false}));if(!(window.SEP&&SEP.play('rain')))S.water();at(300,()=>S.water())}
   else{ring(cx,cy,{t:0,r1:W*.75,w:16,col:'255,240,200',d:600});ring(cx,cy,{t:110,r1:W*.6,w:8,col:'255,255,255',d:550});smoke(cx,cy+40,{t:0,n:16,spread:W*.45,r:20});us.forEach((u,i)=>icon('x_pow',u.bx,u.by,{t:80+i*60,d:340,sz:70}));S.thud()}
   shake({t:60,p:10,d:450});bs=ob;return O?wait(O+80):undefined}
 function textAt(el,s,col='#fff'){if(!ensure()||!el)return;begin();const u=wrap(el),p=pos(u);floatTxt(s,p.x,p.y-u.rh*.55,{t:0,size:16,col})}
 
 function kwFlair(el,k){if(!ensure()||!el)return;begin();const u=wrap(el),p=pos(u);
-  if(k==='taunt'){ring(p.x,p.y,{t:0,col:'190,200,220',r1:80,w:10});keyf(u,{t:0,d:900,fn:(v,q)=>{v.glow=q>=1?0:.8*Math.sin(q*Math.PI);v.glowC='190,210,240'}})}
+  if(k==='taunt'){window.SEP&&SEP.play('taunt');ring(p.x,p.y,{t:0,col:'190,200,220',r1:80,w:10});keyf(u,{t:0,d:900,fn:(v,q)=>{v.glow=q>=1?0:.8*Math.sin(q*Math.PI);v.glowC='190,210,240'}})}
   else if(k==='quick'){flash({t:0,d:120,col:'255,240,120',a:.3});keyf(u,{t:0,d:700,fn:(v,q)=>{v.glow=q>=1?0:1-q;v.glowC='255,230,80';v.oy=q>=1?0:-10*Math.sin(Math.min(1,q*2.5)*Math.PI)}})}
   else if(k==='twice'){burst(p.x,p.y,{t:0,n:6,im:'x_star',sp:3,life:700,sz:.16})}
   else if(k==='stealth'){smoke(p.x,p.y+10,{t:0,col:'200,200,220',n:10});keyf(u,{t:0,d:700,fn:(v,q)=>{v.alpha=q>=1?1:1-.5*Math.sin(q*Math.PI)}})}
-  else if(k==='shield'){const s=Math.max(u.rw,u.rh)*1.3;overlay(u,{t:0,d:900,draw:(x,y,uu,e)=>{const I=ui('x_barrier');if(!I.complete)return;const a=Math.min(1,e/200,(900-e)/300);c.save();c.globalAlpha=.45*a;const ss=s*(.8+.2*Math.min(1,e/250));c.drawImage(I,x-ss/2,y-ss/2,ss,ss);c.restore()}})}
+  else if(k==='shield'){window.SEP&&SEP.play('shield');const s=Math.max(u.rw,u.rh)*1.3;overlay(u,{t:0,d:900,draw:(x,y,uu,e)=>{const I=ui('x_barrier');if(!I.complete)return;const a=Math.min(1,e/200,(900-e)/300);c.save();c.globalAlpha=.45*a;const ss=s*(.8+.2*Math.min(1,e/250));c.drawImage(I,x-ss/2,y-ss/2,ss,ss);c.restore()}})}
   else if(k==='revive'){icon('x_halo',p.x,p.y-u.rh/2-10,{t:0,d:900,sz:44,bob:2})}
   else if(k==='deadly'){icon('x_skull',p.x,p.y,{t:0,d:600,sz:56,a:.8})}}
 function drFx(m){if(!ensure())return;const r=m&&m._lastRect;if(!r)return;begin();const x=r.left+r.width/2,y=r.top+r.height/2;ring(x,y,{t:0,col:'170,120,255',r1:90});
@@ -9479,7 +9479,7 @@ function thorn(el){if(!ensure()||!el)return;begin();const u=wrap(el),p=pos(u);bu
   at(420,()=>{icon('x_claw',p.x,p.y,{t:420,d:420,sz:72});S.safe(()=>{SFX.swish?SFX.swish():noise(.12,{vol:.2,freq:3000,type:'highpass'})})});keyf(u,{t:420,d:1300,fn:(v,k)=>{v.tint=k>=1?null:`rgba(255,40,40,${.45*(k<.55?1:1-(k-.55)/.45)})`;v.ox=k>=1?0:(k<.5?Math.sin(k*140)*3.5*(1-k*2):0)}})}
 function auraPulse(el,targets){if(!ensure()||!el)return;begin();const u=wrap(el),p=pos(u);ring(p.x,p.y,{t:0,col:'255,215,90',r1:W*.4,w:8,d:850});ring(p.x,p.y,{t:160,col:'255,255,255',r1:W*.3,w:4,d:750});
   keyf(u,{t:0,d:850,fn:(v,k)=>{v.glow=k>=1?0:Math.sin(k*Math.PI);v.glowC='255,215,90'}});
-  (targets||[]).forEach((te,j)=>{if(!te)return;const v=wrap(te),q=pos(v);shot(p,q,{t:100+j*70,d:300,im:'x_star',sz:18,scale:1.4,trail:'255,215,90'});at(420+j*70,()=>{burst(q.x,q.y,{t:420+j*70,n:5,im:'x_star',sp:3,g:-.05,life:800,sz:.15});keyf(v,{t:420+j*70,d:600,fn:(w,k)=>{w.glow=k>=1?0:Math.sin(k*Math.PI);w.sc=k>=1?1:1+.1*Math.sin(k*Math.PI)}})})});S.buff()}
+  (targets||[]).forEach((te,j)=>{if(!te)return;const v=wrap(te),q=pos(v);shot(p,q,{t:100+j*70,d:300,im:'x_star',sz:18,scale:1.4,trail:'255,215,90'});at(420+j*70,()=>{burst(q.x,q.y,{t:420+j*70,n:5,im:'x_star',sp:3,g:-.05,life:800,sz:.15});keyf(v,{t:420+j*70,d:600,fn:(w,k)=>{w.glow=k>=1?0:Math.sin(k*Math.PI);w.sc=k>=1?1:1+.1*Math.sin(k*Math.PI)}})})});if(!(window.SEP&&SEP.play('aura')))S.buff()}
 
 /* ---- キャラ専用 ---- */
 function digIn(el,kind){if(!ensure()||!el)return;begin();const u=wrap(el),p=pos(u);const base=u.by+u.rh*.5;
@@ -9642,11 +9642,11 @@ try{if(!window.__PCWRAP){FAV.rnd()}}catch(e){}
 {const _bcP=battlecry;battlecry=async function(sd,m,c){const d=C[c&&c.id]||{};const want=HUMAN&&(d.bc==='raise'||d.bc==='recall');const before=want?new Set(sd.board):null;const r=await _bcP.apply(this,arguments);try{if(want){const nu=sd.board.filter(x=>!before.has(x)&&x!==m&&x.hp>0);nu.forEach((x,i)=>setTimeout(()=>{const e=uEl(x);if(e)CFX.pillar(e)},i*250))}}catch(e){}return r}}
 
 /* 10/29：SEを 本物の 音（Envato）に。読みこめた 音から つかう（だめなら いままでの 音） */
-const SEP={b:{},files:{coin:1,hit:1,crit:1,boom:1,swish:1,sparkle:1,heal:1,revive:1,poof:1,fanfare:1,tap:1,win:1,lose:1,chime:1,glass:1,ice:1,bubble:1,water:1,anvil:1,curse:1,chest:1},loading:false,
+const SEP={b:{},files:{aura:1,taunt:1,cure:1,fire:1,firewhoosh:1,rain:1,shield:1,summon:1,coin:1,hit:1,crit:1,boom:1,swish:1,sparkle:1,heal:1,revive:1,poof:1,fanfare:1,tap:1,win:1,lose:1,chime:1,glass:1,ice:1,bubble:1,water:1,anvil:1,curse:1,chest:1},loading:false,
  load(){if(SEP.loading)return;SEP.loading=true;const a=ac();if(!a)return;Object.keys(SEP.files).forEach(k=>{fetch('audio/se/'+k+'.mp3').then(r=>r.arrayBuffer()).then(x=>a.decodeAudioData(x)).then(buf=>{SEP.b[k]=buf}).catch(()=>{})})},
  play(k,vol=1){try{if(typeof MUTED!=='undefined'&&MUTED)return true;const buf=SEP.b[k];if(!buf){SEP.load();return false}const a=ac();if(!a)return false;const s=a.createBufferSource(),g=a.createGain();s.buffer=buf;g.gain.value=.55*vol;s.connect(g).connect((typeof sfxOut==='function'&&sfxOut())||a.destination);s.start();return true}catch(e){return false}}};
 window.SEP=SEP;['touchend','click','keydown'].forEach(ev=>document.addEventListener(ev,()=>SEP.load(),{once:true,passive:true}));
-{const MAPK={coin:'coin',hit:'hit',crit:'crit',swish:'swish',whoosh:'swish',sparkle:'sparkle',heal:'heal',reviveUp:'revive',poof:'poof',fanfare:'fanfare',tap:'tap',win:'win',lose:'lose',chime:'chime',poison:'bubble'};
+{const MAPK={heal:'cure',tauntUp:'taunt',shieldUp:'shield',summon:'summon',coin:'coin',hit:'hit',crit:'crit',swish:'swish',whoosh:'swish',sparkle:'sparkle',reviveUp:'revive',poof:'poof',fanfare:'fanfare',tap:'tap',win:'win',lose:'lose',chime:'chime',poison:'bubble'};
  for(const k in MAPK){const f=SFX[k];SFX[k]=function(){if(typeof HUMAN!=='undefined'&&HUMAN&&SEP.play(MAPK[k]))return;return f&&f.apply(this,arguments)}}
  SFX.boom=function(){if(!SEP.play('boom'))(SFX.thunder&&SFX.thunder())}}
 
