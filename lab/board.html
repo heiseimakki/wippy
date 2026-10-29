@@ -1894,7 +1894,7 @@ window.BD={
   return `<div class="u ${kw.join(' ')}" style="--met:${o.met||'#c98a4a'}"><div class="art img" style="background-image:url(img/${o.art}.webp)"></div><span class="stat a">${o.atk??2}</span><span class="stat h">${o.hp??3}</span>${pills?'<div class="pills">'+pills+'</div>':''}<i class="fxt"></i><div class="fxm"></div></div>`},
  set(spec){const ef=document.getElementById('ef'),af=document.getElementById('af');
   /* 手札・あいての手札・山札は 毎回 もとに もどす */
-  const keep=['hand','pile','coins'].map(id=>document.getElementById(id)).concat([document.querySelector('.fh'),document.querySelector('#foeHero .hp')]);if(!BD.orig)BD.orig=keep.map(e=>e.innerHTML);else keep.forEach((e,i)=>{e.innerHTML=BD.orig[i]});
+  const keep=['hand','pile','coins','endt'].map(id=>document.getElementById(id)).concat([document.querySelector('.fh'),document.querySelector('#foeHero .hp'),document.querySelector('.fside')]);document.getElementById('app').style.filter='';if(!BD.orig)BD.orig=keep.map(e=>e.innerHTML);else keep.forEach((e,i)=>{e.innerHTML=BD.orig[i]});
   ef.innerHTML=(spec.foes||[]).map(o=>BD.tpl(o)).join('');af.innerHTML=(spec.mine||[]).map(o=>BD.tpl(o)).join('');
   if(spec.foeHp!=null)document.querySelector('#foeHero .hp').textContent=spec.foeHp;
   return {units:[...ef.children,...af.children],foeHero:document.getElementById('foeHero'),meHero:document.getElementById('meHero'),hand:document.getElementById('hand'),foeHand:document.querySelector('.fh'),pile:document.getElementById('pile'),coins:document.getElementById('coins')}}

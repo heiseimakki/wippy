@@ -32,7 +32,7 @@ function apply(u){const el=u.el;if(!el)return;const dx=u.x*W-u.bx+u.ox,dy=u.y*H-
   const f=[];if(u.gray)f.push(`grayscale(${u.gray}) brightness(${1-u.gray*.4})`);if(u.glow>0)f.push(`drop-shadow(0 0 ${8+14*u.glow}px rgba(${u.glowC},${Math.min(1,u.glow)}))`);el.style.filter=f.join(' ')||'none';
   const t=el.querySelector('.fxt');if(t)t.style.background=u.tint||'transparent';
   const a=el.querySelector('.stat.a'),h=el.querySelector('.stat.h,.hp');if(a&&u.atk!=null&&a.textContent!=String(u.atk))a.textContent=u.atk;if(a)a.classList.toggle('up',!!u.up);if(h&&u.hp!=null&&h.textContent!=String(u.hp))h.textContent=u.hp;
-  const m=el.querySelector('.fxm');if(m){const k=u.marks.join(',');if(m.dataset.k!==k){m.dataset.k=k;m.innerHTML=u.marks.map(n=>`<img src="../ui/${n}.png" alt="">`).join('')}}}
+  const m=el.querySelector('.fxm');if(m){const k=u.marks.join(',');if(m.dataset.k!==k){m.dataset.k=k;m.innerHTML=u.marks.map(n=>`<img src="${n.startsWith('fx:')?'fx/'+n.slice(3)+'.webp':'../ui/'+n+'.png'}" alt="">`).join('')}}}
 /* ---- 演出の 部品（すべて 時間で 描く） ---- */
 const add=f=>{fx.push(f);return f};
 function at(ms,fn){ext(ms);add({t0:ms,once:true,fn})}

@@ -283,6 +283,34 @@ const LIST=[
    /* はい出てくる */const T=h+4100;F.at(T,tt=>{F.burst(u.bx,base(),{t:tt,n:10,im:'fx:04_11',sp:4,g:.2,up:3,life:800,sz:.22,add_:false,dir:-Math.PI/2,spread:2.4});F.shake({t:tt,p:5})});
    F.keyf(u,{t:T,d:900,fn:(v,k)=>{v.oy=v.rh*(1-E.o(k));v.clipB=1-E.o(k);v.gray=.3*(1-k);v.rot=Math.sin(k*14)*.08*(1-k)}});F.at(T+920,()=>{u.clipB=0;u.oy=0;u.rot=0;u.gray=0;u.hp=1});
    F.at(T+500,tt=>F.floatTxt('もどってきた！',u.bx,u.by-u.rh*.6,{t:tt,size:20,col:'#c8ffb0'}))}},
+  {k:'c_duel',n:'早撃ち勝負（はやうちポーク）',d:'3・2・1… バン！ 勝ったら 4ダメージ',stage:{foes:S1.foes,mine:[{art:'dog'},{art:'pork',atk:2,hp:2}]},total:4200,build(){const a=U(3),t=U(0);const {W}=F.dims();F.darken({t:150,d:3600,a:.55});
+   F.keyf(a,{t:200,d:400,fn:(u,k)=>{u.glow=k;u.glowC='255,220,120'}});F.keyf(t,{t:200,d:400,fn:(u,k)=>{u.glow=k;u.glowC='255,120,120'}});
+   F.at(300,tt=>{const pa=pos(a),pt=pos(t);F.icon('fx:13_05',pt.x,pt.y,{t:tt,d:2300,sz:90,a:.85})});
+   ['3','2','1'].forEach((s,i)=>F.slam(s,W/2,MID()-6,{t:500+i*600,d:560,size:64,from:2}));
+   F.at(2300,tt=>{F.flash({t:tt,d:250,a:.9});const pa=pos(a),pt=pos(t);F.icon('x_muzzle',pa.x,pa.y-a.rh*.5,{t:tt,d:200,sz:60});F.shot(pa,pt,{t:tt,d:160,im:'x_bullet',sz:24});F.slam('バン！',W/2,MID()-6,{t:tt,d:900,size:54})});
+   hitFx(t,2460,4,{icon:'x_pow',isz:100,shake:12});F.at(2900,tt=>F.floatTxt('勝ち！',pos(a).x,pos(a).y-a.rh*.6,{t:tt,size:22,col:'#ffe066'}));
+   F.keyf(a,{t:3300,d:300,fn:(u,k)=>{u.glow=1-k}});F.keyf(t,{t:3300,d:300,fn:(u,k)=>{u.glow=1-k}})}},
+  {k:'c_coin',n:'コイン投げ（ラッキー・クローバー）',d:'表なら なかま1体 +2/+2',stage:{foes:S1.foes,mine:[{art:'dog'},{art:'clover',atk:1,hp:1}]},total:3400,build(){const a=U(3),b=U(2);const {W}=F.dims();const cx=W/2,cy=MID();
+   F.overlay(a,{t:300,d:1500,draw:(x,y,r,e)=>{const c=F.ctx(),I=F.ui('fx:09_18');if(!I.complete)return;const k=Math.min(1,e/1200);const yy=cy-Math.sin(k*Math.PI)*130;const sx=Math.abs(Math.cos(e/45));const s=64;c.save();c.translate(cx,yy);c.scale(e<1200?Math.max(.08,sx):1,1);c.drawImage(I,-s/2,-s/2,s,s);c.restore()}});
+   F.at(1500,tt=>{F.slam('おもて！',cx,cy-56,{t:tt,d:1100,size:36,from:1.6});F.burst(cx,cy,{t:tt,n:8,im:'x_star',sp:4,life:800,sz:.18})});
+   F.at(1900,tt=>{const p=pos(b);F.shot({x:cx,y:cy},p,{t:tt,d:350,im:'x_star',sz:20,trail:'255,215,90'});F.at(tt+350,t2=>{F.ring(p.x,p.y,{t:t2,r1:80});F.floatTxt('+2/+2',p.x,p.y-b.rh*.5,{t:t2,col:'#ffe066',size:22});b.atk+=2;b.hp+=2;F.keyf(b,{t:t2,d:800,fn:(u,k)=>{u.glow=Math.sin(k*Math.PI);u.sc=1+.15*Math.sin(k*Math.PI)}})})})}},
+  {k:'c_roulette',n:'運命の ルーレット（ルーレット・ハリー）',d:'ランダムな あいて1体を 手札へ',stage:{foes:S2.foes,mine:[{art:'harry',atk:2,hp:3}]},total:3600,build(){const {W}=F.dims();
+   /* ねらいが くるくる まわって だんだん おそく → とまる */const order=[0,1,2,0,1,2,0,1,2,0,1];let tt0=300;order.forEach((i,j)=>{const d=90+j*j*9;F.at(tt0,tt=>{const v=U(i);F.keyf(v,{t:tt,d:d,fn:(u,k)=>{u.glow=k>=1?0:1;u.glowC='255,230,120'}});F.at(tt,()=>{const p=pos(v);F.icon('fx:13_05',p.x,p.y,{t:tt,d:d,sz:80})})});tt0+=d});
+   const t=U(1),T=tt0;F.at(T,tt=>{const p=pos(t);F.icon('fx:13_05',p.x,p.y,{t:tt,d:700,sz:96});F.slam('これだ！',W/2,MID()-6,{t:tt,d:1000,size:36,from:1.6})});
+   const fh=F.place(F.bd().foeHand);F.keyf(t,{t:T+700,d:600,fn:(u,k)=>{u.ox=(fh.x-u.bx)*E.io(k);u.oy=(fh.y-u.by)*E.io(k);u.sc=1-.7*k;u.alpha=1-.6*k;u.rot=k*.8}});F.at(T+1300,()=>{t.hidden=true;const f=F.bd().foeHand;const cb=f.ownerDocument.createElement('span');cb.className='cb';f.appendChild(cb)})}},
+  {k:'c_moji',n:'文字化け（もじばけ魔女バグーラ）',d:'あいての 画面の 文字が ぜんぶ 文字化け',stage:{foes:S1.foes,mine:[{art:'bagura',atk:2,hp:2}]},total:4200,build(){const B=F.bd(),d=B.hand.ownerDocument;const G='縺繧窶ｯ譁蛹ｮ縲ｿ荳蜷譌ｬ繝ｭ';
+   F.at(300,tt=>{const p=pos(U(2));F.burst(p.x,p.y,{t:tt,n:10,im:'fx:02_05',sp:3,life:900,sz:.16});F.floatTxt('ﾌﾞﾂﾌﾞﾂ…',p.x,p.y-60,{t:tt,size:16,col:'#d0a0ff'})});
+   const els=()=>[...d.querySelectorAll('.nm,.fsr small,#endt,.kws b,.pill')];let orig=null;
+   F.at(900,tt=>{orig=els().map(e=>e.textContent);F.flash({t:tt,d:200,col:'180,120,255',a:.5})});
+   F.keyf(U(0),{t:900,d:2400,fn:(u,k,tt)=>{if(!orig)return;const L=els();if(k>=1){L.forEach((e,i)=>e.textContent=orig[i]);d.getElementById('app').style.filter='';return}if(Math.floor(tt/90)%2)return;L.forEach((e,i)=>{const n=(orig[i]||'').length||3;let s='';for(let j=0;j<n;j++)s+=G[(Math.random()*G.length)|0];e.textContent=s});d.getElementById('app').style.filter=Math.random()<.3?`hue-rotate(${(Math.random()*90-45)|0}deg)`:''}});
+   F.at(1200,tt=>F.slam('文字化け！',F.dims().W/2,MID()-6,{t:tt,d:1400,size:40,grad:['#f0e0ff','#c99aff','#8a5ad0','#5a2aa0'],stroke:'#1e0a3a'}))}},
+  {k:'c_hanage',n:'鼻毛ボーボー（はなげ仙人）',d:'あいて ぜんいん 2ターン 攻撃 -2',stage:{foes:S2.foes,mine:[{art:'hanage',atk:1,hp:3}]},total:3400,build(){const {W}=F.dims();
+   F.at(300,tt=>{const p=pos(U(3));F.floatTxt('ふんっ！',p.x,p.y-U(3).rh*.6,{t:tt,size:20})});
+   [0,1,2].forEach(i=>F.at(700+i*150,tt=>{const v=U(i);v.marks=['fx:12_15'];F.keyf(v,{t:tt,d:400,fn:(u,k)=>{u.sc=1+.15*Math.sin(k*Math.PI)}});const p=pos(v);F.floatTxt('ボーボー',p.x,p.y+v.rh*.1,{t:tt,size:14,rise:14});F.floatTxt('攻撃-2',p.x,p.y-v.rh*.6,{t:tt+300,size:16,col:'#a0c8ff'});v.atk=Math.max(0,v.atk-2)}))}},
+  {k:'c_poop',n:'ウンチを ふんだ（フンコロがし）',d:'あいての 攻撃 -1（2ターン）',stage:{foes:S1.foes,mine:[{art:'funkoro',atk:1,hp:3}]},total:3200,build(){const a=U(2);const h=throwHit(a,U(0),300,{im:'fx:11_01',sz:26,scale:1.6,arc:80,d:650,trail:'150,100,60'});
+   F.at(h,tt=>{const ef=F.place(F.bd().units[0].parentNode);F.icon('fx:11_01',ef.x,ef.y+ef.h*.45,{t:tt,d:2000,sz:70});F.slam('ふんだ！',F.dims().W/2,MID()-6,{t:tt+150,d:1300,size:36,from:1.6,grad:['#fff0d0','#e0b070','#a06a30','#6a4020']});
+     [0,1].forEach(i=>{const v=U(i);F.keyf(v,{t:tt,d:500,fn:(u,k)=>{u.oy=k>=1?0:-14*Math.sin(k*Math.PI)}});F.floatTxt('攻撃-1',pos(v).x,pos(v).y-v.rh*.6,{t:tt+300,size:16,col:'#a0c8ff'});v.atk-=1});
+     F.overlay(U(0),{t:tt,d:2000,draw:(x,y,r,e)=>{const c=F.ctx(),I=F.ui('fx:11_02');if(!I.complete)return;for(let i=0;i<2;i++){const a2=e/300+i*3;c.drawImage(I,ef.x+Math.cos(a2)*40-11,ef.y+ef.h*.3+Math.sin(a2*1.3)*12-11,22,22)}}})})}},
  ]},
  {cat:'これから 作る',items:[
   {k:'s1',n:'キャラ専用 演出',d:'302人の リスト（演出リスト ページ）',soon:1},{k:'s2',n:'ボス登場',d:'',soon:1},{k:'s3',n:'勝った！／まけた',d:'',soon:1},{k:'s4',n:'合成・しんか・かくせい',d:'',soon:1},{k:'s5',n:'天気（はれ・あめ・ゆき・すな）',d:'',soon:1},{k:'s6',n:'お金・カードを 手に入れる',d:'',soon:1}]},
