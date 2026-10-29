@@ -87,7 +87,7 @@ function lunge(a,tg,t,o={}){const {d=180,back=380,frac=.85,windup=0,lift=0}=o;co
   if(windup)F.keyf(a,{t,d:windup,fn:(u,k)=>{u.oy=18*E.o(k);u.sc=1+.12*E.o(k)}});
   const t1=t+windup;F.keyf(a,{t:t1,d,fn:(u,k)=>{u.ox=(pt.x-pa.x)*frac*E.io(k);u.oy=w0+((pt.y-pa.y)*frac-w0)*E.io(k)-Math.sin(k*Math.PI)*lift}});
   F.keyf(a,{t:t1+d,d:back,fn:(u,k)=>{u.ox=(pt.x-pa.x)*frac*(1-E.o(k));u.oy=(pt.y-pa.y)*frac*(1-E.o(k));u.sc=1+(windup?.12:0)*(1-k)}});return t1+d}
-function hitFx(tg,t,n,o={}){const {im='x_hit',icon=null,isz=80,shake=6,txt=null,col='#fff'}=o;F.at(t,tt=>{const p=pos(tg);if(icon)F.icon(icon,p.x,p.y,{t:tt,d:420,sz:isz});if(shake)F.shake({t:tt,p:shake});if(txt)F.floatTxt(txt,p.x,p.y-tg.rh*.62-14,{t:tt,size:16,col,rise:16})});hitAt(tg,t,n,{im})}
+function hitFx(tg,t,n,o={}){const {im='x_hit',icon=null,isz=80,shake=6,txt=null,col='#fff'}=o;F.at(t,tt=>{const p=pos(tg);if(icon)F.icon(icon,p.x,p.y,{t:tt,d:420,sz:isz});if(shake)F.shake({t:tt,p:shake});if(txt){const sd=p.x<F.dims().W/2?1:-1;F.floatTxt(txt,p.x+sd*tg.rw*.95,p.y-tg.rh*.45,{t:tt,size:17,col,rise:12,rot:sd*-.22})}});hitAt(tg,t,n,{im})}
 function throwHit(a,tg,t,o){const {d=600}=o;F.shot(pos(a),pos(tg),Object.assign({t,d},o));return t+d}
 const LIST=[
  {cat:'きほん',items:[
@@ -214,7 +214,7 @@ const LIST=[
    F.overlay(t,{t:h,d:1200,draw:(x,y,r,e)=>{const c=F.ctx(),I=F.ui('fx:12_21');if(!I.complete)return;const k=Math.min(1,e/300);c.save();c.globalAlpha=k;for(let i=0;i<3;i++){c.save();c.translate(x,y-t.rh*.25+i*t.rh*.25);c.rotate(Math.PI/2+(i%2?.3:-.3));const s=t.rw*1.2;c.drawImage(I,-s/2,-s/4,s,s/2);c.restore()}c.restore()}});
    F.keyf(t,{t:h,d:1200,fn:(u,k)=>{u.sc=k>=1?1:1-.1*Math.abs(Math.sin(k*Math.PI*3))}});[0,1,2].forEach(i=>F.at(h+200+i*330,tt=>F.floatTxt('ギュッ',pos(t).x+t.rw*.6,pos(t).y-t.rh*.2+i*8,{t:tt,size:15,rise:16})));hitAt(t,h+900,2,{im:'x_hit'})}},
   {k:'a_claw',n:'ツメで ひっかく',d:'ネコ・けもの',stage:SA('cancan',2),total:1900,build(){const a=U(1),t=U(0);const h=lunge(a,t,250,{d:150,frac:.75});
-   [0,1,2].forEach(i=>F.at(h+i*90,tt=>{const p=pos(t);F.icon('fx:07_04',p.x+(i-1)*10,p.y+(i-1)*6,{t:tt,d:380,sz:90})}));hitFx(t,h+120,2,{shake:6,txt:'バリバリッ'})}},
+   [0,1,2].forEach(i=>F.at(h+i*90,tt=>{const p=pos(t);F.icon('fx:07_04',p.x+(i-1)*10,p.y+(i-1)*6,{t:tt,d:380,sz:90})}));hitFx(t,h+120,2,{shake:6,txt:'ザシュッ！'})}},
   {k:'a_dive',n:'急降下で つつく',d:'鳥',stage:SA('vulture',2),total:2200,build(){const a=U(1),t=U(0);const pa=pos(a),pt=pos(t);F.keyf(a,{t:250,d:350,fn:(u,k)=>{u.oy=-90*E.o(k);u.ox=-30*E.o(k)}});
    F.keyf(a,{t:600,d:160,fn:(u,k)=>{u.ox=-30+(pt.x-pa.x+30)*.85*E.io(k);u.oy=-90+((pt.y-pa.y)*.85+90)*E.io(k)}});F.at(760,tt=>F.burst(pt.x,pt.y,{t:tt,n:8,im:'fx:12_23',sp:4,g:.08,life:900,sz:.14,add_:false}));hitFx(t,760,2,{icon:'x_hit',isz:60,txt:'ツンツン！'});
    F.keyf(a,{t:770,d:450,fn:(u,k)=>{u.ox=(pt.x-pa.x)*.85*(1-E.o(k));u.oy=(pt.y-pa.y)*.85*(1-E.o(k))}})}},
