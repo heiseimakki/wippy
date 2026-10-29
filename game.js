@@ -8754,6 +8754,34 @@ function awDoneText(){try{const sh=$('sheet');if(!sh)return;const w=document.cre
   while(n=w.nextNode()){if(/…！？|→ ?(覚醒|かくせい)！/.test(n.nodeValue)){const row=n.parentElement&&n.parentElement.closest('div,li');if(row&&/(覚醒|かくせい)/.test(row.textContent))hit.push(n)}}
   hit.forEach(n=>{n.nodeValue=n.nodeValue.replace(/^([：:]\s*)?.*$/,(m,p)=>(p||'')+AWK_DONE)})}catch(e){}}
 {const _sc=sheetCard;sheetCard=function(id,lv,top,btns,plus){const r=_sc.apply(this,arguments);try{if(plus>0&&typeof AWK!=='undefined'&&AWK[id]){awDoneText();setTimeout(awDoneText,0);setTimeout(awDoneText,120)}}catch(e){}return r}}
+/* 10/29：かくせいしたら「まったく 新しい カード」。前の 力（はやうち・見参 など）は のこさない
+   ・説明：かくせいの 行と ボスの力だけ
+   ・バトル：かくせいして 出すと、もとの 見参や マークは つかわず、ボスの力だけ */
+function awOnlyView(id){try{const sh=$('sheet');if(!sh)return;
+  sh.querySelectorAll('.kwlist>div').forEach(r=>{if(r.classList.contains('awx'))return;if(!/(覚醒|かくせい)/.test(r.textContent))r.remove();else{const sp=r.querySelector('span');if(sp)sp.innerHTML='<b>かくせい</b>：'+AWK_DONE}});
+  const k=sh.querySelector('#shc .kws');if(k)[...k.children].forEach(x=>{if(!/(覚醒|かくせい|👑)/.test(x.textContent+x.className+(x.style.backgroundImage||''))&&!x.querySelector('img[src*="awake"]'))x.remove()});
+  if(!sh.querySelector('.awbox')&&typeof BX!=='undefined'&&BX[id]){const kl=sh.querySelector('.kwlist');if(kl&&!kl.querySelector('.awx'))kl.insertAdjacentHTML('beforeend',`<div class="awx"><i style="background:#ff4fa0">👑</i><span><b>${BX[id].nm}</b>：${BX[id].d}</span></div>`)}}catch(e){}}
+{const _sc=sheetCard;sheetCard=function(id,lv,top,btns,plus){const r=_sc.apply(this,arguments);try{if(plus>0&&typeof AWK!=='undefined'&&AWK[id]){awOnlyView(id);setTimeout(()=>awOnlyView(id),0)}}catch(e){}return r}}
+{const _pc=playCard;playCard=async function(sd,i){const c=sd&&sd.hand&&sd.hand[i];if(!(c&&c.awake&&typeof AWK!=='undefined'&&AWK[c.id]))return _pc.apply(this,arguments);
+  const id=c.id,o=C[id],n=Object.assign({},o);['kw','bc','v','aura','av','dr','onkill','bounty','fuel','poison'].forEach(k=>{if(k==='kw')n.kw='';else delete n[k]});
+  C[id]=n;try{return await _pc.apply(this,arguments)}finally{C[id]=o}}}
+/* 10/29：モーキン警部の 見参を「空から 見まもる 保安官」に。
+   手札を 見る（保安検査）＋ かくれている あいてを 見やぶる ＋ なかま ぜんいんの 体力 +1（Lvで ふえる） */
+C.eagle.bc='skywatch';try{FLAV2.eagle='空から 見まもっておる！';FLAV.eagle={'見参！':'あいての 手札を ぜんぶ 見て（ほあん けんさ）、かくれている あいてを 見やぶる。なかま ぜんいんの 体力 +1'}}catch(e){}
+{const _bt=bcText;bcText=function(d,lv){if(d&&d.bc==='skywatch'){const n=1+(typeof lvN==='function'?lvN(lv||1):0);return `空から 見まもる！ あいての 手札を ぜんぶ 見て、かくれている あいてを 見やぶる。なかま ぜんいんの 体力 +${n}`}return _bt.apply(this,arguments)}}
+{const _bc=battlecry;battlecry=async function(sd,m,c){const d=C[c.id];if(!d||d.bc!=='skywatch')return _bc.apply(this,arguments);
+  if(HUMAN&&typeof bcFx==='function')await bcFx(m);const me=isMe(sd),o=opp(sd),n=1+(typeof lvN==='function'?lvN(c.lv||1):0);
+  if(me)B.scout=true;let seen=0;o.board.forEach(x=>{if(x.hp>0&&x.kw.has('stealth')){x.kw.delete('stealth');seen++}});
+  sd.board.forEach(x=>{if(x.hp>0){x.hp+=n;x.max+=n;if(HUMAN){const e=uEl(x);if(e)floatAt(e,'+'+n,'heal')}}});
+  if(HUMAN){say(me?`空から 見まもる！ あいての 手札は まる見え${seen?`、かくれた ${seen}体も 見やぶった`:''}！`:'空から 見はられている…！');try{renderBattle()}catch(e){}}}}
+
+/* 10/29：book・ずかんを ひらいた しゅんかんに 画面の 高さが まだ ちいさい（キーボードが しまう前など）と 8まいしか 出ない → 高さが かわったら 入れなおす */
+{const _bv=bookView;bookView=function(f,p){window._bkArgs=[f||'all',p||0];return _bv.apply(this,arguments)}}
+{const _dx=FACS.dex;FACS.dex=function(t,p){window._dxArgs=[t,p];return _dx.apply(this,arguments)}}
+{let lastH=innerHeight,tm=0;const re=()=>{const h=(window.visualViewport&&visualViewport.height)||innerHeight;if(Math.abs(h-lastH)<40)return;lastH=h;clearTimeout(tm);tm=setTimeout(()=>{try{if(document.querySelector('#app #bkg')&&window._bkArgs&&$('sheet').hidden)bookView(..._bkArgs);else if(document.querySelector('#app #dxbody')&&window._dxArgs&&$('sheet').hidden)FACS.dex(..._dxArgs)}catch(e){}},150)};
+  addEventListener('resize',re);if(window.visualViewport)visualViewport.addEventListener('resize',re);
+  /* 入った すぐあとにも 1回 たしかめる */
+  {const _bv2=bookView;bookView=function(){const r=_bv2.apply(this,arguments);if(!window._bkRe){window._bkRe=1;[300,900].forEach(ms=>setTimeout(()=>{lastH=0;re()},ms));setTimeout(()=>window._bkRe=0,1000)}return r}}}
 
 
 /* =====================================================================
