@@ -96,11 +96,11 @@ function breakImg(name,x,y,size,o={}){const {t=0,life=1100,pow=1}=o;ext(t+life);
       c.beginPath();p.pts.forEach((q,i)=>i?c.lineTo(q[0],q[1]):c.moveTo(q[0],q[1]));c.closePath();c.clip();c.drawImage(I,-R,-R,R*2,R*2);c.restore()}}})}
 /* たつまき（画像）：くねくね ゆれながら 左から右へ 通りすぎる。落ち葉と 小石が まわりを ぐるぐる */
 const LEAF=[[1,28,25,35],[43,0,24,33],[104,5,25,18],[0,75,62,58],[54,30,54,33]],PEB=[[132,36,18,17],[3,42,16,16],[130,13,12,13],[1,96,15,12]];
-function tornadoImg(o={}){const {t=0,d=2600,y=H*.5,x0=-80,x1=W+80,h=220,n=18,alpha=.85}=o;ext(t+d);const TI=ui('x_tornado'),LI=ui('x_leaves'),DI=ui('x_dust');
-  const D_=Array.from({length:n},(_,i)=>{const leaf=i%3!==2;const r=leaf?LEAF[i%LEAF.length]:PEB[i%PEB.length];return {leaf,r,k:.08+Math.random()*.85,a:Math.random()*7,v:4+Math.random()*3,sz:leaf?(22+Math.random()*14):(10+Math.random()*7),spin:(Math.random()-.5)*12,ph:Math.random()*7}});
+function tornadoImg(o={}){const {t=0,d=2600,y=H*.5,x0=-80,x1=W+80,h=220,n=18,alpha=.85}=o;ext(t+d);const TI=ui('fx:new/tornado2'),LI=ui('fx:new/leaf_brown'),LO=ui('fx:new/leaf_orange'),DI=ui('fx:new/pebbles');
+  const D_=Array.from({length:n},(_,i)=>{const leaf=i%3!==2;const r=leaf?LEAF[i%LEAF.length]:PEB[i%PEB.length];return {o:i%2,leaf,r,k:.08+Math.random()*.85,a:Math.random()*7,v:4+Math.random()*3,sz:leaf?(22+Math.random()*14):(10+Math.random()*7),spin:(Math.random()-.5)*12,ph:Math.random()*7}});
   const st={x:x0};const cx=e=>x0+(x1-x0)*(e/d)+Math.sin(e/150)*14;
   const drawD=(e,front)=>{const X=cx(e);for(const p of D_){const a=p.a+e/1000*p.v;const z=Math.sin(a);if((z>0)!==front)continue;const k=(p.k+Math.sin(e/700+p.ph)*.05);const R_=h*(.12+.36*k);const dx=X+Math.cos(a)*R_+Math.sin(e/150+k*3)*10*k,dy=y-k*h+z*R_*.22;const sc=.7+.4*(z+1)/2;
-      const I=p.leaf?LI:DI;if(!I.complete)continue;const [sx,sy,sw,sh]=p.r;const w=p.sz*sc,hh=w*sh/sw;c.save();c.globalAlpha=(front?1:.6)*fadeA(e);c.translate(dx,dy);c.rotate(e/1000*p.spin);c.drawImage(I,sx,sy,sw,sh,-w/2,-hh/2,w,hh);c.restore()}};
+      const I=p.leaf?(p.o?LO:LI):DI;if(!I.complete)continue;const [sx,sy,sw,sh]=[0,0,I.naturalWidth||1,I.naturalHeight||1];const w=p.sz*sc,hh=w*sh/sw;c.save();c.globalAlpha=(front?1:.6)*fadeA(e);c.translate(dx,dy);c.rotate(e/1000*p.spin);c.drawImage(I,sx,sy,sw,sh,-w/2,-hh/2,w,hh);c.restore()}};
   const fadeA=e=>Math.min(1,e/250,(d-e)/300);
   add({draw(tt){const e=tt-t;if(e<0||e>d)return;st.x=cx(e);drawD(e,false);if(TI.complete){const X=cx(e);c.save();c.globalAlpha=alpha*fadeA(e);c.translate(X,y);c.rotate(Math.sin(e/210)*.07);c.scale(1+Math.sin(e/90)*.05,1+Math.cos(e/120)*.03);const w=h*TI.naturalWidth/TI.naturalHeight;
       /* 上のほうを すこし ずらして くねくね */const sl=6;for(let i=0;i<sl;i++){const k0=i/sl,k1=(i+1)/sl;const off=Math.sin(e/160+k0*2.4)*12*k0;const sy0=TI.naturalHeight*(1-k1),sh0=TI.naturalHeight/sl;c.drawImage(TI,0,sy0,TI.naturalWidth,sh0+1,-w/2+off,-h*k1,w,h/sl+1)}c.restore()}
