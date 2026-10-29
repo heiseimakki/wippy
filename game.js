@@ -8706,9 +8706,13 @@ function townNextGuide(){try{if(!HUMAN||!G||!nextSid()||anyClear())return;const 
   b.onclick=()=>{SFX.tap&&SFX.tap();b.textContent='まってね…';window.__cloudEnable().then(r=>{lab();toast(r?'クラウドに のこしたよ！':'いまは クラウドが つかえないみたい')})};ok.before(b)}catch(e){}}}
 
 
+const CB_EASY=["mixed3","army","thornwall","taunt2","allin","healwall","big7","linkx2","twins","firewater","quick2","quick3","shieldwall","big10","pack","trio","cheer","revive2","legend2","lone","robot3","cheap3","steamking","cactus3","spirit3","zombiewave","zfam","feast","skullpo","hattwice","trumpet","twinquick","sun5","sun10","rain3","sand3","snow3","wxmaster","gattai2","evolved","rank2","grown","thorngrow","jail2","fuse2","ghost3","poison2","drunkall","coinbig","thaw","wake","awaken","awplay","steal","vassal","wantedkill","boom2","triple","perfect","close","bosscatch","elitecatch","heal8","poison3","coin10","shield3"];
+const NEWB='<i class="nwb"><b>NEW!</b><s></s><s></s><s></s></i>';
 /* 10/29：ずかんは スクロールなし。1ページに 入るだけ ならべて、◀ ▶ と スワイプで めくる
    タブは しおりの形を やめて、えらんでいる方が はっきり わかる 色の ボタンに */
-FACS.dex=function(tab,page){tab=tab==null?(window._dxTab||0):tab;window._dxTab=tab;page=page||0;G.combos=G.combos||{};
+FACS.dex=function(tab,page){tab=tab==null?(window._dxTab||0):tab;window._dxTab=tab;page=page||0;G.combos=G.combos||{};G.dexSeen=G.dexSeen||{};G.cbSeen=G.cbSeen||{};const newly=[];
+  /* はじめて ひらいた時は、いま もっている ものを ぜんぶ 見たことに（NEW だらけに しない） */
+  if(!G._dexInit){G._dexInit=1;COLLECT.forEach(id=>{if(G.seen[id])G.dexSeen[id]=1});CB.forEach(c=>{if(G.combos[c.id])G.cbSeen[c.id]=1})}
   const seen=COLLECT.filter(id=>G.seen[id]).length,got=CB.filter(c=>G.combos[c.id]).length;
   app().innerHTML=`${head().replace(`<span class="money">＄${G.money}</span>`,'')}
     <div class="dxseg"><button class="dxs s0 ${tab===0?'on':''}">なかま ずかん<small>${seen} / ${COLLECT.length}</small></button><button class="dxs s1 ${tab===1?'on':''}">コンボ ずかん<small>${got} / ${CB.length}</small></button></div>
@@ -8719,11 +8723,11 @@ FACS.dex=function(tab,page){tab=tab==null?(window._dxTab||0):tab;window._dxTab=t
   const body=$('dxbody'),top=body.getBoundingClientRect().top,avail=Math.max(160,innerHeight-top-12-(parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--sab'))||0));
   let per,items,draw;
   if(tab===0){const W=Math.min(innerWidth,480),cw=Math.min(W*.22,84),ch=cw*1.48+6,cols=4,rows=Math.max(1,Math.floor(avail/ch));per=cols*rows;items=COLLECT;body.style.gridTemplateColumns=`repeat(${cols},1fr)`;
-    draw=list=>list.forEach(id=>{let el;if(G.seen[id]){el=cardEl(id,1,{hideLv:true});el.onclick=()=>sheetCard(id,1)}else{el=document.createElement('div');el.className='card back';el.innerHTML='<div class="q">？</div>'}el.style.setProperty('--cw',cw+'px');body.appendChild(el)})}
-  else{const rh=58;per=Math.max(1,Math.floor(avail/rh));items=CB;
-    draw=list=>{body.innerHTML=list.map(c=>G.combos[c.id]?`<div class="cbrow"><b>${c.ic} ${c.n}</b><span>${c.d}</span></div>`:`<div class="cbrow no"><b>？？？</b><span>まだ ひらめいていない</span></div>`).join('')}}
+    draw=list=>list.forEach(id=>{let el;if(G.seen[id]){el=cardEl(id,1,{hideLv:true});el.onclick=()=>sheetCard(id,1);if(!G.dexSeen[id]){el.insertAdjacentHTML('beforeend',NEWB);newly.push(()=>G.dexSeen[id]=1)}}else{el=document.createElement('div');el.className='card back';el.innerHTML='<div class="q">？</div>'}el.style.setProperty('--cw',cw+'px');body.appendChild(el)})}
+  else{const rh=58;per=Math.max(1,Math.floor(avail/rh));const OD=CB_EASY;items=CB.slice().sort((a,b)=>{const x=OD.indexOf(a.id),y=OD.indexOf(b.id);return (x<0?999:x)-(y<0?999:y)});
+    draw=list=>{list.forEach(c=>{if(G.combos[c.id]&&!G.cbSeen[c.id])newly.push(()=>G.cbSeen[c.id]=1)});body.innerHTML=list.map(c=>G.combos[c.id]?`<div class="cbrow">${!G.cbSeen[c.id]?NEWB:''}<b>${c.ic} ${c.n}</b><span>${c.d}</span></div>`:`<div class="cbrow no"><b>？？？</b><span>まだ ひらめいていない</span></div>`).join('')}}
   const pages=Math.max(1,Math.ceil(items.length/per));page=Math.max(0,Math.min(pages-1,page));
-  draw(items.slice(page*per,page*per+per));
+  draw(items.slice(page*per,page*per+per));if(newly.length){newly.forEach(f=>f());try{save()}catch(e){}}
   $('dxn').textContent=`${page+1} / ${pages}`;$('dxp').disabled=page<=0;$('dxx').disabled=page>=pages-1;
   const go=p=>{SFX.tap&&SFX.tap();FACS.dex(tab,p)};$('dxp').onclick=()=>go(page-1);$('dxx').onclick=()=>go(page+1);
   let x0=null;body.ontouchstart=e=>{x0=e.touches[0].clientX};body.ontouchend=e=>{if(x0==null)return;const dx=e.changedTouches[0].clientX-x0;x0=null;if(dx<-50&&page<pages-1)go(page+1);else if(dx>50&&page>0)go(page-1)}};
@@ -8742,7 +8746,17 @@ FACS.dex=function(tab,page){tab=tab==null?(window._dxTab||0):tab;window._dxTab=t
 .cbrow{height:52px;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center;background:rgba(40,20,8,.85);border:2px solid #6fb6ff;border-radius:12px;padding:4px 10px;overflow:hidden}
 .cbrow b{font-size:14px;color:#cfe8ff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .cbrow span{font-size:11.5px;color:#f4e6cc;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.cbrow.no{border-color:#5a4a3a;opacity:.7}.cbrow.no b{color:#bba}`;document.head.appendChild(st)})();
+.cbrow.no{border-color:#5a4a3a;opacity:.7}.cbrow.no b{color:#bba}
+.nwb{position:absolute;right:-6px;top:-8px;z-index:8;font-style:normal;pointer-events:none;animation:nwIn .6s cubic-bezier(.2,1.8,.4,1) both,nwBob 1.6s .6s ease-in-out infinite}
+.nwb b{position:relative;display:block;overflow:hidden;font:900 11px var(--display,sans-serif);letter-spacing:.04em;color:#fff;background:linear-gradient(135deg,#ff5fa2,#ffb92e);border:2px solid #fff;border-radius:99px;padding:2px 7px;box-shadow:0 2px 6px rgba(0,0,0,.45),0 0 10px rgba(255,120,170,.8)}
+.nwb b::after{content:"";position:absolute;top:0;bottom:0;width:40%;left:-60%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.9),transparent);animation:nwShine 1.8s .7s ease-in-out infinite}
+.nwb s{position:absolute;width:10px;height:10px;background:radial-gradient(circle,#fff 0 20%,#ffe066 35%,transparent 70%);border-radius:50%;animation:nwTw 1.2s ease-in-out infinite}
+.nwb s:nth-child(2){left:-6px;top:-4px}.nwb s:nth-child(3){right:-5px;top:-6px;animation-delay:.4s}.nwb s:nth-child(4){right:6px;bottom:-6px;animation-delay:.8s}
+@keyframes nwIn{0%{transform:scale(0) rotate(-30deg);opacity:0}100%{transform:none;opacity:1}}
+@keyframes nwBob{0%,100%{translate:0 0}50%{translate:0 -3px}}
+@keyframes nwShine{0%{left:-60%}60%,100%{left:130%}}
+@keyframes nwTw{0%,100%{transform:scale(.3);opacity:.2}50%{transform:scale(1.2);opacity:1}}
+.cbrow{position:relative;overflow:visible!important}#dxbody .card{position:relative}`;document.head.appendChild(st)})();
 /* 10/29：ダブルタップや ピンチで 画面が 大きく ならないように（iPhone） */
 (()=>{const st=document.createElement('style');st.textContent='html,body{touch-action:manipulation;-webkit-text-size-adjust:100%}*{touch-action:manipulation}';document.head.appendChild(st);
   try{const m=document.querySelector('meta[name=viewport]');if(m)m.content='width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover'}catch(e){}
@@ -8782,6 +8796,11 @@ C.eagle.bc='skywatch';try{FLAV2.eagle='空から 見まもっておる！';FLAV.
   addEventListener('resize',re);if(window.visualViewport)visualViewport.addEventListener('resize',re);
   /* 入った すぐあとにも 1回 たしかめる */
   {const _bv2=bookView;bookView=function(){const r=_bv2.apply(this,arguments);if(!window._bkRe){window._bkRe=1;[300,900].forEach(ms=>setTimeout(()=>{lastH=0;re()},ms));setTimeout(()=>window._bkRe=0,1000)}return r}}}
+
+/* 10/29：かくせいの すがたを ちゃんと 見せる（名無しのガンマンは 99/99） */
+const AW_STAT={nanashi:[99,99]};
+try{AWN_COOL.nanashi='見参！：99/99の すがたに なる。かわりに 山札・手札・ほかの なかまを ぜんぶ すてる。いるあいだ：ターンの終わりに「ねらいうち・みだれうち・リロード・にらみ」から 1つを つかう。';if(AWN.nanashi)AWN.nanashi[1]=AWN_COOL.nanashi}catch(e){}
+{const _ce=cardEl;cardEl=function(id,lv,o){const el=_ce.apply(this,arguments);try{if(o&&o.plus>0&&AW_STAT[id]){const a=el.querySelector('.stat.a'),h=el.querySelector('.stat.h');if(a)a.textContent=AW_STAT[id][0];if(h)h.textContent=AW_STAT[id][1]}}catch(e){}return el}}
 
 
 /* =====================================================================
