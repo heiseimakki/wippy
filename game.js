@@ -2100,10 +2100,10 @@ function hintAfter(){}
 /* ---- 5秒そのままだと「次にできること」がふわっと出る ---- */
 function nextActs(tg){const me=B.me;
   if(B.sel)return tg.some(t=>t.hero)?{kind:'sel',t:'おやぶんを タップして ビビらせよう！',el:$('foeHero')}:{kind:'sel',t:'あかく ひかる てきを タップ！',el:document.querySelector('#ef .u.tgt')};
-  const rd=document.querySelector('#af .u.ready');if(rd)return{kind:'atk',t:'ひかってる なかまで アタック！',em:'⚔️',el:rd};
-  const pc=document.querySelector('#hand .card.can');if(pc)return{kind:'play',t:'コインで なかまを よぼう！',em:'✨',el:pc};
+  const rd=document.querySelector('#af .u.ready');if(rd)return{kind:'atk',t:'ひかってる なかまで アタック！',em:'<img class="iei" src="@@D2@@" alt="">',el:rd};
+  const pc=document.querySelector('#hand .card.can');if(pc)return{kind:'play',t:'コインで なかまを よぼう！',em:'<img class="iei" src="fx/new/coin_front.webp" alt="">',el:pc};
   if(canLasso())return{kind:'lasso',t:'なげなわで つかまえられるかも！',em:'🪢',el:$('lasso')};
-  return{kind:'end',t:'やれること ぜんぶ やった！',em:'👍',sub:'ターン終了 ▶',el:$('endt')}}
+  return{kind:'end',t:'やれること ぜんぶ やった！',em:'<img class="iei" src="fav/f_smile.png" alt="">',sub:'ターン終了 ▶',el:$('endt')}}
 let IDLE=null;
 function idleClear(){clearTimeout(IDLE);IDLE=null;document.querySelectorAll('.idlehint').forEach(h=>{h.classList.add('out');setTimeout(()=>h.remove(),350)});document.querySelectorAll('.nudge').forEach(e=>e.classList.remove('nudge'))}
 function idleArm(){idleClear();if(!HUMAN||!B||B.over)return;IDLE=setTimeout(idleShow,5000)}
@@ -9422,7 +9422,7 @@ function poisonU(u,t=0){const p=pos(u);at(t,()=>{burst(p.x,p.y,{t,n:12,im:'fx:ne
 /* 見参！ */
 async function kenzan(m){if(!ensure())return;const el=uEl(m);if(!el)return;begin();const u=wrap(el);const p=pos(u);
   let sub=null;try{const x=effList(m.id,m.lv).find(x=>x[1]==='見参！');if(x){const s=String(x[2]);const mm=s.match(/^(.{1,16}?[！!…〜♪？])(\s|$)/);if(mm)sub=mm[1]}}catch(e){}
-  darken({t:0,d:1700,a:.4,holes:[u]});rays(p.x,p.y,{t:0,d:1500,hole:u,a:.4});burst(p.x,p.y,{t:0,n:8,im:['x_spark','x_star'],sp:5,sz:.16,life:800});flash({t:0,d:180,a:.5});
+  darken({t:0,d:1700,a:.4,holes:[u]});try{const pp=document.createElement('div');pp.className='kwpop fx-bc';pp.style.setProperty('--k',(typeof KW_COL!=='undefined'&&KW_COL.bc)||'#e8a23a');pp.innerHTML='<span class="i"><img class="kwi" src="ui/u_k_bc.png" alt=""></span>';el.appendChild(pp);setTimeout(()=>pp.remove(),1100*SP())}catch(e){}burst(p.x,p.y,{t:0,n:8,im:['x_spark','x_star'],sp:5,sz:.16,life:800});flash({t:0,d:180,a:.5});
   keyf(u,{t:0,d:1300,fn:(v,k)=>{v.glow=k>=1?0:Math.sin(k*Math.PI);v.sc=k>=1?1:1+.12*Math.sin(Math.min(1,k*3)*Math.PI)}});
   const y=Math.max(70,Math.min(H-120,p.y-u.rh*.9));slam('見参！',W/2,y,{t:80,d:1500,size:50,sub});S.kenzan();await wait(950)}
 /* やられ（コピーを つかう：盤面が 書きかわっても のこる） */
@@ -9468,7 +9468,7 @@ function kwFlair(el,k){if(!ensure()||!el)return;begin();const u=wrap(el),p=pos(u
   else if(k==='quick'){flash({t:0,d:120,col:'255,240,120',a:.3});keyf(u,{t:0,d:700,fn:(v,q)=>{v.glow=q>=1?0:1-q;v.glowC='255,230,80';v.oy=q>=1?0:-10*Math.sin(Math.min(1,q*2.5)*Math.PI)}})}
   else if(k==='twice'){burst(p.x,p.y,{t:0,n:6,im:'x_star',sp:3,life:700,sz:.16})}
   else if(k==='stealth'){smoke(p.x,p.y+10,{t:0,col:'200,200,220',n:10});keyf(u,{t:0,d:700,fn:(v,q)=>{v.alpha=q>=1?1:1-.5*Math.sin(q*Math.PI)}})}
-  else if(k==='shield'){window.SEP&&SEP.play('shield');const s=Math.max(u.rw,u.rh)*1.3;overlay(u,{t:0,d:900,draw:(x,y,uu,e)=>{const I=ui('x_barrier');if(!I.complete)return;const a=Math.min(1,e/200,(900-e)/300);c.save();c.globalAlpha=.45*a;const ss=s*(.8+.2*Math.min(1,e/250));c.drawImage(I,x-ss/2,y-ss/2,ss,ss);c.restore()}})}
+  else if(k==='shield'){window.SEP&&SEP.play('shield');S.safe(()=>{SFX.shieldUp&&SFX.shieldUp()});const s=Math.max(u.rw,u.rh)*1.5;overlay(u,{t:0,d:800,draw:(x,y,uu,e)=>{const I=ui('x_barrier');if(!I.complete)return;const q=Math.min(1,e/450);const a=Math.min(1,e/120)*(e>600?Math.max(0,(800-e)/200)*.6+.4:1);c.save();c.globalAlpha=.75*a;const ss=s*(1.45-.45*E.o(q));c.drawImage(I,x-ss/2,y-ss/2,ss,ss);c.restore()}});ring(p.x,p.y,{t:0,col:'140,220,255',r1:Math.max(u.rw,u.rh)*.9,w:6,d:500})}
   else if(k==='revive'){icon('x_halo',p.x,p.y-u.rh/2-10,{t:0,d:900,sz:44,bob:2})}
   else if(k==='deadly'){icon('x_skull',p.x,p.y,{t:0,d:600,sz:56,a:.8})}}
 function drFx(m){if(!ensure())return;const r=m&&m._lastRect;if(!r)return;begin();const x=r.left+r.width/2,y=r.top+r.height/2;ring(x,y,{t:0,col:'170,120,255',r1:90});
@@ -9568,14 +9568,14 @@ if(typeof battlecry==='function'){const _bcC=battlecry;battlecry=async function(
 (function(){const st=document.createElement('style');st.textContent=`.u .cfxt{position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:6}
 .cfxon{animation:none!important;transition:none!important}
 .u.sleepy .art::after{content:'';position:absolute;inset:0;background:rgba(40,60,140,.24);border-radius:inherit;pointer-events:none}
-.u.shield::after{content:""!important;position:absolute!important;inset:-16%!important;border:0!important;border-radius:0!important;background:url(ui/x_barrier.png) center/contain no-repeat!important;box-shadow:none!important;opacity:.38!important;z-index:1!important;pointer-events:none;animation:cfxBar 2.8s ease-in-out infinite!important}
+.u.shield::after{content:""!important;position:absolute!important;inset:-24%!important;border:0!important;border-radius:0!important;background:url(ui/x_barrier.png) center/contain no-repeat!important;box-shadow:none!important;opacity:.58!important;z-index:1!important;pointer-events:none;animation:cfxBar 2.8s ease-in-out infinite!important}
 @keyframes cfxBar{50%{transform:scale(1.03)}}
 .u .iceov{z-index:1!important}
 .u .stat,.u .pills,.u .jcnt{z-index:6!important}
 .u.sleepy .art{filter:brightness(.88) saturate(.85)}`;document.head.appendChild(st)})();
 
 /* キーワードの お知らせ（出たとき）に キャンバスの かざり */
-if(typeof kwFx==='function'){const _kf=kwFx;kwFx=async function(m){try{if(HUMAN&&m&&m.kw){const el=uEl(m);const ks=['taunt','shield','quick','twice','stealth','revive','deadly'].filter(k=>m.kw.has(k)).slice(0,2);ks.forEach((k,i)=>setTimeout(()=>{const e=uEl(m);if(e)CFX.kwFlair(e,k)},i*1150*(SPEED||1)))}}catch(e){}return _kf.apply(this,arguments)}}
+if(typeof kwFx==='function'){const _kf=kwFx;kwFx=async function(m){try{if(HUMAN&&m&&m.kw){const el=uEl(m);const ks=['taunt','quick','twice','stealth','revive','deadly'].filter(k=>m.kw.has(k)).slice(0,2);ks.forEach((k,i)=>setTimeout(()=>{const e=uEl(m);if(e)CFX.kwFlair(e,k)},i*1150*(SPEED||1)))}}catch(e){}return _kf.apply(this,arguments)}}
 if(typeof drMark==='function'){const _dmk=drMark;drMark=async function(m){const sp=()=>(typeof SPEED==='number'&&SPEED>0?SPEED:1);const zz=ms=>new Promise(r=>setTimeout(r,ms/sp()));if(HUMAN)await zz(380);try{if(HUMAN)CFX.drFx(m)}catch(e){}const r=await _dmk.apply(this,arguments);if(HUMAN)await zz(750);return r}}
 /* いるあいだ：出した時と ターンの はじめに 力を くばる。もらっている子には ★マーク */
 const cfxAuraT=(sd,m)=>{const d=C[m.id]||{};if(!d.aura)return [];return sd.board.filter(b=>b!==m&&b.hp>0&&(d.aura==='atk'||d.aura==='regen'||(d.aura==='faction'&&b.f===m.f)))};
@@ -9630,7 +9630,7 @@ if(typeof NEWBC!=='undefined'){const W2=(name,pre,post)=>{const f=NEWBC[name];if
  W2('steal',async(sd,m,c,o)=>{if(o.hand.length)await CFX.steal(uEl(m),isMe(sd))});
  W2('balloon',null,async(sd,m)=>{const t=sd.board.find(x=>x.hp>0&&x.kw&&x.kw.has('stealth')&&x!==m)||m;const e=uEl(t);if(e)CFX.balloon(e)});}
 /* 10/29：タブの ウィピィ（ファビコン）を ばめんで かえる */
-const FAV={happy:['smile','wink','laugh','shy','relief','star','carrot','dreamy','side','tilt','surprise'],set(n){try{let l=document.querySelector('link[rel="icon"][data-wf]');if(!l){document.querySelectorAll('link[rel="icon"]').forEach(x=>x.remove());l=document.createElement('link');l.rel='icon';l.type='image/png';l.setAttribute('data-wf','1');document.head.appendChild(l)}l.href='fav/f_'+n+'.png'}catch(e){}},
+const FAV={happy:['smile','wink','laugh','shy','relief','star','carrot','dreamy','side','tilt','surprise'],set(n){try{let l=document.querySelector('link[rel="icon"][data-wf]');if(!l){document.querySelectorAll('link[rel="icon"]').forEach(x=>x.remove());l=document.createElement('link');l.rel='icon';l.type='image/png';l.setAttribute('data-wf','1');document.head.appendChild(l)}l.href='fav/f_'+n+'.png?v=3'}catch(e){}},
  rnd(){FAV.set('smile')}};
 try{if(!window.__PCWRAP){FAV.rnd()}}catch(e){}
 /* ファビコンは ずっと にっこり（ばめんで かえない） */
@@ -9651,6 +9651,15 @@ window.SEP=SEP;['touchend','click','keydown'].forEach(ev=>document.addEventListe
  SFX.boom=function(){if(!SEP.play('boom'))(SFX.thunder&&SFX.thunder())}}
 /* 10/29：マップぜんたい（地図ボタン）の 背景を そのステージの マップに */
 try{new MutationObserver(ms=>{for(const m of ms)for(const n of m.addedNodes){if(n.nodeType===1&&n.classList&&n.classList.contains('mapall')){try{const bx=n.querySelector('.mbox');if(bx&&R&&typeof mapOf==='function')bx.style.backgroundImage=`url(${mapOf(R.sid)})`}catch(e){}}}}).observe(document.body,{childList:true})}catch(e){}
+
+/* 10/29：コインの マークを 金貨の 絵に（ぜんぶの <use href="#coin"> に きく） */
+try{const sy=document.getElementById('coin');if(sy)sy.innerHTML='<image href="fx/new/coin_front.webp" x="0" y="0" width="100" height="100"/>'}catch(e){}
+try{const st=document.createElement('style');st.textContent='.ie .iei{width:64px;height:64px;object-fit:contain;display:block;margin:0 auto 4px;filter:drop-shadow(0 2px 4px rgba(0,0,0,.5))}';document.head.appendChild(st)}catch(e){}
+/* SEは いったん 前の 音に もどす（全部 そろってから 当てなおす） */
+SEP.off=true;{const _pl=SEP.play;SEP.play=function(){if(SEP.off)return false;return _pl.apply(this,arguments)}}
+
+/* バリアが ついた しゅんかん（出したとき・効果で ついたとき）に 大きな バリアが はられて、マークが のこる */
+{const _rbS=renderBattle;renderBattle=function(){const r=_rbS.apply(this,arguments);try{if(B&&HUMAN&&window.CFX){[...B.me.board,...B.foe.board].forEach(m=>{const has=m.hp>0&&m.kw&&m.kw.has('shield');if(has&&!m._shFx){m._shFx=1;const sp=(typeof SPEED==='number'&&SPEED>0)?SPEED:1;setTimeout(()=>{const e=uEl(m);if(e&&m.kw.has('shield'))CFX.kwFlair(e,'shield')},(m.fresh?900:150)*sp)}else if(!has&&m._shFx)m._shFx=0})}}catch(e){}return r}}
 
 
 /* =====================================================================

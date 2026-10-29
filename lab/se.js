@@ -74,7 +74,7 @@ window.SE={S,SFX,SND,TXT,tone,noise,ac,set muted(v){MUTED=v},get muted(){return 
 /* 本物の SE（本番と 同じ ファイル） */
 (function(){const SE=window.SE;if(!SE)return;const B={},F=['aura','taunt','cure','fire','firewhoosh','rain','shield','summon','coin','hit','crit','boom','swish','sparkle','heal','revive','poof','fanfare','tap','win','lose','chime','glass','ice','bubble','water','anvil','curse','chest'];let ld=false;
  const load=()=>{if(ld)return;const a=SE.ac();if(!a)return;ld=true;F.forEach(k=>fetch('../audio/se/'+k+'.mp3').then(r=>r.arrayBuffer()).then(x=>a.decodeAudioData(x)).then(b=>B[k]=b).catch(()=>{}))};
- const play=(k)=>{const b=B[k];if(!b){load();return false}const a=SE.ac();const s=a.createBufferSource(),g=a.createGain();g.gain.value=.55;s.buffer=b;s.connect(g).connect(a.destination);s.start();return true};
+ const play=(k)=>{if(SE.sampleOff!==false)return false;const b=B[k];if(!b){load();return false}const a=SE.ac();const s=a.createBufferSource(),g=a.createGain();g.gain.value=.55;s.buffer=b;s.connect(g).connect(a.destination);s.start();return true};
  ['click','touchend'].forEach(ev=>document.addEventListener(ev,load,{passive:true}));
  SE.playS=play;
  const M={heal:'cure',tauntUp:'taunt',shieldUp:'shield',summon:'summon',coin:'coin',hit:'hit',crit:'crit',swish:'swish',whoosh:'swish',sparkle:'sparkle',reviveUp:'revive',poof:'poof',fanfare:'fanfare',tap:'tap',win:'win',lose:'lose',chime:'chime',poison:'bubble'};

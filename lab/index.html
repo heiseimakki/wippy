@@ -180,11 +180,13 @@ const LIST=[
  ]},
  {cat:'キーワード',items:[
   {k:'kw_taunt',n:'かばう',d:'あいては まず この子を ねらう',stage:{foes:S1.foes,mine:[{art:'armadillo',atk:1,hp:3},{art:'dog'}]},total:2400,build(){const u=U(2);F.at(300,tt=>{const p=pos(u);F.icon('u_k_taunt',p.x,p.y-u.r-24,{t:tt,d:1600,sz:56,bob:3});F.ring(p.x,p.y,{t:tt,col:'190,200,220',r1:80,w:10})});F.keyf(u,{t:300,d:1800,fn:(u,k)=>{u.glow=.8;u.glowC='190,210,240'}})}},
-  {k:'kw_shield',n:'バリア',d:'1回だけ ダメージ0（バリアが われる）',stage:{foes:S1.foes,mine:[{art:'jacka',atk:1,hp:1,kw:['shield']}]},total:2800,build(){const u=U(2);u.el.classList.add('shield');let on=true;
-   const S=()=>Math.max(u.rw,u.rh)*1.3;
-   
-   F.shot(pos(U(0)),pos(u),{t:500,d:380,im:'x_bullet',sz:22});
-   F.at(880,tt=>{on=false;u.el.classList.remove('shield');const p=pos(u);F.breakImg('x_barrier',p.x,p.y,S(),{t:tt});F.shake({t:tt,p:7});F.burst(p.x,p.y,{t:tt,n:10,im:'x_spark',sp:6,life:600,sz:.18});
+  {k:'kw_shield',n:'バリア',d:'はる（大きな バリア → マークが のこる）→ 1回だけ ダメージ0で われる',stage:{foes:S1.foes,mine:[{art:'jacka',atk:1,hp:1}]},total:3600,build(){const u=U(2);
+   const S=()=>Math.max(u.rw,u.rh)*1.5;
+   F.at(300,tt=>{const p=pos(u);F.ring(p.x,p.y,{t:tt,col:'140,220,255',r1:Math.max(u.rw,u.rh)*.9,w:6,d:500});F.floatTxt('バリア',p.x,p.y-u.rh*.75,{t:tt+100,size:18,col:'#bfe6ff'})});
+   ovF(u,{t:300,d:800,draw:(x,y,r,e)=>{const c=F.ctx(),I=F.ui('x_barrier');if(!I.complete)return;const q=Math.min(1,e/450);const a=Math.min(1,e/120)*(e>600?Math.max(0,(800-e)/200)*.6+.4:1);c.save();c.globalAlpha=.75*a;const ss=S()*(1.45-.45*E.o(q));c.drawImage(I,x-ss/2,y-ss/2,ss,ss);c.restore()}});
+   F.at(950,()=>u.el.classList.add('shield'));
+   F.shot(pos(U(0)),pos(u),{t:1700,d:380,im:'x_bullet',sz:22});
+   F.at(2080,tt=>{u.el.classList.remove('shield');const p=pos(u);F.breakImg('x_barrier',p.x,p.y,S(),{t:tt});F.shake({t:tt,p:7});F.burst(p.x,p.y,{t:tt,n:10,im:'x_spark',sp:6,life:600,sz:.18});
      F.floatTxt('0',p.x,p.y-u.rh/2-14,{t:tt+60,col:'#bfe6ff',size:30});ono(u,'パリーン！',tt+60,{col:'#e6f8ff'})})}},
   {k:'kw_quick',n:'はやうち',d:'出した ターンから すぐ 攻撃',stage:{foes:S1.foes,mine:[{art:'bibiri',atk:4,hp:3}]},total:2200,build(){const u=U(2);F.at(250,tt=>{const p=pos(u);F.icon('u_k_quick',p.x,p.y-u.r-22,{t:tt,d:1200,sz:56});F.flash({t:tt,d:120,col:'255,240,120',a:.5})});F.keyf(u,{t:250,d:1200,fn:(u,k)=>{u.glow=1-k;u.glowC='255,230,80';u.oy=k>=1?0:-10*Math.sin(Math.min(1,k*4)*Math.PI)}})}},
   {k:'kw_twice',n:'2回攻撃',d:'1ターンに 2回',stage:S1,total:2600,build(){const a=U(2),t=U(0);const pa=pos(a),pt=pos(t);[0,1].forEach(i=>{const s=300+i*650;F.keyf(a,{t:s,d:180,fn:(u,k)=>{u.ox=(pt.x-pa.x)*E.io(k);u.oy=(pt.y-pa.y)*E.io(k)}});F.at(s+180,tt=>{F.icon('x_pow',pt.x,pt.y,{t:tt,d:320,sz:70});F.shake({t:tt,p:6});{const sd=pt.x<F.dims().W/2?1:-1;F.floatTxt(i?'2回目！':'1回目',pt.x+sd*t.rw*.78,pt.y-t.rh*.7,{t:tt,size:18,col:'#ffd27a',rise:12,rot:sd*-.22})}});hitAt(t,s+180,1);F.keyf(a,{t:s+190,d:300,fn:(u,k)=>{u.ox=(pt.x-pa.x)*(1-E.o(k));u.oy=(pt.y-pa.y)*(1-E.o(k))}})})}},
@@ -386,7 +388,7 @@ if(window.SE){const {S:SS,SFX:SX,SND,TXT,tone:TN,noise:NZ}=SE;const se=(t,f)=>F.
   st_jail:se=>{se(300,SS.creak);se(560,()=>TN(500,.08,{vol:.1,type:'square'}));se(2750,()=>{SX.coin&&SX.coin();SX.sparkle&&SX.sparkle()})},
   c_roulette:se=>{let t=300;[0,1,2,0,1,2,0,1,2,0,1].forEach((i,j)=>{se(t,tick);t+=90+j*j*9});se(t,()=>SX.ding&&SX.ding());se(t+700,SS.whoosh)},
   bc_stun:se=>{se(1000,SS.glass);se(1300,SS.hiccup)},bc_freeze:se=>{se(1000,SS.ice)},bc_poison:se=>{se(1000,SS.bubble)},
-  kw_stealth:se=>{se(300,SS.whoosh)},kw_revive:se=>{se(1200,SS.revive)},kw_shield:se=>{se(0,P('shield'))}};
+  kw_stealth:se=>{se(300,SS.whoosh)},kw_revive:se=>{se(1200,SS.revive)},kw_shield:se=>{se(300,()=>SX.shieldUp&&SX.shieldUp())}};
  ALL.forEach(it=>{const x=EXTRA[it.k];if(!x||!it.build)return;const b0=it.build;it.build=function(){const r=b0.apply(this,arguments);x(se);return r}});
 }
 menu.innerHTML=LIST.map(c=>`<div class="cat">${c.cat}<i>${c.items.filter(i=>!i.soon).length?c.items.filter(i=>!i.soon).length+'こ':'じゅんび中'}</i></div><div class="grid">${c.items.map(i=>`<button class="it ${i.soon?'soon':''}" data-k="${i.k}"><b>${i.n}</b><small>${i.d||'じゅんび中'}</small></button>`).join('')}</div>`).join('')

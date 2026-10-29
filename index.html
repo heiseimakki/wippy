@@ -1,4 +1,4 @@
-<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="theme-color" content="#2a1408"><link rel="icon" href="favicon.ico" sizes="any"><link rel="icon" type="image/png" href="fav/favicon-32.png"><link rel="apple-touch-icon" href="fav/apple-touch-icon.png"></head><body><meta charset="utf-8">
+<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="theme-color" content="#2a1408"><link rel="icon" href="favicon.ico?v=3" sizes="any"><link rel="icon" type="image/png" href="fav/favicon-32.png?v=3"><link rel="apple-touch-icon" href="fav/apple-touch-icon.png?v=3"></head><body><meta charset="utf-8">
 <script>
 /* PC・タブレットでも スマホの大きさで あそぶ：広い画面なら、スマホ型のわくの中に ゲームを入れる */
 (function(){try{
@@ -80,7 +80,7 @@ addEventListener('pagehide',flush);
 </script>
 <script>
 /* 10/26：ダウンロードが とまったら、自動で やりなおす（3回まで）。それでも だめなら やさしく おしらせ */
-(function(){var T=2900110,V='c41cd37f',bar=document.getElementById('pbf'),pc=document.getElementById('pbp'),best=0,tries=0,fin=false;
+(function(){var T=2901948,V='56acffec',bar=document.getElementById('pbf'),pc=document.getElementById('pbp'),best=0,tries=0,fin=false;
 function set(p){p=Math.max(.03,Math.min(1,p));if(p>best)best=p;bar.style.width=(best*100)+'%';pc.textContent='ゲームが はじまるよ  '+Math.floor(best*100)+'%'}
 function done(){var pb=document.getElementById('preboot');if(pb){pb.classList.add('done');setTimeout(function(){pb.parentNode&&pb.parentNode.removeChild(pb)},400)}}
 function run(t){if(fin)return;fin=true;var i=t.indexOf('\n'),D=JSON.parse(t.slice(0,i));t=t.slice(i+1).replace(/@@D(\d+)@@/g,function(m,k){return D[+k]});var go=function(){var s=document.createElement('script');s.text=t;document.body.appendChild(s);done()};var w=window.__cloudReady;if(w&&w.then){pc.textContent='セーブを たしかめてるよ…';w.then(go,go)}else go()}
