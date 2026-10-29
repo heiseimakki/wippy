@@ -8681,10 +8681,11 @@ function mgMark(){try{if(!HUMAN||typeof G==='undefined'||!G)return;const b=[...d
    ・町：まだ つかまえていない 賞金首が いたら「しょうきん首」を 光らせる（オープニングの あとも 出る）
    ・しょうきん首：つぎの 手配書（あいていて まだ つかまえていない いちばん はじめ）を 光らせる */
 function nextSid(){try{const sids=Object.keys(STAGES);for(let k=0;k<sids.length;k++){const open=k===0||G.clear[sids[k-1]]>0;if(open&&!G.clear[sids[k]])return sids[k]}}catch(e){}return null}
-function townNextGuide(){try{if(!HUMAN||!G||!nextSid())return;const b=[...document.querySelectorAll('#fac button')].find(x=>/しょうきん首/.test(x.textContent));if(!b||b.classList.contains('gdglow'))return;
+const anyClear=()=>{try{return Object.values(G.clear||{}).some(v=>v>0)}catch(e){return true}};
+function townNextGuide(){try{if(!HUMAN||!G||!nextSid()||anyClear())return;const b=[...document.querySelectorAll('#fac button')].find(x=>/しょうきん首/.test(x.textContent));if(!b||b.classList.contains('gdglow'))return;
   const first=!(G.clear&&Object.values(G.clear).some(v=>v>0));guideAt(b,first?'ここから 荒野へ ぼうけんに でかけよう！':'つぎの 賞金首が まってるよ！',{place:'below'})}catch(e){}}
 {const _tw=town;town=function(){const r=_tw.apply(this,arguments);setTimeout(()=>{if(document.querySelector('#fac'))townNextGuide()},700);return r}}
-{const _fb=FACS.board;FACS.board=function(){const r=_fb.apply(this,arguments);setTimeout(()=>{try{if(!HUMAN)return;const sid=nextSid();if(!sid)return;const k=Object.keys(STAGES).indexOf(sid);const p=document.querySelectorAll('#stl .wpost')[k];if(!p)return;
+{const _fb=FACS.board;FACS.board=function(){const r=_fb.apply(this,arguments);setTimeout(()=>{try{if(!HUMAN||anyClear())return;const sid=nextSid();if(!sid)return;const k=Object.keys(STAGES).indexOf(sid);const p=document.querySelectorAll('#stl .wpost')[k];if(!p)return;
   gdClear();p.classList.add('wnext');const first=k===0;guideAt(p,first?'この 手配書を おして、さいしょの 賞金首を つかまえに いこう！':'つぎの 賞金首は この子！ おして しゅっぱつ！',{place:'below'});
   if(k>1)p.scrollIntoView({block:'center',behavior:'smooth'})}catch(e){}},550);return r}}
 (()=>{const st=document.createElement('style');st.textContent=`
@@ -8703,6 +8704,56 @@ function townNextGuide(){try{if(!HUMAN||!G||!nextSid())return;const b=[...docume
 {const _os=openSettings;openSettings=function(){_os.apply(this,arguments);try{if(!window.__cloudEnable)return;const ok=$('ok');if(!ok)return;const b=document.createElement('button');b.className='btn ghost';b.style.cssText='width:100%;margin-top:8px';
   const lab=()=>{b.textContent=window.__cloudOn()?'セーブは クラウドにも のこってるよ':'セーブを クラウドにも のこす（きえない ように）';b.disabled=window.__cloudOn()};lab();
   b.onclick=()=>{SFX.tap&&SFX.tap();b.textContent='まってね…';window.__cloudEnable().then(r=>{lab();toast(r?'クラウドに のこしたよ！':'いまは クラウドが つかえないみたい')})};ok.before(b)}catch(e){}}}
+
+
+/* 10/29：ずかんは スクロールなし。1ページに 入るだけ ならべて、◀ ▶ と スワイプで めくる
+   タブは しおりの形を やめて、えらんでいる方が はっきり わかる 色の ボタンに */
+FACS.dex=function(tab,page){tab=tab==null?(window._dxTab||0):tab;window._dxTab=tab;page=page||0;G.combos=G.combos||{};
+  const seen=COLLECT.filter(id=>G.seen[id]).length,got=CB.filter(c=>G.combos[c.id]).length;
+  app().innerHTML=`${head().replace(`<span class="money">＄${G.money}</span>`,'')}
+    <div class="dxseg"><button class="dxs s0 ${tab===0?'on':''}">なかま ずかん<small>${seen} / ${COLLECT.length}</small></button><button class="dxs s1 ${tab===1?'on':''}">コンボ ずかん<small>${got} / ${CB.length}</small></button></div>
+    <div class="dxpg"><button class="bkarrow" id="dxp">◀</button><b id="dxn"></b><button class="bkarrow" id="dxx">▶</button></div>
+    <div id="dxbody" class="${tab?'cbpage':'bkgrid'}"></div>`;
+  bindBack();
+  document.querySelectorAll('.dxs').forEach((b,i)=>b.onclick=()=>{if(i===tab)return;SFX.tap&&SFX.tap();FACS.dex(i,0)});
+  const body=$('dxbody'),top=body.getBoundingClientRect().top,avail=Math.max(160,innerHeight-top-12-(parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--sab'))||0));
+  let per,items,draw;
+  if(tab===0){const W=Math.min(innerWidth,480),cw=Math.min(W*.22,84),ch=cw*1.48+6,cols=4,rows=Math.max(1,Math.floor(avail/ch));per=cols*rows;items=COLLECT;body.style.gridTemplateColumns=`repeat(${cols},1fr)`;
+    draw=list=>list.forEach(id=>{let el;if(G.seen[id]){el=cardEl(id,1,{hideLv:true});el.onclick=()=>sheetCard(id,1)}else{el=document.createElement('div');el.className='card back';el.innerHTML='<div class="q">？</div>'}el.style.setProperty('--cw',cw+'px');body.appendChild(el)})}
+  else{const rh=58;per=Math.max(1,Math.floor(avail/rh));items=CB;
+    draw=list=>{body.innerHTML=list.map(c=>G.combos[c.id]?`<div class="cbrow"><b>${c.ic} ${c.n}</b><span>${c.d}</span></div>`:`<div class="cbrow no"><b>？？？</b><span>まだ ひらめいていない</span></div>`).join('')}}
+  const pages=Math.max(1,Math.ceil(items.length/per));page=Math.max(0,Math.min(pages-1,page));
+  draw(items.slice(page*per,page*per+per));
+  $('dxn').textContent=`${page+1} / ${pages}`;$('dxp').disabled=page<=0;$('dxx').disabled=page>=pages-1;
+  const go=p=>{SFX.tap&&SFX.tap();FACS.dex(tab,p)};$('dxp').onclick=()=>go(page-1);$('dxx').onclick=()=>go(page+1);
+  let x0=null;body.ontouchstart=e=>{x0=e.touches[0].clientX};body.ontouchend=e=>{if(x0==null)return;const dx=e.changedTouches[0].clientX-x0;x0=null;if(dx<-50&&page<pages-1)go(page+1);else if(dx>50&&page>0)go(page-1)}};
+(()=>{const st=document.createElement('style');st.textContent=`
+.dxseg{display:flex;gap:8px;margin:6px 8px 4px}
+.dxs{flex:1;display:flex;flex-direction:column;align-items:center;gap:1px;font:900 15px var(--body);padding:8px 4px 6px;border-radius:14px;border:3px solid transparent;cursor:pointer;transition:transform .15s,filter .15s}
+.dxs small{font-size:11px;font-weight:800;opacity:.8}
+.dxs.s0{background:linear-gradient(#ffe7a8,#f2c35a);color:#3a2412}
+.dxs.s1{background:linear-gradient(#bfe6ff,#6fb6ff);color:#14304f}
+.dxs.on{border-color:#fff;box-shadow:0 0 0 3px rgba(0,0,0,.35),0 4px 12px rgba(0,0,0,.45);transform:scale(1.03)}
+.dxs:not(.on){filter:grayscale(.85) brightness(.55);transform:scale(.94);box-shadow:inset 0 3px 6px rgba(0,0,0,.4)}
+.dxpg{display:flex;align-items:center;justify-content:center;gap:14px;margin:2px 0 4px}
+.dxpg b{font-family:var(--display);font-size:18px;color:#ffe9b0;min-width:70px;text-align:center}
+#dxbody.bkgrid{display:grid;gap:6px 4px;justify-items:center;padding:0 6px}
+#dxbody.cbpage{display:flex;flex-direction:column;gap:6px;padding:0 8px}
+.cbrow{height:52px;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center;background:rgba(40,20,8,.85);border:2px solid #6fb6ff;border-radius:12px;padding:4px 10px;overflow:hidden}
+.cbrow b{font-size:14px;color:#cfe8ff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cbrow span{font-size:11.5px;color:#f4e6cc;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.cbrow.no{border-color:#5a4a3a;opacity:.7}.cbrow.no b{color:#bba}`;document.head.appendChild(st)})();
+/* 10/29：ダブルタップや ピンチで 画面が 大きく ならないように（iPhone） */
+(()=>{const st=document.createElement('style');st.textContent='html,body{touch-action:manipulation;-webkit-text-size-adjust:100%}*{touch-action:manipulation}';document.head.appendChild(st);
+  try{const m=document.querySelector('meta[name=viewport]');if(m)m.content='width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover'}catch(e){}
+  ['gesturestart','gesturechange','gestureend'].forEach(ev=>document.addEventListener(ev,e=>e.preventDefault(),{passive:false}));
+  document.addEventListener('touchmove',e=>{if(e.touches&&e.touches.length>1&&e.cancelable)e.preventDefault()},{passive:false})})();
+/* 10/29：かくせい後の 説明は「どうしたら かくせいするか」ではなく、かくせいした あとの ことばに */
+const AWK_DONE='しんの すがたに なったよ！ もう だれにも 止められない！';
+function awDoneText(){try{const sh=$('sheet');if(!sh)return;const w=document.createTreeWalker(sh,NodeFilter.SHOW_TEXT);let n;const hit=[];
+  while(n=w.nextNode()){if(/…！？|→ ?(覚醒|かくせい)！/.test(n.nodeValue)){const row=n.parentElement&&n.parentElement.closest('div,li');if(row&&/(覚醒|かくせい)/.test(row.textContent))hit.push(n)}}
+  hit.forEach(n=>{n.nodeValue=n.nodeValue.replace(/^([：:]\s*)?.*$/,(m,p)=>(p||'')+AWK_DONE)})}catch(e){}}
+{const _sc=sheetCard;sheetCard=function(id,lv,top,btns,plus){const r=_sc.apply(this,arguments);try{if(plus>0&&typeof AWK!=='undefined'&&AWK[id]){awDoneText();setTimeout(awDoneText,0);setTimeout(awDoneText,120)}}catch(e){}return r}}
 
 
 /* =====================================================================
