@@ -8831,6 +8831,426 @@ function wishAsk(opts){return new Promise(res=>{const m=modal(`<div class="wish"
 
 
 /* =====================================================================
+   10/29：かしまさんの カード設計メモ（キャラ一覧 v5）どおりに 作りなおす
+   ・3枠で うまく 動かない ところだけ 調整（シート「カード見直し」）
+   ・牢屋＝休眠：場に のこるけど 何も できない・当たらない。出てくると まった ぶん 強くなる
+   ・「この子が 出ると」の キーワードは 見参！に、「やられたら」の 金塊は やられたら に まとめる
+   ===================================================================== */
+const XD={};
+const xFoes=sd=>opp(sd).board.filter(e=>e.hp>0&&!e.jailed);
+const xMine=(sd,m)=>sd.board.filter(b=>b!==m&&b.hp>0&&!b.jailed);
+const xFl=(m,t,c='info')=>{try{const e=uEl(m);if(e)floatAt(e,t,c)}catch(e){}};
+const xRe=()=>{if(HUMAN)try{renderBattle()}catch(e){}};
+const xGive=(sd,id,lv,tmp)=>{if(sd.hand.length<8)sd.hand.push({id,lv:lv||1,plus:0,_new:isMe(sd)?1:0,_tmp:tmp?1:0})};
+const xDrawWhere=(sd,fn)=>{const i=sd.deck.findIndex(c=>c&&C[c.id]&&fn(C[c.id],c));if(i<0)return false;const c=sd.deck.splice(i,1)[0];if(isMe(sd))c._new=1;if(sd.hand.length<8)sd.hand.push(c);else sd.grave.push(c);return true};
+const xHeal=(sd,n)=>{if(isMe(sd)){if(typeof heal==='function')heal(n);else R.hp=Math.min(R.maxhp,R.hp+n)}else B.foe.hp=Math.min(B.foe.max,B.foe.hp+n)};
+const xAlive=(sd,id)=>sd.board.some(b=>b.id===id&&b.hp>0&&!b.jailed);
+const xIsRobot=m=>(m.f||C[m.id].f)==='ro';
+const xBird=id=>/ワシ|カラス|ハヤブサ|コンドル|ハト|ツバメ|キツツキ|ふくろう|フクロウ|オウム|ガチョウ|ヒヨ|ひよこ|ハゲタカ|バルチャー|イーグル|ホーク|オウル|ハゲワシ|とり|鳥|ガーガー|アヒル|モーキン/.test(C[id]&&C[id].n||'')||['eagle','owl','crow','hawk','vulture','pigeon2','new05','new43','new06','new79','new80','new72','new107','new109','new125','new211','new213','new229','new92','gaga','guard'].includes(id);
+const xLv=c=>(c&&c.lv)||1;
+
+/* ---------- 休眠（牢屋・もぐる・しずむ） ---------- */
+function xSleepIn(m,turns,kind='jail',onRel){m.jailed=turns;m.jailT=turns;m.jailKind=kind;m.onRel=onRel||null;m.attacks=0;m.sleep=true;m.kw.delete('taunt_tmp')}
+async function xRelease(sd,m){const k=m.jailKind;m.jailed=0;
+  if(k==='jail'){const g=m.jailT||2;m.atk+=g;m.hp+=g;m.max+=g;xFl(m,`しゃくほう！ +${g}/+${g}`,'crit');if(HUMAN)say(`🔓 ${C[m.id].n}が 牢屋から 出てきた！ まった ぶん 強く なった！`)}
+  else xFl(m,k==='dig'?'ザバーッ！':'ぬまから もどった！','crit');
+  if(m.onRel&&XD[m.onRel]&&XD[m.onRel].rel)try{await XD[m.onRel].rel(sd,m)}catch(e){}
+  m.onRel=null}
+{const _st=startTurn;startTurn=async function(sd){const rel=[];if(B)for(const m of sd.board)if(m.jailed>0){m.jailed--;if(m.jailed<=0)rel.push(m)}
+  /* ブリザーラ：あいてに いると こおった子は とけない */
+  if(B&&xAlive(opp(sd),'new178'))sd.board.forEach(m=>{if(m.frozen>0)m.frozen++});
+  const r=await _st.apply(this,arguments);if(!B)return r;
+  for(const m of sd.board)if(m.jailed>0){m.attacks=0;m.sleep=true}
+  for(const m of rel)if(sd.board.includes(m))await xRelease(sd,m);
+  for(const f of XON.start)try{await f(sd)}catch(e){}
+  xRe();return r}}
+{const _dm=damage;damage=async function(sd,t,n,o){if(t&&!t.hero&&t.jailed){xFl(t,'とどかない！');return}return _dm.apply(this,arguments)}}
+{const _sg=strongest;strongest=function(list){return _sg((list||[]).filter(x=>!x.jailed))}}
+/* ねらえる子：休眠中は ねらえない／とびこえ（かばうを むし）／鳥は かかしを こわがる／ピンクは かくれられない */
+validTargets=function(sd){const o=opp(sd);const a=B&&(B.sel||B._aiAtk);
+  const vis=o.board.filter(x=>x.hp>0&&!x.jailed&&(!x.kw.has('stealth')||x.pink));
+  let ts=vis;const tt=vis.filter(x=>x.kw.has('taunt'));
+  const jump=a&&(a.fly||['new67','new80'].includes(a.id));
+  if(tt.length&&!jump)ts=tt;
+  if(a&&xBird(a.id))ts=ts.filter(x=>x.id!=='new113');
+  if(ts.length)return ts;if(vis.length&&!tt.length)return vis;
+  if(o.board.some(x=>x.hp>0&&!x.jailed&&!x.kw.has('stealth')))return [];
+  return (o===B.foe&&B.foe.hidden)?[]:[heroOf(o)]};
+
+/* ---------- できごとの フック ---------- */
+const XON={start:[],end:[],death:[],attack:[]};
+{const _et=endTurnFx;endTurnFx=async function(sd){const r=await _et.apply(this,arguments);if(B&&!B.over)for(const f of XON.end)try{await f(sd)}catch(e){}return r}}
+{const _at=attack;attack=async function(sd,m,t){if(m&&m.miss>0&&canAttack(m)&&!B.over){m.miss--;m.attacks--;xFl(m,'スカッ！ はずれ…');if(HUMAN){SFX.whoosh&&SFX.whoosh();await sleep(500)}xRe();return}
+  B._aiAtk=m;const hp0=t&&!t.hero?t.hp:null;const r=await _at.apply(this,arguments);B._aiAtk=null;
+  if(B&&!B.over)for(const f of XON.attack)try{await f(sd,m,t,hp0)}catch(e){}return r}}
+{const _cu=cleanup;cleanup=async function(){if(!B)return _cu.apply(this,arguments);
+  const dying=[];for(const sd of [B.me,B.foe])for(const m of sd.board)if(m.hp<=0&&!(m.kw.has('revive')&&!m.revived))dying.push([sd,m]);
+  const r=await _cu.apply(this,arguments);if(!B)return r;
+  for(const [sd,m] of dying){if(sd.board.includes(m))continue;
+    const x=XD[m.id];if(x&&x.dr)try{await x.dr(sd,m)}catch(e){}
+    for(const f of XON.death)try{await f(sd,m)}catch(e){}}
+  if(dying.length){xRe();if(dying.some(([s,m])=>!s.board.includes(m)))return _cu.apply(this,arguments)}
+  return r}}
+{const _bc=battlecry;battlecry=async function(sd,m,c){const x=XD[c.id];if(!x||!x.bc)return _bc.apply(this,arguments);
+  if(HUMAN&&typeof bcFx==='function')await bcFx(m);try{await x.bc(sd,m,c)}catch(e){console.warn(e)}
+  if(B&&!B.over&&typeof cleanup==='function')await cleanup();xRe()}}
+{const _sm=summon;summon=function(sd,id,lv,plus,card){const m=_sm.apply(this,arguments);try{if(m&&B&&(xAlive(sd,'new122')&&m.id!=='new122'||xIsRobot(m)&&sd.board.some(b=>b!==m&&b.hp>0&&['new136','build'].includes(b.id)))){m.sleep=false;m.attacks=m.kw.has('twice')?2:1}}catch(e){}return m}}
+
+/* ---------- データの 上書き（数字・キーワード） ---------- */
+const XSET=(id,o)=>{if(C[id])Object.assign(C[id],o)};
+['new126','new138','new153','new155','new157','new165','new166','new181','new215','new222','new39','new81','new82','new89','new98','new07','new110','new112','new116','new124','new127','new129','new130','new139','new151','new159','new167','new172','new179','new185','new195','new196','new197','new208','new211','new225','new53','new56','new57','new59','new61','new67','new75','new97','new99','new10','new115','new117','new12','new128','new143','new170','new224','new226','new43','new55','new58','new72','new86','new87','new104','new156','new90','new107','new147','new161','new162','new189','new190','new219','new231','new91','new105','new106','new51','new63','new78','new163','new176','new191','new204','new34','new38','new52','new66','new80','new94','new108','new122','new136','new164','new178','new192','new206','new220','new234'].forEach(id=>{const c=C[id];if(!c)return;['bc','dr','aura','v','av','dv','tok','wx','wv','steal','poison','fuel','growT','curse','grow'].forEach(k=>{if(k in c)c['_old_'+k]=c[k]});});
+const XCLR=(id,...ks)=>{const c=C[id];if(c)ks.forEach(k=>{delete c[k]})};
+/* キーワードの 入れかえ */
+const XKW=(id,kw)=>{if(C[id])C[id].kw=kw};
+XKW('new155','');XKW('new166','');XKW('new39','');XKW('new112','');XKW('new151','');XKW('new167','');XKW('new211','');XKW('new105','');XKW('new163','');XKW('new191','');
+XKW('new170','');XKW('new52','');XKW('new94','');XKW('new220','thorns');
+/* 「見参」や「やられたら」の しくみを 自分で うごかす子は、もとの しくみを はずす */
+['new126','new138','new181','new222','new128','new43','new215','new81','new82','new89','new98','new07','new116','new124','new127','new129','new139','new159','new172','new185','new195','new196','new225','new57','new61','new75','new10','new115','new117','new143','new224','new226','new55','new58','new86','new104','new156','new90','new147','new161','new189','new190','new231','new91','new106','new63','new78','new176','new191','new34','new52','new66','new80','new94','new108','new164','new192','new234','new165','new53','new56','new99','new130','new151','new38','new220','new206','new140'].forEach(id=>XCLR(id,'bc','dr','gattai'));
+['new110','new179','new197','new208','new87','new12','new72','new97','new107','new122','new136','new204','new59','new162','new178','new234','new94','new108','new26'].forEach(id=>XCLR(id,'aura'));
+XCLR('new165','wx');XCLR('new157','growT','grow');XSET('new220',{tg:2});XCLR('new204','wx');XCLR('new52','poison');XCLR('new155','poison');
+XSET('new156',{r:'R'});           /* 1体を カエルに かえる は ふつうには 強すぎるので レアへ */
+XSET('new226',{r:'N'});
+
+/* ---------- 1まい ずつ ---------- */
+const X=(id,o)=>{XD[id]=Object.assign(XD[id]||{},o)};
+/* 手札を 1まい 見やぶる */
+async function xPeek1(sd,title='見やぶった！'){if(!isMe(sd)||!HUMAN)return;const h=B.foe.hand;if(!h.length){say('あいての 手札は 0まい！');return}const c=pick(h);
+  await new Promise(res=>{modal(`<h2>${title}</h2><div class="grid" id="fh1" style="justify-content:center"></div><button class="btn" id="ok" style="width:100%;margin-top:10px">OK</button>`);const el=cardEl(c.id,c.lv||1,{});el.style.setProperty('--cw','min(30vw,120px)');$('fh1').appendChild(el);$('ok').onclick=()=>{closeModal();res()}})}
+['new138','new181','new222','new128'].forEach(id=>X(id,{bc:async(sd)=>{await xPeek1(sd)}}));
+X('new43',{bc:async sd=>{if(!isMe(sd)||!HUMAN)return;const h=B.foe.hand.filter(c=>C[c.id]);if(!h.length){say('あいての 手札は 0まい！');return}
+  const n=Math.min(10,(B.foe.maxCoin||0)+1);const can=h.filter(c=>C[c.id].c<=n).sort((a,b)=>C[b.id].c-C[a.id].c);const c=can[0]||h.slice().sort((a,b)=>C[a.id].c-C[b.id].c)[0];
+  await new Promise(res=>{modal(`<h2>つぎに 出てくるのは…</h2><div class="grid" id="fh1" style="justify-content:center"></div><button class="btn" id="ok" style="width:100%;margin-top:10px">OK</button>`);const el=cardEl(c.id,c.lv||1,{});el.style.setProperty('--cw','min(30vw,120px)');$('fh1').appendChild(el);$('ok').onclick=()=>{closeModal();res()}})}});
+/* 手に入れる！ 3まいから 1まい えらぶ */
+async function xDiscover(sd,pool,n=3,title='1まい えらんでね'){pool=[...new Set(pool)].filter(id=>C[id]&&!C[id].token);if(!pool.length)return;const opts=shuffle(pool.slice()).slice(0,n);
+  if(!isMe(sd)||!HUMAN){xGive(sd,pick(opts),1,1);return}
+  const id=await new Promise(res=>{const m=modal(`<h2>${title}</h2><div class="grid" id="dsc" style="justify-content:center"></div><p class="small" style="text-align:center">この戦いの あいだだけ つかえるよ</p>`);
+    opts.forEach(id=>{const el=cardEl(id,1,{});el.style.setProperty('--cw','min(27vw,104px)');el.onclick=()=>{SFX.tap&&SFX.tap();closeModal();res(id)};$('dsc').appendChild(el)})});xGive(sd,id,1,1);xRe()}
+const xPool=f=>Object.keys(C).filter(id=>C[id]&&!C[id].token&&!C[id].out&&C[id].r!=='L'&&f(C[id],id));
+X('new126',{dr:async sd=>{await xDiscover(sd,xPool(c=>['ro','st','gu'].includes(c.f)),3,'貨物の 中から 1まい！')}});
+X('new58',{bc:async sd=>{const ids=(B.deadFoes&&B.deadFoes[isMe(sd)?'me':'foe'])||[];await xDiscover(sd,ids.length?ids:xPool(c=>c.f==='zo'||c.f==='gh'),3,'たおれた あいてから 1まい！')}});
+X('new90',{bc:async sd=>{await xDiscover(sd,xPool((c,id)=>['fuse','duel'].includes(c.bc)||/ダイナマイト|決闘|早撃ち/.test(c.n+(c.note||''))),3,'ダイナマイトか 決闘の カード！')}});
+X('new117',{bc:async sd=>{if(!xDrawWhere(sd,c=>c.f==='an'))xFl(null,'')}});
+/* 数字だけ では ない 見参 */
+X('new07',{bc:async(sd,m,c)=>{const t=pick(xMine(sd,m));if(t){const n=2+lvN(xLv(c));t.hp+=n;t.max+=n;xFl(t,'+0/+'+n,'heal')}}});
+X('new127',{bc:async(sd,m)=>{const ts=xMine(sd,m);const t=ts.find(xIsRobot)||null;if(t){t.sleep=false;t.attacks=t.kw.has('twice')?2:1;xFl(t,'はやうち！','crit')}}});
+X('new172',{bc:async(sd,m)=>{const t=pick(xMine(sd,m));if(t){t.kw.add('nostun');t.muffler=1;t.frozen=0;xFl(t,'マフラー！','heal')}}});
+X('new195',{bc:async(sd,m)=>{const t=pick(xMine(sd,m));if(t){t.hot=1;xFl(t,'あつあつ！','crit')}}});
+X('new189',{bc:async(sd,m)=>{const t=strongestOf(xMine(sd,m));if(t){t.fly=1;xFl(t,'空を とぶ！','crit')}}});
+X('new161',{bc:async(sd,m)=>{const t=pick(xMine(sd,m))||m;t.kw.add('shield');t.slick=1;xFl(t,'ヌルヌル！','heal')}});
+X('new81',{bc:async sd=>{const t=strongest(xFoes(sd));if(t){t.pink=1;t.kw.delete('stealth');xFl(t,'ピンク！','info')}}});
+X('new57',{bc:async sd=>{let n=0;opp(sd).board.forEach(t=>{if(t.kw.has('stealth')){t.kw.delete('stealth');n++;xFl(t,'見つけた！','info')}});if(HUMAN)say(n?`かくれていた ${n}体を てらして 見つけた！`:'かくれている あいては いなかった')}});
+X('new82',{bc:async sd=>{const all=[...B.me.board,...B.foe.board].filter(x=>x.poison>0&&(sd.board.includes(x)));const t=all[0]||[...B.me.board,...B.foe.board].find(x=>x.poison>0);if(t){t.poison--;xFl(t,'毒が 1つ きえた','heal')}}});
+X('new89',{bc:async(sd,m)=>{const ts=xMine(sd,m).filter(x=>x.card&&C[x.id].bc);const t=ts.sort((a,b)=>C[b.id].c-C[a.id].c)[0];if(t&&sd.hand.length<8){await bounceTo(sd,t);if(HUMAN)say(`${C[t.id].n}を 手札に もどした！ もう一回 見参！できる`)}}});
+X('new116',{bc:async sd=>{const t=strongest(xFoes(sd));if(t){t.kw.add('taunt');xFl(t,'ひっぱった！ かばう に なった','info')}}});
+X('new124',{bc:async sd=>{xGive(sd,'bento',1,1);if(HUMAN)say('「おべんとう」を 手札に くわえた！')}});
+X('new129',{bc:async(sd,m)=>{const p=summon(sd,'parcelT',1);if(p)p.parcel=1}});
+X('new159',{bc:async sd=>{const t=strongest(xFoes(sd));if(t){t.miss=(t.miss||0)+1;xFl(t,'どろんこ！ つぎは はずれる','info')}}});
+X('new143',{bc:async sd=>{xFoes(sd).forEach(t=>{t.miss=(t.miss||0)+1;xFl(t,'まぶしい！','info')})}});
+X('new185',{bc:async sd=>{const c=sd.deck[0];if(!c)return;if(!isMe(sd)||!HUMAN){drawCard(sd,1);return}
+  const ok=await new Promise(res=>{modal(`<h2>つぎの カードは…</h2><div class="grid" id="fh1" style="justify-content:center"></div><div class="row" style="gap:8px;margin-top:10px"><button class="btn green" id="yes" style="flex:1">ひく！</button><button class="btn" id="no" style="flex:1">山札の 下へ</button></div>`);const el=cardEl(c.id,c.lv||1,{});el.style.setProperty('--cw','min(30vw,120px)');$('fh1').appendChild(el);$('yes').onclick=()=>{closeModal();res(1)};$('no').onclick=()=>{closeModal();res(0)}});
+  if(ok)drawCard(sd,1);else sd.deck.push(sd.deck.shift())}});
+X('new225',{bc:async sd=>{const n=Math.max(1,B.playedThisTurn||1);sd.coin+=n;if(HUMAN)say(`コイン +${n}！`)}});
+X('new61',{dr:async sd=>{const o=opp(sd);if(o.hand.length<8)o.hand.push({id:'curseT',lv:1,plus:0,_tmp:1});if(HUMAN)say('あいての 手札に「のろい」が まざった…')}});
+X('new75',{bc:async sd=>{B.fuses=B.fuses||[];B.fuses.push({side:sd,left:3,v:3,front:1});if(HUMAN)say('🧨 3…2…1… で ドカン！')}});
+X('new104',{bc:async sd=>{B.fuses=B.fuses||[];B.fuses.push({side:sd,left:3,v:3,front:1},{side:sd,left:4,v:3,front:1});if(HUMAN)say('🧨 ダイナマイトを 2本 おいた！')}});
+X('new10',{dr:async sd=>{const o=opp(sd);for(const t of xFoes(sd))await damage(o,t,1,{quiet:true,fx:'magic'})}});
+X('new196',{dr:async sd=>{const o=opp(sd);for(const t of xFoes(sd))await damage(o,t,1,{quiet:true,fx:'magic',el:'fire'})}});
+X('new215',{dr:async sd=>{const t=pick(xFoes(sd));if(t)await damage(opp(sd),t,1,{quiet:true})}});
+X('new224',{bc:async sd=>{for(let i=0;i<3;i++){const t=pick(xFoes(sd));if(!t)break;await damage(opp(sd),t,1,{quiet:true,fx:'shot'})}}});
+X('new115',{bc:async(sd,m)=>{const all=[...xFoes(sd),...xMine(sd,m)];const t=pick(all);if(t){await damage(sd.board.includes(t)?sd:opp(sd),t,2,{quiet:true});if(HUMAN)say(sd.board.includes(t)?'あばれて なかまに ぶつかった！':'あばれて あいてに ぶつかった！')}}});
+X('new226',{bc:async sd=>{let n=0;while(roomOf(sd)>0&&n<5){const k=summon(sd,'straycatT',1);if(!k)break;k.fuel=2;k.walk=1;n++}if(HUMAN&&n)say(`ノラネコが ${n}匹 あつまった！（つぎの ターン さんぽへ）`)}});
+X('new55',{bc:async sd=>{let n=0;while(roomOf(sd)>0&&n<2){if(!summon(sd,'zombieT',1))break;n++}const z=sd.board.filter(b=>b.hp>0&&(b.f==='zo'||C[b.id].f==='zo'));if(z.length>=3){xFoes(sd).forEach(t=>{if(!t.kw.has('nostun')){t.frozen=1;xFl(t,'♪','info')}});if(HUMAN)say('🎶 大合唱！ あいて ぜんいん 1回休み！')}}});
+X('new86',{bc:async sd=>{if(Math.random()<.5){drawCard(sd,1);if(HUMAN)say('ちゃんと とどいた！ 1まい ひく')}else{drawCard(opp(sd),1);if(HUMAN)say('あっ… まちがえて あいてに とどいた！')}}});
+X('new156',{bc:async sd=>{const o=opp(sd);const t=strongest(xFoes(sd));if(!t)return;const i=o.board.indexOf(t);const f=mkMinion(o,'frogT',1);f.sleep=true;f.attacks=0;o.board[i]=f;if(HUMAN)say(`${C[t.id].n}は カエルに なった！ ケロッ`)}});
+X('new147',{bc:async(sd,m)=>{const base=xMine(sd,m).find(xIsRobot);if(!base){drawCard(sd,1);return}const c=base.card||{id:base.id,lv:base.lv};
+  sd.board=sd.board.filter(x=>x!==m);base.atk+=m.atk;base.hp+=m.hp;base.max+=m.hp;xFl(base,'🔩 あたまに がったい！','crit');if(C[base.id].bc&&typeof battlecry==='function'){await battlecry(sd,base,c)}}});
+X('new140',{bc:async(sd,m)=>{const base=xMine(sd,m).find(xIsRobot);if(!base)return;const c=base.card||{id:base.id,lv:base.lv};
+  sd.board=sd.board.filter(x=>x!==m);base.atk+=m.atk;base.hp+=m.hp;base.max+=m.hp;xFl(base,'🔩 がったい！','crit');if(C[base.id].bc)await battlecry(sd,base,c)}});
+XSET('new140',{bc:'x'});XSET('new147',{bc:'x'});
+X('new190',{bc:async sd=>{shuffle(xFoes(sd).filter(t=>!t.kw.has('nostun'))).slice(0,2).forEach(t=>{t.frozen=1;xFl(t,'🍺','info')})}});
+X('new231',{bc:async sd=>{shuffle(xFoes(sd).filter(t=>!t.kw.has('nostun'))).slice(0,2).forEach(t=>{t.frozen=1;xFl(t,'🍺','info')})}});
+X('new91',{bc:async sd=>{const o=opp(sd);const a=sd.deck[0],b=o.deck[0];drawCard(sd,1);drawCard(o,1);if(a&&b&&C[a.id]&&C[b.id]){const win=C[a.id].c>=C[b.id].c;if(isMe(sd)&&win&&R){R.money+=3}if(HUMAN)say(win?`しょうぶ！ ${C[a.id].c} 対 ${C[b.id].c} で かち！ ＄3`:`しょうぶ！ ${C[a.id].c} 対 ${C[b.id].c} で まけ…`)}}});
+X('new106',{bc:async sd=>{const o=opp(sd);for(const t of shuffle(xFoes(sd)).slice(0,3))await damage(o,t,2,{quiet:true})}});
+X('new63',{bc:async sd=>{const i=sd.hand.findIndex(c=>C[c.id]&&C[c.id].f==='zo'&&!C[c.id].spell);if(i<0||roomOf(sd)<=0)return;const c=sd.hand.splice(i,1)[0];summon(sd,c.id,c.lv||1,c.plus||0,c);if(HUMAN)say(`${C[c.id].n}が いっしょに 出てきた！`)}});
+X('new176',{bc:async(sd,m)=>{const o=opp(sd);for(const t of xFoes(sd))await damage(o,t,2,{quiet:true,fx:'magic'});for(const t of xMine(sd,m))await damage(sd,t,1,{quiet:true})}});
+X('new78',{dr:async sd=>{const o=opp(sd);const t=strongest(xFoes(sd));if(t){t.hp=0;xFl(t,'がけから 道づれ！','crit')}}});
+X('new191',{bc:async(sd,m)=>{xSleepIn(m,2,'dig','new191');if(HUMAN)say('砂に もぐった！ 2ターン後に 出てくるよ')},rel:async(sd,m)=>{const o=opp(sd);for(const t of xFoes(sd))await damage(o,t,2,{quiet:true,fx:'magic'})}});
+X('new98',{bc:async(sd,m)=>{xSleepIn(m,2,'dig','new98');if(HUMAN)say('地面に もぐった！ 2ターン後に 金塊を もってくるよ')},rel:async(sd,m)=>{sd.coin+=2;if(isMe(sd)&&R)R.money+=2;xFl(m,'金塊！ コイン+2','heal')}});
+X('new151',{dr:async(sd,m)=>{if(m.sunk||roomOf(sd)<=0)return;const z=mkMinion(sd,m.id,m.lv);z.sunk=1;z.card=m.card;sd.board.push(z);xSleepIn(z,2,'sink');if(HUMAN)say('ぬまに しずんだ…（2ターン後に もどってくる）')}});
+X('new165',{dr:async sd=>{if(typeof setWeather==='function')setWeather(sd,'snow',1)}});
+X('new53',{dr:async sd=>{const c=sd.hand.find(c=>C[c.id]&&C[c.id].f==='zo');if(c){c.plus=(c.plus||0)+1;if(HUMAN)say(`${C[c.id].n}が ほねを ひろって パワーアップ！`)}}});
+X('new130',{dr:async sd=>{sd.coin+=1;if(HUMAN&&isMe(sd))say('ぬすんだ コインが おちた！ コイン+1')}});
+X('new139',{dr:async(sd,m)=>{sd.board.forEach(b=>{if(b.hp>0&&b!==m){b.kw.add('stealth');b.steamHide=1;xFl(b,'もくもく…','info')}})}});
+X('new112',{dr:async(sd,m)=>{const k=m._killer;if(k&&k.hp>0){k.frozen=1;xFl(k,'どろんこ！ 1回休み','info')}}});
+X('new38',{dr:async(sd,m)=>{const L=(m.train||[]);let n=0;for(const c of L){if(roomOf(sd)<=0)break;if(summon(sd,c.id,c.lv||1,0,c))n++}if(HUMAN&&n)say(`🚃 おばけ特急から ${n}人 もどってきた！`)}});
+X('new220',{dr:async sd=>{summon(sd,'seedT',1)}});
+X('new206',{dr:async sd=>{const e=summon(sd,'eggT',1);if(e){e.hatch=2}}});
+X('new34',{bc:async(sd,m)=>{const n=xMine(sd,m).filter(xIsRobot).length+sd.hand.filter(c=>C[c.id]&&C[c.id].f==='ro').length;if(n){m.atk+=n;m.hp+=n;m.max+=n;xFl(m,`+${n}/+${n}`,'heal')}if(HUMAN)say(`ロボット ${n}体ぶん パワーアップ！`)}});
+X('new52',{bc:async sd=>{const t=strongest(xFoes(sd));if(t){t.frozen=Math.max(t.frozen||0,2);t.coil=2;xFl(t,'ぐるぐる巻き！','crit')}}});
+X('new66',{bc:async sd=>{const L=(B.fallen&&B.fallen[isMe(sd)?'me':'foe'])||[];let n=0;for(const c of L.slice().reverse()){if(roomOf(sd)<=0)break;const g=summon(sd,c.id,c.lv||1,0,null);if(g){g.atk=1;g.hp=1;g.max=1;g.kw.add('stealth');g.ghost=1;n++}}if(HUMAN)say(n?`🎹 ${n}人が おばけに なって もどってきた！`:'まだ だれも たおれていない…')}});
+X('new80',{bc:async sd=>{const t=strongest(xFoes(sd));if(t){await bounceTo(opp(sd),t);if(HUMAN)say(`${C[t.id].n}を つかんで 空へ！`)}}});
+X('new94',{bc:async(sd,m)=>{sd.board.forEach(b=>{if(b.hp>0){b.kw.add('shield');xFl(b,'金ピカ！','heal')}})}});
+X('new108',{bc:async sd=>{B.goldRush=B.goldRush||{};B.goldRush[isMe(sd)?'me':'foe']=1;if(HUMAN)say('この戦い、たおした あいては 金塊を おとす！')},dr:async sd=>{if(isMe(sd)&&R){R.money+=5;if(HUMAN)say('「まいぞうきんの ありかを おしえるワン…」 ＄5')}}});
+X('new164',{bc:async sd=>{let n=0;while(roomOf(sd)>0&&n<4){if(!summon(sd,'frogT',1))break;n++}}});
+X('new192',{bc:async sd=>{const t=strongest(xFoes(sd));if(t&&roomOf(sd)>0){const k=summon(sd,t.id,t.lv||1);if(k){k.atk=t.atk;k.hp=t.hp;k.max=t.max;xFl(k,'しんきろう！','crit')}}if(typeof setWeather==='function')setWeather(sd,'sand',2)}});
+X('new234',{bc:async sd=>{const o=opp(sd);if(o.hand.length&&sd.hand.length<8){const c=o.hand.splice(rnd(o.hand.length),1)[0];sd.hand.push(c);if(HUMAN)say(`${C[c.id].n}を うばった！`)}}});
+X('new178',{bc:async sd=>{if(typeof setWeather==='function')setWeather(sd,'snow',3)}});
+/* 自分から うごく 子 */
+X('new39',{bc:async(sd,m)=>{m.kw.add('stealth');m.tmpHide=1}});
+X('new167',{});X('new211',{bc:async(sd,m)=>{if(sd.board.some(b=>b!==m&&b.hp>0&&(b.f==='ca'||C[b.id].f==='ca'))){m.kw.add('stealth');xFl(m,'サボテンの かげに かくれた','info')}}});
+
+/* ---------- いるあいだ／ターンの おわり など ---------- */
+XON.end.push(async sd=>{for(const m of sd.board){if(m.hp<=0||m.jailed)continue;const id=m.id;
+  if(id==='new110'){xHeal(sd,1);if(HUMAN)try{floatAt(isMe(sd)?$('meHero'):$('foeHero'),'+1','heal')}catch(e){}}
+  if(id==='new179'||id==='new208'||id==='new87'){const t=sd.board.filter(b=>b.hp>0&&b.hp<b.max).sort((a,b)=>(a.hp-a.max)-(b.hp-b.max))[0];if(t){t.hp++;xFl(t,'+1','heal')}}
+  if(id==='new197'){const i=sd.board.indexOf(m);[sd.board[i-1],m,sd.board[i+1]].forEach(t=>{if(t&&t.hp>0&&t.hp<t.max){t.hp++;xFl(t,'+1','heal')}})}
+  if(id==='new26'){sd.board.forEach(b=>{if(b.hp>0&&b.hp<b.max){b.hp=Math.min(b.max,b.hp+1);xFl(b,'+1','heal')}})}
+  if(id==='new204'){const t=xFoes(sd)[0];if(t)await damage(opp(sd),t,1,{quiet:true,el:'fire'})}
+  if(id==='new107'&&isMe(sd)){m.eggs=(m.eggs||0)+1;xFl(m,`金のたまご ${m.eggs}/3`,'heal');if(m.eggs>=3){m.eggs=0;R.money+=5;if(HUMAN)say('金のたまごが 3つ！ ＄5')}}
+  if(id==='new162'&&B.wx&&B.wx.k==='rain'&&roomOf(sd)>0)summon(sd,'frogT',1)}
+  /* ノラネコの さんぽ・湯気の かくれんぼ・かぶりトカゲ は 1ターンだけ */
+  for(const b of sd.board){if(b.steamHide){b.steamHide=0;b.kw.delete('stealth')}}
+  /* ぐるぐる巻き：毎ターン2ダメージ */
+  for(const t of opp(sd).board)if(t.coil>0&&t.hp>0){t.coil--;await damage(opp(sd),t,2,{quiet:true});xFl(t,'ぎゅ〜っ','info')}});
+XON.start.push(async sd=>{for(const b of sd.board){if(b.tmpHide){b.tmpHide=0;b.kw.delete('stealth')}
+  if(b.id==='new167'){const snow=B.wx&&B.wx.k==='snow';if(snow)b.kw.add('stealth');else if(!b.tmpHide)b.kw.delete('stealth')}
+  if(b.id==='eggT'&&b.hatch>0){b.hatch--;if(b.hatch<=0){const i=sd.board.indexOf(b);const n=mkMinion(sd,'new206',1);n.sleep=true;sd.board[i]=n;if(HUMAN)say('🥚 たまごから イグニドンが ふたたび 生まれた！')}}
+  if(b.id==='new157'){b.age=(b.age||0)+1;if(b.age>=2){b.atk=Math.max(b.atk,3);b.hp=Math.max(b.hp,3);b.max=Math.max(b.max,3);b.age=-99;xFl(b,'パリーン！ ワニっこ！','crit')}}}
+  /* 牢屋：ダンロが いると なかまは こおらない */
+  if(xAlive(sd,'new170'))sd.board.forEach(b=>{if(b.frozen>0&&b.fzType==='ice'){b.frozen=0}})});
+XON.death.push(async(sd,m)=>{const o=opp(sd);const kfoe=isMe(o)?'me':'foe';
+  /* 記録 */
+  B.fallen=B.fallen||{me:[],foe:[]};if(m.card)B.fallen[isMe(sd)?'me':'foe'].push(m.card);
+  B.deadFoes=B.deadFoes||{me:[],foe:[]};B.deadFoes[kfoe].push(m.id);
+  /* ヨミジ：なかまが やられたら 特急へ */
+  for(const y of sd.board)if(y.id==='new38'&&y.hp>0&&y!==m&&m.card){y.train=y.train||[];y.train.push(m.card);xFl(y,'🚃 ごあんない…','info')}
+  /* ハゲタカおばば・ニャンゴールド：あいてが たおれたら コイン（金塊） */
+  for(const b of o.board)if(b.hp>0&&!b.jailed&&(b.id==='new72'||b.id==='new94')){o.coin+=1;xFl(b,'金塊！ コイン+1','heal')}
+  if(B.goldRush&&B.goldRush[kfoe]){o.coin+=1;if(isMe(o)&&R)R.money+=1}
+  /* パスタッチオ：子分（マフィア）が やられたら コイン */
+  if((m.f||C[m.id].f)==='mf')for(const b of sd.board)if(b.id==='new234'&&b.hp>0){sd.coin+=1;xFl(b,'コイン+1','heal')}
+  /* ケロリーヌ：カエルが やられたら あいての 親分に 1ダメージ */
+  if(m.id==='frogT'||C[m.id].n.includes('カエル'))for(const s of [B.me,B.foe])for(const b of s.board)if(b.id==='new164'&&b.hp>0)await damage(opp(s),heroOf(opp(s)),1,{quiet:true});
+  /* ハナコ：なかまが やられたら お花 */
+  for(const b of sd.board)if(b.id==='new56'&&b.hp>0&&roomOf(sd)>0)summon(sd,'flowerT',1);
+  /* 小包：中から なかまを 1人 */
+  if(m.parcel)drawCard(sd,1)});
+XON.attack.push(async(sd,m,t,hp0)=>{if(!m||!t)return;
+  if(m.id==='new155'&&!t.hero&&m.hp>0){t.hp-=1;m.hp=Math.min(m.max+1,m.hp+1);m.max=Math.max(m.max,m.hp);xFl(m,'ちゅ〜っ +1','heal')}
+  if(m.id==='new166'&&!t.hero){const o=opp(sd);const i=o.board.indexOf(t);const nb=o.board[i+1]||o.board[i-1];if(nb&&nb.hp>0)await damage(o,nb,1,{quiet:true})}
+  if(m.hot&&!t.hero&&t.hp>0){t.poison=(t.poison||0)+1;xFl(t,'やけど！','info')}
+  if(m.id==='new163'&&!t.hero&&t.hp<=0){m.belly=t.card||{id:t.id,lv:t.lv};xFl(m,'まるのみ！','crit')}
+  if((m.f||C[m.id].f)==='gh'&&sd.board.some(b=>b.id==='new59'&&b.hp>0&&b!==m))await damage(opp(sd),heroOf(opp(sd)),1,{quiet:true});
+  if(t&&!t.hero&&t.hp<=0)t._killer=m;
+  if(m.fly&&t&&!t.hero&&t.kw.has('taunt')){} });
+X('new163',{dr:async(sd,m)=>{if(m.belly&&roomOf(sd)>0){summon(sd,m.belly.id,m.belly.lv||1,0,null);if(HUMAN)say('おなかの 中から 出てきて なかまに なった！')}}});
+/* はねかえし（ギラリ）：さいしょに うけた 攻撃を そのまま かえす */
+{const _dm2=damage;damage=async function(sd,t,n,o){if(t&&!t.hero&&t.id==='new105'&&!t.reflected&&o&&o.src&&!o.src.hero&&n>0){t.reflected=1;xFl(t,'はねかえし！','crit');const s=o.src;const ss=B.me.board.includes(s)?B.me:B.foe;return _dm2(ss,s,n,{quiet:true})}return _dm2.apply(this,arguments)}}
+/* ノラネコの さんぽ：1ターンで いなくなる（fuel） */
+
+/* ---------- 投げ縄名人：2回 なげられる ---------- */
+XON.start.push(async sd=>{if(isMe(sd)&&xAlive(sd,'new51'))B.lasso2=1});
+/* 投げ縄を つかったあと、名人が いれば もう1回 */
+setInterval(()=>{try{if(B&&B.lassoUsed&&B.lasso2&&B.side===B.me&&xAlive(B.me,'new51')){B.lasso2=0;B.lassoUsed=false;if(HUMAN)say('ロープ婆「もう 1回 なげな！」')}}catch(e){}},400);
+
+/* ---------- ふつうの 手札カード（おべんとう・のろい） ---------- */
+if(!C.bento&&typeof C==='object'){C.bento={id:'bento',n:'おべんとう',f:'sa',r:'N',c:0,a:0,h:0,kw:'',em:'🍱',img:C.new124&&C.new124.img,token:1,spell:1,s:'いただきま〜す！',st:1};
+  C.curseT={id:'curseT',n:'のろい',f:'gh',r:'N',c:99,a:0,h:0,kw:'',em:'💀',img:C.new61&&C.new61.img,token:1,spell:1,s:'…',st:1}}
+{const _pc=playCard;playCard=async function(sd,i){const c=sd&&sd.hand&&sd.hand[i];
+  if(c&&c.id==='bento'){if(sd.coin<0)return false;sd.hand.splice(i,1);xHeal(sd,3);sd.board.forEach(b=>{if(b.hp>0)b.hp=Math.min(b.max,b.hp+3)});if(HUMAN){say('🍱 おべんとう！ 体力 +3');SFX.heal&&SFX.heal()}xRe();return true}
+  if(c&&c.id==='curseT'){if(HUMAN&&isMe(sd))say('のろいの カードは つかえない…');return false}
+  if(B&&sd===B.me){B.playedThisTurn=(B.playedThisTurn||0)+1}
+  return _pc.apply(this,arguments)}}
+XON.start.push(async sd=>{if(isMe(sd))B.playedThisTurn=0});
+/* のろい：ずっと 手札に のこって 1まい ぶん じゃまをする（AIも つかわない） */
+
+/* ---------- せつめい文 ---------- */
+const XT={
+ new126:[['dr','手にいれる！ 貨物の 3まいから 1まい えらぶ']],
+ new138:[['bc','号外〜！ あいての 手札を 1まい 見やぶる']],
+ new181:[['bc','大きな 耳で、あいての 手札を 1まい 見やぶる']],
+ new222:[['bc','うわさを 聞いた！ あいての 手札を 1まい 見やぶる']],
+ new128:[['bc','あやしいやつ！ あいての 手札を 1まい 見やぶる']],
+ new43:[['bc','あいてが つぎに 出しそうな カードを のぞき見する']],
+ new140:[['bc','がったい！ ほかの ロボットに がったいして、その ロボットの 見参！が もう1回']],
+ new147:[['bc','がったい！ ロボットの あたまに なって、その ロボットの 見参！を もう一度（ロボットが いなければ 1まい ひく）']],
+ new153:[['aura','なかまの 攻撃が はずれない（すなあらし・まっくらでも だいじょうぶ）']],
+ new155:[['kw','すいとる','戦うたび あいてから 体力を 1 すいとる']],
+ new157:[['kw','たまご','2ターン たつと われて「ワニっこ」（3/3）に なる']],
+ new165:[['dr','ゆき+1']],
+ new166:[['kw','すべる','攻撃したあと、となりの あいてにも ぶつかる（1ダメージ）']],
+ new215:[['dr','トゲを まきちらす！ ランダムな あいてに 1ダメージ']],
+ new39:[['bc','サボテンを かぶって、つぎの ターンまで ねらわれない']],
+ new81:[['bc','いちばん強い あいてを ピンクに ぬる。ピンクの あいては かくれんぼ できない']],
+ new82:[['bc','場の 毒を 1つ けす']],
+ new89:[['bc','なかま1体を 手札に もどす（もう一回 見参！できる）']],
+ new98:[['bc','地面に もぐる（2ターン）。出てくるとき 金塊を もってくる（コイン+2）']],
+ new07:[['bc','ほかの なかま1体を +0/+2']],
+ new110:[['aura','ターンの おわり、ミルクで あなたの 体力を 1 いやす']],
+ new112:[['dr','どろを はねる！ たおした あいては 1回休み']],
+ new113:[['kw','かかし','鳥の あいては こわがって この子を 攻撃できない']],
+ new116:[['bc','いちばん強い あいてを 投げ縄で ひっぱる。その あいては かばう に なる']],
+ new124:[['bc','「おべんとう」（0コイン：体力を 3 いやす）を 手札に 1まい']],
+ new127:[['bc','なかまの ロボット1体を はやうちに（すぐ 攻撃できる）']],
+ new129:[['bc','小包（0/2）を おく。小包が やられると 中から なかまを 1人 ひく']],
+ new130:[['dr','ぬすんだ コインを おとす（コイン+1）']],
+ new139:[['dr','もくもく 湯気！ なかま ぜんいん 1ターン かくれんぼ']],
+ new151:[['dr','ぬまに しずんで、2ターン後に もどってくる（1回だけ）']],
+ new159:[['bc','いちばん強い あいてに どろを かける。つぎの 攻撃は はずれる']],
+ new167:[['kw','ゆきの日','天気が「ゆき」の あいだ かくれんぼ（ねらわれない）']],
+ new172:[['bc','なかま1体に マフラー！ こおらなくなる']],
+ new179:[['aura','こぶの 水で、毎ターン いちばん けがした なかま1体を 1 いやす']],
+ new185:[['bc','つぎに ひく カードを 先に 見て、すきなら ひく']],
+ new195:[['bc','なかま1体を あつあつに。戦った あいては やけど（毎ターン1ダメージ）']],
+ new196:[['dr','火の粉を まく！ あいて ぜんいんに 1ダメージ']],
+ new197:[['aura','ターンの おわり、自分と となりの なかまを 1 いやす']],
+ new208:[['aura','ターンの おわり、いちばん けがした なかま1体を 1 いやす']],
+ new211:[['bc','サボテンの となりに 出すと かくれんぼ']],
+ new225:[['bc','この ターン 出した なかまの 数だけ コイン+1']],
+ new47:[['bc','いちばん強い あいてに 手配書を はる。その あいてを たおすと ＄2']],
+ new53:[['dr','ほねを のこす。手札の ゾンビが ひろって パワーアップ（+1/+1）']],
+ new56:[['aura','なかまが やられるたび、お花（0/1）が さく']],
+ new57:[['bc','かくれんぼ中の あいてを てらして 見つける']],
+ new59:[['aura','なかまの おばけが 攻撃するたび ドン！ あいての 親分に 1ダメージ']],
+ new61:[['dr','あいての 手札に「のろい」（つかえない カード）を 1まい まぜる']],
+ new67:[['kw','とびこえ','かばうを むしして 攻撃できる']],
+ new75:[['bc','ダイナマイトを おく。3→2→1→ドカン！ 前の あいてに 3ダメージ']],
+ new97:[['aura','なかまの 金ほり（＄が 見つかる 効果）が 2倍']],
+ new99:[['kw','金塊こぼし','ダメージを うけるたび 金塊が こぼれる（コイン+1）']],
+ new10:[['dr','ドカン！ あいて ぜんいんに 1ダメージ']],
+ new115:[['bc','あばれる！ ランダムな キャラ（あいてか なかま）に 2ダメージ']],
+ new117:[['bc','山札から 動物の なかまを 1人 ひく']],
+ new12:[['aura','ほかの 動物の 攻撃+1']],
+ new143:[['bc','花火ドーン！ あいて ぜんいん まぶしくて、つぎの 攻撃は はずれる']],
+ new170:[['aura','なかまは こおらない']],
+ new224:[['bc','ダダダ！ ランダムな あいてに 1ダメージを 3回']],
+ new226:[['bc','ノラネコ（1/1）を あいている 場所に よぶ。つぎの ターン みんな さんぽへ（いなくなる）']],
+ new55:[['bc','ゾンビ（1/1）を あいている 場所に 2匹 よぶ。ゾンビが 3体 そろうと 大合唱！ あいて ぜんいん 1回休み']],
+ new58:[['bc','手にいれる！ たおれた あいての カードから 1まい えらんで 手札へ']],
+ new72:[['aura','あいてが たおれるたび コイン+1']],
+ new86:[['bc','なかまを 1人 ひく… でも 半分の かくりつで あいてが ひく']],
+ new87:[['aura','ターンの おわり、ポロン♪ いちばん けがした なかま1体を 1 いやす']],
+ new104:[['bc','ダイナマイトを 2本 おく（1本ずつ ドカン！ 前の あいてに 3ダメージ）']],
+ new156:[['bc','いちばん強い あいてを カエル（1/1）に かえる']],
+ new90:[['bc','手にいれる！ ダイナマイトか 決闘の カードを 3まいから 1まい']],
+ new107:[['aura','毎ターン 金の たまごを うむ（3つで ＄5）']],
+ new134:[['bc','がったい！ ほかの ロボットに がったいする']],
+ new161:[['bc','なかま1体を ヌルヌルに。投げ縄で つかまらない＆1回だけ ダメージ0']],
+ new162:[['aura','天気が「あめ」の日は 毎ターン 子ガエル（1/1）が ふえる']],
+ new189:[['bc','いちばん強い なかまを のせて とぶ。その なかまは かばうを むしして 攻撃できる']],
+ new190:[['bc','ゆらゆら ダンス！ あいて 2体を 酔っぱらわせる（1回休み）']],
+ new219:[['kw','昇進','あいてを 3体 たおすと ⭐。⭐に なると なかまの サボテン ぜんいん トゲトゲ']],
+ new231:[['bc','あやしい ジュースを くばる！ ランダムな あいて 2体が 酔っぱらう']],
+ new91:[['bc','おたがい 1まい ひいて、コストが 高い ほうが かち。かったら ＄3']],
+ new105:[['kw','はねかえし','さいしょに うけた 攻撃を そのまま あいてに かえす']],
+ new106:[['bc','トロッコで つっこむ！ ランダムな あいて 3体に 2ダメージ']],
+ new51:[['aura','投げ縄名人：投げ縄を 2回 なげられる']],
+ new63:[['bc','手札の ゾンビを 1体、そのまま 場に 出す']],
+ new78:[['dr','いちばん強い あいてを がけから 道づれ']],
+ new163:[['kw','まるのみ','戦って たおした あいてを まるのみ。やられたら その キャラが なかまとして 出てくる']],
+ new176:[['bc','なだれ！ あいて ぜんいんに 2ダメージ。なかまにも 1ダメージ']],
+ new191:[['bc','砂に もぐる（2ターン ねらわれない）。出てくるとき あいて ぜんいんに 2ダメージ']],
+ new204:[['aura','前の あいてに 毎ターン 1ダメージ（あつい！）']],
+ new34:[['bc','大将 出陣！ 場と 手札の ロボット 1体ごとに 自分 +1/+1']],
+ new38:[['aura','なかまが やられるたび、おばけ特急に のせる'],['dr','のせた なかまを ぜんぶ よみがえらせる（あいている 場所まで）']],
+ new52:[['bc','いちばん強い あいてを ぐるぐる巻き！ 2ターン 動けない。その あいだ 毎ターン 2ダメージ']],
+ new66:[['bc','この戦いで たおれた なかまが、おばけ（1/1・かくれんぼ）に なって もどってくる（あいている 場所まで）']],
+ new80:[['bc','いちばん強い あいてを つかんで 空へ！ 手札に おいかえす'],['kw','とびこえ','かばうを むしして 攻撃できる']],
+ new94:[['bc','なかま ぜんいんを 金ピカに（1回だけ ダメージ0）'],['aura','あいてが たおれるたび 金塊が おちる（コイン+1）']],
+ new108:[['bc','この戦い、たおした あいては ぜんぶ 金塊を おとす（コイン+1・＄1）'],['dr','「まいぞうきんの ありかを おしえるワン…」 旅の 賞金 ＋＄5']],
+ new122:[['aura','なかま ぜんいん はやうち（出した ターンから 攻撃できる）']],
+ new136:[['bc','線路を つっぱしる！ あいて ぜんいんに 2ダメージ'],['aura','ほかの ロボットは はやうち']],
+ new164:[['bc','子ガエル（1/1）を あいている 場所に よぶ'],['aura','カエルが やられるたび あいての 親分に 1ダメージ']],
+ new178:[['bc','ゆき+3'],['aura','こおった あいては とけない']],
+ new192:[['bc','いちばん強い あいての コピーを なかまとして つくる。すなあらし+2']],
+ new206:[['bc','噴火！ あいて ぜんいんに 2ダメージ、はれ+2'],['dr','たまごを 1つ のこす（2ターンで ふたたび 生まれる）']],
+ new220:[['kw','トゲトゲ','攻撃してきた あいてに 2ダメージ'],['dr','たね（0/1・そだつ）を 自分の 場所に 1つ のこす']],
+ new234:[['bc','あいての 手札から 1まい うばう'],['aura','子分（マフィア）が やられるたび コイン+1']],
+ new26:[['aura','森の めぐみじゃ。ターンの おわり、なかま ぜんいんの 体力を 1 いやす']],
+};
+/* 見参 系の キーワードは 見参！に、金塊は やられたら に（ほかの カードも） */
+const ONPLAY=new Set(['牢屋','ちりょう','手配書','効果けし','ダイナマイト','手にいれる！','さかさま','ゆきを よぶ','はれを よぶ','あめを よぶ','すなあらしを よぶ','がったい！','ニセモノ']);
+{const _el=effList;effList=function(id,lv){let L=_el.apply(this,arguments);try{
+  const t=XT[id];if(t){
+    const sh0=(typeof FLAV2!=='undefined'&&FLAV2[id])?FLAV2[id]:'';const sh=sh0?sh0+' ':'';
+    const add=t.map(([k,a,b])=>k==='bc'?['📣','見参！',(sh0&&String(a).startsWith(sh0)?'':sh)+a,KW_COL.bc,'見参']:k==='dr'?['💀','やられたら',a,KW_COL.dr,'やられたら']:k==='aura'?['📣','いるあいだ',a,KW_COL.aura,'応援']:['✨',a,b,'#7a5ac8',a]);
+    const KWM={'かばう':'taunt','バリア':'shield','はやうち':'quick','2回攻撃':'twice','かくれんぼ':'stealth','1回復活':'revive','必殺':'deadly','トゲ':'thorns'};const kws=String(C[id].kw||'');
+    const oldKw=L.filter(x=>(x[1]==='みず'||x[1]==='ほのお')||(KWM[x[1]]&&kws.includes(KWM[x[1]])));
+    L=[...oldKw,...add]}
+  /* キーワード名の まとめ */
+  const out=[];for(const x of L){let [ic,n,txt,col,sh]=x;
+    if(ONPLAY.has(n)&&/この子が 出ると、?/.test(String(txt))){txt=String(txt).replace(/この子が 出ると、?\s*/,'');n='見参！';col=KW_COL.bc;sh='見参';ic='📣'}
+    else if(ONPLAY.has(n)&&n!=='見参！'&&/^(ゆきを|はれを|あめを|すなあらしを) よぶ$/.test(n)){txt='天気を よぶ：'+txt;n='見参！';col=KW_COL.bc;sh='見参';ic='📣'}
+    if(n==='金塊'){txt=String(txt).replace(/やられたら\s*/,'');n='やられたら';col=KW_COL.dr;sh='やられたら';ic='💀'}
+    const same=out.find(y=>y[1]===n&&(n==='見参！'||n==='やられたら'));if(same){same[2]=same[2]+'。'+txt}else out.push([ic,n,txt,col,sh])}
+  return out}catch(e){return L}}}
+{const _ct=cardText;cardText=function(id,lv){const t=XT[id];if(!t)return _ct.apply(this,arguments);return t.map(([k,a,b])=>(k==='bc'?'見参！：':k==='dr'?'やられたら：':k==='aura'?'いるあいだ：':a+'：')+(k==='kw'?b:a)).join('。')}}
+function strongestOf(list){return (list||[]).slice().sort((a,b)=>b.atk-a.atk||b.hp-a.hp)[0]}
+(()=>{const st=document.createElement('style');st.textContent=`
+.u.jailed{filter:grayscale(.8) brightness(.55)!important}
+.u.jailed::after{content:"";position:absolute;inset:-2px;border-radius:inherit;z-index:7;pointer-events:none;background:repeating-linear-gradient(90deg,rgba(40,30,20,.0) 0 9px,#3a2a1a 9px 13px,#8a6a3a 13px 14px,rgba(40,30,20,0) 14px 22px);box-shadow:inset 0 0 12px rgba(0,0,0,.8)}
+.u.jailed.dig::after,.u.jailed.sink::after{background:radial-gradient(ellipse at 50% 80%,rgba(140,100,50,.9),rgba(80,60,30,.6) 60%,transparent 75%)}
+.u .jcnt{position:absolute;left:50%;top:-10px;transform:translateX(-50%);z-index:9;font:900 11px var(--body);color:#fff;background:#3a2a1a;border:2px solid #c9a46a;border-radius:99px;padding:0 7px;white-space:nowrap}
+.u.pinked{box-shadow:0 0 0 3px #ff7ac0!important}`;document.head.appendChild(st)})();
+{const _rb=renderBattle;renderBattle=function(){const r=_rb.apply(this,arguments);try{if(B&&HUMAN)for(const s of [B.me,B.foe])for(const m of s.board){const e=uEl(m);if(!e)continue;
+  e.classList.toggle('jailed',m.jailed>0);e.classList.toggle('dig',m.jailKind==='dig');e.classList.toggle('sink',m.jailKind==='sink');e.classList.toggle('pinked',!!m.pink);
+  let j=e.querySelector('.jcnt');if(m.jailed>0){if(!j){j=document.createElement('i');j.className='jcnt';e.appendChild(j)}j.textContent=(m.jailKind==='jail'?'🔒 あと':'あと ')+m.jailed}else if(j)j.remove()}}catch(e){}return r}}
+/* 牢屋（見参）：いちばん強い あいてを 休眠に */
+{const _bc2=battlecry;battlecry=async function(sd,m,c){const d=C[c.id];if(!d||d.bc!=='jail')return _bc2.apply(this,arguments);
+  if(HUMAN&&typeof bcFx==='function')await bcFx(m);const t=strongest(xFoes(sd));const n=c.id==='new93'?3:2;
+  if(t){xSleepIn(t,n,'jail');if(HUMAN){say(`🔒 ${C[t.id].n}を 牢屋に 入れた！（${n}ターン）`);SFX.lock&&SFX.lock()}}xRe()}}
+/* 牢屋の せつめい（休眠） */
+try{if(typeof FLAV!=='undefined'){['new65','new93'].forEach(id=>{FLAV[id]=FLAV[id]||{};FLAV[id]['見参！']=FLAV[id]['見参！']||''})}}catch(e){}
+{const _el2=effList;effList=function(id,lv){const L=_el2.apply(this,arguments);try{if(C[id]&&C[id].bc==='jail'){const n=id==='new93'?3:2;return L.map(x=>x[1]==='見参！'&&/牢屋/.test(x[2])?[x[0],x[1],`いちばん強い あいてを ${n}ターン 牢屋へ（その あいだ 動けない・当たらない。出てくると まった ぶん 強くなる）`,x[3],x[4]]:x)}}catch(e){}return L}}
+/* ダイナマイト（前の あいてに 3ダメージ）：fuses の front を 前の あいてに */
+/* 前の あいてに ドカン（ボム吉・ドカ男） */
+{const _st2=startTurn;startTurn=async function(sd){if(!B||!B.fuses)return _st2.apply(this,arguments);const fr=B.fuses.filter(f=>f.front&&f.side===sd);B.fuses=B.fuses.filter(f=>!(f.front&&f.side===sd));
+  for(const f of fr){f.left--;if(f.left<=0){f.done=1;const o=opp(sd);const t=o.board.find(e=>e.hp>0&&!e.jailed);if(HUMAN){say('🧨 ドッカーン！');shakeApp&&shakeApp()}if(t)await damage(o,t,f.v,{quiet:true,fx:'enemy'});else await damage(o,heroOf(o),f.v,{quiet:true})}}
+  const r=await _st2.apply(this,arguments);if(B){B.fuses=B.fuses||[];B.fuses.push(...fr.filter(f=>!f.done))}return r}}
+/* ツルハシゴブリン：ダメージを うけるたび 金塊（コイン+1） */
+{const _dm3=damage;damage=async function(sd,t,n,o){const r=await _dm3.apply(this,arguments);try{if(B&&t&&!t.hero&&t.id==='new99'&&n>0){const s=B.me.board.includes(t)?B.me:B.foe;s.coin+=1;xFl(t,'金塊！ コイン+1','heal')}}catch(e){}return r}}
+/* ホタル：なかまの 攻撃は はずれない */
+{const _at2=attack;attack=async function(sd,m,t){if(m&&m.miss>0&&xAlive(sd,'new153'))m.miss=0;return _at2.apply(this,arguments)}}
+/* カウガール ミルキー：ほかの 動物の 攻撃+1 */
+{const _ab=auraBonus;auraBonus=function(sd,m){let v=_ab.apply(this,arguments);try{if((m.f||C[m.id].f)==='an')v+=sd.board.filter(b=>b!==m&&b.id==='new12'&&b.hp>0&&!b.jailed).length}catch(e){}return v}}
+/* ランタン：金ほりが 2倍 */
+XON.end.push(async sd=>{if(!isMe(sd)||!xAlive(sd,'new97'))return;for(const m of sd.board)if(m.hp>0&&C[m.id].aura==='miner'&&Math.random()<.5){R.money++;xFl(m,'＄1（ランタン）','heal')}});
+/* サボ松：⭐で なかまの サボテン ぜんいん トゲトゲ */
+XON.attack.push(async(sd,m)=>{if(m&&m.id==='new219'&&(m.rank||0)>=1&&!m.starDone){m.starDone=1;sd.board.forEach(b=>{if(b.hp>0&&(b.f||C[b.id].f)==='ca'){b.kw.add('thorns');xFl(b,'トゲトゲ！','crit')}})}});
+
+/* =====================================================================
+   10/29：同じ 効果の かぶりを なくす（とくに ふつうと レジェンドが 同じ もの）
+   ===================================================================== */
+['bass','owl','pecos','carnelia','ruler','ma','clock','narikin','ikoku','adara'].forEach(id=>{const c=C[id];if(c){c._old_bc=c.bc;c._old_aura=c.aura}});
+XCLR('bass','bc');XCLR('owl','bc','v');XCLR('pecos','bc');XCLR('carnelia','bc');XCLR('ruler','aura');XCLR('ma','aura');XCLR('clock','aura');XCLR('ikoku','aura');XCLR('adara','aura');
+XSET('narikin',{aura:'coinflip'});
+X('bass',{bc:async sd=>{const t=strongest(xFoes(sd));if(t){xSleepIn(t,2,'jail');if(HUMAN)say(`🔒 にがさない！ ${C[t.id].n}を 牢屋へ`)}if(isMe(sd))B.lassoBonus=(B.lassoBonus||0)+.3}});
+X('owl',{bc:async(sd,m)=>{let n=0;for(let k=0;k<2;k++){if(roomOf(sd)<=0)break;const i=sd.hand.findIndex(c=>C[c.id]&&!C[c.id].spell&&!C[c.id].token&&c.id!=='curseT');if(i<0)break;const c=sd.hand.splice(i,1)[0];if(summon(sd,c.id,c.lv||1,c.plus||0,c))n++}if(HUMAN)say(n?`🎪 ショーの はじまり！ ${n}人が ステージへ！`:'ステージに 出る なかまが いない…')}});
+X('pecos',{bc:async sd=>{const o=opp(sd);const t=strongest(xFoes(sd));if(t)await bounceTo(o,t);for(const e of xFoes(sd))await damage(o,e,1,{quiet:true})}});
+X('carnelia',{bc:async sd=>{const o=opp(sd);const ts=xFoes(sd).sort((a,b)=>b.atk-a.atk||b.hp-a.hp).slice(0,2);for(const t of ts)await bounceTo(o,t);if(HUMAN&&ts.length)say(`空へ ポーン！ ${ts.length}体を 手札へ`)}});
+XON.end.push(async sd=>{for(const m of sd.board){if(m.hp<=0||m.jailed)continue;
+  if(m.id==='ruler'){const t=pick(sd.board.filter(b=>b!==m&&b.hp>0&&['st','ro'].includes(b.f||C[b.id].f)));if(t){t.atk++;t.hp++;t.max++;xFl(t,'+1/+1','heal')}}}});
+XON.start.push(async sd=>{const n=sd.board.filter(b=>b.id==='clock'&&b.hp>0&&!b.jailed).length;if(n&&B.turn%2===0)drawCard(sd,n)});
+XON.death.push(async(sd,m)=>{for(const b of sd.board)if(b.id==='ma'&&b.hp>0&&b!==m){drawCard(sd,1);xFl(b,'うちの子が…！ 1まい ひく','info')}});
+{const _ab2=auraBonus;auraBonus=function(sd,m){let v=_ab2.apply(this,arguments);try{v+=sd.board.filter(b=>b!==m&&b.id==='ikoku'&&b.hp>0&&!b.jailed).length}catch(e){}return v}}
+/* アーサー：ほかの なかま +1/+1（体力は 出たときと 出てきた子に） */
+XON.start.push(async sd=>{if(!xAlive(sd,'ikoku'))return;sd.board.forEach(b=>{if(b.id!=='ikoku'&&b.hp>0&&!b._ikHp){b._ikHp=1;b.hp++;b.max++}})});
+/* アダラー：ほかの なかまが うける ダメージ -1 */
+{const _dm4=damage;damage=async function(sd,t,n,o){try{if(B&&t&&!t.hero&&n>1&&t.id!=='adara'){const s=B.me.board.includes(t)?B.me:B.foe;if(s.board.some(b=>b.id==='adara'&&b.hp>0&&!b.jailed))n=n-1}}catch(e){}return _dm4.call(this,sd,t,n,o)}}
+Object.assign(XT,{
+ bass:[['bc','にがさない！ いちばん強い あいてを 2ターン 牢屋へ。この戦い、投げ縄が 30% 当たりやすく なる']],
+ owl:[['bc','ショーの はじまり！ 手札の なかまを 2人まで、コインなしで ステージ（場）に 出す']],
+ pecos:[['bc','いちばん強い あいてを 手札に ふきとばし、のこりの あいて ぜんいんに 1ダメージ']],
+ carnelia:[['bc','空へ ポーン！ 強い あいてを 2体まで 手札に ふきとばす']],
+ ruler:[['aura','ワシの 街じゃ！ ターンの おわり、スチームタウンか ロボットの なかま1体を +1/+1']],
+ ma:[['aura','うちの子に なにすんだい！ なかまが やられるたび 1まい ひく']],
+ clock:[['aura','チクタク… 2ターンに 1回、1まい 多く ひく']],
+ ikoku:[['aura','我に つづけ！ ほかの なかまは +1/+1']],
+ adara:[['aura','聖なる 光で、ほかの なかまが うける ダメージを 1 へらす']],
+});
+
+
+/* =====================================================================
    おもしろ技ためし場（fun.html だけで動く）
    ・おもしろい技のキャラだけのデッキ ・毎ターン コイン10 ・体力999
    ・的（まと）はやられても すぐ補充 ・「わざをえらぶ」で好きなキャラを手札に
