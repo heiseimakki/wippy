@@ -9618,7 +9618,7 @@ if(typeof NEWBC!=='undefined'){const W2=(name,pre,post)=>{const f=NEWBC[name];if
  W2('balloon',null,async(sd,m)=>{const t=sd.board.find(x=>x.hp>0&&x.kw&&x.kw.has('stealth')&&x!==m)||m;const e=uEl(t);if(e)CFX.balloon(e)});}
 /* 10/29：タブの ウィピィ（ファビコン）を ばめんで かえる */
 const FAV={happy:['smile','wink','laugh','shy','relief','star','carrot','dreamy','side','tilt','surprise'],set(n){try{let l=document.querySelector('link[rel="icon"][data-wf]');if(!l){document.querySelectorAll('link[rel="icon"]').forEach(x=>x.remove());l=document.createElement('link');l.rel='icon';l.type='image/png';l.setAttribute('data-wf','1');document.head.appendChild(l)}l.href='fav/f_'+n+'.png'}catch(e){}},
- rnd(){FAV.set(FAV.happy[Math.floor(Math.random()*FAV.happy.length)])}};
+ rnd(){FAV.set('smile')}};
 try{if(!window.__PCWRAP){FAV.rnd()}}catch(e){}
 if(typeof battle==='function'){const _bt=battle;battle=async function(){try{if(HUMAN)FAV.set('serious')}catch(e){}return _bt.apply(this,arguments)}}
 if(typeof finishBattle==='function'){const _fb2=finishBattle;finishBattle=async function(){try{if(HUMAN&&B){FAV.set(B.over==='win'?'laugh':B.over==='lose'?'cry':'smile');setTimeout(()=>FAV.rnd(),6000)}}catch(e){}return _fb2.apply(this,arguments)}}
