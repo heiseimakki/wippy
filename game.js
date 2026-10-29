@@ -2058,7 +2058,7 @@ function renderBattle(){
     <div class="bf" id="af"></div>
     <div class="bar"><div class="hero" id="meHero"><div class="hart" style="background-image:url(${HERO.img})"></div><span class="hp">${Math.max(0,R.hp)}</span></div><span class="coins" id="coins">${coinIco}${me.coin}<small class="small">/${me.maxCoin}</small></span><span class="deckpile ${me.deck.length?'':'empty'}" id="pile">${me.deck.length}</span>
       <span class="sp"></span>${me.hanage?'<span title="鼻毛">👃</span>':''}${me.unko?'<span>💩</span>':''}${me.moji?'<span>文字化け</span>':''}
-      ${canLasso()?`<button class="btn red" id="lasso" style="padding:8px 10px">🪢投げ縄 ${Math.round(lassoChance()*100)}% <small style="font-size:.78em;opacity:.9">あと${lassoLeft()}回</small></button>`:''}
+      ${canLasso()?`<button class="btn red" id="lasso" aria-label="投げ縄">🪢<b>${Math.round(lassoChance()*100)}%</b><small>あと${lassoLeft()}回</small></button>`:''}
       <button class="pop green" id="endt" style="font-size:15px;padding:10px 16px" ${myTurn?'':'disabled'}>ターン終了 ▶</button></div>
     <div class="hand" id="hand"></div>`;
   bindRelics();
@@ -9301,6 +9301,11 @@ try{const st=document.createElement('style');st.textContent='.ie .iei{width:64px
  eggT:'…ピキッ（なにか 生まれそう）',fakeT:'ほんものだよ？ たぶん',flowerT:'さいたよ〜♪',frogT:'ケロッ！',ghostT:'ひゅ〜どろ〜…',hawkT:'ピィーッ！',honkiT:'ほんきで いくぞ〜！',lambT:'メェ〜',parcelT:'おとどけもの です！',pigeonT:'クルッポー！',rockT:'…ゴロッ',seedT:'そだつの まっててね',straycatT:'ニャ〜ゴ',cactT:'チクッと するよ！',maKid1:'かあちゃんの ために！',maKid2:'あにき、まって〜',maKid3:'ぼくも がんばる！'};
  for(const k in TS)try{if(C[k]&&!C[k].s)C[k].s=TS[k]}catch(e){}}
 
+
+/* 10/30：なげなわボタンが ふくらんで ターン終了を おしだすのを なおす */
+try{const st=document.createElement('style');st.textContent='.bar #lasso{position:relative;flex:0 0 auto;width:auto!important;min-width:0;padding:6px 8px!important;font-size:14px;line-height:1;white-space:nowrap;display:flex;align-items:center;gap:3px}.bar #lasso img,.bar #lasso .emo{width:22px!important;height:22px!important;margin:0!important}.bar #lasso small{position:absolute;top:-9px;right:-6px;font-size:10px;background:#fff6e0;color:#a5321a;border-radius:999px;padding:2px 5px;box-shadow:0 1px 3px rgba(0,0,0,.4)}.bar.haslasso #pile{flex-shrink:0;margin-left:4px!important}.bar.haslasso #endt{font-size:11.5px!important;padding:10px 8px!important;letter-spacing:-.04em;white-space:nowrap!important;flex:0 0 auto;min-width:auto!important}.bar.haslasso .sp{flex:0 0 0!important;width:0!important}.bar.haslasso{gap:5px!important}';document.head.appendChild(st)}catch(e){}
+
+try{const _rbL=renderBattle;renderBattle=function(){const r=_rbL.apply(this,arguments);try{const bar=document.querySelector('.bar');if(bar){const L=!!document.getElementById('lasso');bar.classList.toggle('haslasso',L);const et=document.getElementById('endt');if(L&&et)et.textContent=et.textContent.replace(/\s*▶\s*$/,'')}}catch(e){}return r}}catch(e){}
 
 
 /* =====================================================================
