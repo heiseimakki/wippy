@@ -1846,7 +1846,7 @@ async function battlecry(sd,m,c){
     case 'junk':if(Math.random()<.5){m.hp=0;if(me)say('ガガガ…ピー…こわれた！')}break;
   }
 }
-async function bounceTo(sd,m){if(HUMAN&&window.CFX){const e=uEl(m);if(e)await CFX.blow(e,sd===B.me?$('hand'):document.querySelector('#foeStage .fh'))}sd.board=sd.board.filter(x=>x!==m);if(m.card&&sd.hand.length<8)sd.hand.push(m.card);if(!window.CFX)burst(uEl(m),['💨','🌪️'],8);if(HUMAN)renderBattle()}
+async function bounceTo(sd,m){sd.board=sd.board.filter(x=>x!==m);if(m.card&&sd.hand.length<8)sd.hand.push(m.card);burst(uEl(m),['💨','🌪️'],8);if(HUMAN)renderBattle()}
 
 /* ---- ダメージ ---- */
 /* 親分がビビる（やる気がへる） */
@@ -1880,7 +1880,7 @@ async function attack(sd,m,t){
   await cleanup();if(HUMAN)renderBattle();
 }
 /* 復活：たおれる → 天から光とわっか → ふわっと立ちあがる */
-async function reviveFx(m){const el=uEl(m);if(!el)return;if(window.CFX)return CFX.revive(m);const [x,y]=ctr(el);const r=el.getBoundingClientRect();
+async function reviveFx(m){const el=uEl(m);if(!el)return;const [x,y]=ctr(el);const r=el.getBoundingClientRect();
   SFX.poof&&SFX.poof();
   const a1=el.animate([{transform:'none',filter:'none'},{transform:'translateY(10px) rotate(-8deg) scale(.92)',filter:'grayscale(1) brightness(.6)'}],{duration:320,fill:'forwards',easing:'ease-in'});await a1.finished.catch(()=>{});
   const beam=document.createElement('div');beam.className='rvbeam';beam.style.cssText=`left:${x}px;top:${r.top-140}px;width:${r.width*1.1}px;height:${r.height+150}px`;document.body.appendChild(beam);
@@ -1990,7 +1990,7 @@ async function finishBattle(){
 /* ---- 演出 ---- */
 function ctr(el){const r=el.getBoundingClientRect();return [r.left+r.width/2,r.top+r.height/2]}
 async function fly(from,to,kind='bullet',ms=230){
-  if(!HUMAN||!from||!to)return;if(window.CFX)return CFX.shotTo(from,to,CFX._bc==='poison'?'poison':kind==='enemy'?'bomb':kind==='magic'?'magic':'shoot');const [x1,y1]=ctr(from),[x2,y2]=ctr(to);
+  if(!HUMAN||!from||!to)return;const [x1,y1]=ctr(from),[x2,y2]=ctr(to);
   const p=document.createElement('div');p.className='proj '+kind;document.body.appendChild(p);const ang=Math.atan2(y2-y1,x2-x1)*180/Math.PI;
   try{await p.animate([{transform:`translate(${x1}px,${y1}px) rotate(${ang}deg) scale(.6)`},{transform:`translate(${x2}px,${y2}px) rotate(${ang}deg) scale(1.15)`}],{duration:Math.max(1,ms*SPEED),easing:'ease-in'}).finished}catch(e){}
   p.remove()}
@@ -2100,10 +2100,10 @@ function hintAfter(){}
 /* ---- 5秒そのままだと「次にできること」がふわっと出る ---- */
 function nextActs(tg){const me=B.me;
   if(B.sel)return tg.some(t=>t.hero)?{kind:'sel',t:'おやぶんを タップして ビビらせよう！',el:$('foeHero')}:{kind:'sel',t:'あかく ひかる てきを タップ！',el:document.querySelector('#ef .u.tgt')};
-  const rd=document.querySelector('#af .u.ready');if(rd)return{kind:'atk',t:'ひかってる なかまで アタック！',em:'<img class="iei" src="@@D2@@" alt="">',el:rd};
-  const pc=document.querySelector('#hand .card.can');if(pc)return{kind:'play',t:'コインで なかまを よぼう！',em:'<img class="iei" src="fx/new/coin_front.webp" alt="">',el:pc};
+  const rd=document.querySelector('#af .u.ready');if(rd)return{kind:'atk',t:'ひかってる なかまで アタック！',em:'⚔️',el:rd};
+  const pc=document.querySelector('#hand .card.can');if(pc)return{kind:'play',t:'コインで なかまを よぼう！',em:'✨',el:pc};
   if(canLasso())return{kind:'lasso',t:'なげなわで つかまえられるかも！',em:'🪢',el:$('lasso')};
-  return{kind:'end',t:'やれること ぜんぶ やった！',em:'<img class="iei" src="fav/f_smile.png" alt="">',sub:'ターン終了 ▶',el:$('endt')}}
+  return{kind:'end',t:'やれること ぜんぶ やった！',em:'👍',sub:'ターン終了 ▶',el:$('endt')}}
 let IDLE=null;
 function idleClear(){clearTimeout(IDLE);IDLE=null;document.querySelectorAll('.idlehint').forEach(h=>{h.classList.add('out');setTimeout(()=>h.remove(),350)});document.querySelectorAll('.nudge').forEach(e=>e.classList.remove('nudge'))}
 function idleArm(){idleClear();if(!HUMAN||!B||B.over)return;IDLE=setTimeout(idleShow,5000)}
@@ -2252,7 +2252,7 @@ async function kwFx(m){if(!HUMAN)return;const L=effList(m.id,m.lv).filter(x=>x[4
     const p=document.createElement('div');p.className='kwpop '+(KW_FX[k]||'');p.style.setProperty('--k',x[3]);p.innerHTML=`<span class="i">${x[0]}</span><span class="t">${x[4]}</span>`;el.appendChild(p);
     ({shield:SFX.shieldUp,revive:SFX.reviveUp,twice:SFX.twiceUp,quick:SFX.zap,stealth:SFX.sneaky}[k]||(()=>{}))();if(k==='shield'){}else if(k==='taunt'){SFX.tauntUp();el.animate([{transform:'translateY(-14px)'},{transform:'translateY(4px)'},{transform:'none'}],{duration:380})}else SFX.sparkle&&SFX.sparkle();
     await sleep(1150);p.remove();await firstKw(m,x)}}
-async function bcFx(m){const el=uEl(m);if(!el)return;if(window.CFX){await CFX.kenzan(m);if(CFX._after){const af=CFX._after;CFX._after=null;try{await af()}catch(e){}}const x0=effList(m.id,m.lv).find(x=>x[1]==='見参！');if(x0)await firstKw(m,x0);return}const p=document.createElement('div');p.className='kwpop fx-bc';p.style.setProperty('--k',KW_COL.bc);p.innerHTML=`<span class="i"><img class="kwi" src="ui/u_k_bc.png" alt=""></span>`;el.appendChild(p);
+async function bcFx(m){const el=uEl(m);if(!el)return;const p=document.createElement('div');p.className='kwpop fx-bc';p.style.setProperty('--k',KW_COL.bc);p.innerHTML=`<span class="i"><img class="kwi" src="ui/u_k_bc.png" alt=""></span>`;el.appendChild(p);
   el.animate([{transform:'scale(1)'},{transform:'scale(1.25)',filter:'brightness(1.6)'},{transform:'scale(1)'}],{duration:600});SFX.fanfare();await sleep(1000);p.remove();const x=effList(m.id,m.lv).find(x=>x[1]==='見参！');if(x)await firstKw(m,x)}
 /* はじめて見たマークは、5秒くらい説明を出す（タップで閉じる） */
 async function firstKw(m,x){if(!HUMAN||!G)return;G.kwSeen=G.kwSeen||{};if(G.kwSeen[x[1]])return;G.kwSeen[x[1]]=1;save();
@@ -2321,7 +2321,7 @@ async function projFx(from,to,f){const [x1,y1]=ctr(from),[x2,y2]=ctr(to);let p;
   for(let i=0;i<=8;i++){const t=i/8,x=x1+(x2-x1)*t,y=y1+(y2-y1)*t-(f.arc?Math.sin(Math.PI*t)*90:0);kf.push({transform:`translate(${x}px,${y}px) rotate(${f.spin?t*720:ang}deg) scale(${.7+t*.5})`})}
   try{await p.animate(kf,{duration:ms,easing:'linear'}).finished}catch(e){}p.remove()}
 /* 攻撃する時の演出。当たる瞬間に終わる（ダメージ数字はこのあと） */
-async function atkFx(m,el,tel,mine){if(window.CFX&&HUMAN)return CFX.attack(m,el,tel,mine);const key=fxStyle(m.id),f=FXDEF[key]||FXDEF.tackle;const [x1,y1]=ctr(el),[x2,y2]=ctr(tel);
+async function atkFx(m,el,tel,mine){const key=fxStyle(m.id),f=FXDEF[key]||FXDEF.tackle;const [x1,y1]=ctr(el),[x2,y2]=ctr(tel);
   if(f.ranged){SFX.swing&&SFX.swing();
     el.animate([{transform:'none'},{transform:`translate(${(x1-x2)*.06}px,${(y1-y2)*.06}px) scale(1.08)`},{transform:'none'}],{duration:Math.max(1,260*SPEED),easing:'ease-out'});
     if(f.muzzle){const mz=document.createElement('img');mz.src='ui/x_muzzle.png';mz.className='muzzle mimg';const a=Math.atan2(y2-y1,x2-x1);mz.style.cssText=`left:${x1+Math.cos(a)*34}px;top:${y1+Math.sin(a)*34}px;transform:translate(-50%,-50%) rotate(${a*180/Math.PI}deg)`;document.body.appendChild(mz);setTimeout(()=>mz.remove(),220)}
@@ -2332,10 +2332,10 @@ async function atkFx(m,el,tel,mine){if(window.CFX&&HUMAN)return CFX.attack(m,el,
     strikeFx(tel,f.strike,f.big);if(f.big)shakeApp()}
   if(f.hit)f.hit();onoma(tel,pick(f.on),f.col);if(f.chips)burst(tel,f.chips,6,50)}
 /* 見参！などの飛び道具も、そのキャラのスタイルで */
-async function bcShot(m,tel){const el=uEl(m);if(!HUMAN||!el||!tel)return;if(window.CFX){const k=CFX.kindOf(m);return CFX.shotTo(el,tel,['shoot','meat','bone','spike','note','fireball','bomb','bottle','card','magic','ice','water','ink','wind','lasso','leaf'].includes(k)?k:'magic')}const f=FXDEF[fxStyle(m.id)];
+async function bcShot(m,tel){const el=uEl(m);if(!HUMAN||!el||!tel)return;const f=FXDEF[fxStyle(m.id)];
   if(f&&f.ranged){f.sfx();await projFx(el,tel,f);if(f.hit)f.hit();onoma(tel,pick(f.on),f.col)}else await fly(el,tel,'magic')}
 /* やられ演出：本体のコピーを作って、ぴゅ〜っと飛ばす（盤面の書きかえに巻きこまれない） */
-async function koFx(m,el,mine){SFX.die&&SFX.die();if(!HUMAN||!el){return}if(window.CFX)return CFX.ko(m,el,mine);
+async function koFx(m,el,mine){SFX.die&&SFX.die();if(!HUMAN||!el){return}
   const r=el.getBoundingClientRect();m._pos=[r.left+r.width/2,r.top+r.height/2];const c=el.cloneNode(true);c.classList.remove('hit','flashhit','die','aiming','aimed');c.removeAttribute('data-u');c.querySelectorAll('.float,.bubble').forEach(x=>x.remove());
   c.style.cssText=`position:fixed;left:${r.left}px;top:${r.top}px;width:${r.width}px;height:${r.height}px;margin:0;z-index:85;pointer-events:none`;c.classList.add('kocl');document.body.appendChild(c);el.style.visibility='hidden';
   const ko=koStyle(m.id),line=lineOf(m.id,0);
@@ -2352,7 +2352,7 @@ async function koFx(m,el,mine){SFX.die&&SFX.die();if(!HUMAN||!el){return}if(wind
 /* 絵のエフェクトを1つ出す（x,y は画面の中心座標） */
 function fxImg(x,y,name,w,anim='fxpop',ms=600){if(!HUMAN)return;const i=document.createElement('img');i.src='ui/'+name+'.png';i.className='fximg '+anim;i.style.cssText=`left:${x}px;top:${y}px;width:${Math.round(w)}px`;document.body.appendChild(i);setTimeout(()=>i.remove(),ms)}
 function fxAt(el,name,w,anim,ms){if(!el)return;const [x,y]=ctr(el);fxImg(x,y,name,w||el.getBoundingClientRect().width,anim,ms)}
-const _impactX=impact;impact=function(el,kind=''){if(window.CFX&&HUMAN&&el){CFX.hit(el,kind);return}_impactX(el,kind);if(!HUMAN||!el)return;
+const _impactX=impact;impact=function(el,kind=''){_impactX(el,kind);if(!HUMAN||!el)return;
   if(kind==='poison')fxAt(el,'x_poison',70,'fxpop',700);else if(kind==='heal')fxAt(el,'x_heal',64,'fxup',800);else if(kind==='magic')fxAt(el,'x_spark',60,'fxpop',500);else fxAt(el,'x_ring',80,'fxring',420)};
 /* エフェクトの絵は、起動してしばらくしたら こっそり先読み（はじめて出たときに 空っぽにならないように） */
 setTimeout(()=>{try{bgLoad(['bullet','spin','bottle','note','card','spark','fire','tornado','sweat','ice','claw','slash','bite','pow','hit','muzzle','dust','boom','gears','smoke','poison','heal','ring','loop','band','slip','star'].map(n=>`ui/x_${n}.png`))}catch(e){}},6000);
@@ -2951,11 +2951,9 @@ function entranceFx(m,from,mine){const el=uEl(m);if(!el||!HUMAN)return Promise.r
   await sleep(250);
   B._spDone=null;
   {const el=uEl(m);if(el){speak(d.s,m.id,'v_'+m.id+'_s');sayBubble(el,d.s,!isMe(sd))}}
-  await sleep(isMe(sd)?650:450);
-  /* 10/29：見参が あるなら 見参を さきに。そのあとで ほかの マーク（みず など） */
-  if(d.bc){quietOn();try{await battlecry(sd,m,c)}finally{if(B)B._spDone=null}quietOff();if(B&&!B.over&&m.hp>0&&sd.board.includes(m)){await sleep(1500);await kwFx(m)}}
-  else{await kwFx(m);quietOn();try{await battlecry(sd,m,c)}finally{if(B)B._spDone=null}quietOff()}
-  await cleanup();if(HUMAN)renderBattle();return true}}
+  await sleep(isMe(sd)?650:450);await kwFx(m);
+  quietOn();try{await battlecry(sd,m,c)}finally{if(B)B._spDone=null}
+  quietOff();await cleanup();if(HUMAN)renderBattle();return true}}
 
 /* ---- 長い曲（mp3）で鳴らす：タイトル・マップ・オープニング。町は #bgm ---- */
 const MFILE={title:'audio/bgm_title.mp3',map:'audio/bgm_map.mp3',mapnight:'audio/bgm_map.mp3',story:'audio/western_story_short.mp3'};
@@ -5391,7 +5389,7 @@ NEWC({id:'new51',n:'なげなわばあちゃん ロープ婆',f:'sh',r:'R',c:4,a
 NEWC({id:'new52',n:'荒野の大ヘビ ガラゴン',f:'an',r:'L',c:6,a:5,h:6,em:'🐍',stage:'wild',s:'シャ〜…荒野は わしのもの…',lines:['シャ…ほどけて…しまった…','シャ〜…ていねいに たのむぞ','シャシャ〜！ ながくなった！','…からまった'],note:'見参！：敵1体をぐるぐる巻き！2ターン動けない。そのあいだ毎ターン2ダメージ',bc:'jail',poison:2}); // 単純化：牢屋＋戦った相手に毒×2
 NEWC({id:'new53',n:'ゾンビ犬ホネスキー',f:'zo',r:'N',c:2,a:2,h:1,em:'🐕',stage:'hill',s:'ワウ〜…ほね ほしい…',lines:['ワウ…ほね…おいてく…','ワウ？ ほね くれる？','ワウワウ！ほね いっぱい！','…ほね、うめちゃった'],note:'やられたら：ほね（0/1）をのこす。つぎのゾンビが ひろうとパワーアップ',dr:'summon',tok:'boneT',dv:1});
 NEWC({id:'new54',n:'ねむたいゾンビ',f:'zo',r:'N',c:1,a:0,h:3,em:'🧟',stage:'hill',s:'アー…ねむい…',lines:['アー…おやすみ…','アー…おこさないで…','アー！ 目が さめた！','アー…ぐぅ…'],note:'かばう：敵はまずこのキャラを攻撃しないといけない',kw:'taunt'});
-NEWC({id:'new55',n:'うたうゾンビ合唱団',f:'zo',r:'N',c:4,a:1,h:1,em:'🎤',stage:'hill',s:'アー♪ アー♪ アー♪',lines:['アー…♪（ソロに なった）','アー♪ ハモって いい？','アー♪♪♪ 大合唱！','…音が はずれた'],note:'見参！：ゾンビ（1/1）を2匹よぶ。3体そろうと大合唱！敵ぜんいん攻撃-1',bc:'summon',tok:'zombieT',v:2}); // 単純化：大合唱は省略
+NEWC({id:'new55',n:'うたうゾンビ合唱団',f:'zo',r:'N',c:4,a:1,h:1,em:'🎤',stage:'hill',s:'アー♪ アー♪ アー♪',lines:['アー…♪（ソロに なった）','アー♪ ハモって いい？','アー♪♪♪ 大合唱！','…音が はずれた'],note:'見参！：ゾンビ（1/1）を2匹よぶ。3体そろうと大合唱！敵ぜんいん1回休み',bc:'summon',tok:'zombieT',v:2}); // 単純化：大合唱は省略
 NEWC({id:'new56',n:'おはなおばけ ハナコ',f:'gh',r:'N',c:2,a:1,h:3,em:'🌸',stage:'hill',s:'おはな、いかが〜？',lines:['おはな…かれちゃった…','きれいに さかせてね','まんかい〜！','…つぼみのまま'],note:'いるあいだ：仲間がやられるたび、お花（0/1）がさく',dr:'summon',tok:'flowerT',dv:2}); // 単純化：自分がやられたら お花2つ
 NEWC({id:'new57',n:'ちょうちんおばけ ボンボリ',f:'gh',r:'N',c:2,a:2,h:2,em:'🏮',stage:'hill',s:'ぼんやり あかるいよ〜',lines:['ふっ…（あかりが きえた）','あかるく してね','ピカーッ！','…でんきぎれ'],note:'見参！：かくれんぼ中の敵を てらして見つける',bc:'shave'}); // 単純化：効果けし
 NEWC({id:'new58',n:'墓守りモグじい',f:'an',r:'N',c:3,a:2,h:4,em:'⛏️',stage:'hill',s:'ほっほ、なにか うまっとるぞ',lines:['穴に…かえるわい…','ほりだしもの、あるかの？','大当たりじゃ！','…石ころじゃった'],note:'手にいれる！：たおれた敵のカードから1枚えらんで手札へ',bc:'get',v:1}); // 単純化：同じしゅぞくを1まい
@@ -7263,7 +7261,7 @@ if(window.MutationObserver){const swap=im=>{const s=im.getAttribute('src');if(s&
 /* とびどうぐが 当たったときの 絵（ぞくせいごと） */
 const FX_HIT={shoot:'x_hit',fire:'fx/fire_hit',ice:'fx/ice_hit',wind:'fx/wind_hit',water:'fx/water_hit',magic:'fx/magic_hit',note:'fx/note_hit',bomb:'x_boom',throw:'x_splash',card:'x_hit'};
 {const _af=atkFx;atkFx=async function(m,el,tel,mine){const key=fxStyle(m.id),f=FXDEF[key]||FXDEF.tackle;await _af.apply(this,arguments);
-  try{if(!window.CFX&&HUMAN&&tel&&f.ranged&&FX_HIT[key]){const w=tel.getBoundingClientRect().width;fxAt(tel,FX_HIT[key],Math.max(70,w*1.1),'fxpop',600)}}catch(e){}}}
+  try{if(HUMAN&&tel&&f.ranged&&FX_HIT[key]){const w=tel.getBoundingClientRect().width;fxAt(tel,FX_HIT[key],Math.max(70,w*1.1),'fxpop',600)}}catch(e){}}}
 /* fxImg は fx/◯◯ の 名前も つかえるように */
 {const _fi=fxImg;fxImg=function(x,y,name,w,anim='fxpop',ms=600){if(!HUMAN)return;if(!String(name).startsWith('fx/'))return _fi.apply(this,arguments);
   const i=document.createElement('img');i.src=fxSrc(name);i.className='fximg '+anim;i.style.cssText=`left:${x}px;top:${y}px;width:${Math.round(w)}px`;document.body.appendChild(i);setTimeout(()=>i.remove(),ms)}}
@@ -8961,7 +8959,7 @@ X('new215',{dr:async sd=>{const t=pick(xFoes(sd));if(t)await damage(opp(sd),t,1,
 X('new224',{bc:async sd=>{for(let i=0;i<3;i++){const t=pick(xFoes(sd));if(!t)break;await damage(opp(sd),t,1,{quiet:true,fx:'shot'})}}});
 X('new115',{bc:async(sd,m)=>{const all=[...xFoes(sd),...xMine(sd,m)];const t=pick(all);if(t){await damage(sd.board.includes(t)?sd:opp(sd),t,2,{quiet:true});if(HUMAN)say(sd.board.includes(t)?'あばれて なかまに ぶつかった！':'あばれて あいてに ぶつかった！')}}});
 X('new226',{bc:async sd=>{let n=0;while(roomOf(sd)>0&&n<5){const k=summon(sd,'straycatT',1);if(!k)break;k.fuel=2;k.walk=1;n++}if(HUMAN&&n)say(`ノラネコが ${n}匹 あつまった！（つぎの ターン さんぽへ）`)}});
-X('new55',{bc:async sd=>{let n=0;while(roomOf(sd)>0&&n<2){if(!summon(sd,'zombieT',1))break;n++}const z=sd.board.filter(b=>b.hp>0&&(b.f==='zo'||C[b.id].f==='zo'));if(z.length>=3){const fs=xFoes(sd);if(HUMAN&&window.CFX&&CFX.chorus){try{await CFX.chorus(z.map(uEl).filter(Boolean),fs.map(uEl).filter(Boolean))}catch(e){}}fs.forEach(t=>{t.atk=Math.max(0,t.atk-1);xFl(t,'攻撃-1','info')});if(HUMAN)say('🎶 大合唱！ あいて ぜんいん 攻撃-1')}}});
+X('new55',{bc:async sd=>{let n=0;while(roomOf(sd)>0&&n<2){if(!summon(sd,'zombieT',1))break;n++}const z=sd.board.filter(b=>b.hp>0&&(b.f==='zo'||C[b.id].f==='zo'));if(z.length>=3){xFoes(sd).forEach(t=>{if(!t.kw.has('nostun')){t.frozen=1;xFl(t,'♪','info')}});if(HUMAN)say('🎶 大合唱！ あいて ぜんいん 1回休み！')}}});
 X('new86',{bc:async sd=>{if(Math.random()<.5){drawCard(sd,1);if(HUMAN)say('ちゃんと とどいた！ 1まい ひく')}else{drawCard(opp(sd),1);if(HUMAN)say('あっ… まちがえて あいてに とどいた！')}}});
 X('new156',{bc:async sd=>{const o=opp(sd);const t=strongest(xFoes(sd));if(!t)return;const i=o.board.indexOf(t);const f=mkMinion(o,'frogT',1);f.sleep=true;f.attacks=0;o.board[i]=f;if(HUMAN)say(`${C[t.id].n}は カエルに なった！ ケロッ`)}});
 X('new147',{bc:async(sd,m)=>{const base=xMine(sd,m).find(xIsRobot);if(!base){drawCard(sd,1);return}const c=base.card||{id:base.id,lv:base.lv};
@@ -9127,7 +9125,7 @@ const XT={
  new170:[['aura','なかまは こおらない']],
  new224:[['bc','ダダダ！ ランダムな あいてに 1ダメージを 3回']],
  new226:[['bc','ノラネコ（1/1）を あいている 場所に よぶ。つぎの ターン みんな さんぽへ（いなくなる）']],
- new55:[['bc','ゾンビ（1/1）を あいている 場所に 2匹 よぶ。ゾンビが 3体 そろうと 大合唱！ あいて ぜんいん 攻撃-1']],
+ new55:[['bc','ゾンビ（1/1）を あいている 場所に 2匹 よぶ。ゾンビが 3体 そろうと 大合唱！ あいて ぜんいん 1回休み']],
  new58:[['bc','手にいれる！ たおれた あいての カードから 1まい えらんで 手札へ']],
  new72:[['aura','あいてが たおれるたび コイン+1']],
  new86:[['bc','なかまを 1人 ひく… でも 半分の かくりつで あいてが ひく']],
@@ -9189,14 +9187,14 @@ const ONPLAY=new Set(['牢屋','ちりょう','手配書','効果けし','ダイ
 {const _ct=cardText;cardText=function(id,lv){const t=XT[id];if(!t)return _ct.apply(this,arguments);return t.map(([k,a,b])=>(k==='bc'?'見参！：':k==='dr'?'やられたら：':k==='aura'?'いるあいだ：':a+'：')+(k==='kw'?b:a)).join('。')}}
 function strongestOf(list){return (list||[]).slice().sort((a,b)=>b.atk-a.atk||b.hp-a.hp)[0]}
 (()=>{const st=document.createElement('style');st.textContent=`
-.u.jailed{filter:none!important}.u.jailed .art{filter:grayscale(.8) brightness(.5)!important}
-.u.jailed::after{content:"";position:absolute;inset:-12% -10%;border-radius:0;z-index:4;pointer-events:none;background:url(fx/new/jail_bars.webp) center/contain no-repeat;filter:drop-shadow(0 2px 3px rgba(0,0,0,.6))}
+.u.jailed{filter:grayscale(.8) brightness(.55)!important}
+.u.jailed::after{content:"";position:absolute;inset:-2px;border-radius:inherit;z-index:7;pointer-events:none;background:repeating-linear-gradient(90deg,rgba(40,30,20,.0) 0 9px,#3a2a1a 9px 13px,#8a6a3a 13px 14px,rgba(40,30,20,0) 14px 22px);box-shadow:inset 0 0 12px rgba(0,0,0,.8)}
 .u.jailed.dig::after,.u.jailed.sink::after{background:radial-gradient(ellipse at 50% 80%,rgba(140,100,50,.9),rgba(80,60,30,.6) 60%,transparent 75%)}
 .u .jcnt{position:absolute;left:50%;top:-10px;transform:translateX(-50%);z-index:9;font:900 11px var(--body);color:#fff;background:#3a2a1a;border:2px solid #c9a46a;border-radius:99px;padding:0 7px;white-space:nowrap}
 .u.pinked{box-shadow:0 0 0 3px #ff7ac0!important}`;document.head.appendChild(st)})();
 {const _rb=renderBattle;renderBattle=function(){const r=_rb.apply(this,arguments);try{if(B&&HUMAN)for(const s of [B.me,B.foe])for(const m of s.board){const e=uEl(m);if(!e)continue;
   e.classList.toggle('jailed',m.jailed>0);e.classList.toggle('dig',m.jailKind==='dig');e.classList.toggle('sink',m.jailKind==='sink');e.classList.toggle('pinked',!!m.pink);
-  let j=e.querySelector('.jcnt');if(m.jailed>0){if(!j){j=document.createElement('i');j.className='jcnt';e.appendChild(j)}j.innerHTML=(m.jailKind==='jail'?'<img src="fx/new/lock_closed.webp" alt="" style="height:1.25em;vertical-align:-.3em"> あと ':'あと ')+m.jailed}else if(j)j.remove()}}catch(e){}return r}}
+  let j=e.querySelector('.jcnt');if(m.jailed>0){if(!j){j=document.createElement('i');j.className='jcnt';e.appendChild(j)}j.textContent=(m.jailKind==='jail'?'🔒 あと':'あと ')+m.jailed}else if(j)j.remove()}}catch(e){}return r}}
 /* 牢屋（見参）：いちばん強い あいてを 休眠に */
 {const _bc2=battlecry;battlecry=async function(sd,m,c){const d=C[c.id];if(!d||d.bc!=='jail')return _bc2.apply(this,arguments);
   if(HUMAN&&typeof bcFx==='function')await bcFx(m);const t=strongest(xFoes(sd));const n=c.id==='new93'?3:2;
