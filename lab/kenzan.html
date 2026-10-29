@@ -69,7 +69,7 @@ function draw(t){const c=cx2;c.setTransform(DPR,0,0,DPR,0,0);c.clearRect(0,0,W,H
   /* すなけむり */for(let i=0;i<16;i++){const s=780,k=(t-s)/900;if(k<0||k>1)continue;const a=Math.PI+rnd(i)*Math.PI,x=cx+(rnd(i+3)-.5)*80+Math.cos(a)*90*E3(k),y=cy+70+Math.sin(a)*25*E3(k);c.fillStyle=`rgba(201,162,122,${.5*(1-k)})`;c.beginPath();c.arc(x,y,14+26*k,0,Math.PI*2);c.fill()}
   /* カード */const ks=seg(t,250,670),sq=seg(t,670,780);let y=H+120+(cy-(H+120))*E3(ks),rot=-.35*(1-E3(ks)),sc=.6+.75*E3(ks);if(t>=670)sc=1.35-.35*EIO(sq);if(t>1160)y=cy+Math.sin(t/380)*3;
   if(t>250){const CW=118,CH=150;c.save();c.translate(cx,y);c.rotate(rot);c.scale(sc,sc);
-    const g=E3(seg(t,780,1180));if(g>0){c.shadowColor=`rgba(255,211,74,${g})`;c.shadowBlur=36}c.fillStyle='#8a5a1c';rr(c,-CW/2,-CH/2,CW,CH,14);c.fill();c.shadowBlur=0;
+    const g=E3(seg(t,780,1180));if(g>0){c.shadowColor=`rgba(255,211,74,${g*(.35+.65*out)})`;c.shadowBlur=36}c.fillStyle='#8a5a1c';rr(c,-CW/2,-CH/2,CW,CH,14);c.fill();c.shadowBlur=0;
     c.fillStyle='#ffd76a';rr(c,-CW/2+4,-CH/2+4,CW-8,CH-8,11);c.fill();
     c.save();rr(c,-CW/2+8,-CH/2+8,CW-16,CW-16,9);c.clip();if(IM.art.complete)c.drawImage(IM.art,-CW/2+8,-CH/2+8,CW-16,CW-16);c.restore();
     c.fillStyle='#3a2412';c.font='800 13px "M PLUS Rounded 1c"';c.textAlign='center';c.textBaseline='middle';c.fillText('見はり番ドッグ',0,CH/2-20);
@@ -83,12 +83,12 @@ function draw(t){const c=cx2;c.setTransform(DPR,0,0,DPR,0,0);c.clearRect(0,0,W,H
   c.globalCompositeOperation='source-over';
   /* 白い フラッシュ */const fl=1-seg(t,780,1040);if(t>=780&&fl>0){c.fillStyle=`rgba(255,255,255,${fl})`;c.fillRect(-20,-20,W+40,H+40)}
   /* 見参！ */const tk=seg(t,900,1160);if(tk>0){const s2=3-2*EB(tk);c.save();c.globalAlpha=Math.min(1,tk*2)*out;c.translate(cx,cy-130);c.scale(s2,s2);c.font='58px "Dela Gothic One"';c.textAlign='center';c.textBaseline='middle';
-    c.lineJoin='round';c.lineWidth=12;c.strokeStyle='#3e1a06';c.shadowColor='rgba(0,0,0,.6)';c.shadowOffsetY=5;c.shadowBlur=4;c.strokeText('見参！',0,0);c.shadowColor='transparent';
+    c.lineJoin='round';c.lineWidth=12;c.strokeStyle='#3e1a06';c.shadowColor=`rgba(0,0,0,${.6*Math.min(1,tk*2)*out})`;c.shadowOffsetY=5;c.shadowBlur=4;c.strokeText('見参！',0,0);c.shadowColor='transparent';
     const gr=c.createLinearGradient(0,-30,0,30);gr.addColorStop(0,'#fffbe0');gr.addColorStop(.3,'#ffe066');gr.addColorStop(.62,'#ffb31a');gr.addColorStop(1,'#ff7a00');c.fillStyle=gr;c.fillText('見参！',0,0);c.restore()}
   const sb=seg(t,1160,1460);if(sb>0){c.save();c.globalAlpha=sb*out;c.font='800 16px "M PLUS Rounded 1c"';c.textAlign='center';c.textBaseline='middle';c.lineJoin='round';c.lineWidth=6;c.strokeStyle='#3e1a06';const yy=cy-72-10*sb;c.strokeText('あいての 手札を ぜんぶ 見る！',cx,yy);c.fillStyle='#fff';c.fillText('あいての 手札を ぜんぶ 見る！',cx,yy);c.restore()}
-  /* セリフ */const bk=seg(t,1160,1460);if(bk>0&&t<3400){const s3=EB(bk);c.save();c.translate(cx,cy+118);c.scale(s3,s3);c.font='800 14px "M PLUS Rounded 1c"';const w=c.measureText(LINE).width;c.fillStyle='#fff';rr(c,-w/2-12,-16,w+24,32,16);c.fill();c.beginPath();c.moveTo(-8,-15);c.lineTo(8,-15);c.lineTo(0,-27);c.fill();c.fillStyle='#3a2412';c.textAlign='center';c.textBaseline='middle';c.fillText(LINE,0,1);c.restore()}
+  /* セリフ */const bk=seg(t,1160,1460);if(bk>0&&out>0){const s3=EB(bk);c.save();c.globalAlpha=out;c.translate(cx,cy+118);c.scale(s3,s3);c.font='800 14px "M PLUS Rounded 1c"';const w=c.measureText(LINE).width;c.fillStyle='#fff';rr(c,-w/2-12,-16,w+24,32,16);c.fill();c.beginPath();c.moveTo(-8,-15);c.lineTo(8,-15);c.lineTo(0,-27);c.fill();c.fillStyle='#3a2412';c.textAlign='center';c.textBaseline='middle';c.fillText(LINE,0,1);c.restore()}
 }
-function playNew(){const my=++run;dom.innerHTML='';fit();cv.style.display='';const t0=performance.now();const loop=()=>{if(my!==run)return;const t=performance.now()-t0;draw(t);if(t<3600)requestAnimationFrame(loop)};requestAnimationFrame(loop)}
+function playNew(){const my=++run;dom.innerHTML='';fit();cv.style.display='';const t0=performance.now();const loop=()=>{if(my!==run)return;const t=performance.now()-t0;draw(Math.min(t,3600));if(t<3600)requestAnimationFrame(loop);else draw(3600)};requestAnimationFrame(loop)}
 window.__draw=t=>{fit();draw(t)};
 function play(){if(mode==='new')playNew();else playOld()}
 document.getElementById('tOld').onclick=()=>{mode='old';tOld.classList.add('on');tNew.classList.remove('on');play()};
