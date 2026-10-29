@@ -10,7 +10,8 @@ const cl=(x,a=0,b=1)=>Math.max(a,Math.min(b,x)),seg=(t,a,d)=>cl((t-a)/d);
 let cv,c,W,H,DPR,run=0,T0=0,fx=[],shakeP=0,shakeEnd=0,flashA=[],units=[],heroes={},dim=0,dimT=null,BW=null,bd=null,maxEnd=0,shX=0,shY=0;
 const ext=e=>{if(e>maxEnd)maxEnd=e};
 /* 読ませる 文字は 3びょう いじょう（長いと もっと） */
-const readMs=(s,min)=>Math.max(min,s&&/[ぁ-んァ-ン一-龥]/.test(s)?Math.max(3000,900+s.length*230):min);
+/* 文字の 長さに あわせる：みじかい ひとこと（見参の セリフくらい）は 2びょう台、文は 3びょう いじょう */
+const readMs=(s,min)=>{if(!s||!/[ぁ-んァ-ン一-龥]/.test(s))return min;const n=s.replace(/\s/g,'').length;return Math.max(min,n<=22?1300+n*70:Math.max(3000,900+n*170))};
 function fit(){DPR=Math.min(2,devicePixelRatio||1);W=cv.clientWidth;H=cv.clientHeight;cv.width=W*DPR;cv.height=H*DPR}
 function init(canvas,frameEl){cv=canvas;c=cv.getContext('2d');if(frameEl)BW=frameEl.contentWindow;fit();if(!init.on){init.on=1;addEventListener('resize',fit)}}
 /* ---- 場面 ---- */

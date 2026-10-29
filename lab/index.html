@@ -76,9 +76,9 @@ function freezeOn(u,t){F.at(t,()=>{const el=u.el,d=el.ownerDocument;el.classList
   const p=pos(u);F.floatTxt('カチコチ！',p.x,p.y-u.rh/2-10,{t,col:'#bff4ff',size:20})})}
 const LIST=[
  {cat:'きほん',items:[
-  {k:'kenzan',n:'見参！',d:'カードを 出した しゅんかん',stage:{foes:S1.foes,mine:[{art:'dog'},{art:'eagle',atk:6,hp:7}]},total:3400,build(){const u=U(3);F.darken({t:150,d:4700});const t=enter(u);
-   F.at(t,()=>F.rays(pos(u).x,pos(u).y,{t,d:4200}));F.at(t,()=>{const p=pos(u);F.burst(p.x,p.y,{t,n:24,im:['x_spark','x_star'],sp:7,sz:.25});F.flash({t,d:240,a:.85})});
-   F.slam('見参！',F.dims().W/2,MID()-6,{t:t+120,d:2200,sub:'空から 見まもっておる！'});F.keyf(u,{t,d:4000,fn:(u,k)=>{u.glow=Math.sin(k*Math.PI)}})}},
+  {k:'kenzan',n:'見参！',d:'カードを 出した しゅんかん',stage:{foes:S1.foes,mine:[{art:'dog'},{art:'eagle',atk:6,hp:7}]},total:2700,build(){const u=U(3);F.darken({t:150,d:2700});const t=enter(u);
+   F.at(t,()=>F.rays(pos(u).x,pos(u).y,{t,d:2100}));F.at(t,()=>{const p=pos(u);F.burst(p.x,p.y,{t,n:24,im:['x_spark','x_star'],sp:7,sz:.25});F.flash({t,d:240,a:.85})});
+   F.slam('見参！',F.dims().W/2,MID()-6,{t:t+120,d:2200,sub:'空から 見まもっておる！'});F.keyf(u,{t,d:2000,fn:(u,k)=>{u.glow=Math.sin(k*Math.PI)}})}},
   {k:'yarare',n:'やられたら',d:'たおれた ときに 出る 効果',stage:{foes:S1.foes,mine:[{art:'new03',atk:4,hp:1},{art:'juko'}]},total:4600,build(){const u=U(2);ko(u,300);const p0=pos(u);
    F.at(1150,()=>{F.icon('u_k_dr',p0.x,p0.y,{t:1150,d:1300,sz:70,bob:4});F.ring(p0.x,p0.y,{t:1150,col:'170,120,255',r1:90})});
    F.slam('やられたら',F.dims().W/2,MID()-6,{t:1350,d:1500,size:42,grad:['#f0e0ff','#c99aff','#8a5ad0','#5a2aa0'],stroke:'#1e0a3a',sub:'のろいの 手紙が とんでいく…'});
