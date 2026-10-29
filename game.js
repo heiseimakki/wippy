@@ -2079,7 +2079,7 @@ function renderBattle(){
       sheetCard(m.id,m.lv,`<p>${m.sleep?'💤 よんだばかりなので、つぎの ターンから うごける':m.frozen||m.wasFrozen?'💫 休み中':m.kw.has('noattack')?'このキャラは攻撃できない':m.attacks<=0?'このターンはもう攻撃した':''}</p>`)};$('af').appendChild(el)});
   
   me.hand.forEach((c,i)=>{const d=C[c.id];const ok=myTurn&&d.c<=me.coin&&me.board.length<bmax(me);
-    const el=cardEl(c.id,c.lv,{cls:(me.unko?'poo ':'')+(ok?'can':myTurn&&d.c>me.coin?'poor':''),plus:c.plus||0});if(me.moji)el.querySelector('.nm').textContent=mojify(d.n);
+    const el=cardEl(c.id,c.lv,{cls:(me.unko?'poo ':'')+(ok?'can':B.side===me&&!B.over&&d.c>me.coin?'poor':''),plus:c.plus||0});if(me.moji)el.querySelector('.nm').textContent=mojify(d.n);
     el.insertAdjacentHTML('beforeend',coinStack(d.c,me.unko));
     el.onclick=()=>{if(B.busy)return;clearCoach();
       sheetCard(c.id,c.lv,'',`<button class="pop green" id="pl" ${ok?'':'disabled'}>よぶ！ ${coinIco}${me.unko?'💩':d.c}</button>`,c.plus||0);
