@@ -9373,7 +9373,7 @@ const S={
 /* ===== 演出 ===== */
 const AMB=null,BOT=null;
 /* 当たった（キャラが 赤く ぶるっ） */
-function ono(u,str,t=0,o={}){at(t,()=>{const p=pos(u);const sd=p.x<W/2?1:-1;floatTxt(str,p.x+sd*u.rw*1.2,p.y-u.rh*.12+(o.dy||0),{t,size:o.size||16,col:o.col||'#fff',rise:12,rot:sd*-.22})})}
+function ono(u,str,t=0,o={}){at(t,()=>{const p=pos(u);const sd=p.x<W/2?1:-1;floatTxt(str,p.x+sd*u.rw*.78,p.y-u.rh*.7+(o.dy||0),{t,size:o.size||16,col:o.col||'#fff',rise:12,rot:sd*-.22})})}
 function hitU(u,t=0,im='x_hit',strong=1){if(!u)return;at(t,()=>{const p=pos(u);if(im)burst(p.x,p.y,{t,n:6+2*strong,im,sp:4,g:.1,life:450,sz:.22});keyf(u,{t,d:300,fn:(v,k)=>{v.ox=k>=1?0:(Math.random()-.5)*10*(1-k)*strong;v.tint=k>=1?null:`rgba(255,40,40,${.45*(1-k)})`}})})}
 function lunge(a,tg,t,o={}){const {d=180,back=380,frac=.85,windup=0}=o;const pa=pos(a),pt=pos(tg);const w0=windup?18:0;const sgn=pt.y<pa.y?1:-1;
   if(windup)keyf(a,{t,d:windup,fn:(u,k)=>{u.oy=w0*sgn*E.o(k);u.sc=1+.12*E.o(k)}});
@@ -9410,7 +9410,7 @@ async function attack(m,el,tel,mine){if(!ensure()||!el||!tel)return;begin();cons
   const tx=TXT[k];at(h,()=>{const p=pos(t);if(k==='bottle')burst(p.x,p.y,{t:h,n:10,im:['fx:new/amber_drops','fx:new/amber_splash'],sp:4.5,g:.2,life:480,sz:.22,add_:false,filter:null});if(k==='bomb'){flash({t:h,d:200,col:'255,200,120',a:.6});icon('fx:07_06',p.x,p.y,{t:h,d:520,sz:150});shake({t:h,p:13})}
     if(k==='fireball'){tint({t:h-60,d:500,a:.12,inD:60,outD:380});burst(p.x,p.y,{t:h,n:6,im:'x_fire',sp:3,g:-.1,up:3,life:650,sz:.22})}if(k==='ice')burst(p.x,p.y,{t:h,n:8,im:'fx:04_17',sp:4,g:.2,life:500,sz:.1,add_:false});if(k==='water')burst(p.x,p.y,{t:h,n:8,im:'fx:06_18',sp:4,g:.2,life:480,sz:.2,add_:false});
     if(k==='magic')burst(p.x,p.y,{t:h,n:8,im:'fx:02_05',sp:4,life:650,sz:.16});if(k==='leaf')burst(p.x,p.y,{t:h,n:8,im:'fx:new/leaf_brown',sp:3,g:.06,life:800,sz:.12,add_:false});if(k==='ink')keyf(t,{t:h,d:900,fn:(u,q)=>{u.tint=q>=1?null:`rgba(20,10,30,${.55*(1-q)})`}});
-    if(tx){const sd=p.x<W/2?1:-1;floatTxt(tx,p.x+sd*t.rw*1.2,p.y-t.rh*.12,{t:h,size:16,rise:12,rot:sd*-.22,col:k==='zombie'?'#9dff7a':k==='ice'?'#d0f4ff':'#fff',stroke:k==='zombie'?'#1f4a12':'#3e1a06'})}});
+    if(tx){const sd=p.x<W/2?1:-1;floatTxt(tx,p.x+sd*t.rw*.78,p.y-t.rh*.7,{t:h,size:16,rise:12,rot:sd*-.22,col:k==='zombie'?'#9dff7a':k==='ice'?'#d0f4ff':'#fff',stroke:k==='zombie'?'#1f4a12':'#3e1a06'})}});
   await wait(h)}
 /* 当たった（ゲームの impact の かわり） */
 function hit(el,kind=''){if(!ensure()||!el)return;begin();const u=wrap(el);if(kind==='heal'){healU(u);return}if(kind==='poison'){poisonU(u,0);return}hitU(u,0,kind==='magic'?'x_spark':kind==='fire'?'x_fire':'x_hit')}
@@ -9471,7 +9471,7 @@ function drFx(m){if(!ensure())return;const r=m&&m._lastRect;if(!r)return;begin()
   slam('やられたら',W/2,Math.max(80,Math.min(H-140,y-r.height*.9)),{t:40,d:1400,size:38,grad:['#f0e0ff','#c99aff','#8a5ad0','#5a2aa0'],stroke:'#1e0a3a',sub})}
 function burn(el){if(!ensure()||!el)return;begin();const u=wrap(el),p=pos(u);keyf(u,{t:0,d:350,fn:(v,k)=>{v.tint=`rgba(255,60,20,${.35*k})`;v.glow=.8*k;v.glowC='255,80,30'}});at(400,()=>{burst(p.x,p.y,{t:400,im:'x_fire',angles:[-Math.PI/2-1.05,-Math.PI/2,-Math.PI/2+1.05],sp:3.2,g:.05,up:.6,life:650,sz:.26,shrink:true});noise(.3,{vol:.15,freq:900})});keyf(u,{t:725,d:500,fn:(v,k)=>{v.tint=k>=1?null:`rgba(255,60,20,${.35*(1-k)})`;v.glow=k>=1?0:.8*(1-k)}})}
 function thorn(el){if(!ensure()||!el)return;begin();const u=wrap(el),p=pos(u);burst(p.x,p.y-u.rh*.2,{t:0,n:7,im:'fx:new/needle_up',sp:5,g:.06,dir:-Math.PI/2,spread:2.2,life:480,sz:.2,orient:true,add_:false});
-  keyf(u,{t:0,d:1300,fn:(v,k)=>{v.tint=k>=1?null:`rgba(255,40,40,${.45*(k<.55?1:1-(k-.55)/.45)})`;v.ox=k>=1?0:(k<.5?Math.sin(k*140)*3.5*(1-k*2):0)}})}
+  at(420,()=>{icon('x_claw',p.x,p.y,{t:420,d:420,sz:72});S.safe(()=>{SFX.swish?SFX.swish():noise(.12,{vol:.2,freq:3000,type:'highpass'})})});keyf(u,{t:420,d:1300,fn:(v,k)=>{v.tint=k>=1?null:`rgba(255,40,40,${.45*(k<.55?1:1-(k-.55)/.45)})`;v.ox=k>=1?0:(k<.5?Math.sin(k*140)*3.5*(1-k*2):0)}})}
 function auraPulse(el,targets){if(!ensure()||!el)return;begin();const u=wrap(el),p=pos(u);ring(p.x,p.y,{t:0,col:'255,215,90',r1:W*.4,w:8,d:850});ring(p.x,p.y,{t:160,col:'255,255,255',r1:W*.3,w:4,d:750});
   keyf(u,{t:0,d:850,fn:(v,k)=>{v.glow=k>=1?0:Math.sin(k*Math.PI);v.glowC='255,215,90'}});
   (targets||[]).forEach((te,j)=>{if(!te)return;const v=wrap(te),q=pos(v);shot(p,q,{t:100+j*70,d:300,im:'x_star',sz:18,scale:1.4,trail:'255,215,90'});at(420+j*70,()=>{burst(q.x,q.y,{t:420+j*70,n:5,im:'x_star',sp:3,g:-.05,life:800,sz:.15});keyf(v,{t:420+j*70,d:600,fn:(w,k)=>{w.glow=k>=1?0:Math.sin(k*Math.PI);w.sc=k>=1?1:1+.1*Math.sin(k*Math.PI)}})})});S.buff()}
@@ -9521,7 +9521,7 @@ if(typeof battlecry==='function'){const _bcC=battlecry;battlecry=async function(
     if(s.startsWith('🧊')){CFX.freezeU(el);return}
     if(s==='バリア！'){CFX.shieldBreak(el);return}
     if(s.startsWith('👼')){return}
-    if(/^トゲ/.test(s))CFX.thorn(el);
+    if(/^トゲ/.test(s)){CFX.thorn(el);const sp=(typeof SPEED==='number'&&SPEED>0)?SPEED:1;setTimeout(()=>_fa.call(this,el,s.replace(/^トゲ\s*/,''),cls),420*sp);return}
     if(/^やけど/.test(s))CFX.burn(el);
     if(/^☠/.test(s)){CFX.poison(el);return _fa.call(this,el,s.replace(/^☠\s*/,'毒'),cls)}
     if(s.startsWith('🔥 '))return _fa.call(this,el,s.slice(2),cls);
