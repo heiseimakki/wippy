@@ -8799,8 +8799,35 @@ C.eagle.bc='skywatch';try{FLAV2.eagle='空から 見まもっておる！';FLAV.
 
 /* 10/29：かくせいの すがたを ちゃんと 見せる（名無しのガンマンは 99/99） */
 const AW_STAT={nanashi:[99,99]};
-try{AWN_COOL.nanashi='見参！：99/99の すがたに なる。かわりに 山札・手札・ほかの なかまを ぜんぶ すてる。いるあいだ：ターンの終わりに「ねらいうち・みだれうち・リロード・にらみ」から 1つを つかう。';if(AWN.nanashi)AWN.nanashi[1]=AWN_COOL.nanashi}catch(e){}
+/* 説明は 99/99 と 書かず、わくわくする 書きかたの まま（f42） */
 {const _ce=cardEl;cardEl=function(id,lv,o){const el=_ce.apply(this,arguments);try{if(o&&o.plus>0&&AW_STAT[id]){const a=el.querySelector('.stat.a'),h=el.querySelector('.stat.h');if(a)a.textContent=AW_STAT[id][0];if(h)h.textContent=AW_STAT[id][1]}}catch(e){}return el}}
+
+
+/* 10/29：ランプの魔人ジニー：6コイン 3/3。見参！で「ねがいごと」を 3つの中から 1つ えらぶ（10この中から 毎回ランダムに 3つ） */
+(()=>{const g=C.new22;if(!g)return;g.c=6;g.a=3;g.h=3;g.bc='wish';g.v=0;g.note='見参！：ねがいを かなえる！ 3つの ねがいから 1つ えらぼう（毎回 ちがう ねがいが 出るよ）';try{if(typeof FLAV!=='undefined')FLAV.new22={'見参！':'ねがいを かなえる！ 3つの ねがいから 1つ えらぼう（毎回 ちがう ねがいが 出るよ）'}}catch(e){}})();
+const WISH=[
+ {k:'draw',t:'カードを 2まい ひく',ok:()=>true,run:(sd)=>drawCard(sd,2)},
+ {k:'steal',t:'あいての 子分を 1人 なかまにする',ok:sd=>foesOf(sd).length&&roomOf(sd)>0,run:sd=>{const o=opp(sd);const t=pick(foesOf(sd));o.board=o.board.filter(x=>x!==t);t.sleep=true;t.attacks=0;sd.board.push(t);if(HUMAN){const e=uEl(t);e&&floatAt(e,'なかまに なった！','info')}}},
+ {k:'aoe',t:'あいての 子分 ぜんいんに 2ダメージ',ok:sd=>foesOf(sd).length,run:async sd=>{const o=opp(sd);if(HUMAN){shakeApp&&shakeApp();SFX.crit&&SFX.crit()}for(const e of foesOf(sd))await damage(o,e,2,{fx:'magic',quiet:true})}},
+ {k:'weak',t:'あいての 子分 ぜんいんの こうげきを 1に する',ok:sd=>foesOf(sd).some(x=>x.atk>1),run:sd=>foesOf(sd).forEach(x=>{x.atk=1;x.baseAtk=1;if(HUMAN){const e=uEl(x);e&&floatAt(e,'こうげき 1','dmg')}})},
+ {k:'heal',t:'なかま ぜんいんの 体力を 5 回復',ok:sd=>sd.board.some(x=>x.hp>0&&x.hp<x.max),run:sd=>sd.board.forEach(x=>{if(x.hp>0){const n=Math.min(5,x.max-x.hp);x.hp+=n;if(HUMAN&&n){const e=uEl(x);e&&floatAt(e,'+'+n,'heal')}}})},
+ {k:'big',t:'ジニーが +5/+5',ok:()=>true,run:(sd,m)=>{m.atk+=5;m.hp+=5;m.max+=5;m.baseAtk=(m.baseAtk||0)+5;if(HUMAN){const e=uEl(m);e&&floatAt(e,'+5/+5','heal')}}},
+ {k:'tri',t:'ジニーが 必殺・バリア・かくれんぼを もつ',ok:()=>true,run:(sd,m)=>{['deadly','shield','stealth'].forEach(k=>m.kw.add(k))}},
+ {k:'wall',t:'ジニーの 体力 +10、かばうを もつ',ok:()=>true,run:(sd,m)=>{m.hp+=10;m.max+=10;m.kw.add('taunt');if(HUMAN){const e=uEl(m);e&&floatAt(e,'+10','heal')}}},
+ {k:'back',t:'やられた なかまを 1人 よびもどす',ok:sd=>roomOf(sd)>0&&(sd.grave||[]).some(c=>c&&C[c.id]&&!C[c.id].spell),run:sd=>{const L=sd.grave.filter(c=>c&&C[c.id]&&!C[c.id].spell);const c=pick(L);sd.grave.splice(sd.grave.indexOf(c),1);const m=summon(sd,c.id,c.lv||1,0,c);if(m&&HUMAN){const e=uEl(m);e&&floatAt(e,'もどってきた！','info')}}},
+ {k:'coin',t:'コインを 3まい もらう',ok:()=>true,run:sd=>{sd.coin+=3}},
+];
+function wishAsk(opts){return new Promise(res=>{const m=modal(`<div class="wish"><div class="wsh">ランプの魔人 ジニー</div><h2>ねがいを 1つ えらんでね！</h2>${opts.map((o,i)=>`<button class="btn wbtn" data-i="${i}">${o.t}</button>`).join('')}</div>`);
+  m.querySelectorAll('.wbtn').forEach(b=>b.onclick=()=>{SFX.tap&&SFX.tap();closeModal();res(opts[+b.dataset.i])})})}
+{const _bc=battlecry;battlecry=async function(sd,m,c){const d=C[c.id];if(!d||d.bc!=='wish')return _bc.apply(this,arguments);
+  if(HUMAN&&typeof bcFx==='function')await bcFx(m);const ok=WISH.filter(w=>{try{return w.ok(sd,m)}catch(e){return false}});const opts=shuffle(ok.slice()).slice(0,3);if(!opts.length)return;
+  const me=isMe(sd);const w=me&&HUMAN?await wishAsk(opts):pick(opts);
+  if(HUMAN)say(me?`ジニー「ねがいを かなえよう！」 → ${w.t}`:`あいての ジニーが ねがった： ${w.t}`);
+  try{await w.run(sd,m)}catch(e){}if(typeof cleanup==='function')await cleanup();if(HUMAN)try{renderBattle()}catch(e){}}}
+{const _bt=bcText;bcText=function(d,lv){if(d&&d.bc==='wish')return 'ねがいを かなえる！ 3つの ねがいから 1つ えらぼう（毎回 ちがう ねがいが 出るよ）';return _bt.apply(this,arguments)}}
+(()=>{const st=document.createElement('style');st.textContent=`.wish{text-align:center}.wish .wsh{font-weight:900;color:#c99aff;font-size:13px;letter-spacing:.1em}.wish h2{margin:4px 0 10px}
+.wbtn{display:block;width:100%;margin:8px 0;padding:14px 10px;font-size:15px;font-weight:900;color:#3a1060;background:linear-gradient(#f4e6ff,#d6b4ff);border:3px solid #fff;border-radius:16px;box-shadow:0 4px 0 #8a5ac0,0 0 14px rgba(200,150,255,.7);animation:wbIn .4s cubic-bezier(.2,1.6,.5,1) both}
+.wbtn:nth-of-type(2){animation-delay:.1s}.wbtn:nth-of-type(3){animation-delay:.2s}@keyframes wbIn{from{transform:scale(.5);opacity:0}to{transform:none;opacity:1}}`;document.head.appendChild(st)})();
 
 
 /* =====================================================================
