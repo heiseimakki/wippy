@@ -44,6 +44,8 @@ function smoke(x,y,o={}){const {t=0,n=12,col='201,170,130',life=900,spread=90,r=
   add({draw(tt){const e=tt-t;if(e<0)return;for(const p of P_){if(e>p.l)continue;const k=e/p.l;c.fillStyle=`rgba(${col},${.55*(1-k)})`;c.beginPath();c.arc(x+Math.cos(p.a)*p.v*E.o(k),y+Math.sin(p.a)*p.v*.3*E.o(k),r+r*1.6*k,0,7);c.fill()}}})}
 function flash(o={}){const {t=0,d=260,col='255,255,255',a=1}=o;add({top:1,draw(tt){const k=seg(tt,t,d);if(k<=0||k>=1)return;c.fillStyle=`rgba(${col},${a*(1-k)})`;c.fillRect(-30,-30,W+60,H+60)}})}
 function darken(o={}){const {t=0,d=2400,a=.5,inD=300,outD=400}=o;ext(t+d);add({under:1,draw(tt){const e=tt-t;if(e<0||e>d)return;dim=Math.max(dim,a*Math.min(1,e/inD,(d-e)/outD))}})}
+/* 画面ぜんたいを うすく 色づけて もどす（炎なら 赤、水なら 青） */
+function tint(o={}){const {t=0,d=1400,col='255,60,30',a=.22,inD=250,outD=600}=o;ext(t+d);add({draw(tt){const e=tt-t;if(e<0||e>d)return;c.fillStyle=`rgba(${col},${a*Math.min(1,e/inD,(d-e)/outD)})`;c.fillRect(-30,-30,W+60,H+60)}})}
 function shake(o={}){const {t=0,d=380,p=8}=o;add({pre:1,draw(tt){const k=seg(tt,t,d);if(k<=0||k>=1)return;const q=p*(1-k);shX=(Math.random()-.5)*2*q;shY=(Math.random()-.5)*2*q;c.translate(shX,shY)}})}
 function slam(str,x,y,o={}){let {t=0,d=1500,size=56,grad=['#fffbe0','#ffe066','#ffb31a','#ff7a00'],stroke='#3e1a06',from=3,sub=null}=o;d=readMs((sub||'')+str,d);ext(t+d);add({top:1,draw(tt){const k=seg(tt,t,260),e=tt-t;if(e<0||e>d)return;const out=1-seg(tt,t+d-300,300);const s=from-(from-1)*E.b(k);c.save();c.globalAlpha=Math.min(1,k*2)*out;c.translate(x,y);c.scale(s,s);c.font=`${size}px "Dela Gothic One"`;c.textAlign='center';c.textBaseline='middle';c.lineJoin='round';c.lineWidth=size*.2;c.strokeStyle=stroke;c.shadowColor='rgba(0,0,0,.6)';c.shadowOffsetY=5;c.shadowBlur=4;c.strokeText(str,0,0);c.shadowColor='transparent';const g=c.createLinearGradient(0,-size/2,0,size/2);grad.forEach((col,i)=>g.addColorStop(i/(grad.length-1),col));c.fillStyle=g;c.fillText(str,0,0);
   /* キラッ */const sh=seg(tt,t+300,500);if(sh>0&&sh<1){c.globalCompositeOperation='source-atop';const w=c.measureText(str).width;const sx=-w/2-40+(w+80)*sh;const gg=c.createLinearGradient(sx-30,0,sx+30,0);gg.addColorStop(0,'rgba(255,255,255,0)');gg.addColorStop(.5,'rgba(255,255,255,.95)');gg.addColorStop(1,'rgba(255,255,255,0)');c.fillStyle=gg;c.fillText(str,0,0)}
@@ -103,8 +105,9 @@ function tornadoImg(o={}){const {t=0,d=2600,y=H*.5,x0=-80,x1=W+80,h=220,n=18,alp
     drawD(e,true);
     /* 足もとの 砂ぼこり */if(DI.complete&&Math.floor(e/90)%2===0){}}});
   return st}
-function tween(u,o){const {t=0,d=400,e=E.o,...props}=o;const from={};add({pre:1,draw(tt){const k=seg(tt,t,d);if(k<=0)return;for(const p in props){if(!(p in from))from[p]=u[p];u[p]=from[p]+(props[p]-from[p])*e(k)}}})}
-function keyf(u,o){const {t=0,d=400,fn}=o;add({pre:1,draw(tt){const k=seg(tt,t,d);if(k<=0||k>=1)return;fn(u,k,tt)}})}
+/* おわったら 1回だけ さいごの 値に して はなす（あとの 動きを じゃましない） */
+function tween(u,o){const {t=0,d=400,e=E.o,...props}=o;const from={};let done=false;ext(t+d);add({pre:1,draw(tt){if(done)return;const k=seg(tt,t,d);if(k<=0)return;for(const p in props){if(!(p in from))from[p]=u[p];u[p]=from[p]+(props[p]-from[p])*e(k)}if(k>=1)done=true}})}
+function keyf(u,o){const {t=0,d=400,fn}=o;let done=false;ext(t+d);add({pre:1,draw(tt){if(done)return;const k=seg(tt,t,d);if(k<=0)return;if(k>=1){done=true;fn(u,1,tt);return}fn(u,k,tt)}})}
 function overlay(u,o){const {t=0,d=2000,draw:dr}=o;add({draw(tt){const e=tt-t;if(e<0||e>d)return;const {x,y}=P(u);dr(x,y,u.r*u.sc,e,e/d)}})}
 function play(builder,total=2600){const my=++run;fx=[];maxEnd=0;stage(builder.stage||{});builder.build&&builder.build();T0=performance.now();
   const loop=()=>{if(my!==run)return;const t=performance.now()-T0;frame(t);if(t<Math.max(total,maxEnd)+300)requestAnimationFrame(loop);else{dim=0;BW.document.getElementById('dim').style.opacity=0}};requestAnimationFrame(loop)}
@@ -112,4 +115,4 @@ function frame(t){c.setTransform(DPR,0,0,DPR,0,0);c.clearRect(0,0,W,H);dim=0;shX
   c.save();for(const f of fx)if(f.pre)f.draw(t);for(const f of fx)if(f.under)f.draw(t);
   for(const u of units)apply(u);apply(heroes.foe);apply(heroes.me);const dm=BW.document.getElementById('dim');if(dm)dm.style.opacity=dim;
   for(const f of fx)if(f.draw&&!f.pre&&!f.under&&!f.top)f.draw(t);for(const f of fx)if(f.top)f.draw(t);c.restore()}
-return {breakImg,tornadoImg,shatter,tornado,init,play,place,bd:()=>bd,ext,readMs,measure,ring,rays,burst,dots,smoke,flash,darken,shake,slam,floatTxt,icon,shot,tween,keyf,overlay,at,P,E,seg,units:()=>units,heroes:()=>heroes,ctx:()=>c,dims:()=>({W,H}),ui,img}})();
+return {tint,breakImg,tornadoImg,shatter,tornado,init,play,place,bd:()=>bd,ext,readMs,measure,ring,rays,burst,dots,smoke,flash,darken,shake,slam,floatTxt,icon,shot,tween,keyf,overlay,at,P,E,seg,units:()=>units,heroes:()=>heroes,ctx:()=>c,dims:()=>({W,H}),ui,img}})();
