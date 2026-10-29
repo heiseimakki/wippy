@@ -9453,7 +9453,24 @@ function aoe(els,style){if(!ensure()||!els.length)return;begin();const us=els.ma
   else{ring(cx,cy,{t:0,r1:W*.75,w:16,col:'255,240,200',d:600});ring(cx,cy,{t:110,r1:W*.6,w:8,col:'255,255,255',d:550});smoke(cx,cy+40,{t:0,n:16,spread:W*.45,r:20});us.forEach((u,i)=>icon('x_pow',u.bx,u.by,{t:80+i*60,d:340,sz:70}));S.thud()}
   shake({t:60,p:10,d:450})}
 function textAt(el,s,col='#fff'){if(!ensure()||!el)return;begin();const u=wrap(el),p=pos(u);floatTxt(s,p.x,p.y-u.rh*.55,{t:0,size:16,col})}
-return {attack,hit,kenzan,ko,revive,shotTo,bottleTo,freezeU,blow,summonPop,shieldBreak,deadly,aoe,textAt,heal:el=>{if(!ensure()||!el)return;begin();healU(wrap(el));S.heal()},buff:el=>{if(!ensure()||!el)return;begin();buffU(wrap(el))},down:el=>{if(!ensure()||!el)return;begin();const u=wrap(el);keyf(u,{t:0,d:600,fn:(v,k)=>{v.tint=k>=1?null:`rgba(60,90,200,${.3*(1-k)})`;v.oy=k>=1?0:6*Math.sin(k*Math.PI)}});S.down()},poison:el=>{if(!ensure()||!el)return;begin();poisonU(wrap(el))},kindOf,on:true}})();
+
+function kwFlair(el,k){if(!ensure()||!el)return;begin();const u=wrap(el),p=pos(u);
+  if(k==='taunt'){ring(p.x,p.y,{t:0,col:'190,200,220',r1:80,w:10});keyf(u,{t:0,d:900,fn:(v,q)=>{v.glow=q>=1?0:.8*Math.sin(q*Math.PI);v.glowC='190,210,240'}})}
+  else if(k==='quick'){burst(p.x,p.y,{t:0,n:8,im:'x_bolt',sp:6,g:0,life:450,sz:.22});flash({t:0,d:120,col:'255,240,120',a:.35});keyf(u,{t:0,d:700,fn:(v,q)=>{v.glow=q>=1?0:1-q;v.glowC='255,230,80'}})}
+  else if(k==='twice'){burst(p.x,p.y,{t:0,n:6,im:'x_star',sp:3,life:700,sz:.16})}
+  else if(k==='stealth'){smoke(p.x,p.y+10,{t:0,col:'200,200,220',n:10});keyf(u,{t:0,d:700,fn:(v,q)=>{v.alpha=q>=1?1:1-.5*Math.sin(q*Math.PI)}})}
+  else if(k==='shield'){const s=Math.max(u.rw,u.rh)*1.3;overlay(u,{t:0,d:900,draw:(x,y,uu,e)=>{const I=ui('x_barrier');if(!I.complete)return;const a=Math.min(1,e/200,(900-e)/300);c.save();c.globalAlpha=.75*a;const ss=s*(.8+.2*Math.min(1,e/250));c.drawImage(I,x-ss/2,y-ss/2,ss,ss);c.restore()}})}
+  else if(k==='revive'){icon('x_halo',p.x,p.y-u.rh/2-10,{t:0,d:900,sz:44,bob:2})}
+  else if(k==='deadly'){icon('x_skull',p.x,p.y,{t:0,d:600,sz:56,a:.8})}}
+function drFx(m){if(!ensure())return;const r=m&&m._lastRect;if(!r)return;begin();const x=r.left+r.width/2,y=r.top+r.height/2;ring(x,y,{t:0,col:'170,120,255',r1:90});
+  let sub=null;try{const q=effList(m.id,m.lv).find(q=>q[1]==='やられたら');if(q){const mm=String(q[2]).match(/^(.{1,16}?[！!…〜♪？])(\s|$)/);if(mm)sub=mm[1]}}catch(e){}
+  slam('やられたら',W/2,Math.max(80,Math.min(H-140,y-r.height*.9)),{t:40,d:1400,size:38,grad:['#f0e0ff','#c99aff','#8a5ad0','#5a2aa0'],stroke:'#1e0a3a',sub})}
+function thorn(el){if(!ensure()||!el)return;begin();const u=wrap(el),p=pos(u);burst(p.x,p.y-u.rh*.2,{t:0,n:8,im:'x_claw',sp:5,dir:-Math.PI/2,spread:1.6,life:450,sz:.18});
+  keyf(u,{t:0,d:650,fn:(v,k)=>{v.tint=k>=1?null:`rgba(255,40,40,${.45*(1-k*.7)})`;v.ox=k>=1?0:Math.sin(k*70)*3.5*(1-k)}})}
+function auraPulse(el,targets){if(!ensure()||!el)return;begin();const u=wrap(el),p=pos(u);ring(p.x,p.y,{t:0,col:'255,215,90',r1:W*.4,w:8,d:850});ring(p.x,p.y,{t:160,col:'255,255,255',r1:W*.3,w:4,d:750});
+  keyf(u,{t:0,d:850,fn:(v,k)=>{v.glow=k>=1?0:Math.sin(k*Math.PI);v.glowC='255,215,90'}});
+  (targets||[]).forEach((te,j)=>{if(!te)return;const v=wrap(te),q=pos(v);shot(p,q,{t:100+j*70,d:300,im:'x_star',sz:18,scale:1.4,trail:'255,215,90'});at(420+j*70,()=>{burst(q.x,q.y,{t:420+j*70,n:5,im:'x_star',sp:3,g:-.05,life:800,sz:.15});keyf(v,{t:420+j*70,d:600,fn:(w,k)=>{w.glow=k>=1?0:Math.sin(k*Math.PI);w.sc=k>=1?1:1+.1*Math.sin(k*Math.PI)}})})});S.buff()}
+return {kwFlair,drFx,thorn,auraPulse,attack,hit,kenzan,ko,revive,shotTo,bottleTo,freezeU,blow,summonPop,shieldBreak,deadly,aoe,textAt,heal:el=>{if(!ensure()||!el)return;begin();healU(wrap(el));S.heal()},buff:el=>{if(!ensure()||!el)return;begin();buffU(wrap(el))},down:el=>{if(!ensure()||!el)return;begin();const u=wrap(el);keyf(u,{t:0,d:600,fn:(v,k)=>{v.tint=k>=1?null:`rgba(60,90,200,${.3*(1-k)})`;v.oy=k>=1?0:6*Math.sin(k*Math.PI)}});S.down()},poison:el=>{if(!ensure()||!el)return;begin();poisonU(wrap(el))},kindOf,on:true}})();
 window.CFX=CFX;
 /* ---- ゲームへの つなぎ ---- */
 if(typeof battlecry==='function'){const _bcC=battlecry;battlecry=async function(sd,m,c){const d=C[c&&c.id]||{};const pm=CFX._m,pb=CFX._bc;CFX._m=m;CFX._bc=d.bc;
@@ -9464,6 +9481,7 @@ if(typeof battlecry==='function'){const _bcC=battlecry;battlecry=async function(
     if(s.startsWith('🧊')){CFX.freezeU(el);return}
     if(s==='バリア！'){CFX.shieldBreak(el);return}
     if(s.startsWith('👼')){return}
+    if(/^トゲ/.test(s))CFX.thorn(el);
     if(/^☠/.test(s)){CFX.poison(el);return _fa.call(this,el,s.replace(/^☠\s*/,'毒'),cls)}
     if(s.startsWith('🔥 '))return _fa.call(this,el,s.slice(2),cls);
     if(cls==='heal'&&/^\+\d+$/.test(s))CFX.heal(el);
@@ -9478,6 +9496,18 @@ if(typeof battlecry==='function'){const _bcC=battlecry;battlecry=async function(
 (function(){const st=document.createElement('style');st.textContent=`.u .cfxt{position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:6}
 .u.sleepy .art::after{content:'';position:absolute;inset:0;background:rgba(40,60,140,.24);border-radius:inherit;pointer-events:none}
 .u.sleepy .art{filter:brightness(.88) saturate(.85)}`;document.head.appendChild(st)})();
+
+/* キーワードの お知らせ（出たとき）に キャンバスの かざり */
+if(typeof kwFx==='function'){const _kf=kwFx;kwFx=async function(m){try{if(HUMAN&&m&&m.kw){const el=uEl(m);const ks=['taunt','shield','quick','twice','stealth','revive','deadly'].filter(k=>m.kw.has(k)).slice(0,2);ks.forEach((k,i)=>setTimeout(()=>{const e=uEl(m);if(e)CFX.kwFlair(e,k)},i*1150*(SPEED||1)))}}catch(e){}return _kf.apply(this,arguments)}}
+if(typeof drMark==='function'){const _dmk=drMark;drMark=async function(m){try{if(HUMAN)CFX.drFx(m)}catch(e){}return _dmk.apply(this,arguments)}}
+/* いるあいだ：出した時と ターンの はじめに 力を くばる。もらっている子には ★マーク */
+const cfxAuraT=(sd,m)=>{const d=C[m.id]||{};if(!d.aura)return [];return sd.board.filter(b=>b!==m&&b.hp>0&&(d.aura==='atk'||d.aura==='regen'||(d.aura==='faction'&&b.f===m.f)))};
+function cfxAura(sd,only){if(!HUMAN||!B)return;const ms=sd.board.filter(m=>m.hp>0&&C[m.id]&&C[m.id].aura&&(!only||m===only));ms.forEach((m,i)=>setTimeout(()=>{const el=uEl(m);if(el)CFX.auraPulse(el,cfxAuraT(sd,m).map(uEl))},i*350))}
+if(typeof startTurn==='function'){const _st=startTurn;startTurn=async function(sd){const r=await _st.apply(this,arguments);try{if(HUMAN&&B&&!B.over)setTimeout(()=>cfxAura(sd),250)}catch(e){}return r}}
+if(typeof playCard==='function'){const _pc=playCard;playCard=async function(sd,i){const c=sd.hand[i];const r=await _pc.apply(this,arguments);try{if(r&&HUMAN&&c&&C[c.id]&&C[c.id].aura){const m=sd.board.find(x=>x.card===c)||sd.board[sd.board.length-1];setTimeout(()=>cfxAura(sd,m),200)}}catch(e){}return r}}
+{const _ue2=unitEl;unitEl=function(sd,m,o){const el=_ue2.apply(this,arguments);try{if(HUMAN&&B&&m&&el&&typeof auraBonus==='function'&&auraBonus(sd,m)>0)el.insertAdjacentHTML('beforeend','<i class="cfxm"></i>')}catch(e){}return el}}
+(function(){const st=document.createElement('style');st.textContent=`.u .cfxm{position:absolute;left:50%;top:-12px;width:22px;height:22px;transform:translateX(-50%);background:url(ui/x_star.png) center/contain no-repeat;filter:drop-shadow(0 1px 2px rgba(0,0,0,.6));pointer-events:none;z-index:7;animation:cfxmB 2.2s ease-in-out infinite}
+@keyframes cfxmB{0%,100%{transform:translateX(-50%) scale(1)}50%{transform:translateX(-50%) scale(1.15)}}`;document.head.appendChild(st)})();
 
 
 /* =====================================================================
