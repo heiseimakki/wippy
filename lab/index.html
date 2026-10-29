@@ -108,11 +108,13 @@ const LIST=[
   {k:'bc_freeze',n:'こおらせる',d:'カチコチ（1回休み）',stage:S1,total:3400,build(){const t=U(0);F.shot(pos(U(2)),pos(t),{t:300,d:750,im:'x_ice',sz:30,trail:'160,220,255'});F.at(1050,tt=>{const p=pos(t);freezeOn(t,tt);F.flash({t:tt,d:200,col:'200,240,255',a:.6});F.burst(p.x,p.y,{t:tt,n:14,im:'x_ice',sp:5,g:.15,life:700,sz:.2})});}},
   {k:'bc_poison',n:'毒を つける',d:'毎ターン 1ダメージ',stage:S1,total:3400,build(){const t=U(0);F.shot(pos(U(2)),pos(t),{t:300,d:800,im:'x_poison',sz:30,arc:60,trail:'170,90,230'});F.at(1100,tt=>{const p=pos(t);F.burst(p.x,p.y,{t:tt,n:12,im:'x_poison',sp:3,g:.12,life:900,sz:.2,add_:false});F.floatTxt('毒×2',p.x,p.y-26,{t:tt,col:'#d9a0ff'})});
    F.overlay(t,{t:1100,d:1900,draw:(x,y,r,e)=>{const c=F.ctx();c.fillStyle='rgba(150,70,210,.5)';for(let i=0;i<4;i++){const k=((e/700)+i/4)%1;c.beginPath();c.arc(x-r*.5+i*r*.35,y+r*.2+k*r*.9,5+3*(1-k),0,7);c.fill()}}});F.keyf(t,{t:1100,d:1900,fn:u=>{u.tint='rgba(140,60,200,.22)'}})}},
-  {k:'bc_blow',n:'ふきとばす',d:'あいてを 手札に もどす',stage:S1,total:3800,build(){const t=U(0);const fh=F.place(F.bd().foeHand);
-   F.at(250,tt=>{const p=pos(t);F.tornado(p.x,p.y+t.rh*.55,{t:tt,d:2300,h:t.rh*2.5,r1:t.rw*1.35,r0:14});F.smoke(p.x,p.y+t.rh*.4,{t:tt,n:14,spread:110})});
-   F.keyf(t,{t:700,d:1100,fn:(u,k,tt)=>{u.oy=-k*u.rh*1.1;u.ox=Math.sin(tt/120)*u.rw*.35*(1-k*.3);u.rot=Math.sin(tt/160)*.35;u.sc=1-k*.25}});
-   F.keyf(t,{t:1800,d:650,fn:(u,k)=>{const sx=Math.sin(1800/120)*u.rw*.35*.7;u.ox=sx+(fh.x-t.bx-sx)*E.io(k);u.oy=-u.rh*1.1+(fh.y-t.by+u.rh*1.1)*E.io(k);u.sc=.75-.6*k;u.rot=k*.6;u.alpha=1-k*.7}});
-   F.at(2450,tt=>{t.hidden=true;const f=F.bd().foeHand,d=f.ownerDocument;const cb=d.createElement('span');cb.className='cb';f.appendChild(cb);cb.animate([{transform:'scale(1.8)',filter:'brightness(2)'},{transform:'scale(1)',filter:'none'}],{duration:400,easing:'ease-out'});F.floatTxt('手札に もどった',fh.x,fh.y+30,{t:tt,size:15})})}},
+  {k:'bc_blow',n:'ふきとばす',d:'たつまきが 通りすぎて あいてを 手札へ',stage:S1,total:3600,build(){const t=U(0);const {W}=F.dims();const fh=F.place(F.bd().foeHand);
+   const T0=200,D=2600,base=pos(t).y+t.rh*.6,x0=-90,x1=W+90;const tw=F.tornadoImg({t:T0,d:D,y:base,x0,x1,h:t.rh*2.6});
+   /* たつまきが 来た 時に まきこまれる */const hitAt=T0+D*((t.bx-x0)/(x1-x0))-180;
+   F.at(hitAt,tt=>F.smoke(pos(t).x,base,{t:tt,n:12,spread:100}));
+   F.keyf(t,{t:hitAt,d:900,fn:(u,k,tt)=>{const a=tt/150;u.ox=(tw.x-u.bx)*Math.min(1,k*3)+Math.cos(a)*u.rw*.5*k;u.oy=-k*u.rh*1.2+Math.sin(a)*8;u.rot=Math.sin(tt/120)*.5;u.sc=1-k*.2}});
+   let sx=0,sy=0;F.keyf(t,{t:hitAt+900,d:700,fn:(u,k)=>{if(!sx){sx=u.ox;sy=u.oy}u.ox=sx+(fh.x-u.bx-sx)*E.io(k);u.oy=sy+(fh.y-u.by-sy)*E.io(k);u.sc=.8-.6*k;u.rot=.5+k*2;u.alpha=1-k*.6}});
+   F.at(hitAt+1600,tt=>{t.hidden=true;const f=F.bd().foeHand,d=f.ownerDocument;const cb=d.createElement('span');cb.className='cb';f.appendChild(cb);cb.animate([{transform:'scale(1.8)',filter:'brightness(2)'},{transform:'scale(1)',filter:'none'}],{duration:400,easing:'ease-out'});F.floatTxt('手札に もどった',fh.x,fh.y+30,{t:tt,size:15})})}},
   {k:'bc_draw',n:'カードを ひく',d:'山札から 手札へ',stage:{foes:S1.foes,mine:[{art:'dog'}]},total:3200,build(){const B=F.bd();while(B.hand.children.length>2)B.hand.lastElementChild.remove();const pl=F.place(B.pile);
    const ids=[['eagle','シェリフ・モーキン警部',5,6,7],['juko','重厚な保安官',3,2,4]];
    ids.forEach((c0,i)=>F.at(400+i*700,tt=>{const hand=B.hand,d=hand.ownerDocument;const src=hand.children[0];const el=src.cloneNode(true);el.classList.remove('can');el.querySelectorAll('.stack,.kws i').forEach(x=>x.remove());
@@ -125,10 +127,12 @@ const LIST=[
  ]},
  {cat:'キーワード',items:[
   {k:'kw_taunt',n:'かばう',d:'あいては まず この子を ねらう',stage:{foes:S1.foes,mine:[{art:'armadillo',atk:1,hp:3},{art:'dog'}]},total:2400,build(){const u=U(2);F.at(300,tt=>{const p=pos(u);F.icon('u_k_taunt',p.x,p.y-u.r-24,{t:tt,d:1600,sz:56,bob:3});F.ring(p.x,p.y,{t:tt,col:'190,200,220',r1:80,w:10})});F.keyf(u,{t:300,d:1800,fn:(u,k)=>{u.glow=.8;u.glowC='190,210,240'}})}},
-  {k:'kw_shield',n:'バリア',d:'1回だけ ダメージ0（ひびわれて くだける）',stage:{foes:S1.foes,mine:[{art:'jacka',atk:1,hp:1,kw:['shield']}]},total:3000,build(){const u=U(2);
-   F.shot(pos(U(0)),pos(u),{t:600,d:380,im:'x_bullet',sz:22});
-   F.at(980,tt=>{const p=pos(u);const R=Math.max(u.rw,u.rh)/2+8;F.shatter(p.x,p.y,R,{t:tt,hx:p.x-R*.2,hy:p.y-R*.45});F.shake({t:tt+380,p:6});
-     F.at(tt+380,t2=>{u.el.classList.remove('shield');F.floatTxt('0',p.x,p.y-u.rh/2-12,{t:t2,col:'#bfe6ff',size:30});F.floatTxt('パリーン！',p.x,p.y+u.rh/2+16,{t:t2,col:'#e6f8ff',size:18,rise:20})})})}},
+  {k:'kw_shield',n:'バリア',d:'1回だけ ダメージ0（バリアが われる）',stage:{foes:S1.foes,mine:[{art:'jacka',atk:1,hp:1,kw:['shield']}]},total:2800,build(){const u=U(2);u.el.classList.remove('shield');let on=true;
+   const S=()=>Math.max(u.rw,u.rh)*1.3;
+   F.overlay(u,{t:0,d:1000,draw:(x,y,r,e)=>{if(!on)return;const c=F.ctx(),I=F.ui('x_barrier');if(!I.complete)return;const s=S()*(1+Math.sin(e/260)*.03);c.save();c.globalAlpha=.72;c.drawImage(I,x-s/2,y-s/2,s,s);c.restore()}});
+   F.shot(pos(U(0)),pos(u),{t:500,d:380,im:'x_bullet',sz:22});
+   F.at(880,tt=>{on=false;const p=pos(u);F.breakImg('x_barrier',p.x,p.y,S(),{t:tt});F.shake({t:tt,p:7});F.burst(p.x,p.y,{t:tt,n:10,im:'x_spark',sp:6,life:600,sz:.18});
+     F.floatTxt('0',p.x,p.y-u.rh/2-14,{t:tt+60,col:'#bfe6ff',size:30});F.floatTxt('パリーン！',p.x,p.y+u.rh/2+18,{t:tt+60,col:'#e6f8ff',size:18,rise:20})})}},
   {k:'kw_quick',n:'はやうち',d:'出した ターンから すぐ 攻撃',stage:{foes:S1.foes,mine:[{art:'bibiri',atk:4,hp:3}]},total:2200,build(){const u=U(2);F.at(250,tt=>{const p=pos(u);F.icon('u_k_quick',p.x,p.y-u.r-22,{t:tt,d:1200,sz:56});F.burst(p.x,p.y,{t:tt,n:10,im:'x_bolt',sp:6,g:0,life:500,sz:.25});F.flash({t:tt,d:120,col:'255,240,120',a:.5})});F.keyf(u,{t:250,d:1200,fn:(u,k)=>{u.glow=1-k;u.glowC='255,230,80'}})}},
   {k:'kw_twice',n:'2回攻撃',d:'1ターンに 2回',stage:S1,total:2600,build(){const a=U(2),t=U(0);const pa=pos(a),pt=pos(t);[0,1].forEach(i=>{const s=300+i*650;F.keyf(a,{t:s,d:180,fn:(u,k)=>{u.ox=(pt.x-pa.x)*E.io(k);u.oy=(pt.y-pa.y)*E.io(k)}});F.at(s+180,tt=>{F.burst(pt.x,pt.y,{t:tt,n:8,im:'x_slash',sp:5,life:400,sz:.3});F.floatTxt(i?'2回目！':'1回目',pt.x,pt.y-36,{t:tt,size:18,col:'#ffd27a'})});hitAt(t,s+180,1);F.keyf(a,{t:s+190,d:300,fn:(u,k)=>{u.ox=(pt.x-pa.x)*(1-E.o(k));u.oy=(pt.y-pa.y)*(1-E.o(k))}})})}},
   {k:'kw_stealth',n:'かくれんぼ',d:'自分から 攻撃するまで ねらわれない',stage:{foes:S1.foes,mine:[{art:'new03',atk:4,hp:1}]},total:2400,build(){const u=U(2);F.keyf(u,{t:300,d:600,fn:(u,k)=>{u.alpha=1-k*.6}});F.keyf(u,{t:900,d:1300,fn:(u,k,tt)=>{u.alpha=.4+.1*Math.sin(tt/150);u.ox=Math.sin(tt/300)*3}});F.at(300,tt=>F.smoke(pos(u).x,pos(u).y+10,{t:tt,col:'200,200,220',n:10}))}},

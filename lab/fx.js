@@ -80,6 +80,28 @@ function shatter(x,y,R,o={}){const {t=0,crack=380,col='127,231,255',hx=x,hy=y-R*
       for(const p of S_){const f=ee/16.7;const d=p.v*f*(1-Math.min(1,f/90)*.4)+R*.05;const px=x+Math.cos(p.a)*d,py=y+Math.sin(p.a)*d+.05*f*f;c.save();c.globalAlpha=Math.max(0,1-ee/1100);c.translate(px,py);c.rotate(p.spin*f);c.translate(-Math.cos(p.a)*R*.7,-Math.sin(p.a)*R*.7);
         c.beginPath();p.pts.forEach((q,i)=>i?c.lineTo(q[0],q[1]):c.moveTo(q[0],q[1]));c.closePath();const g=c.createLinearGradient(-R,-R,R,R);g.addColorStop(0,'rgba(230,250,255,.75)');g.addColorStop(1,`rgba(${col},.35)`);c.fillStyle=g;c.fill();c.strokeStyle='rgba(255,255,255,.95)';c.lineWidth=1.5;c.stroke();c.restore()}}}
     c.restore()}})}
+/* ===== 画像で つくる 演出 ===== */
+/* 画像を 切りわけて くだく（バリアが われる）：となりあう かけらが ぴったり あう 分けかた */
+function breakImg(name,x,y,size,o={}){const {t=0,life=1100,pow=1}=o;ext(t+life);const I=ui(name);const R=size/2;
+  const W_=8,rings=[0,.42,.75,1.05];const V=rings.map((rr,j)=>Array.from({length:W_},(_,i)=>{const a=(i+(j%2?.5:0))/W_*Math.PI*2+(Math.random()-.5)*.35;const r=rr*R*(j?(.9+Math.random()*.2):0);return [Math.cos(a)*r,Math.sin(a)*r]}));
+  const P_=[];for(let j=0;j<rings.length-1;j++)for(let i=0;i<W_;i++){const i2=(i+1)%W_;const pts=j===0?[[0,0],V[1][i],V[1][i2]]:[V[j][i],V[j+1][i],V[j+1][i2],V[j][i2]];const cx=pts.reduce((a,p)=>a+p[0],0)/pts.length,cy=pts.reduce((a,p)=>a+p[1],0)/pts.length;const a=Math.atan2(cy,cx);P_.push({pts,cx,cy,a,v:(2+Math.random()*3.5)*pow*(j?1:.6),spin:(Math.random()-.5)*.18,up:1+Math.random()*2})}
+  add({top:1,draw(tt){const e=tt-t;if(e<0||e>life||!I.complete)return;const f=e/16.7;
+    if(e<140){c.save();c.globalCompositeOperation='lighter';c.globalAlpha=.8*(1-e/140);c.drawImage(I,x-R*1.15,y-R*1.15,R*2.3,R*2.3);c.restore()}
+    for(const p of P_){const d=p.v*f;const px=p.cx+Math.cos(p.a)*d,py=p.cy+Math.sin(p.a)*d-p.up*f+.09*f*f;c.save();c.globalAlpha=Math.max(0,1-Math.pow(e/life,1.6));c.translate(x+px,y+py);c.rotate(p.spin*f);c.translate(-p.cx,-p.cy);
+      c.beginPath();p.pts.forEach((q,i)=>i?c.lineTo(q[0],q[1]):c.moveTo(q[0],q[1]));c.closePath();c.clip();c.drawImage(I,-R,-R,R*2,R*2);c.restore()}}})}
+/* たつまき（画像）：くねくね ゆれながら 左から右へ 通りすぎる。落ち葉と 小石が まわりを ぐるぐる */
+const LEAF=[[1,28,25,35],[43,0,24,33],[104,5,25,18],[0,75,62,58],[54,30,54,33]],PEB=[[132,36,18,17],[3,42,16,16],[130,13,12,13],[1,96,15,12]];
+function tornadoImg(o={}){const {t=0,d=2600,y=H*.5,x0=-80,x1=W+80,h=220,n=18,alpha=.85}=o;ext(t+d);const TI=ui('x_tornado'),LI=ui('x_leaves'),DI=ui('x_dust');
+  const D_=Array.from({length:n},(_,i)=>{const leaf=i%3!==2;const r=leaf?LEAF[i%LEAF.length]:PEB[i%PEB.length];return {leaf,r,k:.08+Math.random()*.85,a:Math.random()*7,v:4+Math.random()*3,sz:leaf?(22+Math.random()*14):(10+Math.random()*7),spin:(Math.random()-.5)*12,ph:Math.random()*7}});
+  const st={x:x0};const cx=e=>x0+(x1-x0)*(e/d)+Math.sin(e/150)*14;
+  const drawD=(e,front)=>{const X=cx(e);for(const p of D_){const a=p.a+e/1000*p.v;const z=Math.sin(a);if((z>0)!==front)continue;const k=(p.k+Math.sin(e/700+p.ph)*.05);const R_=h*(.12+.36*k);const dx=X+Math.cos(a)*R_+Math.sin(e/150+k*3)*10*k,dy=y-k*h+z*R_*.22;const sc=.7+.4*(z+1)/2;
+      const I=p.leaf?LI:DI;if(!I.complete)continue;const [sx,sy,sw,sh]=p.r;const w=p.sz*sc,hh=w*sh/sw;c.save();c.globalAlpha=(front?1:.6)*fadeA(e);c.translate(dx,dy);c.rotate(e/1000*p.spin);c.drawImage(I,sx,sy,sw,sh,-w/2,-hh/2,w,hh);c.restore()}};
+  const fadeA=e=>Math.min(1,e/250,(d-e)/300);
+  add({draw(tt){const e=tt-t;if(e<0||e>d)return;st.x=cx(e);drawD(e,false);if(TI.complete){const X=cx(e);c.save();c.globalAlpha=alpha*fadeA(e);c.translate(X,y);c.rotate(Math.sin(e/210)*.07);c.scale(1+Math.sin(e/90)*.05,1+Math.cos(e/120)*.03);const w=h*TI.naturalWidth/TI.naturalHeight;
+      /* 上のほうを すこし ずらして くねくね */const sl=6;for(let i=0;i<sl;i++){const k0=i/sl,k1=(i+1)/sl;const off=Math.sin(e/160+k0*2.4)*12*k0;const sy0=TI.naturalHeight*(1-k1),sh0=TI.naturalHeight/sl;c.drawImage(TI,0,sy0,TI.naturalWidth,sh0+1,-w/2+off,-h*k1,w,h/sl+1)}c.restore()}
+    drawD(e,true);
+    /* 足もとの 砂ぼこり */if(DI.complete&&Math.floor(e/90)%2===0){}}});
+  return st}
 function tween(u,o){const {t=0,d=400,e=E.o,...props}=o;const from={};add({pre:1,draw(tt){const k=seg(tt,t,d);if(k<=0)return;for(const p in props){if(!(p in from))from[p]=u[p];u[p]=from[p]+(props[p]-from[p])*e(k)}}})}
 function keyf(u,o){const {t=0,d=400,fn}=o;add({pre:1,draw(tt){const k=seg(tt,t,d);if(k<=0||k>=1)return;fn(u,k,tt)}})}
 function overlay(u,o){const {t=0,d=2000,draw:dr}=o;add({draw(tt){const e=tt-t;if(e<0||e>d)return;const {x,y}=P(u);dr(x,y,u.r*u.sc,e,e/d)}})}
@@ -89,4 +111,4 @@ function frame(t){c.setTransform(DPR,0,0,DPR,0,0);c.clearRect(0,0,W,H);dim=0;shX
   c.save();for(const f of fx)if(f.pre)f.draw(t);for(const f of fx)if(f.under)f.draw(t);
   for(const u of units)apply(u);apply(heroes.foe);apply(heroes.me);const dm=BW.document.getElementById('dim');if(dm)dm.style.opacity=dim;
   for(const f of fx)if(f.draw&&!f.pre&&!f.under&&!f.top)f.draw(t);for(const f of fx)if(f.top)f.draw(t);c.restore()}
-return {shatter,tornado,init,play,place,bd:()=>bd,ext,readMs,measure,ring,rays,burst,dots,smoke,flash,darken,shake,slam,floatTxt,icon,shot,tween,keyf,overlay,at,P,E,seg,units:()=>units,heroes:()=>heroes,ctx:()=>c,dims:()=>({W,H}),ui,img}})();
+return {breakImg,tornadoImg,shatter,tornado,init,play,place,bd:()=>bd,ext,readMs,measure,ring,rays,burst,dots,smoke,flash,darken,shake,slam,floatTxt,icon,shot,tween,keyf,overlay,at,P,E,seg,units:()=>units,heroes:()=>heroes,ctx:()=>c,dims:()=>({W,H}),ui,img}})();
