@@ -9370,6 +9370,8 @@ const S={
   whoosh(){S.safe(()=>{SFX.whoosh&&SFX.whoosh()})},
   swing(){S.safe(()=>{SFX.swing?SFX.swing():(SFX.whoosh&&SFX.whoosh())})},
 };
+S.water=function(){S.safe(()=>{noise(.4,{vol:.2,freq:2500})})};
+['glass','ice','bubble','boom','water'].forEach(k=>{const f=S[k];S[k]=function(){if(window.SEP&&typeof HUMAN!=='undefined'&&HUMAN&&SEP.play(k))return;return f.apply(this,arguments)}});
 /* ===== 演出 ===== */
 const AMB=null,BOT=null;
 /* 当たった（キャラが 赤く ぶるっ） */
@@ -9386,7 +9388,7 @@ const THROW={shoot:{im:'x_bullet',sz:22,d:260},meat:{im:'fx:new/meat',sz:30,scal
   spike:{im:'fx:new/needle',sz:30,scale:1.6,d:260,trail:'230,220,170',n:3,aim:true},note:{im:'fx:08_07',sz:18,scale:1.8,arc:40,d:520,trail:'255,160,220',n:3},fireball:{im:'fx:06_03',sz:34,scale:1.8,d:450,trail:'255,140,60'},bomb:{im:'fx:09_16',sz:30,scale:1.8,arc:110,d:620,trail:'120,120,120'},
   bottle:{im:'fx:new/whisky',sz:34,scale:1.45,arc:70,d:560,trail:'230,160,70',filter:BOT},card:{im:'fx:09_25',sz:20,scale:1.8,d:340,trail:'255,255,255',n:2},magic:{im:'fx:03_20',sz:26,scale:1.8,d:420,trail:'200,230,255'},ice:{im:'fx:04_17',sz:16,scale:1.8,d:340,trail:'170,220,255',n:3},
   water:{im:'fx:06_17',sz:12,scale:1.8,d:300,trail:'150,200,255',n:5},ink:{im:'fx:03_01',sz:26,scale:1.8,arc:40,d:450,trail:'40,30,60'},wind:{im:'x_tornado',sz:30,scale:1.6,d:450,trail:'230,230,220'},lasso:{im:'x_spin',sz:24,scale:1.6,d:380,trail:'230,180,100'},poison:{im:'fx:new/poison_flask',sz:30,scale:1.6,arc:60,d:520,trail:'170,90,230'}};
-const SND={claw:()=>SFX.swish&&SFX.swish(),fang:S.squish,zombie:S.squish,punch:S.thud,meat:S.squish,bone:S.clack,spike:S.swing,ghost:S.ghost,note:()=>{tone(784,.1,{vol:.08});tone(988,.1,{vol:.08,at:.08});tone(1175,.14,{vol:.08,at:.16})},fireball:()=>noise(.35,{vol:.25,freq:900}),bomb:S.boom,bottle:S.glass,card:()=>SFX.flip&&SFX.flip(),magic:()=>SFX.sparkle&&SFX.sparkle(),ice:S.ice,water:()=>noise(.2,{vol:.2,freq:2500}),ink:S.squish,tongue:S.boing,rush:S.thud,dive:()=>SFX.swish&&SFX.swish(),slash:()=>SFX.swish&&SFX.swish(),wind:S.wind,lasso:()=>SFX.whoosh&&SFX.whoosh(),shoot:()=>SFX.shot&&SFX.shot(),gnaw:S.gnaw,squeeze:S.creak,leaf:S.wind};
+const SND={claw:()=>SFX.swish&&SFX.swish(),fang:S.squish,zombie:S.squish,punch:S.thud,meat:S.squish,bone:S.clack,spike:S.swing,ghost:S.ghost,note:()=>{tone(784,.1,{vol:.08});tone(988,.1,{vol:.08,at:.08});tone(1175,.14,{vol:.08,at:.16})},fireball:()=>noise(.35,{vol:.25,freq:900}),bomb:S.boom,bottle:S.glass,card:()=>SFX.flip&&SFX.flip(),magic:()=>SFX.sparkle&&SFX.sparkle(),ice:S.ice,water:()=>S.water(),ink:S.squish,tongue:S.boing,rush:S.thud,dive:()=>SFX.swish&&SFX.swish(),slash:()=>SFX.swish&&SFX.swish(),wind:S.wind,lasso:()=>SFX.whoosh&&SFX.whoosh(),shoot:()=>SFX.shot&&SFX.shot(),gnaw:S.gnaw,squeeze:S.creak,leaf:S.wind};
 const snd=k=>S.safe(()=>{const f=SND[k];if(f)f()});
 /* こうげき：当たる しゅんかんで おわる（このあと ゲームが ダメージを 出す） */
 async function attack(m,el,tel,mine){if(!ensure()||!el||!tel)return;begin();const a=wrap(el),t=wrap(tel);const k=kindOf(m);const atk=(m.atk||0);let h=300;
@@ -9456,7 +9458,7 @@ function deadly(el){if(!ensure()||!el)return;begin();const u=wrap(el),p=pos(u);d
 function aoe(els,style,cel){if(!ensure()||!els.length)return;begin();const us=els.map(wrap);const xs=us.map(u=>u.bx),ys=us.map(u=>u.by);const cx=(Math.min(...xs)+Math.max(...xs))/2,cy=ys.reduce((a,b)=>a+b,0)/ys.length;
   /* 10/29：やった子が うしろに 助走 → もとの 位置に もどる 瞬間に ドン */let O=0;if(cel){const cu=wrap(cel);const dir=Math.sign(cu.by-cy)||1;keyf(cu,{t:0,d:330,fn:(v,k)=>{v.oy=26*dir*E.io(k);v.sc=1-.06*k}});keyf(cu,{t:330,d:140,fn:(v,k)=>{v.oy=k>=1?0:26*dir*(1-E.o(k))-8*dir*Math.sin(k*Math.PI);v.sc=k>=1?1:.94+.1*Math.sin(k*Math.PI)+.06*k}});O=450}const ob=bs;bs+=dd(O);
   if(style==='fire'){tint({t:0,d:1200,col:'255,70,20',a:.22});ring(cx,cy,{t:60,r1:W*.7,w:16,col:'255,140,60',d:650});us.forEach((u,i)=>icon('x_pow',u.bx,u.by,{t:80+i*60,d:340,sz:66,filter:'hue-rotate(-20deg) saturate(1.4)'}));noise(.5,{vol:.25,freq:900})}
-  else if(style==='water'){tint({t:0,d:1200,col:'40,120,255',a:.22});for(let i=0;i<10;i++){const x=W*(.08+.84*Math.random());shot({x,y:cy-160},{x:x+10,y:cy+30*(Math.random()-.2)},{t:i*30,d:280,im:'fx:06_17',sz:10,trail:'150,200,255'})}ring(cx,cy,{t:300,r1:W*.65,w:12,col:'140,200,255',d:600});us.forEach((u,i)=>burst(u.bx,u.by,{t:300+i*60,n:8,im:'fx:06_18',sp:4,g:.18,life:650,sz:.26,add_:false}));noise(.4,{vol:.2,freq:2500})}
+  else if(style==='water'){tint({t:0,d:1200,col:'40,120,255',a:.22});for(let i=0;i<10;i++){const x=W*(.08+.84*Math.random());shot({x,y:cy-160},{x:x+10,y:cy+30*(Math.random()-.2)},{t:i*30,d:280,im:'fx:06_17',sz:10,trail:'150,200,255'})}ring(cx,cy,{t:300,r1:W*.65,w:12,col:'140,200,255',d:600});us.forEach((u,i)=>burst(u.bx,u.by,{t:300+i*60,n:8,im:'fx:06_18',sp:4,g:.18,life:650,sz:.26,add_:false}));S.water()}
   else{ring(cx,cy,{t:0,r1:W*.75,w:16,col:'255,240,200',d:600});ring(cx,cy,{t:110,r1:W*.6,w:8,col:'255,255,255',d:550});smoke(cx,cy+40,{t:0,n:16,spread:W*.45,r:20});us.forEach((u,i)=>icon('x_pow',u.bx,u.by,{t:80+i*60,d:340,sz:70}));S.thud()}
   shake({t:60,p:10,d:450});bs=ob;return O?wait(O+80):undefined}
 function textAt(el,s,col='#fff'){if(!ensure()||!el)return;begin();const u=wrap(el),p=pos(u);floatTxt(s,p.x,p.y-u.rh*.55,{t:0,size:16,col})}
@@ -9638,6 +9640,15 @@ try{if(!window.__PCWRAP){FAV.rnd()}}catch(e){}
  const _rb=renderBattle;renderBattle=function(){const r=_rb.apply(this,arguments);try{if(B&&HUMAN&&window.CFX){if(lb!==B){lb=B;lc=B.me.coin}else{const c=B.me.coin;if(lc!=null&&c>lc&&!B._refill){const src=CFX._m&&B.me.board.includes(CFX._m)?uEl(CFX._m):null;CFX.coinFly(c-lc,src)}lc=c}}}catch(e){}return r}}
 /* よみがえる（raise・recall）は 光の柱 */
 {const _bcP=battlecry;battlecry=async function(sd,m,c){const d=C[c&&c.id]||{};const want=HUMAN&&(d.bc==='raise'||d.bc==='recall');const before=want?new Set(sd.board):null;const r=await _bcP.apply(this,arguments);try{if(want){const nu=sd.board.filter(x=>!before.has(x)&&x!==m&&x.hp>0);nu.forEach((x,i)=>setTimeout(()=>{const e=uEl(x);if(e)CFX.pillar(e)},i*250))}}catch(e){}return r}}
+
+/* 10/29：SEを 本物の 音（Envato）に。読みこめた 音から つかう（だめなら いままでの 音） */
+const SEP={b:{},files:{coin:1,hit:1,crit:1,boom:1,swish:1,sparkle:1,heal:1,revive:1,poof:1,fanfare:1,tap:1,win:1,lose:1,chime:1,glass:1,ice:1,bubble:1,water:1,anvil:1,curse:1,chest:1},loading:false,
+ load(){if(SEP.loading)return;SEP.loading=true;const a=ac();if(!a)return;Object.keys(SEP.files).forEach(k=>{fetch('audio/se/'+k+'.mp3').then(r=>r.arrayBuffer()).then(x=>a.decodeAudioData(x)).then(buf=>{SEP.b[k]=buf}).catch(()=>{})})},
+ play(k,vol=1){try{if(typeof MUTED!=='undefined'&&MUTED)return true;const buf=SEP.b[k];if(!buf){SEP.load();return false}const a=ac();if(!a)return false;const s=a.createBufferSource(),g=a.createGain();s.buffer=buf;g.gain.value=.55*vol;s.connect(g).connect((typeof sfxOut==='function'&&sfxOut())||a.destination);s.start();return true}catch(e){return false}}};
+window.SEP=SEP;['touchend','click','keydown'].forEach(ev=>document.addEventListener(ev,()=>SEP.load(),{once:true,passive:true}));
+{const MAPK={coin:'coin',hit:'hit',crit:'crit',swish:'swish',whoosh:'swish',sparkle:'sparkle',heal:'heal',reviveUp:'revive',poof:'poof',fanfare:'fanfare',tap:'tap',win:'win',lose:'lose',chime:'chime',poison:'bubble'};
+ for(const k in MAPK){const f=SFX[k];SFX[k]=function(){if(typeof HUMAN!=='undefined'&&HUMAN&&SEP.play(MAPK[k]))return;return f&&f.apply(this,arguments)}}
+ SFX.boom=function(){if(!SEP.play('boom'))(SFX.thunder&&SFX.thunder())}}
 
 
 /* =====================================================================

@@ -71,3 +71,14 @@ const S={
 const TXT={claw:'ザシュッ！',fang:'ガブッ！',zombie:'ガブッ！',punch:'ガシャーン！',meat:'ボヨン！',bone:'カコーン！',spike:'チクッ',ghost:'ヒヤッ…',note:'ジャーン♪',fireball:'ボウッ！',bomb:'ドッカーン！',bottle:'パリーン！',card:'シュパッ！',magic:'キラリーン！',ice:'つめた〜い！',water:'バシャッ！',ink:'ブシュッ！',tongue:'ペチッ',rush:'ドーン！',dive:'ツンツン！',slash:'ズバッ！',wind:'ビュオォ！',lasso:'グイッ！'};
 const SND={claw:()=>SFX.swish&&SFX.swish(),fang:S.squish,zombie:S.squish,punch:S.thud,meat:S.squish,bone:S.clack,spike:S.swing,ghost:S.ghost,note:()=>{tone(784,.1,{vol:.08});tone(988,.1,{vol:.08,at:.08});tone(1175,.14,{vol:.08,at:.16})},fireball:()=>noise(.35,{vol:.25,freq:900}),bomb:S.boom,bottle:S.glass,card:()=>SFX.flip&&SFX.flip(),magic:()=>SFX.sparkle&&SFX.sparkle(),ice:S.ice,water:()=>noise(.2,{vol:.2,freq:2500}),ink:S.squish,tongue:S.boing,rush:S.thud,dive:()=>SFX.swish&&SFX.swish(),slash:()=>SFX.swish&&SFX.swish(),wind:S.wind,lasso:()=>SFX.whoosh&&SFX.whoosh(),shoot:()=>SFX.shot&&SFX.shot(),gnaw:S.gnaw,squeeze:S.creak,leaf:S.wind};
 window.SE={S,SFX,SND,TXT,tone,noise,ac,set muted(v){MUTED=v},get muted(){return MUTED}};})();
+/* 本物の SE（本番と 同じ ファイル） */
+(function(){const SE=window.SE;if(!SE)return;const B={},F=['coin','hit','crit','boom','swish','sparkle','heal','revive','poof','fanfare','tap','win','lose','chime','glass','ice','bubble','water','anvil','curse','chest'];let ld=false;
+ const load=()=>{if(ld)return;const a=SE.ac();if(!a)return;ld=true;F.forEach(k=>fetch('../audio/se/'+k+'.mp3').then(r=>r.arrayBuffer()).then(x=>a.decodeAudioData(x)).then(b=>B[k]=b).catch(()=>{}))};
+ const play=(k)=>{const b=B[k];if(!b){load();return false}const a=SE.ac();const s=a.createBufferSource(),g=a.createGain();g.gain.value=.55;s.buffer=b;s.connect(g).connect(a.destination);s.start();return true};
+ ['click','touchend'].forEach(ev=>document.addEventListener(ev,load,{passive:true}));
+ const M={coin:'coin',hit:'hit',crit:'crit',swish:'swish',whoosh:'swish',sparkle:'sparkle',heal:'heal',reviveUp:'revive',poof:'poof',fanfare:'fanfare',tap:'tap',win:'win',lose:'lose',chime:'chime',poison:'bubble'};
+ for(const k in M){const f=SE.SFX[k];SE.SFX[k]=function(){if(play(M[k]))return;return f&&f.apply(this,arguments)}}
+ ['glass','ice','bubble','water'].forEach(k=>{const f=SE.S[k];SE.S[k]=function(){if(play(k))return;return f&&f.apply(this,arguments)}});
+ SE.S.boom=function(){if(!play('boom'))SE.SFX.thunder&&SE.SFX.thunder()};
+ if(SE.SND){SE.SND.water=()=>{if(!play('water'))SE.noise(.2,{vol:.2,freq:2500})}}
+})();
