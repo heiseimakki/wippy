@@ -84,7 +84,7 @@ function freezeOn(u,t){F.at(t,()=>{const el=u.el,d=el.ownerDocument;el.classList
 const LIST=[
  {cat:'きほん',items:[
   {k:'kenzan',n:'見参！',d:'カードを 出した しゅんかん',stage:{foes:S1.foes,mine:[{art:'dog'},{art:'eagle',atk:6,hp:7}]},total:2700,build(){const u=U(3);F.darken({t:150,d:2700});const t=enter(u);
-   F.at(t,()=>F.rays(pos(u).x,pos(u).y,{t,d:2100}));F.at(t,()=>{const p=pos(u);F.burst(p.x,p.y,{t,n:24,im:['x_spark','x_star'],sp:7,sz:.25});F.flash({t,d:240,a:.85})});
+   F.at(t,()=>F.rays(pos(u).x,pos(u).y,{t,d:2100,under:true,a:.45}));F.at(t,()=>{const p=pos(u);F.burst(p.x,p.y,{t,n:8,im:['x_spark','x_star'],sp:5,sz:.16,life:800});F.flash({t,d:200,a:.6})});
    F.slam('見参！',F.dims().W/2,MID()-6,{t:t+120,d:2200,sub:'空から 見まもっておる！'});F.keyf(u,{t,d:2000,fn:(u,k)=>{u.glow=Math.sin(k*Math.PI)}})}},
   {k:'yarare',n:'やられたら',d:'たおれた ときに 出る 効果',stage:{foes:S1.foes,mine:[{art:'new03',atk:4,hp:1},{art:'juko'}]},total:2600,build(){const u=U(2);ko(u,100);const p0=pos(u);
    F.at(520,()=>{F.icon('u_k_dr',p0.x,p0.y,{t:520,d:900,sz:70,bob:4});F.ring(p0.x,p0.y,{t:520,col:'170,120,255',r1:90})});

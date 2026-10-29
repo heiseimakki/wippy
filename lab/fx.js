@@ -13,8 +13,9 @@ const ext=e=>{if(e>maxEnd)maxEnd=e};
 /* 読ませる 文字は 3びょう いじょう（長いと もっと） */
 /* 文字の 長さに あわせる：みじかい ひとこと（見参の セリフくらい）は 2びょう台、文は 3びょう いじょう */
 const readMs=(s,min)=>{if(!s||!/[ぁ-んァ-ン一-龥]/.test(s))return min;const n=s.replace(/\s/g,'').length;return Math.max(min,n<=22?1300+n*70:Math.max(3000,900+n*170))};
-function fit(){DPR=Math.min(2,devicePixelRatio||1);W=cv.clientWidth;H=cv.clientHeight;cv.width=W*DPR;cv.height=H*DPR}
-function init(canvas,frameEl){cv=canvas;c=cv.getContext('2d');if(frameEl)BW=frameEl.contentWindow;fit();if(!init.on){init.on=1;addEventListener('resize',fit)}}
+function fit(){DPR=Math.min(2,devicePixelRatio||1);W=cv.clientWidth;H=cv.clientHeight;cv.width=W*DPR;cv.height=H*DPR;if(ucv){ucv.width=W*DPR;ucv.height=H*DPR}}
+let uc=null,ucv=null;
+function init(canvas,frameEl){cv=canvas;c=cv.getContext('2d');if(frameEl){BW=frameEl.contentWindow;ucv=BW.document.getElementById('under');uc=ucv&&ucv.getContext('2d')}fit();if(!init.on){init.on=1;addEventListener('resize',fit)}}
 /* ---- 場面 ---- */
 function unit(o){return Object.assign({x:.5,y:.7,r:34,art:'dog',atk:2,hp:3,alpha:1,sc:1,ox:0,oy:0,rot:0,tint:null,gray:0,glow:0,glowC:'255,211,74',hidden:false,status:[],marks:[]},o)}
 /* 本番の バトル画面（board.html）に 子分を ならべて、その 位置を つかう */
@@ -36,7 +37,7 @@ function apply(u){const el=u.el;if(!el)return;const dx=u.x*W-u.bx+u.ox,dy=u.y*H-
 const add=f=>{fx.push(f);return f};
 function at(ms,fn){ext(ms);add({t0:ms,once:true,fn})}
 function ring(x,y,o={}){const {t=0,d=650,col='255,211,74',r0=10,r1=120,w=8}=o;add({draw(tt){const k=seg(tt,t,d);if(k<=0||k>=1)return;c.strokeStyle=`rgba(${col},${1-k})`;c.lineWidth=w*(1-k*.6);c.beginPath();c.arc(x,y,r0+(r1-r0)*E.o(k),0,7);c.stroke()}})}
-function rays(x,y,o={}){const {t=0,d=1400,col='255,242,176',n=16,len=420,spin=.4,a=.5}=o;add({draw(tt){const k=seg(tt,t,d);if(k<=0||k>=1)return;const al=Math.min(1,k*5,(1-k)*3)*a;c.save();c.translate(x,y);c.rotate(tt/1000*spin);c.globalCompositeOperation='lighter';for(let i=0;i<n;i++){const a0=i/n*Math.PI*2;c.fillStyle=`rgba(${col},${al*(i%2?.9:.45)})`;c.beginPath();c.moveTo(0,0);c.arc(0,0,len,a0,a0+Math.PI/n/1.6);c.closePath();c.fill()}c.restore()}})}
+function rays(x,y,o={}){const {t=0,d=1400,col='255,242,176',n=16,len=420,spin=.4,a=.5,under=false}=o;ext(t+d);add({low:under,draw(tt){const k=seg(tt,t,d);if(k<=0||k>=1)return;const al=Math.min(1,k*5,(1-k)*3)*a;c.save();c.translate(x,y);c.rotate(tt/1000*spin);c.globalCompositeOperation='lighter';for(let i=0;i<n;i++){const a0=i/n*Math.PI*2;c.fillStyle=`rgba(${col},${al*(i%2?.9:.45)})`;c.beginPath();c.moveTo(0,0);c.arc(0,0,len,a0,a0+Math.PI/n/1.6);c.closePath();c.fill()}c.restore()}})}
 function burst(x,y,o={}){const {t=0,n=18,im='x_spark',sp=7,g=.2,life=1100,sz=.25,add_=true,spread=Math.PI*2,dir=0,up=3,sway=null,filter=null,orient=false}=o;const ims=Array.isArray(im)?im:[im];const sw=sway!=null?sway:(ims.some(n=>/star|spark/.test(n))?null:.22);ext(t+life*1.2);const P_=[];for(let i=0;i<n;i++){const a=dir-spread/2+Math.random()*spread;P_.push({a,v:sp*(.5+Math.random()*.8),s:sz*(.6+Math.random()*.8),l:life*(.6+Math.random()*.6),sp:(Math.random()-.5)*.3,ph:Math.random()*6,im:Array.isArray(im)?im[i%im.length]:im})}
   add({draw(tt){const e=tt-t;if(e<0)return;for(const p of P_){if(e>p.l)continue;const f=e/16.7,dr=Math.pow(.95,f),dist=p.v*(1-dr)/.05;const px=x+Math.cos(p.a)*dist,py=y+Math.sin(p.a)*dist-up*(1-dr)/.05+g*f*f*.35;const I=ui(p.im);if(!I.complete)continue;const s=p.s*126*1.5;c.save();c.globalAlpha=Math.min(1,(1-e/p.l)*2.5);if(add_)c.globalCompositeOperation='lighter';if(filter)c.filter=filter;c.translate(px,py);c.rotate(orient?p.a+Math.PI/2:(sw!=null?Math.sin(f*.09+p.ph)*sw:f*p.sp));c.drawImage(I,-s/2,-s/2,s,s);c.restore()}}})}
 function dots(x,y,o={}){const {t=0,n=16,col='255,224,138',sp=2,up=1.5,life=1200,r=3,area=60,add_=true}=o;const P_=[];for(let i=0;i<n;i++)P_.push({x:x+(Math.random()-.5)*area,y:y+(Math.random()-.5)*area*.4,vx:(Math.random()-.5)*sp,vy:-up*(.4+Math.random()),l:life*(.5+Math.random()*.8),d:Math.random()*life*.3,r:r*(.5+Math.random())});
@@ -114,6 +115,6 @@ function play(builder,total=2600){const my=++run;fx=[];maxEnd=0;stage(builder.st
   const loop=()=>{if(my!==run)return;const t=performance.now()-T0;frame(t);if(t<Math.max(total,maxEnd)+300)requestAnimationFrame(loop);else{dim=0;BW.document.getElementById('dim').style.opacity=0}};requestAnimationFrame(loop)}
 function frame(t){c.setTransform(DPR,0,0,DPR,0,0);c.clearRect(0,0,W,H);dim=0;shX=0;shY=0;for(const f of fx)if(f.once&&!f.done&&t>=f.t0){f.done=1;f.fn(t)}
   c.save();for(const f of fx)if(f.pre)f.draw(t);for(const f of fx)if(f.under)f.draw(t);
-  for(const u of units)apply(u);apply(heroes.foe);apply(heroes.me);const dm=BW.document.getElementById('dim');if(dm)dm.style.opacity=dim;
-  for(const f of fx)if(f.draw&&!f.pre&&!f.under&&!f.top)f.draw(t);for(const f of fx)if(f.top)f.draw(t);c.restore()}
+  for(const u of units)apply(u);apply(heroes.foe);apply(heroes.me);if(uc){const mc=c;c=uc;c.setTransform(DPR,0,0,DPR,0,0);c.clearRect(0,0,W,H);for(const f of fx)if(f.low&&f.draw)f.draw(t);c=mc}const dm=BW.document.getElementById('dim');if(dm)dm.style.opacity=dim;
+  for(const f of fx)if(f.draw&&!f.pre&&!f.under&&!f.top&&!f.low)f.draw(t);for(const f of fx)if(f.top)f.draw(t);c.restore()}
 return {tint,breakImg,tornadoImg,shatter,tornado,init,play,place,bd:()=>bd,ext,readMs,measure,ring,rays,burst,dots,smoke,flash,darken,shake,slam,floatTxt,icon,shot,tween,keyf,overlay,at,P,E,seg,units:()=>units,heroes:()=>heroes,ctx:()=>c,dims:()=>({W,H}),ui,img}})();
