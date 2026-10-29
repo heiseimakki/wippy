@@ -8631,7 +8631,7 @@ const LV7=7;
 /* 見はり番ドッグ：あいての 手札を 見たあと、いちばん つよい カードを 1まい すてさせる */
 {const _bc=battlecry;battlecry=async function(sd,m,c){const r=await _bc.apply(this,arguments);try{if(c&&c.id==='dog'&&(c.lv||1)>=LV7&&B&&!B.over){const o=opp(sd);if(o.hand.length){const i=o.hand.reduce((bi,x,k,a)=>C[x.id].c>C[a[bi].id].c?k:bi,0);const x=o.hand.splice(i,1)[0];o.grave&&o.grave.push(x);if(HUMAN){say(`ワン！ ${C[x.id].n}を すてさせた！`);try{renderBattle()}catch(e){}}}}}catch(e){}return r}}
 /* ねむり花ユメミ：なかまは ねむらない */
-{const _lb=NEWBC.lullaby;NEWBC.lullaby=async function(sd,m,c,o){if(c&&(c.lv||1)>=LV7){[...opp(sd).board].forEach(u=>{if(u.hp>0&&!u.kw.has('nostun')){u.frozen=1;floatAt(uEl(u),'💤','info')}});if(HUMAN)say('こもりうた… あいてだけ ねむっちゃった');return}return _lb.apply(this,arguments)}}
+{const _lb=NEWBC.lullaby;NEWBC.lullaby=async function(sd,m,c,o){if(c&&(c.lv||1)>=LV7){[...opp(sd).board].forEach(u=>{if(u.hp>0&&!u.kw.has('nostun')){u.frozen=1;floatAt(uEl(u),'💤','info')}});if(HUMAN)say(isMe(sd)?'こもりうた… あいてだけ ねむっちゃった':'こもりうた… ウィピィの なかまが ねむっちゃった');return}return _lb.apply(this,arguments)}}
 /* グータラ：かばう／ジャッカロープ：バリア2回 */
 {const _sm=summon;summon=function(sd,id,lv){const m=_sm.apply(this,arguments);try{if(m&&(lv||1)>=LV7){if(id==='new44')m.kw.add('taunt');if(id==='jacka'&&m.kw.has('shield'))m.shN=2}}catch(e){}return m}}
 /* まずしいゾンビ：体力 まんたんで ふっかつ */
@@ -8950,7 +8950,7 @@ X('new185',{bc:async sd=>{const c=sd.deck[0];if(!c)return;if(!isMe(sd)||!HUMAN){
   const ok=await new Promise(res=>{modal(`<h2>つぎの カードは…</h2><div class="grid" id="fh1" style="justify-content:center"></div><div class="row" style="gap:8px;margin-top:10px"><button class="btn green" id="yes" style="flex:1">ひく！</button><button class="btn" id="no" style="flex:1">山札の 下へ</button></div>`);const el=cardEl(c.id,c.lv||1,{});el.style.setProperty('--cw','min(30vw,120px)');$('fh1').appendChild(el);$('yes').onclick=()=>{closeModal();res(1)};$('no').onclick=()=>{closeModal();res(0)}});
   if(ok)drawCard(sd,1);else sd.deck.push(sd.deck.shift())}});
 X('new225',{bc:async sd=>{const n=Math.max(1,B.playedThisTurn||1);sd.coin+=n;if(HUMAN)say(`コイン +${n}！`)}});
-X('new61',{dr:async sd=>{const o=opp(sd);if(o.hand.length<8)o.hand.push({id:'curseT',lv:1,plus:0,_tmp:1});if(HUMAN)say('あいての 手札に「のろい」が まざった…')}});
+X('new61',{dr:async sd=>{const o=opp(sd);if(o.hand.length<8)o.hand.push({id:'curseT',lv:1,plus:0,_tmp:1});if(HUMAN)say(isMe(sd)?'あいての 手札に「のろい」が まざった…':'ウィピィの 手札に「のろい」が まざった…')}});
 X('new75',{bc:async sd=>{B.fuses=B.fuses||[];B.fuses.push({side:sd,left:3,v:3,front:1});if(HUMAN)say('🧨 3…2…1… で ドカン！')}});
 X('new104',{bc:async sd=>{B.fuses=B.fuses||[];B.fuses.push({side:sd,left:3,v:3,front:1},{side:sd,left:4,v:3,front:1});if(HUMAN)say('🧨 ダイナマイトを 2本 おいた！')}});
 X('new10',{dr:async sd=>{const o=opp(sd);for(const t of xFoes(sd))await damage(o,t,1,{quiet:true,fx:'magic'})}});
@@ -8959,8 +8959,8 @@ X('new215',{dr:async sd=>{const t=pick(xFoes(sd));if(t)await damage(opp(sd),t,1,
 X('new224',{bc:async sd=>{for(let i=0;i<3;i++){const t=pick(xFoes(sd));if(!t)break;await damage(opp(sd),t,1,{quiet:true,fx:'shot'})}}});
 X('new115',{bc:async(sd,m)=>{const all=[...xFoes(sd),...xMine(sd,m)];const t=pick(all);if(t){await damage(sd.board.includes(t)?sd:opp(sd),t,2,{quiet:true});if(HUMAN)say(sd.board.includes(t)?'あばれて なかまに ぶつかった！':'あばれて あいてに ぶつかった！')}}});
 X('new226',{bc:async sd=>{let n=0;while(roomOf(sd)>0&&n<5){const k=summon(sd,'straycatT',1);if(!k)break;k.fuel=2;k.walk=1;n++}if(HUMAN&&n)say(`ノラネコが ${n}匹 あつまった！（つぎの ターン さんぽへ）`)}});
-X('new55',{bc:async sd=>{let n=0;while(roomOf(sd)>0&&n<2){if(!summon(sd,'zombieT',1))break;n++}const z=sd.board.filter(b=>b.hp>0&&(b.f==='zo'||C[b.id].f==='zo'));if(z.length>=3){xFoes(sd).forEach(t=>{if(!t.kw.has('nostun')){t.frozen=1;xFl(t,'♪','info')}});if(HUMAN)say('🎶 大合唱！ あいて ぜんいん 1回休み！')}}});
-X('new86',{bc:async sd=>{if(Math.random()<.5){drawCard(sd,1);if(HUMAN)say('ちゃんと とどいた！ 1まい ひく')}else{drawCard(opp(sd),1);if(HUMAN)say('あっ… まちがえて あいてに とどいた！')}}});
+X('new55',{bc:async sd=>{let n=0;while(roomOf(sd)>0&&n<2){if(!summon(sd,'zombieT',1))break;n++}const z=sd.board.filter(b=>b.hp>0&&(b.f==='zo'||C[b.id].f==='zo'));if(z.length>=3){xFoes(sd).forEach(t=>{if(!t.kw.has('nostun')){t.frozen=1;xFl(t,'♪','info')}});if(HUMAN)say(isMe(sd)?'🎶 大合唱！ あいて ぜんいん 1回休み！':'🎶 大合唱！ ウィピィの なかま ぜんいん 1回休み！')}}});
+X('new86',{bc:async sd=>{if(Math.random()<.5){drawCard(sd,1);if(HUMAN)say('ちゃんと とどいた！ 1まい ひく')}else{drawCard(opp(sd),1);if(HUMAN)say(isMe(sd)?'あっ… まちがえて あいてに とどいた！':'あっ… まちがえて ウィピィに とどいた！')}}});
 X('new156',{bc:async sd=>{const o=opp(sd);const t=strongest(xFoes(sd));if(!t)return;const i=o.board.indexOf(t);const f=mkMinion(o,'frogT',1);f.sleep=true;f.attacks=0;o.board[i]=f;if(HUMAN)say(`${C[t.id].n}は カエルに なった！ ケロッ`)}});
 X('new147',{bc:async(sd,m)=>{const base=xMine(sd,m).find(xIsRobot);if(!base){drawCard(sd,1);return}const c=base.card||{id:base.id,lv:base.lv};
   sd.board=sd.board.filter(x=>x!==m);base.atk+=m.atk;base.hp+=m.hp;base.max+=m.hp;xFl(base,'🔩 あたまに がったい！','crit');if(C[base.id].bc&&typeof battlecry==='function'){await battlecry(sd,base,c)}}});
