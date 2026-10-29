@@ -9460,7 +9460,7 @@ function textAt(el,s,col='#fff'){if(!ensure()||!el)return;begin();const u=wrap(e
 
 function kwFlair(el,k){if(!ensure()||!el)return;begin();const u=wrap(el),p=pos(u);
   if(k==='taunt'){ring(p.x,p.y,{t:0,col:'190,200,220',r1:80,w:10});keyf(u,{t:0,d:900,fn:(v,q)=>{v.glow=q>=1?0:.8*Math.sin(q*Math.PI);v.glowC='190,210,240'}})}
-  else if(k==='quick'){burst(p.x,p.y,{t:0,n:8,im:'x_bolt',sp:6,g:0,life:450,sz:.22});flash({t:0,d:120,col:'255,240,120',a:.35});keyf(u,{t:0,d:700,fn:(v,q)=>{v.glow=q>=1?0:1-q;v.glowC='255,230,80'}})}
+  else if(k==='quick'){flash({t:0,d:120,col:'255,240,120',a:.3});keyf(u,{t:0,d:700,fn:(v,q)=>{v.glow=q>=1?0:1-q;v.glowC='255,230,80';v.oy=q>=1?0:-10*Math.sin(Math.min(1,q*2.5)*Math.PI)}})}
   else if(k==='twice'){burst(p.x,p.y,{t:0,n:6,im:'x_star',sp:3,life:700,sz:.16})}
   else if(k==='stealth'){smoke(p.x,p.y+10,{t:0,col:'200,200,220',n:10});keyf(u,{t:0,d:700,fn:(v,q)=>{v.alpha=q>=1?1:1-.5*Math.sin(q*Math.PI)}})}
   else if(k==='shield'){const s=Math.max(u.rw,u.rh)*1.3;overlay(u,{t:0,d:900,draw:(x,y,uu,e)=>{const I=ui('x_barrier');if(!I.complete)return;const a=Math.min(1,e/200,(900-e)/300);c.save();c.globalAlpha=.45*a;const ss=s*(.8+.2*Math.min(1,e/250));c.drawImage(I,x-ss/2,y-ss/2,ss,ss);c.restore()}})}
