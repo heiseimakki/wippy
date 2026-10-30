@@ -650,7 +650,7 @@ const TALK={
   shaker:['ご注文は 8つまで 同時に どうぞ','足、何本 あるの！？'],
   cancan:['ラインダンスで 目が まわるわよ','くるくる〜 め、目がまわる〜'],
   arai:['お皿、ピッカピカに しときます！','えらいね！ でも しょうぶは べつ！'],
-  yoppa:['ヒック… ミルク のみすぎた…','おじさん、ミルク のみすぎ だよ〜'],
+  yoppa:['ヒック… ここが 特等席だ…','おじさん、のみすぎ だよ〜'],
   mustache:['こんやは 貸し切りよ','わたしも 入れて〜！'],
   mog:['さあ、手拍子 どうぞ〜','パン、パン！ …って ちがう！'],
   kishi:['ここは ぼくが まもる！','たのもしい〜！'],
@@ -778,7 +778,7 @@ const TIPS={
     '💠バリアは 1回だけ 「えいっ」と はじく。2回目は がんばって！','👼復活の子は、たおれても 1回だけ「まだまだ〜！」って 起きあがるよ',
     '📣見参！の子は、出てきた しゅんかんに 何かやらかす。お楽しみに！','💤 よばれたばかりの子は ねむいから、攻撃は 次のターンからだよ',
     '勝つたびに なかまが ふえる！ 山札が 多いほど、さいごまで ねばれるよ','親分の やる気が 0に なるか、子分が ぜんぶ いなくなると、親分は 白い旗で こうさん！',
-    'コインは 毎ターン 1まいずつ ふえるよ（さいふの 大きさまで）','🥛 酒場の ミルクを のむと、げんきが もどるよ！',
+    'コインは 毎ターン 1まいずつ ふえるよ（さいふの 大きさまで）','🍺 酒場の ミルクは 体力回復に ききめ バツグン！',
     '💀 賞金首は、やる気を 半分まで へらすと 🪢投げ縄で つかまえられるよ','つかまえた お尋ね者は 保安官事務所へ。説得したら なかまに なるかも！？',
     'ダブった なかまは すてないで！ 🔨合成すると レベルアップ！','Lv5に なると ✨しんか する子も いるよ。どんな すがたに なるかな？',
     'むかしの 保安官バッジは、星の形の ものが 多かったんだって！','あぶなくなったら 🏠で 町に 帰ろう。逃げるが 勝ち！',
@@ -5026,8 +5026,8 @@ async function bhit(t,n){await damage(t.hero?B.me:B.me,t,n,{fx:'enemy',quiet:tru
 const roomFoe=()=>bmax(B.foe)-B.foe.board.length;
 
 const BX={
-  bibiri:{nm:'ビビり撃ち',d:'ダメージを うけると、びっくりして パンパン うっちゃう！',
-    async hurt(){if(B._bb===B.side)return;B._bb=B.side;const k=1+rnd(5);bsay(`ビビリ「ひぃっ！」 ${k}かい パンパン！`);
+  bibiri:{nm:'ビビり撃ち',d:'ダメージを うけると、びっくりして 1〜5発 撃ちまくる！',
+    async hurt(){if(B._bb===B.side)return;B._bb=B.side;const k=1+rnd(5);bsay(`ビビリ「ひぃっ！」 ${k}発 撃ちまくり！`);
       for(let i=0;i<k&&!B.over;i++){const ts=[...myLive(),heroOf(B.me)];await bhit(pick(ts),1)}await cleanup();B._bb=null}},
   zombino:{nm:'ファミリー',d:'敵のターンの終わりに ゾンビ2体が あらわれる！ ゾンビが いるあいだ ドン・ゾンビーノは ダメージを うけない',
     preHurt(){if(foeLive().some(m=>m.id==='zombieT')){floatAt(heroEl(B.foe),'🧟 ファミリーが まもった！','info');return true}},
@@ -5042,14 +5042,14 @@ const BX={
     async foeTurn(){if(B.turn%2)return;bsay('ポール・バニヤンの 大斧ひとふり！ ぜんぶ まとめて 2ダメージ！');if(HUMAN)shakeApp();
       for(const m of myLive())await bhit(m,2);await bhit(heroOf(B.me),2);await cleanup()},
     async foeEnd(){if(B.turn%3)return;const n=Math.min(2,roomFoe());for(let i=0;i<n;i++)summon(B.foe,'logT',1);if(n){bsay('丸太のかべが できた！');if(HUMAN)renderBattle()}}},
-  nanashi:{nm:'あっとうてきに つよい！',d:'つぎに 何をするか 見えている。みだれうち／ねらいうち／ひと休み',
+  nanashi:{nm:'あっとうてきに つよい！',d:'つぎに 何をするか 見えている。みだれうち／ねらいうち／リロード',
     start(){B.nn=pick(['midare','nerai','reload'])},
     async foeTurn(){const k=B.nn||'nerai';
       if(k==='midare'){bsay('名無しのガンマン「……」 みだれうち！ なかま全員に 2ダメージ');for(const m of myLive())await bhit(m,2)}
       if(k==='nerai'){bsay('名無しのガンマン「……」 ねらいうち！ あなたに 4ダメージ');await bhit(heroOf(B.me),4)}
-      if(k==='reload'){B.foe.hp=Math.min(B.foe.max,B.foe.hp+6);floatAt(heroEl(B.foe),'+6','heal');bsay('名無しのガンマン「……」 ひと休み。❤️6 もどった');updHero()}
+      if(k==='reload'){B.foe.hp=Math.min(B.foe.max,B.foe.hp+6);floatAt(heroEl(B.foe),'+6','heal');bsay('名無しのガンマン「……」 リロード。 体力6回復');updHero()}
       await cleanup();B.nn=pick(['midare','nerai','reload'].filter(x=>x!==k||Math.random()<.3))},
-    badge(){return {midare:'🔫🔫 つぎ：みだれうち',nerai:'🎯 つぎ：ねらいうち',reload:'🔄 つぎ：ひと休み'}[B.nn]||''}},
+    badge(){return {midare:'🔫🔫 つぎ：みだれうち',nerai:'🎯 つぎ：ねらいうち',reload:'🔄 つぎ：リロード'}[B.nn]||''}},
   ketcham:{nm:'いただき！',d:'2ターンに1回、あなたの手札から 1まい ぬすんで 自分のなかまにする',
     async foeTurn(){if(B.turn%2||!B.me.hand.length)return;const i=rnd(B.me.hand.length);const c=B.me.hand.splice(i,1)[0];B.foe.hand.push({...c,_new:0});
       bsay(`怪盗「いただき！」 ${C[c.id].n}を ぬすまれた！`);if(HUMAN){renderBattle();await sleep(500)}}},
@@ -5062,9 +5062,9 @@ const BX={
       if(gs.length){gs.forEach(m=>{m.atk=Math.min(8,m.atk*2);m.baseAtk=m.atk;floatAt(uEl(m),'攻撃×2！','crit')});bsay('「よくも兄弟を！」 のこりの子分の 攻撃が 倍に！')}
       else{B.maPh=2;bsay('ママ・バーカー「うちの子に 何すんの！」 ママが 出てきた！');if(HUMAN)shakeApp()}},
     async foeTurn(){if(B.maPh!==2||!roomFoe())return;summon(B.foe,'goonT',B.maLv||2);bsay('ママが 子分を よみがえらせた！');if(HUMAN)renderBattle()}},
-  ice:{nm:'こおりの世界',d:'敵のターンの終わりに あなたの なかま1体が こおる。こおった子は たたかれると パリーンと われちゃう。げんきが はんぶんに なると おこりだす',
+  ice:{nm:'こおりの世界',d:'敵のターンの終わりに あなたの なかま1体が こおる。こおった子は たたかれると パリーンと われちゃう。体力が半分になると キレる',
     async foeEnd(){const ts=myLive().filter(m=>!m._ice);const t=pick(ts);if(t){t.frozen=1;t._ice=1;t.fzType='ice';floatAt(uEl(t),'🧊 カチコチ！','info');bsay(`${C[t.id].n}が カチコチに こおった！`)}},
-    hurt(){if(!B.rage&&B.foe.hp<=B.foe.max/2){B.rage=B.turn;bsay('フォクシアが ぷんぷん おこった！ 3ターンに1回、ふぶきが くる！');if(HUMAN)shakeApp()}},
+    hurt(){if(!B.rage&&B.foe.hp<=B.foe.max/2){B.rage=B.turn;bsay('フォクシアが キレた！ 3ターンに1回、ふぶきが くる！');if(HUMAN)shakeApp()}},
     async foeTurn(){if(!B.rage||(B.turn-B.rage)%3)return;bsay('ふぶき！ なかま全員に 1ダメージ（こおった子は こなごな）');
       for(const m of myLive())await bhit(m,m._ice?99:1);await bhit(heroOf(B.me),2);await cleanup()}},
   ikoku:{nm:'王の命令',d:'3ターンに1回、あなたの いちばん強い なかまを 3ターン「家来」にする',
@@ -5771,7 +5771,7 @@ function awAdd(ev,n=1,set=false){if(!B||!B.me)return;for(const c of B.me.hand){c
 /* ---- 覚醒したボスの力（なかま がわ。ボス戦と同じ強さ） ---- */
 const room=sd=>bmax(sd)-sd.board.length;
 const AWX={
-  bibiri:{async hurt(sd,m){if(m._bb)return;m._bb=1;const o=opp(sd),k=1+rnd(5);if(HUMAN)say(`ビビリ「ひぃっ！」 ${k}かい パンパン！`);for(let i=0;i<k&&B&&!B.over;i++){const ts=[...o.board.filter(e=>e.hp>0),heroOf(o)];await damage(o,pick(ts),1,{quiet:true})}m._bb=0}},
+  bibiri:{async hurt(sd,m){if(m._bb)return;m._bb=1;const o=opp(sd),k=1+rnd(5);if(HUMAN)say(`ビビリ「ひぃっ！」 ${k}発 撃ちまくり！`);for(let i=0;i<k&&B&&!B.over;i++){const ts=[...o.board.filter(e=>e.hp>0),heroOf(o)];await damage(o,pick(ts),1,{quiet:true})}m._bb=0}},
   zombino:{pre(sd,m){if(sd.board.some(x=>x!==m&&x.hp>0&&(x.id==='zombieT'||x.f==='zo'))){floatAt(uEl(m),'🧟 ファミリーが まもった！','info');return true}},
     end(sd){const n=Math.min(2,room(sd));for(let i=0;i<n;i++)summon(sd,'zombieT',2);if(n&&HUMAN)say('「ゾンビ2体が あらわれる！」')}},
   eagle:{foePlay(sd,m,em){if(em){em._wntA=1;floatAt(uEl(em),'📜 手配書！','info')}},async turn(sd,m){const o=opp(sd);const t=o.board.filter(e=>e.hp>0&&e._wntA).pop()||o.board.filter(e=>e.hp>0).pop();if(t){if(HUMAN)say(`モーキン警部が 空から ${C[t.id].n}を ねらった！`);await damage(o,t,2);await damage(o,t,2)}}},
@@ -6044,8 +6044,8 @@ for(const id in AWN_COOL)if(AWN[id])AWN[id][1]=AWN_COOL[id];
 /* ボス戦の 力の説明も イキに */
 const BX_COOL={zombino:'敵のターンの終わりに ファミリー（ゾンビ2体）が かけつける。ファミリーが いるかぎり ドンは 不死身',
   capone:'ラスボス。子分の枠は 5体、山札は たっぷり、にげも かくれも しない。毎ターン ニャンコが 2体。4ターンに1回「集合！」',
-  nanashi:'何をしてくるか 見えている。でも 止められるかな？ みだれうち／ねらいうち／ひと休み',
-  ice:'敵のターンの終わりに あなたの なかまが 1体 カチコチ。さわられると こなごな。体力が はんぶんで おこる'};
+  nanashi:'何をしてくるか 見えている。でも 止められるかな？ みだれうち／ねらいうち／リロード',
+  ice:'敵のターンの終わりに あなたの なかまが 1体 カチコチ。さわられると こなごな。体力が半分で キレる'};
 for(const id in BX_COOL)if(BX[id])BX[id].d=BX_COOL[id];
 /* 覚醒の表示は「Lv7+👑」（＋3 などは 出さない） */
 {const _bs=bookSheet;bookSheet=function(id,lv,aw){_bs.apply(this,arguments);if(aw){const L=document.querySelector('#shc .lv');if(L)L.textContent=`${lv>=MAX_LV?'MAX':'Lv'+lv}+👑`;const h=document.querySelector('#sheet h3 .small');if(h)h.textContent=`${lv>=MAX_LV?'Lv MAX':'Lv'+lv}+👑`}}}
@@ -6091,7 +6091,7 @@ const FLAV={
  pyonko:{"見参！": "いらっしゃいませ〜！ なかまを{1}人 ひく"},
  korokichi:{"いるあいだ": "リーリー♪ ほかの酒場の攻撃+{1}"},
  harry:{"見参！": "運命の ルーレット！ ランダムな敵キャラ{1}体を手札に追い返す"},
- bard:{"見参！": "えいっ！ 自分の攻撃+{1}"},
+ bard:{"見参！": "ヒック！ 自分の攻撃+{1}"},
  lily:{"見参！": "なかまを{1}人 ひく"},
  shaker:{"いるあいだ": "ターンの終わり、仲間ぜんいんの体力を{1}いやす"},
  cancan:{"見参！": "いちばん強い敵を酔っぱらわせる（{1}回休み）"},
@@ -6317,18 +6317,18 @@ const FLAV={
  new214:{"見参！": "トゲぬきミルク！ 仲間ぜんいんとあなたの体力を{1}いやす"},
  new215:{"やられたら": "ころん♪ ランダムな敵に{1}ダメージを{2}回"},
  new216:{"見参！": "ぽぽぽんっ！ たね（{1}/{2}）を{3}匹よぶ"},
- new218:{"見参！": "ふわぁ… いちばん強い敵が ねむっちゃう（1回 おやすみ）"},
+ new218:{"見参！": "ふわぁ… いちばん強い敵を酔っぱらわせる（{1}回休み）"},
  new219:{"昇進": "森の 番人！ 敵を{1}体 たおすごとに ⭐ +{2}/+{3}（{4}回まで）"},
  new220:{"やられたら": "たね（{1}/{2}）を{3}匹よぶ"},
  new221:{"昇進": "いつか ボスに！ 敵を{1}体 たおすごとに ⭐ +{2}/+{3}（{4}回まで）"},
  new222:{"見参！": "敵の手札を見やぶる＋なかまを{1}人 ひく"},
- new223:{"見参！": "ケーサツだぞ〜！ いちばん強い敵が びっくりして 1回 おやすみ"},
+ new223:{"見参！": "ケーサツだぞ〜！ いちばん強い敵を酔っぱらわせる（{1}回休み）"},
  new224:{"見参！": "ダダダニャ〜！ ランダムな敵に{1}ダメージ"},
  new225:{"見参！": "このターン、コイン+{1}"},
  new226:{"見参！": "ノラネコ（{1}/{2}）を{3}匹よぶ"},
  new228:{"金塊": "やられたら 旅の賞金+＄{1}"},
  new229:{"やられたら": "クルッポー！ ハト（{1}/{2}）を{3}匹よぶ"},
- new230:{"見参！": "とくダネ！ いちばん強い敵が てれて 1回 おやすみ"},
+ new230:{"見参！": "とくダネ！ いちばん強い敵を酔っぱらわせる（{1}回休み）"},
  new231:{"見参！": "いちばん強い敵を酔っぱらわせる（{1}回休み）"},
  new232:{"見参！": "どっちが ホンモノ？ なかまを{1}人 ひく"},
  new234:{"いるあいだ": "毎ターンコイン+{1}"},
@@ -6972,8 +6972,8 @@ if(BX.ketcham){Object.assign(BX.ketcham,{d:'ターンの終わりに、あなた
  for(const id in N)if(AWK[id]){AWK[id].need=N[id][0];AWK[id].t=N[id][1];AWK[id].q=N[id][2]}}
 /* ===== 3ターン・4ターンごとの 効果を なくす（10/26）：基本は「ターンの終わりに」。のこすのは アダラー覚醒の 3じゅうバリア だけ ===== */
 /* フォクシア：キレたあとは ターンの終わりに ふぶき */
-if(BX.ice){Object.assign(BX.ice,{d:'ターンの終わりに あなたの なかま1体が こおる（たたかれると こなごな）。体力が 半分に なると おこって、ターンの終わりに ふぶき（なかま全員と あなたに 1ダメージ）',
-  hurt(){if(!B.rage&&B.foe.hp<=B.foe.max/2){B.rage=B.turn;bsay('フォクシアが ぷんぷん おこった！ ターンの終わりに ふぶきが くる！');if(HUMAN)shakeApp()}},foeTurn:undefined,
+if(BX.ice){Object.assign(BX.ice,{d:'ターンの終わりに あなたの なかま1体が こおる（たたかれると こなごな）。体力が 半分に なると キレて、ターンの終わりに ふぶき（なかま全員と あなたに 1ダメージ）',
+  hurt(){if(!B.rage&&B.foe.hp<=B.foe.max/2){B.rage=B.turn;bsay('フォクシアが キレた！ ターンの終わりに ふぶきが くる！');if(HUMAN)shakeApp()}},foeTurn:undefined,
   async foeEnd(){const ts=myLive().filter(m=>!m._ice);const t=pick(ts);if(t){t.frozen=1;t._ice=1;t.fzType='ice';floatAt(uEl(t),'🧊 カチコチ！','info');bsay(`${C[t.id].n}が カチコチに こおった！`)}
     if(B.rage&&!B.over){bsay('ふぶき！ なかま全員に 1ダメージ（こおった子は こなごな）');for(const m of myLive())await bhit(m,m._ice?99:1);await bhit(heroOf(B.me),1);await cleanup()}}})}
 /* アーサー：ターンの終わりに いちばん強い なかまを 家来に（つぎの ターンの終わりに もどる） */
@@ -7745,7 +7745,7 @@ new82:['パタパタ〜、おそうじ おそうじ','ほこりで くしゃみ 
 new83:['あま〜い ミルクセーキ、いかが？','のみたい！ …けど しょうぶが さき！'],
 new84:['おきゃくさん、ヒゲ のびてますよ','わたしの ヒゲは きっちゃ だめ〜！'],
 new85:['ピッカピカに みがくよ！','わたしの 星バッジも みがいて〜！'],
-new86:['ふぁ〜… おてがみ でーす','あぶない あぶない！ まっすぐ あるいて！'],
+new86:['ヒック… おてがみ でーす','あぶない あぶない！ まっすぐ あるいて！'],
 new87:['ポロン♪ ひとりでに なっちゃう','ひとりでに！？ …ちょっと こわいけど きれい'],
 new88:['バタン！ いらっしゃい！','びっくりした〜！ ドア、そっと しめて！'],
 new89:['リンリン♪ おにもつ おはこびします','じゃあ この しょうぶも はこんで〜！'],
