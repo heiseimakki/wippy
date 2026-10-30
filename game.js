@@ -216,7 +216,7 @@ const COLLECT=Object.keys(C).filter(id=>!C[id].token);
    強くなり方はゆっくり。Lv10でやっと2倍ちょっと
    ===================================================================== */
 const MAX_LV=10, EVO_LV=5;
-const MERGE_RATE=[0,1,.9,.8,.7,.6,.5,.4,.3,.2];   // Lv1→2 … Lv9→10
+const MERGE_RATE=[0,.8,.65,.5,.4,.3,.22,.15,.1,.06];   // Lv1→2 … Lv9→10（10/30 ひくく）
 const clv=lv=>Math.max(1,Math.min(MAX_LV,lv||1));
 /* レベルが上がるたびに、体力→攻撃→体力→攻撃…と1ずつ増える（Lv10は両方+1） */
 const lvA=lv=>Math.floor((clv(lv)-1)/2)+(clv(lv)>=MAX_LV?1:0);
@@ -224,8 +224,8 @@ const lvH=lv=>Math.floor(clv(lv)/2);
 const statA=(id,lv)=>C[id].a+(C[id].kw.includes('noattack')?0:lvA(lv)+(C[id].grow?Math.floor((clv(lv)-1)/5):0));
 const statH=(id,lv)=>Math.max(1,C[id].h+lvH(lv)+(C[id].grow?Math.floor(clv(lv)/5):0));
 const valX=(v,lv)=>(v||0)+Math.floor(clv(lv)/3);           // ダメージ・回復などの数字（Lv3,6,9で+1）
-const lvB=lv=>Math.min(2,Math.floor(clv(lv)/3)),lvP=lv=>clv(lv)>=3?1:0,lvN=lv=>(clv(lv)>=EVO_LV?1:0)+(clv(lv)>=MAX_LV?1:0); /* 10/27 効果の成長：B=Lv3,6で+1 P=Lv3で+1 N=Lv5,10で+1 */
-const valN=(v,lv)=>(v||0)+((lv||1)>=EVO_LV?1:0)+((lv||1)>=MAX_LV?1:0); // 枚数・匹数などの数
+const lvB=lv=>Math.min(2,Math.floor(clv(lv)/3)),lvP=lv=>clv(lv)>=3?1:0,lvN=lv=>(clv(lv)>=MAX_LV?1:0); /* 10/30：Lv5は とくべつ じゃない（昇進だけ）。N=Lv10で+1 */
+const valN=(v,lv)=>(v||0)+((lv||1)>=MAX_LV?1:0); // 枚数・匹数などの数
 
 
 const KW_T={taunt:'かばう',shield:'バリア',twice:'2回攻撃',quick:'はやうち',revive:'1回復活',home:'たおれたら手札へ',thorns:'トゲ',stealth:'かくれんぼ',
@@ -246,7 +246,7 @@ function bcText(d,lv){
     case 'stun':return 'いちばん強い敵を酔っぱらわせる（1回休み）';case 'stunall':return '敵ぜんいんを酔っぱらわせる（1回休み）';
     case 'blow':return 'いちばん強い敵キャラを手札に吹き飛ばす';case 'bounce':return 'ランダムな敵キャラ1体を手札に追い返す';
     case 'sneeze':return `大くしゃみ！いちばん強い あいて1体を 手札に 吹き飛ばす`;
-    case 'summon':return `${tokName(d.tok)}を${n}匹よぶ`;case 'buff':return `いちばん強い仲間に+${x}/+${x}`;case 'buffr':return `ほかの仲間1体に+${x}/+${x}`;
+    case 'summon':return `${tokName(d.tok)}を${d.v||1}匹よぶ`;case 'buff':return `いちばん強い仲間に+${x}/+${x}`;case 'buffr':return `ほかの仲間1体に+${x}/+${x}`;
     case 'buffall':return `仲間ぜんいんの攻撃+${x}`;case 'selfatk':return `自分の攻撃+${x}`;
     case 'flipdraw':return `コイン投げ！表なら なかまを${n}人 ひく`;case 'flipbuff':return `コイン投げ！表なら仲間1体に+${x}/+${x}`;
     case 'quickmg':return `早撃ち勝負！勝ったらいちばん強い敵キャラに${x}ダメージ`;case 'meat':return `お肉タップタプ！10回ごとに+${x}/+${x}`;
@@ -257,7 +257,7 @@ function bcText(d,lv){
     case 'moji':return 'あいての画面の文字が ぜんぶ文字化け！あいては次のターン、なかまを1人しか出せない';case 'mojis':return 'あいての手札の名前が文字化け！あいては次のターン、なかまを1人しか出せない';case 'junk':return 'コイン投げ！裏だとこわれて退場';
   }return ''}
 function drText(d,lv){const x=valX(d.dv,lv),n=valN(d.dv,lv);
-  switch(d.dr){case 'summon':return `${tokName(d.tok)}を${n}匹よぶ`;case 'boom':return `ランダムな敵に${x}ダメージを${d.boomN||3}回`;
+  switch(d.dr){case 'summon':return `${tokName(d.tok)}を${d.dv||1}匹よぶ`;case 'boom':return `ランダムな敵に${x}ダメージを${d.boomN||3}回`;
     case 'healhero':return `あなたの体力を${x}いやす`;case 'healall':return `仲間ぜんいんの体力を${x}いやす`;case 'draw':return `なかまを${n}人 ひく`}return ''}
 function auraText(d,lv){const x=valX(d.av,lv);
   switch(d.aura){case 'atk':return `いるあいだ、ほかの仲間の攻撃+${x}`;case 'faction':return `いるあいだ、ほかの${FACT[d.f][0]}の攻撃+${x}`;
@@ -1120,7 +1120,7 @@ document.addEventListener('pointerdown',e=>{if(e.target.closest&&e.target.closes
 
 
 /* バージョン：おおきい変更.機能を足した.小さな直し　（1.0.0 = 正式リリース） */
-const VERSION='0.77.0';
+const VERSION='0.78.0';
 /* =====================================================================
    タイトル・データ管理
    ===================================================================== */
@@ -1227,7 +1227,7 @@ const WANTED_UI=[{img:'@@D14@@',ar:'320/475',w:[.1677,.322,.8721,.7401]},{img:'d
 const bossPay=sid=>({wild:50,hill:100,canyon:150,saloon:200,mine:250,ranch:300,train:350,steam:400,bayou:450,snow:475,oasis:500,volcano:525,forest:550,mafia:650}[sid]||250); /* 10/28：手配書の お金＝ボスを たおすと ほんとうに もらえる */
 const wantedPay=(sid,star)=>bossPay(sid)+(star||0)*Math.max(50,Math.round(bossPay(sid)*.5/25)*25);
 const bountyOf=id=>{const c=C[id];return 6+c.c*5+(c.r==='R'?10:c.r==='L'?40:0)};
-const persuadeDays=id=>{const c=C[id];return 1+Math.floor(c.c/3)+(c.r==='L'?2:c.r==='R'?1:0)};
+const persuadeDays=id=>{const c=C[id];return c.r==='L'?5:c.r==='R'?3:1};/* 10/30：ノーマル1日・レア3日・レジェンド5日 */
 const FACS={
   board(){
     /* 賞金首の手配書がはってある。手配書をおすと、その賞金首をつかまえに冒険へ */
@@ -1353,9 +1353,10 @@ async function evolveAnim(id){
   let el=cardEl(id,e.lv,{showTx:false});el.style.setProperty('--cw','150px');$('er').appendChild(el);
   mbub(el,lineOf(id,1));
   for(let i=0;i<12;i++){el.style.filter=i%2?'brightness(3)':'none';SFX.tap();await sleep(150-i*8)}
-  SFX.legend();flash();const n=cardEl(to,1,{showTx:false,cls:'glowL flip'});n.style.setProperty('--cw','150px');el.replaceWith(n);burst(n,['✨','⭐','🌟'],22,140);
+  SFX.legend();flash();const n=cardEl(to,(()=>{const xa=lvA(e.lv)-lvA(EVO_LV),xh=lvH(e.lv)-lvH(EVO_LV);let nl=1;while(nl<MAX_LV&&(lvA(nl)<xa||lvH(nl)<xh))nl++;return nl})(),{showTx:false,cls:'glowL flip'});n.style.setProperty('--cw','150px');el.replaceWith(n);burst(n,['✨','⭐','🌟'],22,140);
   $('eres').textContent=`${C[to].n}に進化した！`;mbub(n,C[to].s||lineOf(to,2));
-  const left=e.n;G.seen[to]=1;if(G.col[to])G.col[to].n++;else G.col[to]={lv:1,n:0};
+  const left=e.n;G.seen[to]=1;/* 10/30：Lv5より 上げた ぶんの つよさは、昇進しても のこす */const xa=lvA(e.lv)-lvA(EVO_LV),xh=lvH(e.lv)-lvH(EVO_LV);let nl=1;while(nl<MAX_LV&&(lvA(nl)<xa||lvH(nl)<xh))nl++;
+  if(G.col[to]){G.col[to].n++;if(nl>G.col[to].lv)G.col[to].lv=nl}else G.col[to]={lv:nl,n:0};
   if(left>0)G.col[id]={lv:1,n:left-1};else delete G.col[id];
   const pi=G.party.indexOf(id);if(pi>=0){if(G.col[id]){if(G.party.length<deckMax())G.party.push(to)}else G.party=G.party.map(x=>x===id?to:x)}fixParty();
   G.st.evos++;save();checkAch();await sleep(2300);st.hidden=true;partyView();
@@ -1751,7 +1752,7 @@ function validTargets(sd){const o=opp(sd);const vis=o.board.filter(x=>x.hp>0&&!x
   return (o===B.foe&&B.foe.hidden)?[]:[heroOf(o)]}
 function lassoChance(){const f=B.foe;let p=.15+(1-f.hp/f.max)*.85+R.skills.lasso+B.lassoBonus+(hasRelic('goldrope')?.15:0)+Math.max(0,...B.me.board.filter(a=>C[a.id].aura==='lasso').map(a=>.15+.05*lvB(a.lv)));if(f.boss)p-=.1;return Math.max(.05,Math.min(.95,p))}
 const LASSO_MAX=3;/* 10/26：投げ縄は 1回の 戦いで 3回まで */
-const lassoLeft=()=>B?Math.max(0,LASSO_MAX-(B.lassoTries||0)):0;
+const lassoLeft=()=>B?Math.max(0,LASSO_MAX+(B.lassoBonus||0)-(B.lassoTries||0)):0;
 const canLasso=()=>B&&B.foe.wanted&&B.foe.hp>0&&B.foe.hp<=B.foe.max/2&&!B.lassoUsed&&!B.foe.hidden&&B.side===B.me&&lassoLeft()>0;
 
 async function battle(spec){
@@ -1776,13 +1777,14 @@ async function startTurn(sd){
   if(isMe(sd)){c+=R.skills.coin;if(hasRelic('horseshoe')&&B.turn===1)c++;if(hasRelic('dice')&&Math.random()<.5)c++;B.lassoUsed=false;B.firstPlay=false}
   sd.coin=c;if(isMe(sd))B.coinIn=c;
   drawCard(sd,1+sd.board.filter(m=>C[m.id].aura==='draw').length);
-  for(const m of sd.board){m.sleep=false;m.attacks=m.kw.has('twice')?2:1;if(m._lazy){m._lazy=0;m.sleep=true;m.attacks=0}if(m.frozen>0){m.frozen--;m.wasFrozen=true}else m.wasFrozen=false}
+  for(const m of sd.board){m.sleep=false;m.attacks=m.kw.has('twice')?2:1;if(m._lazy){m._lazy=0;m.sleep=true;m.attacks=0}m.wasFrozen=m.frozen>0}/* 10/30：1回休みは このターンの あいだ 休み、ターンの おわりに とける */
   for(const m of sd.board)if(m.poison){const p=m.poison*(isMe(sd)?1:(hasRelic('skull')?2:1));m.hp-=p;floatAt(uEl(m),'☠-'+p);impact(uEl(m),'poison')}
   if(!isMe(sd)&&hasRelic('snakeoil')){const t=pick(sd.board);if(t){t.hp-=1;floatAt(uEl(t),'🧴-1')}}
   if(!isMe(sd)&&B.foe.hidden)B.foe.hidden=false;
   await cleanup();
 }
 async function endTurnFx(sd){
+  for(const m of sd.board){if(m.frozen>0)m.frozen--}
   for(const m of sd.board){const d=C[m.id];
     if(d.aura==='regen'){const x=valX(d.av,m.lv);sd.board.forEach(b=>{if(b.hp<b.max){b.hp=Math.min(b.max,b.hp+x);floatAt(uEl(b),'+'+x,'heal')}})}
     if(d.aura==='miner'&&isMe(sd)&&Math.random()<.5+.25*lvN(m.lv)){R.money++;floatAt(uEl(m),'＄1','heal')}
@@ -1825,7 +1827,7 @@ async function battlecry(sd,m,c){
     case 'blow':{const t=strongest(foesM());if(t){await bounceTo(o,t);SFX.whoosh();say(`${C[t.id].n}は空のかなたへ！（手札にもどった）`)}break}
     case 'bounce':{const t=pick(foesM());if(t){await bounceTo(o,t);SFX.whoosh()}break}
     case 'sneeze':{/* 10/30：3体＝全員は 強すぎ → いちばん 強い 1体だけ */const st0=strongest(foesM());const ts=st0?[st0]:[];SFX.boing();shakeApp();for(const t of ts)await bounceTo(o,t);say(ts.length?'ハ…ハ…ハックショーン！！ いちばん強い あいてを 吹き飛ばした！':'ハ…ハ…ハックショーン！！');break}
-    case 'summon':for(let i=0;i<n;i++)summon(sd,d.tok,c.lv);break;
+    case 'summon':for(let i=0;i<(d.v||1);i++)summon(sd,d.tok,c.lv);break;/* 10/30：よぶ数は レベルで ふえない（場は かぎりが ある） */
     case 'buff':{const t=strongest(mine());if(t){t.atk+=x;t.hp+=x;t.max+=x;floatAt(uEl(t),`+${x}/+${x}`,'heal');impact(uEl(t),'heal')}break}
     case 'buffr':{const t=pick(mine());if(t){t.atk+=x;t.hp+=x;t.max+=x;floatAt(uEl(t),`+${x}/+${x}`,'heal');impact(uEl(t),'heal')}break}
     case 'buffall':sd.board.forEach(b=>{b.atk+=x;floatAt(uEl(b),'攻撃+'+x,'heal')});SFX.sparkle();break;
@@ -1904,7 +1906,7 @@ async function cleanup(){
       if(HUMAN&&d.dr&&typeof drMark==='function')try{await drMark(m)}catch(e){}
       if(HUMAN&&d.dr&&typeof DR_FX!=='undefined'){const f=DR_FX[m.id]||DR_FX[d.dr];if(f)try{await f(sd,m)}catch(e){}}
       if(d.dr){const x=valX(d.dv,m.lv),n=valN(d.dv,m.lv),o=opp(sd);
-        if(d.dr==='summon')for(let i=0;i<n;i++)summon(sd,d.tok,m.lv);
+        if(d.dr==='summon')for(let i=0;i<(d.dv||1);i++)summon(sd,d.tok,m.lv);
         if(d.dr==='boom')for(let i=0;i<(d.boomN||3);i++){const t=pick([...o.board.filter(e=>e.hp>0),heroOf(o)]);if(t)await damage(o,t,x,{quiet:true})}
         if(d.dr==='healhero'){if(isMe(sd))heal(x);else B.foe.hp=Math.min(B.foe.max,B.foe.hp+x)}
         if(d.dr==='healall')sd.board.forEach(b=>b.hp=Math.min(b.max,b.hp+x));if(d.dr==='draw')drawCard(sd,n)}
@@ -2035,7 +2037,7 @@ function coachUpdate(myTurn,tg){clearCoach();if(!TUTOR()||!myTurn||!B||B.over)re
   coachAt($('endt'),'ターン終了をおそう')}
 /* 敵のまわりの表示：タップで説明 */
 const FOE_TIPS={
-  run:f=>['🏃','にげちゃう！',`あと ${Math.max(0,f.escape-B.turn)}ターンで にげる。はやく たおそう！`,'#7a4a2a'],
+  run:f=>['<img src="ui/u_k_run.png" alt="">','にげちゃう！',`あと ${Math.max(0,f.escape-B.turn)}ターンで にげる。はやく たおそう！`,'#7a4a2a'],
   catch:f=>['🪢','なげなわ チャンス！','いま なげなわを なげると なかまに できるかも！','#2fbf6a'],
   fcoin:f=>['🪙','あいての コイン','これを つかって 子分を よぶよ。ターンごとに ふえる。','#b97b12'],
   fdeck:f=>['🂠','あいての のこり',`まだ よべる 子分の かず（${f.deck.length}）。子分が ぜんぶ いなくなると こうさん！`,'#b04030'],
@@ -2050,7 +2052,7 @@ function renderBattle(){
       ${heroT?'<span class="aim"></span>':''}
       <div class="fname">${f.wanted?`<i class="pill want">${f.boss?'ボス':'賞金首'}</i>`:''}${f.hanage?' 👃':''}${f.unko?' 💩':''}</div>
       
-      <div class="fleft">${f.wanted&&f.escape?`<i class="pill run" data-tip="run">🏃 にげるまで あと${Math.max(0,f.escape-B.turn)}</i>`:''}${canLasso()?'<i class="pill catch" data-tip="catch">🪢 つかまえられる！</i>':f.wanted&&f.hp>f.max/2?`<i class="pill lhint" data-tip="catch">🪢 あと${Math.ceil(f.hp-f.max/2)}で なげなわOK</i>`:''}</div>
+      <div class="fleft">${f.wanted&&f.escape?`<i class="pill run" data-tip="run">にげるまで あと${Math.max(0,f.escape-B.turn)}</i>`:''}${canLasso()?'<i class="pill catch" data-tip="catch">🪢 つかまえられる！</i>':f.wanted&&f.hp>f.max/2?`<i class="pill lhint" data-tip="catch">🪢 あと${Math.ceil(f.hp-f.max/2)}で なげなわOK</i>`:''}</div>
       <div class="fside"><div class="fsr" data-tip="fcoin"><span>${coinIco}${f.coin}</span><small>コイン</small></div><div class="fsr" data-tip="fdeck"><span class="deckpile red ${f.deck.length?'':'empty'}">${f.deck.length}</span><small>のこり</small></div><div class="fsr" data-tip="fhand"><div class="fh">${f.hand.length?(B.scout?f.hand.map(c=>`<span class="mini">${C[c.id].em||'🃏'}</span>`).join(''):f.hand.map(()=>'<span class="cb"></span>').join('')):'<span class="small">0</span>'}</div><small>てふだ</small></div></div>
     </div>
     <div class="bf ${heroT?'tgthero':''}" id="ef"></div>
@@ -3977,6 +3979,7 @@ Object.assign(SPECIAL,{
    タイトル画面：ロゴ どーん！ ＋ タンブルウィード ＋ 砂あらし ＋ あそぶボタン ＋ おしらせ
    ===================================================================== */
 const CHANGELOG=[
+  {v:'0.78.0',d:'10/30',t:['「1回休み」が ちゃんと 1回 休むように なったよ','ステージの パックは 3まい。その ステージの 子だけ 出るよ','昇進した すがたは、自分で 昇進させたときだけ 手に入るよ','ロープばあちゃんの なげなわが 2回 ふえるよ','説得は ノーマル1日・レア3日・レジェンド5日']},
   {v:'0.77.0',d:'10/29',t:['ほかの スマホへ データを 引っこし できるように なったよ！','地図ボタンの マップが、ステージごとの 絵に なったよ','コインの マークを 金貨の 絵に したよ','ブラウザの タブに、ぼくの 顔が 出るように なったよ','コインが 足りない カードは、ちゃんと 灰色に なるように 直したよ','あいての 力が こっちに かかる ときは「ウィピィの」と 出すように したよ']},
   {v:'0.76.0',d:'10/28',t:['しょうきん首を つかまえると、しょうきんが もらえるように なったよ！','つぎに いく ところが 光って、わかるように なったよ','合成・しんか できる時に、なかまが 光るように なったよ','Lv7に なると、とくべつな 力が ふえるように なったよ','ボス戦の 曲を かえて、つよさも 見なおしたよ','ずかんに タブを つけたよ','ウィピィの 顔が、セリフに あわせて かわるように なったよ','出なかった 画像を 直したよ','せっていから、セーブを クラウドにも のこせるように なったよ']},
   {v:'0.75.0',d:'10/27',t:['合成すると、とくべつな 力も つよく なるように なったよ！','行商人さんで、どうぐを 売れるように なったよ','はじめての子に、ウィピィが 道あんない するように なったよ','あいての 山札の まい数が 見えるように なったよ','右下の はぐるまから「こうさん」できるように なったよ','しょうきんの 金額を 見なおしたよ','カードの せつめいを 読みやすく したよ']},
@@ -5226,7 +5229,7 @@ function NEWC(o){const {id,n,f,r,c,a,h,em,stage,stages,lines,note,...rest}=o;if(
 const WX={sun:['はれ','☀️'],rain:['あめ','🌧️'],sand:['すなあらし','🌪️'],snow:['ゆき','❄️']};
 Object.assign(KW_COL,{wx:'#f0a020',grow:'#58b04a',evo:'#e05aa0',rank:'#d0a020',gattai:'#4a90a8',fuse:'#d04020',jail:'#6a6a6a',wanted:'#a0602a',get:'#2a9a6a',healone:'#4ab04a',shave:'#8a8a8a',swap:'#7a5ad0',gold:'#d0a020',link:'#d07a3a'});
 /* そだつ：合成（レベル）で のびる。Lv1 +0/+1×3回 → Lv3 +1/+1×4回 → Lv5 +1/+1×6回（おともの子は そのまま） */
-function growOf(d,lv){const g=d.growT||0;if(d.tok)return{a:g,h:g,n:Math.max(1,Math.floor(6/g))};lv=lv||1;return{a:lv>=3?g:0,h:g,n:lv>=5?6:lv>=3?4:3}}
+function growOf(d,lv){const g=d.growT||0;if(d.tok)return{a:g,h:g,n:Math.max(1,Math.floor(6/g))};lv=lv||1;return{a:lv>=3?g:0,h:g,n:lv>=10?6:lv>=3?4:3}}
 function newEff(d,lv){const L=[];const E=(k,ic,n,t,sh)=>L.push([ic,n,t,KW_COL[k],sh]);
   if(d.wx)E('wx',WX[d.wx][1],'天気',`見参！で「${WX[d.wx][0]}」を ${d.wv||1}つ よぶ（同じ天気は たまる）`,WX[d.wx][0]);
   if(d.growT){const G=growOf(d,lv);E('grow','🌱','うえるとそだつ',`自分のターンのはじめに +${G.a}/+${G.h}（${G.n}回まで）`+(d.tok?'':`　合成で のびる`),'そだつ')}
@@ -5906,7 +5909,7 @@ const CB2=[
   {id:'zombiewave',ic:'🧟',n:'ゾンビの 大行進',d:'ゾンビが 3人 ならぶ',t:b=>b.filter(m=>m.f==='zo'||m.id==='zombieT').length>=3},
   {id:'shield3',ic:'🛡️',n:'バリアの しろ',d:'バリアの子が 3人',t:b=>b.length>=3&&b.every(m=>m.kw.has('shield'))},
   {id:'taunt2',ic:'🧱',n:'2じゅうの かべ',d:'かばう子が 2人',t:b=>b.filter(m=>m.kw.has('taunt')).length>=2},
-  {id:'quick3',ic:'🏇',n:'でっぱつ しんこう',d:'はやうちの子が 2人',t:b=>b.filter(m=>m.kw.has('quick')).length>=2},
+  {id:'quick3',ic:'🏇',n:'しゅっぱつ しんこう！',d:'はやうちの子が 2人',t:b=>b.filter(m=>m.kw.has('quick')).length>=2},
 ];
 CB.push(...CB2);
 const cbHit=id=>{const c=CB.find(x=>x.id===id);if(c)comboFound(c)};
@@ -8108,7 +8111,7 @@ const GIVEUP={new01:['もう かてない！ ゆるして〜！','チクッと�
   const nxt=()=>{const M=L&&B._bmK!=null?L[B._bmK]:null;return M?`つぎの 技：${M.n}（${M.d}）`:''};
   const c=document.querySelector('#foeStage .bxchip');if(c&&X&&!c._tb){c._tb=1;c.onclick=e=>{e.stopPropagation();tipBubble(c,'👑','ボスの力：'+X.nm,X.d,'#d0307e')}}
   const a=document.querySelector('#foeStage .awkpill');if(a&&!a._tb){a._tb=1;a.style.pointerEvents='auto';a.style.cursor='pointer';a.onclick=e=>{e.stopPropagation();e.preventDefault();
-    const moves=L?L.map(m=>m.n).join('・'):'';tipBubble(a,'👑','覚醒した ボス',`ボス専用の 覚醒すがたで たたかうよ。${X?'とくいわざ「'+X.nm+'」も つかう。':''}${moves?'ときどき ボスの 技（'+moves+'）を つかってくる。':''}${nxt()}`,'#9a30c0')}}
+    const moves=L?L.map(m=>m.n).join('・'):'';tipBubble(a,'👑','かくせいした ボス','ボスは かくせい している！ すごく つよいよ！ 気をつけて！','#9a30c0')}}
   const n=document.querySelector('#foeStage .bnext');if(n&&!n._tb&&L){n._tb=1;n.style.pointerEvents='auto';n.onclick=e=>{e.stopPropagation();const M=L[B._bmK];if(M)tipBubble(n,M.ic,M.n,M.d,'#b04a2a')}}
 }catch(e){}return r}}
 /* お祝いの 放射：ボックス いっぱいに（.unlock の中ではなく、モーダルの 箱ごと） */
@@ -8252,7 +8255,8 @@ lootReward=function(title,extra){
    ===================================================================== */
 const EMO2={'🫳':'ui/u_k_steal','🔄':'ui/u_k_swap','📜':'ui/u_k_wanted','✂️':'ui/u_k_shave','✂':'ui/u_k_shave','🤝':'ui/u_k_link','💚':'ui/u_k_healone','🎖️':'ui/u_k_rank','🎖':'ui/u_k_rank','🔨':'ui/u_i_hammer','⚒️':'ui/u_i_hammer','☀️':'ui/u_w_sun','☀':'ui/u_w_sun','🩹':'ui/u_it_bandage','🥞':'ui/u_it_pancake','🫘':'ui/u_it_beans','☕':'ui/u_it_coffee','📯':'ui/u_it_horn','🥠':'ui/u_it_cookie','🧤':'ui/u_it_glove','🪙':'ui/u_i_coin','💎':'ui/u_i_gem','🏠':'ui/u_home','👑':'ui/u_k_awake','⭐':'ui/x_star','👜':'fx/bag','🎒':'ui/i_f_party','⬆️':'fx/up','⬆':'fx/up',
  '💧':'e/💧','🌱':'e/🌱','🔒':'e/🔒','🎁':'e/🎁','🔥':'e/🔥','🧨':'e/🧨','✨':'e/✨','🔩':'e/🔩','👻':'ui/s_ghost','🗺️':'ui/m_o_map','🗺':'ui/m_o_map','❤️':'ui/u_i_heart',
- '🃏':'ui/u_i_deck','💰':'ui/u_i_money','🏆':'e/🏆','🎉':'fx/popper','🪢':'ui/u_k_lasso','💀':'e/💀','☠️':'e/☠️','🍀':'e/🍀','💤':'e/💤','🛡️':'e/🛡️','💣':'e/💣','🔑':'e/🔑','🔔':'e/🔔','🌵':'e/🌵','🤠':'e/🤠','🎩':'e/🎩','🐴':'e/🐴'};
+ '🃏':'ui/u_i_deck','💰':'ui/u_i_money','🏆':'e/🏆','🎉':'fx/popper','🪢':'ui/u_k_lasso','💀':'e/💀','☠️':'e/☠️','🍀':'e/🍀','💤':'e/💤','🛡️':'e/🛡️','💣':'e/💣','🔑':'e/🔑','🔔':'e/🔔','🌵':'e/🌵','🤠':'e/🤠','🎩':'e/🎩','🐴':'e/🐴',
+ /* 10/30：のこっていた 絵文字 */ '🛡':'ui/u_k_taunt','🔫':'ui/x_muzzle','⚔️':'ui/atk','⚔':'ui/atk','💔':'ui/x_hit','⚠️':'ui/x_skull','⚠':'ui/x_skull','💠':'ui/u_k_shield','👼':'ui/u_k_revive','🌈':'ui/x_spark','🪶':'ui/s_feather','🏃':'ui/u_k_run','💥':'ui/x_boom','✋':'ui/w_cardback','💫':'ui/x_dizzy','😵':'ui/x_dizzy','🧊':'ui/x_ice','❄️':'ui/x_ice','❄':'ui/x_ice','🍺':'ui/m_o_mug','🎵':'ui/x_note','🎶':'ui/x_note','🌙':'ui/s_moon','🪓':'ui/s_axe','🎩':'ui/s_tophat','🪄':'ui/s_wand','🧟':'ui/s_tk_zombie','🐍':'ui/s_tk_snake','💩':'ui/s_poop','👃':'ui/s_nose','💨':'ui/x_dust2','⚡':'ui/x_bolt','🌪️':'ui/x_tornado','🌪':'ui/x_tornado','💢':'ui/x_anger','💦':'ui/x_sweat','🕸️':'ui/s_web','🕸':'ui/s_web','🍄':'ui/s_mushroom','💣':'ui/s_bomb','🌟':'ui/x_star','🥛':'ui/i_milk','🎯':'ui/x_pow','🍖':'fx/new/meat'};
 try{for(const sid in STAGES){const ic=STAGES[sid].ic;if(ic&&!EMO2[ic])EMO2[ic]='pack/'+sid}}catch(e){}
 try{if(window.FXD)Object.keys(FXD).forEach(k=>{if(k.startsWith('e/')){const ch=k.slice(2);if(!EMO2[ch])EMO2[ch]=k}})}catch(e){}
 const EMO_RE=new RegExp('('+Object.keys(EMO2).sort((a,b)=>b.length-a.length).map(k=>k.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).join('|')+')\\uFE0F?','gu');
@@ -8835,7 +8839,7 @@ function wishAsk(opts){return new Promise(res=>{const m=modal(`<div class="wish"
 /* =====================================================================
    10/29：かしまさんの カード設計メモ（キャラ一覧 v5）どおりに 作りなおす
    ・3枠で うまく 動かない ところだけ 調整（シート「カード見直し」）
-   ・牢屋＝休眠：場に のこるけど 何も できない・当たらない。出てくると まった ぶん 強くなる
+   ・牢屋＝休眠：場に のこるけど 何も できない・当たらない（入れられた あいては 強くならない）
    ・「この子が 出ると」の キーワードは 見参！に、「やられたら」の 金塊は やられたら に まとめる
    ===================================================================== */
 const XD={};
@@ -8854,7 +8858,8 @@ const xLv=c=>(c&&c.lv)||1;
 /* ---------- 休眠（牢屋・もぐる・しずむ） ---------- */
 function xSleepIn(m,turns,kind='jail',onRel){m.jailed=turns;m.jailT=turns;m.jailKind=kind;m.onRel=onRel||null;m.attacks=0;m.sleep=true;m.kw.delete('taunt_tmp')}
 async function xRelease(sd,m){const k=m.jailKind;m.jailed=0;
-  if(k==='jail'){const g=m.jailT||2;m.atk+=g;m.hp+=g;m.max+=g;xFl(m,`しゃくほう！ +${g}/+${g}`,'crit');if(HUMAN)say(`🔓 ${C[m.id].n}が 牢屋から 出てきた！ まった ぶん 強く なった！`)}
+  /* 10/30：牢屋に 入れられた あいては 休むだけ（強くならない）。自分から 入る子だけ m.jailBuff で 強くなる */
+  if(k==='jail'){if(m.jailBuff){const g=m.jailT||2;m.atk+=g;m.hp+=g;m.max+=g;xFl(m,`しゃくほう！ +${g}/+${g}`,'crit')}if(HUMAN)say(`🔓 ${C[m.id].n}が 牢屋から 出てきた！`)}
   else xFl(m,k==='dig'?'ザバーッ！':'ぬまから もどった！','crit');
   if(m.onRel&&XD[m.onRel]&&XD[m.onRel].rel)try{await XD[m.onRel].rel(sd,m)}catch(e){}
   m.onRel=null}
@@ -9060,7 +9065,9 @@ X('new163',{dr:async(sd,m)=>{if(m.belly&&roomOf(sd)>0){summon(sd,m.belly.id,m.be
 /* ---------- 投げ縄名人：2回 なげられる ---------- */
 XON.start.push(async sd=>{if(isMe(sd)&&xAlive(sd,'new51'))B.lasso2=1});
 /* 投げ縄を つかったあと、名人が いれば もう1回 */
-setInterval(()=>{try{if(B&&B.lassoUsed&&B.lasso2&&B.side===B.me&&xAlive(B.me,'new51')){B.lasso2=0;B.lassoUsed=false;if(HUMAN)say('ロープ婆「もう 1回 なげな！」')}}catch(e){}},400);
+/* 10/30：場に いるあいだ、なげなわの 回数 +2。1ターンに 2回 なげられる（出したターンから） */
+setInterval(()=>{try{if(!B||B.over||!xAlive(B.me,'new51'))return;if(!B.lassoBonus){B.lassoBonus=2;if(HUMAN){say('ロープ婆「なげなわ、まかせな！」');if(!B.busy)try{renderBattle()}catch(e){}}}
+  if(B.lassoUsed&&B.side===B.me&&B._l2t!==B.turn){B._l2t=B.turn;B.lassoUsed=false;if(HUMAN){say('ロープ婆「もう 1回 なげな！」');if(!B.busy)try{renderBattle()}catch(e){}}}}catch(e){}},400);
 
 /* ---------- ふつうの 手札カード（おべんとう・のろい） ---------- */
 if(!C.bento&&typeof C==='object'){C.bento={id:'bento',n:'おべんとう',f:'sa',r:'N',c:0,a:0,h:0,kw:'',em:'🍱',img:C.new124&&C.new124.img,token:1,spell:1,s:'いただきま〜す！',st:1};
@@ -9154,7 +9161,7 @@ const XT={
  new91:[['bc','おたがい 1まい ひいて、コストが 高い ほうが かち。かったら ＄3']],
  new105:[['kw','はねかえし','さいしょに うけた 攻撃を そのまま あいてに かえす']],
  new106:[['bc','トロッコで つっこむ！ ランダムな あいて 3体に 2ダメージ']],
- new51:[['aura','投げ縄名人：投げ縄を 2回 なげられる']],
+ new51:[['aura','なげなわ名人：なげなわが 2回 ふえる。1ターンに 2回 なげられる']],
  new63:[['bc','手札の ゾンビを 1体、そのまま 場に 出す']],
  new78:[['dr','いちばん強い あいてを がけから 道づれ']],
  new163:[['kw','まるのみ','戦って たおした あいてを まるのみ。やられたら その キャラが なかまとして 出てくる']],
@@ -9211,7 +9218,7 @@ function strongestOf(list){return (list||[]).slice().sort((a,b)=>b.atk-a.atk||b.
   if(t){xSleepIn(t,n,'jail');if(HUMAN){say(`🔒 ${C[t.id].n}を 牢屋に 入れた！（${n}ターン）`);SFX.lock&&SFX.lock()}}xRe()}}
 /* 牢屋の せつめい（休眠） */
 try{if(typeof FLAV!=='undefined'){['new65','new93'].forEach(id=>{FLAV[id]=FLAV[id]||{};FLAV[id]['見参！']=FLAV[id]['見参！']||''})}}catch(e){}
-{const _el2=effList;effList=function(id,lv){const L=_el2.apply(this,arguments);try{if(C[id]&&C[id].bc==='jail'){const n=id==='new93'?3:2;return L.map(x=>x[1]==='見参！'&&/牢屋/.test(x[2])?[x[0],x[1],`いちばん強い あいてを ${n}ターン 牢屋へ（その あいだ 動けない・当たらない。出てくると まった ぶん 強くなる）`,x[3],x[4]]:x)}}catch(e){}return L}}
+{const _el2=effList;effList=function(id,lv){const L=_el2.apply(this,arguments);try{if(C[id]&&C[id].bc==='jail'){const n=id==='new93'?3:2;return L.map(x=>x[1]==='見参！'&&/牢屋/.test(x[2])?[x[0],x[1],`いちばん強い あいてを ${n}ターン 牢屋へ`,x[3],x[4]]:x)}}catch(e){}return L}}
 /* ダイナマイト（前の あいてに 3ダメージ）：fuses の front を 前の あいてに */
 /* 前の あいてに ドカン（ボム吉・ドカ男） */
 {const _st2=startTurn;startTurn=async function(sd){if(!B||!B.fuses)return _st2.apply(this,arguments);const fr=B.fuses.filter(f=>f.front&&f.side===sd);B.fuses=B.fuses.filter(f=>!(f.front&&f.side===sd));
@@ -9359,6 +9366,41 @@ try{const M={flowerT:['（はらり…と ちった）','（ゆらゆら）','�
 /* 10/30：カードの 絵の 位置（かしまさんが 直しチェックで ずらした 位置）。[よこ, たて, 大きさ] */
 const ART_POS2={"bison": [92.9, 100, 106], "boiler": [50, 64.3, 100], "capone": [50, 25.3, 100], "celestia": [86.4, 100, 122], "clover": [57.9, 100, 132], "dalton": [50, 100, 100], "doo": [50, 100, 100], "eagle": [50, 6, 100], "garasan": [50, 100, 100], "goliath": [63.4, 0, 108], "guard": [0, 57.9, 108], "haboob": [50, 100, 100], "ikoku": [50, 100, 100], "kishi": [0, 92.8, 104], "mary": [58.8, 100, 118], "new109": [0, 76.5, 112], "new122": [50, 6, 100], "new131": [50, 0, 100], "new136": [50, 39.7, 108], "new139": [50, 100, 100], "new179": [0, 71.6, 108], "new181": [50, 49.5, 100], "new200": [50, 100, 100], "new206": [50, 0, 100], "new207": [0, 100, 114], "new212": [50, 100, 100], "new234": [100, 22.5, 112], "new37": [0, 91.3, 104], "new64": [50, 67.6, 100], "new80": [100, 0, 116], "pochi": [0, 100, 106], "runner": [100, 55.9, 104], "sabota": [47.9, 100, 110], "tumble": [50, 100, 100], "vulture": [0, 0, 106]};
 {const _ceP=cardEl;cardEl=function(id){const el=_ceP.apply(this,arguments);try{const p=ART_POS2[id];const a=p&&el.querySelector('.art');if(a){a.style.backgroundSize=p[2]+'% auto';a.style.backgroundPosition=p[0]+'% '+p[1]+'%'}}catch(e){}return el}}
+/* 10/30：ふきだしの アイコンが 縦に のびない／ボスムービーの 上下の 黒い帯を なくす */
+(()=>{const st=document.createElement('style');st.textContent=`
+.kwbub .kh i{flex:none!important;aspect-ratio:1}
+#bmov .bmbar{display:none!important}
+#bmov .bmnar{bottom:calc(env(safe-area-inset-bottom,0px) + 3vh + 22px)!important}
+#bmov .bmtag{bottom:calc(env(safe-area-inset-bottom,0px) + 3vh + 112px)!important}
+#bmov .bmline{bottom:calc(env(safe-area-inset-bottom,0px) + 3vh + 14px)!important}
+#bmov .bmtap{bottom:calc(env(safe-area-inset-bottom,0px) + 3vh + 20px)!important}
+#bmov .bmskip{top:calc(env(safe-area-inset-top,0px) + 14px)!important}`;document.head.appendChild(st)})();
+/* 10/30：「つぎに できること」は 1回目 5秒、出たあとは 30秒おき */
+{const _ia=idleArm;idleArm=function(){const r=_ia.apply(this,arguments);try{if(B&&B._idleOnce&&IDLE!==null){clearTimeout(IDLE);IDLE=setTimeout(idleShow,30000)}}catch(e){}return r}
+ const _is=idleShow;idleShow=function(){const had=document.querySelector('.idlehint');const r=_is.apply(this,arguments);try{if(B&&document.querySelector('.idlehint')&&!had)B._idleOnce=1}catch(e){}return r}}
+/* 10/30：ぼうけんで なかまにした子が、同じ子 2体だと 町で 1体 きえる → ふえた ぶんは ぜんぶ もちかえる */
+{const _sr9=startRun;startRun=async function(){const r=await _sr9.apply(this,arguments);try{if(R&&R.deck){const m={};R.deck.forEach(c=>{if(c&&c.id)m[c.id]=(m[c.id]||0)+1});R._startCnt=m}}catch(e){}return r}}
+{const _er9=endRun;endRun=function(how){try{if(R&&R.deck&&R._startCnt&&how!=='dead'){const left=Object.assign({},R._startCnt);
+  const cs=[...R.deck].sort((a,b)=>(b&&b._new?1:0)-(a&&a._new?1:0));
+  for(const c of cs){if(!c||!C[c.id]||C[c.id].token||C[c.id].tok||c._ojama)continue;if(left[c.id]>0&&!c._new){left[c.id]--;continue}if(c._got)continue;
+    addCard(c.id,c.lv||1);c._got=1}}}catch(e){}return _er9.apply(this,arguments)}}
+/* 10/30：昇進した すがた（ゾンビ兵・保安官ポチ など）は、敵にも パックにも 出ない。自分で 昇進させたときだけ */
+const EVO_FORMS=new Set(Object.values(C).map(c=>c&&c.evo).filter(Boolean));
+try{for(const sid in STAGES){const S=STAGES[sid];['pool','elites','mooks'].forEach(k=>{if(Array.isArray(S[k]))S[k]=S[k].filter(id=>!EVO_FORMS.has(id))})}}catch(e){}
+try{if(typeof PACK_POOL!=='undefined')for(let i=PACK_POOL.length-1;i>=0;i--)if(EVO_FORMS.has(PACK_POOL[i]))PACK_POOL.splice(i,1)}catch(e){}
+{const _sp9=spackPool;spackPool=function(){return _sp9.apply(this,arguments).filter(id=>!EVO_FORMS.has(id))}}
+{const _oc9=offerCards;offerCards=function(){const r=_oc9.apply(this,arguments);return (r||[]).filter(c=>!c||!EVO_FORMS.has(c.id)||(G.col&&G.col[c.id]))}}
+/* 10/30：ステージの パックは 3まい。レジェンドが 少しだけ 出やすい（3.5% → 5%） */
+rollSpack=function(sid){const pool=spackPool(sid),boss=STAGES[sid].boss,w=G.wallet;
+  const one=forceR=>{if(C[boss]&&Math.random()<.005)return boss;const r=Math.random();const rar=r<.05?'L':(r<.22||forceR)?'R':'N';
+    let p=pool.filter(id=>C[id].r===rar&&C[id].c<=w);if(!p.length)p=pool.filter(id=>C[id].r===rar);if(!p.length)p=pool.filter(id=>C[id].c<=w);if(!p.length)p=pool;return pick(p)};
+  const got=Array.from({length:3},(_,i)=>one(i===0)).sort((a,b)=>'NRL'.indexOf(C[a].r)-'NRL'.indexOf(C[b].r));
+  if(got.includes(boss)&&typeof AWK!=='undefined'&&AWK[boss]){G.awk=G.awk||{};if(!G.awk[boss]){G.awk[boss]=1;window.__awkNew=boss}}return got};
+/* 10/30：せつめいの 文字の まちがい なおし（成金の 50まい・モグじい・グリズリー） */
+{const FIX={narikin:{'いるあいだ':'金で 買えぬもの なし！ 2回に1回、ターンの はじめに コイン+1'},new58:{'見参！':'ほりだしもの！ たおれた あいての カードを 1まい えらんで 手札に くわえる'}};
+ const _el9=effList;effList=function(id,lv){const L=_el9.apply(this,arguments);try{const F=FIX[id];return L.map(x=>{let t=x[2];if(F&&F[x[1]])t=F[x[1]];
+   if(id==='grizzly'&&x[1]==='見参！'){const m=/\+(\d+)\/\+\d+/.exec(String(t));t=`お肉タップタプ！ 3びょうで お肉を タップ！ 10回ごとに +${m?m[1]:1}/+${m?m[1]:1}`}
+   return t===x[2]?x:[x[0],x[1],t,x[3],x[4]]})}catch(e){return L}}}
 
 
 /* =====================================================================
