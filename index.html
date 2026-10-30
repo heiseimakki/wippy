@@ -80,7 +80,7 @@ addEventListener('pagehide',flush);
 </script>
 <script>
 /* 10/26：ダウンロードが とまったら、自動で やりなおす（3回まで）。それでも だめなら やさしく おしらせ */
-(function(){var T=2855496,V='3d2b0196',bar=document.getElementById('pbf'),pc=document.getElementById('pbp'),best=0,tries=0,fin=false;
+(function(){var T=2855047,V='a06492bf',bar=document.getElementById('pbf'),pc=document.getElementById('pbp'),best=0,tries=0,fin=false;
 function set(p){p=Math.max(.03,Math.min(1,p));if(p>best)best=p;bar.style.width=(best*100)+'%';pc.textContent='ゲームが はじまるよ  '+Math.floor(best*100)+'%'}
 function done(){var pb=document.getElementById('preboot');if(pb){pb.classList.add('done');setTimeout(function(){pb.parentNode&&pb.parentNode.removeChild(pb)},400)}}
 function run(t){if(fin)return;fin=true;var i=t.indexOf('\n'),D=JSON.parse(t.slice(0,i));t=t.slice(i+1).replace(/@@D(\d+)@@/g,function(m,k){return D[+k]});var go=function(){var s=document.createElement('script');s.text=t;document.body.appendChild(s);done()};var w=window.__cloudReady;if(w&&w.then){pc.textContent='セーブを たしかめてるよ…';w.then(go,go)}else go()}

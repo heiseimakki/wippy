@@ -221,11 +221,12 @@ const clv=lv=>Math.max(1,Math.min(MAX_LV,lv||1));
 /* レベルが上がるたびに、体力→攻撃→体力→攻撃…と1ずつ増える（Lv10は両方+1） */
 const lvA=lv=>Math.floor((clv(lv)-1)/2)+(clv(lv)>=MAX_LV?1:0);
 const lvH=lv=>Math.floor(clv(lv)/2);
-const statA=(id,lv)=>C[id].a+(C[id].kw.includes('noattack')?0:lvA(lv)+(C[id].grow?Math.floor((clv(lv)-1)/5):0));
-const statH=(id,lv)=>Math.max(1,C[id].h+lvH(lv)+(C[id].grow?Math.floor(clv(lv)/5):0));
+const evB=(id,k)=>{try{const e=typeof G!=='undefined'&&G&&G.col&&G.col[id];return (e&&e[k])||0}catch(x){return 0}};/* 10/30：昇進前に Lv5より 上げた ぶん、昇進後も ずっと 上のせ */
+const statA=(id,lv)=>evB(id,'ea')+C[id].a+(C[id].kw.includes('noattack')?0:lvA(lv)+(C[id].grow?Math.floor((clv(lv)-1)/5):0));
+const statH=(id,lv)=>Math.max(1,evB(id,'eh')+C[id].h+lvH(lv)+(C[id].grow?Math.floor(clv(lv)/5):0));
 const valX=(v,lv)=>(v||0)+Math.floor(clv(lv)/3);           // ダメージ・回復などの数字（Lv3,6,9で+1）
-const lvB=lv=>Math.min(2,Math.floor(clv(lv)/3)),lvP=lv=>clv(lv)>=3?1:0,lvN=lv=>(clv(lv)>=MAX_LV?1:0); /* 10/30：Lv5は とくべつ じゃない（昇進だけ）。N=Lv10で+1 */
-const valN=(v,lv)=>(v||0)+((lv||1)>=MAX_LV?1:0); // 枚数・匹数などの数
+const lvB=lv=>Math.min(2,Math.floor(clv(lv)/3)),lvP=lv=>clv(lv)>=3?1:0,lvN=lv=>(clv(lv)>=EVO_LV?1:0)+(clv(lv)>=MAX_LV?1:0); /* 10/27 効果の成長：B=Lv3,6で+1 P=Lv3で+1 N=Lv5,10で+1 */
+const valN=(v,lv)=>(v||0)+((lv||1)>=EVO_LV?1:0)+((lv||1)>=MAX_LV?1:0); // 枚数・匹数などの数
 
 
 const KW_T={taunt:'かばう',shield:'バリア',twice:'2回攻撃',quick:'はやうち',revive:'1回復活',home:'たおれたら手札へ',thorns:'トゲ',stealth:'かくれんぼ',
@@ -1353,10 +1354,10 @@ async function evolveAnim(id){
   let el=cardEl(id,e.lv,{showTx:false});el.style.setProperty('--cw','150px');$('er').appendChild(el);
   mbub(el,lineOf(id,1));
   for(let i=0;i<12;i++){el.style.filter=i%2?'brightness(3)':'none';SFX.tap();await sleep(150-i*8)}
-  SFX.legend();flash();const n=cardEl(to,(()=>{const xa=lvA(e.lv)-lvA(EVO_LV),xh=lvH(e.lv)-lvH(EVO_LV);let nl=1;while(nl<MAX_LV&&(lvA(nl)<xa||lvH(nl)<xh))nl++;return nl})(),{showTx:false,cls:'glowL flip'});n.style.setProperty('--cw','150px');el.replaceWith(n);burst(n,['✨','⭐','🌟'],22,140);
+  SFX.legend();flash();const n=cardEl(to,1,{showTx:false,cls:'glowL flip'});n.style.setProperty('--cw','150px');el.replaceWith(n);burst(n,['✨','⭐','🌟'],22,140);
   $('eres').textContent=`${C[to].n}に進化した！`;mbub(n,C[to].s||lineOf(to,2));
-  const left=e.n;G.seen[to]=1;/* 10/30：Lv5より 上げた ぶんの つよさは、昇進しても のこす */const xa=lvA(e.lv)-lvA(EVO_LV),xh=lvH(e.lv)-lvH(EVO_LV);let nl=1;while(nl<MAX_LV&&(lvA(nl)<xa||lvH(nl)<xh))nl++;
-  if(G.col[to]){G.col[to].n++;if(nl>G.col[to].lv)G.col[to].lv=nl}else G.col[to]={lv:nl,n:0};
+  const left=e.n;G.seen[to]=1;/* 10/30：昇進後は Lv1から。Lv5より 上げて いたら、その ぶん 昇進後の つよさに 上のせ */const xa=lvA(e.lv)-lvA(EVO_LV),xh=lvH(e.lv)-lvH(EVO_LV);
+  if(G.col[to])G.col[to].n++;else G.col[to]={lv:1,n:0};G.col[to].ea=Math.max(G.col[to].ea||0,xa);G.col[to].eh=Math.max(G.col[to].eh||0,xh);
   if(left>0)G.col[id]={lv:1,n:left-1};else delete G.col[id];
   const pi=G.party.indexOf(id);if(pi>=0){if(G.col[id]){if(G.party.length<deckMax())G.party.push(to)}else G.party=G.party.map(x=>x===id?to:x)}fixParty();
   G.st.evos++;save();checkAch();await sleep(2300);st.hidden=true;partyView();
@@ -3979,7 +3980,7 @@ Object.assign(SPECIAL,{
    タイトル画面：ロゴ どーん！ ＋ タンブルウィード ＋ 砂あらし ＋ あそぶボタン ＋ おしらせ
    ===================================================================== */
 const CHANGELOG=[
-  {v:'0.78.0',d:'10/30',t:['「1回休み」が ちゃんと 1回 休むように なったよ','ステージの パックは 3まい。その ステージの 子だけ 出るよ','昇進した すがたは、自分で 昇進させたときだけ 手に入るよ','ロープばあちゃんの なげなわが 2回 ふえるよ','説得は ノーマル1日・レア3日・レジェンド5日']},
+  {v:'0.78.0',d:'10/30',t:['「1回休み」が ちゃんと 1回 休むように なったよ','昇進まえに Lv5より 上げておくと、昇進したあとも その ぶん つよいよ','昇進した すがたは、自分で 昇進させたときだけ 手に入るよ','ロープばあちゃんの なげなわが 2回 ふえるよ','説得は ノーマル1日・レア3日・レジェンド5日']},
   {v:'0.77.0',d:'10/29',t:['ほかの スマホへ データを 引っこし できるように なったよ！','地図ボタンの マップが、ステージごとの 絵に なったよ','コインの マークを 金貨の 絵に したよ','ブラウザの タブに、ぼくの 顔が 出るように なったよ','コインが 足りない カードは、ちゃんと 灰色に なるように 直したよ','あいての 力が こっちに かかる ときは「ウィピィの」と 出すように したよ']},
   {v:'0.76.0',d:'10/28',t:['しょうきん首を つかまえると、しょうきんが もらえるように なったよ！','つぎに いく ところが 光って、わかるように なったよ','合成・しんか できる時に、なかまが 光るように なったよ','Lv7に なると、とくべつな 力が ふえるように なったよ','ボス戦の 曲を かえて、つよさも 見なおしたよ','ずかんに タブを つけたよ','ウィピィの 顔が、セリフに あわせて かわるように なったよ','出なかった 画像を 直したよ','せっていから、セーブを クラウドにも のこせるように なったよ']},
   {v:'0.75.0',d:'10/27',t:['合成すると、とくべつな 力も つよく なるように なったよ！','行商人さんで、どうぐを 売れるように なったよ','はじめての子に、ウィピィが 道あんない するように なったよ','あいての 山札の まい数が 見えるように なったよ','右下の はぐるまから「こうさん」できるように なったよ','しょうきんの 金額を 見なおしたよ','カードの せつめいを 読みやすく したよ']},
@@ -5229,7 +5230,7 @@ function NEWC(o){const {id,n,f,r,c,a,h,em,stage,stages,lines,note,...rest}=o;if(
 const WX={sun:['はれ','☀️'],rain:['あめ','🌧️'],sand:['すなあらし','🌪️'],snow:['ゆき','❄️']};
 Object.assign(KW_COL,{wx:'#f0a020',grow:'#58b04a',evo:'#e05aa0',rank:'#d0a020',gattai:'#4a90a8',fuse:'#d04020',jail:'#6a6a6a',wanted:'#a0602a',get:'#2a9a6a',healone:'#4ab04a',shave:'#8a8a8a',swap:'#7a5ad0',gold:'#d0a020',link:'#d07a3a'});
 /* そだつ：合成（レベル）で のびる。Lv1 +0/+1×3回 → Lv3 +1/+1×4回 → Lv5 +1/+1×6回（おともの子は そのまま） */
-function growOf(d,lv){const g=d.growT||0;if(d.tok)return{a:g,h:g,n:Math.max(1,Math.floor(6/g))};lv=lv||1;return{a:lv>=3?g:0,h:g,n:lv>=10?6:lv>=3?4:3}}
+function growOf(d,lv){const g=d.growT||0;if(d.tok)return{a:g,h:g,n:Math.max(1,Math.floor(6/g))};lv=lv||1;return{a:lv>=3?g:0,h:g,n:lv>=5?6:lv>=3?4:3}}
 function newEff(d,lv){const L=[];const E=(k,ic,n,t,sh)=>L.push([ic,n,t,KW_COL[k],sh]);
   if(d.wx)E('wx',WX[d.wx][1],'天気',`見参！で「${WX[d.wx][0]}」を ${d.wv||1}つ よぶ（同じ天気は たまる）`,WX[d.wx][0]);
   if(d.growT){const G=growOf(d,lv);E('grow','🌱','うえるとそだつ',`自分のターンのはじめに +${G.a}/+${G.h}（${G.n}回まで）`+(d.tok?'':`　合成で のびる`),'そだつ')}
@@ -9390,12 +9391,7 @@ try{for(const sid in STAGES){const S=STAGES[sid];['pool','elites','mooks'].forEa
 try{if(typeof PACK_POOL!=='undefined')for(let i=PACK_POOL.length-1;i>=0;i--)if(EVO_FORMS.has(PACK_POOL[i]))PACK_POOL.splice(i,1)}catch(e){}
 {const _sp9=spackPool;spackPool=function(){return _sp9.apply(this,arguments).filter(id=>!EVO_FORMS.has(id))}}
 {const _oc9=offerCards;offerCards=function(){const r=_oc9.apply(this,arguments);return (r||[]).filter(c=>!c||!EVO_FORMS.has(c.id)||(G.col&&G.col[c.id]))}}
-/* 10/30：ステージの パックは 3まい。レジェンドが 少しだけ 出やすい（3.5% → 5%） */
-rollSpack=function(sid){const pool=spackPool(sid),boss=STAGES[sid].boss,w=G.wallet;
-  const one=forceR=>{if(C[boss]&&Math.random()<.005)return boss;const r=Math.random();const rar=r<.05?'L':(r<.22||forceR)?'R':'N';
-    let p=pool.filter(id=>C[id].r===rar&&C[id].c<=w);if(!p.length)p=pool.filter(id=>C[id].r===rar);if(!p.length)p=pool.filter(id=>C[id].c<=w);if(!p.length)p=pool;return pick(p)};
-  const got=Array.from({length:3},(_,i)=>one(i===0)).sort((a,b)=>'NRL'.indexOf(C[a].r)-'NRL'.indexOf(C[b].r));
-  if(got.includes(boss)&&typeof AWK!=='undefined'&&AWK[boss]){G.awk=G.awk||{};if(!G.awk[boss]){G.awk[boss]=1;window.__awkNew=boss}}return got};
+/* 10/30：パックの まい数・レジェンドの 出やすさは もとのまま（ためしに 3まいに したが もどした） */
 /* 10/30：せつめいの 文字の まちがい なおし（成金の 50まい・モグじい・グリズリー） */
 {const FIX={narikin:{'いるあいだ':'金で 買えぬもの なし！ 2回に1回、ターンの はじめに コイン+1'},new58:{'見参！':'ほりだしもの！ たおれた あいての カードを 1まい えらんで 手札に くわえる'}};
  const _el9=effList;effList=function(id,lv){const L=_el9.apply(this,arguments);try{const F=FIX[id];return L.map(x=>{let t=x[2];if(F&&F[x[1]])t=F[x[1]];
