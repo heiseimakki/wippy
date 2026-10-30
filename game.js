@@ -232,7 +232,7 @@ const KW_T={taunt:'かばう',shield:'バリア',twice:'2回攻撃',quick:'は�
   lone:'一匹オオカミ',nostun:'酔わない',deadly:'必殺',noattack:'攻撃できない',splash:'なぎはらい',feed:'おこぼれ',pack:'群れ'};
 const KW_HELP={taunt:'敵はまずこのキャラを攻撃しないといけない',shield:'1回だけダメージを0にする',twice:'1ターンに2回攻撃できる',quick:'出したターンからすぐ攻撃できる',
   revive:'たおれても1回だけ体力1で立ち上がる',home:'たおれたら手札にもどる',thorns:'攻撃されたら、攻撃してきた相手に1ダメージ',stealth:'自分から攻撃するまで、ねらわれない',
-  lone:'ほかに仲間がいないと攻撃+2',nostun:'酔っぱらい（1回休み）にならない',deadly:'戦った相手のキャラを一発でたおす',noattack:'自分からは攻撃できない。でも攻撃力99なので、攻撃してきた相手はたおれる。3ターンで燃料切れ',
+  lone:'ほかに仲間がいないと攻撃+2',nostun:'酔っぱらい（1回休み）にならない',deadly:'ダメージをあたえた 相手のキャラを 一撃で たおす（バリアには ガードされる）',noattack:'自分からは攻撃できない。でも攻撃力99なので、攻撃してきた相手はたおれる。3ターンで燃料切れ',
   splash:'攻撃した相手のとなりにも2ダメージ',feed:'キャラがたおれるたび、攻撃+1',pack:'ほかに動物の仲間がいると攻撃+2',poison:'毒：毎ターン、毒の数だけダメージ'};
 
 function tokName(t){return t&&C[t]?`${C[t].n}（${C[t].a*K}/${C[t].h*K}）`:''}
@@ -1860,7 +1860,7 @@ async function damage(sd,t,n,{fx='',quiet,src,crit}={}){
     updHero();return}
   if(t.hp<=0)return;const el=uEl(t);
   if(t.kw.has('shield')){t.kw.delete('shield');floatAt(el,'バリア！','info');impact(el,'magic');SFX.guard();return}
-  if(src&&src.kw.has('deadly'))n=Math.max(n,t.hp);
+  if(src&&src.kw.has('deadly')&&n>0)n=Math.max(n,t.hp);
   t.hp-=n;impact(el,fx);floatAt(el,'-'+n,crit||n>=5?'crit':'');if(!quiet)(n>=5?SFX.crit:SFX.hit)();if(n>=6)shakeApp();
   if(src&&C[src.id].poison&&t.hp>0){const pz=C[src.id].poison+lvP(src.lv);t.poison+=pz;floatAt(el,'☠+'+pz,'info')}
   updUnit(t);
@@ -1944,7 +1944,7 @@ async function aiAttack(sd){
     const a=atkOf(sd,m);let best=null,score=-99;
     for(const t of ts){let s;
       if(t.hero){s=isMe(sd)?(B.foe.wanted&&B.foe.hp-a<=0&&B.foe.hp>B.foe.max/2?-5:2.2):2.5;if(!isMe(sd)&&R.hp<=a)s=50;if(isMe(sd)&&!B.foe.wanted){if(B.foe.hp<=a)s=50;else if(B.foe.hp<=8)s+=1}}
-      else{const o=opp(sd);const kills=t.hp<=a||(m.kw.has('deadly')&&!t.kw.has('shield'));const dies=atkOf(o,t)>=m.hp&&!m.kw.has('shield');
+      else{const o=opp(sd);const kills=t.hp<=a||(a>0&&m.kw.has('deadly')&&!t.kw.has('shield'));const dies=atkOf(o,t)>=m.hp&&!m.kw.has('shield');
         s=(kills?2+atkOf(o,t)*.6:0)+(dies?-1-a*.4:0.3)+(t.kw.has('taunt')?1:0)}
       s+=Math.random()*.6;if(s>score){score=s;best=t}}
     await attack(sd,m,best);if(HUMAN)await sleep(isMe(sd)?200:600);
@@ -2396,7 +2396,7 @@ function westDecor(){if(!HUMAN||!B)return;
   const fh=$('foeHero'),fs=$('foeStage');if(fs&&B.foe.hp>0&&B.foe.hp<=B.foe.max*.3)fs.insertAdjacentHTML('beforeend','<img class="sweat" src="ui/x_sweat.png" alt="">');
   const a=B.sel;if(!a||B.side!==B.me)return;
   document.querySelectorAll('#ef .u.tgt').forEach(el=>{const t=B.foe.board.find(m=>String(m.uid)===el.dataset.u);if(!t)return;
-    const dmg=atkOf(B.me,a,t),back=atkOf(B.foe,t),sh=t.kw.has('shield'),ko=!sh&&(dmg>=t.hp||a.kw.has('deadly')),die=back>=a.hp&&!a.kw.has('shield');
+    const dmg=atkOf(B.me,a,t),back=atkOf(B.foe,t),sh=t.kw.has('shield'),ko=!sh&&(dmg>=t.hp||(dmg>0&&a.kw.has('deadly'))),die=back>=a.hp&&!a.kw.has('shield');
     el.insertAdjacentHTML('beforeend',`<span class="xhair"></span><span class="prev ${ko?'ko':''}">${sh?'💠バリア':ko?`<img class="pvi" src="${(typeof UIIMG==='function'?UIIMG('ui/u_k_deadly'):'ui/u_k_deadly.png')}" alt="">たおせる！`:'-'+dmg}</span>${die?'<span class="prevb" title="はんげきで やられる">⚠️</span>':''}`)});
   if(fh&&document.querySelector('.foestage.tgt'))fh.insertAdjacentHTML('beforeend',`<span class="prev hero">💔-${atkOf(B.me,a,heroOf(B.foe))}</span>`)}
 const _renderBattle=renderBattle;renderBattle=function(){_renderBattle();westDecor()};
@@ -8306,7 +8306,7 @@ document.addEventListener('click',e=>{const p=e.target.closest&&e.target.closest
   const o=opp(sd);
   const scoreOf=(m,t)=>{const a=atkOf(sd,m);if(a<=0&&!m.kw.has('deadly'))return -99;
     if(t.hero){let s=2.4;if(R&&R.hp<=a)s=60;return s}
-    const kills=t.hp<=a||(m.kw.has('deadly')&&!t.kw.has('shield'))||false;const back=atkOf(o,t);const dies=back>=m.hp&&!m.kw.has('shield');
+    const kills=t.hp<=a||(a>0&&m.kw.has('deadly')&&!t.kw.has('shield'))||false;const back=atkOf(o,t);const dies=back>=m.hp&&!m.kw.has('shield');
     let s=0;if(kills)s+=2.2+back*.7+(t.atk||0)*.2;else s+=Math.min(a,t.hp)/Math.max(1,t.hp)*0.8;
     if(dies)s-=1.4+a*.35+(m.max||m.hp)*.15;else s+=.4;if(t.kw.has('taunt'))s+=.6;if(t._wanted)s+=.2;return s};
   for(let k=0;k<12;k++){if(B.over)return;const ms=sd.board.filter(canAttack);if(!ms.length)return;
