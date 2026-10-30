@@ -1172,7 +1172,7 @@ function moveData(){
   $('in').onclick=()=>{modal(`<h2>コードを読みこむ</h2><textarea class="code" id="ci" placeholder="WIPPY2-…"></textarea>
       <div class="row">入れる場所：${[1,2,3].map(n=>`<label class="small"><input type="radio" name="sl" value="${n}" ${n===1?'checked':''}> データ${n}</label>`).join(' ')}</div>
       <p class="small" id="ce" style="margin:6px 0"></p><div class="row"><button class="btn ghost" id="cx">やめる</button><span class="sp"></span><button class="btn" id="cl">読みこむ</button></div>`);
-    $('cx').onclick=closeModal;$('cl').onclick=()=>{const g=readCode($('ci').value);if(!g){$('ce').textContent='コードが読めなかった…もう一度コピーしてみてね';return}
+    $('cx').onclick=closeModal;$('cl').onclick=async()=>{const raw=($('ci').value||'').replace(/\s+/g,'');/* 前の「WPY1:」の コードも 読める（ぜんぶの データを 入れかえる） */if(/^WPY[01]:/.test(raw)&&window.MOVE){try{const o=await MOVE.unpack(raw);for(const k in o)if(/^wippy/.test(k)&&typeof o[k]==='string'){localStorage.setItem(k,o[k]);try{window.__cloudPut&&window.__cloudPut(k)}catch(e){}}SFX.win();$('ce').textContent='ひっこし できたよ！ よみこみなおすね';setTimeout(()=>location.reload(),900)}catch(e){$('ce').textContent='コードが読めなかった…もう一度コピーしてみてね'}return}const g=readCode($('ci').value);if(!g){$('ce').textContent='コードが読めなかった…もう一度コピーしてみてね';return}
       const n=+document.querySelector('input[name=sl]:checked').value;lsSet(SLOT_KEY(n),JSON.stringify(g));SFX.win();closeModal();title()}};
 }
 
@@ -1607,11 +1607,11 @@ function saloonNode(){
 
 /* ---- レリック ---- */
 function giveRelic(k){const left=RELIC_IDS.filter(x=>!R.relics.includes(x));if(!left.length)return null;k=k||pick(left);R.relics.push(k);G.st.maxRelic=Math.max(G.st.maxRelic,R.relics.length);
-  if(k==='wanted'){}if(HUMAN){SFX.sparkle();toast(`${RELICS[k].ic} レリック「${RELICS[k].n}」：${RELICS[k].d}`)}return k}
+  if(k==='wanted'){}if(HUMAN){SFX.sparkle();toast(`${RELICS[k].ic} お宝「${RELICS[k].n}」を ゲット！<br><small style="font-weight:500;opacity:.9">${RELICS[k].d}</small>`)}return k}
 function relicChoice(title){return new Promise(res=>{
   const left=shuffle(RELIC_IDS.filter(x=>!R.relics.includes(x))).slice(0,3);if(!left.length)return res();
   if(!HUMAN){giveRelic(left[0]);return res()}
-  modal(`<h2>${title}</h2><p class="muted">お宝（レリック）を1つえらぼう。この冒険のあいだ、持ってるだけで効く。</p><div class="choice">${left.map(k=>`<button data-k="${k}"><span class="i">${RELICS[k].ic}</span><div>${RELICS[k].n}<small>${RELICS[k].d}</small></div></button>`).join('')}</div>`);
+  modal(`<h2>${title}</h2><p class="muted">ごほうびの お宝を 1つ えらんでね。この ぼうけんの あいだ、もっているだけで 力を くれるよ。</p><div class="choice">${left.map(k=>`<button data-k="${k}"><span class="i">${RELICS[k].ic}</span><div>${RELICS[k].n}<small>${RELICS[k].d}</small></div></button>`).join('')}</div>`);
   document.querySelectorAll('[data-k]').forEach(b=>b.onclick=()=>{giveRelic(b.dataset.k);closeModal();res()});
 })}
 
@@ -1982,7 +1982,7 @@ async function finishBattle(){
   if(spec.kind==='boss'){return endRun('clear')}
   const extra=`<p class="money" style="font-size:22px">＋＄${pay}${caught?' ・ 🪢'+C[caught].n:''}</p>`;
   if(HUMAN){jingle('win');await winFx(caught?'つかまえた！':'やったね！');music(R.sid==='hill'?'mapnight':'map')}
-  if(spec.kind==='elite')await relicChoice('💀 賞金首の戦いが終わった！');
+  if(spec.kind==='elite')await relicChoice('💀 しょうきん首を やっつけた！');
   await reward(caught?'🪢 つかまえた！':'🎉 やったね！',extra);
   B=null;if(HUMAN)afterNode();
 }
@@ -2100,10 +2100,10 @@ function hintAfter(){}
 /* ---- 5秒そのままだと「次にできること」がふわっと出る ---- */
 function nextActs(tg){const me=B.me;
   if(B.sel)return tg.some(t=>t.hero)?{kind:'sel',t:'おやぶんを タップして ビビらせよう！',el:$('foeHero')}:{kind:'sel',t:'あかく ひかる てきを タップ！',el:document.querySelector('#ef .u.tgt')};
-  const rd=document.querySelector('#af .u.ready');if(rd)return{kind:'atk',t:'ひかってる なかまで アタック！',em:'⚔️',el:rd};
-  const pc=document.querySelector('#hand .card.can');if(pc)return{kind:'play',t:'コインで なかまを よぼう！',em:'✨',el:pc};
+  const rd=document.querySelector('#af .u.ready');if(rd)return{kind:'atk',t:'ひかってる なかまで アタック！',em:'<img class="iei" src="ui/x_pow.png" alt="">',el:rd};
+  const pc=document.querySelector('#hand .card.can');if(pc)return{kind:'play',t:'コインで なかまを よぼう！',em:'<img class="iei" src="fx/new/coin_front.webp" alt="">',el:pc};
   if(canLasso())return{kind:'lasso',t:'なげなわで つかまえられるかも！',em:'🪢',el:$('lasso')};
-  return{kind:'end',t:'やれること ぜんぶ やった！',em:'👍',sub:'ターン終了 ▶',el:$('endt')}}
+  return{kind:'end',t:'やれること ぜんぶ やった！',em:'<img class="iei" src="fav/f_smile.png" alt="">',sub:'ターン終了 ▶',el:$('endt')}}
 let IDLE=null;
 function idleClear(){clearTimeout(IDLE);IDLE=null;document.querySelectorAll('.idlehint').forEach(h=>{h.classList.add('out');setTimeout(()=>h.remove(),350)});document.querySelectorAll('.nudge').forEach(e=>e.classList.remove('nudge'))}
 function idleArm(){idleClear();if(!HUMAN||!B||B.over)return;IDLE=setTimeout(idleShow,5000)}
@@ -2135,9 +2135,9 @@ function mgQuick(){return new Promise(async res=>{
   const cpuMs=260+rnd(220);
   mgShell('早撃ち勝負！',`<div class="qd" id="qd">…まだだ…</div><div class="sub">「バン！」が出たら、すぐタップ！早すぎるとフライング</div><div class="result" id="qr"></div>`);
   let state='wait',t0=0,done=false;
-  const fin=(win,msg)=>{if(done)return;done=true;$('qr').textContent=msg;(win?SFX.win:SFX.lose)();setTimeout(()=>{$('stage').hidden=true;res(win)},1200)};
+  const fin=(win,msg)=>{if(done)return;done=true;$('qr').innerHTML=(win?'かち！<br>':'まけ…<br>')+msg;(win?SFX.win:SFX.lose)();setTimeout(()=>{$('stage').hidden=true;res(win)},1200)};
   $('qd').onpointerdown=e=>{e.preventDefault();if(state==='wait'){state='x';return fin(false,'フライング！')}
-    if(state==='go'){const ms=Math.round(performance.now()-t0);state='x';fin(ms<cpuMs,`あなた ${ms}ミリ秒 ／ あいて ${cpuMs}ミリ秒`)}};
+    if(state==='go'){const ms=Math.round(performance.now()-t0);state='x';fin(ms<cpuMs,`<small>あなた ${ms}ミリ秒 ／ あいて ${cpuMs}ミリ秒</small>`)}};
   await sleep(1200+rnd(2000));if(state!=='wait')return;
   state='go';t0=performance.now();$('qd').textContent='バン！';$('qd').classList.add('go');SFX.shot();
   setTimeout(()=>{if(state==='go'){state='x';fin(false,'おそかった！')}},1500)})}
@@ -3005,8 +3005,9 @@ document.addEventListener('visibilitychange',()=>{if(document.hidden){if(!FP.pau
     b.onclick=()=>{SFX.tap&&SFX.tap();const ov=document.createElement('div');ov.className='mapall';const W=map.offsetWidth;
       const[ba,bb]=bounds();const HH=bb-ba;const sc=Math.min((innerWidth-40)/W,(innerHeight-120)/HH);const box=document.createElement('div');box.className='mbox';box.style.width=W*sc+'px';box.style.height=HH*sc+'px';
       const cl=map.cloneNode(true);cl.removeAttribute('id');cl.style.transformOrigin='0 0';cl.style.transform=`translateY(${-ba*sc}px) scale(${sc})`;cl.style.transition='none';cl.style.width=W+'px';cl.querySelectorAll('[id]').forEach(e=>e.removeAttribute('id'));box.appendChild(cl);
-      const n=[...map.querySelectorAll('.an3.done')].pop()||map.querySelector('.an3.now');if(n){const tag=document.createElement('div');tag.className='mhere';tag.textContent='いま ここ！';tag.style.left=Math.max(48,Math.min(W*sc-48,parseFloat(n.style.left)/100*W*sc))+'px';tag.style.top=Math.max(22,(parseFloat(n.style.top)-ba)*sc-26)+'px';box.appendChild(tag);
-        const cn=cl.querySelectorAll('.an3')[[...map.querySelectorAll('.an3')].indexOf(n)];if(cn)cn.classList.add('cur')}
+      /* 10/30：いまいる所＝さいごに すすんだ マス（いちばん上の 列） */const n=[...map.querySelectorAll('.an3.done')].sort((a,b)=>(+b.style.zIndex||0)-(+a.style.zIndex||0))[0]||map.querySelector('.an3.now');if(n){const tag=document.createElement('div');tag.className='mhere';tag.textContent='いま ここ！';const nx=parseFloat(n.style.left)/100*W*sc,lx=Math.max(48,Math.min(W*sc-48,nx));tag.style.left=lx+'px';tag.style.setProperty('--ax',(nx-lx)+'px');tag.style.top=Math.max(22,(parseFloat(n.style.top)-ba)*sc-26)+'px';box.appendChild(tag);
+        const cn=cl.querySelectorAll('.an3')[[...map.querySelectorAll('.an3')].indexOf(n)];if(cn)cn.classList.add('cur');
+        /* 10/30：ふきだしは そのマスの 真上に（となりのマスに かぶせない） */requestAnimationFrame(()=>{try{const br=box.getBoundingClientRect();let top=1e9,l=1e9,r=-1e9;const cands=[...cn.querySelectorAll('.pic,.obj,img')].filter(e=>!e.matches('.mbeam,.mrays,.mspk'));(cands.length?cands:[cn]).forEach(e=>{const q=e.getBoundingClientRect();if(!q.height)return;top=Math.min(top,q.top);l=Math.min(l,q.left);r=Math.max(r,q.right)});if(top<1e9){const cx=(l+r)/2-br.left,lx=Math.max(44,Math.min(br.width-44,cx));tag.style.left=lx+'px';tag.style.setProperty('--ax',(cx-lx)+'px');tag.style.top=Math.max(26,top-br.top-2)+'px'}}catch(e){}})}
       ov.appendChild(box);ov.insertAdjacentHTML('beforeend','<div class="mcap">タップで もどる</div>');document.body.appendChild(ov);ov.onclick=()=>{SFX.tap&&SFX.tap();ov.remove()}}}
 }}
 
@@ -7111,7 +7112,7 @@ function saveCodeView(){if(typeof G==='undefined'||!G)return toast('まだ デ�
   modal(`<h2>📦 いまの データの コード</h2><p class="muted">ぜんぶ コピーして メモなどに とっておいてね。タイトルの「データ → 引っこし → コードを読みこむ」で もとに もどせるよ。</p><textarea class="code" id="ct" readonly>${code}</textarea>
   <div class="row"><button class="btn" id="cp">コピー</button><span class="sp"></span><button class="btn ghost" id="cx">とじる</button></div>`);
   $('cx').onclick=closeModal;$('cp').onclick=async()=>{const t=$('ct');t.select();let ok=false;try{await navigator.clipboard.writeText(code);ok=true}catch(e){try{ok=document.execCommand('copy')}catch(e2){}}$('cp').textContent=ok?'コピーした！':'長おしで コピーしてね'}}
-{const _os=openSettings;openSettings=function(){_os.apply(this,arguments);try{const ok=$('ok');if(ok&&typeof G!=='undefined'&&G){const b=document.createElement('button');b.className='btn ghost';b.style.cssText='width:100%;margin-top:10px';b.textContent='📦 いまの データを コードで のこす';b.onclick=saveCodeView;ok.parentNode.insertBefore(b,ok)}}catch(e){}}}
+{const _os=openSettings;openSettings=function(){_os.apply(this,arguments);try{const ok=$('ok');if(ok&&typeof G!=='undefined'&&G){const b=document.createElement('button');b.className='btn ghost';b.style.cssText='width:100%;margin-top:10px';b.textContent='📦 引っこし（コードで のこす・読みこむ）';b.onclick=()=>{try{moveData()}catch(e){saveCodeView()}};ok.parentNode.insertBefore(b,ok)}}catch(e){}}}
 /* クリア画面が 下に スクロールできる なぞ（回る ひかりが はみだしていた）／NEW! の 下の すき間 */
 (()=>{const st=document.createElement('style');st.textContent=`.unlock{overflow:hidden;padding:0 8px 14px;margin:0 -8px -14px}
 .unlock .uic{display:flex;justify-content:center;align-items:center;line-height:1}
@@ -9279,9 +9280,7 @@ const MOVE={keys(){const o={};try{for(let i=0;i<localStorage.length;i++){const k
      try{for(const k in o)if(/^wippy/.test(k)&&typeof o[k]==='string'){localStorage.setItem(k,o[k]);try{window.__cloudPut&&window.__cloudPut(k)}catch(e){}}}catch(e){msg.textContent='入れられなかった…';return}
      msg.style.color='#2a7a2a';msg.textContent='ひっこし できたよ！ はじめから よみこむね';setTimeout(()=>location.reload(),900)}}};
 window.MOVE=MOVE;
-{const _os2=openSettings;openSettings=function(){_os2.apply(this,arguments);try{const ok=$('ok');if(!ok)return;const w=document.createElement('div');w.style.cssText='display:flex;gap:6px;margin-top:8px';
-  w.innerHTML='<button class="btn ghost" style="flex:1;font-size:13px">セーブを コピー<br><small>（ひっこし用）</small></button><button class="btn ghost" style="flex:1;font-size:13px">ひっこしコードを<br><small>はりつける</small></button>';
-  const [a,b]=w.querySelectorAll('button');a.onclick=()=>{SFX.tap&&SFX.tap();MOVE.copyOut()};b.onclick=()=>{SFX.tap&&SFX.tap();MOVE.pasteIn()};ok.before(w)}catch(e){}}}
+/* 10/30：ひっこしコードは かわいい方（🐰Wippy&Friends…）に 1つに まとめた。せっていの ボタンは f46 の 1つだけ */
 
 /* 10/29：タブの ウィピィ（ファビコン）を ばめんで かえる */
 const FAV={happy:['smile','wink','laugh','shy','relief','star','carrot','dreamy','side','tilt','surprise'],set(n){try{let l=document.querySelector('link[rel="icon"][data-wf]');if(!l){document.querySelectorAll('link[rel="icon"]').forEach(x=>x.remove());l=document.createElement('link');l.rel='icon';l.type='image/png';l.setAttribute('data-wf','1');document.head.appendChild(l)}l.href='fav/f_'+n+'.png?v=3'}catch(e){}},
@@ -9306,6 +9305,37 @@ try{const st=document.createElement('style');st.textContent='.ie .iei{width:64px
 try{const st=document.createElement('style');st.textContent='.bar #lasso{position:relative;flex:0 0 auto;width:auto!important;min-width:0;padding:6px 8px!important;font-size:14px;line-height:1;white-space:nowrap;display:flex;align-items:center;gap:3px}.bar #lasso img,.bar #lasso .emo{width:22px!important;height:22px!important;margin:0!important}.bar #lasso small{position:absolute;top:-9px;right:-6px;font-size:10px;background:#fff6e0;color:#a5321a;border-radius:999px;padding:2px 5px;box-shadow:0 1px 3px rgba(0,0,0,.4)}.bar.haslasso #pile{flex-shrink:0;margin-left:4px!important}.bar.haslasso #endt{font-size:11.5px!important;padding:10px 8px!important;letter-spacing:-.04em;white-space:nowrap!important;flex:0 0 auto;min-width:auto!important}.bar.haslasso .sp{flex:0 0 0!important;width:0!important}.bar.haslasso{gap:5px!important}';document.head.appendChild(st)}catch(e){}
 
 try{const _rbL=renderBattle;renderBattle=function(){const r=_rbL.apply(this,arguments);try{const bar=document.querySelector('.bar');if(bar){const L=!!document.getElementById('lasso');bar.classList.toggle('haslasso',L);const et=document.getElementById('endt');if(L&&et)et.textContent=et.textContent.replace(/\s*▶\s*$/,'')}}catch(e){}return r}}catch(e){}
+
+
+/* 10/30：画面の よゆう（iPhoneのSafariで 上が つまらないように）。本番で つかう */
+(()=>{const st=document.createElement('style');st.textContent=`
+#app{padding-top:calc(env(safe-area-inset-top,0px) + 16px)!important}
+#app:has(> .bar){padding-top:calc(env(safe-area-inset-top,0px) + 8px)!important}
+#app.slotscr{padding-top:calc(env(safe-area-inset-top,0px) + 58px)!important;justify-content:center!important;padding-bottom:calc(env(safe-area-inset-bottom,0px) + 24px)!important}
+.opcap{top:auto!important;bottom:calc(env(safe-area-inset-bottom,0px) + 4%)!important}
+/* しょうきん首：つぎの手配書の 光を 柱より 上に */
+.wboard .wgrid{z-index:auto!important}.wboard .wgrid>.wpost{position:relative;z-index:2}.wboard .wgrid>.wpost.wnext{z-index:4!important}
+/* 地図ぜんたい：いまいる所だけ 光らせる */
+.mapall .mbox .an3.now{filter:none!important}.mapall .mbox .an3.cur{filter:drop-shadow(0 0 6px #fff) drop-shadow(0 0 14px #ffd34a) drop-shadow(0 0 26px rgba(255,180,0,.95))!important;animation:mhereGlow 1.2s ease-in-out infinite}
+@keyframes mhereGlow{50%{filter:drop-shadow(0 0 9px #fff) drop-shadow(0 0 20px #ffe066) drop-shadow(0 0 36px rgba(255,190,0,1))}}
+.mapall .an3.cur,.mapall .an3.cur *{opacity:1!important}.mapall .an3.cur .pic,.mapall .an3.cur .obj,.mapall .an3.cur img{filter:none!important}.mapall .mhere{font-size:12px!important;padding:1px 9px!important;translate:-50% -100%;transform-origin:50% 100%}
+.mapall .mhere::after{content:'';position:absolute;left:calc(50% + var(--ax,0px));bottom:-8px;transform:translateX(-50%);border:7px solid transparent;border-top-color:#7a4a12;border-bottom:0}
+/* おしらせの帯：画面から はみ出さない */
+.toast{white-space:normal!important;max-width:min(94vw,480px)!important;width:max-content;box-sizing:border-box;text-align:center;line-height:1.4}
+/* つかまえた！の アイテム：名前を 1行で、せつめいは 読みやすく */
+.loot .li{width:auto!important;min-width:96px;max-width:min(80vw,230px)}.loot .li b{white-space:nowrap;line-height:1.3}.loot .li small{max-width:200px;word-break:keep-all;overflow-wrap:anywhere;text-align:center;line-height:1.4!important}
+/* はやうち勝負：まんなかに・文字の 位置が うごかない */
+#stage .qd{margin:0 auto!important}#stage .qd+.sub{word-break:keep-all;overflow-wrap:anywhere;line-height:1.5;margin:10px auto 0;max-width:min(80vw,340px)}#stage #qr{min-height:3em;margin-top:8px;word-break:keep-all;overflow-wrap:anywhere}
+`;document.head.appendChild(st)})();
+/* 10/30：キーワードの 絵（いるあいだ・おうえん など）が まだ 読みこまれていない時に ？や 四角に なるのを なおす。
+   ファイルが ない絵は、絵の まとめファイルを 読んでから はりなおす */
+(()=>{const fixOne=img=>{try{const m=(img.getAttribute('src')||'').match(/(?:^|\/)(ui\/u_[\w]+)\.png$/);if(!m)return;const key=m[1];
+  if(window.ARTD&&ARTD[key]){img.src=ARTD[key];return}
+  if(typeof ART_CH!=='undefined'&&ART_CH[key]!==undefined&&typeof artChunk==='function'){artChunk(ART_CH[key]).then(()=>{if(window.ARTD&&ARTD[key])img.src=ARTD[key]})}}catch(e){}};
+  addEventListener('error',e=>{const t=e.target;if(t&&t.tagName==='IMG')fixOne(t)},true);
+  /* 先に 読んでおく（キーワードの 絵が 入っている まとめ） */
+  setTimeout(()=>{try{const s=new Set();Object.keys(ART_CH).forEach(k=>{if(/^ui\/u_k_/.test(k))s.add(ART_CH[k])});s.forEach(i=>artChunk(i))}catch(e){}},1500);
+})();
 
 
 /* =====================================================================
