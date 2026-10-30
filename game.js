@@ -232,7 +232,7 @@ const KW_T={taunt:'かばう',shield:'バリア',twice:'2回攻撃',quick:'は�
   lone:'一匹オオカミ',nostun:'酔わない',deadly:'必殺',noattack:'攻撃できない',splash:'なぎはらい',feed:'おこぼれ',pack:'群れ'};
 const KW_HELP={taunt:'敵はまずこのキャラを攻撃しないといけない',shield:'1回だけダメージを0にする',twice:'1ターンに2回攻撃できる',quick:'出したターンからすぐ攻撃できる',
   revive:'たおれても1回だけ体力1で立ち上がる',home:'たおれたら手札にもどる',thorns:'攻撃されたら、攻撃してきた相手に1ダメージ',stealth:'自分から攻撃するまで、ねらわれない',
-  lone:'ほかに仲間がいないと攻撃+2',nostun:'酔っぱらい（1回休み）にならない',deadly:'ダメージをあたえた 相手のキャラを 一撃で たおす（バリアには ガードされる）',noattack:'自分からは攻撃できない。でも攻撃力99なので、攻撃してきた相手はたおれる。3ターンで燃料切れ',
+  lone:'ほかに仲間がいないと攻撃+2',nostun:'酔っぱらい（1回休み）にならない',deadly:'ダメージをあたえた 相手の子分を 一撃で たおす',noattack:'自分からは攻撃できない。でも攻撃力99なので、攻撃してきた相手はたおれる。3ターンで燃料切れ',
   splash:'攻撃した相手のとなりにも2ダメージ',feed:'キャラがたおれるたび、攻撃+1',pack:'ほかに動物の仲間がいると攻撃+2',poison:'毒：毎ターン、毒の数だけダメージ'};
 
 function tokName(t){return t&&C[t]?`${C[t].n}（${C[t].a*K}/${C[t].h*K}）`:''}
@@ -585,7 +585,7 @@ clydeT:['ボニ〜〜！','','',''],
 goblinT:['兄貴〜〜〜！','','',''],
 };
 /* 攻撃のスタイル（共通パーツを使い回す）。書いてないキャラは陣営や特徴から自動で決まる */
-const FXS={
+const FXS={kurogoke:'bite',new163:'bite',
  pochi:'lasso',pochi2:'lasso',pochi3:'lasso',juko:'lasso',bass:'lasso',ranger:'lasso',bruno:'smash',mustang:'tackle',
  jitchoku:'shoot',wyatt:'shoot',masterson:'shoot',garrett:'tackle',tink:'magic',roybean:'smash',gaga:'peck',mia:'card',virgil:'shoot',adara:'slash',
  tenshu:'throw',kifujin:'water',doc:'throw',pokerfox:'card',ragtime:'note',bull:'tackle',slim:'throw',pyonko:'throw',korokichi:'note',harry:'card',bard:'note',lily:'note',shaker:'throw',cancan:'tackle',arai:'throw',yoppa:'throw',mustache:'throw',mog:'note',
