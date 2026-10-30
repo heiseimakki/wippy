@@ -3980,7 +3980,7 @@ Object.assign(SPECIAL,{
    タイトル画面：ロゴ どーん！ ＋ タンブルウィード ＋ 砂あらし ＋ あそぶボタン ＋ おしらせ
    ===================================================================== */
 const CHANGELOG=[
-  {v:'0.78.0',d:'10/30',t:['「1回休み」が ちゃんと 1回 休むように なったよ','昇進まえに Lv5より 上げておくと、昇進したあとも その ぶん つよいよ','昇進した すがたは、自分で 昇進させたときだけ 手に入るよ','ロープばあちゃんの なげなわが 2回 ふえるよ','説得は ノーマル1日・レア3日・レジェンド5日']},
+  {v:'0.78.0',d:'10/30',t:['「1回休み」が ちゃんと 1回 休むように なったよ','昇進まえに Lv5より 上げておくと、昇進したあとも その ぶん つよいよ','ステージの パックは 3まいに なったよ','昇進した すがたは、自分で 昇進させたときだけ 手に入るよ','ロープばあちゃんの なげなわが 2回 ふえるよ','説得は ノーマル1日・レア3日・レジェンド5日']},
   {v:'0.77.0',d:'10/29',t:['ほかの スマホへ データを 引っこし できるように なったよ！','地図ボタンの マップが、ステージごとの 絵に なったよ','コインの マークを 金貨の 絵に したよ','ブラウザの タブに、ぼくの 顔が 出るように なったよ','コインが 足りない カードは、ちゃんと 灰色に なるように 直したよ','あいての 力が こっちに かかる ときは「ウィピィの」と 出すように したよ']},
   {v:'0.76.0',d:'10/28',t:['しょうきん首を つかまえると、しょうきんが もらえるように なったよ！','つぎに いく ところが 光って、わかるように なったよ','合成・しんか できる時に、なかまが 光るように なったよ','Lv7に なると、とくべつな 力が ふえるように なったよ','ボス戦の 曲を かえて、つよさも 見なおしたよ','ずかんに タブを つけたよ','ウィピィの 顔が、セリフに あわせて かわるように なったよ','出なかった 画像を 直したよ','せっていから、セーブを クラウドにも のこせるように なったよ']},
   {v:'0.75.0',d:'10/27',t:['合成すると、とくべつな 力も つよく なるように なったよ！','行商人さんで、どうぐを 売れるように なったよ','はじめての子に、ウィピィが 道あんない するように なったよ','あいての 山札の まい数が 見えるように なったよ','右下の はぐるまから「こうさん」できるように なったよ','しょうきんの 金額を 見なおしたよ','カードの せつめいを 読みやすく したよ']},
@@ -9391,12 +9391,51 @@ try{for(const sid in STAGES){const S=STAGES[sid];['pool','elites','mooks'].forEa
 try{if(typeof PACK_POOL!=='undefined')for(let i=PACK_POOL.length-1;i>=0;i--)if(EVO_FORMS.has(PACK_POOL[i]))PACK_POOL.splice(i,1)}catch(e){}
 {const _sp9=spackPool;spackPool=function(){return _sp9.apply(this,arguments).filter(id=>!EVO_FORMS.has(id))}}
 {const _oc9=offerCards;offerCards=function(){const r=_oc9.apply(this,arguments);return (r||[]).filter(c=>!c||!EVO_FORMS.has(c.id)||(G.col&&G.col[c.id]))}}
-/* 10/30：パックの まい数・レジェンドの 出やすさは もとのまま（ためしに 3まいに したが もどした） */
+/* 10/30：ステージの パックは 3まい（レジェンドの 出やすさは もとのまま 3.5%） */
+rollSpack=function(sid){const pool=spackPool(sid),boss=STAGES[sid].boss,w=G.wallet;
+  const one=forceR=>{if(C[boss]&&Math.random()<.005)return boss;const r=Math.random();const rar=r<.035?'L':(r<.2||forceR)?'R':'N';
+    let p=pool.filter(id=>C[id].r===rar&&C[id].c<=w);if(!p.length)p=pool.filter(id=>C[id].r===rar);if(!p.length)p=pool.filter(id=>C[id].c<=w);if(!p.length)p=pool;return pick(p)};
+  const got=Array.from({length:3},(_,i)=>one(i===0)).sort((a,b)=>'NRL'.indexOf(C[a].r)-'NRL'.indexOf(C[b].r));
+  if(got.includes(boss)&&typeof AWK!=='undefined'&&AWK[boss]){G.awk=G.awk||{};if(!G.awk[boss]){G.awk[boss]=1;window.__awkNew=boss}}return got};
 /* 10/30：せつめいの 文字の まちがい なおし（成金の 50まい・モグじい・グリズリー） */
 {const FIX={narikin:{'いるあいだ':'金で 買えぬもの なし！ 2回に1回、ターンの はじめに コイン+1'},new58:{'見参！':'ほりだしもの！ たおれた あいての カードを 1まい えらんで 手札に くわえる'}};
  const _el9=effList;effList=function(id,lv){const L=_el9.apply(this,arguments);try{const F=FIX[id];return L.map(x=>{let t=x[2];if(F&&F[x[1]])t=F[x[1]];
    if(id==='grizzly'&&x[1]==='見参！'){const m=/\+(\d+)\/\+\d+/.exec(String(t));t=`お肉タップタプ！ 3びょうで お肉を タップ！ 10回ごとに +${m?m[1]:1}/+${m?m[1]:1}`}
    return t===x[2]?x:[x[0],x[1],t,x[3],x[4]]})}catch(e){return L}}}
+/* 10/30：なかまの カード画面を すっきり。合成は「いまの カード → 合成後の カード」の 2まいで 見せる。
+   合成できない ときは 数字を 出さない。くらい 合成ボタンを おすと 2まいが 見える。カードを さわると こうかが 見える */
+function cmpCards(id,lv){const w=document.createElement('div');w.className='cmp2';
+  const a=cardEl(id,lv,{}),b=cardEl(id,Math.min(MAX_LV,lv+1),{});[a,b].forEach(el=>{el.style.setProperty('--cw','min(22vw,88px)');el.classList.add('cmpc')});
+  const ar=document.createElement('div');ar.className='cmpar';ar.textContent='→';w.append(a,ar,b);
+  [[a,lv],[b,Math.min(MAX_LV,lv+1)]].forEach(([el,L])=>el.addEventListener('click',ev=>{ev.stopPropagation();const fx=effList(id,L);
+    tipBubble(el,'',`${C[id].n} Lv${L}`,`⚔️${statA(id,L)}　❤️${statH(id,L)}`+(fx.length?'<br>'+fx.map(x=>`<b>${x[1]}</b>：${x[2]}`).join('<br>'):''),'#7a5a3a')}));
+  return w}
+colSheet=function(id){
+  const e=G.col[id],c=C[id],inP=partyCnt(id);if(!e||!c)return;
+  const canMerge=e.lv<MAX_LV&&e.n>0;const canEvo=e.lv>=EVO_LV&&c.evo;const rate=Math.round((MERGE_RATE[e.lv]||0)*100);
+  let body='<div id="cmpbox"></div>';
+  if(c.evo&&e.lv<EVO_LV)body+=`<div class="upline small">Lv${EVO_LV}で 昇進できる</div>`;
+  body+=`<div class="upline small">もっている ${ownN(id)}まい ・ つれていく ${inP}まい</div>`;
+  if(canMerge&&inP>=2&&e.n<=1)body+=`<div class="upline small" style="color:#ffb37a">合成すると つれていくのが 1まいに へるよ</div>`;
+  sheetCard(id,e.lv,body,`<div class="popcol">
+    ${canEvo?`<button class="pop rainbow" id="ev">✨ 昇進！</button>`:''}
+    ${e.lv<MAX_LV?`<button class="pop pink ${canMerge?'':'dim'}" id="mg">🔨 合成${canMerge?` <small>${rate}%</small><i class="cnt">×${e.n}</i>`:''}</button>`:''}
+    ${canAddCopy(id)?`<button class="pop green" id="tp">⬆ ${inP?'もう1まい つれていく':'つれていく'}</button>`:''}
+    ${inP?`<button class="pop gray" id="tm">⬇ おるすばんへ</button>`:''}</div>`);
+  const box=$('cmpbox');if(box&&canMerge)box.appendChild(cmpCards(id,e.lv));
+  const m=$('mg');if(m)m.onclick=()=>{if(canMerge)return mergeAnim(id);
+    if(box&&!box.firstChild){box.appendChild(cmpCards(id,e.lv));box.insertAdjacentHTML('beforeend','<div class="upline small cmpno">おなじ子が もう1まい いると 合成できるよ</div>')}SFX.tap&&SFX.tap()};
+  const v=$('ev');if(v)v.onclick=()=>evolveAnim(id);
+  const tp=$('tp');if(tp)tp.onclick=()=>{if(addCopy(id)){SFX.tap();save()}closeSheet();partyView()};
+  const tm=$('tm');if(tm)tm.onclick=()=>{if(removeCopy(id)){SFX.tap();save()}closeSheet();partyView()};
+  try{tribePill(id)}catch(x){}};
+(()=>{const st=document.createElement('style');st.textContent=`
+.cmp2{display:flex;align-items:center;justify-content:center;gap:6px;margin:6px 0 4px;max-width:100%;min-width:0}
+.cmp2 .cmpar{font:900 26px var(--display,sans-serif);color:#ffd76a;text-shadow:0 2px 0 rgba(0,0,0,.4)}
+.cmp2 .card{cursor:pointer;flex:none}
+.pop.dim{filter:grayscale(.7) brightness(.75);opacity:.85}
+.cmpno{text-align:center;color:#e8d3b0}
+.kwbub .kh i:empty{display:none}`;document.head.appendChild(st)})();
 
 
 /* =====================================================================
