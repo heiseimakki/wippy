@@ -9362,6 +9362,79 @@ const ART_POS2={"bison": [92.9, 100, 106], "boiler": [50, 64.3, 100], "capone": 
 
 
 /* =====================================================================
+   10/30：敵の 考えを かしこく
+   ・見参で なかまを よぶ子は、場が いっぱいで ムダに なるなら 先に 攻撃して、あとで 出す
+   ・赤いマス・ボスは コインと 場所で いちばん いい 組み合わせを えらぶ（ボスほど かしこい）
+   ===================================================================== */
+(()=>{
+const tier=()=>{const k=B&&B.spec&&B.spec.kind;return k==='boss'?3:k==='elite'?2:1};
+const NEED={};
+const needRoom=id=>{if(id in NEED)return NEED[id];let n=0;try{const L=effList(id,1)||[];for(const x of L){const nm=String(x[1]||''),t=String(x[2]||'');if(/見参/.test(nm)&&/(よぶ|呼ぶ|ふやす|ならべ|場に ?出す|ステージ)/.test(t)&&!/出せない/.test(t)){const m=t.match(/(\d+)\s*(匹|体|ひき|びき|人)/);n=Math.max(n,m?+m[1]:1)}}}catch(e){}return NEED[id]=n};
+const val=c=>{const d=C[c.id];if(!d)return 0;const lv=c.lv||1;let v=statA(c.id,lv)+statH(c.id,lv)+(c.plus||0)*2;const kw=d.kw||'';
+  if(/taunt/.test(kw))v+=1;if(/shield/.test(kw))v+=1.2;if(/deadly/.test(kw))v+=1.5;if(/quick/.test(kw))v+=1;if(d.bc)v+=1.6;if(d.aura)v+=1.4;if(d.dr)v+=.8;return v};
+const playable=(sd,c)=>{const d=C[c.id];return d&&d.c<=sd.coin};
+const _ap=aiPlay;
+aiPlay=async function(sd){if(!B||isMe(sd)||window.__OLDAI)return _ap.apply(this,arguments);
+  const T=tier(),p2=!!B._aiP2,limit=sd.moji?1:9;let plays=0;
+  for(let k=0;k<9&&plays<limit;k++){if(!B||B.over)return;
+    const room=bmax(sd)-sd.board.length;if(room<=0)break;
+    let opts=sd.hand.map((c,i)=>({c,i})).filter(x=>playable(sd,x.c));if(!opts.length)break;
+    /* 見参が ムダに なる子は あとまわし */
+    const ok=[];for(const x of opts){const need=needRoom(x.c.id);
+      if(need>0&&room-1<need){if(!p2){B._aiDefer=true;continue}
+        /* あとでも 半分も 出せないなら 手札に のこす */if(room-1<Math.ceil(need/2))continue}
+      ok.push(x)}
+    if(!ok.length)break;
+    let pickX;
+    if(T===1){ok.sort((a,b)=>C[b.c.id].c-C[a.c.id].c||Math.random()-.5);pickX=ok[0]}
+    else{/* コインと 場所の 中で いちばん 強く なる 組み合わせ */
+      const n=Math.min(ok.length,8);let best=null,bv=-1;
+      for(let mask=1;mask<(1<<n);mask++){let cost=0,v=0,cnt=0;for(let j=0;j<n;j++)if(mask&(1<<j)){cost+=C[ok[j].c.id].c;v+=val(ok[j].c);cnt++}
+        if(cost>sd.coin||cnt>room)continue;v+=cost*(T===3?.35:.2);if(v>bv){bv=v;best=mask}}
+      const sel=[];for(let j=0;j<n;j++)if(best&(1<<j))sel.push(ok[j]);
+      /* なかまを つよくする子（いるあいだ）を さきに、よぶ子は あとに */
+      sel.sort((a,b)=>(C[b.c.id].aura?1:0)-(C[a.c.id].aura?1:0)||needRoom(a.c.id)-needRoom(b.c.id)||val(b.c)-val(a.c));
+      pickX=sel[0]}
+    if(!pickX)break;
+    await playCard(sd,pickX.i);plays++;if(!B||B.over)return}};
+const _aa=aiAttack;
+aiAttack=async function(sd){const r=await _aa.apply(this,arguments);
+  try{if(B&&!B.over&&!isMe(sd)&&B._aiDefer){B._aiDefer=false;B._aiP2=true;try{await aiPlay(sd)}finally{if(B)B._aiP2=false}}}catch(e){}
+  return r};
+})();
+/* =====================================================================
+   10/30：マップの マスの ならびを ほどよく
+   ・どの道を えらんでも 戦い・休む（酒場）・買う（お店）・はてな が ほどよく まざる
+   ・戦いじゃない マスは つづけて 出さない（酒場→お店→… の 連続を なくす）
+   ・ボスの 手前の 列は「休む1・買う1・のこりは 戦い」
+   ===================================================================== */
+{const _bmB=buildMap;buildMap=function(sid,floors){const map=_bmB.apply(this,arguments);try{
+  const L=map.length;if(L<4)return map;const isF=t=>t==='fight'||t==='elite'||t==='boss';
+  const foes=[];map.forEach(r=>r.forEach(n=>{if(n&&n.t==='fight'&&n.foe)foes.push(n.foe)}));
+  const toFight=n=>{n.t='fight';delete n.ev;delete n.who;if(!n.foe){const s=STAGES[sid];n.foe=pick(foes.length?foes:(s.mooks||[]).filter(id=>C[id]))}};
+  /* 親（ひとつ前の列で つながっている マス） */
+  const parents=(i,k)=>i<=0?[]:map[i-1].filter(n=>n.next&&n.next.includes(k));
+  for(let i=1;i<L-2;i++){const row=map[i];
+    row.forEach((n,k)=>{if(isF(n.t))return;if(parents(i,k).some(p=>!isF(p.t)))toFight(n)});
+    /* 列に 戦いが ひとつも ないのは だめ */
+    if(row.length>1&&!row.some(n=>isF(n.t)))toFight(pick(row))}
+  /* ボスの 手前 */
+  const pre=map[L-2];if(pre&&pre.length){const want=G&&G.runs>=1?['saloon','shop']:['saloon'];const ks=shuffle(pre.map((n,k)=>k));
+    pre.forEach(n=>toFight(n));want.forEach((t,j)=>{const k=ks[j];if(k===undefined)return;const n=pre[k];n.t=t;delete n.foe})
+    /* 手前の 列と つながる マスが 戦いじゃないなら、1つ前の 列の そのマスは 戦いに */
+    const pr=map[L-3];if(pr)pr.forEach(p=>{if(!isF(p.t)&&p.next.some(k=>!isF(pre[k].t)))toFight(p)})}
+  /* どの道でも 1つは 休む・買う・はてな が あるように */
+  for(let pass=0;pass<20;pass++){const self=(i,k)=>isF(map[i][k].t)?0:1;const pre=map.map(r=>r.map(()=>0)),suf=map.map(r=>r.map(()=>0));
+    for(let i=0;i<L;i++)map[i].forEach((n,k)=>{const ps=parents(i,k).map(pn=>pre[i-1][map[i-1].indexOf(pn)]);pre[i][k]=self(i,k)+(ps.length?Math.min(...ps):0)});
+    for(let i=L-1;i>=0;i--)map[i].forEach((n,k)=>{const cs=(n.next||[]).map(j=>suf[i+1][j]);suf[i][k]=self(i,k)+(cs.length?Math.min(...cs):0)});
+    let fixed=false;
+    for(let i=L-3;i>=2&&!fixed;i--)map[i].forEach((n,k)=>{if(fixed||n.t!=='fight')return;if(pre[i][k]+suf[i][k]>0)return;if(parents(i,k).some(pp=>!isF(pp.t)))return;if(n.next.some(j=>!isF(map[i+1][j].t)))return;
+      const t=pick(G&&G.runs>=1?['saloon','shop','event']:['saloon']);n.t=t;delete n.foe;if(t==='event')n.ev=pickEvent();fixed=true});
+    if(!fixed)break}
+}catch(e){}return map}}
+
+
+/* =====================================================================
    おもしろ技ためし場（fun.html だけで動く）
    ・おもしろい技のキャラだけのデッキ ・毎ターン コイン10 ・体力999
    ・的（まと）はやられても すぐ補充 ・「わざをえらぶ」で好きなキャラを手札に
