@@ -420,7 +420,7 @@ rookie2:['ちっ…ヤキが回ったぜ','腕がなるぜ','獲物が増えそ�
 rookie3:['…フッ、いい腕だ…','…やれ','…悪くない','…'],
 zombie:['ウ〜…またあした…','ウ…？ ウー！','ウー！ウー♪','ウ…（ポロッ）'],
 zombie2:['ア〜…バラバラ〜…','アー…ドキドキ…しない…心臓…ない…','アー！！','ア…腕…どこ…'],
-zombie3:['何度でも…もどってくるぞ…','死者の軍団、強化だ…','われらは さらに 不死身となった','ぐぬぬ…眠い…'],
+zombie3:['何度でも…もどってくるぞ…','ゾンビ軍団、強化だ…','われらは さらに 不死身となった','ぐぬぬ…眠い…'],
 akudo:['うわーん！おぼえてろ〜！','いたずら パワーアップか？','へへっ、もっと いたずらできるぞ！','ちぇっ、つまんねーの'],
 akudo2:['ちくしょう〜、今日はここまでだ！','オレを もっとワルにしてくれ','ワルさに みがきが かかったぜ','ケッ、運が悪いぜ'],
 akudo3:['子分たち〜、ずらかれ〜！','親分を 合成するってのか…！','親分の貫禄、倍増だ！','…子分には言うなよ'],
@@ -782,7 +782,7 @@ const TIPS={
     '💀 賞金首は、やる気を 半分まで へらすと 🪢投げ縄で つかまえられるよ','つかまえた お尋ね者は 保安官事務所へ。説得したら なかまに なるかも！？',
     'ダブった なかまは すてないで！ 🔨合成すると レベルアップ！','Lv5に なると ✨しんか する子も いるよ。どんな すがたに なるかな？',
     'むかしの 保安官バッジは、星の形の ものが 多かったんだって！','あぶなくなったら 🏠で 町に 帰ろう。逃げるが 勝ち！',
-    'たおれると、その冒険で ためた 賞金は ぜーんぶ 落としちゃう…','ボスを たおすと つぎの レベルが あそべる。たたかう かいすうも 敵も ふえるけど、賞金も ガッポリ！'],
+    'たおれると、その冒険で ためた 賞金の 4わりを 落としちゃう…','ボスを たおすと つぎの レベルが あそべる。たたかう かいすうも 敵も ふえるけど、賞金も ガッポリ！'],
   west:['西部の町の「サルーン」は、みんなが 集まる 酒場だったよ','保安官の 星バッジは、町を 守る しるし','タンブルウィードは、かれて 根から はなれた 草が 風で ころがった もの',
     'サワロという 大きな サボテンは、10メートルを こえることも あるんだって','むかしの 西部では「ポニー・エクスプレス」という 馬の リレーで 手紙を 運んだ',
     'アメリカの 東と 西を つなぐ 鉄道は、1869年に つながったよ','ジャッカロープは、角の 生えた ウサギの 伝説の 生き物','ロードランナーは、時速30キロ以上で 走れる 鳥',
@@ -1514,7 +1514,7 @@ function buildMap(sid,floors){
 }
 const nextNodes=()=>{const row=R.map[R.floor];if(!row)return [];if(R.floor===0)return row.map((n,j)=>j);const prev=R.map[R.floor-1][R.pos];return prev?prev.next:row.map((n,j)=>j)};
 async function startRun(sid,star){
-  if(!G.party.length){modal(`<h2>仲間がいない！</h2><p class="muted">「仲間・デッキ」で連れていく仲間をえらんでね。</p><button class="btn" id="ok">OK</button>`);$('ok').onclick=closeModal;return}
+  if(!G.party.length){modal(`<h2>仲間がいない！</h2><p class="muted">町の「なかま」で 連れていく なかまを えらんでね。</p><button class="btn" id="ok">OK</button>`);$('ok').onclick=closeModal;return}
   const hp=34+(G.runs<1?6:0)+(G.items.kit?8:0)+(G.hpBonus||0);
   /* レベルが上がるほど、たたかう回数がふえる（+3まで）。敵も強くなる */
   const floors=G.runs<1&&sid==='wild'?6:stageFloors(sid,star||0);
@@ -2035,7 +2035,7 @@ function coachUpdate(myTurn,tg){clearCoach();if(!TUTOR()||!myTurn||!B||B.over)re
   if(B.sel){const h=tg.some(t=>t.hero);const t=h?$('foeHero'):document.querySelector('#ef .u.tgt');return coachAt(t,h?'敵の顔をタップ！':'赤く光る敵をタップ！')}
   const rd=document.querySelector('#af .u.ready');if(rd)return coachAt(rd,'光っている仲間をタップ');
   const pc=document.querySelector('#hand .card.can');if(pc)return coachAt(pc,'この なかまを 出そう');
-  coachAt($('endt'),'ターン終了をおそう')}
+  coachAt($('endt'),'ターン終了を おしてね')}
 /* 敵のまわりの表示：タップで説明 */
 const FOE_TIPS={
   run:f=>['<img src="ui/u_k_run.png" alt="">','にげちゃう！',`あと ${Math.max(0,f.escape-B.turn)}ターンで にげる。はやく たおそう！`,'#7a4a2a'],
@@ -5082,7 +5082,7 @@ const BX={
       if(B.turn%3)return;const ms=myLive();if(!ms.length)return;ms.forEach(m=>{const a=m.atk,h=m.hp;m.atk=h;m.baseAtk=h;m.hp=Math.max(1,a);m.max=Math.max(m.hp,1);floatAt(uEl(m),'🌕 さかさま！','info')});
       bsay('満月のさかさま！ 攻撃と体力が 入れかわった！');if(HUMAN){renderBattle();await sleep(500)}}},
   capone:{nm:'ニャンコ・ファミリー',d:'ラスボス。子分の枠5体・山札たっぷり・にげない。毎ターン マフィアニャンコを2体。4ターンに1回「集合！」',
-    start(){B.foe.maxB=5;B.foe.escape=999;const extra=B.foe.deck.map(c=>({...c}));B.foe.deck.push(...shuffle(extra));bsay('カポニャンコ「ワシの街から 生きて かえれると 思うなよ」')},
+    start(){B.foe.maxB=5;B.foe.escape=999;const extra=B.foe.deck.map(c=>({...c}));B.foe.deck.push(...shuffle(extra));bsay('カポニャンコ「ワシの街から かんたんに かえれると 思うなよ」')},
     async foeTurn(){const T=['nyaBari','nyaHaya','nyaMamo','nyaNoro'];const lv=zl();
       if(B.turn%4===0){while(roomFoe())summon(B.foe,pick(T),lv);foeLive().forEach(m=>{m.atk++;m.baseAtk=(m.baseAtk||0)+1});bsay('カポニャンコ「集合！」 ニャンコ全員 攻撃+1！');if(HUMAN)shakeApp()}
       else{const n=Math.min(2,roomFoe());for(let i=0;i<n;i++)summon(B.foe,pick(T),lv);if(n)bsay('マフィアニャンコが あらわれた！')}
@@ -5237,11 +5237,11 @@ function newEff(d,lv){const L=[];const E=(k,ic,n,t,sh)=>L.push([ic,n,t,KW_COL[k]
   if(d.evoK)E('evo','✨','しんかする！',`敵を${d.evoK}体 たおすと「${(d.evoF&&d.evoF.n)||'しんか'}」に しんか`,'しんか');
   if(d.rankK)E('rank','🎖️','昇進',`敵を${d.rankK}体 たおすごとに ⭐ +1/+1（2回まで）`,'昇進');
   if(d.gattai)E('gattai','🔩','がったい！','見参！：ほかのロボットがいたら、パーツになって がったい','がったい');
-  const b={fuse:['🧨','ダイナマイト',`見参！：2ターン後に ドカン！ 敵キャラぜんいんに${d.v||2}`],jail:['🔒','牢屋','見参！：いちばん強い敵を 2ターン 牢屋へ'],wanted:['📜','手配書','見参！：いちばん強い敵に手配書。たおすと＄3＋1人ひく'],
+  const b={fuse:['🧨','ダイナマイト',`見参！：2ターン後に ドカン！ 敵キャラぜんいんに${d.v||2}ダメージ`],jail:['🔒','牢屋','見参！：いちばん強い敵を 2ターン 牢屋へ'],wanted:['📜','手配書','見参！：いちばん強い敵に手配書。たおすと＄3＋1人ひく'],
     get:['🎁','手にいれる！',`見参！：同じしゅぞくの カードを${d.v||1}まい 手にいれる`],healone:['💚','ちりょう',`見参！：いちばん けがした仲間を${d.v||3}いやす`],shave:['✂️','効果けし','見参！：いちばん強い敵の とくべつな力を なくす'],swap:['🔄','さかさま','見参！：敵1体の 攻撃と体力を 入れかえる']}[d.bc];
   if(b)E(d.bc,b[0],b[1],b[2],b[1]);
   if(d.dr==='gold')E('gold','🪙','金塊',`やられたら 旅の賞金+＄${d.dv||2}`,'金塊');
-  if(d.dr==='fuse')E('fuse','🧨','ダイナマイト',`やられたら 2ターン後に ドカン！ 敵キャラぜんいんに${d.dv||2}`,'ドカン');
+  if(d.dr==='fuse')E('fuse','🧨','ダイナマイト',`やられたら 2ターン後に ドカン！ 敵キャラぜんいんに${d.dv||2}ダメージ`,'ドカン');
   if(d.aura==='link')E('link','🤝','連携','となりの仲間が攻撃すると、同じ相手に 1ダメージ','連携');
   if(d.aura==='wxboost')E('wx','🌈','天気の名人','いるあいだ、天気の数が +1','天気+1');
   return L}
@@ -5372,7 +5372,7 @@ NEWC({id:'new28',n:'ショーガールのルル',f:'mf',r:'N',c:3,a:2,h:3,em:'�
 NEWC({id:'new29',n:'スチームタウンのえんとつ小僧',f:'st',r:'N',c:1,a:1,h:1,em:'🧹',stage:'steam',s:'すすだらけで ごめんよ！',lines:['','','',''],note:'はやうち：出したターンからすぐ攻撃できる',kw:'quick'});
 NEWC({id:'new30',n:'スチームタウンのレンチ番',f:'st',r:'N',c:2,a:2,h:2,em:'🔧',stage:'steam',s:'ネジを ギュッと しめるぜ！',lines:['','','',''],note:'見参！：ほかのスチームタウン1体に+1／+1',bc:'buffr',v:1}); // 単純化：スチームタウン限定 → ほかの仲間1体
 NEWC({id:'new31',n:'スチームタウンのボイラー番',f:'st',r:'N',c:3,a:2,h:4,em:'♨️',stage:'steam',s:'あちち、ここは とおさんぞ！',lines:['','','',''],note:'かばう：敵はまずこのキャラを攻撃しないといけない',kw:'taunt'});
-NEWC({id:'new32',n:'スチームタウンの用心棒',f:'st',r:'N',c:4,a:4,h:4,em:'👊',stage:'steam',s:'ボスの命令だ、こうしゃぜ！',lines:['','','',''],note:'2回攻撃：1ターンに2回攻撃できる',kw:'twice'});
+NEWC({id:'new32',n:'スチームタウンの用心棒',f:'st',r:'N',c:4,a:4,h:4,em:'👊',stage:'steam',s:'ボスの命令だ、いくぜ！',lines:['','','',''],note:'2回攻撃：1ターンに2回攻撃できる',kw:'twice'});
 NEWC({id:'new33',n:'スチームタウンのあらくれ親分',f:'st',r:'R',c:5,a:5,h:5,em:'😠',stage:'steam',s:'子分たち、ひとあばれだ！',lines:['','','',''],note:'いるあいだ：ほかのスチームタウンの攻撃+1',aura:'faction',av:1});
 NEWC({id:'new34',n:'からくり大将 ギガボルト',f:'ro',r:'L',c:6,a:5,h:6,em:'🤖',stage:'steam',stages:['steam','train'],s:'ガシャン！ガシャン！大将、出陣！',lines:['','','',''],note:'かばう／見参！：場と手札のロボット1体ごとに 自分+1／+1',kw:'taunt',bc:'selfatk',v:2}); // 単純化：ロボットの数だけ → 自分の攻撃+2
 NEWC({id:'new35',n:'くっつきボルトくん',f:'ro',r:'N',c:2,a:1,h:2,em:'🔩',stage:'steam',s:'カチッと くっつくよ！',lines:['','','',''],note:'くっつく：ロボットのとなりに出すと 合体して、数字と効果をそのロボットにたす',gattai:1});
@@ -5418,7 +5418,7 @@ NEWC({id:'new74',n:'岩かげの山賊 ガケマル',f:'ou',r:'N',c:3,a:3,h:3,em
 NEWC({id:'new75',n:'ダイナマイト見習い ボム吉',f:'gu',r:'N',c:2,a:1,h:2,em:'🧨',stage:'canyon',s:'火、つけちゃった〜！',lines:['ドカン…（じぶんで）','ドキドキ…ちかちか…','ドッカーン！大せいこう！','…しけってた'],note:'ダイナマイト：見参！でダイナマイトをおく。3→2→1→ドカン！前の敵に3ダメージ',bc:'fuse',v:1}); // 単純化：前の敵に3 → 2ターン後 敵ぜんいんに1
 NEWC({id:'new76',n:'峡谷の風の子 ピュウ',f:'sp',r:'N',c:2,a:2,h:1,em:'💨',stage:'canyon',s:'ピュ〜ッ！',lines:['ピュ…（むかい風）','ピュ？','ピュピュ〜ッ！','…そよ風'],note:'見参！：すなあらし+1',wx:'sand',wv:1});
 NEWC({id:'new77',n:'こだま歌姫 ヤッホーナ',f:'sa',r:'R',c:3,a:2,h:3,em:'🎶',stage:'canyon',s:'ら〜♪ ら〜♪ ら〜♪',lines:['ら…♪（こだま だけ のこった）','いい声 でるかしら？','ら〜♪ 2ばいの ひびき！','…声が かれた'],note:'見参！：つぎに出す仲間の見参！が2回おきる',bc:'draw',v:1}); // 単純化：なかまを1人ひく
-NEWC({id:'new78',n:'がけっぷち用心棒 ガンロック',f:'mf',r:'R',c:4,a:3,h:5,em:'🧱',stage:'canyon',s:'ここから先は がけだぜ',lines:['きみも いっしょだ〜！','おとすなよ…','岩みたいに かたくなった','…ひやっとした'],note:'かばう：敵はまずこのキャラを攻撃しないといけない / やられたら：いちばん強い敵をがけから道づれ',kw:'taunt',dr:'boom',dv:2}); // 単純化：道づれ → ランダム2ダメージ×3
+NEWC({id:'new78',n:'がけっぷち用心棒 ガンロック',f:'mf',r:'R',c:4,a:3,h:5,em:'🧱',stage:'canyon',s:'ここから先は がけだぜ',lines:['きみも いっしょだ〜！','おとすなよ…','岩みたいに かたくなった','…ひやっとした'],note:'かばう：敵はまずこのキャラを攻撃しないといけない / やられたら：いちばん強い敵も いっしょに がけから おっこちる',kw:'taunt',dr:'boom',dv:2}); // 単純化：道づれ → ランダム2ダメージ×3
 NEWC({id:'new79',n:'ハヤブサのキラ',f:'an',r:'R',c:3,a:3,h:2,em:'🦅',stage:'canyon',s:'キラッ！みのがさないよ',lines:['キラ…おちる〜','キラ？ しんか できる？','キラーン！','…はね ぬけた'],note:'しんかする！：敵を3体たおすと「大ハヤブサ」（5/4・はやうち）に変身',evoK:3,evoF:{n:'大ハヤブサ',a:2,h:2,kw:'quick'}});
 NEWC({id:'new80',n:'峡谷の主 ゴンドルフ',f:'an',r:'L',c:7,a:6,h:7,em:'🦅',stage:'canyon',s:'峡谷の空は ぜんぶ わしのものだ',lines:['空が…とおい…','わしの つばさを たのむぞ','空の王者、ここにあり！','…風が わるい'],note:'見参！：敵1体をつかんで空へ！手札に追い返す / とびこえ：かばうを むしして攻撃できる',bc:'blow'}); // 単純化：とびこえは未実装
 NEWC({id:'new81',n:'看板ペンキ屋 ヌリヌリ',f:'gu',r:'N',c:1,a:1,h:1,em:'🎨',stage:'saloon',s:'ぬりぬり〜♪ なに色が いい？',lines:['ペンキ…こぼれた〜','きれいな色に してね','ピッカピカ！','…まだら もよう'],note:'見参！：敵1体をピンク色にぬる。ピンクの敵は かくれんぼできない',bc:'shave'}); // 単純化：効果けし
@@ -5733,7 +5733,7 @@ const AWK={
   ketcham:{need:5,ev:'foehand',t:'敵の手札が 5まい いじょう'},
   ruler:{need:2,ev:'stplay',t:'スチームタウンか ロボットの なかまを 2体 出す'},
   ma:{need:3,ev:'allydie',t:'なかまが 3体 やられる'},
-  ice:{need:2,ev:'freeze',t:'敵を 2回 こおらせる（酔わせる）'},
+  ice:{need:2,ev:'freeze',t:'敵を 2回 こおらせるか 酔わせる'},
   ikoku:{need:1,ev:'ally3',t:'なかまが 3体 そろう'},
   adara:{need:2,ev:'shieldbreak',t:'なかまの バリアが 2回 やぶれる'},
   amelie:{need:6,ev:'turn',t:'戦いが 6ターンめに なる（満月）'},
@@ -6684,7 +6684,7 @@ const AW_DONE='さいきょうの すがたに 変身したよ！ もう だれ�
   window.__AWV=aw;try{return _sc.apply(this,arguments)}finally{window.__AWV=null}}}
 {const _ue=unitEl;unitEl=function(sd,m){window.__AWV=m&&(m.awake||(m.card&&m.card.awake))?(m.id==='ameClone'?'amelie':m.id):null;try{return _ue.apply(this,arguments)}finally{window.__AWV=null}}}
 /* ムービーの セリフ */
-if(typeof BOSS_SCENE!=='undefined'&&BOSS_SCENE.hill)BOSS_SCENE.hill.b='きみも いちど 死んで\nわが ゾンビファミリーに 来ないか？';
+if(typeof BOSS_SCENE!=='undefined'&&BOSS_SCENE.hill)BOSS_SCENE.hill.b='きみも ゾンビに なって\nわが ゾンビファミリーに 来ないか？';
 /* やられた時の 演出が 下の パネルに かくれない */
 (()=>{const st=document.createElement('style');st.textContent=`.kocl{z-index:300!important}.kobub{z-index:301!important}.rvbeam,.rvhalo{z-index:299!important}.riseg,.dirt{z-index:298!important}`;document.head.appendChild(st)})();
 /* ---- 覚醒の 説明：「何が おきるか」→「イキな ひとこと」の 順に（10/25） ---- */
@@ -6964,7 +6964,7 @@ if(BX.ketcham){Object.assign(BX.ketcham,{d:'ターンの終わりに、あなた
   nanashi:[6,'手札で 6ターン だまって まつ','6ターン だまって まつと…！？'],
   ruler:[5,'スチームタウンの なかまを 5体 出す','スチームタウンの なかまを 5体 出すと…！？'],
   ma:[5,'なかまが 5体 やられる','なかまが 5体 やられると…！？'],
-  ice:[4,'敵を 4回 こおらせる（酔わせる）','敵を 4回 こおらせると…！？'],
+  ice:[4,'敵を 4回 こおらせるか 酔わせる','敵を 4回 こおらせると…！？'],
   ikoku:[1,'なかまが 5体 そろう','なかまが 5体 そろうと…！？'],
   adara:[4,'なかまの バリアが 4回 やぶれる','なかまの バリアが 4回 やぶれると…！？'],
   amelie:[8,'戦いが 8ターンめに なる（満月）','8ターンめの 満月に なると…！？'],
@@ -7821,7 +7821,7 @@ new144:['ワン・ボルト！','ブリキの わんこ！ かわいい！'],
 new145:['ここは とおさん！','とおして〜！ おねがい！'],
 new146:['ガシッ！ うで かすよ！','かして くれるの？ …あ、パンチ！'],
 new16:['シュー… マモル…','まもりたい ものが あるんだね。わたしも！'],
-new32:['ボスの 命令だ、こうしゃぜ！','命令じゃなくて じぶんで きめなよ！'],
+new32:['ボスの 命令だ、いくぜ！','命令じゃなくて じぶんで きめなよ！'],
 new33:['子分たち、ひとあばれだ！','あばれるなら わたしが とめる！'],
 new147:['ピピッ、計算中…','わたしの 計算だと… わたしが 勝つ！'],
 new148:['ひらめいちゃった！','なになに？ おしえて おしえて！'],
@@ -8086,7 +8086,7 @@ if(typeof BC_FX!=="undefined"){BC_FX.aoe=async function(sd,m,el){const o=opp(sd)
 /* こうさんの ひとこと：キャラごとに（なければ しゅぞくごと） */
 const GIVEUP_F={sh:['ま、まいった！ きみの 勝ちだワン…','くっ… 正義の 負けだ〜！','バッジ… おいて かえります…'],sa:['ひ〜っ！ お店 しめま〜す！','もう かてない〜！ ゆるして〜！','おごるから ゆるして〜！'],
  gu:['ここまでか… いい うでだ！','わ、わるかった〜！','つるはし おいて にげまーす！'],an:['キュ〜ン… もう かてない〜！','にがして〜！ おうちに かえる〜！','まいった〜！ ゆるして〜！'],
- ma:['じゅもん… わすれちゃった〜！','こ、こうさんよ〜！','まほうが きかない〜！ ゆるして〜！'],st:['プシュ〜… こうさん！','しょ、しょうき じょうき が きれた〜！','ネジが ゆるんだ〜… まいった！'],
+ ma:['じゅもん… わすれちゃった〜！','こ、こうさんよ〜！','まほうが きかない〜！ ゆるして〜！'],st:['プシュ〜… こうさん！','じょ、じょうきが きれた〜！','ネジが ゆるんだ〜… まいった！'],
  zo:['アー… もう ねる… こうさん…','ウー… まいった… ゾン…','ゾ、ゾンビでも こわい〜！'],ou:['にがしてくれ〜！','わるかった〜！ もう しないよ〜！','お、おぼえてろよ〜！'],
  mf:['ボ、ボスには ないしょで…！ こうさん！','ニャ〜！ ゆるして〜！','今日は この へんで かんべんしてやる〜！'],ro:['ピピッ… こうさん モード…','エラー… まけを みとめます…','ガ、ガガ… ゆるして〜'],
  gh:['ひゅ〜… きえちゃいま〜す…','おばけでも こわい〜！ こうさん！','うらめしや〜… じゃなくて ごめんなさ〜い！'],sp:['しゅわ〜… きえちゃう〜！','まいった〜！ そらに かえる〜！','せいれいでも かてない〜！'],
@@ -8988,7 +8988,7 @@ X('new91',{bc:async sd=>{const o=opp(sd);const a=sd.deck[0],b=o.deck[0];drawCard
 X('new106',{bc:async sd=>{const o=opp(sd);for(const t of shuffle(xFoes(sd)).slice(0,3))await damage(o,t,2,{quiet:true})}});
 X('new63',{bc:async sd=>{const i=sd.hand.findIndex(c=>C[c.id]&&C[c.id].f==='zo'&&!C[c.id].spell);if(i<0||roomOf(sd)<=0)return;const c=sd.hand.splice(i,1)[0];summon(sd,c.id,c.lv||1,c.plus||0,c);if(HUMAN)say(`${C[c.id].n}が いっしょに 出てきた！`)}});
 X('new176',{bc:async(sd,m)=>{const o=opp(sd);for(const t of xFoes(sd))await damage(o,t,2,{quiet:true,fx:'magic'});for(const t of xMine(sd,m))await damage(sd,t,1,{quiet:true})}});
-X('new78',{dr:async sd=>{const o=opp(sd);const t=strongest(xFoes(sd));if(t){t.hp=0;xFl(t,'がけから 道づれ！','crit')}}});
+X('new78',{dr:async sd=>{const o=opp(sd);const t=strongest(xFoes(sd));if(t){t.hp=0;xFl(t,'いっしょに がけから ころりん！','crit')}}});
 X('new191',{bc:async(sd,m)=>{xSleepIn(m,2,'dig','new191');if(HUMAN)say('砂に もぐった！ 2ターン後に 出てくるよ')},rel:async(sd,m)=>{const o=opp(sd);for(const t of xFoes(sd))await damage(o,t,2,{quiet:true,fx:'magic'})}});
 X('new98',{bc:async(sd,m)=>{xSleepIn(m,2,'dig','new98');if(HUMAN)say('地面に もぐった！ 2ターン後に 金塊を もってくるよ')},rel:async(sd,m)=>{sd.coin+=2;if(isMe(sd)&&R)R.money+=2;xFl(m,'金塊！ コイン+2','heal')}});
 X('new151',{dr:async(sd,m)=>{if(m.sunk||roomOf(sd)<=0)return;const z=mkMinion(sd,m.id,m.lv);z.sunk=1;z.card=m.card;sd.board.push(z);xSleepIn(z,2,'sink');if(HUMAN)say('ぬまに しずんだ…（2ターン後に もどってくる）')}});
@@ -9125,7 +9125,7 @@ const XT={
  new208:[['aura','ターンの おわり、いちばん けがした なかま1体を 1 いやす']],
  new211:[['bc','サボテンの となりに 出すと かくれんぼ']],
  new225:[['bc','この ターン 出した なかまの 数だけ コイン+1']],
- new47:[['bc','いちばん強い あいてに 手配書を はる。その あいてを たおすと ＄2']],
+ new47:[['bc','いちばん強い あいてに 手配書を はる。その あいてを たおすと ＄3']],
  new53:[['dr','ほねを のこす。手札の ゾンビが ひろって パワーアップ（+1/+1）']],
  new56:[['aura','なかまが やられるたび、お花（0/1）が さく']],
  new57:[['bc','かくれんぼ中の あいてを てらして 見つける']],
@@ -9164,7 +9164,7 @@ const XT={
  new106:[['bc','トロッコで つっこむ！ ランダムな あいて 3体に 2ダメージ']],
  new51:[['aura','なげなわ名人：なげなわが 2回 ふえる。1ターンに 2回 なげられる']],
  new63:[['bc','手札の ゾンビを 1体、そのまま 場に 出す']],
- new78:[['dr','いちばん強い あいてを がけから 道づれ']],
+ new78:[['dr','いちばん強い あいても いっしょに がけから おっこちる']],
  new163:[['kw','まるのみ','戦って たおした あいてを まるのみ。やられたら その キャラが なかまとして 出てくる']],
  new176:[['bc','なだれ！ あいて ぜんいんに 2ダメージ。なかまにも 1ダメージ']],
  new191:[['bc','砂に もぐる（2ターン ねらわれない）。出てくるとき あいて ぜんいんに 2ダメージ']],
