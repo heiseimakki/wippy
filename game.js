@@ -50,7 +50,7 @@ def('pork','はやうちポーク','sh','R',2,2,1,'🐷',{kw:'quick',bc:'quickmg
 
 /* ---- 酒場 ---- */
 def('tenshu','良心的な店主','sa','N',1,1,1,'img:IMG_2352',{bc:'coin',v:1,s:'笑顔と飲み物がお出迎えよ！'});
-def('kifujin','岩礁の貴婦人','sa','R',3,2,4,'img:IMG_6718',{bc:'stun',s:'海は全てを洗い流すのよ'});
+def('kifujin','岩礁の貴婦人','sa','R',3,2,4,'img:IMG_6718',{bc:'stun',s:'波に のって あそびましょ♪'});
 def('doc','ドク・ホリデー','sa','N',3,2,3,'🩺',{bc:'healall',v:3,s:'はい、あーんして'});
 def('pokerfox','ポーカーぎつね','sa','N',2,1,2,'🦊',{bc:'flipdraw',v:2,s:'勝負はいつも一発勝負さ'});
 def('ragtime','ラグタイム・ケロ','sa','R',3,2,3,'🐸',{bc:'recall',s:'今夜もいい曲、弾かせてもらうケロ'});
@@ -69,7 +69,7 @@ def('mustache','マダム・ムスタッシュ','sa','L',6,4,6,'💋',{aura:'dra
 def('mog','ピアノ弾きのモグ','sa','R',2,1,2,'🎹',{bc:'buffall',v:1,s:'さあ、手拍子どうぞ〜'});
 
 /* ---- ギルド ---- */
-def('kishi','勇敢な騎士','gu','N',3,2,4,'img:IMG_2349',{kw:'taunt',s:'ここから先へは 一歩も 通さん！'});
+def('kishi','勇敢な騎士','gu','N',3,2,4,'img:IMG_2349',{kw:'taunt',s:'ここは ぼくが まもる！'});
 def('ikoku','異国の王 アーサー','gu','L',6,5,6,'img:IMG_2351',{aura:'atk',av:1,s:'同志たちよ、我に続け！'});
 def('eichi','叡智の話者','gu','N',2,1,2,'img:IMG_6714',{bc:'draw',v:2,s:'どれどれ。続きを読んでみようか。'});
 def('annie','アニー・オークレイン','gu','N',2,2,1,'🦩',{bc:'dmg',v:2,s:'そのコイン、空中で撃ち抜いてあげる'});
@@ -112,7 +112,7 @@ def('dog','見はり番ドッグ','an','N',2,2,3,'🐕',{bc:'scout',s:'キャン
 def('jab','イノシシのジャブ','an','N',3,2,3,'🐗',{kw:'twice',s:'ブヒッ、どいたどいた！'});
 def('kurogoke','クロゴケ姐さん','an','R',3,2,2,'🕷️',{kw:'stealth deadly',s:'あたしの糸からは逃げられないよ'});
 def('eagle','シェリフ・モーキン警部','an','L',6,5,6,'🦅',{bc:'scout',kw:'twice',s:'空の上から、すべて見えておる'});
-def('serpentia','ラミアの王妃 サーペンティア','an','L',5,4,5,'img:serpentia',{poison:2,bc:'poison',v:2,s:'そなたのような命知らずは嫌いではない'});
+def('serpentia','さばくの王妃 サーペンティア','an','L',5,4,5,'img:serpentia',{poison:2,bc:'poison',v:2,s:'わらわの しっぽに ついておいで'});
 def('grizzly','はらぺこグリズリー','an','R',4,3,4,'🐻',{bc:'meat',v:1,s:'お肉…お肉はどこだ…'});
 def('funkoro','フンコロがし','an','R',2,2,2,'🪲',{bc:'unko',v:1,s:'コロコロ…はい、どうぞ'});
 def('fairy','木の妖精 コダマ','an','R',2,1,2,'img:fairy',{aura:'regen',av:1,bc:'healall',v:1,s:'森のみんな、げんきになあれ'});
@@ -134,8 +134,8 @@ def('shadow','シャドウ・ジャック','ma','R',5,4,5,'👤',{bc:'weakall',v
 def('clover','ラッキー・クローバー','ma','N',1,1,1,'🍀',{bc:'flipbuff',v:2,s:'四つ葉は、見つけた人のもの'});
 def('bonedoc','ほねドクター','ma','N',2,1,2,'💀',{bc:'poison',v:2,s:'カラカラ…骨は正直だよ'});
 def('amelie','月光の呪術師 アメリ','ma','L',6,4,5,'img:IMG_6717',{bc:'stunall',s:'その専門書は4才の頃に暗記しました。'});
-def('carnelia','大空の姫君 カルネリア','ma','L',6,4,5,'img:carnelia',{bc:'blow',s:'そら〜、まいったわね！地上へ還ってもらいましょ'});
-def('celestia','水滴みのセレスティア','ma','L',7,5,6,'img:IMG_6724',{bc:'raise',v:2,s:'おとなしく お帰りなさい'});
+def('carnelia','大空の姫君 カルネリア','ma','L',6,4,5,'img:carnelia',{bc:'blow',s:'つばさで ひとふき、ふわりっ！'});
+def('celestia','水滴みのセレスティア','ma','L',7,5,6,'img:IMG_6724',{bc:'raise',v:2,s:'おとなしくしていれば 手はださないわ'});
 def('bagura','もじばけ魔女バグーラ','ma','R',3,3,3,'🧙',{bc:'moji',s:'繧上◆縺励?繧ゅ§縺ー縺鯛?ｦ'});
 def('hanage','はなげ仙人','ma','R',2,2,2,'👃',{bc:'hanage',v:2,s:'ふぉっふぉっ、伸びるぞ〜'});
 
@@ -180,7 +180,7 @@ OUT('soapy','ソーピー・スミス','ou','N',3,2,3,'🧼',{bc:'weaken',v:2,s:
 OUT('ketcham','怪盗 キャッツ・ケッチャム','ou','L',5,5,4,'🐈‍⬛',{kw:'stealth',s:'汽笛が鳴ったら、仕事の時間だ'});
 OUT('sambass','サム・バス','ou','N',3,2,3,'💰',{dr:'healall',dv:1,s:'金持ちからいただいて、みんなに配るのさ'});
 OUT('mary','ニセ札メリー','ou','N',1,1,1,'💵',{bc:'coin',v:1,s:'ホンモノそっくりでしょ？'});
-OUT('bignose','ビッグ・ノーズ・ジョージ','ou','R',9,7,9,'👃',{bc:'sneeze',v:3,s:'この鼻をなめるなよ'});
+OUT('bignose','ビッグ・ノーズ・ジョージ','ou','R',9,7,9,'👃',{bc:'sneeze',v:3,s:'この鼻、すごいだろ〜！'});
 OUT('iguana','かくれんぼイグアナ','ou','N',2,2,2,'🦎',{kw:'stealth',s:'見つけられるもんなら、見つけてみな'});
 OUT('axe','スチームタウンの斧使い','ou','R',4,4,4,'img:IMG_6721',{kw:'splash',s:'どこまでも 追いかけるぜ！'});
 OUT('tokko','スチームタウンの特攻隊長','ou','N',3,3,1,'img:IMG_6722',{kw:'quick',s:'一発 おみまい してやるぜ！'});
@@ -245,7 +245,7 @@ function bcText(d,lv){
     case 'poison':return `いちばん強い敵キャラに毒×${n}`;case 'weaken':return `ねらった敵の攻撃-${x}`;case 'weakall':return `敵ぜんいんの攻撃-${x}`;
     case 'stun':return 'いちばん強い敵を酔っぱらわせる（1回休み）';case 'stunall':return '敵ぜんいんを酔っぱらわせる（1回休み）';
     case 'blow':return 'いちばん強い敵キャラを手札に吹き飛ばす';case 'bounce':return 'ランダムな敵キャラ1体を手札に追い返す';
-    case 'sneeze':return `大くしゃみ！ランダムな敵キャラ${n}体を手札に吹き飛ばす`;
+    case 'sneeze':return `大くしゃみ！いちばん強い あいて1体を 手札に 吹き飛ばす`;
     case 'summon':return `${tokName(d.tok)}を${n}匹よぶ`;case 'buff':return `いちばん強い仲間に+${x}/+${x}`;case 'buffr':return `ほかの仲間1体に+${x}/+${x}`;
     case 'buffall':return `仲間ぜんいんの攻撃+${x}`;case 'selfatk':return `自分の攻撃+${x}`;
     case 'flipdraw':return `コイン投げ！表なら なかまを${n}人 ひく`;case 'flipbuff':return `コイン投げ！表なら仲間1体に+${x}/+${x}`;
@@ -635,7 +635,7 @@ const TALK={
   bass:['にげても むだだ。かならず 見つける','にげないよ！ ここで しょうぶ！'],
   pork:['…まだだ… まだだ… いまだ！','はやっ！ でも まけない！'],
   tenshu:['いらっしゃい！ 一杯 どう？','ミルクで おねがいします！'],
-  kifujin:['海は すべてを あらいながすのよ','ここ、さばく なんだけど…？'],
+  kifujin:['波に のって あそびましょ♪','わ〜い、なみのり〜！'],
   doc:['はい、あーんして','おくすり にがいの いや〜！'],
   pokerfox:['勝負は いつも 一発勝負さ','その トランプ、ずるしてない？'],
   ragtime:['こんやも いい曲、ひかせてもらうケロ','おどりながら たたかっちゃう！'],
@@ -652,7 +652,7 @@ const TALK={
   yoppa:['ヒック… ここが 特等席だ…','おじさん、のみすぎ だよ〜'],
   mustache:['こんやは 貸し切りよ','わたしも 入れて〜！'],
   mog:['さあ、手拍子 どうぞ〜','パン、パン！ …って ちがう！'],
-  kishi:['ここから先へは 一歩も 通さん！','じゃあ 二歩で 通るね！'],
+  kishi:['ここは ぼくが まもる！','たのもしい〜！'],
   ikoku:['このオアシスは 王である われの ものだ！','泉は みんなの ものだよ！'],
   eichi:['どれどれ。続きを 読んでみようか','おはなしの 続きは わたしが つくる！'],
   annie:['そのコイン、空中で うちぬいて あげる','わたしの コイン、ねらわないで〜！'],
@@ -693,7 +693,7 @@ const TALK={
   jab:['ブヒッ、どいた どいた！','どかないもんね！'],
   kurogoke:['あたしの 糸からは にげられないよ','ネバネバ、いや〜！'],
   eagle:['空の上から、すべて 見えておる','じゃあ わたしの 作戦も…？'],
-  serpentia:['そなたのような 命知らずは きらいではない','ほめられた…？'],
+  serpentia:['わらわの しっぽに ついておいで','ついていく〜！'],
   grizzly:['お肉… お肉は どこだ…','わたしは お肉じゃないよ〜！'],
   funkoro:['コロコロ… はい、どうぞ','い、いらない かな〜…'],
   fairy:['森の みんな、げんきに なあれ','わたしも げんき もらっちゃお！'],
@@ -713,8 +713,8 @@ const TALK={
   clover:['四つ葉は、見つけた人の もの','わたしが 見つける〜！'],
   bonedoc:['カラカラ… 骨は 正直だよ','わたしの 骨も じょうぶだよ！'],
   amelie:['その本、4才の ころに 暗記しました','すごっ！ でも しょうぶは 本じゃないよ！'],
-  carnelia:['そら〜、まいったわね！ 地上へ おかえり！','空からは ずるい〜！'],
-  celestia:['おとなしく お帰りなさい','まだ 帰らないもん！'],
+  carnelia:['つばさで ひとふき、ふわりっ！','とばされる〜！'],
+  celestia:['おとなしくしていれば 手はださないわ','は、はい…！'],
   bagura:['繧上◆縺励?繧ゅ§縺ー縺…','な、なんて 言ったの〜！？'],
   hanage:['ふぉっふぉっ、のびるぞ〜','鼻毛は やめて〜！'],
   seisei:['こんな 色じゃったろうか？ まあ よいかの','おじいちゃん、だいじょうぶ？'],
@@ -752,7 +752,7 @@ const TALK={
   ketcham:['汽笛が なったら… この列車は おれの ものだ','とめてみせるよ、ネコさん！'],
   sambass:['お宝は みんなで わけるのさ！','いい人… なのかな？'],
   mary:['このお札、ホンモノよ？ うふふ','すかしが ないよ！ ニセモノ！'],
-  bignose:['この 鼻を なめるなよ！','なめないよ〜！'],
+  bignose:['この鼻、すごいだろ〜！','ほんとだ、おっきい〜！'],
   iguana:['オレが どこに いるか わかるかな？','そこでしょ！ しっぽ 見えてる！'],
   axe:['どこまでも 追いかけるぜ！','わたしだって にげないよ！'],
   tokko:['一発 おみまい してやるぜ！','おみまいは おことわり！'],
@@ -1824,7 +1824,7 @@ async function battlecry(sd,m,c){
     case 'stunall':foesM().forEach(e=>{if(!e.kw.has('nostun')){e.frozen=1;floatAt(uEl(e),'🍺','info')}});SFX.sparkle();break;
     case 'blow':{const t=strongest(foesM());if(t){await bounceTo(o,t);SFX.whoosh();say(`${C[t.id].n}は空のかなたへ！（手札にもどった）`)}break}
     case 'bounce':{const t=pick(foesM());if(t){await bounceTo(o,t);SFX.whoosh()}break}
-    case 'sneeze':{const ts=shuffle(foesM()).slice(0,n);SFX.boing();shakeApp();for(const t of ts)await bounceTo(o,t);say(`ハ…ハ…ハックショーン！！ ${ts.length}体を吹き飛ばした！`);break}
+    case 'sneeze':{/* 10/30：3体＝全員は 強すぎ → いちばん 強い 1体だけ */const st0=strongest(foesM());const ts=st0?[st0]:[];SFX.boing();shakeApp();for(const t of ts)await bounceTo(o,t);say(ts.length?'ハ…ハ…ハックショーン！！ いちばん強い あいてを 吹き飛ばした！':'ハ…ハ…ハックショーン！！');break}
     case 'summon':for(let i=0;i<n;i++)summon(sd,d.tok,c.lv);break;
     case 'buff':{const t=strongest(mine());if(t){t.atk+=x;t.hp+=x;t.max+=x;floatAt(uEl(t),`+${x}/+${x}`,'heal');impact(uEl(t),'heal')}break}
     case 'buffr':{const t=pick(mine());if(t){t.atk+=x;t.hp+=x;t.max+=x;floatAt(uEl(t),`+${x}/+${x}`,'heal');impact(uEl(t),'heal')}break}
@@ -1896,7 +1896,7 @@ async function cleanup(){
   let died=0;
   for(const sd of [B.me,B.foe]){
     for(const m of [...sd.board]){if(m.hp>0)continue;
-      if(m.kw.has('revive')&&!m.revived){m.revived=true;m.hp=Math.min(m.max||9,1+lvN(m.lv));/* ダメージを受けた状態の体力1でもどる */if(HUMAN)await reviveFx(m);continue}
+      if(m.kw.has('revive')&&!m.revived){m.revived=true;/* 10/30：ふっかつしたら まっさら（攻撃ダウン・こおり・どく・のろい などは ぜんぶ 消える）で 体力1 */try{const pl=(m.card&&m.card.plus)||0;const f=mkMinion(sd,m.id,m.lv,pl);m.atk=f.atk;m.baseAtk=f.baseAtk;m.max=f.max;m.kw=f.kw;m.kw.delete('revive');['frozen','poison'].forEach(k=>m[k]=0);['fzType','_ice','_iceA','wasFrozen','jailed','jailT','jailKind','onRel','miss','slick','reflected','pink','coil','_curse','_shaved','_wanted','_vas','_vasA','_hng','muffler','tmpHide','drunk','burn','cursed','silence','noAtk','shN','_shFx'].forEach(k=>{delete m[k]})}catch(e){}m.hp=Math.min(m.max||9,1+lvN(m.lv));if(HUMAN)await reviveFx(m);continue}
       if(HUMAN){try{const e0=uEl(m);if(e0)m._lastRect=e0.getBoundingClientRect()}catch(e){}await koFx(m,uEl(m),isMe(sd))}
       sd.board=sd.board.filter(x=>x!==m);died++;
       if(!isMe(sd)){B.kills++;if(hasRelic('cowbell'))R.money++}
@@ -5397,7 +5397,7 @@ NEWC({id:'new57',n:'ちょうちんおばけ ボンボリ',f:'gh',r:'N',c:2,a:2,
 NEWC({id:'new58',n:'墓守りモグじい',f:'an',r:'N',c:3,a:2,h:4,em:'⛏️',stage:'hill',s:'ほっほ、なにか うまっとるぞ',lines:['穴に…かえるわい…','ほりだしもの、あるかの？','大当たりじゃ！','…石ころじゃった'],note:'手にいれる！：たおれた敵のカードから1枚えらんで手札へ',bc:'get',v:1}); // 単純化：同じしゅぞくを1まい
 NEWC({id:'new59',n:'ガイコツ太鼓のドンコ',f:'gh',r:'N',c:2,a:2,h:2,em:'🥁',stage:'hill',s:'ドンドコ ドン！',lines:['ドン…ドコ……','ドキドキ ドン？','ドンドンドーン！','…太鼓が やぶれた'],note:'いるあいだ：仲間のおばけが攻撃するたび ドン！敵ヒーローに1ダメージ',aura:'link'}); // 単純化：連携
 NEWC({id:'new60',n:'こうもりのパタ',f:'an',r:'N',c:1,a:1,h:1,em:'🦇',stage:'hill',s:'パタパタ〜！',lines:['パタ…（ぽてっ）','パタ？','パタパタパタ〜！','…パタ'],note:'はやうち：出したターンからすぐ攻撃できる',kw:'quick'});
-NEWC({id:'new61',n:'ふこうの手紙 ノロイ',f:'gh',r:'N',c:2,a:1,h:1,em:'✉️',stage:'hill',s:'このてがみ、3人に まわしてね…',lines:['まわして…くれなかった…','てがみ、かきなおす？','とどいた〜！','…あて先ちがい'],note:'やられたら：たおした敵の手札に「のろい」（つかえないカード）を1枚まぜる',dr:'boom',dv:1}); // 単純化：のろい → ランダム1ダメージ×3
+NEWC({id:'new61',n:'ふこうの手紙 ポーカス',f:'gh',r:'N',c:2,a:1,h:1,em:'✉️',stage:'hill',s:'このてがみ、3人に まわしてね…',lines:['まわして…くれなかった…','てがみ、かきなおす？','とどいた〜！','…あて先ちがい'],note:'やられたら：たおした敵の手札に「のろい」（つかえないカード）を1枚まぜる',dr:'boom',dv:1}); // 単純化：のろい → ランダム1ダメージ×3
 NEWC({id:'new62',n:'ゾンビ見習いのボーン太',f:'zo',r:'N',c:2,a:2,h:3,em:'🦴',stage:'hill',s:'アー！ がんばるゾン！',lines:['アー…まだ見習いゾン…','アー、どきどきゾン','アー！ 一人前ゾン！','アー…修行ゾン…'],note:'（効果なし）'});
 NEWC({id:'new63',n:'ゾンビ花よめ ヴェール',f:'zo',r:'R',c:4,a:3,h:4,em:'👰',stage:'hill',s:'アー…ちかいの キス…',lines:['アー…ブーケが…','アー…きれいに してね','アー！ しあわせ…','アー…ベールが やぶれた'],note:'見参！：手札のゾンビを1体、そのまま場に出す',bc:'get',v:1}); // 単純化：ゾンビを1まい手札に
 NEWC({id:'new64',n:'ひとだま三姉妹',f:'gh',r:'R',c:3,a:1,h:1,em:'🔥',stage:'hill',s:'ふわふわ〜 3人そろって〜',lines:['ひとり…きえちゃった…','3人で ドキドキ','3人とも ピカピカ！','…1人 まいご'],note:'見参！：ひとだま（1/1・かくれんぼ）を2つよぶ',bc:'summon',tok:'ghostT',v:2});
@@ -6157,7 +6157,7 @@ const FLAV={
  soapy:{"見参！": "ねらった敵の攻撃-{1}"},
  sambass:{"やられたら": "仲間ぜんいんの体力を{1}いやす"},
  mary:{"見参！": "ホンモノそっくり！ このターン、コイン+{1}"},
- bignose:{"見参！": "大くしゃみ！ランダムな敵キャラ{1}体を手札に吹き飛ばす"},
+ bignose:{"見参！": "大くしゃみ！いちばん強い あいて1体を 手札に 吹き飛ばす"},
  ice:{"見参！": "いちばん強い敵を カチコチに こおらせる（{1}回休み）"},
  chousyu:{"見参！": "通行料 いただき！ このターン、コイン+{1}"},
  narikin:{"いるあいだ": "金で 買えぬもの なし！ 毎ターンコイン+{1}"},
@@ -8952,7 +8952,14 @@ X('new185',{bc:async sd=>{const c=sd.deck[0];if(!c)return;if(!isMe(sd)||!HUMAN){
   const ok=await new Promise(res=>{modal(`<h2>つぎの カードは…</h2><div class="grid" id="fh1" style="justify-content:center"></div><div class="row" style="gap:8px;margin-top:10px"><button class="btn green" id="yes" style="flex:1">ひく！</button><button class="btn" id="no" style="flex:1">山札の 下へ</button></div>`);const el=cardEl(c.id,c.lv||1,{});el.style.setProperty('--cw','min(30vw,120px)');$('fh1').appendChild(el);$('yes').onclick=()=>{closeModal();res(1)};$('no').onclick=()=>{closeModal();res(0)}});
   if(ok)drawCard(sd,1);else sd.deck.push(sd.deck.shift())}});
 X('new225',{bc:async sd=>{const n=Math.max(1,B.playedThisTurn||1);sd.coin+=n;if(HUMAN)say(`コイン +${n}！`)}});
-X('new61',{dr:async sd=>{const o=opp(sd);if(o.hand.length<8)o.hand.push({id:'curseT',lv:1,plus:0,_tmp:1});if(HUMAN)say(isMe(sd)?'あいての 手札に「のろい」が まざった…':'ウィピィの 手札に「のろい」が まざった…')}});
+X('new61',{dr:async sd=>{/* 10/30：ふこうの手紙 ポーカス。やられたら おジャマおばけ（1コイン1/1）が まざる。
+  敵の ポーカスを たおすと ウィピィの デッキに 3まい（この ぼうけんの あいだ ずっと）。ウィピィの ポーカスが やられたら あいての 手札に 1まい（この戦いだけ） */
+  const o=opp(sd);
+  if(isMe(o)){const add=()=>({id:'ojamaT',lv:1,plus:0,_ojama:1});
+    if(typeof R!=='undefined'&&R&&R.deck)for(let i=0;i<3;i++)R.deck.push(add());
+    for(let i=0;i<3;i++){const c=add();c._tmp=1;o.deck.splice(Math.floor(Math.random()*(o.deck.length+1)),0,c)}
+    if(HUMAN){say('👻 おジャマおばけが 3まい、ウィピィの デッキに まざってしまった！');try{drawPileN()}catch(e){}}}
+  else{if(o.hand.length<8)o.hand.push({id:'ojamaT',lv:1,plus:0,_tmp:1});if(HUMAN)say('👻 あいての 手札に おジャマおばけが まざった！')}}});
 X('new75',{bc:async sd=>{B.fuses=B.fuses||[];B.fuses.push({side:sd,left:3,v:3,front:1});if(HUMAN)say('🧨 3…2…1… で ドカン！')}});
 X('new104',{bc:async sd=>{B.fuses=B.fuses||[];B.fuses.push({side:sd,left:3,v:3,front:1},{side:sd,left:4,v:3,front:1});if(HUMAN)say('🧨 ダイナマイトを 2本 おいた！')}});
 X('new10',{dr:async sd=>{const o=opp(sd);for(const t of xFoes(sd))await damage(o,t,1,{quiet:true,fx:'magic'})}});
@@ -8961,7 +8968,7 @@ X('new215',{dr:async sd=>{const t=pick(xFoes(sd));if(t)await damage(opp(sd),t,1,
 X('new224',{bc:async sd=>{for(let i=0;i<3;i++){const t=pick(xFoes(sd));if(!t)break;await damage(opp(sd),t,1,{quiet:true,fx:'shot'})}}});
 X('new115',{bc:async(sd,m)=>{const all=[...xFoes(sd),...xMine(sd,m)];const t=pick(all);if(t){await damage(sd.board.includes(t)?sd:opp(sd),t,2,{quiet:true});if(HUMAN)say(sd.board.includes(t)?'あばれて なかまに ぶつかった！':'あばれて あいてに ぶつかった！')}}});
 X('new226',{bc:async sd=>{let n=0;while(roomOf(sd)>0&&n<5){const k=summon(sd,'straycatT',1);if(!k)break;k.fuel=2;k.walk=1;n++}if(HUMAN&&n)say(`ノラネコが ${n}匹 あつまった！（つぎの ターン さんぽへ）`)}});
-X('new55',{bc:async sd=>{let n=0;while(roomOf(sd)>0&&n<2){if(!summon(sd,'zombieT',1))break;n++}const z=sd.board.filter(b=>b.hp>0&&(b.f==='zo'||C[b.id].f==='zo'));if(z.length>=3){xFoes(sd).forEach(t=>{if(!t.kw.has('nostun')){t.frozen=1;xFl(t,'♪','info')}});if(HUMAN)say(isMe(sd)?'🎶 大合唱！ あいて ぜんいん 1回休み！':'🎶 大合唱！ ウィピィの なかま ぜんいん 1回休み！')}}});
+X('new55',{bc:async sd=>{let n=0;while(roomOf(sd)>0&&n<2){if(!summon(sd,'zombieT',1))break;n++}const z=sd.board.filter(b=>b.hp>0&&(b.f==='zo'||C[b.id].f==='zo'));if(z.length>=3){/* 10/30：大合唱は あいて ぜんいん 攻撃-1 */xFoes(sd).forEach(t=>{t.atk=Math.max(0,t.atk-1);xFl(t,'♪ -1','bad')});if(HUMAN){try{z.slice(0,3).forEach((b,i)=>{const e=uEl(b);if(e)e.animate([{transform:'rotate(0)'},{transform:'rotate(-6deg)'},{transform:'rotate(6deg)'},{transform:'rotate(0)'}],{duration:700,iterations:2,delay:i*90})})}catch(e){}say(isMe(sd)?'🎶 大合唱！ あいて ぜんいん 攻撃-1！':'🎶 大合唱！ ウィピィの なかま ぜんいん 攻撃-1！')}}}});
 X('new86',{bc:async sd=>{if(Math.random()<.5){drawCard(sd,1);if(HUMAN)say('ちゃんと とどいた！ 1まい ひく')}else{drawCard(opp(sd),1);if(HUMAN)say(isMe(sd)?'あっ… まちがえて あいてに とどいた！':'あっ… まちがえて ウィピィに とどいた！')}}});
 X('new156',{bc:async sd=>{const o=opp(sd);const t=strongest(xFoes(sd));if(!t)return;const i=o.board.indexOf(t);const f=mkMinion(o,'frogT',1);f.sleep=true;f.attacks=0;o.board[i]=f;if(HUMAN)say(`${C[t.id].n}は カエルに なった！ ケロッ`)}});
 X('new147',{bc:async(sd,m)=>{const base=xMine(sd,m).find(xIsRobot);if(!base){drawCard(sd,1);return}const c=base.card||{id:base.id,lv:base.lv};
@@ -9057,6 +9064,7 @@ setInterval(()=>{try{if(B&&B.lassoUsed&&B.lasso2&&B.side===B.me&&xAlive(B.me,'ne
 
 /* ---------- ふつうの 手札カード（おべんとう・のろい） ---------- */
 if(!C.bento&&typeof C==='object'){C.bento={id:'bento',n:'おべんとう',f:'sa',r:'N',c:0,a:0,h:0,kw:'',em:'🍱',img:C.new124&&C.new124.img,token:1,spell:1,s:'いただきま〜す！',st:1};
+  C.ojamaT={id:'ojamaT',n:'おジャマおばけ',f:'gh',r:'N',c:1,a:1,h:1,kw:'',em:'👻',img:C.ghostT&&C.ghostT.img,token:1,s:'じゃま〜…',st:1};
   C.curseT={id:'curseT',n:'のろい',f:'gh',r:'N',c:99,a:0,h:0,kw:'',em:'💀',img:C.new61&&C.new61.img,token:1,spell:1,s:'…',st:1}}
 {const _pc=playCard;playCard=async function(sd,i){const c=sd&&sd.hand&&sd.hand[i];
   if(c&&c.id==='bento'){if(sd.coin<0)return false;sd.hand.splice(i,1);xHeal(sd,3);sd.board.forEach(b=>{if(b.hp>0)b.hp=Math.min(b.max,b.hp+3)});if(HUMAN){say('🍱 おべんとう！ 体力 +3');SFX.heal&&SFX.heal()}xRe();return true}
@@ -9114,7 +9122,7 @@ const XT={
  new56:[['aura','なかまが やられるたび、お花（0/1）が さく']],
  new57:[['bc','かくれんぼ中の あいてを てらして 見つける']],
  new59:[['aura','なかまの おばけが 攻撃するたび ドン！ あいての 親分に 1ダメージ']],
- new61:[['dr','あいての 手札に「のろい」（つかえない カード）を 1まい まぜる']],
+ new61:[['dr','たおした あいてに おジャマおばけ（1コイン 1/1）を 3まい まぜる。ウィピィの デッキなら この ぼうけんの あいだ ずっと']],
  new67:[['kw','とびこえ','かばうを むしして 攻撃できる']],
  new75:[['bc','ダイナマイトを おく。3→2→1→ドカン！ 前の あいてに 3ダメージ']],
  new97:[['aura','なかまの 金ほり（＄が 見つかる 効果）が 2倍']],
@@ -9127,7 +9135,7 @@ const XT={
  new170:[['aura','なかまは こおらない']],
  new224:[['bc','ダダダ！ ランダムな あいてに 1ダメージを 3回']],
  new226:[['bc','ノラネコ（1/1）を あいている 場所に よぶ。つぎの ターン みんな さんぽへ（いなくなる）']],
- new55:[['bc','ゾンビ（1/1）を あいている 場所に 2匹 よぶ。ゾンビが 3体 そろうと 大合唱！ あいて ぜんいん 1回休み']],
+ new55:[['bc','ゾンビ（1/1）を あいている 場所に 2匹 よぶ。ゾンビが 3体 そろうと 大合唱！ あいて ぜんいん 攻撃-1']],
  new58:[['bc','手にいれる！ たおれた あいての カードから 1まい えらんで 手札へ']],
  new72:[['aura','あいてが たおれるたび コイン+1']],
  new86:[['bc','なかまを 1人 ひく… でも 半分の かくりつで あいてが ひく']],
@@ -9259,6 +9267,8 @@ Object.assign(XT,{
   addEventListener('pagehide',stopAll,true);addEventListener('freeze',stopAll,true);
   document.addEventListener('visibilitychange',()=>{if(!document.hidden){resumeList.length=0}});
   try{if(navigator.mediaSession){['play','pause','stop','seekbackward','seekforward','previoustrack','nexttrack'].forEach(a=>{try{navigator.mediaSession.setActionHandler(a,a==='play'?null:()=>stopAll())}catch(e){}})}}catch(e){}})();
+/* 10/30：ぼうけんが おわったら おジャマおばけは きえる（デッキは ぼうけんごとなので しぜんに きえる。おしらせだけ） */
+{const _er=endRun;endRun=function(){const had=typeof R!=='undefined'&&R&&R.deck&&R.deck.some(c=>c&&c._ojama);const r=_er.apply(this,arguments);if(had&&HUMAN)setTimeout(()=>{try{toast('👻 おジャマおばけは 消えていった…！')}catch(e){}},1200);return r}}
 
 
 /* 10/29：演出（CFX）とは べつの しくみ（本番でも つかう） */
@@ -9297,7 +9307,7 @@ try{const st=document.createElement('style');st.textContent='.ie .iei{width:64px
 /* 10/29：トークンにも セリフ（長おしで 出る「」） */
 {const TS={brotherT:'にいちゃん、まってよ〜！',clydeT:'ボニー、まかせとけ！',duckT:'ガァ！（キュッキュッ）',goblinT:'ゴブッ！ やっちまえ！',goonT:'へい、親分！',partnerT:'相棒、いくぜ！',snakeT:'シャーッ… チクッと するよ',tumbleT:'コロコロ〜…',zombieT:'アー…（ついていきます）',
  illuT:'ふふっ、どれが ほんもの？',logT:'…（びくとも しない）',nyaBari:'バリアで まもるニャ！',nyaHaya:'はやいニャ！',nyaMamo:'まもるニャ〜！',nyaNoro:'のろってやるニャ…',batT:'キキッ！',boneT:'カラン…（ほねだけ）',broT:'にいちゃんの ために！',cowboyT:'ヒーハー！',
- eggT:'…ピキッ（なにか 生まれそう）',fakeT:'ほんものだよ？ たぶん',flowerT:'さいたよ〜♪',frogT:'ケロッ！',ghostT:'ひゅ〜どろ〜…',hawkT:'ピィーッ！',honkiT:'ほんきで いくぞ〜！',lambT:'メェ〜',parcelT:'おとどけもの です！',pigeonT:'クルッポー！',rockT:'…ゴロッ',seedT:'そだつの まっててね',straycatT:'ニャ〜ゴ',cactT:'チクッと するよ！',maKid1:'かあちゃんの ために！',maKid2:'あにき、まって〜',maKid3:'ぼくも がんばる！'};
+ eggT:'…ピキッ（なにか 生まれそう）',fakeT:'ほんものだよ？ たぶん',flowerT:'（ふわっと いい におい）',frogT:'ケロッ！',ghostT:'ひゅ〜どろ〜…',hawkT:'ピィーッ！',honkiT:'ほんきで いくぞ〜！',lambT:'メェ〜',parcelT:'（なにか はいっている…）',pigeonT:'クルッポー！',rockT:'…ゴロッ',seedT:'（…すやすや ねむっている）',straycatT:'ニャ〜ゴ',cactT:'チクッと するよ！',maKid1:'かあちゃんの ために！',maKid2:'あにき、まって〜',maKid3:'ぼくも がんばる！'};
  for(const k in TS)try{if(C[k]&&!C[k].s)C[k].s=TS[k]}catch(e){}}
 
 
@@ -9305,6 +9315,8 @@ try{const st=document.createElement('style');st.textContent='.ie .iei{width:64px
 try{const st=document.createElement('style');st.textContent='.bar #lasso{position:relative;flex:0 0 auto;width:auto!important;min-width:0;padding:6px 8px!important;font-size:14px;line-height:1;white-space:nowrap;display:flex;align-items:center;gap:3px}.bar #lasso img,.bar #lasso .emo{width:22px!important;height:22px!important;margin:0!important}.bar #lasso small{position:absolute;top:-9px;right:-6px;font-size:10px;background:#fff6e0;color:#a5321a;border-radius:999px;padding:2px 5px;box-shadow:0 1px 3px rgba(0,0,0,.4)}.bar.haslasso #pile{flex-shrink:0;margin-left:4px!important}.bar.haslasso #endt{font-size:11.5px!important;padding:10px 8px!important;letter-spacing:-.04em;white-space:nowrap!important;flex:0 0 auto;min-width:auto!important}.bar.haslasso .sp{flex:0 0 0!important;width:0!important}.bar.haslasso{gap:5px!important}';document.head.appendChild(st)}catch(e){}
 
 try{const _rbL=renderBattle;renderBattle=function(){const r=_rbL.apply(this,arguments);try{const bar=document.querySelector('.bar');if(bar){const L=!!document.getElementById('lasso');bar.classList.toggle('haslasso',L);const et=document.getElementById('endt');if(L&&et)et.textContent=et.textContent.replace(/\s*▶\s*$/,'')}}catch(e){}return r}}catch(e){}
+/* 10/30：もの（お花・岩・丸太・たね・小包・たまご・ほね・おもちゃ）は しゃべらない。やられた時なども 音や ようすで */
+try{const M={flowerT:['（はらり…と ちった）','（ゆらゆら）','（ぱぁっと さいた）','（しおしお…）'],parcelT:['（ばらばらに なった）','（ガサッ）','（ゴトン）','（しーん…）'],seedT:['（ころん…）','（ぴくっ）','（ぽこっと 芽が でた）','（しーん…）'],rockT:['（ゴロン…と くずれた）','（ゴト…）','（ゴロッ）','（しーん…）'],logT:['（バキッと われた）','（ミシッ）','（ドン！）','（しーん…）'],boneT:['（カラカラ…）','（カタッ）','（カラン！）','（しーん…）'],eggT:['（パリン…）','（ピキッ）','（ピキピキッ）','（しーん…）'],duckT:['（キュ〜…）','（キュッ）','（キュキュッ！）','（キュ…）']};for(const k in M)if(typeof LINES!=='undefined')LINES[k]=M[k]}catch(e){}
 
 
 /* 10/30：画面の よゆう（iPhoneのSafariで 上が つまらないように）。本番で つかう */
@@ -9336,6 +9348,17 @@ try{const _rbL=renderBattle;renderBattle=function(){const r=_rbL.apply(this,argu
   /* 先に 読んでおく（キーワードの 絵が 入っている まとめ） */
   setTimeout(()=>{try{const s=new Set();Object.keys(ART_CH).forEach(k=>{if(/^ui\/u_k_/.test(k))s.add(ART_CH[k])});s.forEach(i=>artChunk(i))}catch(e){}},1500);
 })();
+/* 10/30：長い 名前は 2行に（上に 2つ名を 小さく、下に 名前を 大きく） */
+(()=>{const st=document.createElement('style');st.textContent=`
+.card .nm.two{font-size:calc(var(--W)*.078)!important;line-height:1.02}
+.card .nm.two .n2{display:block}
+.card .nm.two small{display:block;font-size:.6em;opacity:.85;letter-spacing:-.02em;white-space:nowrap}
+.card .nm.two b{display:block;font-weight:400;white-space:nowrap}`;document.head.appendChild(st);
+ const split=n=>{const s=n.lastIndexOf(' ');if(s>1&&s<n.length-1)return[n.slice(0,s),n.slice(s+1)];const k=n.lastIndexOf('の');if(k>=2&&n.length-k-1>=2)return[n.slice(0,k+1),n.slice(k+1)];return null};
+ const _ce=cardEl;cardEl=function(id){const el=_ce.apply(this,arguments);try{const nm=el.querySelector('.nm');const n=nm&&nm.textContent||'';if(nm&&[...n].length>=11){const p=split(n);if(p&&[...p[1]].length<=9){nm.classList.remove('x3','x4','x5','xlong','long');nm.classList.add('two');nm.innerHTML=`<span class="n2"><small></small><b></b></span>`;const sm=nm.querySelector('small');sm.textContent=p[0];const L0=[...p[0]].length;if(L0>9)sm.style.fontSize=Math.max(.42,5.6/L0).toFixed(2)+'em';nm.querySelector('b').textContent=p[1]}}}catch(e){}return el}})();
+/* 10/30：カードの 絵の 位置（かしまさんが 直しチェックで ずらした 位置）。[よこ, たて, 大きさ] */
+const ART_POS2={"bison": [92.9, 100, 106], "boiler": [50, 64.3, 100], "capone": [50, 25.3, 100], "celestia": [86.4, 100, 122], "clover": [57.9, 100, 132], "dalton": [50, 100, 100], "doo": [50, 100, 100], "eagle": [50, 6, 100], "garasan": [50, 100, 100], "goliath": [63.4, 0, 108], "guard": [0, 57.9, 108], "haboob": [50, 100, 100], "ikoku": [50, 100, 100], "kishi": [0, 92.8, 104], "mary": [58.8, 100, 118], "new109": [0, 76.5, 112], "new122": [50, 6, 100], "new131": [50, 0, 100], "new136": [50, 39.7, 108], "new139": [50, 100, 100], "new179": [0, 71.6, 108], "new181": [50, 49.5, 100], "new200": [50, 100, 100], "new206": [50, 0, 100], "new207": [0, 100, 114], "new212": [50, 100, 100], "new234": [100, 22.5, 112], "new37": [0, 91.3, 104], "new64": [50, 67.6, 100], "new80": [100, 0, 116], "pochi": [0, 100, 106], "runner": [100, 55.9, 104], "sabota": [47.9, 100, 110], "tumble": [50, 100, 100], "vulture": [0, 0, 106]};
+{const _ceP=cardEl;cardEl=function(id){const el=_ceP.apply(this,arguments);try{const p=ART_POS2[id];const a=p&&el.querySelector('.art');if(a){a.style.backgroundSize=p[2]+'% auto';a.style.backgroundPosition=p[0]+'% '+p[1]+'%'}}catch(e){}return el}}
 
 
 /* =====================================================================
