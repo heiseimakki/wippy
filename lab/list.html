@@ -19,7 +19,7 @@ main{padding:8px 12px 30px;display:grid;gap:8px}
 .c h3{margin:0;font-size:15px;font-weight:900}.c h3 i{font-style:normal;font-size:11px;color:#c9b08a;margin-left:6px}
 .c p{margin:4px 0 0;font-size:12px;color:#e8d3b0;line-height:1.5}
 .c .t{display:inline-block;font-size:11px;font-weight:900;border-radius:6px;padding:1px 6px;margin-right:4px}
-.atk{background:#7a2a1a}.idea{background:#2a4a6a}.st{background:#3a5a2a}
+.atk{background:#7a2a1a}.idea{background:#2a4a6a}.st{background:#3a5a2a}.st.todo{background:#c2410c;color:#fff}.st.done{background:#2f9e44;color:#fff}
 </style></head><body>
 <header><a href="./">← 演出ずかん</a><b>演出リスト</b>
 <div class="f"><input id="q" placeholder="名前・効果で さがす"><button data-f="all" class="on">ぜんぶ</button><button data-f="sp">専用演出</button><button data-f="none">いま 演出なし</button></div><div id="n"></div></header>
@@ -30,7 +30,7 @@ let rows=[],flt='all';
 const esc=s=>String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'})[c]);
 function draw(){const q=document.getElementById('q').value.trim();const L=rows.filter(r=>(!q||r.join(' ').includes(q))&&(flt=='all'||(flt=='sp'&&/専用/.test(r[8]))||(flt=='none'&&r[4]=='なし')));
  document.getElementById('n').textContent=L.length+'人';
- document.getElementById('m').innerHTML=L.map(r=>`<div class="c"><h3>${esc(r[1])}<i>${esc(r[2])}・${esc(r[0])}</i></h3><p>${esc(r[3])}</p><p><span class="t atk">こうげき</span>${esc(r[6])}<small style="color:#a89070">（いま：${esc(r[5])}）</small></p>${r[7]?`<p><span class="t idea">効果の 演出</span>${esc(r[7])}</p>`:''}<p><span class="t st">${esc(r[8])}</span>いまの 専用演出：${esc(r[4])}</p></div>`).join('')}
+ document.getElementById('m').innerHTML=L.map(r=>`<div class="c"><h3>${esc(r[1])}<i>${esc(r[2])}・${esc(r[0])}</i></h3><p>${esc(r[3])}</p><p><span class="t atk">こうげき</span>${esc(r[6])}<small style="color:#a89070">（いま：${esc(r[5])}）</small></p>${r[7]?`<p><span class="t idea">効果の 演出</span>${esc(r[7])}</p>`:''}<p><span class="t st ${/できた|済/.test(r[8])?'done':/これから/.test(r[8])?'todo':''}">${esc(r[8])}</span>いまの 専用演出：${esc(r[4])}</p></div>`).join('')}
 fetch('fxlist.csv?v='+Date.now()).then(r=>r.text()).then(t=>{rows=parse(t).slice(1).filter(r=>r.length>5);draw()});
 document.getElementById('q').oninput=draw;
 document.querySelectorAll('[data-f]').forEach(b=>b.onclick=()=>{flt=b.dataset.f;document.querySelectorAll('[data-f]').forEach(x=>x.classList.toggle('on',x===b));draw()});
