@@ -143,12 +143,15 @@ function run(host,o){return new Promise(async resolve=>{
     if(!st.strip){ctx.save();flat();ctx.clip();ctx.drawImage(Dc,2.2,3,PW,PH);ctx.restore()}
     ctx.save();body();ctx.clip();ctx.drawImage(Lc,0,0,PW,PH);ctx.restore();
     /* やぶれた ところ：かげ → 光 → せんい */
+    let glowFn=null;/* 11/1：光は めくれた 帯の あとに 描く（帯に 上半分が かくれて「下が 光ってる」に 見えた）→ 切れ目の 線の ちょうど まんなか */
     if(st.p>0){let a=-1,b=-1;for(let i=0;i<NC;i++)if(torn(i)){if(a<0)a=i;b=i}
       if(a>=0){ctx.save();body();ctx.clip();for(let i=a;i<=b;i++){const L=st.strip?1:E.o(E.cl(distFront(i)/(PW*.13)))*st.relax;ctx.fillStyle=`rgba(30,10,0,${.38*L})`;ctx.fillRect(i*cw,ty[i],cw+.5,4+9*L)}ctx.restore();
         const xa=a*cw,xb=(b+1)*cw,mx=(xa+xb)/2,wx=(xb-xa)/2+12,inten=st.strip?Math.max(0,1-(now-st.strip.t0)/900):Math.min(1,st.p*1.4);
-        if(inten>0){/* 11/01：光は 切れ目（列ごとの ty）に そって。ななめでも ずれない */ctx.save();ctx.globalCompositeOperation='lighter';ctx.lineJoin='round';const gh=10+26*st.p,gp=()=>{ctx.beginPath();ctx.moveTo(mx-wx,ty[a]);for(let i=a;i<=b;i++)ctx.lineTo((i+.5)*cw,ty[i]);ctx.lineTo(mx+wx,ty[b])};
-          [[2,.13],[1.4,.16],[.9,.2],[.5,.26],[.22,.3]].forEach(([k,al2])=>{const g=ctx.createLinearGradient(mx-wx,0,mx+wx,0);g.addColorStop(0,tcol(best,0,now));g.addColorStop(.5,tcol(best,al2*inten,now));g.addColorStop(1,tcol(best,0,now));ctx.strokeStyle=g;ctx.lineWidth=gh*k;gp();ctx.stroke()});ctx.restore()}
-        ctx.save();ctx.globalCompositeOperation='lighter';const sl=()=>{ctx.beginPath();for(let i=a;i<=b;i++)ctx[i===a?'moveTo':'lineTo']((i+.5)*cw,ty[i])};ctx.shadowColor=tcol(best,1,now);ctx.shadowBlur=10;ctx.strokeStyle=tcol(best,.9*Math.max(.4,inten),now);ctx.lineWidth=3;sl();ctx.stroke();ctx.shadowBlur=0;ctx.strokeStyle=`rgba(255,255,255,${Math.max(.5,inten)})`;ctx.lineWidth=1.2;sl();ctx.stroke();ctx.restore();
+        if(inten>0)glowFn=()=>{/* 11/01：光は 切れ目（列ごとの ty）に そって。ななめでも ずれない */ctx.save();ctx.globalCompositeOperation='lighter';ctx.lineJoin='round';const gh=10+26*st.p,gp=()=>{ctx.beginPath();ctx.moveTo(mx-wx,ty[a]);for(let i=a;i<=b;i++)ctx.lineTo((i+.5)*cw,ty[i]);ctx.lineTo(mx+wx,ty[b])};
+          /* 線の 下は 明るい パック（光が たされて 白く とぶ）・上は くらい 背景。下がわは 光を よわく して、見た目の まんなかを 線に そろえる */const half=(up,mul)=>{ctx.save();ctx.beginPath();const E2=up?-PH:PH*2;ctx.moveTo(mx-wx-60,E2);ctx.lineTo(mx+wx+60,E2);ctx.lineTo(mx+wx+60,ty[b]);for(let i=b;i>=a;i--)ctx.lineTo((i+.5)*cw,ty[i]);ctx.lineTo(mx-wx-60,ty[a]);ctx.closePath();ctx.clip();
+          [[2,.13],[1.4,.16],[.9,.2],[.5,.26],[.22,.3]].forEach(([k,al2])=>{const g=ctx.createLinearGradient(mx-wx,0,mx+wx,0);g.addColorStop(0,tcol(best,0,now));g.addColorStop(.5,tcol(best,al2*inten*mul,now));g.addColorStop(1,tcol(best,0,now));ctx.strokeStyle=g;ctx.lineWidth=gh*k;gp();ctx.stroke()});ctx.restore()};half(1,1);half(0,.55);ctx.restore();
+          /* 切れ目の 線も 光の 上に（線と 光の まんなかが そろう） */ctx.save();ctx.globalCompositeOperation='lighter';const sl2=()=>{ctx.beginPath();for(let i=a;i<=b;i++)ctx[i===a?'moveTo':'lineTo']((i+.5)*cw,ty[i])};ctx.shadowColor=tcol(best,1,now);ctx.shadowBlur=10;ctx.strokeStyle=tcol(best,.9*Math.max(.4,inten),now);ctx.lineWidth=3;sl2();ctx.stroke();ctx.shadowBlur=0;ctx.strokeStyle=`rgba(255,255,255,${Math.max(.5,inten)})`;ctx.lineWidth=1.2;sl2();ctx.stroke();ctx.restore()}
+        if(!glowFn){ctx.save();ctx.globalCompositeOperation='lighter';const sl=()=>{ctx.beginPath();for(let i=a;i<=b;i++)ctx[i===a?'moveTo':'lineTo']((i+.5)*cw,ty[i])};ctx.shadowColor=tcol(best,1,now);ctx.shadowBlur=10;ctx.strokeStyle=tcol(best,.9*Math.max(.4,inten),now);ctx.lineWidth=3;sl();ctx.stroke();ctx.shadowBlur=0;ctx.strokeStyle=`rgba(255,255,255,${Math.max(.5,inten)})`;ctx.lineWidth=1.2;sl();ctx.stroke();ctx.restore()}
         /* 中の 銀色の 層が すこし 見える */ctx.save();const sg2=ctx.createLinearGradient(0,0,PW,0);sg2.addColorStop(0,'#9aa3ad');sg2.addColorStop(Math.max(.05,Math.min(.95,.35+st.tilt*.3)),'#ffffff');sg2.addColorStop(1,'#cfd7e0');ctx.strokeStyle=sg2;ctx.lineWidth=1.5;ctx.beginPath();for(let i=a;i<=b;i++)ctx[i===a?'moveTo':'lineTo']((i+.5)*cw,ty[i]+1.8);ctx.stroke();ctx.restore()}}
     /* まだの ところ（たいら） */
     if(!st.strip){ctx.save();flat();ctx.clip();ctx.drawImage(Lc,0,0,PW,PH);ctx.restore();
@@ -158,6 +161,7 @@ function run(host,o){return new Promise(async resolve=>{
         if(th>.05){ctx.globalAlpha=al*Math.min(.6,Math.sin(th)*.6);ctx.drawImage(Dc,i*cw*dpr,0,cw*dpr,h*dpr,x,y1-ch,cw+.7,ch);ctx.globalAlpha=al}
         fl.push([x+cw/2,y1-.4])}
       /* 帯の 下の せんい（線で なめらかに） */if(fl.length>1){ctx.strokeStyle='#dfe6ee';ctx.lineWidth=1.5;ctx.lineJoin='round';ctx.beginPath();fl.forEach((q,j)=>ctx[j?'lineTo':'moveTo'](q[0],q[1]));ctx.stroke()}}
+    if(glowFn)glowFn();
     ctx.restore()}
   function drawStrip(ctx,now,dt){const s=st.strip;if(!s)return;const e=now-s.t0;if(e>1300)return;s.vy+=1500*dt;s.x+=s.vx*dt;s.y+=s.vy*dt;s.r+=s.vr*dt;
     ctx.save();ctx.globalAlpha=e<900?1:1-(e-900)/400;ctx.translate(s.x,s.y);ctx.rotate(s.r);const k=Math.min(1,e/300);ctx.scale(1,1-.35*k+.15*Math.sin(e/90));ctx.drawImage(s.c,-PW/2,-s.h/2,PW,s.h);ctx.restore()}
