@@ -1773,7 +1773,7 @@ if(window.SE){const {S:SS,SFX:SX,SND,TXT,tone:TN,noise:NZ}=SE;const se=(t,f)=>F.
      SE2Z.win.push([st,atk?h+250:st+(SE2TL[k]||700)]);F.at(st,()=>SE2Z.play(k,'start'));F.at(atk?h:st,()=>SE2Z.play(k,'hit'))});return r}});
 }
 menu.innerHTML=LIST.map(c=>`<div class="cat">${c.cat}<i>${c.items.filter(i=>!i.soon).length?c.items.filter(i=>!i.soon).length+'こ':'じゅんび中'}</i></div><div class="grid">${c.items.map(i=>`<button class="it ${i.soon?'soon':''} ${i.nw?'new':''}" data-k="${i.k}"><b>${i.n}</b><small>${i.d||'じゅんび中'}</small></button>`).join('')}</div>`).join('')
- +`<div class="cat" style="margin-top:16px">くらべる</div><div class="grid"><a class="it new" href="list.html" style="text-decoration:none"><b>演出リスト（302人）</b><small>キャラごとの こうげき・効果の 演出アイデア</small></a><a class="it" href="kenzan.html" style="text-decoration:none"><b>見参！ いま↔新しい</b><small>前に 作った くらべページ</small></a></div>`;
+ +`<div class="cat" style="margin-top:16px">くらべる</div><div class="grid"><a class="it new" href="list.html" style="text-decoration:none"><b>演出リスト（302人）</b><small>キャラごとの こうげき・効果の 演出アイデア</small></a></div>`;
 const pl=document.getElementById('player');let cur=0;
 /* ===== 10/31 メモ：いま 見ている 演出の 名前と 時間を つけて 送る（Claude の リンクで ひらいた ときだけ 送れる。ゲームの 確認モードと おなじ しくみ） ===== */
 let ZCL=null;async function zcapi(){if(ZCL)return ZCL;ZCL=(async()=>{const c=window.claude;if(!c||!c.use)return {db:null};const db=await c.use('db').catch(()=>null);return {db}})();return ZCL}
