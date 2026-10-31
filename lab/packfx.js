@@ -202,7 +202,20 @@ function run(host,o){return new Promise(async resolve=>{
   const loc=e=>{const r=R.getBoundingClientRect();return {x:e.clientX-r.left,y:e.clientY-r.top}};
   R.addEventListener('pointerdown',e=>{e.preventDefault();const p=loc(e);try{R.setPointerCapture(e.pointerId)}catch(_){}S.tn(1,.01,{vol:0});
     if(st.ph==='idle'||st.ph==='tear'){st.drag={x0:p.x,y0:p.y,x:p.x,y:p.y,base:st.p};lastX=p.x;lastT=performance.now();st.relax=1}
-    else if(st.ph==='flip')tapFlip(p);else if(st.ph==='end')finish()});
+    else if(st.ph==='flip')tapFlip(p);else if(st.ph==='end')endTap(p)});
+  /* 11/1：さいごは ボタンを おした ときだけ おわる。カードを タップすると 効果の まど */
+  function endTap(p){if(info){closeInfo();return}const hit=C.slice().sort((a,b)=>b.z-a.z).find(c=>Math.abs(p.x-c.x)<=CB*c.s/2&&Math.abs(p.y-c.y)<=CH*c.s/2);
+    if(hit){showInfo(hit);return}const b=st.btn;if(b&&Math.abs(p.x-b.x)<=b.w/2+8&&Math.abs(p.y-b.y)<=b.h/2+8){finish();return}}
+  let info=null;function closeInfo(){if(info){info.remove();info=null}}
+  function showInfo(c){closeInfo();S.flip&&S.flip();const ix=C.indexOf(c);const w=document.createElement('div');w.className='pfx-info';
+    w.style.cssText='position:absolute;inset:0;z-index:5;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:rgba(10,6,2,.62);touch-action:none';
+    const box=document.createElement('div');box.style.cssText='max-width:min(86vw,340px);display:flex;justify-content:center';
+    let body=null;try{body=o.cardInfo?o.cardInfo(ix,c.cd):null}catch(e){body=null}
+    if(!body){const f=c.cd&&c.cd.face;body=f?(f.cloneNode?f.cloneNode(true):String(f)):document.createElement('div')}
+    if(body.tagName==='IMG'||typeof body==='string'){const im=typeof body==='string'?Object.assign(document.createElement('img'),{src:body}):body;im.style.cssText='width:min(72vw,300px);height:auto;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.6)';body=im}
+    box.appendChild(body);const bt=document.createElement('button');bt.textContent='とじる';bt.style.cssText='font:700 17px sans-serif;padding:10px 34px;border-radius:999px;border:2px solid #fff3c0;background:linear-gradient(#ffe27a,#e8962a);color:#5a2e08';
+    bt.onclick=ev=>{ev.stopPropagation();closeInfo()};w.addEventListener('pointerdown',ev=>{ev.stopPropagation();if(!box.contains(ev.target))closeInfo()});
+    w.append(box,bt);R.appendChild(w);info=w}
   R.addEventListener('pointermove',e=>{if(!st.drag)return;const p=loc(e),now=performance.now();const d=st.drag;d.x=p.x;d.y=p.y;const dx=p.x-d.x0;
     if(!st.dir){if(Math.abs(dx)>7){st.dir=dx<0?-1:1;st.ph='tear';S.tearOn()}else return}
     if(st.ph!=='tear')return;
@@ -269,8 +282,8 @@ function run(host,o){return new Promise(async resolve=>{
     /* 文字（いちばん 上） */
     if(st.ph==='idle'||(st.ph==='tear'&&st.p<.25)){const y=Math.min(HH-24,PY+PH/2+44);txt(fg,'ゆびで なぞって やぶろう！',W/2,y,{size:19,col:'#fff3d0',a:.75+.25*Math.sin(now/300)})}
     if(st.ph==='end'){const e=now-st.endT;const lastY=slots[slots.length-1].y+CH/2,y=Math.min(HH-30,lastY+46),a=Math.min(1,e/300);
-      if(o.endBtn){const bw=190,bh=48,sc=1+.03*Math.sin(now/260);fg.save();fg.globalAlpha=a;fg.translate(W/2,y);fg.scale(sc,sc);const g=fg.createLinearGradient(0,-bh/2,0,bh/2);g.addColorStop(0,'#ffe27a');g.addColorStop(1,'#e8962a');fg.fillStyle='#7a4310';fg.beginPath();fg.roundRect(-bw/2,-bh/2+4,bw,bh,bh/2);fg.fill();fg.fillStyle=g;fg.beginPath();fg.roundRect(-bw/2,-bh/2,bw,bh,bh/2);fg.fill();fg.strokeStyle='#fff3c0';fg.lineWidth=2;fg.stroke();fg.restore();txt(fg,o.endBtn,W/2,y,{size:20,col:'#fffbe8',a})}
-      else txt(fg,'タップで つぎへ',W/2,y,{size:18,col:'#fff3d0',a:a*(.7+.3*Math.sin(now/300))})}
+      if(o.endBtn){const bw=190,bh=48,sc=1+.03*Math.sin(now/260);st.btn={x:W/2,y,w:bw,h:bh};fg.save();fg.globalAlpha=a;fg.translate(W/2,y);fg.scale(sc,sc);const g=fg.createLinearGradient(0,-bh/2,0,bh/2);g.addColorStop(0,'#ffe27a');g.addColorStop(1,'#e8962a');fg.fillStyle='#7a4310';fg.beginPath();fg.roundRect(-bw/2,-bh/2+4,bw,bh,bh/2);fg.fill();fg.fillStyle=g;fg.beginPath();fg.roundRect(-bw/2,-bh/2,bw,bh,bh/2);fg.fill();fg.strokeStyle='#fff3c0';fg.lineWidth=2;fg.stroke();fg.restore();txt(fg,o.endBtn,W/2,y,{size:20,col:'#fffbe8',a})}
+      else txt(fg,'カードを タップで せつめい',W/2,y,{size:16,col:'#fff3d0',a:a*(.7+.3*Math.sin(now/300))})}
     drawLabels(fg,now)}
   raf=requestAnimationFrame(frame)})}
 const PFX=window.PackFX={run,seLog:SELOG,se:PSE};
