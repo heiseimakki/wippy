@@ -22,7 +22,8 @@ function unit(o){const u=Object.assign({x:.5,y:.7,r:34,art:'dog',atk:2,hp:3,alph
 function stage(spec){units=[];heroes={};bd=BW.BD.set(spec);const all=[...(spec.foes||[]).map(u=>Object.assign({side:'foe'},u)),...(spec.mine||[]).map(u=>Object.assign({side:'me'},u))];
   all.forEach((o,i)=>{const el=bd.units[i];const u=unit(o);u.el=el;units.push(u)});
   const hx=(el,o)=>Object.assign({el,ox:0,oy:0,sc:1,rot:0,alpha:1,gray:0,glow:0,glowC:'255,211,74',tint:null,marks:[]},o);
-  heroes.foe=hx(bd.foeHero,{hp:+(bd.foeHero.querySelector('.hp')||{}).textContent||20});heroes.me=hx(bd.meHero,{hp:+(bd.meHero.querySelector('.hp')||{}).textContent||40});
+  /* 10/31 ひらく たび・もう一度の たびに 親分の 体力の 数字を はじめの 値に もどす */const hp0=(el,def)=>{const h=el&&el.querySelector('.hp');if(!h)return def;if(el.dataset.hp0==null)el.dataset.hp0=h.textContent;h.textContent=el.dataset.hp0;return +el.dataset.hp0||def};
+  heroes.foe=hx(bd.foeHero,{hp:hp0(bd.foeHero,20)});heroes.me=hx(bd.meHero,{hp:hp0(bd.meHero,40)});
   measure()}
 function measure(){[...units,heroes.foe,heroes.me].forEach(u=>{if(!u||!u.el)return;const t=u.el.style.transform;u.el.style.transform='none';const r=u.el.getBoundingClientRect();u.el.style.transform=t;u.bx=r.left+r.width/2;u.by=r.top+r.height/2;u.x=u.bx/W;u.y=u.by/H;u.r=Math.min(r.width,r.height)/2;u.rw=r.width;u.rh=r.height})}
 const P=u=>({x:u.x*W+u.ox,y:u.y*H+u.oy});
