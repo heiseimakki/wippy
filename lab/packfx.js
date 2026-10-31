@@ -1,7 +1,8 @@
 /* ===== 11/01 パック開封（PackFX）：ゆびで なぞって やぶる → カードが すべり出る → 1まいずつ めくる =====
    ・パック／光／紙／つぶ は キャンバス、カードは 本物の カード（DOM）を 3Dで めくる
    ・ずかん（lab/packfx.js）と ゲーム（f93_packfx.js）は おなじ ファイル。ゲームでは packCut を つつむ（エラーなら 前の 演出）
-   ・音：やぶる音は ゆびの 速さで 大きさが かわる（合成）。ほかは SFX／SE2 の 音。終わりは みじかく フェード */
+   ・音：やぶる音は ゆびの 速さで 大きさが かわる。ほかは SFX／SE2 の 音。終わりは みじかく フェード
+   ・11/01 Drive の 新しい SE（mp3）：ゲームは packse.js（パックの 画面で 読む）、ずかんは fx/pack/se/*.mp3（Claudeの中は ZKIMG を atob）。読めないときは 前の 音 */
 (function(){
 if(window.PackFX)return;
 const E={o:k=>1-Math.pow(1-k,3),io:k=>k<.5?4*k*k*k:1-Math.pow(-2*k+2,3)/2,back:k=>{const c=1.6;return 1+(c+1)*Math.pow(k-1,3)+c*Math.pow(k-1,2)},cl:k=>k<0?0:k>1?1:k};
@@ -11,9 +12,20 @@ function tcol(r,a,t){if(r==='A'){const h=((t||0)/8)%360;return `hsla(${h},100%,7
 function loadImg(src){return new Promise(ok=>{if(!src)return ok(null);const i=new Image();i.onload=()=>ok(i);i.onerror=()=>ok(null);i.src=src})}
 
 /* ---------- 音 ---------- */
+/* 11/01 新しい SE：slice1-5＝シュパッ（ランダム・つづけて おなじ 音は なし）、tear＝やぶる（つぶを ちらして 速さで 音量・高さ）、shake＝ふる、
+   draw＝すべり出る、deal＝とぶ／めくる、open1-2＝パックが ひらく、rare／legend＝レア・レジェンド、pre／preawk＝レジェンド・かくせいの ためる音 */
+const PSE_K=['slice1','slice2','slice3','slice4','slice5','tear','shake','draw','deal','open1','open2','rare','legend','pre','preawk'];
+const PSE={ctx:null,buf:{},p:null,err:0},SELOG=[];
+function b64ab(u){const bin=atob(u.slice(u.indexOf(',')+1)),n=bin.length,ar=new Uint8Array(n);for(let i=0;i<n;i++)ar[i]=bin.charCodeAt(i);return ar.buffer}
+function pseLoad(o,a){if(!a)return null;if(PSE.ctx===a&&PSE.p)return PSE.p;PSE.ctx=a;PSE.buf={};PSE.err=0;
+  const dec=ab=>new Promise((ok,ng)=>{try{const r=a.decodeAudioData(ab,ok,ng);if(r&&r.then)r.then(ok,ng)}catch(e){ng(e)}});
+  const src=async k=>{const P=window.PACKSE;if(P&&P[k])return b64ab(P[k]);const Z=window.ZKIMG&&window.ZKIMG['fx/pack/se/'+k+'.mp3'];if(Z)return b64ab(Z);
+    const r=await fetch((o.seBase||'fx/pack/se/')+k+'.mp3');if(!r.ok)throw new Error(k);return r.arrayBuffer()};
+  const js=()=>o.seJs&&!window.PACKSE?new Promise(ok=>{const s=document.createElement('script');s.src=o.seJs;s.onload=ok;s.onerror=ok;document.head.appendChild(s)}):Promise.resolve();
+  PSE.p=js().then(()=>{if(o.seJs&&!window.PACKSE)return;return Promise.all(PSE_K.map(k=>src(k).then(dec).then(b=>{if(PSE.ctx===a)PSE.buf[k]=b},()=>{PSE.err++})))}).catch(()=>{});return PSE.p}
 function Snd(o){const S={};const A=()=>{try{const a=o.ac&&o.ac();if(a&&a.state==='suspended')a.resume();return a}catch(e){return null}};
   const off=()=>{try{return o.muted&&o.muted()}catch(e){return false}};
-  let out=null;const dst=a=>{if(!out||out.context!==a){const c=a.createDynamicsCompressor();c.threshold.value=-16;c.ratio.value=4;const g=a.createGain();g.gain.value=1.4;g.connect(c);c.connect(a.destination);out=g}return out};
+  let out=null;const dst=a=>{if(!out||out.context!==a){let go=null;try{go=o.out&&o.out()}catch(e){}if(go&&go.context===a){const g=a.createGain();g.gain.value=.64;g.connect(go);out=g;return out}const c=a.createDynamicsCompressor();c.threshold.value=-16;c.ratio.value=4;const g=a.createGain();g.gain.value=1.4;g.connect(c);c.connect(a.destination);out=g}return out};
   let nb=null;const noiseBuf=a=>{if(!nb||nb.sampleRate!==a.sampleRate){const n=a.sampleRate*2;nb=a.createBuffer(1,n,a.sampleRate);const d=nb.getChannelData(0);let l=0;for(let i=0;i<n;i++){const w=Math.random()*2-1;l=l*.6+w*.4;d[i]=Math.random()<.5?w:l}}return nb};
   /* ノイズ（フィルタ）：かならず フェードイン・フェードアウト */
   S.nz=(dur,{f=2000,q=1,type='bandpass',vol=.2,at=0,f2}={})=>{if(off())return;const a=A();if(!a)return;const t=a.currentTime+at;const s=a.createBufferSource(),fl=a.createBiquadFilter(),g=a.createGain();s.buffer=noiseBuf(a);fl.type=type;fl.frequency.setValueAtTime(f,t);if(f2)fl.frequency.exponentialRampToValueAtTime(f2,t+dur);fl.Q.value=q;
@@ -23,21 +35,33 @@ function Snd(o){const S={};const A=()=>{try{const a=o.ac&&o.ac();if(a&&a.state==
   /* ライブラリの 音（あれば）。おわりは みじかく フェード */
   S.smp=(name,vol=1,at=0,maxd=99)=>{if(off())return false;const a=A();if(!a)return false;let b=null;try{b=o.buf&&o.buf(name)}catch(e){}if(!b)return false;const t=a.currentTime+at,L=Math.min(b.duration,maxd),fd=Math.min(.12,L*.25);const s=a.createBufferSource(),g=a.createGain();s.buffer=b;
     g.gain.setValueAtTime(vol,t);g.gain.setValueAtTime(vol,t+L-fd);g.gain.linearRampToValueAtTime(0,t+L);s.connect(g).connect(dst(a));s.start(t);s.stop(t+L+.02);return true};
+  /* 11/01 新しい SE を 鳴らす（なければ false → 前の 音） */
+  const pb=k=>{const a=A();return (a&&PSE.ctx===a&&PSE.buf[k])||null};S.ac=A;S.has=k=>!!pb(k);
+  S.se=(k,{v=.5,at=0,rate=1,maxd=99,ofs=0}={})=>{if(off())return false;const a=A();if(!a)return false;const b=pb(k);if(!b)return false;const t=a.currentTime+at,L=Math.min((b.duration-ofs)/rate,maxd),fd=Math.min(.12,L*.25);
+    const s=a.createBufferSource(),g=a.createGain();s.buffer=b;s.playbackRate.value=rate;g.gain.setValueAtTime(v,t);g.gain.setValueAtTime(v,t+L-fd);g.gain.linearRampToValueAtTime(0,t+L);s.connect(g).connect(dst(a));s.start(t,ofs);s.stop(t+L+.02);SELOG.push(k);if(SELOG.length>80)SELOG.shift();return true};
+  const pick=ks=>ks.filter(k=>pb(k));
   const sfx=k=>{if(off())return false;try{const X=o.sfx;if(X&&X[k]){X[k]();return true}}catch(e){}return false};
   /* やぶる音（ずっと 鳴らして、ゆびの 速さで 音量を かえる） */
   let tear=null;
-  S.tearOn=()=>{if(off()||tear)return;const a=A();if(!a)return;const s=a.createBufferSource(),hp=a.createBiquadFilter(),bp=a.createBiquadFilter(),g=a.createGain();s.buffer=noiseBuf(a);s.loop=true;hp.type='highpass';hp.frequency.value=900;bp.type='peaking';bp.frequency.value=3200;bp.gain.value=8;g.gain.value=0;s.connect(hp).connect(bp).connect(g).connect(dst(a));s.start();tear={s,g,a,bp}};
-  S.tearSpeed=v=>{if(!tear)return;const a=tear.a,t=a.currentTime,k=Math.min(1,v);tear.g.gain.setTargetAtTime(k*.34,t,.03);tear.bp.frequency.setTargetAtTime(2400+k*2600,t,.05);
+  /* 11/01：tear の 音を こまかい つぶ（60〜110ms）で ちらして 鳴らす。ゆびの 速さ → 音量・高さ */
+  const grain=()=>{if(!tear||!tear.gr)return;const a=tear.a,b=pb('tear');if(!b)return;tear.k+=(tear.kt-tear.k)*.5;const now=a.currentTime;if(tear.nx<now)tear.nx=now;
+    while(tear.nx<now+.08){const k=tear.k;if(k>.02){const d=.06+Math.random()*.05,r=.8+k*.45+Math.random()*.12,ofs=Math.random()*Math.max(0,b.duration-d*r-.02);const s=a.createBufferSource(),g=a.createGain(),t=tear.nx,v=.6*k;
+      s.buffer=b;s.playbackRate.value=r;g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(v,t+d*.4);g.gain.linearRampToValueAtTime(0,t+d);s.connect(g).connect(dst(a));s.start(t,ofs);s.stop(t+d+.02)}tear.nx+=.035+Math.random()*.015}};
+  S.tearOn=()=>{if(off()||tear)return;const a=A();if(!a)return;if(pb('tear')){tear={a,gr:1,k:0,kt:0,nx:0};tear.tm=setInterval(grain,25);SELOG.push('tear');return}const s=a.createBufferSource(),hp=a.createBiquadFilter(),bp=a.createBiquadFilter(),g=a.createGain();s.buffer=noiseBuf(a);s.loop=true;hp.type='highpass';hp.frequency.value=900;bp.type='peaking';bp.frequency.value=3200;bp.gain.value=8;g.gain.value=0;s.connect(hp).connect(bp).connect(g).connect(dst(a));s.start();tear={s,g,a,bp}};
+  S.tearSpeed=v=>{if(!tear)return;const a=tear.a,t=a.currentTime,k=Math.min(1,v);if(tear.gr)tear.kt=k;else tear.g.gain.setTargetAtTime(k*.34,t,.03);if(!tear.gr)tear.bp.frequency.setTargetAtTime(2400+k*2600,t,.05);
     /* パリパリ（小さな クラック） */const n=Math.random()<k*1.6?1+(Math.random()<k?1:0):0;for(let i=0;i<n;i++)S.nz(.012+Math.random()*.02,{f:1800+Math.random()*4200,q:3,vol:.12+.25*k,at:Math.random()*.03})};
-  S.tearOff=()=>{if(!tear)return;const {a,g,s}=tear;const t=a.currentTime;g.gain.cancelScheduledValues(t);g.gain.setValueAtTime(g.gain.value,t);g.gain.linearRampToValueAtTime(0,t+.12);try{s.stop(t+.15)}catch(e){}tear=null};
-  S.shake=i=>{S.nz(.07,{f:5200,q:.8,type:'highpass',vol:.09});S.nz(.05,{f:2600,q:2,vol:.06,at:.03});if(i===2)S.tn(180,.12,{type:'triangle',vol:.05})};
-  S.snap=()=>{/* シュパッ：高い ノイズが すっと 下がる＋みじかい 切れ音 */S.nz(.14,{f:9000,f2:2200,q:2.2,vol:.4});S.nz(.035,{f:7000,type:'highpass',vol:.3});S.nz(.09,{f:4200,f2:1500,q:4,vol:.22,at:.03});S.tn(2400,.08,{type:'sine',vol:.04,slide:5200})};
-  S.burst=r=>{S.nz(.5,{f:700,q:.7,vol:.12,f2:3200});if(!S.smp('casual/Holy Magic 1.wav',r==='N'?.35:.6,0,1.2))S.tn(r==='N'?1046:1318,.5,{type:'triangle',vol:.06})};
+  S.tearOff=()=>{if(!tear)return;if(tear.gr){clearInterval(tear.tm);tear=null;return}const {a,g,s}=tear;const t=a.currentTime;g.gain.cancelScheduledValues(t);g.gain.setValueAtTime(g.gain.value,t);g.gain.linearRampToValueAtTime(0,t+.12);try{s.stop(t+.15)}catch(e){}tear=null};
+  S.shake=i=>{if(S.se('shake',{v:.3+i*.08,rate:[1.12,1,.9][i]||1,maxd:.36,ofs:.04}))return;S.nz(.07,{f:5200,q:.8,type:'highpass',vol:.09});S.nz(.05,{f:2600,q:2,vol:.06,at:.03});if(i===2)S.tn(180,.12,{type:'triangle',vol:.05})};
+  let lastSl='';S.snap=()=>{/* 11/01：5つの 切る音から ランダム（つづけて おなじ 音は なし） */const ks=pick(['slice1','slice2','slice3','slice4','slice5']),c=ks.length>1?ks.filter(k=>k!==lastSl):ks;if(c.length){const k=c[Math.floor(Math.random()*c.length)%c.length];lastSl=k;if(S.se(k,{v:.6}))return}/* シュパッ：高い ノイズが すっと 下がる＋みじかい 切れ音 */S.nz(.14,{f:9000,f2:2200,q:2.2,vol:.4});S.nz(.035,{f:7000,type:'highpass',vol:.3});S.nz(.09,{f:4200,f2:1500,q:4,vol:.22,at:.03});S.tn(2400,.08,{type:'sine',vol:.04,slide:5200})};
+  S.burst=r=>{const ob=pick(['open1','open2']);if(ob.length&&S.se(ob[Math.floor(Math.random()*ob.length)%ob.length],{v:r==='N'?.42:.5}))return;S.nz(.5,{f:700,q:.7,vol:.12,f2:3200});if(!S.smp('casual/Holy Magic 1.wav',r==='N'?.35:.6,0,1.2))S.tn(r==='N'?1046:1318,.5,{type:'triangle',vol:.06})};
   S.whoosh=(at=0,v=1)=>{if(at===0&&S.smp('casual/GUI Swish 1.wav',.55*v))return;S.nz(.32,{f:400,f2:2400,q:1.4,vol:.22*v,at})};
-  S.flip=()=>{if(!sfx('flip'))S.nz(.05,{f:3500,q:1.2,vol:.16});S.tn(1500,.04,{type:'triangle',vol:.03})};
+  S.rise=n=>{let ok=false;for(let i=0;i<n;i++)ok=S.se('draw',{v:.5,at:i*.13,rate:1+(i-(n-1)/2)*.05})||ok;if(!ok)S.whoosh()};
+  S.fan=n=>{let ok=false;for(let i=0;i<n;i++)ok=S.se('deal',{v:.45,at:i*.07,rate:1+(i%2?.06:-.03)})||ok;if(!ok)S.whoosh(0,.8)};
+  S.flip=()=>{if(S.se('deal',{v:.42,rate:1.3,maxd:.13}))return;if(!sfx('flip'))S.nz(.05,{f:3500,q:1.2,vol:.16});S.tn(1500,.04,{type:'triangle',vol:.03})};
   S.sparkle=()=>{if(S.smp('match3/Crystal Take.wav',.5))return;if(!sfx('sparkle'))[2637,3136,3951].forEach((f,i)=>S.tn(f,.25,{vol:.035,at:i*.06}))};
-  S.rare=()=>{if(!S.smp('game2/ice magic appear.wav',.6,0,1.4))[1047,1319,1568,2093].forEach((f,i)=>S.tn(f,.5,{type:'triangle',vol:.06,at:i*.07}));S.tn(2637,.6,{vol:.03,at:.3})};
-  S.legend=awk=>{if(!sfx('fanfare'))[[523,0],[659,.12],[784,.24],[1047,.4]].forEach(([f,at])=>{S.tn(f,.55,{type:'sawtooth',vol:.04,at});S.tn(f*2,.4,{type:'triangle',vol:.03,at})});S.smp('casual/Bless Sound.wav',.55,.15,2.2);if(awk)for(let i=0;i<8;i++)S.tn(1800+i*220,.18,{vol:.03,at:.5+i*.05})};
+  S.rare=()=>{if(S.se('rare',{v:.55}))return;if(!S.smp('game2/ice magic appear.wav',.6,0,1.4))[1047,1319,1568,2093].forEach((f,i)=>S.tn(f,.5,{type:'triangle',vol:.06,at:i*.07}));S.tn(2637,.6,{vol:.03,at:.3})};
+  S.pre=awk=>(awk&&S.se('preawk',{v:.5}))||S.se('pre',{v:.5});
+  S.legend=awk=>{if(S.se('legend',{v:.6})){if(awk)for(let i=0;i<8;i++)S.tn(1800+i*220,.18,{vol:.03,at:.5+i*.05});return}if(!sfx('fanfare'))[[523,0],[659,.12],[784,.24],[1047,.4]].forEach(([f,at])=>{S.tn(f,.55,{type:'sawtooth',vol:.04,at});S.tn(f*2,.4,{type:'triangle',vol:.03,at})});S.smp('casual/Bless Sound.wav',.55,.15,2.2);if(awk)for(let i=0;i<8;i++)S.tn(1800+i*220,.18,{vol:.03,at:.5+i*.05})};
   S.tell=r=>{if(r==='N')return;for(let i=0;i<(r==='R'?3:6);i++)S.tn(600+i*140,.14,{type:'triangle',vol:.035,at:i*.08})};
   S.stop=()=>S.tearOff();
   return S}
@@ -52,7 +76,7 @@ function run(host,o){return new Promise(async resolve=>{
   const mkC=z=>{const c=document.createElement('canvas');c.width=W*dpr;c.height=H*dpr;c.style.cssText=`position:absolute;inset:0;width:${W}px;height:${H}px;z-index:${z};pointer-events:none`;R.appendChild(c);const x=c.getContext('2d');x.setTransform(dpr,0,0,dpr,0,0);return x};
   const bg=mkC(1);const lay=document.createElement('div');lay.style.cssText='position:absolute;inset:0;z-index:2;pointer-events:none';R.appendChild(lay);const fg=mkC(3);
   requestAnimationFrame(()=>R.style.opacity=1);
-  const S=Snd(o);
+  const S=Snd(o);try{pseLoad(o,S.ac())}catch(e){}
   const cards=o.cards||[];const n=cards.length;
   const best=cards.some(c=>c.awk)?'A':cards.some(c=>c.r==='L')?'L':cards.some(c=>c.r==='R')?'R':'N';
   /* パックの 大きさ・位置 */
@@ -169,7 +193,7 @@ function run(host,o){return new Promise(async resolve=>{
     drawPillars(ctx,now)}
   /* ---- なぞる ガイド ---- */
   function drawGuide(ctx,now){if(st.ph!=='idle'&&!(st.ph==='tear'&&st.p<.04))return;const e=(now-st.hint0)%1900,k=E.io(E.cl(e/1300)),a=e<150?e/150:e>1300?Math.max(0,1-(e-1300)/400):1;
-    const y=pTop()+TY+st.packY,x0=PX+PW*.42,x1=PX-PW*.42,x=lerp(x0,x1,k);ctx.save();
+    const y=pTop()+TY+st.packY,x0=PX-PW*.42,x1=PX+PW*.42,x=lerp(x0,x1,k);ctx.save();
     ctx.globalAlpha=.55*a;ctx.setLineDash([5,7]);ctx.strokeStyle='#fff';ctx.lineWidth=2.5;ctx.beginPath();ctx.moveTo(x0,y);ctx.lineTo(x,y);ctx.stroke();ctx.setLineDash([]);
     ctx.globalAlpha=a;const pr=1+.15*Math.sin(now/120);ctx.fillStyle='rgba(255,255,255,.9)';ctx.beginPath();ctx.arc(x,y,9*pr,0,7);ctx.fill();ctx.strokeStyle='rgba(255,255,255,.7)';ctx.lineWidth=2.5;ctx.beginPath();ctx.arc(x,y,16+4*Math.sin(now/200),0,7);ctx.stroke();
     /* ゆび（シルエット） */ctx.translate(x+6,y+12);ctx.rotate(-.35);ctx.fillStyle='#fff3e0';ctx.strokeStyle='#5a3416';ctx.lineWidth=2.2;ctx.beginPath();ctx.roundRect(-6,0,12,30,6);ctx.fill();ctx.stroke();ctx.beginPath();ctx.roundRect(-11,20,26,26,10);ctx.fill();ctx.stroke();ctx.restore()}
@@ -196,17 +220,17 @@ function run(host,o){return new Promise(async resolve=>{
     later(380+(best==='N'?0:180),rise)}
   /* ---- 流れ ---- */
   const timers=[];const later=(ms,f)=>timers.push(setTimeout(f,ms));
-  async function rise(){try{await Promise.race([Promise.all(C.map(c=>c.ld).filter(Boolean)),new Promise(r=>setTimeout(r,2500))])}catch(e){}st.ph='rise';S.whoosh();const now=performance.now();const top=pTop()+st.packY;
+  async function rise(){try{await Promise.race([Promise.all(C.map(c=>c.ld).filter(Boolean)),new Promise(r=>setTimeout(r,2500))])}catch(e){}st.ph='rise';S.rise(n);const now=performance.now();const top=pTop()+st.packY;
     C.forEach((c,i)=>{c.s=s0;c.x=PX+(i-(n-1)/2)*3;c.y=top+TY+6+CH*s0/2;c.vis=1;c.z=10+i;c.state='rise';c.f0=now+i*130;c.ya=c.y;c.yb=top-CH*s0/2+TY-14-(n-1-i)*2;c.rz=(i-(n-1)/2)*.012})
     later(130*(n-1)+700,()=>{st.ph='drop';st.dropT=performance.now();later(480,fan)})}
-  function fan(){st.ph='fan';const now=performance.now();S.whoosh(0,.8);C.forEach((c,i)=>{c.state='fan';c.f0=now+i*70;c.xa=c.x;c.ya=c.y;c.sa=c.s;c.rza=c.rz});later(70*(n-1)+620,()=>{st.ph='flip';st.nextAuto=performance.now()+1300})}
+  function fan(){st.ph='fan';const now=performance.now();S.fan(n);C.forEach((c,i)=>{c.state='fan';c.f0=now+i*70;c.xa=c.x;c.ya=c.y;c.sa=c.s;c.rza=c.rz});later(70*(n-1)+620,()=>{st.ph='flip';st.nextAuto=performance.now()+1300})}
   let busy=false;
   function tapFlip(p){if(busy){C.forEach(c=>{if(c.state==='zoom'&&c.hold)c.hurry=1});return}
     let tgt=C.find(c=>!c.done&&c.state==='slot'&&Math.abs(p.x-c.x)<CB/2&&Math.abs(p.y-c.y)<CH/2);if(!tgt)tgt=C.find(c=>!c.done&&c.state==='slot');if(tgt)reveal(tgt)}
   function reveal(c){busy=true;c.done=true;const r=rr(c),now=performance.now();c.f0=now;
     if(r==='N'){c.state='flipN';S.flip()}
     else if(r==='R'){c.state='flipR';S.tell('R')}
-    else{c.state='zoom';c.hold=0;c.hurry=0;c.xa=c.x;c.ya=c.y;S.tell('L');C.forEach(d=>{if(d!==c)d.dimT=1});pillars.push({card:c,col:r,t0:now+250})}}
+    else{c.state='zoom';c.hold=0;c.hurry=0;c.xa=c.x;c.ya=c.y;S.tell('L');later(920,()=>S.pre(c.cd.awk));C.forEach(d=>{if(d!==c)d.dimT=1});pillars.push({card:c,col:r,t0:now+250})}}
   function revealDone(c){c.state='slot';busy=false;st.nextAuto=performance.now()+1400;if(C.every(d=>d.done&&d.state==='slot'))later(450,()=>{st.ph='end';st.endT=performance.now()})}
   let fin=false;function finish(){if(fin)return;fin=true;S.stop();R.style.opacity=0;timers.forEach(clearTimeout);setTimeout(()=>{cancelAnimationFrame(raf);resolve();if(!o.keep)R.remove()},260)}
   PFX._cur={finish,st,C};
@@ -249,7 +273,7 @@ function run(host,o){return new Promise(async resolve=>{
       else txt(fg,'タップで つぎへ',W/2,y,{size:18,col:'#fff3d0',a:a*(.7+.3*Math.sin(now/300))})}
     drawLabels(fg,now)}
   raf=requestAnimationFrame(frame)})}
-const PFX=window.PackFX={run};
+const PFX=window.PackFX={run,seLog:SELOG,se:PSE};
 })();
 
 /* ===== ゲームに つなぐ：パックを 買ったときの packCut を つつむ（エラーなら 前の 演出） =====
@@ -266,7 +290,7 @@ packCut=async function(sid,got,stage){if(typeof HUMAN!=='undefined'&&!HUMAN)retu
     const U=n=>'ui/'+n;
     await PackFX.run(document.body,{fixed:true,z:9000,keep:true,pack:(window.ARTD&&ARTD['pack/'+sid])||('art/pack/'+sid+'.webp'),cards,
       img:{back:'ui/w_cardback.png',coin:U('x_coin.png'),star:U('x_star.png'),spark:U('x_spark.png')},
-      ac:()=>typeof ac==='function'?ac():null,muted:()=>typeof MUTED!=='undefined'&&MUTED,sfx:typeof SFX!=='undefined'?{flip:SFX.flip,fanfare:SFX.fanfare||SFX.legend,sparkle:SFX.sparkle}:null,
+      ac:()=>typeof ac==='function'?ac():null,seJs:'packse.js',out:()=>typeof sfxOut==='function'?sfxOut():null,muted:()=>typeof MUTED!=='undefined'&&MUTED,sfx:typeof SFX!=='undefined'?{flip:SFX.flip,fanfare:SFX.fanfare||SFX.legend,sparkle:SFX.sparkle}:null,
       buf:f=>window.SE2&&SE2.buf&&SE2.buf[f]});
     const roots=[...document.querySelectorAll('.pfx-root')];
     setTimeout(()=>{const d=document.getElementById('pkd');if(d)d.click();setTimeout(()=>roots.forEach(r=>r.remove()),60)},0);
