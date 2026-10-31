@@ -21,22 +21,22 @@ def('pochi','見習いポチ','sh','N',1,1,2,'🐶',{bc:'draw',v:1,evo:'pochi2',
 def('pochi2','保安官ポチ','sh','N',2,2,3,'🐕',{st:2,kw:'taunt',bc:'draw',v:1,evo:'pochi3',s:'今日からオレが町を守るワン！'});
 def('pochi3','保安官長ポチ','sh','N',3,3,5,'🐕‍🦺',{st:3,kw:'taunt',aura:'atk',av:1,s:'全員、オレについてこいワン！'});
 def('rookie','ルーキー','gu','N',1,2,1,'🐨',{evo:'rookie2',s:'はじめての依頼、がんばります！'});
-def('rookie2','ベテラン賞金稼ぎのティミー','gu','N',2,3,2,'🤠',{st:2,bounty:2,evo:'rookie3',s:'獲物のにおいがするぜ'});
-def('rookie3','伝説のガンマン ティミー','gu','N',3,3,3,'🌵',{st:3,kw:'twice',bounty:2,s:'…名を名乗るまでもない'});
+def('rookie2','ベテラン賞金稼ぎ','gu','N',2,3,2,'🤠',{st:2,bounty:2,evo:'rookie3',s:'獲物のにおいがするぜ'});
+def('rookie3','伝説のガンマン','gu','N',3,3,3,'🌵',{st:3,kw:'twice',bounty:2,s:'…名を名乗るまでもない'});
 def('zombie','まずしいゾンビ','zo','N',1,1,1,'🧟',{kw:'revive',evo:'zombie2',s:'ウー…'});
 def('zombie2','ゾンビ兵','zo','N',2,2,3,'🧟‍♂️',{st:2,kw:'revive',evo:'zombie3',s:'アー…ウー…'});
-def('zombie3','ゾンビ将軍 ペニー','zo','N',3,2,4,'🧛',{st:3,kw:'revive',bc:'summon',tok:'zombieT',v:1,s:'われらは、何度でも立ち上がる…'});
+def('zombie3','ゾンビ将軍','zo','N',3,2,4,'🧛',{st:3,kw:'revive',bc:'summon',tok:'zombieT',v:1,s:'われらは、何度でも立ち上がる…'});
 def('akudo','ロックバレーの悪童','ou','N',1,2,1,'img:IMG_6719',{evo:'akudo2',s:'へへっ、いたずらしちゃうぞ！'});
-def('akudo2','荒野のならず者 ビリー','ou','N',2,2,3,'img:IMG_6719',{st:2,bc:'dmg',v:1,evo:'akudo3',s:'オレのなわばりで何してやがる'});
-def('akudo3','荒野の大親分 ビリー','ou','N',4,2,2,'img:IMG_6719',{st:3,bc:'summon',tok:'goonT',v:2,s:'子分たち、やっちまえ！'});
+def('akudo2','ならず者','ou','N',2,2,3,'img:IMG_6719',{st:2,bc:'dmg',v:1,evo:'akudo3',s:'オレのなわばりで何してやがる'});
+def('akudo3','荒野の大親分','ou','N',4,2,2,'img:IMG_6719',{st:3,bc:'summon',tok:'goonT',v:2,s:'子分たち、やっちまえ！'});
 
 /* ---- 保安官 ---- */
-def('juko','おんこうな保安官 レオ','sh','R',3,2,4,'img:IMG_6711',{kw:'taunt',aura:'lasso',s:'まぁ座れ。まずは話を聞こう'});
-def('jitchoku','まじめな保安官 ネッド','sh','N',2,2,2,'img:IMG_2350',{bounty:2,s:'アナタ怪シイ！逮捕デス'});
+def('juko','重厚な保安官','sh','R',3,2,4,'img:IMG_6711',{kw:'taunt',aura:'lasso',s:'まぁ座れ。まずは話を聞こう'});
+def('jitchoku','実直な保安官','sh','N',2,2,2,'img:IMG_2350',{bounty:2,s:'アナタ怪シイ！逮捕デス'});
 def('wyatt','ワイアット・アーフ','sh','R',4,2,3,'🎖️',{bc:'buffall',v:1,s:'兄弟たち、OK牧場へ行くぞ'});
 def('masterson','バット・マスターソン','sh','N',2,2,3,'🎩',{bounty:2,s:'ペンも銃も、オレの武器さ'});
 def('garrett','パット・ギャレッ亀','sh','N',4,3,5,'🐢',{kw:'taunt',s:'キッド、年貢の納め時だ'});
-def('tink','ようせいティンク','sh','N',1,1,2,'🧚',{onkill:'draw',s:'悪い子はいねがー？'});
+def('tink','ようせいティンク','sh','N',1,1,2,'🧚',{onkill:'draw',s:'ぴかっ ぴかっ… こっちだよ〜'});
 def('bruno','カギ番ブルーノ','sh','N',3,2,3,'🔑',{bc:'stun',s:'おとなしくしてりゃ、悪いようにはしねぇ'});
 def('mustang','マスタング巡査','sh','N',3,3,1,'🐴',{kw:'quick',s:'ヒヒーン！追いつめたぞ！'});
 def('ranger','テキサス・レンジャー隊','sh','N',3,2,3,'🏇',{bc:'buffr',v:1,s:'隊長、ここはお任せを！'});
@@ -50,7 +50,7 @@ def('pork','はやうちポーク','sh','R',2,2,1,'🐷',{kw:'quick',bc:'quickmg
 
 /* ---- 酒場 ---- */
 def('tenshu','良心的な店主','sa','N',1,1,1,'img:IMG_2352',{bc:'coin',v:1,s:'笑顔と飲み物がお出迎えよ！'});
-def('kifujin','海辺のきふじん マリーナ','sa','R',3,2,4,'img:IMG_6718',{bc:'stun',s:'波に のって あそびましょ♪'});
+def('kifujin','岩礁の貴婦人','sa','R',3,2,4,'img:IMG_6718',{bc:'stun',s:'波に のって あそびましょ♪'});
 def('doc','ドク・ホリデー','sa','N',3,2,3,'🩺',{bc:'healall',v:3,s:'はい、あーんして'});
 def('pokerfox','ポーカーぎつね','sa','N',2,1,2,'🦊',{bc:'flipdraw',v:2,s:'勝負はいつも一発勝負さ'});
 def('ragtime','ラグタイム・ケロ','sa','R',3,2,3,'🐸',{bc:'recall',s:'今夜もいい曲、弾かせてもらうケロ'});
@@ -59,7 +59,7 @@ def('slim','ミルク好きスリム','sa','N',2,3,2,'🥛',{kw:'nostun',s:'ミ�
 def('pyonko','看板娘のピョン子','sa','N',2,1,3,'🐰',{bc:'draw',v:1,s:'いらっしゃいませ〜！'});
 def('korokichi','バイオリンのコロ吉','sa','N',2,1,3,'🦗',{aura:'faction',av:1,s:'リーリー♪ 一曲いかが？'});
 def('harry','ルーレット・ハリー','sa','R',4,3,4,'🎰',{bc:'bounce',s:'赤か黒か、運命のルーレット！'});
-def('bard','ほろよい吟遊詩人 バラッド','sa','N',2,1,2,'🎻',{bc:'selfatk',v:3,s:'ヒック…いい歌ができそうだ'});
+def('bard','酔いどれ吟遊詩人','sa','N',2,1,2,'🎻',{bc:'selfatk',v:3,s:'ヒック…いい歌ができそうだ'});
 def('lily','歌姫リリー','sa','N',3,2,3,'🎤',{bc:'draw',v:1,s:'今夜は判事さんのために歌うわ'});
 def('shaker','タコのシェイカー','sa','N',4,2,5,'🐙',{aura:'regen',av:1,s:'ご注文は8つまで同時にどうぞ'});
 def('cancan','カンカン・キャット','sa','N',1,1,1,'💃',{bc:'stun',s:'ラインダンスで目が回るわよ'});
@@ -79,7 +79,7 @@ def('nanashi','名無しのガンマン','gu','R',5,6,5,'🤠',{s:'…名乗る�
 def('ferret','たんけん隊フェレット','gu','N',1,1,1,'🐾',{bc:'treasure',v:2,s:'この先、宝の匂いがするぜ'});
 def('hammer','鍛冶屋のハンマ','gu','N',3,1,3,'🔨',{bc:'buff',v:2,s:'いい鉄はいい仕事をする'});
 def('hawk','バウンティ・ホーク','gu','N',2,2,2,'🦅',{bounty:2,s:'獲物は逃がさない'});
-def('gantetsu','金ほり ナゲット','gu','N',3,2,4,'⛏️',{aura:'miner',s:'ツルハシは裏切らねぇ'});
+def('gantetsu','金ほりガンテツ','gu','N',3,2,4,'⛏️',{aura:'miner',s:'ツルハシは裏切らねぇ'});
 def('boya','ボウヤ・ザ・キッド','gu','N',1,1,1,'👦',{kw:'quick',s:'ボクだって一人前さ！'});
 def('highnoon','決闘屋ハイヌーン','gu','N',4,4,2,'🕛',{kw:'quick',s:'正午だ。抜きな'});
 def('digger','ダブル・ディガー','gu','R',4,3,4,'🔫',{kw:'twice',s:'右も左も、外さないぜ'});
@@ -101,7 +101,7 @@ def('bison','ブルドーザー・バイソン','an','R',6,6,6,'🦬',{kw:'taunt
 def('sabota','サボ太','an','N',2,1,3,'🌵',{kw:'thorns',s:'さわると痛いよ'});
 def('wolf','ローン・ウルフ','an','N',2,2,2,'🐺',{kw:'lone',s:'群れるのは、性に合わない'});
 def('jacka','ジャッカロープ','an','N',1,1,1,'🐇',{kw:'shield',s:'ぴょーん！'});
-def('vulture','おこぼれバルチャー バズ','an','N',3,2,3,'🦅',{kw:'feed',s:'おこぼれちょうだい'});
+def('vulture','おこぼれバルチャー','an','N',3,2,3,'🦅',{kw:'feed',s:'おこぼれちょうだい'});
 def('armadillo','まるまるアルマジロ','an','N',2,1,3,'🦔',{kw:'taunt',s:'まるまって、カチーン！'});
 def('runner','ロードランナー','an','N',2,2,1,'🐦',{kw:'quick',s:'ピピッ！'});
 def('tumble','タンブルウィードくん','an','N',1,1,2,'🌾',{dr:'summon',tok:'tumbleT',dv:1,s:'コロコロ〜'});
@@ -115,14 +115,14 @@ def('eagle','シェリフ・モーキン警部','an','L',6,5,6,'🦅',{bc:'scout
 def('serpentia','さばくの王妃 サーペンティア','an','L',5,4,5,'img:serpentia',{poison:2,bc:'poison',v:2,s:'わらわの しっぽに ついておいで'});
 def('grizzly','はらぺこグリズリー','an','R',4,3,4,'🐻',{bc:'meat',v:1,s:'お肉…お肉はどこだ…'});
 def('funkoro','フンコロがし','an','R',2,2,2,'🪲',{bc:'unko',v:1,s:'コロコロ…はい、どうぞ'});
-def('fairy','木の妖精 オーキー','an','R',2,1,2,'img:fairy',{aura:'regen',av:1,bc:'healall',v:1,s:'森のみんな、げんきになあれ'});
+def('fairy','木の妖精 コダマ','an','R',2,1,2,'img:fairy',{aura:'regen',av:1,bc:'healall',v:1,s:'森のみんな、げんきになあれ'});
 
 /* ---- 魔法使い ---- */
 def('rainmaker','レインメーカー','ma','N',3,2,4,'🌧️',{aura:'regen',av:1,s:'雨よ、降れ〜！'});
 def('hoho','マダム・ホーホー','ma','N',2,1,3,'🔮',{bc:'draw',v:1,s:'ホッホウ、見えるぞ…'});
-def('chakka','火の精霊エンバー','ma','N',2,3,1,'🔥',{bc:'dmg',v:1,s:'アチチ、燃えてきた！'});
+def('chakka','火の精霊チャッカ','ma','N',2,3,1,'🔥',{bc:'dmg',v:1,s:'アチチ、燃えてきた！'});
 def('herb','ハーブばあや','ma','N',3,1,4,'🌿',{bc:'healall',v:2,s:'薬草はいかが？'});
-def('sandman','ねむりの ナップ','ma','N',3,2,3,'💤',{bc:'weaken',v:2,s:'ふぁ〜あ、おやすみ'});
+def('sandman','サンドマン','ma','N',3,2,3,'💤',{bc:'weaken',v:2,s:'ふぁ〜あ、おやすみ'});
 def('doo','のろい人形ドゥー','ma','N',1,1,1,'🪆',{poison:1,s:'ひとりにしないで…'});
 def('stargazer','スターゲイザー教授','ma','N',4,2,4,'🔭',{bc:'draw',v:2,s:'星が告げている…'});
 def('mash','キノコ魔女マッシュ','ma','N',4,2,4,'🍄',{bc:'poison',v:2,s:'キノコスープはいかが？'});
@@ -137,11 +137,11 @@ def('amelie','月光の呪術師 アメリ','ma','L',6,4,5,'img:IMG_6717',{bc:'s
 def('carnelia','大空の姫君 カルネリア','ma','L',6,4,5,'img:carnelia',{bc:'blow',s:'つばさで ひとふき、ふわりっ！'});
 def('celestia','水滴みのセレスティア','ma','L',7,5,6,'img:IMG_6724',{bc:'raise',v:2,s:'おとなしくしていれば 手はださないわ'});
 def('bagura','もじばけ魔女バグーラ','ma','R',3,3,3,'🧙',{bc:'moji',s:'繧上◆縺励?繧ゅ§縺ー縺鯛?ｦ'});
-def('hanage','はなげ仙人 ハーミット','ma','R',2,2,2,'👃',{bc:'hanage',v:2,s:'ふぉっふぉっ、伸びるぞ〜'});
+def('hanage','はなげ仙人','ma','R',2,2,2,'👃',{bc:'hanage',v:2,s:'ふぉっふぉっ、伸びるぞ〜'});
 
 /* ---- スチームタウン ---- */
 def('seisei','スチームタウンの精製師','st','N',2,1,1,'img:IMG_6716',{bc:'buffr',v:2,s:'こんな色じゃったろうか？まあよいかの。'});
-def('kaikei','会計士 カウント','st','N',2,1,2,'img:IMG_2354',{aura:'coinflip',s:'数字は僕の友達さ。'});
+def('kaikei','信頼できる会計士','st','N',2,1,2,'img:IMG_2354',{aura:'coinflip',s:'数字は僕の友達さ。'});
 def('gadget','うるさいガジェット','st','N',1,1,2,'img:gadget',{bc:'draw',v:1,s:'♪♪♪♪♪'});
 def('telegraph','電信ロボ','st','N',3,1,3,'📠',{bc:'draw',v:2,s:'ツー・トン・ツー…オテガミデス'});
 def('boiler','ボイラー・ボイル','st','N',5,3,6,'♨️',{kw:'taunt',s:'シュゴォォォ…'});
@@ -152,7 +152,7 @@ def('geary','はぐるまギアリー','st','N',3,1,2,'⚙️',{bc:'buffr',v:2,s
 def('betty','ふうせんベティ','st','N',3,2,3,'🎈',{bc:'draw',v:1,s:'空から見ると、荒野も小さいわね'});
 def('ironhorse','アイアン・ホース','st','R',5,5,3,'🚃',{kw:'quick',s:'ブルルル…シュッシュッ！'});
 def('bolt','ポンコツ・ボルト','st','N',2,3,3,'🤖',{bc:'junk',s:'ガガガ…ピー…ダイジョウブ、タブン'});
-def('clock','チクタク時計 ティッキー','st','N',3,0,4,'⏰',{aura:'draw',s:'チクタク、時間ですよ〜'});
+def('clock','チクタク時計','st','N',3,0,4,'⏰',{aura:'draw',s:'チクタク、時間ですよ〜'});
 def('ruler','スチームタウン・ザ・ルーラー','st','L',6,5,6,'img:IMG_6723',{aura:'coin',s:'この街で ワシに さからうとは いい度胸じゃ'});
 def('build','鉄道王ビルド','st','L',5,4,5,'🎩',{aura:'faction',av:2,s:'線路は金の道だ'});
 def('kyu','キュウジュウキュウ号','st','R',4,99,5,'🚂',{kw:'noattack taunt',fuel:3,s:'ゴゴゴゴ…（動かない）'});
@@ -161,7 +161,7 @@ def('kyu','キュウジュウキュウ号','st','R',4,99,5,'🚂',{kw:'noattack 
 def('kibishii','きびしいゾンビ','zo','N',1,2,1,'🧟‍♀️',{poison:1,s:'アー…'});
 def('sabishii','さびしいゾンビ','zo','N',1,1,1,'🧟',{kw:'revive',s:'ウー…'});
 def('atsukama','あつかましいゾンビ','zo','N',1,1,1,'🧟‍♂️',{kw:'taunt revive',s:'アー…'});
-def('crow','そうぎ屋カラス モーティマー','zo','N',3,2,3,'🐦‍⬛',{bc:'raise',v:1,s:'お別れには、まだ早いですな'});
+def('crow','そうぎ屋カラス','zo','N',3,2,3,'🐦‍⬛',{bc:'raise',v:1,s:'お別れには、まだ早いですな'});
 def('tesaguri','てさぐりゾンビ','zo','R',2,1,2,'🙈',{bc:'mojis',s:'アー…どこ…？'});
 
 /* ---- お尋ね者・マフィア（捕まえると仲間になる） ---- */
@@ -182,19 +182,19 @@ OUT('sambass','サム・バス','ou','N',3,2,3,'💰',{dr:'healall',dv:1,s:'金�
 OUT('mary','ニセ札メリー','ou','N',1,1,1,'💵',{bc:'coin',v:1,s:'ホンモノそっくりでしょ？'});
 OUT('bignose','ビッグ・ノーズ・ジョージ','ou','R',9,7,9,'👃',{bc:'sneeze',v:3,s:'この鼻、すごいだろ〜！'});
 OUT('iguana','かくれんぼイグアナ','ou','N',2,2,2,'🦎',{kw:'stealth',s:'見つけられるもんなら、見つけてみな'});
-OUT('axe','スチームタウンのバイク乗り','ou','R',4,4,4,'img:IMG_6721',{kw:'splash',s:'どこまでも 追いかけるぜ！'});
+OUT('axe','スチームタウンの斧使い','ou','R',4,4,4,'img:IMG_6721',{kw:'splash',s:'どこまでも 追いかけるぜ！'});
 OUT('tokko','スチームタウンの特攻隊長','ou','N',3,3,1,'img:IMG_6722',{kw:'quick',s:'一発 おみまい してやるぜ！'});
 OUT('minpei','ビートルウッドの民兵','ou','N',1,1,2,'img:IMG_6712',{kw:'taunt',s:'食べきれる分しか持ってきてないってば〜！'});
 OUT('ice','氷魔術師 フォクシア','ou','L',5,4,5,'img:IMG_6720',{bc:'stun',s:'氷づけと 雪だるま、どっちがいい？'});
 OUT('chousyu','ずさんな徴収係','mf','N',1,1,1,'img:IMG_6713',{bc:'coin',v:1,s:'通行料、きっちり いただくぜ'});
-OUT('narikin','ずるい成金 ゴールディ','mf','N',3,1,3,'img:IMG_2353',{aura:'coin',s:'お金で 買えない ものは ない！'});
+OUT('narikin','卑怯な成金','mf','N',3,1,3,'img:IMG_2353',{aura:'coin',s:'お金で 買えない ものは ない！'});
 OUT('goblins','ゴブリン三兄弟','mf','N',3,1,1,'👺',{bc:'summon',tok:'goblinT',v:2,s:'兄貴のためなら！'});
 OUT('goliath','用心棒ゴリアテ','mf','N',4,3,5,'🦍',{kw:'taunt',s:'ボスには指一本ふれさせねぇ'});
-OUT('mole','金庫やぶりのツィッガー','mf','N',3,2,3,'🐀',{bc:'treasure',v:3,s:'なぜ銀行を掘るかって？そこに金があるからさ'});
+OUT('mole','金庫やぶりモグラ','mf','N',3,2,3,'🐀',{bc:'treasure',v:3,s:'なぜ銀行を掘るかって？そこに金があるからさ'});
 OUT('hyena','ベビーフェイス・ハイエナ','mf','N',3,4,2,'🐕',{onkill:'draw',s:'童顔だからってナメんなよ'});
 OUT('kerits','ケリツツキ','mf','N',4,2,4,'🐦',{kw:'twice',s:'ダダダダダッ！'});
 OUT('pickey','チンピラのピッキー','mf','N',1,1,1,'😼',{bc:'buff',v:1,s:'へへっ、兄貴〜！'});
-OUT('capone','悪の親玉 カポニャンコ','mf','L',5,5,5,'🐈',{aura:'coin',s:'ワシの街で好きにはさせん'});
+OUT('capone','悪の親玉 カポニャンコ','mf','L',5,5,5,'🐈',{aura:'coin',s:'ミャーの街で好きにはさせん'});
 OUT('ma','おっ母つぁん ママ・バーカー','mf','L',6,5,6,'👵',{aura:'draw',s:'うちの子に手を出したね？'});
 OUT('zombino','ドン・ゾンビーノ','zo','L',5,4,5,'🧟',{aura:'faction',av:1,dr:'summon',tok:'zombieT',dv:2,s:'ファミリーは…ずっと…ファミリー…'});
 
@@ -236,7 +236,7 @@ const KW_HELP={taunt:'敵はまずこのキャラを攻撃しないといけな�
   lone:'ほかに仲間がいないと攻撃+2',nostun:'酔っぱらい（1回休み）にならない',deadly:'ダメージをあたえた 相手の子分を 一撃で たおす',noattack:'自分からは攻撃できない。でも攻撃力99なので、攻撃してきた相手はたおれる。3ターンで燃料切れ',
   splash:'攻撃した相手のとなりにも2ダメージ',feed:'キャラがたおれるたび、攻撃+1',pack:'ほかに動物の仲間がいると攻撃+2',poison:'毒：毎ターン、毒の数だけダメージ'};
 
-function tokName(t){return t&&C[t]?`${C[t].n}（${C[t].a*K}/${C[t].h*K}）`:''}
+function tokName(t,lv){if(!t||!C[t])return '';/* 10/31：よぶ子の 強さは ほんとうに 出てくる 強さ（その レベル） */if(lv&&typeof statA==='function')return `${C[t].n}（${statA(t,lv)}/${statH(t,lv)}）`;return `${C[t].n}（${C[t].a*K}/${C[t].h*K}）`}
 function bcText(d,lv){
   const x=valX(d.v,lv),n=valN(d.v,lv);
   switch(d.bc){
@@ -247,7 +247,7 @@ function bcText(d,lv){
     case 'stun':return 'いちばん強い敵を酔っぱらわせる（1回休み）';case 'stunall':return '敵ぜんいんを酔っぱらわせる（1回休み）';
     case 'blow':return 'いちばん強い敵キャラを手札に吹き飛ばす';case 'bounce':return 'ランダムな敵キャラ1体を手札に追い返す';
     case 'sneeze':return `大くしゃみ！いちばん強い あいて1体を 手札に 吹き飛ばす`;
-    case 'summon':return `${tokName(d.tok)}を${d.v||1}匹よぶ`;case 'buff':return `いちばん強い仲間に+${x}/+${x}`;case 'buffr':return `ほかの仲間1体に+${x}/+${x}`;
+    case 'summon':return `${tokName(d.tok,lv)}を${d.v||1}匹よぶ`;case 'buff':return `いちばん強い仲間に+${x}/+${x}`;case 'buffr':return `ほかの仲間1体に+${x}/+${x}`;
     case 'buffall':return `仲間ぜんいんの攻撃+${x}`;case 'selfatk':return `自分の攻撃+${x}`;
     case 'flipdraw':return `コイン投げ！表なら なかまを${n}人 ひく`;case 'flipbuff':return `コイン投げ！表なら仲間1体に+${x}/+${x}`;
     case 'quickmg':return `早撃ち勝負！勝ったらいちばん強い敵キャラに${x}ダメージ`;case 'meat':return `お肉タップタプ！10回ごとに+${x}/+${x}`;
@@ -258,7 +258,7 @@ function bcText(d,lv){
     case 'moji':return 'あいての画面の文字が ぜんぶ文字化け！あいては次のターン、なかまを1人しか出せない';case 'mojis':return 'あいての手札の名前が文字化け！あいては次のターン、なかまを1人しか出せない';case 'junk':return 'コイン投げ！裏だとこわれて退場';
   }return ''}
 function drText(d,lv){const x=valX(d.dv,lv),n=valN(d.dv,lv);
-  switch(d.dr){case 'summon':return `${tokName(d.tok)}を${d.dv||1}匹よぶ`;case 'boom':return `ランダムな敵に${x}ダメージを${d.boomN||3}回`;
+  switch(d.dr){case 'summon':return `${tokName(d.tok,lv)}を${d.dv||1}匹よぶ`;case 'boom':return `ランダムな敵に${x}ダメージを${d.boomN||3}回`;
     case 'healhero':return `あなたの体力を${x}いやす`;case 'healall':return `仲間ぜんいんの体力を${x}いやす`;case 'draw':return `なかまを${n}人 ひく`}return ''}
 function auraText(d,lv){const x=valX(d.av,lv);
   switch(d.aura){case 'atk':return `いるあいだ、ほかの仲間の攻撃+${x}`;case 'faction':return `いるあいだ、ほかの${FACT[d.f][0]}の攻撃+${x}`;
@@ -278,7 +278,7 @@ const RELICS={
   horseshoe:{ic:'🧲',n:'幸運の蹄鉄',d:'戦いの1ターン目、コイン+1'},
   cactus:{ic:'🌵',n:'サボテンジュース',d:'戦いに勝つたび、体力を2いやす'},
   cowbell:{ic:'🔔',n:'カウベル',d:'敵をたおすたび＄1'},
-  goldrope:{ic:'🪢',n:'金の投げ縄',d:'投げ縄の成功率+15%'},
+  goldrope:{ic:'🪢',n:'金の投げなわ',d:'投げなわの成功率+15%'},
   hat:{ic:'🎩',n:'ガンマンの帽子',d:'仲間ぜんいんの攻撃+1'},
   bone:{ic:'🍖',n:'骨付き肉',d:'出した仲間の体力+1'},
   twin:{ic:'🔫',n:'二丁拳銃',d:'毎ターン最初に出した仲間は、すぐ攻撃できる'},
@@ -357,7 +357,7 @@ const STAGES={
 const ACH=[
   {id:'run1',n:'はじめての冒険',d:'冒険に出かける',pay:5,t:g=>g.runs>=1},
   {id:'win1',n:'初勝利',d:'戦いに勝つ',pay:5,t:g=>g.st.wins>=1},
-  {id:'catch1',n:'はじめての投げ縄',d:'お尋ね者を捕まえる',pay:10,t:g=>g.st.caught>=1},
+  {id:'catch1',n:'はじめての投げなわ',d:'お尋ね者を捕まえる',pay:10,t:g=>g.st.caught>=1},
   {id:'catch5',n:'駆け出しの賞金稼ぎ',d:'お尋ね者を5人捕まえる',pay:25,t:g=>g.st.caught>=5},
   {id:'catch20',n:'荒野の名ハンター',d:'お尋ね者を20人捕まえる',pay:80,t:g=>g.st.caught>=20},
   {id:'merge1',n:'合成デビュー',d:'合成に成功する',pay:5,t:g=>g.st.merges>=1},
@@ -374,7 +374,7 @@ const ACH=[
   {id:'star3',n:'レベル4',d:'どこかを レベル4で クリア',pay:60,t:g=>Math.max(g.clear.wild||0,g.clear.hill||0)>=4},
   {id:'star6',n:'レベル7',d:'どこかを レベル7で クリア',pay:120,t:g=>Math.max(g.clear.wild||0,g.clear.hill||0)>=7},
   {id:'star10',n:'荒野の伝説',d:'どこかを レベル11で クリア',pay:500,t:g=>Math.max(g.clear.wild||0,g.clear.hill||0)>=11},
-  {id:'relic5',n:'お宝コレクター',d:'1回の冒険でレリックを5つ持つ',pay:30,t:g=>g.st.maxRelic>=5},
+  {id:'relic5',n:'お宝コレクター',d:'1回の冒険でお宝（レリック）を5つ持つ',pay:30,t:g=>g.st.maxRelic>=5},
   {id:'hanage',n:'鼻がムズムズ',d:'鼻毛ボーボーにされる',pay:3,t:g=>g.st.hanage>=1},
   {id:'k990',n:'ゴゴゴゴ…',d:'キュウジュウキュウ号で反撃する',pay:15,t:g=>g.st.k990>=1},
   {id:'rich',n:'大金持ち',d:'＄500を持つ',pay:50,t:g=>g.money>=500},
@@ -429,11 +429,11 @@ jitchoku:['ワタシ、タイホ、サレタ…？','アナタ、ワタシ、強
 wyatt:['兄弟たち…あとはたのむ…','兄弟の分まで、強くなろう','OK！絶好調だ！','…兄弟には言わないでくれ'],
 masterson:['ペンより…重いものは…ない…','次の記事は「最強のオレ」だな','いい見出しができたぜ','この話は…ボツだ'],
 garrett:['こ、甲羅に…ヒビが…','ゆっくり…たのむよ…','甲羅が かたくなった','…のんびりいこう'],
-tink:['悪い子に…やられた〜！','わたし、もっとキラキラする？','キラキラ〜☆','羽が…ちぢんだ…'],
+tink:['ひかりが…きえちゃう〜…','わたし、もっとキラキラする？','キラキラ〜☆','羽が…ちぢんだ…'],
 bruno:['カギを…落としちまった…','おい、手荒にするなよ','カギが ひとつ増えたぜ','…カギ、なくした'],
 mustang:['ヒヒ〜ン！落馬だ〜！','ヒン？ ヒヒン？','ヒヒーン！足が軽い！','ブルル…しょんぼり'],
 ranger:['隊長〜！撤退〜！','隊員一同、覚悟はできています！','隊の士気が上がりました！','隊長に報告しづらい…'],
-roybean:['判決…保留じゃ…','わしを合成するというのか…！','判決！大成功！','…控訴じゃ！'],
+roybean:['判決…保留じゃ…','わしを合成するというのか…！','判決！大成功！','…控訴(こうそ)じゃ！'],
 gaga:['ガー！ガー〜〜！','ガ、ガー…？','ガーガーガー！！','ガ…（しょぼん）'],
 mia:['事件は…迷宮入りね…','推理どおりなら、うまくいくはず','推理的中！','…推理ミスだわ'],
 virgil:['弟たちを…たのむ…','兄として、まだ強くなれる','これで弟たちを守れる','…兄失格だ'],
@@ -525,7 +525,7 @@ bagura:['繧ゅ§縺ー縺…（ばたり）','繧ｦ繧ｷ繧ｷ…？','繧ｹ
 hanage:['鼻毛が…ぬけた…','ふぉっふぉっ、鼻毛が うずくわい','鼻毛 30センチ のびたぞい！','…鼻毛が 切れた'],
 seisei:['こんな…終わりじゃったかの…','まあ、よいかの。やってみよう','こんな色じゃったかの？ 成功じゃ','まあ、よいかの…'],
 kaikei:['計算…ミス…','成功率は計算ずみさ','数字どおり！','…けたを まちがえた'],
-gadget:['♪…♪…（ぷつん）','♪？ ♪♪？','♪♪♪♪♪♪♪♪♪！！','♪…（音われ）'],
+gadget:['♪…♪…（プツン）','♪？ ♪♪？','♪♪♪♪♪♪♪♪♪！！','♪…（音われ）'],
 telegraph:['ツー…ツー…シンゴウ…トダエタ','ツー・トン…ドキドキ…','ツー・トン・セイコウ！','ツー…エラー…'],
 boiler:['シュ〜…（火が消えた）','シュゴ？ シュゴォ？','シュゴォォォォッ！！','プスン…'],
 edison:['ひらめき…そこねた…','ひらめきの 予感！','大発明だ！','…失敗は 成功のもと'],
@@ -542,7 +542,7 @@ kyu:['ゴゴ…ゴ…（やっぱり動かない）','ゴゴゴゴ…（ドキ�
 kibishii:['ア…きびしい…','アー…きびしく たのむ…','アー！ きびしい！','アー…（きびしい）'],
 sabishii:['ウ…さびしい…','ウー…ひとりに しないで…','ウー！ うれしい…','ウ…さびしい…'],
 atsukama:['アー…まだ いるよ…','アー…もっと よこせ…','アー！ もっと よこせ！','アー…ケチ…'],
-crow:['お別れの…時間ですな…','おや、わたくしを？ 光栄ですな','お祝いの カァ〜！','…喪服が 似合いますな'],
+crow:['お別れの…時間ですな…','おや、わたくしを？ 光栄ですな','お祝いの カァ〜！','…喪服(もふく)が 似合いますな'],
 tesaguri:['アー…どこ…？（ばたり）','アー…どこ…？ ドキドキ…','アー！ 見えた！','アー…やっぱり どこ…？'],
 coyote:['ワオ〜ン…今夜は…ここまで…','ワオーン、ドキドキ','ワオオオーン！','…クゥン'],
 jesse:['列車が…出ちまった…','オレを いただこうってのか？','大当たりだ！','…空っぽの金庫か'],
@@ -553,7 +553,7 @@ bibiri:['ママ〜〜〜〜！！','こ、こ、怖くなんか…ないぞ…',
 cake:['ク、クリームが…とける〜','おいしく してね','デコレーション 完成！','…くずれちゃった'],
 butch:['相棒〜！ あとはたのむ〜！','二人一緒に 合成か？','相棒と ハイタッチ！','…手袋 わすれた'],
 bonnie:['ふたりなら…こわく…ない…はず…','ふたりで ドキドキ','ふたりで 最強！','…ケンカしちゃった'],
-bart:['詩を…のこして…さらば…','詩をひとつ… ドキドキ…','名作が できた','…駄作だ'],
+bart:['詩を…のこして…さらば…','詩をひとつ… ドキドキ…','名作が できた','…駄作(ださく)だ'],
 soapy:['当たりは…入ってなかった…','当たり、出るかな〜？','大当たり〜！','…ハズレでした〜'],
 ketcham:['汽笛が…鳴りやんだ…','汽笛の 合図で','ニャ〜オ、仕事 完了','…乗りおくれた'],
 sambass:['みんなに…配りきれなかった…','オレの分も 配ってくれ','みんなに 配れるぞ！','…落としちまった'],
@@ -568,11 +568,11 @@ chousyu:['通行料…はらいます…','手数料は タダでいいぜ','が
 narikin:['お金で…買えなかった…','いくらでも はらうぞ！','金の力だ！','…お金を ドブに すてた'],
 goblins:['兄貴〜〜〜！','兄貴のために ドキドキ','兄貴〜！ やったよ〜！','…兄貴に おこられる'],
 goliath:['ボス…すまねぇ…','ボスのために 強くなる','筋肉 ムキムキだ','…ボスに 言えねぇ'],
-mole:['穴に…もどります…','掘って 掘って 掘りまくれ！','金庫 発見！','…岩盤だった'],
-hyena:['童顔で…ナメられた…','ナメんなよ、ドキドキなんか してねぇ','ギャハハ！ 強くなったぜ','…ナメられた'],
+mole:['穴に…もどります…','掘って 掘って 掘りまくれ！','金庫 発見！','…岩盤(がんばん)だった'],
+hyena:['童顔(どうがん)で…ナメられた…','ナメんなよ、ドキドキなんか してねぇ','ギャハハ！ 強くなったぜ','…ナメられた'],
 kerits:['ダダ…ダ…（ばたっ）','ダダダ…ドキドキ…','ダダダダダダダダッ！！','ダ…'],
 pickey:['兄貴〜〜！ たすけて〜！','へへっ、兄貴〜 見ててね','兄貴〜！ やったっす！','…兄貴には ないしょっす'],
-capone:['ワシの…街が…','ワシを合成するというのか…！','ワシの街は 安泰じゃ','…今日は ここまでじゃ'],
+capone:['ミャーの…街が…','ミャーを合成するというのか…！','ミャーの街は 安泰じゃ','…今日は ここまでじゃ'],
 ma:['みんな…あとは まかせたよ…','かあちゃんを 強くしておくれ','かあちゃん 元気100倍だよ！','…あらまぁ'],
 zombino:['ファミリー…は…永遠…','ファミリーの ために…','ファミリー…最強…','ファミリーに…言えない…'],
 zombieT:['ウ〜…','ウ？','ウー！','ウ…'],
@@ -624,7 +624,7 @@ const TALK={
   wyatt:['兄弟たち、ここで けりを つけるぞ','かっこいい！ でも まけないよ！'],
   masterson:['ペンも 銃も、オレの 武器さ','わたしの 武器は なかまだよ！'],
   garrett:['ここで 会ったが 百年目だ','百年も まってないでしょ！'],
-  tink:['わるい子は いねがー？','いないよ〜！ いい子 だよ〜！'],
+  tink:['ぴかぴか〜 道を てらすよ〜','わぁ、あかるい！ ありがとう！'],
   bruno:['おとなしく してりゃ、わるいように しねぇ','カギは ぜったい わたさない！'],
   mustang:['ヒヒーン！ 追いつめたぞ！','まだまだ にげ道は あるもんね！'],
   ranger:['隊長、ここは おまかせを！','隊長って だれ〜！？'],
@@ -674,7 +674,7 @@ const TALK={
   bunyan:['山ひとつ、ひとふりで たおしてやろう','おっきい〜！ でも こわくない！'],
   pecos:['竜巻だって 乗りこなして みせるぜ！','わたしは 竜巻に まけない！'],
   shoryu:['ガブガブ！','かまないで〜！'],
-  guard:['そ〜ら、立ちされ！','やだ！ ここ 通るの！'],
+  guard:['そ〜ら、どいた どいた！','やだ！ ここ 通るの！'],
   scorpio:['チクッと いくぜ','チクッは いたいから やめて〜！'],
   garako:['シャーッ！','ヘビさん、おちついて！'],
   tarantula:['ワシャワシャ…','あし、多すぎ〜！'],
@@ -767,7 +767,7 @@ const TALK={
   hyena:['ちっちゃいからって ナメんなよ！','わたしも ちっちゃいよ！'],
   kerits:['ダダダダダッ！ 通せんぼだ！','木じゃないから つつかないで〜！'],
   pickey:['へへっ、兄貴に いいつけてやる！','兄貴も まとめて つかまえる！'],
-  capone:['ワシの 街で すきには させん','荒野は みんなの ものだよ！'],
+  capone:['ミャーの 街で すきには させん','荒野は みんなの ものだよ！'],
   ma:['この沼は うちの 一家の なわばりだよ！','おばあちゃん、こしに 気をつけてね！ でも まけないもん！'],
   zombino:['ファミリーに 手を出す やつは… ゆるさん…','わたしの なかまも ファミリーだよ！'],
 };
@@ -777,9 +777,9 @@ const TIPS={
   game:['🛡かばう の子は、敵の攻撃を ぜんぶ 一人で うけちゃう！ えらい！ かわいそう！','子分が 1人でも いると、親分は ねらえないよ。まずは 子分から！',
     '💠バリアは 1回だけ 「えいっ」と はじく。2回目は がんばって！','👼復活の子は、たおれても 1回だけ「まだまだ〜！」って 起きあがるよ',
     '📣見参！の子は、出てきた しゅんかんに 何かやらかす。お楽しみに！','💤 よばれたばかりの子は ねむいから、攻撃は 次のターンからだよ',
-    '勝つたびに なかまが ふえる！ 山札が 多いほど、さいごまで ねばれるよ','親分の やる気が 0に なるか、子分が ぜんぶ いなくなると、親分は 白い旗で こうさん！',
+    '勝つたびに なかまが ふえる！ デッキが 多いほど、さいごまで ねばれるよ','親分の やる気が 0に なるか、子分が ぜんぶ いなくなると、親分は 白い旗で こうさん！',
     'コインは 毎ターン 1まいずつ ふえるよ（さいふの 大きさまで）','🍺 酒場の ミルクは 体力回復に ききめ バツグン！',
-    '💀 賞金首は、やる気を 半分まで へらすと 🪢投げ縄で つかまえられるよ','つかまえた お尋ね者は 保安官事務所へ。説得したら なかまに なるかも！？',
+    '💀 賞金首は、やる気を 半分まで へらすと 🪢投げなわで つかまえられるよ','つかまえた お尋ね者は 保安官事務所へ。説得したら なかまに なるかも！？',
     'ダブった なかまは すてないで！ 🔨合成すると レベルアップ！','Lv5に なると ✨しんか する子も いるよ。どんな すがたに なるかな？',
     'むかしの 保安官バッジは、星の形の ものが 多かったんだって！','あぶなくなったら 🏠で 町に 帰ろう。逃げるが 勝ち！',
     'たおれると、あわてて かえる とちゅうで 賞金を すこし 落としちゃう…','ボスを たおすと つぎの レベルが あそべる。たたかう かいすうも 敵も ふえるけど、賞金も ガッポリ！'],
@@ -1121,7 +1121,7 @@ document.addEventListener('pointerdown',e=>{if(e.target.closest&&e.target.closes
 
 
 /* バージョン：おおきい変更.機能を足した.小さな直し　（1.0.0 = 正式リリース） */
-const VERSION='0.78.0';
+const VERSION='0.79.0';
 /* =====================================================================
    タイトル・データ管理
    ===================================================================== */
@@ -1257,8 +1257,8 @@ const FACS={
     ensureRumor();music('saloon');const r=G.rumor;
     const ev={gold:'荒野で金鉱が見つかったらしい。「？」のマスでもうかるかも',storm:'近いうちに砂嵐が来るらしい。「？」のマスは気をつけな',party:'荒野のどこかで、流れの楽団がお祭りをしてるらしい',relic:'荒野に、だれかがお宝を落としたらしいぜ'}[r.event];
     const tips=['🛡かばうキャラがいると、敵はそいつを先に倒さないといけない','💤出したばかりのキャラは次のターンから攻撃できる。⚡はやうちは別だ',
-      '賞金首は弱らせてから投げ縄。なぐりすぎると倒しちゃって、仲間にできないぞ','行商人では いらない どうぐを 売って お金に できるよ',
-      'はなげ仙人 ハーミットには気をつけな。画面が鼻毛だらけになるぞ…','合成はLv10まで。高いレベルほど成功しにくいが、Lv10は伝説の強さだ','Lv5になったら進化できる。進化するとLv1にもどるが、もっと強くなれる'];
+      'しょうきん首は へとへとに してから 投げなわを 投げよう！ 投げなわには、回数上限が あるよ！','行商人では いらない どうぐを 売って お金に できるよ',
+      'はなげ仙人には気をつけな。画面が鼻毛だらけになるぞ…','合成はLv10まで。レベルがあがるほど成功しにくいが、Lv10は伝説の強さだ','Lv5になったら進化できる。進化するとLv1にもどるが、もっと強くなれる'];
     app().innerHTML=`${head()}<div class="panel"><h2>🍺 酒場</h2><p class="muted">マスターがグラスをみがきながら、うわさ話を教えてくれる。</p></div>
       <div class="rumor">🗣️「荒野の<b>${r.floor}戦目あたり</b>に、賞金首<b>${C[r.elite].n}</b>が出るらしいぜ」</div>
       <div class="rumor">🗣️「雑貨屋のパックに、今だけ<b>${C[r.feature].n}</b>が入りやすいんだと」</div>
@@ -1285,7 +1285,7 @@ const FACS={
 function sheriffView(){
   const list=G.jail;
   app().innerHTML=`${head()}<div class="panel"><h2>⭐ 保安官事務所</h2><p class="muted">捕まえたお尋ね者は、<b>突き出して賞金</b>にするか、<b>説得して仲間</b>にするか。<br>説得には日にちがかかる（冒険から帰るたびに1日たつ）。大物ほど長い。</p></div>
-    <div class="grid" id="cg"></div>${list.length?'':'<p class="muted" style="text-align:center">留置所はからっぽ。冒険で「賞金首」を弱らせて、投げ縄で捕まえよう</p>'}`;
+    <div class="grid" id="cg"></div>${list.length?'':'<p class="muted" style="text-align:center">留置所はからっぽ。ぼうけんで 賞金首を へとへとに して、投げなわで つかまえよう</p>'}`;
   bindBack();
   list.forEach((j,i)=>{const id=j.id,left=j.until?j.until-G.day:null;
     const badge=!j.until?'どうする？':left<=0?'説得完了！':`説得中 あと${left}日`;
@@ -1345,7 +1345,7 @@ async function mergeAnim(id){
   b.style.transition='transform .3s,opacity .3s';b.style.transform='translateX(-80px) scale(.5)';b.style.opacity='0';await sleep(300);
   if(ok){e.lv++;G.st.merges++;SFX.win();flash();const n=cardEl(id,e.lv,{showTx:false,cls:'glowL flip'});n.style.setProperty('--cw','120px');a.replaceWith(n);burst(n,['✨','⭐','💫'],16,120);
     mbub(n,lineOf(id,2));$('mres').textContent=e.lv>=MAX_LV?'レベルMAX！伝説の強さだ！':`成功！Lv${e.lv}になった！`;$('msub').textContent=`攻撃${statA(id,e.lv)} 体力${statH(id,e.lv)}`;if(e.lv>=MAX_LV)SFX.legend()}
-  else{SFX.bad();a.classList.add('wob');mbub(a,lineOf(id,3));$('mres').textContent='失敗…';$('msub').textContent='使った1枚は消えてしまった。レベルはそのまま'}
+  else{SFX.bad();a.classList.add('wob');mbub(a,lineOf(id,3));$('mres').textContent='失敗…';$('msub').textContent='ざんねん… つかった 1まいは どこかへ いっちゃった。レベルは そのままだよ'}
   save();checkAch();await sleep(2300);st.hidden=true;partyView();
 }
 async function evolveAnim(id){
@@ -1373,7 +1373,7 @@ function shopView(){
   app().innerHTML=`${head()}<div class="panel"><h2><img class="ri" src="@@D12@@" alt=""> 雑貨屋</h2><p class="muted">「らっしゃい！西部劇パック、入荷してるよ」</p></div>
     <div class="choice">
       ${Object.entries(PACKS).map(([k,p])=>`<button data-pk="${k}" ${G.money<p.price?'disabled':''}><span class="i">${p.ic}</span><div>${p.n} ＄${p.price}<small>${p.d}。今だけ「${C[G.rumor.feature].n}」が出やすい！</small></div></button>`).join('')}
-      <button id="i1"><span class="i"><img class="ri" src="@@D15@@" alt=""></span><div>予備の投げ縄 ＄8 ${G.items.rope?'（持ってる）':''}<small>次の冒険だけ、投げ縄の成功率+10%</small></div></button>
+      <button id="i1"><span class="i"><img class="ri" src="@@D15@@" alt=""></span><div>予備の投げなわ ＄8 ${G.items.rope?'（持ってる）':''}<small>次の冒険だけ、投げなわの成功率+10%</small></div></button>
       <button id="i2"><span class="i"><img class="ri" src="@@D16@@" alt=""></span><div>救急箱 ＄8 ${G.items.kit?'（持ってる）':''}<small>次の冒険だけ、体力+8でスタート</small></div></button>
       <button id="i3"><span class="i"><img class="ri" src="@@D17@@" alt=""></span><div>古い地図 ＄5 ${G.items.map?'（持ってる）':''}<small>次の冒険だけ、「？」マスの中身が見える</small></div></button>
     </div>`;
@@ -1635,7 +1635,7 @@ function peddler(){
   music('shop');
   const draw_=()=>{modal(`<h2>🏪 行商人</h2><p class="muted">「旅の役に立つもの、あるよ」 旅の賞金：＄${R.money}</p><div class="grid" id="og"></div>
     <div class="choice"><button id="hl"><span class="i">🩹</span><div>手当て ＄4<small>体力を8いやす（今${R.hp}/${R.maxhp}）</small></div></button>
-    <button id="rm" ${removed||R.deck.length<=4?'disabled':''}><span class="i">🗑️</span><div>なかまを1人 おわかれ ＄5<small>いらない なかまを 山札から ぬく（デッキがスッキリ）</small></div></button>
+    <button id="rm" ${removed||R.deck.length<=4?'disabled':''}><span class="i">🗑️</span><div>なかまを1人 おわかれ ＄5<small>いらない なかまを デッキから ぬく（デッキがスッキリ）</small></div></button>
     ${relic?`<button id="rl"><span class="i">${RELICS[relic].ic}</span><div>${RELICS[relic].n} ＄${RELIC_PRICE(relic)}<small>${RELICS[relic].d}（この冒険のあいだ ずっと）</small></div></button>`:''}</div><button class="btn" id="ok" style="width:100%">先へ進む</button>`);
     offers.forEach((c,i)=>{if(!c)return;const el=cardEl(c.id,c.lv,{badge:'＄6'});el.style.setProperty('--cw','min(27vw,100px)');el.onclick=()=>{if(R.money<6)return toast('お金がたりない');R.money-=6;R.deck.push(c);offers[i]=null;SFX.coin();draw_()};$('og').appendChild(el)});
     $('hl').disabled=R.money<4||R.hp>=R.maxhp;$('hl').onclick=()=>{R.money-=4;heal(8);SFX.heal();draw_()};
@@ -1694,10 +1694,10 @@ function endRun(how){
 
 /* =====================================================================
    戦い（ハースストーン式）
-   - おたがいに手札・山札・コイン。コインは毎ターン1ずつ増える（最大10）
+   - おたがいに手札・デッキ・コイン。コインは毎ターン1ずつ増える（最大10）
    - 出したキャラは次のターンから攻撃できる（⚡はやうちはすぐ）
    - 自分のキャラをタップ → 攻撃する相手をタップ。おたがいにダメージ
-   - 親分のやる気を0にするか、子分を出しきらせたら、親分はこうさん＝勝ち。賞金首はやる気をへらして投げ縄！
+   - 親分のやる気を0にするか、子分を出しきらせたら、親分はこうさん＝勝ち。賞金首はやる気をへらして投げなわ！
    ===================================================================== */
 let B=null;
 const enemyLv=f=>{const s=STAGES[R.sid];return Math.max(1,Math.min(MAX_LV,Math.round(s.lvBase+(f-1)*s.lvStep+(R.star||0)*.2)))};
@@ -1711,7 +1711,7 @@ function foeDeck(f,n,elv){const s=STAGES[R.sid],maxCost=Math.min(foeCap(),TUT_RU
   if(G.runs<=2){const simple=pool.filter(id=>{const d=C[id];return !d.bc&&!d.dr&&!d.aura&&!d.poison&&!d.fuel&&d.kw.split(' ').filter(Boolean).every(k=>['taunt','shield','revive'].includes(k))});if(simple.length>=3)pool=simple}
   return shuffle(Array.from({length:n},()=>({id:pick(pool),lv:elv,plus:Math.floor(R.star/3)})))}
 function makeFight(f,foeId){
-  const elv=enemyLv(f);const names=[['荒野のならず者 ビリーのボス','😠'],['牛どろぼうの頭','🐮'],['荒野の用心棒','🤠'],['ゴブリンの親分','👺'],['ハゲワシ使い','🦅']];let [nm,em]=pick(names),img;const mk=foeId&&C[foeId]?foeId:pick((STAGES[R.sid].mooks||[]).filter(id=>C[id]&&C[id].img));if(mk){nm=C[mk].n;em=C[mk].em;img=C[mk].img}const cid=mk;
+  const elv=enemyLv(f);const names=[['ならず者のボス','😠'],['牛どろぼうの頭','🐮'],['荒野の用心棒','🤠'],['ゴブリンの親分','👺'],['ハゲワシ使い','🦅']];let [nm,em]=pick(names),img;const mk=foeId&&C[foeId]?foeId:pick((STAGES[R.sid].mooks||[]).filter(id=>C[id]&&C[id].img));if(mk){nm=C[mk].n;em=C[mk].em;img=C[mk].img}const cid=mk;
   return {kind:'fight',title:`${f}戦目：${nm}`,foe:{name:nm,em,img,cid,hp:Math.round((TUT_RUN()?4+f:6+f)*starHp())},deck:foeDeck(f,(TUT_RUN()?3:R.sid==='wild'?4:5)+Math.floor(f/(R.sid==='wild'?3:2)),elv),pay:3+Math.floor(f/2)+rnd(3)};
 }
 function makeElite(f,who){
@@ -1733,7 +1733,7 @@ function mkMinion(sd,id,lv,plus=0){const k=new Set(C[id].kw.split(' ').filter(Bo
   const m={uid:Math.random(),id,lv,f:C[id].f,atk:statA(id,lv)+plus,hp:statH(id,lv)+plus,kw:k,sleep:!k.has('quick'),attacks:0,frozen:0,poison:0,fuel:C[id].fuel||0,revived:false,fresh:true};
   m.max=m.hp;m.baseAtk=m.atk;if(isMe(sd)&&hasRelic('bone')){m.hp++;m.max++}return m}
 function summon(sd,id,lv,plus=0,card=null){if(sd.board.length>=bmax(sd))return null;const m=mkMinion(sd,id,lv,plus);m.card=card;if(!m.sleep)m.attacks=m.kw.has('twice')?2:1;sd.board.push(m);return m}
-/* 使ったカードは戻らない。山札がなくなったら、もう引けないだけ（ダメージはなし） */
+/* 使ったカードは戻らない。デッキがなくなったら、もう引けないだけ（ダメージはなし） */
 function drawCard(sd,n=1){for(let i=0;i<n;i++){if(!sd.deck.length)continue;
   const c=sd.deck.shift();if(isMe(sd))c._new=1;if(sd.hand.length<8)sd.hand.push(c);else sd.grave.push(c)}}
 function auraBonus(sd,m){let v=0;for(const b of sd.board){if(b===m)continue;const d=C[b.id];if(d.aura==='atk')v+=valX(d.av,b.lv);if(d.aura==='faction'&&b.f===m.f)v+=valX(d.av,b.lv)}return v}
@@ -1752,7 +1752,7 @@ function validTargets(sd){const o=opp(sd);const vis=o.board.filter(x=>x.hp>0&&!x
   if(t.length)return t;if(vis.length)return vis; /* 相手のキャラが残っているあいだは、顔には攻撃できない */
   return (o===B.foe&&B.foe.hidden)?[]:[heroOf(o)]}
 function lassoChance(){const f=B.foe;let p=.15+(1-f.hp/f.max)*.85+R.skills.lasso+B.lassoBonus+(hasRelic('goldrope')?.15:0)+Math.max(0,...B.me.board.filter(a=>C[a.id].aura==='lasso').map(a=>.15+.05*lvB(a.lv)));if(f.boss)p-=.1;return Math.max(.05,Math.min(.95,p))}
-const LASSO_MAX=3;/* 10/26：投げ縄は 1回の 戦いで 3回まで */
+const LASSO_MAX=3;/* 10/26：投げなわは 1回の 戦いで 3回まで */
 const lassoLeft=()=>B?Math.max(0,LASSO_MAX+(B.lassoBonus||0)-(B.lassoTries||0)):0;
 const canLasso=()=>B&&B.foe.wanted&&B.foe.hp>0&&B.foe.hp<=B.foe.max/2&&!B.lassoUsed&&!B.foe.hidden&&B.side===B.me&&lassoLeft()>0;
 
@@ -1921,7 +1921,7 @@ async function cleanup(){
   if(died&&HUMAN)renderBattle();
 }
 
-/* ---- 投げ縄 ---- */
+/* ---- 投げなわ ---- */
 async function tryLasso(){
   if(!canLasso())return;B.lassoUsed=true;B.lassoTries=(B.lassoTries||0)+1;const f=B.foe;
   const p=lassoChance(),ok=Math.random()<p;
@@ -2061,7 +2061,7 @@ function renderBattle(){
     <div class="bf" id="af"></div>
     <div class="bar"><div class="hero" id="meHero"><div class="hart" style="background-image:url(${HERO.img})"></div><span class="hp">${Math.max(0,R.hp)}</span></div><span class="coins" id="coins">${coinIco}${me.coin}<small class="small">/${me.maxCoin}</small></span><span class="deckpile ${me.deck.length?'':'empty'}" id="pile">${me.deck.length}</span>
       <span class="sp"></span>${me.hanage?'<span title="鼻毛">👃</span>':''}${me.unko?'<span>💩</span>':''}${me.moji?'<span>文字化け</span>':''}
-      ${canLasso()?`<button class="btn red" id="lasso" aria-label="投げ縄">🪢<b>${Math.round(lassoChance()*100)}%</b><small>あと${lassoLeft()}回</small></button>`:''}
+      ${canLasso()?`<button class="btn red" id="lasso" aria-label="投げなわ">🪢<b>${Math.round(lassoChance()*100)}%</b><small>あと${lassoLeft()}回</small></button>`:''}
       <button class="pop green" id="endt" style="font-size:15px;padding:10px 16px" ${myTurn?'':'disabled'}>ターン終了 ▶</button></div>
     <div class="hand" id="hand"></div>`;
   bindRelics();
@@ -2091,7 +2091,7 @@ function renderBattle(){
   $('endt').onclick=()=>{clearCoach();SFX.drum();endTurn()};
   const l=$('lasso');if(l)l.onclick=()=>{if(!B.busy)tryLasso()};
   if(B.coinIn){const n=B.coinIn;B.coinIn=0;coinFly($('meHero'),$('coins'),n)}
-  /* 引いたカードが山札から飛んできて、くるっとめくれる */
+  /* 引いたカードがデッキから飛んできて、くるっとめくれる */
   const pile=$('pile');const newC=me.hand.filter(c=>c._new);newC.forEach(c=>delete c._new);if(newC.length&&pile&&HUMAN)drawAnim(newC,pile);drawApply();
   coachUpdate(myTurn,tg);
   /* もう何もできない → ターン終了が光る */
@@ -2263,7 +2263,7 @@ async function firstKw(m,x){if(!HUMAN||!G)return;G.kwSeen=G.kwSeen||{};if(G.kwSe
   const t0=performance.now();while(document.body.contains(b)&&!b.classList.contains('out')&&performance.now()-t0<5000)await sleep(100);
   if(document.body.contains(b)&&!b.classList.contains('out')){b.classList.add('out');setTimeout(()=>b.remove(),200)}}
 
-/* 10/26：カードを ひく演出。①山札から とんでくる → ②まんなかで くるっと めくれる → ③手札の 場所へ はいる（ほかのカードは そのとき よける）
+/* 10/26：カードを ひく演出。①デッキから とんでくる → ②まんなかで くるっと めくれる → ③手札の 場所へ はいる（ほかのカードは そのとき よける）
    とちゅうで 画面が かきなおされても、ひいている カードは かくしたまま（drawApply） */
 const DRAWP=new Set();
 const handElOf=c=>{if(!B)return null;const i=B.me.hand.indexOf(c);return i<0?null:$('hand').children[i]||null};
@@ -2271,7 +2271,7 @@ function drawApply(){if(!DRAWP.size)return;const gap=parseFloat(getComputedStyle
   for(const c of DRAWP){const el=handElOf(c);if(!el){if(!B||!B.me.hand.includes(c))DRAWP.delete(c);continue}
     if(c._dp==='done')continue;el.style.visibility='hidden';el.style.transition='none';
     el.style.marginRight=c._dp==='open'?'0px':`-${el.getBoundingClientRect().width+gap}px`}}
-/* 山札（右）から 手札の その場所へ とんで、そこで くるっと めくれる。山札は 1まい とぶごとに うすくなる */
+/* デッキ（右）から 手札の その場所へ とんで、そこで くるっと めくれる。デッキは 1まい とぶごとに うすくなる */
 function drawAnim(cards,pile){cards.forEach(c=>{c._dp='wait';DRAWP.add(c)});drawApply();drawPileN();
   cards.forEach((c,k)=>{setTimeout(async()=>{let wt=0;while(document.querySelector('#bmov,#cutin')&&wt++<200)await sleep(100);await sleep(k*260*(wt?1:0));if(!B||!handElOf(c)){DRAWP.delete(c);drawPileN();return}
     c._dp='open';let el=handElOf(c);el.style.transition='margin-right .18s ease-out';el.style.marginRight='0px';
@@ -2284,7 +2284,7 @@ function drawAnim(cards,pile){cards.forEach(c=>{c._dp='wait';DRAWP.add(c)});draw
     try{await back.animate([{transform:'rotateY(0)'},{transform:'rotateY(90deg)'}],{duration:130,fill:'forwards'}).finished}catch(e){}back.remove();
     c._dp='done';DRAWP.delete(c);el=handElOf(c);if(el){el.style.visibility='';el.style.marginRight='';el.style.transition='';
       el.animate([{transform:'rotateY(-90deg)'},{transform:'rotateY(0)'}],{duration:150,easing:'ease-out'})}},k*260)})}
-/* 山札の あつみ：まだ とんでいない カードの ぶんは 山に のこして 見せる */
+/* デッキの あつみ：まだ とんでいない カードの ぶんは 山に のこして 見せる */
 function drawPileN(){try{if(!B||typeof deck3d!=='function')return;const pend=[...DRAWP].filter(c=>c._dp==='wait').length;const pl=$('pile');if(pl)deck3d(pl,B.me.deck.length+pend)}catch(e){}}
 
 
@@ -2361,6 +2361,40 @@ const _impactX=impact;impact=function(el,kind=''){_impactX(el,kind);if(!HUMAN||!
 setTimeout(()=>{try{bgLoad(['bullet','spin','bottle','note','card','spark','fire','tornado','sweat','ice','claw','slash','bite','pow','hit','muzzle','dust','boom','gears','smoke','poison','heal','ring','loop','band','slip','star'].map(n=>`ui/x_${n}.png`))}catch(e){}},6000);
 
 
+/* ===== 10/31 新しい演出（CFX）の つなぎ・内がわ（CFX=1 の ビルドだけ。本番には 入らない） =====
+   10/29 に 本番の 戦いの コードを もどしたとき、atkFx・bcShot・koFx・impact・bcFx・reviveFx・bounceTo・fly の
+   中に あった「CFX が あれば そっちを つかう」が 消えた。ここで 同じ ばしょ（f2_fx の すぐ あと）に つけなおす。
+   ・あとの ファイル（f16 の .front、f46/f60 の やられ記録、f48、f59、f71 など）は この上から 包むので そのまま うごく
+   ・CFX は f77 で できる。よばれた ときに window.CFX を 見るので、ここが 先でも だいじょうぶ */
+const cfxOn=()=>!!(typeof HUMAN!=='undefined'&&HUMAN&&window.CFX&&window.CFX.on);
+/* こうげき：キャンバスの こうげき演出（当たる しゅんかんで おわる） */
+{const _a=atkFx;atkFx=async function(m,el,tel,mine){if(!cfxOn()||!el||!tel)return _a.apply(this,arguments);
+  await CFX.attack(m,el,tel,mine);
+  /* f48 の「遠くからの 当たり絵（FX_HIT）」は CFX の 当たりと かさなるので、この 直後の 1回だけ 出さない */
+  CFX._noFxAt=1;setTimeout(()=>{if(window.CFX)CFX._noFxAt=0},0)}}
+{const _fxAt=fxAt;fxAt=function(){if(window.CFX&&CFX._noFxAt){CFX._noFxAt=0;return}return _fxAt.apply(this,arguments)}}
+/* 見参の 飛び道具 */
+const CFX_SHOTK=['shoot','meat','bone','spike','note','fireball','bomb','bottle','card','magic','ice','water','ink','wind','lasso','leaf'];
+{const _b=bcShot;bcShot=async function(m,tel){const el=uEl(m);if(!cfxOn()||!el||!tel)return _b.apply(this,arguments);const k=CFX.kindOf(m);return CFX.shotTo(el,tel,CFX_SHOTK.includes(k)?k:'magic')}}
+/* やられ（f16 が 先に ことばを 出して 0.7秒 がまん → ここ） */
+{const _k=koFx;koFx=async function(m,el,mine){if(!cfxOn()||!el)return _k.apply(this,arguments);if(!(window.SE2&&SE2.has('ko')))SFX.die&&SFX.die();return CFX.ko(m,el,mine)}}
+/* 当たった しるし */
+{const _i=impact;impact=function(el,kind=''){if(cfxOn()&&el){CFX.hit(el,kind);return}return _i.apply(this,arguments)}}
+/* 見参！：まず 見参 → そのあと コイン投げなどの「あと演出」→ はじめての 説明 */
+{const _f=bcFx;bcFx=async function(m){if(!cfxOn())return _f.apply(this,arguments);const el=uEl(m);if(!el)return;
+  await CFX.kenzan(m);if(CFX._after){const af=CFX._after;CFX._after=null;try{await af()}catch(e){}}
+  const x0=effList(m.id,m.lv).find(x=>x[1]==='見参！');if(x0)await firstKw(m,x0)}}
+/* ふっかつ */
+{const _r=reviveFx;reviveFx=async function(m){if(!cfxOn())return _r.apply(this,arguments);return CFX.revive(m)}}
+/* ふきとばし：たつまきで 手札へ */
+{const _t=bounceTo;bounceTo=async function(sd,m){if(cfxOn()){const e=uEl(m);if(e){try{await CFX.blow(e,sd===B.me?$('hand'):document.querySelector('#foeStage .fh'))}catch(x){}}
+    sd.board=sd.board.filter(x=>x!==m);if(m.card&&sd.hand.length<8)sd.hand.push(m.card);if(HUMAN)renderBattle();return}
+  return _t.apply(this,arguments)}}
+/* 飛ぶもの（毒・敵の たま・まほう） */
+{const _y=fly;fly=async function(from,to,kind='bullet',ms){if(!cfxOn()||!from||!to)return _y.apply(this,arguments);
+  return CFX.shotTo(from,to,CFX._bc==='poison'?'poison':kind==='enemy'?'bomb':kind==='magic'?'magic':'shoot')}}
+
+
 /* =====================================================================
    荒野の演出と、わかりやすさの工夫
    ・ねらう時：照準マークと「たおせる！」の予告
@@ -2425,7 +2459,7 @@ const _winFx=winFx;winFx=async function(txt){if(HUMAN){westStop();document.body.
 /* ピンチの心臓の音 */
 setInterval(()=>{if(HUMAN&&!MUTED&&document.body.classList.contains('pinch')&&B&&!B.over&&!document.hidden)WSFX.beat()},1400);
 const _finishBattle=finishBattle;finishBattle=async function(){westStop();document.body.classList.remove('pinch');return _finishBattle()};
-/* ---- 投げ縄：ウィピィから輪っかが飛んで、親分をしばる ---- */
+/* ---- 投げなわ：ウィピィから輪っかが飛んで、親分をしばる ---- */
 async function lassoFx(ok,p){const me=$('meHero'),fh=$('foeHero');if(!me||!fh)return;clearCoach&&clearCoach();
   const [x1,y1]=ctr(me),[x2,y2]=ctr(fh);const r=fh.getBoundingClientRect();
   const bar=document.createElement('div');bar.className='lasbar';bar.innerHTML=`🪢 なげなわ！ <b>${Math.round(p*100)}%</b>`;document.body.appendChild(bar);
@@ -2444,7 +2478,7 @@ async function lassoFx(ok,p){const me=$('meHero'),fh=$('foeHero');if(!me||!fh)re
   else{loop.src='ui/x_slip.png';loop.classList.add('slip');onoma(fh,'するっ…','#cfe8ff');SFX.bad&&SFX.bad();fh.animate([{transform:'none'},{transform:'translateX(-8px)'},{transform:'translateX(8px)'},{transform:'none'}],{duration:300});
     const bub=document.createElement('div');bub.className='kobub';bub.textContent=pick(['へへーん、そんなの きかないよ！','あぶな〜い！','つかまるもんか！']);bub.style.cssText=`left:${x2}px;top:${r.top-4}px`;document.body.appendChild(bub);await sleep(1300);bub.remove()}
   fh.classList.remove('roped');[bar,svg,loop].forEach(e=>e.remove())}
-/* はじめて投げ縄が使えるようになったら、大きく教える */
+/* はじめて投げなわが使えるようになったら、大きく教える */
 const _rb2=renderBattle;renderBattle=function(){_rb2();if(!HUMAN||!B||!G)return;
   if(canLasso()&&!(G.tips&&G.tips.lasso)){G.tips=G.tips||{};G.tips.lasso=1;save();const l=$('lasso');if(l){l.classList.add('lasglow');
     setTimeout(()=>{if($('lasso'))tipBubble($('lasso'),'🪢','なげなわ チャンス！','賞金首（ボスと 赤いマスの敵）は、やる気が 半分いかに なると つかまえられる！ 1ターンに 1回 なげられるよ。つかまえると 賞金アップ＆ 保安官事務所で なかまに できるかも！','#2fbf6a')},500)}}
@@ -2457,7 +2491,7 @@ const _rb2=renderBattle;renderBattle=function(){_rb2();if(!HUMAN||!B||!G)return;
    2 親分たち：ドーン！と不穏な和音
    3 ウィピィ：きゅるりん☆＋ぽよん
    4 金の星：ハープのグリッサンド＋キラキラの和音
-   5 つかまえる：投げ縄ヒュンヒュン→ポン！＋ファンファーレ
+   5 つかまえる：投げなわヒュンヒュン→ポン！＋ファンファーレ
    6 しゅっぱつ：馬のパカラッ＋ラッパ
    ===================================================================== */
 function vo(f,{type='sine',at=0,dur=.5,vol=.08,att=.005,slide=0,vib=0,vibF=6,lp=0}={}){if(!HUMAN||MUTED)return;const a=ac();if(!a)return;const t=a.currentTime+at;
@@ -2515,7 +2549,7 @@ const SPECIAL={
     await spAnim(h,[{transform:`translate(${ox}px,${oy}px) translate(0,-50%) rotate(${a}deg) scaleX(.2)`},{transform:`translate(${ox}px,${oy}px) translate(0,-50%) rotate(${a}deg) scaleX(${d/90})`}],520,'cubic-bezier(.3,1.4,.6,1)');
     onoma({getBoundingClientRect:()=>({left:tx-20,top:ty-20,width:40,height:40})},'ガシッ！','#c8a0ff');await sleep(380);
     await spAnim(h,[{opacity:1},{opacity:0}],250);document.body.classList.remove('spdark');spGone(h)},
-  /* はなげ仙人 ハーミット：大きな鼻から 鼻毛が くるくる */
+  /* はなげ仙人：大きな鼻から 鼻毛が くるくる */
   async hanage(sd,m,el){const [ox,oy]=ctr(el),[tx,ty,tw]=spZone(sd,'opp');const nose=spImg('nose',90);
     await spAnim(nose,[{transform:SPT(ox,oy-70,0)},{transform:SPT(ox,oy-70,1.15)},{transform:SPT(ox,oy-70,1)}],350,'cubic-bezier(.2,1.6,.5,1)');
     tone(220,.5,{type:'sawtooth',vol:.04,slide:520});
@@ -2572,7 +2606,7 @@ const SPECIAL={
     spAnim(mn,[{transform:SPT(tx,ty-150,0)},{transform:SPT(tx,ty-130,1)}],500,'ease-out');
     await spAnim(cr,[{transform:SPT(tx,ty,.2,0),opacity:0},{transform:SPT(tx,ty,1,240),opacity:1}],800,'ease-out');
     onoma({getBoundingClientRect:()=>({left:tx-20,top:ty-20,width:40,height:40})},'しびびび…','#c8a0ff');await sleep(300);document.body.classList.remove('spdark');spAnim(cr,[{opacity:1},{opacity:0}],300);spAnim(mn,[{opacity:1},{opacity:0}],300);spGone([mn,cr],320)},
-  /* ねむりの ナップ：ねむりの砂を さらさら */
+  /* サンドマン：ねむりの砂を さらさら */
   async sandman(sd,m,el){const [tx,ty]=spZone(sd,'opp');const sb=spImg('sandbag',90);noise(.9,{vol:.06,f0:6000,type:'highpass'});
     await spAnim(sb,[{transform:SPT(tx-40,ty-130,0,-20)},{transform:SPT(tx-30,ty-110,1,-30)}],300);
     for(let i=0;i<10;i++)setTimeout(()=>fxImg(tx+(Math.random()-.5)*120,ty-60+Math.random()*60,'x_spark',22,'fxup',700),i*60);
@@ -2582,11 +2616,11 @@ const SPECIAL={
     spAnim(w,[{transform:SPT(bx,by-60,.3),opacity:0},{transform:SPT(bx,by-80,1.1),opacity:1}],500);
     for(let i=0;i<6;i++){const f=spImg('feather',30);spAnim(f,[{transform:SPT(bx+(Math.random()-.5)*bw,by-160,1,0),opacity:0},{transform:SPT(bx+(Math.random()-.5)*bw,by+20,1,90),opacity:1}],1100,'ease-in-out',i*90);spGone(f,1400)}
     await sleep(1000);spAnim(w,[{opacity:1},{opacity:0}],300);spGone(w,320)},
-  /* そうぎ屋カラス モーティマー：お墓から おばけが ふわ〜 */
+  /* そうぎ屋カラス：お墓から おばけが ふわ〜 */
   async crow(sd,m,el){const [bx,by]=spZone(sd,'own');const gv=spImg('grave',80),gh=spImg('ghost',70);
     await spAnim(gv,[{transform:SPT(bx,by+40,0)},{transform:SPT(bx,by,1)}],350,'cubic-bezier(.2,1.6,.5,1)');tone(300,.8,{type:'sine',vol:.06,slide:600});
     await spAnim(gh,[{transform:SPT(bx,by,.3),opacity:0},{transform:SPT(bx+20,by-90,1),opacity:1}],700,'ease-out');onoma(el,'ふわ〜','#e8f4ff');await sleep(300);spAnim(gh,[{opacity:1},{opacity:0}],300);spAnim(gv,[{opacity:1},{opacity:0}],300);spGone([gv,gh],320)},
-  /* ゾンビ将軍 ペニー：地面から 手が にょきっ */
+  /* ゾンビ将軍：地面から 手が にょきっ */
   async zombie3(sd,m,el){const [bx,by,bw]=spZone(sd,'own');const hs=[0,1].map(()=>spImg('zhand',60));SFX.squish&&SFX.squish();
     await Promise.all(hs.map((h,i)=>spAnim(h,[{transform:SPT(bx+(i?1:-1)*bw*.2,by+60,1),clipPath:'inset(0 0 100% 0)'},{transform:SPT(bx+(i?1:-1)*bw*.2,by+10,1),clipPath:'inset(0 0 0 0)'}],500,'cubic-bezier(.2,1.6,.5,1)',i*150)));
     onoma(el,'にょきっ！','#9fe08a');await sleep(350);hs.forEach(h=>spAnim(h,[{opacity:1},{opacity:0}],250));spGone(hs,260)},
@@ -2853,7 +2887,7 @@ turnBanner=async function(t,cls){if(!HUMAN)return;const me=cls==='me';
   for(let i=0;i<4;i++)noise(.03,{vol:.06,at:.1+i*.06,f0:3500,type:'highpass'});
   const w=document.createElement('div');w.className='wsign2 '+cls;w.innerHTML=`<div class="hang"><i class="ch l" style="left:calc(${me?18.2:18.5}% - 13px)"></i><i class="ch r" style="left:calc(${me?82:80}% - 13px)"></i><div class="board"><img src="ui/u_${me?'sign':'sign_r'}.png" alt=""><b>${me?'あなたの ばん！':'あいての ばん'}</b></div></div>`;document.body.appendChild(w);
   await sleep(1050);w.classList.add('up');if(me)coinDrop();await sleep(260);w.remove()};
-/* バトルが始まったら、敵と自分の山札の絵を うしろで先に読んでおく（出したときに 絵がおくれて出ないように） */
+/* バトルが始まったら、敵と自分のデッキの絵を うしろで先に読んでおく（出したときに 絵がおくれて出ないように） */
 const _battleU=battle;battle=function(spec){try{if(HUMAN){const ids=[...(spec.deck||[]),...(R&&R.deck||[])].map(c=>c.id);ids.forEach(id=>{const t=C[id]&&(C[id].tok);if(t)ids.push(t)});bgLoad([...new Set(ids)].map(cardArt).concat([...new Set(ids)].map(id=>C[id]&&C[id].icon)))}}catch(e){}return _battleU(spec)};
 /* ロード中の星：3秒ごとに ぴょんっと はねて、星が とびちる */
 ['animationstart','animationiteration'].forEach(ev=>document.addEventListener(ev,e=>{if(e.animationName!=='bootstar')return;const t=e.target;setTimeout(()=>{if(!t.isConnected)return;burst(t,['⭐','✨','🌟'],10,80);tone(1568,.08,{vol:.04,type:'sine'});tone(2093,.12,{vol:.04,at:.06,type:'sine'})},430)}));
@@ -3117,12 +3151,12 @@ const SP0={
     S0.bub(x,y-60,'が、が、がんばります！',1300);await sleep(500);const b=S0.img('x_bullet',26);
     await spAnim(b,[{transform:SPT(x+20,y,1,0)},{transform:SPT(x+40,y+70,1,200),offset:.5},{transform:SPT(x+55,y+50,1,300),offset:.7},{transform:SPT(x+65,y+70,1,400)}],600,'ease-in');
     tone(1800,.05,{type:'square',vol:.04});tone(1600,.05,{type:'square',vol:.03,at:.18});onoma(fakeEl(x+65,y+60),'コロン…','#ddd');await sleep(450);spGone(b)},
-  /* ベテラン賞金稼ぎのティミー：スコープが 敵をクンクンさがして ピタッ */
+  /* ベテラン賞金稼ぎ：スコープが 敵をクンクンさがして ピタッ */
   async rookie2(sd,m,el){const [x,y]=ctr(el),[tx,ty,tw]=spZone(sd,'opp');const sc=S0.img('scope',80);
     onoma(el,'クンクン…','#d8c39a');nz(.5,{vol:.05,f0:1500,type:'bandpass',q:3});
     await spAnim(sc,[{transform:SPT(x,y-40,.4),opacity:0},{transform:SPT(tx-tw*.4,ty,1),opacity:1,offset:.35},{transform:SPT(tx+tw*.4,ty-10,1),offset:.7},{transform:SPT(tx,ty,1.15)}],1000,'ease-in-out');
     tone(1760,.08,{type:'sine',vol:.06});tone(2350,.12,{type:'sine',vol:.05,at:.08});S0.bub(x,y-60,'獲物のにおいがするぜ');await sleep(600);spAnim(sc,[{opacity:1},{opacity:0}],200);spGone(sc,220)},
-  /* 伝説のガンマン ティミー：スポットライト… 2連射バンバン */
+  /* 伝説のガンマン：スポットライト… 2連射バンバン */
   async rookie3(sd,m,el){const [x,y]=ctr(el),[tx,ty]=spZone(sd,'opp');const d=S0.dark(x,y);vo(110,{type:'sawtooth',dur:.9,vol:.03,lp:500});
     await sleep(700);
     for(let i=0;i<2;i++){S0.gun(0);S0.flash(120);fxImg(x+(i?30:-30),y-10,'x_muzzle',70,'fxpop',400);fxImg(tx+(i?40:-40),ty,'x_hit',70,'fxpop',500);await sleep(170)}
@@ -3143,18 +3177,18 @@ const SP0={
     await spAnim(p,[{transform:SPT(x,y-20,.5,0)},{transform:SPT((x+tx)/2,Math.min(y,ty)-120,1,360),offset:.5},{transform:SPT(tx,ty,1.1,720)}],650,'ease-in');
     nz(.25,{vol:.2,f0:500,type:'lowpass'});onoma(fakeEl(tx,ty),'ベチャッ！','#a57a3c');fxImg(tx,ty,'x_splash',80,'fxpop',500);
     S0.bub(x,y-60,'へへっ、いたずら大成功！');[0,.12,.24].forEach(a=>vo(600,{type:'square',at:a,dur:.08,vol:.03,lp:1800}));await sleep(700);spAnim(p,[{opacity:1},{opacity:0}],250);spGone(p,270)},
-  /* 荒野のならず者 ビリー：つば…じゃなく 砂をけって ガンをとばす */
+  /* ならず者：つば…じゃなく 砂をけって ガンをとばす */
   async akudo2(sd,m,el){const [x,y]=ctr(el),[tx,ty]=spZone(sd,'opp');fxImg(x+30,y-50,'x_anger',44,'fxpop',800);
     [0,.1,.2].forEach(a=>tone(200,.03,{type:'square',vol:.05,at:a}));onoma(el,'ポキポキ','#fff');await sleep(350);
     const d=S0.img('x_dust',90);nz(.4,{vol:.14,f0:1500,f1:400,type:'bandpass'});
     await spAnim(d,[{transform:SPT(x,y+30,.4),opacity:1},{transform:SPT(tx,ty,1.4),opacity:0}],600,'ease-out');
     S0.bub(x,y-60,'ア゛ァン？ やんのか？');await sleep(600);spGone(d)},
-  /* おんこうな保安官 レオ：ドスンと すわって コーヒーを ひとくち */
+  /* 重厚な保安官：ドスンと すわって コーヒーを ひとくち */
   async juko(sd,m,el){const [x,y]=ctr(el);await spAnim(el,[{transform:'translateY(-40px)'},{transform:'translateY(0) scale(1.08,.9)'},{transform:'none'}],380,'ease-in');
     S0.thud();shakeApp&&shakeApp();fxImg(x,y+40,'x_dust2',150,'fxpuff',800);onoma(el,'ドスン！','#c9a46a');await sleep(300);
     const c=S0.svg('cup',44);spAnim(c,[{transform:SPT(x+50,y-10,0)},{transform:SPT(x+50,y-10,1)}],250,'cubic-bezier(.2,1.6,.5,1)');fxImg(x+50,y-40,'x_steam',40,'fxup',900);
     nz(.3,{at:.2,vol:.05,f0:900,type:'bandpass'});S0.bub(x,y-60,'まぁ座れ。話を聞こう',1200);await sleep(1000);spAnim(c,[{opacity:1},{opacity:0}],200);spGone(c,220)},
-  /* まじめな保安官 ネッド：ウーウー サイレン、敵にオリが ガシャーン */
+  /* 実直な保安官：ウーウー サイレン、敵にオリが ガシャーン */
   async jitchoku(sd,m,el){const [x,y]=ctr(el),[tx,ty,tw]=spZone(sd,'opp');
     for(let i=0;i<4;i++)tone(i%2?660:880,.2,{type:'square',vol:.03,at:i*.2});const r=S0.svg('siren',52);spAnim(r,[{transform:SPT(x,y-70,0)},{transform:SPT(x,y-70,1.1)}],200);
     S0.bub(x,y-100,'アナタ怪シイ！タイホデス',1400);await sleep(600);const b=S0.img('bars',Math.min(220,tw));
@@ -3184,7 +3218,7 @@ const SP0={
     const path=[0,1,2,3,4,5].map(i=>({transform:SPT(x+Math.cos(i*1.2)*60,y-50+Math.sin(i*1.2)*30,.9,i%2?-10:10)}));
     [1568,1760,2093,2349,2637,3136].forEach((f,i)=>tone(f,.12,{type:'sine',vol:.035,at:i*.1}));
     const sp=setInterval(()=>{const r=w.getBoundingClientRect();fxImg(r.left+r.width/2,r.top+r.height/2,'x_spark',26,'fxpop',500)},90);
-    await spAnim(w,path,700,'ease-in-out');clearInterval(sp);S0.bub(x,y-80,'悪い子は いねがー？');
+    await spAnim(w,path,700,'ease-in-out');clearInterval(sp);S0.bub(x,y-80,'こっちだよ〜 ぴかぴか〜');
     const wd=S0.img('wand',50);await spAnim(wd,[{transform:SPT(tx,ty-80,1,-40)},{transform:SPT(tx,ty-20,1,30)}],250,'ease-in');tone(1200,.08,{type:'square',vol:.04});onoma(fakeEl(tx,ty),'コツン！','#ffe9a0');fxImg(tx,ty-20,'x_star',40,'fxpop',500);
     await sleep(500);spAnim(w,[{opacity:1},{opacity:0}],200);spAnim(wd,[{opacity:1},{opacity:0}],200);spGone([w,wd],220)},
   /* カギ番ブルーノ：カギたばジャラジャラ→ 敵をガチャン */
@@ -3223,7 +3257,7 @@ const SP0={
     const h=S0.img('x_halo',80);await spAnim(h,[{transform:SPT(x,y-200,.6),opacity:0},{transform:SPT(x,y-75,1),opacity:1}],700,'ease-out');
     for(let i=0;i<6;i++)setTimeout(()=>{const f=S0.img('feather',22);spAnim(f,[{transform:SPT(x+(Math.random()-.5)*120,y-120,1,0)},{transform:SPT(x+(Math.random()-.5)*160,y+40,1,180),opacity:0}],900);spGone(f,950)},i*90);
     S0.bub(x,y-110,'そなたに 聖なる力を！',1300);await sleep(1000);spAnim(b,[{opacity:1},{opacity:0}],300);spAnim(h,[{opacity:1},{opacity:0}],300);spGone([b,h],330)},
-  /* バス・リーブス：投げ縄を くるくる→ 敵のボスに ヒュッ！ */
+  /* バス・リーブス：投げなわを くるくる→ 敵のボスに ヒュッ！ */
   async bass(sd,m,el){const [x,y]=ctr(el),[tx,ty]=spZone(sd,'oppHero');const l=S0.img('x_loop',80);
     for(let i=0;i<6;i++)nz(.12,{at:i*.12,vol:.07,f0:1800,type:'bandpass',q:2});
     await spAnim(l,[0,1,2,3,4,5].map(i=>({transform:SPT(x,y-80,1,i*120)+' scaleY(.45)'})),700,'linear');
@@ -3241,7 +3275,7 @@ const SP0={
     await Promise.all(ms.map((mm,i)=>{nz(.35,{at:i*.15,vol:.06,f0:2000,type:'bandpass',q:2});return spAnim(mm,[{transform:SPT(x,y+10,1,0)},{transform:SPT(bx+(i-1)*bw*.3,by,1,0)},{transform:SPT(bx+(i-1)*bw*.3,by,1,10),offset:.9},{transform:SPT(bx+(i-1)*bw*.3,by,1,0)}],550,'ease-out',i*150)}));
     for(let i=0;i<3;i++)tone(2200+i*200,.06,{type:'triangle',vol:.04,at:i*.07});fxImg(x,y-40,'x_coins',50,'fxup',800);await sleep(600);
     ms.forEach(mm=>spAnim(mm,[{opacity:1},{opacity:0}],250));spGone(ms,270)},
-  /* 海辺のきふじん マリーナ：大波ザッパーン！ 貝がら ころり */
+  /* 岩礁の貴婦人：大波ザッパーン！ 貝がら ころり */
   async kifujin(sd,m,el){const [x,y]=ctr(el),[tx,ty,tw]=spZone(sd,'opp');const w=S0.img('x_splash',180);
     nz(1,{vol:.18,f0:400,f1:1800,type:'lowpass'});S0.bub(x,y-60,'海は すべてを 洗い流すのよ',1300);
     await spAnim(w,[{transform:SPT(tx-tw*.8,ty+20,.4,-20),opacity:0},{transform:SPT(tx,ty-10,1.3,0),opacity:1,offset:.6},{transform:SPT(tx+tw*.7,ty,1.1,20),opacity:0}],900,'ease-in-out');
@@ -3370,7 +3404,7 @@ Object.assign(SPECIAL,{
     vo(1600,{type:'sine',dur:.4,vol:.05,slide:900,vib:20,vibF:14});await S1.fly(b,cx-40,cy-100,tx,ty,300,'ease-in',1,1.3,-20,30);
     fxImg(tx,ty,'x_claw',90,'fxpop',450);nz(.15,{vol:.12,f0:3000,f1:500});onomaX(S1.F(tx,ty),'ガシッ！','#ffd34a');await sleep(350);
     await S1.fly(b,tx,ty,tx+200,ty-260,400,'ease-out',1.3,.6);spGone(b)},
-  /* 金ほり ナゲット：ツルハシで ガッ！ガッ！ → 金塊ぽろり */
+  /* 金ほりガンテツ：ツルハシで ガッ！ガッ！ → 金塊ぽろり */
   async gantetsu(sd,m,el){const [ox,oy]=ctr(el);const pk=spSvg('pick',56);const rock=S1.I('ui/m_d_rocks.png',72);S1.pop(rock,ox,oy-40,1,200);
     for(let i=0;i<2;i++){spAnim(pk,[{transform:SPT(ox+40,oy-100,1,40)},{transform:SPT(ox+14,oy-50,1,-30)},{transform:SPT(ox+40,oy-100,1,40)}],320,'ease-in',i*340);
       setTimeout(()=>{fxImg(ox,oy-40,'x_dust',70,'fxpuff',500);nz(.12,{vol:.14,f0:1200,f1:300});tone(300,.08,{type:'square',vol:.05})},i*340+160)}
@@ -3462,7 +3496,7 @@ Object.assign(SPECIAL,{
   async jacka(sd,m,el){const [ox,oy]=ctr(el);const r=spArt('jacka',50);const xs=[ox-90,ox-30,ox+30,ox+90];
     for(let i=0;i<3;i++){vo(500+i*150,{type:'sine',dur:.18,vol:.06,slide:900+i*150,at:i*.3});await spAnim(r,[{transform:SPT(xs[i],oy-30,1)},{transform:SPT((xs[i]+xs[i+1])/2,oy-120,1.1,i%2?-15:15)},{transform:SPT(xs[i+1],oy-30,1)}],300,'ease-in-out')}
     fxImg(xs[3],oy-50,'x_shield',60,'fxpop',500);fxImg(xs[3],oy-60,'x_star',40,'fxring',500);S1.ring(0,1760);onomaX(S1.F(xs[3],oy-40),'ぴょーん！','#ffd0f0');await sleep(450);spGone(r)},
-  /* おこぼれバルチャー バズ：上で ぐるぐる → 骨をくわえて ムシャ */
+  /* おこぼれバルチャー：上で ぐるぐる → 骨をくわえて ムシャ */
   async vulture(sd,m,el){const [ox,oy]=ctr(el);const v=spArt('vulture',54);
     const pts=Array.from({length:9},(_,i)=>({transform:SPT(ox+Math.cos(i*.8)*70,oy-130+Math.sin(i*.8)*25,1,Math.cos(i*.8)*15)}));
     await spAnim(v,pts,700,'linear');for(let i=0;i<3;i++)vo(700,{type:'triangle',dur:.12,vol:.04,at:i*.3,slide:500});
@@ -3591,7 +3625,7 @@ Object.assign(SPECIAL,{
     const cs=[0,1,2].map(()=>spImg(sp2X('card'),46));tone(1200,.1,{type:'triangle',vol:.05});
     await Promise.all(cs.map((c,i)=>sp2fly(c,[ox,oy-70,.3],[ox+(i-1)*60,oy-140,1,(i-1)*18],350,'ease-out',i*80)));
     await sleep(200);document.body.classList.remove('spdark');[ball,eye,...cs].forEach(e=>spAnim(e,[{opacity:1},{opacity:0}],200));spGone([ball,eye,...cs],220)},
-  /* 火の精霊エンバー：くるくる燃えて 火の玉ボッ！ */
+  /* 火の精霊チャッカ：くるくる燃えて 火の玉ボッ！ */
   async chakka(sd,m,el){const [ox,oy]=ctr(el),[tx,ty]=spZone(sd,'oppHero');const f=spImg(sp2X('fire'),70);
     nz(.5,{vol:.1,f0:400,f1:1500,type:'bandpass'});await spAnim(f,[{transform:SPT(ox,oy-40,.3,0)},{transform:SPT(ox,oy-40,1.2,360)},{transform:SPT(ox,oy-40,1,720)}],500);
     const n=8;for(let i=0;i<n;i++)setTimeout(()=>fxImg(ox+(tx-ox)*i/n,oy-40+(ty-oy+40)*i/n,'x_fire',30,'fxpuff',400),i*40);
@@ -3706,7 +3740,7 @@ Object.assign(SPECIAL,{
     for(let i=0;i<8;i++){nz(.08,{at:i*.08,vol:.1,f0:2000,type:'highpass'});setTimeout(()=>fxImg(W-(W+120)*i/8+40,ty-20,'x_smokeb',60,'fxup',700),i*70)}
     shakeApp&&shakeApp();await spAnim(tr,[{transform:SPT(W+80,ty,1)},{transform:SPT(-80,ty,1)}],650,'ease-in');
     onoma(sp2fe(tx,ty),'ゴーーッ！','#fff');await sleep(250);[r1.d,r2.d].forEach(e=>e.animate([{opacity:1},{opacity:0}],{duration:200,fill:'forwards'}));spGone([tr,r1.d,r2.d],220)},
-  /* チクタク時計 ティッキー：針がぐるぐる → ジリリリ！ */
+  /* チクタク時計：針がぐるぐる → ジリリリ！ */
   async clock(sd,m,el){const [ox,oy]=ctr(el);const c=sp2art('alarm',56);await sp2fly(c,[ox,oy-60,.2],[ox,oy-80,1],250,'cubic-bezier(.2,1.6,.5,1)');
     for(let i=0;i<6;i++)tone(i%2?1800:1500,.03,{type:'square',vol:.05,at:i*.14});onoma(el,'チクタク…','#e0f0ff');
     const hand=sp2div('sp2-line',`width:30px;height:3px;background:#3a2410;transform:translate(${ox}px,${oy-80}px)`);
@@ -3747,7 +3781,7 @@ Object.assign(SPECIAL,{
 
 
 /* =====================================================================
-   おもしろ技アニメ その3（ゾンビ・荒野のならず者 ビリー・ギャングなど 28人）
+   おもしろ技アニメ その3（ゾンビ・ならず者・ギャングなど 28人）
    ===================================================================== */
 (()=>{if(document.getElementById('sp3css'))return;const s=document.createElement('style');s.id='sp3css';s.textContent=`
 .sp3-bub{position:fixed;z-index:91;pointer-events:none;background:#fffdf3;color:#3a2410;border:3px solid #3a2410;border-radius:16px;padding:5px 10px;font:900 14px/1.25 var(--display,sans-serif);white-space:nowrap;transform:translate(-50%,-100%);box-shadow:0 4px 0 rgba(0,0,0,.25);animation:sp3bub .25s cubic-bezier(.2,1.6,.5,1) both}
@@ -3887,7 +3921,7 @@ Object.assign(SPECIAL,{
     for(let i=0;i<4;i++){const q=S3.svg('q',30);const x=ox+(Math.random()-.5)*110,y=oy+(Math.random()-.5)*70;tone(900+i*100,.08,{type:'triangle',vol:.04});
       spAnim(q,[{transform:SPT(x,y,.2),opacity:0},{transform:SPT(x,y-10,1),opacity:1,offset:.4},{transform:SPT(x,y-26,.9),opacity:0}],600);spGone(q,620);await sleep(110)}
     await sleep(500)},
-  /* スチームタウンのバイク乗り：斧がブーメランみたいに てき全体を往復 */
+  /* スチームタウンの斧使い：斧がブーメランみたいに てき全体を往復 */
   async axe(sd,m,el){const [ox,oy]=ctr(el),[tx,ty,tw]=spZone(sd,'opp');const a=spImg('axe',54);S3.later(ox,oy-80,'どこまでも 追いかけるぜ！',800);
     for(let i=0;i<10;i++)nz(.07,{at:i*.08,vol:.06,f0:1800,type:'bandpass',q:4});
     const pts=[[tx-tw*.4,ty],[tx,ty+10],[tx+tw*.4,ty]];
@@ -3919,7 +3953,7 @@ Object.assign(SPECIAL,{
     for(let i=0;i<5;i++){const c=spImg('ui/x_coin.png',22);const x=ox+(Math.random()-.5)*60;tone(1400-i*120,.08,{type:'triangle',vol:.04,at:0});
       spAnim(c,[{transform:SPT(ox,oy-30,1)},{transform:SPT(x,oy+50,1,200)},{transform:SPT(x+10,oy+38,1,240),offset:.85},{transform:SPT(x+14,oy+50,1,260),opacity:0}],600,'ease-in');spGone(c,620);await sleep(90)}
     fxImg(ox+30,oy-40,'x_sweat',26,'fxpop',600);await sleep(500);spAnim(bar,[{opacity:1},{opacity:0}],200);spGone(bar,210)},
-  /* ずるい成金 ゴールディ：お札を ばらまいて 「オーッホッホ」 金歯キラーン */
+  /* 卑怯な成金：お札を ばらまいて 「オーッホッホ」 金歯キラーン */
   async narikin(sd,m,el){const [ox,oy]=ctr(el);S3.later(ox,oy-80,'お金で買えないものは ない！',900);
     for(let i=0;i<12;i++){const b=i%3?S3.svg('billg',38):spImg('ui/x_coins.png',30);const x=ox+(Math.random()-.5)*220;spAnim(b,[{transform:SPT(ox,oy-30,.3,0)},{transform:SPT((ox+x)/2,oy-130,1,180),offset:.4},{transform:SPT(x,oy+70,1,400),opacity:0}],900,'ease-out',i*40);spGone(b,1400)}
     [523,494,466,440,415].forEach((f,i)=>vo(f*1.5,{at:.1+i*.12,dur:.12,vol:.05,type:'triangle'}));S3.on(el,'オーッホッホ！','#ffd34a');
@@ -3929,7 +3963,7 @@ Object.assign(SPECIAL,{
     await el.animate([{transform:'translateY(-90px) scale(1.2)'},{transform:'translateY(0) scale(1.15,.85)',offset:.7},{transform:'none'}],{duration:450*SPEED,easing:'ease-in'}).finished.catch(()=>{});
     tone(60,.4,{type:'sine',vol:.2,slide:30});nz(.4,{vol:.12,f0:300,type:'lowpass'});shakeApp&&shakeApp();fxImg(ox,oy+30,'x_dust2',140,'fxpuff',900);S3.on(el,'ドスン！！','#c9a070');
     await sleep(350);fxImg(ox,oy,'x_barrier',120,'fxpop',900);vo(220,{dur:.5,vol:.06,type:'sawtooth',lp:600});await sleep(500)},
-  /* 金庫やぶりのツィッガー：地面をホリホリ、カチカチ…ガチャ！ お宝ザクザク */
+  /* 金庫やぶりモグラ：地面をホリホリ、カチカチ…ガチャ！ お宝ザクザク */
   async mole(sd,m,el){const [ox,oy]=ctr(el);el.animate([{transform:'none'},{transform:'translateY(40px) scale(.7)',opacity:.3,offset:.3},{transform:'translateY(40px) scale(.7)',opacity:.3,offset:.7},{transform:'none',opacity:1}],{duration:1300*SPEED});
     for(let i=0;i<5;i++){setTimeout(()=>fxImg(ox+(Math.random()-.5)*50,oy+20,'x_dust',50,'fxpuff',600),i*100);nz(.08,{at:i*.1,vol:.07,f0:400,type:'lowpass'})}
     await sleep(450);for(let i=0;i<4;i++){tone(2000,.03,{type:'square',vol:.04,at:i*.09})}S3.on(fakeEl(ox,oy+10),'カチカチ…','#c9c9c9');await sleep(420);
@@ -3980,10 +4014,11 @@ Object.assign(SPECIAL,{
    タイトル画面：ロゴ どーん！ ＋ タンブルウィード ＋ 砂あらし ＋ あそぶボタン ＋ おしらせ
    ===================================================================== */
 const CHANGELOG=[
+  {v:'0.79.0',d:'10/30',t:['あいてが すこし かしこく なったよ。ボスは もっと かしこいよ','マップの マスの ならびを 見なおしたよ','必殺は、ダメージを あたえた 子分を 一げきで たおすように なったよ','ふっかつした子は、まっさらな すがたに もどるように なったよ','ふこうの手紙 ポーカスを たおすと、おジャマおばけが まざるように なったよ','合成の まえに、合成した あとの カードが 見られるように なったよ','つかまえた 子が 町で きえちゃうのを 直したよ','引っこしの コードを 1つに まとめたよ','名前が 長い カードを 2行で 読みやすく したよ']},
   {v:'0.78.0',d:'10/30',t:['「1回休み」が ちゃんと 1回 休むように なったよ','昇進まえに Lv5より 上げておくと、昇進したあとも その ぶん つよいよ','ステージの パックは 3まいに なったよ','昇進した すがたは、自分で 昇進させたときだけ 手に入るよ','ロープばあちゃんの なげなわが 2回 ふえるよ','説得は ノーマル1日・レア3日・レジェンド5日']},
   {v:'0.77.0',d:'10/29',t:['ほかの スマホへ データを 引っこし できるように なったよ！','地図ボタンの マップが、ステージごとの 絵に なったよ','コインの マークを 金貨の 絵に したよ','ブラウザの タブに、ぼくの 顔が 出るように なったよ','コインが 足りない カードは、ちゃんと 灰色に なるように 直したよ','あいての 力が こっちに かかる ときは「ウィピィの」と 出すように したよ']},
   {v:'0.76.0',d:'10/28',t:['しょうきん首を つかまえると、しょうきんが もらえるように なったよ！','つぎに いく ところが 光って、わかるように なったよ','合成・しんか できる時に、なかまが 光るように なったよ','Lv7に なると、とくべつな 力が ふえるように なったよ','ボス戦の 曲を かえて、つよさも 見なおしたよ','ずかんに タブを つけたよ','ウィピィの 顔が、セリフに あわせて かわるように なったよ','出なかった 画像を 直したよ','せっていから、セーブを クラウドにも のこせるように なったよ']},
-  {v:'0.75.0',d:'10/27',t:['合成すると、とくべつな 力も つよく なるように なったよ！','行商人さんで、どうぐを 売れるように なったよ','はじめての子に、ウィピィが 道あんない するように なったよ','あいての 山札の まい数が 見えるように なったよ','右下の はぐるまから「こうさん」できるように なったよ','しょうきんの 金額を 見なおしたよ','カードの せつめいを 読みやすく したよ']},
+  {v:'0.75.0',d:'10/27',t:['合成すると、とくべつな 力も つよく なるように なったよ！','行商人さんで、どうぐを 売れるように なったよ','はじめての子に、ウィピィが 道あんない するように なったよ','あいての デッキの まい数が 見えるように なったよ','右下の はぐるまから「こうさん」できるように なったよ','しょうきんの 金額を 見なおしたよ','カードの せつめいを 読みやすく したよ']},
   {v:'0.74.0',d:'10/26',t:['マップを ぜんぶ 新しく したよ！','新しい なかまが 200人いじょう ふえたよ','なかま 28人の 絵を かきなおしたよ','ぼうけんで なかまに した子が、町に 来てくれるように なったよ','「そだつ」の子が、合成で ぐんぐん のびるように なったよ']},
   {v:'0.73.0',d:'10/25',t:['かくせいカードが 出るように なったよ！ カットインも あるよ','ボス戦を パワーアップ したよ','たたかいの 背景を 7つ ふやしたよ','出したときの 力を「見参！」で わかるように したよ']},
   {v:'0.72.0',d:'10/24',t:['タイトル画面と 曲を 新しく したよ！','はぐるまで、音の 大きさを かえられるように なったよ','さいしょに、音あり／なしを えらべるように なったよ','122人に、登場の 動きを つけたよ']},
@@ -4279,7 +4314,7 @@ const BOSS_SCENE={
   oasis:  {w:'sand',  c:'#ffe27a',o1:'ゴオォォォ…',   n:'まぼろしの オアシス…',       o2:'ガオォーッ！',b:'このオアシスは\n王である われの ものだ！',               y:'泉は みんなの ものだよ！\n王さまでも ひとりじめは ダメ！',mood:'royal'},
   volcano:{w:'ember', c:'#ffb35c',o1:'ゴゴゴゴゴ…',   n:'もえる 火山の 聖域…',        o2:'ジャキーン！',b:'聖域に 立ち入る者は\nこの剣が ゆるさぬ！',               y:'あつくても まけない！\nわたしの ハートは もっと あついよ！',mood:'heroic'},
   forest: {w:'petal', c:'#e0b3ff',o1:'キラ… キラ…',   n:'月の 光の 魔法の森…',        o2:'ふふっ♪',   b:'その本、4才の ころに\n暗記しました',                       y:'すごっ！ でも しょうぶは\n頭のよさじゃ きまらないよ！',mood:'magic'},
-  mafia:  {w:'rain',  c:'#9fc4ff',o1:'ザァァァ…',     n:'雨の夜… ギャングの まち',    o2:'…モグ',     b:'ワシの 街で\nすきには させんぞ',                           y:'荒野は みんなの ものだよ！\nおさかな 食べてる 場合じゃないよ！',mood:'noir'},
+  mafia:  {w:'rain',  c:'#9fc4ff',o1:'ザァァァ…',     n:'雨の夜… ギャングの まち',    o2:'…モグ',     b:'ミャーの 街で\nすきには させんぞ',                           y:'荒野は みんなの ものだよ！\nおさかな 食べてる 場合じゃないよ！',mood:'noir'},
 };
 /* 擬音の 置き場所（%） x,y=左上の位置 r=かたむき sh=画面ゆれ（0〜3） at=出る時間(ms) */
 const BOSS_ONO={
@@ -4595,7 +4630,7 @@ try{const el=$('bgm');if(el){el.pause();el.removeAttribute('src');el.load();el.p
 })();
 
 
-/* ---- 山札を 本当に カードを重ねた 立体に。厚み＝のこり枚数。数字は出さず、タップで ふきだし ---- */
+/* ---- デッキを 本当に カードを重ねた 立体に。厚み＝のこり枚数。数字は出さず、タップで ふきだし ---- */
 (function(){const st=document.createElement('style');st.textContent=`
 .deckpile.d3{width:46px;height:62px;background:none!important;box-shadow:none!important;outline:0!important;filter:none!important;color:transparent!important;text-shadow:none!important;font-size:0!important;perspective:260px;cursor:pointer;-webkit-tap-highlight-color:transparent;overflow:visible;margin:0 4px}
 .deckpile.d3.red{width:34px;height:46px}
@@ -4734,7 +4769,7 @@ setTimeout(()=>{try{Object.values(SMK).forEach(v=>{fetchLow(v.s)});Object.values
 
 /* ---- ボス戦のルール ----
    ・ボス戦の 子分たちは「育ちきった」強さ（レベル最大）
-   ・山札の さいごの1まいは ボス本人。このときだけ ふつうより強い（本来ない数字でもOK）
+   ・デッキの さいごの1まいは ボス本人。このときだけ ふつうより強い（本来ない数字でもOK）
    ・なかまになったら、ふつうのカードの強さ・効果に もどる（ここで いじるのは この戦いの中だけ） */
 const BOSS_PLUS={wild:2,hill:2,canyon:2,saloon:2,mine:2,ranch:3,train:3,steam:3,bayou:3,snow:3,oasis:4,volcano:4,forest:4,mafia:4};
 {const _mb=makeBoss;makeBoss=function(){const sp=_mb();if(TUT_RUN())return sp;
@@ -4803,7 +4838,7 @@ shopView=function(){
   app().innerHTML=`${head()}<div class="panel"><h2><img class="ri" src="@@D12@@" alt=""> 雑貨屋</h2><p class="muted">${open.length?'「らっしゃい！ どのパックに する？」':'「ボスを たおすと、新しい パックが 入荷するよ！」'}</p></div>
     <div class="spshelf" id="shelf"></div>
     <div class="choice">
-      <button id="i1"><span class="i"><img class="ri" src="@@D15@@" alt=""></span><div>予備の投げ縄 ＄8 ${G.items.rope?'（持ってる）':''}<small>次の冒険だけ、投げ縄の成功率+10%</small></div></button>
+      <button id="i1"><span class="i"><img class="ri" src="@@D15@@" alt=""></span><div>予備の投げなわ ＄8 ${G.items.rope?'（持ってる）':''}<small>次の冒険だけ、投げなわの成功率+10%</small></div></button>
       <button id="i2"><span class="i"><img class="ri" src="@@D16@@" alt=""></span><div>救急箱 ＄8 ${G.items.kit?'（持ってる）':''}<small>次の冒険だけ、体力+8でスタート</small></div></button>
       <button id="i3"><span class="i"><img class="ri" src="@@D17@@" alt=""></span><div>古い地図 ＄5 ${G.items.map?'（持ってる）':''}<small>次の冒険だけ、「？」マスの中身が見える</small></div></button>
     </div>`;
@@ -4845,7 +4880,7 @@ async function bossUnlock(up){
   const L=[maxed?['🃏','デッキは もう いっぱい！',`<b>${DECK_CAP}まい</b>（MAX）`]:['🃏','デッキの 上限が ふえた！',`<b class="up">+2</b>　いま：<b>${dm}まい</b>`],
     up.wal?[`<img src="@@D13@@" style="width:30px" alt="">`,'おさいふの 上限が ふえた！',`<b class="up">+1</b>　いま：<b>${G.wallet}コイン</b>${G.wallet>=10?'（MAX）':''}`]
           :['❤️','旅の体力が増えた！',`<b class="up">+3</b>　いま：<b>${34+(G.hpBonus||0)}</b>`],
-    ['🎴','あたらしいパックが発売された！','']];
+    ['🎴','あたらしい パックが お店に ならんだ！','']];
   if(!HUMAN){town();return}
   modal(`<div class="unlock piro"><h2>🏆 ${STAGES[sid].n} クリア！</h2><div id="bupl"></div><div id="pkv" style="display:grid;justify-items:center"></div><button class="btn big" id="ok" hidden style="margin-top:10px">🏠 町へ</button></div>`);
   for(const [ic,t,v] of L){await sleep(650);$('bupl').insertAdjacentHTML('beforeend',`<div class="pline"><i>${ic}</i><div><small>ぴろりん！</small><b>${t}</b>${v?'<br>'+v:''}</div></div>`);SFX.sparkle()}
@@ -4914,7 +4949,7 @@ const ITEMS={
   dynamite:{ic:'🧨',n:'ダイナマイト',d:'つぎの戦い：はじめに 敵の親分に 4ダメージ',w:4,next:1},
   coffee:{ic:'☕',n:'カウボーイコーヒー',d:'つぎの戦い：1ターンめ コイン +2',w:4,next:1},
   whistle:{ic:'📯',n:'よびぶえ',d:'つぎの戦い：はじめに なかまを 2人 多く ひく',w:4,next:1},
-  lasso:{ic:'🪢',n:'新品の投げ縄',d:'つぎの戦い：投げ縄が 当たりやすい',w:3,next:1},
+  lasso:{ic:'🪢',n:'新品の投げなわ',d:'つぎの戦い：投げなわが 当たりやすい',w:3,next:1},
   nugget:{ic:'🪙',n:'金塊',d:'つかうと ＄12',w:3,use:()=>{R.money+=12}},
   treasure:{ic:'🗺️',n:'宝の地図',d:'つかうと お宝（レリック）が 手に入る',w:1.5,use:()=>{giveRelic()}},
 };
@@ -4972,7 +5007,7 @@ function lootReward(title,extra){
     modal(`<div class="unlock"><h2>${title}</h2>${extra||''}<div class="loot" id="lt"></div><button class="btn big" id="ok">つぎへ</button></div>`);
     const add=(ic,b,s,i)=>$('lt').insertAdjacentHTML('beforeend',`<div class="li" style="animation-delay:${i*.18}s"><span class="ic">${ic}</span><b>${b}</b>${s?`<small>${s}</small>`:''}</div>`);
     add((typeof fxSrc==='function'&&fxSrc('fx/bag'))?`<img src="${fxSrc('fx/bag')}" alt="" style="width:54px;height:54px;object-fit:contain">`:'💰',`＋＄${money}`,'',0);
-    items.forEach((k,i)=>add(ITEMS[k].ic,ITEMS[k].n,kept[i]?ITEMS[k].d:'ふくろが いっぱい → ＄5',i+1));
+    items.forEach((k,i)=>add(ITEMS[k].ic,ITEMS[k].n,kept[i]?ITEMS[k].d:'ふくろが いっぱい！ かわりに ＄5',i+1));
     SFX.coin();if(items.length)setTimeout(()=>SFX.sparkle(),220);
     $('ok').onclick=()=>{closeModal();res()}})}
 
@@ -5056,7 +5091,7 @@ const BX={
   ruler:{nm:'あらくれ召集',d:'ダメージを うけると、スチームタウンの あらくれが かけつける！',
     hurt(){if(B._ru===B.turn||Math.random()>.5||!roomFoe())return;B._ru=B.turn;const pool=STAGES.steam.pool.filter(id=>C[id]&&C[id].c<=3);const id=pick(pool);
       summon(B.foe,id,Math.max(1,enemyLv(R.floors)-4));bsay(`「親分！ いま いきやす！」 ${C[id].n}が かけつけた！`);if(HUMAN)renderBattle()}},
-  ma:{nm:'うちの子に 何すんの！',d:'まず 子分3人と 戦う。子分が たおれると のこりの攻撃が 倍に。ぜんぶ たおすと ママが出てきて、毎ターン 子分を よみがえらせる',
+  ma:{nm:'うちの子に 何すんの！',d:'まず 子分3人と 戦う。子分が たおれると、のこりの 子分が もっと つよく なる。ぜんぶ たおすと ママが出てきて、毎ターン 子分を よみがえらせる',
     start(){B.maPh=1;const lv=Math.max(1,enemyLv(R.floors)+((typeof TUNE!=='undefined'&&TUNE.bossLvAdd[R.sid])||0)-4);B.maLv=lv;for(let i=0;i<Math.min(3,roomFoe());i++)summon(B.foe,'goonT',lv);bsay('ママ「みんな、たのんだよ！」')},
     async died(n){if(B.maPh!==1)return;const gs=foeLive().filter(m=>m.id==='goonT');
       if(gs.length){gs.forEach(m=>{m.atk=Math.min(8,m.atk*2);m.baseAtk=m.atk;floatAt(uEl(m),'攻撃×2！','crit')});bsay('「よくも兄弟を！」 のこりの子分の 攻撃が 倍に！')}
@@ -5081,8 +5116,8 @@ const BX={
       if(B.turn%4===2){const n=Math.min(3,roomFoe());for(let i=0;i<n;i++)summon(B.foe,'illuT',zl());if(n){bsay('🌕 月夜の分身！ アメリが 分かれて おそってくる！');if(HUMAN){renderBattle();await sleep(400)}}}
       if(B.turn%3)return;const ms=myLive();if(!ms.length)return;ms.forEach(m=>{const a=m.atk,h=m.hp;m.atk=h;m.baseAtk=h;m.hp=Math.max(1,a);m.max=Math.max(m.hp,1);floatAt(uEl(m),'🌕 さかさま！','info')});
       bsay('満月のさかさま！ 攻撃と体力が 入れかわった！');if(HUMAN){renderBattle();await sleep(500)}}},
-  capone:{nm:'ニャンコ・ファミリー',d:'ラスボス。子分の枠5体・山札たっぷり・にげない。毎ターン マフィアニャンコを2体。4ターンに1回「集合！」',
-    start(){B.foe.maxB=5;B.foe.escape=999;const extra=B.foe.deck.map(c=>({...c}));B.foe.deck.push(...shuffle(extra));bsay('カポニャンコ「ワシの街から かんたんに かえれると 思うなよ」')},
+  capone:{nm:'ニャンコ・ファミリー',d:'ラスボス。子分の枠5体・デッキたっぷり・にげない。毎ターン マフィアニャンコを2体。4ターンに1回「集合！」',
+    start(){B.foe.maxB=5;B.foe.escape=999;const extra=B.foe.deck.map(c=>({...c}));B.foe.deck.push(...shuffle(extra));bsay('カポニャンコ「ミャーの街から かんたんに かえれると 思うなよ」')},
     async foeTurn(){const T=['nyaBari','nyaHaya','nyaMamo','nyaNoro'];const lv=zl();
       if(B.turn%4===0){while(roomFoe())summon(B.foe,pick(T),lv);foeLive().forEach(m=>{m.atk++;m.baseAtk=(m.baseAtk||0)+1});bsay('カポニャンコ「集合！」 ニャンコ全員 攻撃+1！');if(HUMAN)shakeApp()}
       else{const n=Math.min(2,roomFoe());for(let i=0;i<n;i++)summon(B.foe,pick(T),lv);if(n)bsay('マフィアニャンコが あらわれた！')}
@@ -5341,8 +5376,8 @@ NEWTOK('straycatT','ノラネコ',1,1,'🐈',{fuel:1});
 NEWTOK('eggT','火山のたまご',0,2,'🥚',{growT:2});
 
 /* ---- 新キャラ new01〜new234 ---- */
-NEWC({id:'new01',n:'ちびサボ',f:'ca',r:'N',c:1,a:1,h:1,em:'🌵',stage:'wild',stages:['wild','forest'],s:'チクッとするよ〜！',lines:['','','',''],note:'トゲ：攻撃されたら、攻撃してきた相手に1ダメージ',kw:'thorns'});
-NEWC({id:'new02',n:'荒野のガンマン ドリー',f:'ou',r:'N',c:2,a:2,h:2,em:'🤠',stage:'wild',s:'抜くのは あたしが先よ！',lines:['','','',''],note:'はやうち：出したターンからすぐ攻撃できる',kw:'quick'});
+NEWC({id:'new01',n:'ちびサボ',f:'ca',r:'N',c:1,a:1,h:1,em:'🌵',stage:'wild',stages:['wild','forest'],s:'チクッとするよ〜！',lines:['トゲもしおしお〜…','','',''],note:'トゲ：攻撃されたら、攻撃してきた相手に1ダメージ',kw:'thorns'});
+NEWC({id:'new02',n:'荒野のガンマン ドリー',f:'ou',r:'N',c:2,a:2,h:2,em:'🤠',stage:'wild',s:'抜くのは あたしが先よ！',lines:['あんたのほうが 早かったわ…','','',''],note:'はやうち：出したターンからすぐ攻撃できる',kw:'quick'});
 NEWC({id:'new03',n:'ゆうれいカウボーイ ヒュードロ',f:'gh',r:'N',c:2,a:4,h:1,em:'👻',stage:'hill',stages:['hill','bayou'],s:'ヒュ〜ドロドロ〜♪ おどろいた？',lines:['','','',''],note:'かくれんぼ：自分から攻撃するまで、ねらわれない',kw:'stealth'});
 NEWC({id:'new04',n:'ポルターガイスト ガタゴト',f:'gh',r:'R',c:3,a:2,h:3,em:'🪑',stage:'hill',s:'ガタガタ〜！おかたづけ しちゃうぞ〜',lines:['','','',''],note:'見参！：ランダムな敵キャラ1体を手札に追い返す',bc:'bounce'});
 NEWC({id:'new05',n:'イワツバメのツバ吉',f:'an',r:'N',c:1,a:1,h:1,em:'🐦',stage:'canyon',s:'ピュ〜ン！いっちばんのり！',lines:['','','',''],note:'はやうち：出したターンからすぐ攻撃できる',kw:'quick'});
@@ -5357,18 +5392,18 @@ NEWC({id:'new13',n:'列車強盗ジャック',f:'ou',r:'N',c:2,a:2,h:2,em:'💰'
 NEWC({id:'new14',n:'車掌のポッポさん',f:'gu',r:'N',c:2,a:1,h:3,em:'🚂',stage:'train',s:'しゅっぱーつ しんこう〜！',lines:['','','',''],note:'見参！：なかまを1人 ひく（シートではスチームタウン。しゅぞくの見直し列で ギルド）',bc:'draw',v:1});
 NEWC({id:'new15',n:'ゼンマイねずみ チュウ',f:'ro',r:'N',c:1,a:1,h:1,em:'🐭',stage:'steam',s:'ジジジ…チュウ！',lines:['','','',''],note:'やられたら：なかまを1人 ひく（シートではスチームタウン。しゅぞくの見直し列で ロボット）',dr:'draw',dv:1});
 NEWC({id:'new16',n:'スチームゴーレム',f:'ro',r:'R',c:5,a:4,h:6,em:'🗿',stage:'steam',s:'シュー…マモル…',lines:['','','',''],note:'かばう：敵はまずこのキャラを攻撃しないといけない（シートではスチームタウン。しゅぞくの見直し列で ロボット）',kw:'taunt'});
-NEWC({id:'new17',n:'ぬまカエルのルイ王子',f:'ma',r:'N',c:2,a:1,h:3,em:'🐸',stage:'bayou',s:'キスは いらないケロ',lines:['','','',''],note:'見参！：いちばん強い敵キャラに毒×1',bc:'poison',v:1});
+NEWC({id:'new17',n:'ぬまのカエル王子',f:'ma',r:'N',c:2,a:1,h:3,em:'🐸',stage:'bayou',s:'キスは いらないケロ',lines:['','','',''],note:'見参！：いちばん強い敵キャラに毒×1',bc:'poison',v:1});
 NEWC({id:'new18',n:'ワニのガブ郎',f:'an',r:'N',c:4,a:4,h:5,em:'🐊',stage:'bayou',s:'ガブッと いくぞ〜',lines:['','','',''],note:'（効果なし）'});
-NEWC({id:'new19',n:'雪のせいれい スノウィ',f:'sp',r:'N',c:2,a:2,h:2,em:'❄️',stage:'snow',s:'ひんやり〜、こおっちゃえ！',lines:['','','',''],note:'見参！：いちばん強い敵を こおらせる（1回休み）',bc:'stun'});
+NEWC({id:'new19',n:'雪のせいれい ユキミ',f:'sp',r:'N',c:2,a:2,h:2,em:'❄️',stage:'snow',s:'ひんやり〜、こおっちゃえ！',lines:['','','',''],note:'見参！：いちばん強い敵を こおらせる（1回休み）',bc:'stun'});
 NEWC({id:'new20',n:'シロクマ親分',f:'an',r:'R',c:5,a:5,h:6,em:'🐻',stage:'snow',s:'寒いのは へっちゃらだ！',lines:['','','',''],note:'かばう：敵はまずこのキャラを攻撃しないといけない',kw:'taunt'});
 NEWC({id:'new21',n:'砂のせいれい サラサラ',f:'sp',r:'N',c:3,a:2,h:3,em:'🏜️',stage:'oasis',s:'サラサラ〜…どこに いるでしょう？',lines:['','','',''],note:'かくれんぼ：自分から攻撃するまで、ねらわれない',kw:'stealth'});
 NEWC({id:'new22',n:'ランプの魔人 ジニー',f:'sp',r:'L',c:6,a:5,h:5,em:'🧞',stage:'oasis',s:'ねがいごとは 3つまで だよ〜ん！',lines:['','','',''],note:'見参！：なかまを2人 ひいて、コイン+2',bc:'drawcoin',v:2});
-NEWC({id:'new23',n:'マグマのせいれい フレイミー',f:'sp',r:'N',c:3,a:3,h:2,em:'🌋',stage:'volcano',s:'あっちっち〜！ボコボコ〜！',lines:['','','',''],note:'見参！：ランダムな敵に2ダメージ',bc:'bomb',v:2});
+NEWC({id:'new23',n:'マグマのせいれい ゴウ',f:'sp',r:'N',c:3,a:3,h:2,em:'🌋',stage:'volcano',s:'あっちっち〜！ボコボコ〜！',lines:['','','',''],note:'見参！：ランダムな敵に2ダメージ',bc:'bomb',v:2});
 NEWC({id:'new24',n:'ひくいどりのヒノ',f:'an',r:'R',c:4,a:4,h:3,em:'🔥',stage:'volcano',s:'ひのたまキック〜！',lines:['','','',''],note:'はやうち：出したターンからすぐ攻撃できる',kw:'quick'});
 NEWC({id:'new25',n:'おどるサボテン ラテン',f:'ca',r:'N',c:2,a:1,h:3,em:'💃',stage:'forest',s:'♪チャッチャッ サボサボ〜',lines:['','','',''],note:'いるあいだ：ほかのサボテンの攻撃+1',aura:'faction',av:1});
-NEWC({id:'new26',n:'森の長老 エル・カルドン',f:'ca',r:'L',c:6,a:4,h:7,em:'🌳',stage:'forest',s:'ほっほ、森は みんなの ものじゃ',lines:['','','',''],note:'かばう：敵はまずこのキャラを攻撃しないといけない / いるあいだ：ターンの終わり、仲間ぜんいんの体力を1いやす',kw:'taunt',aura:'regen',av:1});
-NEWC({id:'new27',n:'ドアマンのゴンゾ',f:'mf',r:'N',c:2,a:1,h:3,em:'🚪',stage:'mafia',s:'ここから先は とおさねえ',lines:['','','',''],note:'かばう：敵はまずこのキャラを攻撃しないといけない',kw:'taunt'});
-NEWC({id:'new28',n:'ショーガールのルル',f:'mf',r:'N',c:3,a:2,h:3,em:'💋',stage:'mafia',s:'ショーの はじまりよ〜♪',lines:['','','',''],note:'見参！：なかまを1人 ひく',bc:'draw',v:1});
+NEWC({id:'new26',n:'森の長老 サボじい',f:'ca',r:'L',c:6,a:4,h:7,em:'🌳',stage:'forest',s:'ほっほ、森は みんなの ものじゃ',lines:['','','',''],note:'かばう：敵はまずこのキャラを攻撃しないといけない / いるあいだ：ターンの終わり、仲間ぜんいんの体力を1いやす',kw:'taunt',aura:'regen',av:1});
+NEWC({id:'new27',n:'ドアマンのゴンゾ',f:'mf',r:'N',c:2,a:1,h:3,em:'🚪',stage:'mafia',s:'ここから先は とおさねえ',lines:['まいったな…','','',''],note:'かばう：敵はまずこのキャラを攻撃しないといけない',kw:'taunt'});
+NEWC({id:'new28',n:'ショーガールのルル',f:'mf',r:'N',c:3,a:2,h:3,em:'💋',stage:'mafia',s:'ショーの はじまりよ〜♪',lines:['やるじゃない お嬢ちゃん…','','',''],note:'見参！：なかまを1人 ひく',bc:'draw',v:1});
 NEWC({id:'new29',n:'スチームタウンのえんとつ小僧',f:'st',r:'N',c:1,a:1,h:1,em:'🧹',stage:'steam',s:'すすだらけで ごめんよ！',lines:['','','',''],note:'はやうち：出したターンからすぐ攻撃できる',kw:'quick'});
 NEWC({id:'new30',n:'スチームタウンのレンチ番',f:'st',r:'N',c:2,a:2,h:2,em:'🔧',stage:'steam',s:'ネジを ギュッと しめるぜ！',lines:['','','',''],note:'見参！：ほかのスチームタウン1体に+1／+1',bc:'buffr',v:1}); // 単純化：スチームタウン限定 → ほかの仲間1体
 NEWC({id:'new31',n:'スチームタウンのボイラー番',f:'st',r:'N',c:3,a:2,h:4,em:'♨️',stage:'steam',s:'あちち、ここは とおさんぞ！',lines:['','','',''],note:'かばう：敵はまずこのキャラを攻撃しないといけない',kw:'taunt'});
@@ -5378,111 +5413,111 @@ NEWC({id:'new34',n:'からくり大将 ギガボルト',f:'ro',r:'L',c:6,a:5,h:6
 NEWC({id:'new35',n:'くっつきボルトくん',f:'ro',r:'N',c:2,a:1,h:2,em:'🔩',stage:'steam',s:'カチッと くっつくよ！',lines:['','','',''],note:'くっつく：ロボットのとなりに出すと 合体して、数字と効果をそのロボットにたす',gattai:1});
 NEWC({id:'new36',n:'シーツおばけ ふわり',f:'gh',r:'N',c:1,a:1,h:1,em:'👻',stage:'hill',stages:['hill','bayou'],s:'ばぁ〜！…びっくりした？',lines:['','','',''],note:'かくれんぼ：自分から攻撃するまで、ねらわれない',kw:'stealth'});
 NEWC({id:'new37',n:'ねぼけおばけ',f:'gh',r:'R',c:5,a:3,h:3,em:'😪',stage:'hill',s:'ふぁ〜あ…まだ ねむい…',lines:['','','',''],note:'やられたら：「ほんきおばけ」（6／6・かくれんぼ）に化ける',dr:'summon',tok:'honkiT',dv:1});
-NEWC({id:'new38',n:'おばけ特急の車掌 カロン',f:'gh',r:'L',c:6,a:4,h:6,em:'🚃',stage:'hill',stages:['hill','bayou'],s:'おのりのお客さま、ごあんないします…',lines:['','','',''],note:'いるあいだ：なかまがやられるたび、おばけ特急に乗せる／やられたら：乗せたなかまを ぜんぶよみがえらせる',dr:'summon',tok:'ghostT',dv:3}); // 単純化：やられたら ひとだま3つ
+NEWC({id:'new38',n:'おばけ特急の車掌 ヨミジ',f:'gh',r:'L',c:6,a:4,h:6,em:'🚃',stage:'hill',stages:['hill','bayou'],s:'おのりのお客さま、ごあんないします…',lines:['','','',''],note:'いるあいだ：なかまがやられるたび、おばけ特急に乗せる／やられたら：乗せたなかまを ぜんぶよみがえらせる',dr:'summon',tok:'ghostT',dv:3}); // 単純化：やられたら ひとだま3つ
 NEWC({id:'new39',n:'かぶりトカゲ',f:'an',r:'N',c:1,a:1,h:2,em:'🦎',stage:'wild',s:'サボテン…じゃないよ、トカゲだよ',lines:['かぶりもの…とれちゃった…','なにを かぶろうかな？','ぴったり かぶれた！','…バケツだった'],note:'見参！：サボテンをかぶって、つぎのターンまで ねらわれない',kw:'stealth'}); // 単純化：かくれんぼ
 NEWC({id:'new40',n:'旅人ホコリン',f:'gu',r:'N',c:2,a:2,h:2,em:'🎒',stage:'wild',s:'ゲホゲホ、遠くから来たよ',lines:['ゲホ…旅も ここまで…','ほこりを はらって…','ピッカピカの旅人だ！','…またほこりだらけ'],note:'見参！：タンブルウィード（1/1）を1匹つれてくる',bc:'summon',tok:'tumbleT',v:1});
 NEWC({id:'new41',n:'ちいさな砂ぼうず',f:'sp',r:'N',c:1,a:1,h:1,em:'🌪️',stage:'wild',s:'くるくる〜、すなぼこり！',lines:['くる…くる…（ぱらぱら）','くるくる ドキドキ','くるくるくる〜っ！','…ただの砂だった'],note:'見参！：すなあらし+1',wx:'sand',wv:1});
 NEWC({id:'new42',n:'がい骨うし ホネモー',f:'gh',r:'N',c:2,a:1,h:3,em:'🐄',stage:'wild',s:'モ〜…ほねだけど げんきだモ〜',lines:['カラン…カラン…モ〜…','ほねまで ドキドキだモ〜','ほねが ツヤツヤだモ〜！','…ほねが 1本たりないモ〜'],note:'やられたら：ほね（0/1）を2本のこす',dr:'summon',tok:'boneT',dv:2});
-NEWC({id:'new43',n:'見はりコンドル ガンミーナ',f:'an',r:'N',c:3,a:2,h:3,em:'🦅',stage:'wild',s:'上から 見てるよ〜',lines:['見すぎて…目がまわった…','じーっ… ドキドキ','ぜんぶ 見えるぞ！','…めがねが くもった'],note:'見参！：敵がつぎに出すカードを のぞき見する',bc:'scout'});
-NEWC({id:'new44',n:'なまけ助手 スナッズ',f:'sh',r:'N',c:2,a:3,h:3,em:'😴',stage:'wild',s:'ふぁ〜…逮捕は あしたでいい？',lines:['ぐぅ…（ねてるだけ）','おこさないでね〜','…ちょっと やる気でた','ぐぅ〜…'],note:'のんびり屋'}); // 単純化：ねぼすけは未実装（効果なしの大きい体）
+NEWC({id:'new43',n:'見はりコンドル ガンミ',f:'an',r:'N',c:3,a:2,h:3,em:'🦅',stage:'wild',s:'上から 見てるよ〜',lines:['見すぎて…目がまわった…','じーっ… ドキドキ','ぜんぶ 見えるぞ！','…めがねが くもった'],note:'見参！：敵がつぎに出すカードを のぞき見する',bc:'scout'});
+NEWC({id:'new44',n:'なまけ助手 グータラ',f:'sh',r:'N',c:2,a:3,h:3,em:'😴',stage:'wild',s:'ふぁ〜…逮捕は あしたでいい？',lines:['ぐぅ…（ねてるだけ）','おこさないでね〜','…ちょっと やる気でた','ぐぅ〜…'],note:'のんびり屋'}); // 単純化：ねぼすけは未実装（効果なしの大きい体）
 NEWC({id:'new45',n:'荒野のうま ハヤテ',f:'an',r:'N',c:3,a:3,h:2,em:'🐎',stage:'wild',s:'ヒヒン！風より はやいよ！',lines:['ヒヒ…足が もつれた〜','ヒン？ はしっていい？','ヒヒーン！もっと はやく！','…ひと休み'],note:'はやうち：出したターンからすぐ攻撃できる',kw:'quick'});
 NEWC({id:'new46',n:'ちびツノ丸',f:'an',r:'N',c:1,a:2,h:1,em:'🐂',stage:'wild',s:'ツノで つんつん！',lines:['ツノ…まがった…','ツノ、のびるかな？','ツノ ピカピカ！','…ツノが とれた'],note:'（効果なし）'});
 NEWC({id:'new47',n:'手配書はりのチャッピー',f:'gu',r:'N',c:2,a:2,h:1,em:'📜',stage:'wild',s:'手配書 はりまーす！ 賞金首は だれかな〜？',lines:['手配書…風にとばされた〜','ぼくの手配書も つくって？','賞金 アップだ！','…顔が にてない'],note:'見参！：敵1体に手配書をはる。その敵をたおすと＄2',bc:'wanted'});
 NEWC({id:'new48',n:'サボテンのサボ子',f:'ca',r:'N',c:2,a:1,h:2,em:'🌵',stage:'wild',s:'うえてくれたら、のびるよ〜',lines:['しおしお〜…','お水 ちょうだい？','ぐんぐん のびた！','…ちょっと しおれた'],note:'うえるとそだつ：毎ターン すこしずつ 大きくなる（合成で のびる）',growT:1});
-NEWC({id:'new49',n:'決闘ネズミ ブラム',f:'ou',r:'R',c:3,a:3,h:2,em:'🐀',stage:'wild',s:'正午だチュー。ぬきなチュー',lines:['おそかった…チュー…','まだだチュー…まだだチュー…','いまだチュー！','…チュ〜'],note:'決闘：見参！で敵1体とにらみ合い。先にタップできたら 一発でたおす',bc:'quickmg',v:5}); // 単純化：一発でたおす → 勝ったら5ダメージ
-NEWC({id:'new50',n:'まどわしの ウルスラ',f:'an',r:'R',c:3,a:2,h:3,em:'🦊',stage:'wild',s:'どれが ほんものでしょ〜？',lines:['ハズレ…じゃなかった〜','ほんものを えらんでね','ぜんぶ ほんもの！？','…ぜんぶ ニセモノだった'],note:'見参！：ニセモノ（1/1）を2匹よぶ。どれがホンモノかは ないしょ',bc:'summon',tok:'fakeT',v:2});
-NEWC({id:'new51',n:'なげなわばあちゃん ロープ婆',f:'sh',r:'R',c:4,a:2,h:4,em:'👵',stage:'wild',s:'わしの投げ縄から にげられんよ',lines:['あらら…なわが ほどけた…','なわを ギュッと たのむよ','まだまだ 若いもんには まけん！','…こしが いたい'],note:'投げ縄名人：投げ縄を2回投げられる',aura:'lasso'}); // 単純化：投げ縄+15%
+NEWC({id:'new49',n:'決闘ネズミ ズドン',f:'ou',r:'R',c:3,a:3,h:2,em:'🐀',stage:'wild',s:'正午だチュー。ぬきなチュー',lines:['おそかった…チュー…','まだだチュー…まだだチュー…','いまだチュー！','…チュ〜'],note:'決闘：見参！で敵1体とにらみ合い。先にタップできたら 一発でたおす',bc:'quickmg',v:5}); // 単純化：一発でたおす → 勝ったら5ダメージ
+NEWC({id:'new50',n:'しんきろうギツネ ユラリ',f:'an',r:'R',c:3,a:2,h:3,em:'🦊',stage:'wild',s:'どれが ほんものでしょ〜？',lines:['ハズレ…じゃなかった〜','ほんものを えらんでね','ぜんぶ ほんもの！？','…ぜんぶ ニセモノだった'],note:'見参！：ニセモノ（1/1）を2匹よぶ。どれがホンモノかは ないしょ',bc:'summon',tok:'fakeT',v:2});
+NEWC({id:'new51',n:'なげなわばあちゃん ロープ婆',f:'sh',r:'R',c:4,a:2,h:4,em:'👵',stage:'wild',s:'わしの投げなわから にげられんよ',lines:['あらら…なわが ほどけた…','なわを ギュッと たのむよ','まだまだ 若いもんには まけん！','…こしが いたい'],note:'投げなわ名人：投げなわを2回投げられる',aura:'lasso'}); // 単純化：投げなわ+15%
 NEWC({id:'new52',n:'荒野の大ヘビ ガラゴン',f:'an',r:'L',c:6,a:5,h:6,em:'🐍',stage:'wild',s:'シャ〜…荒野は わしのもの…',lines:['シャ…ほどけて…しまった…','シャ〜…ていねいに たのむぞ','シャシャ〜！ ながくなった！','…からまった'],note:'見参！：敵1体をぐるぐる巻き！2ターン動けない。そのあいだ毎ターン2ダメージ',bc:'jail',poison:2}); // 単純化：牢屋＋戦った相手に毒×2
 NEWC({id:'new53',n:'ゾンビ犬ホネスキー',f:'zo',r:'N',c:2,a:2,h:1,em:'🐕',stage:'hill',s:'ワウ〜…ほね ほしい…',lines:['ワウ…ほね…おいてく…','ワウ？ ほね くれる？','ワウワウ！ほね いっぱい！','…ほね、うめちゃった'],note:'やられたら：ほね（0/1）をのこす。つぎのゾンビが ひろうとパワーアップ',dr:'summon',tok:'boneT',dv:1});
 NEWC({id:'new54',n:'ねむたいゾンビ',f:'zo',r:'N',c:1,a:0,h:3,em:'🧟',stage:'hill',s:'アー…ねむい…',lines:['アー…おやすみ…','アー…おこさないで…','アー！ 目が さめた！','アー…ぐぅ…'],note:'かばう：敵はまずこのキャラを攻撃しないといけない',kw:'taunt'});
 NEWC({id:'new55',n:'うたうゾンビ合唱団',f:'zo',r:'N',c:4,a:1,h:1,em:'🎤',stage:'hill',s:'アー♪ アー♪ アー♪',lines:['アー…♪（ソロに なった）','アー♪ ハモって いい？','アー♪♪♪ 大合唱！','…音が はずれた'],note:'見参！：ゾンビ（1/1）を2匹よぶ。3体そろうと大合唱！敵ぜんいん1回休み',bc:'summon',tok:'zombieT',v:2}); // 単純化：大合唱は省略
-NEWC({id:'new56',n:'おはなおばけ デイジー',f:'gh',r:'N',c:2,a:1,h:3,em:'🌸',stage:'hill',s:'おはな、いかが〜？',lines:['おはな…かれちゃった…','きれいに さかせてね','まんかい〜！','…つぼみのまま'],note:'いるあいだ：仲間がやられるたび、お花（0/1）がさく',dr:'summon',tok:'flowerT',dv:2}); // 単純化：自分がやられたら お花2つ
-NEWC({id:'new57',n:'ちょうちんおばけ フリッカー',f:'gh',r:'N',c:2,a:2,h:2,em:'🏮',stage:'hill',s:'ぼんやり あかるいよ〜',lines:['ふっ…（あかりが きえた）','あかるく してね','ピカーッ！','…でんきぎれ'],note:'見参！：かくれんぼ中の敵を てらして見つける',bc:'shave'}); // 単純化：効果けし
+NEWC({id:'new56',n:'おはなおばけ ハナコ',f:'gh',r:'N',c:2,a:1,h:3,em:'🌸',stage:'hill',s:'おはな、いかが〜？',lines:['おはな…かれちゃった…','きれいに さかせてね','まんかい〜！','…つぼみのまま'],note:'いるあいだ：仲間がやられるたび、お花（0/1）がさく',dr:'summon',tok:'flowerT',dv:2}); // 単純化：自分がやられたら お花2つ
+NEWC({id:'new57',n:'ちょうちんおばけ ボンボリ',f:'gh',r:'N',c:2,a:2,h:2,em:'🏮',stage:'hill',s:'ぼんやり あかるいよ〜',lines:['ふっ…（あかりが きえた）','あかるく してね','ピカーッ！','…でんきぎれ'],note:'見参！：かくれんぼ中の敵を てらして見つける',bc:'shave'}); // 単純化：効果けし
 NEWC({id:'new58',n:'墓守りモグじい',f:'an',r:'N',c:3,a:2,h:4,em:'⛏️',stage:'hill',s:'ほっほ、なにか うまっとるぞ',lines:['穴に…かえるわい…','ほりだしもの、あるかの？','大当たりじゃ！','…石ころじゃった'],note:'手にいれる！：たおれた敵のカードから1枚えらんで手札へ',bc:'get',v:1}); // 単純化：同じしゅぞくを1まい
-NEWC({id:'new59',n:'ガイコツ太鼓のラタタ',f:'gh',r:'N',c:2,a:2,h:2,em:'🥁',stage:'hill',s:'ドンドコ ドン！',lines:['ドン…ドコ……','ドキドキ ドン？','ドンドンドーン！','…太鼓が やぶれた'],note:'いるあいだ：仲間のおばけが攻撃するたび ドン！敵ヒーローに1ダメージ',aura:'link'}); // 単純化：連携
+NEWC({id:'new59',n:'ガイコツ太鼓のドンコ',f:'gh',r:'N',c:2,a:2,h:2,em:'🥁',stage:'hill',s:'ドンドコ ドン！',lines:['ドン…ドコ……','ドキドキ ドン？','ドンドンドーン！','…太鼓が やぶれた'],note:'いるあいだ：仲間のおばけが攻撃するたび ドン！敵ヒーローに1ダメージ',aura:'link'}); // 単純化：連携
 NEWC({id:'new60',n:'こうもりのパタ',f:'an',r:'N',c:1,a:1,h:1,em:'🦇',stage:'hill',s:'パタパタ〜！',lines:['パタ…（ぽてっ）','パタ？','パタパタパタ〜！','…パタ'],note:'はやうち：出したターンからすぐ攻撃できる',kw:'quick'});
 NEWC({id:'new61',n:'ふこうの手紙 ポーカス',f:'gh',r:'N',c:2,a:1,h:1,em:'✉️',stage:'hill',s:'このてがみ、3人に まわしてね…',lines:['まわして…くれなかった…','てがみ、かきなおす？','とどいた〜！','…あて先ちがい'],note:'やられたら：たおした敵の手札に「のろい」（つかえないカード）を1枚まぜる',dr:'boom',dv:1}); // 単純化：のろい → ランダム1ダメージ×3
 NEWC({id:'new62',n:'ゾンビ見習いのボーン太',f:'zo',r:'N',c:2,a:2,h:3,em:'🦴',stage:'hill',s:'アー！ がんばるゾン！',lines:['アー…まだ見習いゾン…','アー、どきどきゾン','アー！ 一人前ゾン！','アー…修行ゾン…'],note:'（効果なし）'});
 NEWC({id:'new63',n:'ゾンビ花よめ ヴェール',f:'zo',r:'R',c:4,a:3,h:4,em:'👰',stage:'hill',s:'アー…ちかいの キス…',lines:['アー…ブーケが…','アー…きれいに してね','アー！ しあわせ…','アー…ベールが やぶれた'],note:'見参！：手札のゾンビを1体、そのまま場に出す',bc:'get',v:1}); // 単純化：ゾンビを1まい手札に
 NEWC({id:'new64',n:'ひとだま三姉妹',f:'gh',r:'R',c:3,a:1,h:1,em:'🔥',stage:'hill',s:'ふわふわ〜 3人そろって〜',lines:['ひとり…きえちゃった…','3人で ドキドキ','3人とも ピカピカ！','…1人 まいご'],note:'見参！：ひとだま（1/1・かくれんぼ）を2つよぶ',bc:'summon',tok:'ghostT',v:2});
 NEWC({id:'new65',n:'おばけ写真屋 パシャリ',f:'gh',r:'R',c:3,a:2,h:3,em:'📷',stage:'hill',s:'はい、チーズ〜！',lines:['ピンぼけ…しちゃった…','いい顔 してね','ベストショット！','…まっくろに うつった'],note:'見参！：敵1体を写真にとじこめる（2ターン消える）',bc:'jail'});
-NEWC({id:'new66',n:'墓場のオルガン弾き レクイエ',f:'gh',r:'L',c:6,a:4,h:6,em:'🎹',stage:'hill',s:'さあ、みんな おきて… 演奏会よ',lines:['演奏…おわり…','しずかに… 調律中よ','すばらしい ひびき！','…音が くるった'],note:'見参！：この戦いでたおれた仲間ぜんいんが、おばけ（1/1・かくれんぼ）になってもどってくる',bc:'summon',tok:'ghostT',v:3}); // 単純化：ひとだま3つ
+NEWC({id:'new66',n:'墓場のオルガン弾き レクイエ',f:'gh',r:'L',c:6,a:4,h:6,em:'🎹',stage:'hill',s:'さあ、みんな おきて… 演奏会よ',lines:['演奏…おわり…','しずかに… 調律(ちょうりつ)中よ','すばらしい ひびき！','…音が くるった'],note:'見参！：この戦いでたおれた仲間ぜんいんが、おばけ（1/1・かくれんぼ）になってもどってくる',bc:'summon',tok:'ghostT',v:3}); // 単純化：ひとだま3つ
 NEWC({id:'new67',n:'がけのぼりヤギ メルメル',f:'an',r:'N',c:2,a:2,h:2,em:'🐐',stage:'canyon',s:'メェ〜！がけも へっちゃら！',lines:['メェ…すべった〜','メェ？ のぼっていい？','メェェ〜！てっぺん！','…メェ（おちた）'],note:'とびこえ：かばうを むしして攻撃できる'}); // 単純化：とびこえは未実装
 NEWC({id:'new68',n:'いわのせいれい ゴロン',f:'sp',r:'N',c:3,a:2,h:4,em:'🪨',stage:'canyon',s:'ゴロ…ゴロン…',lines:['ゴロ…（かたまった）','ゴロ？ ゴロン？','ゴロゴロ〜ン！','…ひび はいった'],note:'やられたら：岩（0/3・かばう）になって のこる',dr:'summon',tok:'rockT',dv:1});
-NEWC({id:'new69',n:'こだまコウモリ ヨーデル',f:'an',r:'N',c:2,a:1,h:1,em:'🦇',stage:'canyon',s:'ヤッホー！',lines:['ヤッホー…ホー…ホー…','ヤッホー？','ヤッホーーー！！','…ホー'],note:'やられたら：ヤッホー！とこだまして、つぎのターン もどってくる',kw:'home'}); // 単純化：たおれたら手札へ
+NEWC({id:'new69',n:'こだまコウモリ ヤッホー',f:'an',r:'N',c:2,a:1,h:1,em:'🦇',stage:'canyon',s:'ヤッホー！',lines:['ヤッホー…ホー…ホー…','ヤッホー？','ヤッホーーー！！','…ホー'],note:'やられたら：ヤッホー！とこだまして、つぎのターン もどってくる',kw:'home'}); // 単純化：たおれたら手札へ
 NEWC({id:'new70',n:'つりばし番のギシギシ',f:'gu',r:'N',c:2,a:1,h:3,em:'🌉',stage:'canyon',s:'ここは ひとりずつ わたってね',lines:['ギシ…ギシ…おちる〜！','ゆらさないでね…','がっちり じょうぶ！','…ギシッ'],note:'かばう：敵はまずこのキャラを攻撃しないといけない',kw:'taunt'});
-NEWC({id:'new71',n:'まいごの探検家 ローミー',f:'gu',r:'N',c:1,a:1,h:1,em:'🧭',stage:'canyon',s:'ここ…どこだっけ？',lines:['やっぱり…まいご〜…','ちず、さかさまかな？','道を 見つけた！','…また まいご'],note:'手にいれる！：ランダムな3枚から1枚えらんで手札へ',bc:'get',v:1});
-NEWC({id:'new72',n:'ハゲタカおばば マギー',f:'an',r:'N',c:3,a:2,h:3,em:'🪶',stage:'canyon',s:'おや、いいにおいだねぇ',lines:['あらら…わたしが おこぼれかい…','ひっひっ、どうするんだい？','ごちそうさま！','…おなか すいたよ'],note:'いるあいだ：敵がたおれるたび コイン+1',aura:'coin'}); // 単純化：毎ターンコイン+1
+NEWC({id:'new71',n:'まいごの探検家 マヨイ',f:'gu',r:'N',c:1,a:1,h:1,em:'🧭',stage:'canyon',s:'ここ…どこだっけ？',lines:['やっぱり…まいご〜…','ちず、さかさまかな？','道を 見つけた！','…また まいご'],note:'手にいれる！：ランダムな3枚から1枚えらんで手札へ',bc:'get',v:1});
+NEWC({id:'new72',n:'ハゲタカおばば',f:'an',r:'N',c:3,a:2,h:3,em:'🪶',stage:'canyon',s:'おや、いいにおいだねぇ',lines:['あらら…わたしが おこぼれかい…','ひっひっ、どうするんだい？','ごちそうさま！','…おなか すいたよ'],note:'いるあいだ：敵がたおれるたび コイン+1',aura:'coin'}); // 単純化：毎ターンコイン+1
 NEWC({id:'new73',n:'サソリのハサミン',f:'an',r:'N',c:2,a:3,h:1,em:'🦂',stage:'canyon',s:'チョキチョキ！',lines:['チョキ…（ぱたっ）','チョキ？','チョキーン！','…ハサミ かけた'],note:'（効果なし）'});
 NEWC({id:'new74',n:'岩かげの山賊 ガケマル',f:'ou',r:'N',c:3,a:3,h:3,em:'🏔️',stage:'canyon',s:'へへっ、ここは おれの なわばりさ',lines:['見つかっちまった〜','かくれて まってるぜ','かくれんぼ 名人だ！','…見つかった'],note:'かくれんぼ：自分から攻撃するまで、ねらわれない',kw:'stealth'});
-NEWC({id:'new75',n:'ダイナマイト見習い ブーミー',f:'gu',r:'N',c:2,a:1,h:2,em:'🧨',stage:'canyon',s:'火、つけちゃった〜！',lines:['ドカン…（じぶんで）','ドキドキ…ちかちか…','ドッカーン！大せいこう！','…しけってた'],note:'ダイナマイト：見参！でダイナマイトをおく。3→2→1→ドカン！前の敵に3ダメージ',bc:'fuse',v:1}); // 単純化：前の敵に3 → 2ターン後 敵ぜんいんに1
-NEWC({id:'new76',n:'峡谷の風の子 ゼフ',f:'sp',r:'N',c:2,a:2,h:1,em:'💨',stage:'canyon',s:'ピュ〜ッ！',lines:['ピュ…（むかい風）','ピュ？','ピュピュ〜ッ！','…そよ風'],note:'見参！：すなあらし+1',wx:'sand',wv:1});
-NEWC({id:'new77',n:'こだま歌姫 ヨデリーナ',f:'sa',r:'R',c:3,a:2,h:3,em:'🎶',stage:'canyon',s:'ら〜♪ ら〜♪ ら〜♪',lines:['ら…♪（こだま だけ のこった）','いい声 でるかしら？','ら〜♪ 2ばいの ひびき！','…声が かれた'],note:'見参！：つぎに出す仲間の見参！が2回おきる',bc:'draw',v:1}); // 単純化：なかまを1人ひく
+NEWC({id:'new75',n:'ダイナマイト見習い ボム吉',f:'gu',r:'N',c:2,a:1,h:2,em:'🧨',stage:'canyon',s:'火、つけちゃった〜！',lines:['ドカン…（じぶんで）','ドキドキ…ちかちか…','ドッカーン！大せいこう！','…しけってた'],note:'ダイナマイト：見参！でダイナマイトをおく。3→2→1→ドカン！前の敵に3ダメージ',bc:'fuse',v:1}); // 単純化：前の敵に3 → 2ターン後 敵ぜんいんに1
+NEWC({id:'new76',n:'峡谷の風の子 ピュウ',f:'sp',r:'N',c:2,a:2,h:1,em:'💨',stage:'canyon',s:'ピュ〜ッ！',lines:['ピュ…（むかい風）','ピュ？','ピュピュ〜ッ！','…そよ風'],note:'見参！：すなあらし+1',wx:'sand',wv:1});
+NEWC({id:'new77',n:'こだま歌姫 ヤッホーナ',f:'sa',r:'R',c:3,a:2,h:3,em:'🎶',stage:'canyon',s:'ら〜♪ ら〜♪ ら〜♪',lines:['ら…♪（こだま だけ のこった）','いい声 でるかしら？','ら〜♪ 2ばいの ひびき！','…声が かれた'],note:'見参！：つぎに出す仲間の見参！が2回おきる',bc:'draw',v:1}); // 単純化：なかまを1人ひく
 NEWC({id:'new78',n:'がけっぷち用心棒 ガンロック',f:'mf',r:'R',c:4,a:3,h:5,em:'🧱',stage:'canyon',s:'ここから先は がけだぜ',lines:['きみも いっしょだ〜！','おとすなよ…','岩みたいに かたくなった','…ひやっとした'],note:'かばう：敵はまずこのキャラを攻撃しないといけない / やられたら：いちばん強い敵も いっしょに がけから おっこちる',kw:'taunt',dr:'boom',dv:2}); // 単純化：道づれ → ランダム2ダメージ×3
-NEWC({id:'new79',n:'ハヤブサのフォルカ',f:'an',r:'R',c:3,a:3,h:2,em:'🦅',stage:'canyon',s:'キラッ！みのがさないよ',lines:['キラ…おちる〜','キラ？ しんか できる？','キラーン！','…はね ぬけた'],note:'しんかする！：敵を3体たおすと「大ハヤブサ」（5/4・はやうち）に変身',evoK:3,evoF:{n:'大ハヤブサ',a:2,h:2,kw:'quick'}});
+NEWC({id:'new79',n:'ハヤブサのキラ',f:'an',r:'R',c:3,a:3,h:2,em:'🦅',stage:'canyon',s:'キラッ！みのがさないよ',lines:['キラ…おちる〜','キラ？ しんか できる？','キラーン！','…はね ぬけた'],note:'しんかする！：敵を3体たおすと「大ハヤブサ」（5/4・はやうち）に変身',evoK:3,evoF:{n:'大ハヤブサ',a:2,h:2,kw:'quick'}});
 NEWC({id:'new80',n:'峡谷の主 ゴンドルフ',f:'an',r:'L',c:7,a:6,h:7,em:'🦅',stage:'canyon',s:'峡谷の空は ぜんぶ わしのものだ',lines:['空が…とおい…','わしの つばさを たのむぞ','空の王者、ここにあり！','…風が わるい'],note:'見参！：敵1体をつかんで空へ！手札に追い返す / とびこえ：かばうを むしして攻撃できる',bc:'blow'}); // 単純化：とびこえは未実装
-NEWC({id:'new81',n:'看板ペンキ屋 ダブ',f:'gu',r:'N',c:1,a:1,h:1,em:'🎨',stage:'saloon',s:'ぬりぬり〜♪ なに色が いい？',lines:['ペンキ…こぼれた〜','きれいな色に してね','ピッカピカ！','…まだら もよう'],note:'見参！：敵1体をピンク色にぬる。ピンクの敵は かくれんぼできない',bc:'shave'}); // 単純化：効果けし
-NEWC({id:'new82',n:'そうじ屋モッピー',f:'sa',r:'N',c:1,a:1,h:2,em:'🧹',stage:'saloon',s:'パタパタ〜、おそうじ おそうじ',lines:['ほこりに…まけた…','ちりひとつ のこさずね','ピカピカに なった！','…ほこり まみれ'],note:'見参！：場の毒を1つ消す',bc:'healone',v:1}); // 単純化：ちりょう1
+NEWC({id:'new81',n:'看板ペンキ屋 ヌリヌリ',f:'gu',r:'N',c:1,a:1,h:1,em:'🎨',stage:'saloon',s:'ぬりぬり〜♪ なに色が いい？',lines:['ペンキ…こぼれた〜','きれいな色に してね','ピッカピカ！','…まだら もよう'],note:'見参！：敵1体をピンク色にぬる。ピンクの敵は かくれんぼできない',bc:'shave'}); // 単純化：効果けし
+NEWC({id:'new82',n:'そうじ屋ハタキ',f:'sa',r:'N',c:1,a:1,h:2,em:'🧹',stage:'saloon',s:'パタパタ〜、おそうじ おそうじ',lines:['ほこりに…まけた…','ちりひとつ のこさずね','ピカピカに なった！','…ほこり まみれ'],note:'見参！：場の毒を1つ消す',bc:'healone',v:1}); // 単純化：ちりょう1
 NEWC({id:'new83',n:'ミルクセーキ売り マロン',f:'sa',r:'N',c:2,a:1,h:3,em:'🥤',stage:'saloon',s:'あま〜いミルクセーキ、いかが？',lines:['こぼしちゃった〜…','まぜまぜ ドキドキ','とびきり あまい！','…しょっぱい'],note:'見参！：仲間1体とあなたの体力を2いやす',bc:'healone',v:2}); // 単純化：あなたの回復は省略
-NEWC({id:'new84',n:'床屋の バーバー・バート',f:'sa',r:'N',c:2,a:2,h:2,em:'💈',stage:'saloon',s:'おきゃくさん、ヒゲ のびてますよ',lines:['あっ…きりすぎた…','かっこよく してね','男前に なった！','…へんな かみがた'],note:'見参！：敵1体のヒゲをそる！その敵の効果がなくなる',bc:'shave'});
+NEWC({id:'new84',n:'床屋のチョキ松',f:'sa',r:'N',c:2,a:2,h:2,em:'💈',stage:'saloon',s:'おきゃくさん、ヒゲ のびてますよ',lines:['あっ…きりすぎた…','かっこよく してね','男前に なった！','…へんな かみがた'],note:'見参！：敵1体のヒゲをそる！その敵の効果がなくなる',bc:'shave'});
 NEWC({id:'new85',n:'金貨みがきのピカ子',f:'gu',r:'N',c:2,a:1,h:2,em:'🪙',stage:'saloon',s:'ピッカピカに みがくよ！',lines:['ピカ…くもった…','ピカピカに してね','ピッカーン！','…さびちゃった'],note:'やられたら：金塊を落とす（タップでコイン+1）',dr:'gold',dv:1});
-NEWC({id:'new86',n:'千鳥足の郵便屋 ティプシー',f:'sa',r:'N',c:3,a:2,h:3,em:'📮',stage:'saloon',s:'ヒック…おてがみ でーす',lines:['ヒック…あて先…わすれた…','ヒック、とどくかな？','ヒック！ちゃんと とどいた！','…となりの家だった'],note:'見参！：なかまを 1人 ひく…でも ときどき 敵が ひいちゃう',bc:'flipdraw',v:1}); // 単純化：表なら1人ひく
+NEWC({id:'new86',n:'千鳥足の郵便屋 ヨロレ',f:'sa',r:'N',c:3,a:2,h:3,em:'📮',stage:'saloon',s:'ヒック…おてがみ でーす',lines:['ヒック…あて先…わすれた…','ヒック、とどくかな？','ヒック！ちゃんと とどいた！','…となりの家だった'],note:'見参！：なかまを 1人 ひく…でも ときどき 敵が ひいちゃう',bc:'flipdraw',v:1}); // 単純化：表なら1人ひく
 NEWC({id:'new87',n:'ゆうれいピアノ ポロン',f:'gh',r:'N',c:3,a:2,h:3,em:'🎹',stage:'saloon',s:'ポロン♪ ひとりでに なっちゃう',lines:['ポロ…ン…','ポロン？ ドキドキ','ポロロ〜ン♪','…音が でない'],note:'いるあいだ：ターンの終わり、ポロン♪ 仲間1体の体力を1いやす',aura:'regen',av:1}); // 単純化：1体 → ぜんいん
 NEWC({id:'new88',n:'スイングドアのバタン',f:'sa',r:'N',c:2,a:2,h:3,em:'🚪',stage:'saloon',s:'バタン！いらっしゃい！',lines:['バタン…（しまった）','バタン？','バタンバタン！','…きしむ'],note:'（効果なし）'});
 NEWC({id:'new89',n:'ベルボーイ リンリン',f:'sa',r:'N',c:1,a:1,h:1,em:'🛎️',stage:'saloon',s:'リンリン♪ おにもつ おはこびします',lines:['リン…（ぽてっ）','リンリン？','リンリンリーン！','…にもつ おとした'],note:'見参！：仲間1体を手札にもどす（もう一回 見参！できる）',bc:'recall'}); // 単純化：たおれた仲間1枚を手札に
 NEWC({id:'new90',n:'ガンショップのバンおやじ',f:'gu',r:'N',c:4,a:3,h:4,em:'🔫',stage:'saloon',s:'いいの そろってるぜ',lines:['店じまいだ…','どれにする？','掘り出しもの だ！','…品切れだ'],note:'手にいれる！：ダイナマイトか決闘のカードを1枚',bc:'get',v:1});
 NEWC({id:'new91',n:'ディーラーのクラブ',f:'sa',r:'R',c:3,a:2,h:3,em:'🎰',stage:'saloon',s:'さあ、勝負と いきましょう',lines:['…負けました','カードを くばりますね','わたしの勝ち！','…イカサマが バレた'],note:'見参！：おたがい1枚ひいて、コストが高いほうが＄3',bc:'treasure',v:2}); // 単純化：勝負なしで旅の賞金+＄2
-NEWC({id:'new92',n:'まねっこオウム ポリー',f:'an',r:'R',c:2,a:1,h:2,em:'🦜',stage:'saloon',s:'ペラペラ〜 まねしちゃう！',lines:['ペラ…（だまった）','ペラ？ ペラペラ？','ペラペラペーラ！','…ことば わすれた'],note:'見参！：さいごに出た敵の見参！をまねする',bc:'scout'}); // 単純化：敵の手札を見やぶる＋1人ひく
-NEWC({id:'new93',n:'鐘つきのベルトン',f:'sh',r:'R',c:4,a:2,h:5,em:'🔔',stage:'saloon',s:'ゴーン！悪いやつは 牢屋だ',lines:['ゴ…ン…','ゴーン？','ゴーンゴーン！','…鐘が われた'],note:'牢屋：見参！で敵1体を牢屋へ（3ターン）。出てくる前に投げ縄でつかまえられる',bc:'jail'});
+NEWC({id:'new92',n:'まねっこオウム ペラペラ',f:'an',r:'R',c:2,a:1,h:2,em:'🦜',stage:'saloon',s:'ペラペラ〜 まねしちゃう！',lines:['ペラ…（だまった）','ペラ？ ペラペラ？','ペラペラペーラ！','…ことば わすれた'],note:'見参！：さいごに出た敵の見参！をまねする',bc:'scout'}); // 単純化：敵の手札を見やぶる＋1人ひく
+NEWC({id:'new93',n:'鐘つきのゴーン',f:'sh',r:'R',c:4,a:2,h:5,em:'🔔',stage:'saloon',s:'ゴーン！悪いやつは 牢屋だ',lines:['ゴ…ン…','ゴーン？','ゴーンゴーン！','…鐘が われた'],note:'牢屋：見参！で敵1体を牢屋へ（3ターン）。出てくる前に投げなわでつかまえられる',bc:'jail'});
 NEWC({id:'new94',n:'金ピカ市長 ニャンゴールド',f:'gu',r:'L',c:6,a:5,h:5,em:'🐱',stage:'saloon',s:'この通りは ニャーのものだ！',lines:['金ピカが…はげた…','金ピカに たのむニャ','ニャハハ！金ピカ！','…メッキだったニャ'],note:'いるあいだ：敵がたおれるたび 金塊が落ちる / 見参！：仲間ぜんいんを金ピカに（1回だけダメージ0）',kw:'shield',aura:'coin'}); // 単純化：自分にバリア＋毎ターンコイン+1
-NEWC({id:'new95',n:'カナリアのピップ',f:'an',r:'N',c:1,a:1,h:1,em:'🐤',stage:'mine',s:'ピヨピヨ！あぶないよ！',lines:['ピヨ…（くらくら）','ピヨ？','ピヨピヨ〜♪','…ピヨ'],note:'やられたら：危険をしらせる！なかまを1人ひく',dr:'draw',dv:1});
+NEWC({id:'new95',n:'カナリアのピヨ',f:'an',r:'N',c:1,a:1,h:1,em:'🐤',stage:'mine',s:'ピヨピヨ！あぶないよ！',lines:['ピヨ…（くらくら）','ピヨ？','ピヨピヨ〜♪','…ピヨ'],note:'やられたら：危険をしらせる！なかまを1人ひく',dr:'draw',dv:1});
 NEWC({id:'new96',n:'トロッコ押しのオスオス',f:'gu',r:'N',c:2,a:2,h:3,em:'🛒',stage:'mine',s:'よいしょ よいしょ！',lines:['おもすぎた〜','おして いい？','スイスイ すすむ！','…脱線した'],note:'（効果なし）'});
-NEWC({id:'new97',n:'ランタンもちのブライティ',f:'gu',r:'N',c:2,a:1,h:2,em:'🏮',stage:'mine',s:'てらすよ〜！',lines:['あかりが…きえた…','ちらちら ドキドキ','ピッカーン！','…あぶら ぎれ'],note:'いるあいだ：仲間の金ほり（＄が見つかる効果）が2倍',aura:'miner'}); // 単純化：金ほり
+NEWC({id:'new97',n:'ランタンもちのテラス',f:'gu',r:'N',c:2,a:1,h:2,em:'🏮',stage:'mine',s:'てらすよ〜！',lines:['あかりが…きえた…','ちらちら ドキドキ','ピッカーン！','…あぶら ぎれ'],note:'いるあいだ：仲間の金ほり（＄が見つかる効果）が2倍',aura:'miner'}); // 単純化：金ほり
 NEWC({id:'new98',n:'金ぴかミミズ ニョロゴールド',f:'an',r:'N',c:1,a:0,h:2,em:'🪱',stage:'mine',s:'ニョロ〜、もぐるね',lines:['ニョロ…（ひからびた）','ニョロ？','ニョロピカ〜！','…ただの土'],note:'見参！：地面にもぐる。2ターン後に 金塊をもって出てくる',bc:'treasure',v:1}); // 単純化：旅の賞金+＄1
-NEWC({id:'new99',n:'つるはしゴブリン ノック',f:'mf',r:'N',c:2,a:2,h:2,em:'⛏️',stage:'mine',s:'ほった金は おれのもの！',lines:['おとしちまった〜','ほるぞ ほるぞ！','金が ザクザク！','…ツルハシ おれた'],note:'ダメージをうけるたび 金塊がこぼれる（タップでコイン+1）',dr:'gold',dv:1}); // 単純化：やられたら金塊
+NEWC({id:'new99',n:'ツルハシゴブリン',f:'mf',r:'N',c:2,a:2,h:2,em:'⛏️',stage:'mine',s:'ほった金は おれのもの！',lines:['おとしちまった〜','ほるぞ ほるぞ！','金が ザクザク！','…ツルハシ おれた'],note:'ダメージをうけるたび 金塊がこぼれる（タップでコイン+1）',dr:'gold',dv:1}); // 単純化：やられたら金塊
 NEWC({id:'new100',n:'ヘルメットのゴツン',f:'gu',r:'N',c:3,a:1,h:5,em:'⛑️',stage:'mine',s:'落盤注意！',lines:['ゴツン…きゅう〜','かたく してね','カッチカチ！','…へこんだ'],note:'かばう：敵はまずこのキャラを攻撃しないといけない',kw:'taunt'});
 NEWC({id:'new101',n:'ほら穴こびと ドワ助',f:'gu',r:'N',c:1,a:2,h:1,em:'🧔',stage:'mine',s:'ちいさくても ちからもち！',lines:['ふぅ…ここまで…','ドキドキ…','ちからもち パワー！','…こしが いたい'],note:'（効果なし）'});
 NEWC({id:'new102',n:'コウモリ大家族',f:'an',r:'N',c:3,a:1,h:1,em:'🦇',stage:'mine',s:'キキキッ！みんな いくよ！',lines:['キキ…ちりぢり〜','キキ？','キキキキーッ！','…1匹 まいご'],note:'見参！：コウモリ（1/1・はやうち）を2匹よぶ',bc:'summon',tok:'batT',v:2});
-NEWC({id:'new103',n:'宝石ガニ ジェミー',f:'an',r:'N',c:2,a:1,h:3,em:'🦀',stage:'mine',s:'キラキラ〜 きれいでしょ？',lines:['キラ…（こうらが…）','キラ？','ピッカピカ！','…くもった'],note:'やられたら：宝石を落とす！旅の賞金+＄2',dr:'gold',dv:2});
+NEWC({id:'new103',n:'宝石ガニ キラキラ',f:'an',r:'N',c:2,a:1,h:3,em:'🦀',stage:'mine',s:'キラキラ〜 きれいでしょ？',lines:['キラ…（こうらが…）','キラ？','ピッカピカ！','…くもった'],note:'やられたら：宝石を落とす！旅の賞金+＄2',dr:'gold',dv:2});
 NEWC({id:'new104',n:'ダイナマイト倉庫番 ドカ男',f:'gu',r:'N',c:4,a:2,h:4,em:'🧨',stage:'mine',s:'火気げんきん！…だよね？',lines:['ドッカーン…（まきこまれた）','ひ、火は ちかづけないで','ドカドカーン！','…しけってた'],note:'見参！：ダイナマイトを2本おく（3→2→1→ドカン！前の敵に3ダメージ）',bc:'fuse',v:2}); // 単純化：2ターン後 敵ぜんいんに2
-NEWC({id:'new105',n:'クリスタルのせいれい プリズマ',f:'sp',r:'R',c:4,a:3,h:4,em:'💎',stage:'mine',s:'キラリ…まぶしい？',lines:['パリン…','ていねいに みがいて','ギラーン！','…ヒビが はいった'],note:'はねかえし：さいしょにうけた攻撃を そのまま相手にかえす',kw:'shield thorns'}); // 単純化：バリア＋トゲ
-NEWC({id:'new106',n:'トロッコ暴走団ご一行',f:'ou',r:'R',c:4,a:4,h:3,em:'🛤️',stage:'mine',s:'ブレーキ？ そんなもの ないぜ！',lines:['だっせん〜〜！','スピード だすぜ！','フルスピード！','…ブレーキ かかった'],note:'見参！：トロッコで つっこむ！ランダムな敵3体に2ダメージ',bc:'aoe',v:1}); // 単純化：敵キャラぜんいんに1
+NEWC({id:'new105',n:'クリスタルのせいれい ギラリ',f:'sp',r:'R',c:4,a:3,h:4,em:'💎',stage:'mine',s:'キラリ…まぶしい？',lines:['パリン…','ていねいに みがいて','ギラーン！','…ヒビが はいった'],note:'はねかえし：さいしょにうけた攻撃を そのまま相手にかえす',kw:'shield thorns'}); // 単純化：バリア＋トゲ
+NEWC({id:'new106',n:'トロッコ暴走団 ガタゴー',f:'ou',r:'R',c:4,a:4,h:3,em:'🛤️',stage:'mine',s:'ブレーキ？ そんなもの ないぜ！',lines:['だっせん〜〜！','スピード だすぜ！','フルスピード！','…ブレーキ かかった'],note:'見参！：トロッコで つっこむ！ランダムな敵3体に2ダメージ',bc:'aoe',v:1}); // 単純化：敵キャラぜんいんに1
 NEWC({id:'new107',n:'金のガチョウ ゴルディ',f:'an',r:'R',c:3,a:1,h:4,em:'🥚',stage:'mine',s:'ガァ〜、金のたまご いる？',lines:['ガァ…たまご…','ガァ？ ドキドキ','ガァガァ！ピカピカ！','…ふつうの たまご'],note:'いるあいだ：毎ターン 金のたまごをうむ（3つで＄5）',aura:'miner'}); // 単純化：金ほり
 NEWC({id:'new108',n:'ほりあて大王 キンメッキー',f:'gu',r:'L',c:6,a:5,h:6,em:'👑',stage:'mine',s:'ここ ほれ ワッハッハ！',lines:['金を…のこして…いくぞ…','大王を ほりおこすのか？','金脈 だいはっけん！','…金メッキだった'],note:'見参！：この戦い、たおした敵ぜんぶが金塊を落とす / やられたら：旅の賞金+＄5',aura:'miner',dr:'gold',dv:5}); // 単純化：見参 → いるあいだ金ほり
 NEWC({id:'new109',n:'ひよこのピーコ',f:'an',r:'N',c:1,a:1,h:1,em:'🐥',stage:'ranch',s:'ピヨ！ピーコだよ！',lines:['ピ…ピヨ〜…','ピヨ？ コケ子に なれる？','コケッ！？','…ピヨのまま'],note:'しんかする！：敵を3体たおすと「にわとりコケ子」（3/3）に変身',evoK:3,evoF:{n:'にわとりコケ子',a:2,h:2}});
 NEWC({id:'new110',n:'ミルク牛のモーリー',f:'an',r:'N',c:2,a:1,h:4,em:'🐄',stage:'ranch',s:'モ〜、ミルク のむ？',lines:['モ〜…','モ〜？','モ〜〜♪ こいミルク！','…モ（しょぼん）'],note:'いるあいだ：ターンの終わり、ミルクで あなたの体力を1いやす',aura:'regen',av:1}); // 単純化：あなた → 仲間ぜんいん
 NEWC({id:'new111',n:'カウボーイ見習い ハット',f:'sh',r:'N',c:1,a:1,h:2,em:'🤠',stage:'ranch',s:'ぼうしだけは 一人前！',lines:['ぼうし…とんでった…','ドキドキ…','かっこいい？','…ぼうしが ぶかぶか'],note:'昇進：子分を3体たおすと「カウボーイ⭐」',rankK:3});
-NEWC({id:'new112',n:'どろんこブタ スロッピー',f:'an',r:'N',c:2,a:2,h:2,em:'🐖',stage:'ranch',s:'ブヒッ、どろあそび しよ！',lines:['ブヒ〜…どろだらけ…','ブヒ？','ブヒヒッ！ピカピカ！','…また どろだらけ'],note:'やられたら：どろをはねる！たおした敵は 1回休み',kw:'thorns'}); // 単純化：トゲ（攻撃してきた相手に仕返し）
-NEWC({id:'new113',n:'かかしのヘイウッド',f:'gh',r:'N',c:2,a:0,h:4,em:'🌾',stage:'ranch',s:'…（じーっと たってる）',lines:['ワラが…ちる…','…ドキドキ（してない）','…かっこよく なった','…ワラが ぬけた'],note:'かばう：敵はまずこのキャラを攻撃しないといけない / 鳥の敵は こわがって攻撃できない',kw:'taunt'}); // 単純化：鳥よけは省略
-NEWC({id:'new114',n:'ひつじかい ラナ',f:'gu',r:'N',c:3,a:2,h:3,em:'🧶',stage:'ranch',s:'みんな〜、こっちだよ〜',lines:['まいごに…しないでね…','もこもこ ドキドキ','もっこもこ！','…ひつじが にげた'],note:'見参！：こひつじ（0/2・かばう）を2匹よぶ',bc:'summon',tok:'lambT',v:2});
+NEWC({id:'new112',n:'どろんこブタ ドロ吉',f:'an',r:'N',c:2,a:2,h:2,em:'🐖',stage:'ranch',s:'ブヒッ、どろあそび しよ！',lines:['ブヒ〜…どろだらけ…','ブヒ？','ブヒヒッ！ピカピカ！','…また どろだらけ'],note:'やられたら：どろをはねる！たおした敵は 1回休み',kw:'thorns'}); // 単純化：トゲ（攻撃してきた相手に仕返し）
+NEWC({id:'new113',n:'かかしのワラ兵衛',f:'gh',r:'N',c:2,a:0,h:4,em:'🌾',stage:'ranch',s:'…（じーっと たってる）',lines:['ワラが…ちる…','…ドキドキ（してない）','…かっこよく なった','…ワラが ぬけた'],note:'かばう：敵はまずこのキャラを攻撃しないといけない / 鳥の敵は こわがって攻撃できない',kw:'taunt'}); // 単純化：鳥よけは省略
+NEWC({id:'new114',n:'ひつじかい モコ',f:'gu',r:'N',c:3,a:2,h:3,em:'🧶',stage:'ranch',s:'みんな〜、こっちだよ〜',lines:['まいごに…しないでね…','もこもこ ドキドキ','もっこもこ！','…ひつじが にげた'],note:'見参！：こひつじ（0/2・かばう）を2匹よぶ',bc:'summon',tok:'lambT',v:2});
 NEWC({id:'new115',n:'ロデオうし バッファ',f:'an',r:'N',c:3,a:4,h:2,em:'🐂',stage:'ranch',s:'ブモー！のれるもんなら のってみな！',lines:['ブモ…（ドスン）','ブモ？','ブモォーッ！','…ブモ'],note:'見参！：あばれる！ランダムなキャラ（敵か味方）に2ダメージ',bc:'bomb',v:2}); // 単純化：ランダムな敵だけ
-NEWC({id:'new116',n:'なげなわ少年 ルーピー',f:'sh',r:'N',c:2,a:1,h:2,em:'🪢',stage:'ranch',s:'ヒュンヒュン〜、つかまえた！',lines:['からまった〜','なわ、まわしていい？','ヒュヒュン！','…じぶんに からまった'],note:'見参！：敵1体を投げ縄でひっぱる。その敵は かばうになる',bc:'weaken',v:1}); // 単純化：ねらった敵の攻撃-1
+NEWC({id:'new116',n:'なげなわ少年 ヒュンヒュン',f:'sh',r:'N',c:2,a:1,h:2,em:'🪢',stage:'ranch',s:'ヒュンヒュン〜、つかまえた！',lines:['からまった〜','なわ、まわしていい？','ヒュヒュン！','…じぶんに からまった'],note:'見参！：敵1体を投げなわでひっぱる。その敵は かばうになる',bc:'weaken',v:1}); // 単純化：ねらった敵の攻撃-1
 NEWC({id:'new117',n:'牧羊犬ボーダ',f:'an',r:'N',c:3,a:2,h:3,em:'🐕',stage:'ranch',s:'ワン！みんな あつめるよ！',lines:['クゥ〜ン…','ワン？','ワンワン！','…クゥン'],note:'見参！：動物のなかまを1人ひく',bc:'get',v:1});
 NEWC({id:'new118',n:'子牛のベビモー',f:'an',r:'N',c:1,a:1,h:2,em:'🐮',stage:'ranch',s:'モ〜…',lines:['モ…','モ？','モ〜！','…モ'],note:'（効果なし）'});
 NEWC({id:'new119',n:'おてんば馬 ジャジャ',f:'an',r:'R',c:3,a:3,h:3,em:'🐴',stage:'ranch',s:'ヒヒーン！じゃじゃ馬よ！',lines:['ヒヒン…あとは まかせた！','ヒン？','ヒヒーン！絶好調！','…ヒン（ぷいっ）'],note:'やられたら：のっていたカウボーイ（2/2）が とびおりる',dr:'summon',tok:'cowboyT',dv:1});
-NEWC({id:'new120',n:'ガンコおやじ オックス',f:'sh',r:'R',c:4,a:3,h:4,em:'🐃',stage:'ranch',s:'わしの牧場で なにしとる！',lines:['牛たちを…たのむ…','やさしく しろよ','ガハハ、元気が でた！','…ガンコは なおらん'],note:'見参！：牛の群れが走る！ランダムな敵3体に1ダメージ',bc:'aoe',v:1}); // 単純化：敵キャラぜんいんに1
-NEWC({id:'new121',n:'ひつじ雲のせいれい ニンバス',f:'sp',r:'R',c:3,a:1,h:4,em:'☁️',stage:'ranch',s:'もくもく〜、雨ふらすよ〜',lines:['もく…（はれちゃった）','もくもく ドキドキ','もっくもく！','…ちぎれた'],note:'見参！：あめ+1',wx:'rain',wv:1});
-NEWC({id:'new122',n:'まぼろしの白馬 ブランシュ',f:'an',r:'L',c:6,a:5,h:5,em:'🦄',stage:'ranch',s:'風に のって 来たよ',lines:['風に…かえる…','たてがみを ととのえて','どこまでも かけるよ！','…ひづめが いたい'],note:'はやうち：出したターンからすぐ攻撃できる / いるあいだ：仲間ぜんいん はやうち',kw:'quick',aura:'atk',av:1}); // 単純化：仲間ぜんいん攻撃+1
-NEWC({id:'new123',n:'きっぷ切りのクリッピー',f:'gu',r:'N',c:1,a:1,h:1,em:'🎫',stage:'train',s:'きっぷを はいけん！',lines:['パチン…（はさみ おとした）','きっぷ ある？','パチパチン！','…きりすぎた'],note:'見参！：敵1体に きっぷを切る！つぎのターン 攻撃できない',bc:'stun'});
+NEWC({id:'new120',n:'ガンコおやじ ウシオ',f:'sh',r:'R',c:4,a:3,h:4,em:'🐃',stage:'ranch',s:'わしの牧場で なにしとる！',lines:['牛たちを…たのむ…','やさしく しろよ','ガハハ、元気が でた！','…ガンコは なおらん'],note:'見参！：牛の群れが走る！ランダムな敵3体に1ダメージ',bc:'aoe',v:1}); // 単純化：敵キャラぜんいんに1
+NEWC({id:'new121',n:'ひつじ雲のせいれい モクモク',f:'sp',r:'R',c:3,a:1,h:4,em:'☁️',stage:'ranch',s:'もくもく〜、雨ふらすよ〜',lines:['もく…（はれちゃった）','もくもく ドキドキ','もっくもく！','…ちぎれた'],note:'見参！：あめ+1',wx:'rain',wv:1});
+NEWC({id:'new122',n:'まぼろしの白馬 ハクウン',f:'an',r:'L',c:6,a:5,h:5,em:'🦄',stage:'ranch',s:'風に のって 来たよ',lines:['風に…かえる…','たてがみを ととのえて','どこまでも かけるよ！','…ひづめが いたい'],note:'はやうち：出したターンからすぐ攻撃できる / いるあいだ：仲間ぜんいん はやうち',kw:'quick',aura:'atk',av:1}); // 単純化：仲間ぜんいん攻撃+1
+NEWC({id:'new123',n:'きっぷ切りのパチン',f:'gu',r:'N',c:2,a:1,h:1,em:'🎫',stage:'train',s:'きっぷを はいけん！',lines:['パチン…（はさみ おとした）','きっぷ ある？','パチパチン！','…きりすぎた'],note:'見参！：切符違反！ いちばん強い敵を 2ターン 牢屋に とじこめる',bc:'jail'}); // 11/1 かしまさん：切符違反！牢屋に とじこめる（パシャリと 同じ 牢屋）。コスト1→2
 NEWC({id:'new124',n:'おべんとうコック フライパン',f:'sa',r:'N',c:2,a:1,h:3,em:'🍳',stage:'train',s:'おべんとう いかが〜？',lines:['こげちゃった〜','なにを つくろうかな','とくせい おべんとう！','…しょっぱい'],note:'見参！：「おべんとう」（0コイン：体力を3いやす）を手札に1枚',bc:'healall',v:1}); // 単純化：仲間ぜんいんとあなたを1いやす
-NEWC({id:'new125',n:'屋根の上のカラス ネヴァー',f:'an',r:'N',c:1,a:1,h:1,em:'🐦',stage:'train',s:'カァ！とびこむぜ！',lines:['カァ…おちた…','カァ？','カァカァ！','…カァ'],note:'見参！：屋根から とびこむ！敵1体に1ダメージ',bc:'dmg',v:1});
-NEWC({id:'new126',n:'貨物ねずみ カーゴ',f:'an',r:'N',c:1,a:1,h:1,em:'🐀',stage:'train',s:'チュ！にもつの中は ひみつ',lines:['チュ…にもつ…たのむ…','チュ？','チュチュ〜！','…からっぽ'],note:'やられたら：手にいれる！貨物の3枚から1枚',dr:'draw',dv:1}); // 単純化：やられたら1人ひく
-NEWC({id:'new127',n:'石炭くべの コーリー',f:'gu',r:'N',c:2,a:2,h:2,em:'⚫',stage:'train',s:'どんどん くべるぞ！',lines:['すす…まみれ…','あつくして くれ！','まっかに もえた！','…火が きえた'],note:'見参！：仲間のロボット1体を はやうちに',bc:'buffr',v:1}); // 単純化：ほかの仲間1体+1/+1
+NEWC({id:'new125',n:'屋根の上のカラス クロスケ',f:'an',r:'N',c:1,a:1,h:1,em:'🐦',stage:'train',s:'カァ！とびこむぜ！',lines:['カァ…おちた…','カァ？','カァカァ！','…カァ'],note:'見参！：屋根から とびこむ！敵1体に1ダメージ',bc:'dmg',v:1});
+NEWC({id:'new126',n:'貨物のねずみ ニモツ',f:'an',r:'N',c:1,a:1,h:1,em:'🐀',stage:'train',s:'チュ！にもつの中は ひみつ',lines:['チュ…にもつ…たのむ…','チュ？','チュチュ〜！','…からっぽ'],note:'やられたら：手にいれる！貨物の3枚から1枚',dr:'draw',dv:1}); // 単純化：やられたら1人ひく
+NEWC({id:'new127',n:'石炭くべの ススオ',f:'gu',r:'N',c:2,a:2,h:2,em:'⚫',stage:'train',s:'どんどん くべるぞ！',lines:['すす…まみれ…','あつくして くれ！','まっかに もえた！','…火が きえた'],note:'見参！：仲間のロボット1体を はやうちに',bc:'buffr',v:1}); // 単純化：ほかの仲間1体+1/+1
 NEWC({id:'new128',n:'鉄橋の見はり ヤグラ',f:'sh',r:'N',c:3,a:2,h:4,em:'🔭',stage:'train',s:'あやしいやつ はっけん！',lines:['見のがした…','よく見ててね','まる見えだ！','…ねぼけてた'],note:'見参！：敵の手札を1枚 見やぶる',bc:'scout'});
-NEWC({id:'new129',n:'郵便車のスタンピー',f:'gu',r:'N',c:2,a:1,h:2,em:'📦',stage:'train',s:'お荷物 とどけまーす！',lines:['あて先…ふめい…','小包、ドキドキ','とどきました！','…まちがえた'],note:'見参！：小包（0/2）をおく。やられると中から なかまを1人ひく',bc:'summon',tok:'parcelT',v:1});
-NEWC({id:'new130',n:'列車強盗の子分 バンディ',f:'ou',r:'N',c:2,a:2,h:1,em:'🎭',stage:'train',s:'兄貴の ために！',lines:['コイン…おとした〜','ドキドキ…','ぬすみ 大成功！','…兄貴に おこられる'],note:'やられたら：ぬすんだコインを落とす（タップでコイン+1）',dr:'gold',dv:1});
-NEWC({id:'new131',n:'車輪ロボ ホイーリー',f:'ro',r:'N',c:3,a:3,h:2,em:'🛞',stage:'train',s:'クルクル〜！',lines:['クル…パンク…','クル？','クルクルクル〜！','…クル（とまった）'],note:'がったい！：ほかのロボットにがったいして 車輪になる。そのロボットは はやうち',gattai:1,kw:'quick'});
-NEWC({id:'new132',n:'トンネルおばけ グルーム',f:'gh',r:'N',c:3,a:2,h:3,em:'🌑',stage:'train',s:'まっくらだよ〜',lines:['あかるい…まぶしい…','くらいほうが すき','まっくらパワー！','…でんき ついた'],note:'いるあいだ：敵の攻撃が ときどき外れる（まっくら！）',wx:'sand',wv:1}); // 単純化：見参！ですなあらし+1
+NEWC({id:'new129',n:'郵便車のペタ',f:'gu',r:'N',c:2,a:1,h:2,em:'📦',stage:'train',s:'お荷物 とどけまーす！',lines:['あて先…ふめい…','小包、ドキドキ','とどきました！','…まちがえた'],note:'見参！：小包（0/2）をおく。やられると中から なかまを1人ひく',bc:'summon',tok:'parcelT',v:1});
+NEWC({id:'new130',n:'列車強盗の子分 マスクン',f:'ou',r:'N',c:2,a:2,h:1,em:'🎭',stage:'train',s:'兄貴の ために！',lines:['コイン…おとした〜','ドキドキ…','ぬすみ 大成功！','…兄貴に おこられる'],note:'やられたら：ぬすんだコインを落とす（タップでコイン+1）',dr:'gold',dv:1});
+NEWC({id:'new131',n:'車輪ロボ クルクル',f:'ro',r:'N',c:3,a:3,h:2,em:'🛞',stage:'train',s:'クルクル〜！',lines:['クル…パンク…','クル？','クルクルクル〜！','…クル（とまった）'],note:'がったい！：ほかのロボットにがったいして 車輪になる。そのロボットは はやうち',gattai:1,kw:'quick'});
+NEWC({id:'new132',n:'トンネルおばけ クラヤミ',f:'gh',r:'N',c:3,a:2,h:3,em:'🌑',stage:'train',s:'まっくらだよ〜',lines:['あかるい…まぶしい…','くらいほうが すき','まっくらパワー！','…でんき ついた'],note:'いるあいだ：敵の攻撃が ときどき外れる（まっくら！）',wx:'sand',wv:1}); // 単純化：見参！ですなあらし+1
 NEWC({id:'new133',n:'ダイナマイト強盗 ドカン兄弟',f:'ou',r:'R',c:4,a:2,h:3,em:'🧨',stage:'train',s:'ふたりで ドッカーン！',lines:['ドカン…（ふたりで）','火、つけていい？','ドッカーン！','…ふたりとも しけってた'],note:'見参！：敵の場にダイナマイトをおく（3→2→1→ドカン！敵ぜんいん2ダメージ）',bc:'fuse',v:2});
 NEWC({id:'new134',n:'連結ロボ ガチャン',f:'ro',r:'R',c:3,a:2,h:3,em:'⛓️',stage:'train',s:'ガチャン！つなぐよ！',lines:['ガチャ…はずれた…','ガチャン？','ガッチャーン！','…ネジ ゆるんだ'],note:'がったい！：となりの仲間2体を連結。片方がうけたダメージを2体でわける',gattai:1}); // 単純化：ふつうのがったい
-NEWC({id:'new135',n:'じゃんけん車掌 パンチョ',f:'sh',r:'R',c:3,a:3,h:2,em:'✊',stage:'train',s:'じゃんけん…ぽん！',lines:['あいこで…まけた…','グー？ チョキ？','勝った！','…パーだった'],note:'決闘：見参！で敵1体とじゃんけん勝負！勝てば4ダメージ',bc:'quickmg',v:4});
+NEWC({id:'new135',n:'じゃんけん車掌 キップル',f:'sh',r:'R',c:3,a:3,h:2,em:'✊',stage:'train',s:'じゃんけん…ぽん！',lines:['あいこで…まけた…','グー？ チョキ？','勝った！','…パーだった'],note:'決闘：見参！で敵1体とじゃんけん勝負！勝てば4ダメージ',bc:'quickmg',v:4});
 NEWC({id:'new136',n:'大陸横断ロボ特急 グレートレール',f:'ro',r:'L',c:7,a:6,h:7,em:'🚄',stage:'train',s:'シュゴォォ！はっしゃ しまーす！',lines:['終点…です…','点検 おねがいします','フルスピード！','…ブレーキ ききすぎ'],note:'見参！：線路をつっぱしる！敵ぜんいんに2ダメージ / いるあいだ：ほかのロボットは はやうち',bc:'aoe',v:2,aura:'faction',av:1}); // 単純化：ロボットはやうち → ほかのロボット攻撃+1
 NEWC({id:'new137',n:'スチームタウンのパン屋',f:'st',r:'N',c:1,a:1,h:2,em:'🍞',stage:'steam',s:'やきたて だよ〜！',lines:['こげ…ちゃった…','ふっくら してね','ふわっふわ！','…ぺちゃんこ'],note:'見参！：あつあつパン！仲間1体の体力を2いやす',bc:'healone',v:2});
 NEWC({id:'new138',n:'スチームタウンの新聞売り',f:'st',r:'N',c:1,a:1,h:1,em:'📰',stage:'steam',s:'号外 号外〜！',lines:['新聞…うりきれ…','どんな記事？','大スクープ！','…きのうの新聞'],note:'見参！：号外〜！敵の手札を1枚 見やぶる',bc:'scout'});
-NEWC({id:'new139',n:'じょうきロボ モクリン',f:'ro',r:'N',c:2,a:2,h:2,em:'♨️',stage:'steam',s:'シュー！ポン！',lines:['シュ〜…（しぼんだ）','シュー？','シュシュポン！','…ポン'],note:'やられたら：もくもく湯気！仲間ぜんいん1ターン かくれんぼ',dr:'healall',dv:1}); // 単純化：やられたら仲間ぜんいん1いやす
-NEWC({id:'new140',n:'ネジまきロボ ネジリー',f:'ro',r:'N',c:1,a:0,h:2,em:'⚙️',stage:'steam',s:'キリキリ…まいて〜',lines:['キリ…（とまった）','まいて まいて','キリキリ全開！','…まきすぎた'],note:'がったい！：ほかのロボットにがったい。そのロボットの見参！がもう1回',gattai:1});
+NEWC({id:'new139',n:'ゆげロボ シューポン',f:'ro',r:'N',c:2,a:2,h:2,em:'♨️',stage:'steam',s:'シュー！ポン！',lines:['シュ〜…（しぼんだ）','シュー？','シュシュポン！','…ポン'],note:'やられたら：もくもく湯気！仲間ぜんいん1ターン かくれんぼ',dr:'healall',dv:1}); // 単純化：やられたら仲間ぜんいん1いやす
+NEWC({id:'new140',n:'ネジまきロボ キリキリ',f:'ro',r:'N',c:1,a:0,h:2,em:'⚙️',stage:'steam',s:'キリキリ…まいて〜',lines:['キリ…（とまった）','まいて まいて','キリキリ全開！','…まきすぎた'],note:'がったい！：ほかのロボットにがったい。そのロボットの見参！がもう1回',gattai:1});
 NEWC({id:'new141',n:'スチームタウンの時計屋',f:'st',r:'N',c:3,a:2,h:3,em:'🕰️',stage:'steam',s:'チクタク、まきもどし〜',lines:['時間…ぎれ…','いま なんじ？','ぴったり！','…5分 おくれてる'],note:'見参！：時間をもどす！さいごにやられた仲間を手札にもどす',bc:'recall'});
-NEWC({id:'new142',n:'おそうじロボ ゴッシム',f:'ro',r:'N',c:2,a:1,h:3,em:'🧹',stage:'steam',s:'ゴミは すいこむよ！',lines:['ゴミが…つまった…','ピカピカに？','ブォーン！','…フィルター つまった'],note:'しんかする！：キャラが3体たおれたら「おそうじ大王」（5/5）に変身',evoK:3,evoF:{n:'おそうじ大王',a:4,h:2}}); // 単純化：キャラが3体たおれたら → 敵を3体たおすと
+NEWC({id:'new142',n:'おそうじロボ ハキハキ',f:'ro',r:'N',c:2,a:1,h:3,em:'🧹',stage:'steam',s:'ゴミは すいこむよ！',lines:['ゴミが…つまった…','ピカピカに？','ブォーン！','…フィルター つまった'],note:'しんかする！：キャラが3体たおれたら「おそうじ大王」（5/5）に変身',evoK:3,evoF:{n:'おそうじ大王',a:4,h:2}}); // 単純化：キャラが3体たおれたら → 敵を3体たおすと
 NEWC({id:'new143',n:'スチームタウンの花火師',f:'st',r:'N',c:3,a:2,h:2,em:'🎆',stage:'steam',s:'たまや〜！',lines:['ドーン…（自分に）','花火、ドキドキ','大輪の花！','…不発'],note:'見参！：花火ドーン！敵ぜんいんまぶしくて、つぎの攻撃は外れる',bc:'weakall',v:1}); // 単純化：敵ぜんいん攻撃-1
 NEWC({id:'new144',n:'ブリキの犬 ワンボルト',f:'ro',r:'N',c:2,a:2,h:2,em:'🐶',stage:'steam',s:'ワン・ボルト！',lines:['ワ…ン…','ワン？','ワンワン！ピカピカ！','…さびた'],note:'（効果なし）'});
 NEWC({id:'new145',n:'スチームタウンの見はり番',f:'st',r:'N',c:2,a:1,h:3,em:'👀',stage:'steam',s:'ここは とおさん！',lines:['見はり…しっぱい…','しっかり たのむ','ばっちり 見はるぞ','…いねむり してた'],note:'かばう：敵はまずこのキャラを攻撃しないといけない',kw:'taunt'});
@@ -5494,85 +5529,85 @@ NEWC({id:'new150',n:'スチームタウンの大時計塔 ボーンボーン',f:
 NEWC({id:'new151',n:'ぬまぬまゾンビ',f:'zo',r:'N',c:2,a:2,h:2,em:'🧟',stage:'bayou',s:'アー…ぬまぬま…',lines:['アー…ぶくぶく…','アー…ぬれてる…','アー！ ぬまパワー！','アー…しずんだ…'],note:'やられたら：ぬまに しずんで、2ターン後に もどってくる',kw:'revive'}); // 単純化：1回復活
 NEWC({id:'new152',n:'オタマのタマ',f:'an',r:'N',c:1,a:1,h:1,em:'🐸',stage:'bayou',s:'ぴちぴち！',lines:['ぴち…','カエルに なれる？','ケロッ！？','…オタマのまま'],note:'しんかする！：敵を3体たおすと「ガマ大将」（4/5）に変身',evoK:3,evoF:{n:'ガマ大将',a:3,h:4}});
 NEWC({id:'new153',n:'ホタルのチカ',f:'an',r:'N',c:1,a:1,h:1,em:'✨',stage:'bayou',s:'ピカッ、てらすよ',lines:['ふっ…','ピカ？','ピッカピカ！','…でんち ぎれ'],note:'いるあいだ：仲間の攻撃が外れない（すなあらし・まっくらでもOK）'}); // 単純化：未実装（効果なし）
-NEWC({id:'new154',n:'きりおばけ ミスティ',f:'gh',r:'N',c:2,a:1,h:3,em:'🌫️',stage:'bayou',s:'もや〜…どこ いくの？',lines:['もや…はれた…','もやもや ドキドキ','もやもや〜ん！','…はれちゃった'],note:'かくれんぼ：自分から攻撃するまで、ねらわれない / 見参！：敵1体が まいご（1回休み）',kw:'stealth',bc:'stun'});
+NEWC({id:'new154',n:'きりおばけ モヤモヤ',f:'gh',r:'N',c:2,a:1,h:3,em:'🌫️',stage:'bayou',s:'もや〜…どこ いくの？',lines:['もや…はれた…','もやもや ドキドキ','もやもや〜ん！','…はれちゃった'],note:'かくれんぼ：自分から攻撃するまで、ねらわれない / 見参！：敵1体が まいご（1回休み）',kw:'stealth',bc:'stun'});
 NEWC({id:'new155',n:'ヒルのチュー太',f:'an',r:'N',c:1,a:1,h:2,em:'💧',stage:'bayou',s:'チュ〜…いただきます',lines:['チュ…（ぽろっ）','チュ？','チュ〜♪ まんぷく','…チュ（しょぼん）'],note:'戦うたび あいてから体力を1すいとる',poison:1}); // 単純化：戦った相手に毒×1
-NEWC({id:'new156',n:'ぬま魔女見習い マーシャ',f:'ma',r:'N',c:4,a:2,h:3,em:'🧙',stage:'bayou',s:'ドロドロ〜、ケロケロに なれ〜！',lines:['じぶんが…カエルに…','じゅもん まちがえないでね','まほう 大成功！','…ケロッ（自分が）'],note:'見参！：敵1体を カエル（1/1）に変える',bc:'blow'}); // 単純化：いちばん強い敵を手札に吹き飛ばす
-NEWC({id:'new157',n:'ワニのたまご ハッチ',f:'an',r:'N',c:1,a:0,h:2,em:'🥚',stage:'bayou',s:'…コトコト',lines:['…パリン','…ドキドキ','…パキッ！','…コト'],note:'2ターンたつと われて「ワニっこ」（3/3）になる',growT:1}); // 単純化：うえるとそだつ+1
+NEWC({id:'new156',n:'ぬま魔女見習い ドロリ',f:'ma',r:'N',c:4,a:2,h:3,em:'🧙',stage:'bayou',s:'ドロドロ〜、ケロケロに なれ〜！',lines:['じぶんが…カエルに…','じゅもん まちがえないでね','まほう 大成功！','…ケロッ（自分が）'],note:'見参！：敵1体を カエル（1/1）に変える',bc:'blow'}); // 単純化：いちばん強い敵を手札に吹き飛ばす
+NEWC({id:'new157',n:'ワニのたまご ゴロタマ',f:'an',r:'N',c:1,a:0,h:2,em:'🥚',stage:'bayou',s:'…コトコト',lines:['…パリン','…ドキドキ','…パキッ！','…コト'],note:'2ターンたつと われて「ワニっこ」（3/3）になる',growT:1}); // 単純化：うえるとそだつ+1
 NEWC({id:'new158',n:'ナマズのヒゲじい',f:'an',r:'N',c:3,a:3,h:4,em:'🐟',stage:'bayou',s:'ほっほ、ヒゲが ゆれとる',lines:['ヒゲが…','ヒゲを ととのえて','りっぱな ヒゲじゃ！','…ヒゲが ちぢれた'],note:'（効果なし）'});
 NEWC({id:'new159',n:'どろんこガエル ペッタン',f:'an',r:'N',c:2,a:2,h:2,em:'🐸',stage:'bayou',s:'ペッタン！',lines:['ペタ…','ペッタン？','ペッタンペッタン！','…ペタ'],note:'見参！：敵1体にどろをかける。つぎの攻撃は外れる',bc:'weaken',v:2}); // 単純化：ねらった敵の攻撃-2
-NEWC({id:'new160',n:'ぬまの釣り人 ボバー',f:'gu',r:'N',c:3,a:2,h:3,em:'🎣',stage:'bayou',s:'なにが つれるかな〜',lines:['にげられた…','ウキが うごいた！','大物だ〜！','…長ぐつ だった'],note:'手にいれる！：つりあげた3枚から1枚',bc:'get',v:1});
-NEWC({id:'new161',n:'ガマの油売り ヌルリ',f:'ma',r:'R',c:3,a:2,h:3,em:'🧴',stage:'bayou',s:'さあさ、ガマの油だよ〜',lines:['ヌルッ…すべった…','ヌルヌル ドキドキ','ツルッツル！','…ベタベタ'],note:'見参！：仲間1体をヌルヌルに。投げ縄でつかまらない＆1回だけダメージ0',kw:'shield',bc:'buffr',v:1}); // 単純化：自分にバリア＋ほかの仲間1体+1/+1
-NEWC({id:'new162',n:'沼のせいれい バイユー',f:'sp',r:'R',c:3,a:2,h:3,em:'🌧️',stage:'bayou',s:'じめじめ〜、いい天気',lines:['からからに…なる…','しっとり たのむわ','じめじめ 最高！','…はれちゃった'],note:'見参！：あめ+1 / いるあいだ：あめの日は 毎ターン子ガエル（1/1）がふえる',wx:'rain',wv:1,aura:'wxboost'}); // 単純化：子ガエル → 天気の名人
+NEWC({id:'new160',n:'ぬまの釣り人 ウキ太',f:'gu',r:'N',c:3,a:2,h:3,em:'🎣',stage:'bayou',s:'なにが つれるかな〜',lines:['にげられた…','ウキが うごいた！','大物だ〜！','…長ぐつ だった'],note:'手にいれる！：つりあげた3枚から1枚',bc:'get',v:1});
+NEWC({id:'new161',n:'ガマの油売り ヌルリ',f:'ma',r:'R',c:3,a:2,h:3,em:'🧴',stage:'bayou',s:'さあさ、ガマの油だよ〜',lines:['ヌルッ…すべった…','ヌルヌル ドキドキ','ツルッツル！','…ベタベタ'],note:'見参！：仲間1体をヌルヌルに。投げなわでつかまらない＆1回だけダメージ0',kw:'shield',bc:'buffr',v:1}); // 単純化：自分にバリア＋ほかの仲間1体+1/+1
+NEWC({id:'new162',n:'沼のせいれい ジメリ',f:'sp',r:'R',c:3,a:2,h:3,em:'🌧️',stage:'bayou',s:'じめじめ〜、いい天気',lines:['からからに…なる…','しっとり たのむわ','じめじめ 最高！','…はれちゃった'],note:'見参！：あめ+1 / いるあいだ：あめの日は 毎ターン子ガエル（1/1）がふえる',wx:'rain',wv:1,aura:'wxboost'}); // 単純化：子ガエル → 天気の名人
 NEWC({id:'new163',n:'ゾンビワニ ガブリン',f:'zo',r:'R',c:5,a:4,h:5,em:'🐊',stage:'bayou',s:'アー…ガブ…',lines:['アー…ペッ（はきだした）','アー…ガブ？','アー！ ガブガブ！','アー…はらいっぱい'],note:'戦ってたおした敵を まるのみ。やられたら そのキャラが あなたの仲間として出てくる',kw:'deadly'}); // 単純化：必殺
 NEWC({id:'new164',n:'沼の女王 ケロリーヌ',f:'an',r:'L',c:6,a:4,h:6,em:'👸',stage:'bayou',s:'ケロケロ、わらわの沼へ ようこそ',lines:['ケロ…わらわの…沼が…','やさしく あつかうケロ','ケロッホッホ！','…ケロ（ぷいっ）'],note:'見参！：子ガエル（1/1）を4匹よぶ / いるあいだ：カエルがやられるたび 敵ヒーローに1ダメージ',bc:'summon',tok:'frogT',v:4}); // 単純化：いるあいだは省略
-NEWC({id:'new165',n:'ゆきだるまのポラリン',f:'sp',r:'N',c:1,a:1,h:2,em:'⛄',stage:'snow',s:'ころころ〜、ゆきだるまだよ',lines:['とけ…ちゃう…','つめたく してね','まんまる！','…かたむいた'],note:'やられたら：ゆき+1',wx:'snow',wv:1}); // 単純化：やられたら → 見参！で
-NEWC({id:'new166',n:'ペンギンのワドル',f:'an',r:'N',c:1,a:1,h:1,em:'🐧',stage:'snow',s:'ペンッ！すべるよ〜',lines:['ペン…（ころん）','ペン？','ペンペーン！','…ころんだ'],note:'すべる：攻撃したあと、となりの敵にもぶつかる（1ダメージ）',kw:'splash'}); // 単純化：なぎはらい（となりに2）
+NEWC({id:'new165',n:'ゆきだるまのダルリン',f:'sp',r:'N',c:1,a:1,h:2,em:'⛄',stage:'snow',s:'ころころ〜、ゆきだるまだよ',lines:['とけ…ちゃう…','つめたく してね','まんまる！','…かたむいた'],note:'やられたら：ゆき+1',wx:'snow',wv:1}); // 単純化：やられたら → 見参！で
+NEWC({id:'new166',n:'ペンギンのペン太',f:'an',r:'N',c:1,a:1,h:1,em:'🐧',stage:'snow',s:'ペンッ！すべるよ〜',lines:['ペン…（ころん）','ペン？','ペンペーン！','…ころんだ'],note:'すべる：攻撃したあと、となりの敵にもぶつかる（1ダメージ）',kw:'splash'}); // 単純化：なぎはらい（となりに2）
 NEWC({id:'new167',n:'ゆきうさぎ シロップ',f:'an',r:'N',c:2,a:2,h:1,em:'🐇',stage:'snow',s:'ぴょこっ、見えないでしょ？',lines:['見つかっちゃった…','ぴょこ？','まっしろ ぴょん！','…どろが ついた'],note:'ゆきの日は かくれんぼ（ねらわれない）',kw:'stealth'}); // 単純化：いつでも かくれんぼ
-NEWC({id:'new168',n:'つららのせいれい アイシー',f:'sp',r:'N',c:2,a:2,h:2,em:'🧊',stage:'snow',s:'ピキピキ〜',lines:['ポタッ…','ピキ？','ピッキーン！','…とけた'],note:'見参！：ゆき+1',wx:'snow',wv:1});
+NEWC({id:'new168',n:'つららのせいれい ピキ',f:'sp',r:'N',c:2,a:2,h:2,em:'🧊',stage:'snow',s:'ピキピキ〜',lines:['ポタッ…','ピキ？','ピッキーン！','…とけた'],note:'見参！：ゆき+1',wx:'snow',wv:1});
 NEWC({id:'new169',n:'そりひき犬 ハスキン',f:'an',r:'N',c:2,a:2,h:2,em:'🐺',stage:'snow',s:'ワオン！いっしょに いこう！',lines:['ワ…ン…','ワン？','ワオーン！','…そり ひっくりかえった'],note:'連携：となりの仲間が攻撃すると、いっしょに1ダメージ',aura:'link'});
-NEWC({id:'new170',n:'山小屋番 ロッジ',f:'sa',r:'N',c:3,a:2,h:4,em:'🪵',stage:'snow',s:'あったまって いきなよ',lines:['火が…きえた…','まきを くべてね','ぽかぽか！','…けむい'],note:'いるあいだ：仲間は こおらない',kw:'nostun'}); // 単純化：自分だけ酔わない（こおらない）
+NEWC({id:'new170',n:'山小屋番 ダンロ',f:'sa',r:'N',c:3,a:2,h:4,em:'🪵',stage:'snow',s:'あったまって いきなよ',lines:['火が…きえた…','まきを くべてね','ぽかぽか！','…けむい'],note:'いるあいだ：仲間は こおらない',kw:'nostun'}); // 単純化：自分だけ酔わない（こおらない）
 NEWC({id:'new171',n:'ヘラジカのツノーブ',f:'an',r:'N',c:4,a:4,h:5,em:'🦌',stage:'snow',s:'ブォ〜！',lines:['ブォ…（ドスン）','ブォ？','ブォォ〜！','…ツノ ひっかかった'],note:'（効果なし）'});
-NEWC({id:'new172',n:'毛皮うりのペルト',f:'gu',r:'N',c:2,a:1,h:3,em:'🧣',stage:'snow',s:'もふもふ、あったかいよ',lines:['もふ…','もふもふ ドキドキ','もっふもふ！','…毛が ぬけた'],note:'見参！：仲間1体にマフラー！こおらなくなる',bc:'buffr',v:1}); // 単純化：ほかの仲間1体+1/+1
-NEWC({id:'new173',n:'雪男の子 イエッティ',f:'an',r:'N',c:3,a:3,h:3,em:'🦍',stage:'snow',s:'ウホッ、ゆき大すき！',lines:['ウホ…さむい…','ウホ？ 大きく なれる？','ウホホーッ！','…ちいさいまま'],note:'しんかする！：敵を3体たおすと「大雪男」（6/6）に変身',evoK:3,evoF:{n:'大雪男',a:3,h:3}});
+NEWC({id:'new172',n:'毛皮うりのモフ兵衛',f:'gu',r:'N',c:2,a:1,h:3,em:'🧣',stage:'snow',s:'もふもふ、あったかいよ',lines:['もふ…','もふもふ ドキドキ','もっふもふ！','…毛が ぬけた'],note:'見参！：仲間1体にマフラー！こおらなくなる',bc:'buffr',v:1}); // 単純化：ほかの仲間1体+1/+1
+NEWC({id:'new173',n:'雪男の子 ユキッコ',f:'an',r:'N',c:3,a:3,h:3,em:'🦍',stage:'snow',s:'ウホッ、ゆき大すき！',lines:['ウホ…さむい…','ウホ？ 大きく なれる？','ウホホーッ！','…ちいさいまま'],note:'しんかする！：敵を3体たおすと「大雪男」（6/6）に変身',evoK:3,evoF:{n:'大雪男',a:3,h:3}});
 NEWC({id:'new174',n:'スキー保安官 シュプール',f:'sh',r:'N',c:3,a:3,h:2,em:'⛷️',stage:'snow',s:'シャーッ！おいついたぞ！',lines:['ころんだ〜','すべって いい？','パーフェクト！','…木に ぶつかった'],note:'はやうち：出したターンからすぐ攻撃できる / 昇進：子分を3体たおすと⭐',kw:'quick',rankK:3});
-NEWC({id:'new175',n:'オーロラのせいれい ルミナ',f:'sp',r:'R',c:4,a:2,h:4,em:'🌌',stage:'snow',s:'ゆらゆら〜、きれいでしょ',lines:['ひかりが…きえる…','そっと してね','にじいろ〜！','…くもっちゃった'],note:'見参！：天気を消して、こおりを ぜんぶとかす。仲間ぜんいんの体力を2いやす',bc:'healall',v:2}); // 単純化：天気リセットは省略
+NEWC({id:'new175',n:'オーロラのせいれい ヒカリナ',f:'sp',r:'R',c:4,a:2,h:4,em:'🌌',stage:'snow',s:'ゆらゆら〜、きれいでしょ',lines:['ひかりが…きえる…','そっと してね','にじいろ〜！','…くもっちゃった'],note:'見参！：天気を消して、こおりを ぜんぶとかす。仲間ぜんいんの体力を2いやす',bc:'healall',v:2}); // 単純化：天気リセットは省略
 NEWC({id:'new176',n:'なだれ呼びのヤッホー爺',f:'ma',r:'R',c:5,a:3,h:4,em:'🏔️',stage:'snow',s:'ヤッホー！…あ、しまった',lines:['まきこまれた…','大きな声は だめじゃよ','ヤッホー！大成功！','…ゆきに うもれた'],note:'見参！：なだれ！敵ぜんいんに2ダメージ。仲間にも1ダメージ',bc:'aoe',v:2}); // 単純化：仲間へのダメージは省略
 NEWC({id:'new177',n:'マンモスの赤ちゃん パオ',f:'an',r:'R',c:4,a:3,h:5,em:'🐘',stage:'snow',s:'パオ〜！',lines:['パオ…','パオ？ 大きくなる？','パオォォーン！','…パオ（ちいさい）'],note:'しんかする！：敵を3体たおすと「マンモス」（7/7・かばう）に変身',evoK:3,evoF:{n:'マンモス',a:4,h:2,kw:'taunt'}});
 NEWC({id:'new178',n:'ふぶきの大せいれい ブリザーラ',f:'sp',r:'L',c:6,a:5,h:6,em:'🌨️',stage:'snow',s:'ひゅおぉ…ぜんぶ こおらせて あげる',lines:['とけて…しまう…','つめた〜く たのむわ','ぜんぶ まっしろ！','…春が きちゃった'],note:'見参！：ゆき+3 / いるあいだ：こおった敵は とけない',wx:'snow',wv:3,aura:'wxboost'}); // 単純化：とけない → 天気の名人
-NEWC({id:'new179',n:'ラクダのキャメリア',f:'an',r:'N',c:2,a:1,h:4,em:'🐫',stage:'oasis',s:'お水 わけてあげる〜',lines:['こぶが…ぺちゃんこ…','こぶ ドキドキ','こぶ ふたつ！','…こぶ へった'],note:'いるあいだ：こぶの水で、毎ターン仲間1体を1いやす',aura:'regen',av:1}); // 単純化：1体 → ぜんいん
-NEWC({id:'new180',n:'ヤシの実ざる ココ',f:'an',r:'N',c:1,a:1,h:1,em:'🐒',stage:'oasis',s:'ウキキッ、えいっ！',lines:['ウキ…（ゴツン）','ウキ？','ウキキーッ！','…ウキ'],note:'見参！：ヤシの実を投げる！ランダムな敵に1ダメージ',bc:'bomb',v:1});
-NEWC({id:'new181',n:'フェネックのフェン',f:'an',r:'N',c:1,a:1,h:1,em:'🦊',stage:'oasis',s:'ないしょ話、きこえたよ',lines:['みみ…ふさがれた…','みみ ピーン！','ぜんぶ きこえる！','…なにも きこえない'],note:'見参！：大きな耳で、敵の手札を1枚 見やぶる',bc:'scout'});
-NEWC({id:'new182',n:'しんきろう売り ウェイヴィ',f:'ma',r:'N',c:3,a:2,h:3,em:'🪞',stage:'oasis',s:'ゆらゆら〜、ふえちゃった',lines:['きえちゃった…','ゆらゆら ドキドキ','ゆらゆら〜ん！','…にせもの だった'],note:'見参！：手札のカード1枚のコピーをつくる',bc:'draw',v:1}); // 単純化：なかまを1人ひく
-NEWC({id:'new183',n:'水くみ娘 アイシャ',f:'sa',r:'N',c:2,a:1,h:3,em:'🪣',stage:'oasis',s:'おみず どうぞ〜',lines:['こぼれちゃった…','たっぷり くんでね','なみなみ！','…からっぽ'],note:'見参！：あめ+1',wx:'rain',wv:1});
-NEWC({id:'new184',n:'キャラバン隊長 ダン・キャメル',f:'gu',r:'N',c:4,a:3,h:4,em:'🐪',stage:'oasis',s:'さあ、旅の 荷物を ひろげよう',lines:['キャラバン…ここまで…','いい品 あるかな？','大商い だ！','…ガラクタだった'],note:'手にいれる！：3枚から1枚を、2回',bc:'get',v:2});
-NEWC({id:'new185',n:'サソリ占い師 マダム・ピンサ',f:'ma',r:'N',c:2,a:2,h:2,em:'🔮',stage:'oasis',s:'うふふ、見えるわ…',lines:['見えなかった…','占って あげる','大吉よ！','…大凶だわ'],note:'見参！：つぎにひくカードを 先に見て、すきなら ひく',bc:'draw',v:1}); // 単純化：なかまを1人ひく
-NEWC({id:'new186',n:'すなどけいのせいれい クロノ',f:'sp',r:'N',c:3,a:2,h:3,em:'⏳',stage:'oasis',s:'さらさら…コチコチ…',lines:['さら…（とまった）','ひっくりかえして？','さらさら〜！','…つまった'],note:'見参！：すなあらし+1',wx:'sand',wv:1});
-NEWC({id:'new187',n:'ハヤブサ使い テイロン',f:'gu',r:'N',c:3,a:2,h:2,em:'🦅',stage:'oasis',s:'いけっ、ハヤブサ！',lines:['もどって…こない…','いっしょに がんばろ','ナイス キャッチ！','…ハヤブサが ねてた'],note:'見参！：ハヤブサ（2/1・はやうち）をよぶ',bc:'summon',tok:'hawkT',v:1});
+NEWC({id:'new179',n:'ラクダのこぶ子',f:'an',r:'N',c:2,a:1,h:4,em:'🐫',stage:'oasis',s:'お水 わけてあげる〜',lines:['こぶが…ぺちゃんこ…','こぶ ドキドキ','こぶ ふたつ！','…こぶ へった'],note:'いるあいだ：こぶの水で、毎ターン仲間1体を1いやす',aura:'regen',av:1}); // 単純化：1体 → ぜんいん
+NEWC({id:'new180',n:'ヤシの実ざる ウキキ',f:'an',r:'N',c:1,a:1,h:1,em:'🐒',stage:'oasis',s:'ウキキッ、えいっ！',lines:['ウキ…（ゴツン）','ウキ？','ウキキーッ！','…ウキ'],note:'見参！：ヤシの実を投げる！ランダムな敵に1ダメージ',bc:'bomb',v:1});
+NEWC({id:'new181',n:'フェネックのミミ丸',f:'an',r:'N',c:1,a:1,h:1,em:'🦊',stage:'oasis',s:'ないしょ話、きこえたよ',lines:['みみ…ふさがれた…','みみ ピーン！','ぜんぶ きこえる！','…なにも きこえない'],note:'見参！：大きな耳で、敵の手札を1枚 見やぶる',bc:'scout'});
+NEWC({id:'new182',n:'しんきろう売り ユラユラ',f:'ma',r:'N',c:3,a:2,h:3,em:'🪞',stage:'oasis',s:'ゆらゆら〜、ふえちゃった',lines:['きえちゃった…','ゆらゆら ドキドキ','ゆらゆら〜ん！','…にせもの だった'],note:'見参！：手札のカード1枚のコピーをつくる',bc:'draw',v:1}); // 単純化：なかまを1人ひく
+NEWC({id:'new183',n:'水くみ娘 ミズホ',f:'sa',r:'N',c:2,a:1,h:3,em:'🪣',stage:'oasis',s:'おみず どうぞ〜',lines:['こぼれちゃった…','たっぷり くんでね','なみなみ！','…からっぽ'],note:'見参！：あめ+1',wx:'rain',wv:1});
+NEWC({id:'new184',n:'キャラバン隊長 ラクダン',f:'gu',r:'N',c:4,a:3,h:4,em:'🐪',stage:'oasis',s:'さあ、旅の 荷物を ひろげよう',lines:['キャラバン…ここまで…','いい品 あるかな？','大商い だ！','…ガラクタだった'],note:'手にいれる！：3枚から1枚を、2回',bc:'get',v:2});
+NEWC({id:'new185',n:'サソリ占い師 ハサミーナ',f:'ma',r:'N',c:2,a:2,h:2,em:'🔮',stage:'oasis',s:'うふふ、見えるわ…',lines:['見えなかった…','占って あげる','大吉よ！','…大凶だわ'],note:'見参！：つぎにひくカードを 先に見て、すきなら ひく',bc:'draw',v:1}); // 単純化：なかまを1人ひく
+NEWC({id:'new186',n:'すなどけいのせいれい コチコチ',f:'sp',r:'N',c:3,a:2,h:3,em:'⏳',stage:'oasis',s:'さらさら…コチコチ…',lines:['さら…（とまった）','ひっくりかえして？','さらさら〜！','…つまった'],note:'見参！：すなあらし+1',wx:'sand',wv:1});
+NEWC({id:'new187',n:'ハヤブサ使い タカミ',f:'gu',r:'N',c:3,a:2,h:2,em:'🦅',stage:'oasis',s:'いけっ、ハヤブサ！',lines:['もどって…こない…','いっしょに がんばろ','ナイス キャッチ！','…ハヤブサが ねてた'],note:'見参！：ハヤブサ（2/1・はやうち）をよぶ',bc:'summon',tok:'hawkT',v:1});
 NEWC({id:'new188',n:'日がさトカゲ パラソル',f:'an',r:'N',c:2,a:2,h:3,em:'⛱️',stage:'oasis',s:'日かげは いいね〜',lines:['あつい…','パラ？','パラーン！','…かさ やぶれた'],note:'（効果なし）'});
-NEWC({id:'new189',n:'空とぶじゅうたん ソアリン',f:'ma',r:'R',c:3,a:2,h:2,em:'🪄',stage:'oasis',s:'のって のって〜！',lines:['おちる〜〜','ふわふわ ドキドキ','ふわり〜ん！','…ほつれた'],note:'見参！：仲間1体をのせて とぶ。そのなかまは かばうをむしして攻撃できる',bc:'buffr',v:1}); // 単純化：ほかの仲間1体+1/+1
+NEWC({id:'new189',n:'空とぶじゅうたん フワリン',f:'ma',r:'R',c:3,a:2,h:2,em:'🪄',stage:'oasis',s:'のって のって〜！',lines:['おちる〜〜','ふわふわ ドキドキ','ふわり〜ん！','…ほつれた'],note:'見参！：仲間1体をのせて とぶ。そのなかまは かばうをむしして攻撃できる',bc:'buffr',v:1}); // 単純化：ほかの仲間1体+1/+1
 NEWC({id:'new190',n:'おどり子 ベリーナ',f:'sa',r:'R',c:3,a:2,h:3,em:'💃',stage:'oasis',s:'シャラララ〜ン♪',lines:['目が…まわった〜','ステップ ドキドキ','シャララーン！','…足が もつれた'],note:'見参！：ゆらゆらダンス！敵2体を酔っぱらわせる（1回休み）',bc:'stun'}); // 単純化：2体 → いちばん強い1体
-NEWC({id:'new191',n:'砂クジラ モービー',f:'an',r:'R',c:5,a:4,h:6,em:'🐋',stage:'oasis',s:'ボエ〜〜〜',lines:['ボエ…（ひからびた）','ボエ？','ボエエ〜〜ッ！','…ボエ'],note:'見参！：砂にもぐる（2ターン ねらわれない）。出てくるとき 敵ぜんいんに2ダメージ',kw:'stealth',bc:'aoe',v:1}); // 単純化：かくれんぼ＋すぐ敵ぜんいんに1
+NEWC({id:'new191',n:'砂クジラ ボエー',f:'an',r:'R',c:5,a:4,h:6,em:'🐋',stage:'oasis',s:'ボエ〜〜〜',lines:['ボエ…（ひからびた）','ボエ？','ボエエ〜〜ッ！','…ボエ'],note:'見参！：砂にもぐる（2ターン ねらわれない）。出てくるとき 敵ぜんいんに2ダメージ',kw:'stealth',bc:'aoe',v:1}); // 単純化：かくれんぼ＋すぐ敵ぜんいんに1
 NEWC({id:'new192',n:'しんきろうの王女 ミラージュナ',f:'ma',r:'L',c:6,a:4,h:5,em:'🏜️',stage:'oasis',s:'ほんものの わたくしは どれかしら？',lines:['まぼろしに…きえる…','うつくしく おねがい','まぼろしは えいえんよ','…まぼろし だったのね'],note:'見参！：敵1体のコピーを 仲間としてつくる / いるあいだ：すなあらし がずっとつづく',wx:'sand',wv:2,aura:'wxboost'}); // 単純化：コピーは省略、すなあらし2＋天気の名人
-NEWC({id:'new193',n:'ひのこ坊や フリッチー',f:'sp',r:'N',c:1,a:1,h:1,em:'🔥',stage:'volcano',s:'チリチリ〜、あったかいよ',lines:['ジュッ…','チリ？','メラッ！','…ジュッ'],note:'見参！：はれ+1',wx:'sun',wv:1});
-NEWC({id:'new194',n:'溶岩ガメ ラーヴィ',f:'an',r:'N',c:3,a:1,h:5,em:'🐢',stage:'volcano',s:'のっし…のっし…',lines:['のっし…（ひえた）','ゆっくり たのむよ','アッチアチ！','…ひえちゃった'],note:'アチアチ：攻撃されたら、攻撃してきた相手に1ダメージ',kw:'thorns'});
-NEWC({id:'new195',n:'ふいご番のベロウズ',f:'gu',r:'N',c:2,a:1,h:3,em:'🌬️',stage:'volcano',s:'フーフー！もやすよ！',lines:['フー…いきぎれ…','フーフー ドキドキ','まっかっか！','…火が きえた'],note:'見参！：仲間1体を あつあつに。戦った相手が やけど（毎ターン1ダメージ）',bc:'buffr',v:1}); // 単純化：ほかの仲間1体+1/+1
+NEWC({id:'new193',n:'ひのこ坊や チリチリ',f:'sp',r:'N',c:1,a:1,h:1,em:'🔥',stage:'volcano',s:'チリチリ〜、あったかいよ',lines:['ジュッ…','チリ？','メラッ！','…ジュッ'],note:'見参！：はれ+1',wx:'sun',wv:1});
+NEWC({id:'new194',n:'溶岩ガメ ノッシー',f:'an',r:'N',c:3,a:1,h:5,em:'🐢',stage:'volcano',s:'のっし…のっし…',lines:['のっし…（ひえた）','ゆっくり たのむよ','アッチアチ！','…ひえちゃった'],note:'アチアチ：攻撃されたら、攻撃してきた相手に1ダメージ',kw:'thorns'});
+NEWC({id:'new195',n:'ふいご番のフーフー',f:'gu',r:'N',c:2,a:1,h:3,em:'🌬️',stage:'volcano',s:'フーフー！もやすよ！',lines:['フー…いきぎれ…','フーフー ドキドキ','まっかっか！','…火が きえた'],note:'見参！：仲間1体を あつあつに。戦った相手が やけど（毎ターン1ダメージ）',bc:'buffr',v:1}); // 単純化：ほかの仲間1体+1/+1
 NEWC({id:'new196',n:'火トカゲ サラマ',f:'an',r:'N',c:2,a:2,h:2,em:'🦎',stage:'volcano',s:'メラメラ〜！',lines:['メラ…ジュッ','メラ？','メラメラメラ！','…しっぽ こげた'],note:'やられたら：火の粉をまく！敵ぜんいんに1ダメージ',dr:'boom',dv:1}); // 単純化：ランダム1ダメージ×3
-NEWC({id:'new197',n:'温泉ザル ソーキー',f:'an',r:'N',c:2,a:1,h:3,em:'🐵',stage:'volcano',s:'いい湯だな〜',lines:['のぼせた〜…','ポカ？','ポカポカ〜♪','…ぬるい'],note:'いるあいだ：ターンの終わり、自分と となりの仲間を1いやす',aura:'regen',av:1}); // 単純化：仲間ぜんいん
+NEWC({id:'new197',n:'温泉ザル ポカポカ',f:'an',r:'N',c:2,a:1,h:3,em:'🐵',stage:'volcano',s:'いい湯だな〜',lines:['のぼせた〜…','ポカ？','ポカポカ〜♪','…ぬるい'],note:'いるあいだ：ターンの終わり、自分と となりの仲間を1いやす',aura:'regen',av:1}); // 単純化：仲間ぜんいん
 NEWC({id:'new198',n:'マグマゾンビ',f:'zo',r:'N',c:3,a:3,h:2,em:'🧟',stage:'volcano',s:'アー…アチチ…',lines:['アー…ひえた…','アー…あつい…','アー！ メラメラ！','アー…プスン'],note:'1回復活：たおれても1回だけ体力1で立ち上がる（もえながら）',kw:'revive'});
 NEWC({id:'new199',n:'けむりおばけ スモッグ',f:'gh',r:'N',c:2,a:2,h:1,em:'💨',stage:'volcano',s:'けほけほ〜、どこでしょう？',lines:['ふっ…（きえた）','もくもく？','もっくもく！','…はれちゃった'],note:'かくれんぼ：自分から攻撃するまで、ねらわれない',kw:'stealth'});
 NEWC({id:'new200',n:'ふんかまち ドッカン岩',f:'sp',r:'N',c:4,a:3,h:3,em:'🌋',stage:'volcano',s:'ゴゴゴ…もうすぐ…',lines:['ドッカーン！（まんぞく）','ゴゴ？','ゴゴゴゴゴ！','…ぷすっ'],note:'3→2→1 で噴火！敵ぜんいんに2ダメージ。自分も退場',fuel:3,dr:'fuse',dv:2}); // 単純化：3ターンで退場＋やられたらドカン
 NEWC({id:'new201',n:'はいかぶりコウモリ',f:'an',r:'N',c:1,a:1,h:2,em:'🦇',stage:'volcano',s:'ケホッ、パタパタ',lines:['パタ…','パタ？','パタパタ！','…ケホ'],note:'（効果なし）'});
 NEWC({id:'new202',n:'黒こげ鉱夫 コゲタ',f:'gu',r:'N',c:3,a:2,h:3,em:'🪨',stage:'volcano',s:'アチチ、いい石 あるかな',lines:['まっくろけ…','なにが でるかな','火の石 ゲット！','…ただの炭'],note:'手にいれる！：火山の石3つから1つ',bc:'get',v:1});
 NEWC({id:'new203',n:'火の鳥のヒナ ヒヨノ',f:'an',r:'R',c:3,a:2,h:2,em:'🐣',stage:'volcano',s:'ピィ！もえてるよ！',lines:['ピ…まだ…おわらない…','ピィ？','ピィィッ！メラメラ！','…ピィ（ひえた）'],note:'やられたら：はいの中から 1回だけ よみがえる。はれの日は もう1回',kw:'revive'}); // 単純化：はれの日の2回目は省略
-NEWC({id:'new204',n:'マグマゴーレム ラーヴァロン',f:'sp',r:'R',c:5,a:5,h:5,em:'🔥',stage:'volcano',s:'ドロ…ドロ…',lines:['ドロ…かたまった…','ドロ？','ドロドローン！','…かちかち'],note:'いるあいだ：前の敵に 毎ターン1ダメージ（あつい！）',wx:'sun',wv:1}); // 単純化：見参！で はれ+1
+NEWC({id:'new204',n:'マグマゴーレム ドロドロン',f:'sp',r:'R',c:5,a:5,h:5,em:'🔥',stage:'volcano',s:'ドロ…ドロ…',lines:['ドロ…かたまった…','ドロ？','ドロドローン！','…かちかち'],note:'いるあいだ：前の敵に 毎ターン1ダメージ（あつい！）',wx:'sun',wv:1}); // 単純化：見参！で はれ+1
 NEWC({id:'new205',n:'噴火占いのボルカばば',f:'ma',r:'R',c:4,a:2,h:4,em:'🌋',stage:'volcano',s:'ひっひっ、山が うなっとる',lines:['よそう…ハズレた…','うらなって ほしいかい？','大当たりじゃ！','…ただの くしゃみ じゃった'],note:'見参！：噴火よそう！2ターン後、敵ぜんいんに3ダメージ',bc:'fuse',v:3});
 NEWC({id:'new206',n:'火山の大トカゲ王 イグニドン',f:'an',r:'L',c:7,a:6,h:6,em:'🦖',stage:'volcano',s:'グオォォ！火山の王の おでましだ！',lines:['たまごを…のこす…','わしを あつく してくれ','グオォ！もえあがれ！','…ひえてきた'],note:'見参！：噴火！敵ぜんいんに2ダメージ、はれ+2 / やられたら：たまごを1つのこす（2ターンで ふたたび生まれる）',bc:'aoe',v:2,wx:'sun',wv:2,dr:'summon',tok:'eggT',dv:1}); // 単純化：たまご＝0/2のそだつ子
 NEWC({id:'new207',n:'サボテンのつぼみ ポッチ',f:'ca',r:'N',c:1,a:0,h:2,em:'🌱',stage:'forest',s:'まだ つぼみだよ〜',lines:['しおしお…','さくかな？','ぐんぐん！','…さかなかった'],note:'うえるとそだつ：毎ターン すこしずつ 大きくなる（合成で のびる）',growT:1});
 NEWC({id:'new208',n:'サボテンの花 ピンキー',f:'ca',r:'N',c:2,a:1,h:3,em:'🌺',stage:'forest',s:'いいにおい でしょ？',lines:['はなびら…ちった…','きれいに さかせて','まんかい！','…しおれた'],note:'ちりょう：ターンの終わり、仲間1体を1いやす',aura:'regen',av:1}); // 単純化：1体 → ぜんいん
 NEWC({id:'new209',n:'ハリネズミのチック',f:'an',r:'N',c:2,a:2,h:2,em:'🦔',stage:'forest',s:'チクチクするよ！',lines:['チク…（まるまった）','さわっちゃ だめ','トゲ ピーン！','…トゲ ねた'],note:'トゲトゲ：攻撃されたら、攻撃してきた相手に1ダメージ',kw:'thorns'});
-NEWC({id:'new210',n:'サボテン兄ちゃん スパイク',f:'ca',r:'N',c:2,a:2,h:2,em:'🌵',stage:'forest',s:'弟と いっしょだよ！',lines:['弟…たのんだ…','兄弟で ドキドキ','兄弟パワー！','…弟が まいご'],note:'見参！：弟（1/1・トゲトゲ）をよぶ',bc:'summon',tok:'broT',v:1});
-NEWC({id:'new211',n:'キツツキのペック',f:'an',r:'N',c:2,a:2,h:1,em:'🐦',stage:'forest',s:'コンコン、おじゃまします',lines:['コン…','コン？','コンコンコーン！','…くちばし いたい'],note:'サボテンのとなりに出すと かくれんぼ',kw:'stealth'}); // 単純化：いつでも かくれんぼ
+NEWC({id:'new210',n:'サボテン兄ちゃん ニョキ',f:'ca',r:'N',c:2,a:2,h:2,em:'🌵',stage:'forest',s:'弟と いっしょだよ！',lines:['弟…たのんだ…','兄弟で ドキドキ','兄弟パワー！','…弟が まいご'],note:'見参！：弟（1/1・トゲトゲ）をよぶ',bc:'summon',tok:'broT',v:1});
+NEWC({id:'new211',n:'キツツキのコンコン',f:'an',r:'N',c:2,a:2,h:1,em:'🐦',stage:'forest',s:'コンコン、おじゃまします',lines:['コン…','コン？','コンコンコーン！','…くちばし いたい'],note:'サボテンのとなりに出すと かくれんぼ',kw:'stealth'}); // 単純化：いつでも かくれんぼ
 NEWC({id:'new212',n:'サボテン丸太 ゴロサボ',f:'ca',r:'N',c:3,a:2,h:4,em:'🪵',stage:'forest',s:'ゴロン、とおさないよ',lines:['ゴロ…ころがった…','ゴロ？','トゲトゲ ゴロン！','…トゲ おれた'],note:'かばう：敵はまずこのキャラを攻撃しないといけない / トゲトゲ：攻撃されたら、攻撃してきた相手に1ダメージ',kw:'taunt thorns'});
-NEWC({id:'new213',n:'森のふくろう オリバー',f:'an',r:'N',c:3,a:2,h:3,em:'🦉',stage:'forest',s:'ホウ、ここに うえよう',lines:['ホウ…','ホウ？','ホウホウ！','…ホウ（ねむい）'],note:'見参！：手札のサボテンを1枚、すぐうえる（場に出す）',bc:'draw',v:1}); // 単純化：なかまを1人ひく
-NEWC({id:'new214',n:'サボテンミルク屋 スピーナ',f:'sa',r:'N',c:2,a:1,h:3,em:'🥛',stage:'forest',s:'トゲ ぬきミルク、どうぞ',lines:['トゲが…ささった…','まろやかに してね','まろやか〜！','…トゲ 入ってた'],note:'見参！：仲間ぜんいんとあなたの体力を1いやす',bc:'healall',v:1});
-NEWC({id:'new215',n:'まりもサボ ロリー',f:'ca',r:'N',c:1,a:1,h:1,em:'🟢',stage:'forest',s:'ころん♪',lines:['ころ…ちくっ','ころん？','ころころ〜ん！','…ころん（ぺしゃ）'],note:'やられたら：トゲをまきちらす！ランダムな敵に1ダメージ',dr:'boom',dv:1}); // 単純化：1回 → 3回
-NEWC({id:'new216',n:'たね飛ばし スピッツ',f:'ca',r:'N',c:3,a:1,h:2,em:'🌾',stage:'forest',s:'ぽぽぽんっ！',lines:['たね…のこすね…','どこに まこう？','ぽぽぽぽーん！','…まきわすれた'],note:'見参！：たね（0/1・うえるとそだつ）を2つまく',bc:'summon',tok:'seedT',v:2});
+NEWC({id:'new213',n:'森のふくろう ホウ助',f:'an',r:'N',c:3,a:2,h:3,em:'🦉',stage:'forest',s:'ホウ、ここに うえよう',lines:['ホウ…','ホウ？','ホウホウ！','…ホウ（ねむい）'],note:'見参！：手札のサボテンを1枚、すぐうえる（場に出す）',bc:'draw',v:1}); // 単純化：なかまを1人ひく
+NEWC({id:'new214',n:'サボテンミルク屋 トゲミ',f:'sa',r:'N',c:2,a:1,h:3,em:'🥛',stage:'forest',s:'トゲ ぬきミルク、どうぞ',lines:['トゲが…ささった…','まろやかに してね','まろやか〜！','…トゲ 入ってた'],note:'見参！：仲間ぜんいんとあなたの体力を1いやす',bc:'healall',v:1});
+NEWC({id:'new215',n:'まりもサボ ころん',f:'ca',r:'N',c:1,a:1,h:1,em:'🟢',stage:'forest',s:'ころん♪',lines:['ころ…ちくっ','ころん？','ころころ〜ん！','…ころん（ぺしゃ）'],note:'やられたら：トゲをまきちらす！ランダムな敵に1ダメージ',dr:'boom',dv:1}); // 単純化：1回 → 3回
+NEWC({id:'new216',n:'たね飛ばし タネタネ',f:'ca',r:'N',c:3,a:1,h:2,em:'🌾',stage:'forest',s:'ぽぽぽんっ！',lines:['たね…のこすね…','どこに まこう？','ぽぽぽぽーん！','…まきわすれた'],note:'見参！：たね（0/1・うえるとそだつ）を2つまく',bc:'summon',tok:'seedT',v:2});
 NEWC({id:'new217',n:'サボテン用心棒 ガンサボ',f:'ca',r:'R',c:4,a:3,h:5,em:'🛡️',stage:'forest',s:'さわってみな。チクッと するぜ',lines:['トゲが…ぬけた…','トゲ とがらせて','トゲトゲ MAX！','…トゲ まるくなった'],note:'かばう：敵はまずこのキャラを攻撃しないといけない / トゲトゲ：攻撃してきた相手に2ダメージ',kw:'taunt thorns'}); // 単純化：トゲは1ダメージ
-NEWC({id:'new218',n:'ねむり花 ララ',f:'ca',r:'R',c:3,a:1,h:4,em:'🌼',stage:'forest',s:'ふわぁ…いいにおい…',lines:['ゆめ…さめた…','そっと してね','おやすみ〜♪','…じぶんが ねちゃった'],note:'見参！：あまい香り！敵2体が ねむる（1回休み）',bc:'stun'}); // 単純化：2体 → いちばん強い1体
-NEWC({id:'new219',n:'森のレンジャー サグワード',f:'sh',r:'R',c:3,a:3,h:3,em:'🌲',stage:'forest',s:'森は おれが まもる！',lines:['森を…たのむ…','バッジ もらえる？','⭐ゲット！','…バッジ なくした'],note:'昇進：子分を3体たおすと⭐。⭐になると 仲間のサボテンぜんいん トゲトゲ',rankK:3}); // 単純化：サボテンにトゲは省略
-NEWC({id:'new220',n:'千年サボテン サグアロ様',f:'ca',r:'L',c:7,a:4,h:8,em:'🌵',stage:'forest',s:'ほっほ…千年 まっておったぞ',lines:['たねを…のこして…','そっと 水を くれ','千年ぶりに 花が さいた！','…あと 千年 まつかの'],note:'うえるとそだつ：毎ターン+1/+1 / トゲトゲ：攻撃してきた相手に2ダメージ / やられたら：たねを3つのこす',growT:1,kw:'thorns',dr:'summon',tok:'seedT',dv:3}); // 単純化：トゲは1ダメージ
+NEWC({id:'new218',n:'ねむり花 ユメミ',f:'ca',r:'R',c:3,a:1,h:4,em:'🌼',stage:'forest',s:'ふわぁ…いいにおい…',lines:['ゆめ…さめた…','そっと してね','おやすみ〜♪','…じぶんが ねちゃった'],note:'見参！：あまい香り！敵2体が ねむる（1回休み）',bc:'stun'}); // 単純化：2体 → いちばん強い1体
+NEWC({id:'new219',n:'森のレンジャー サボ松',f:'sh',r:'R',c:3,a:3,h:3,em:'🌲',stage:'forest',s:'森は おれが まもる！',lines:['森を…たのむ…','バッジ もらえる？','⭐ゲット！','…バッジ なくした'],note:'昇進：子分を3体たおすと⭐。⭐になると 仲間のサボテンぜんいん トゲトゲ',rankK:3}); // 単純化：サボテンにトゲは省略
+NEWC({id:'new220',n:'千年サボテン オオトゲ様',f:'ca',r:'L',c:7,a:4,h:8,em:'🌵',stage:'forest',s:'ほっほ…千年 まっておったぞ',lines:['たねを…のこして…','そっと 水を くれ','千年ぶりに 花が さいた！','…あと 千年 まつかの'],note:'うえるとそだつ：毎ターン+1/+1 / トゲトゲ：攻撃してきた相手に2ダメージ / やられたら：たねを3つのこす',growT:1,kw:'thorns',dr:'summon',tok:'seedT',dv:3}); // 単純化：トゲは1ダメージ
 NEWC({id:'new221',n:'ちびドン',f:'mf',r:'N',c:1,a:1,h:1,em:'🎩',stage:'mafia',s:'いつか ボスに なるんだ！',lines:['ママ〜…','えらく なれる？','⭐もらった！','…まだ 下っぱ'],note:'昇進：子分を3体たおすと「幹部ちびドン⭐」',rankK:3});
-NEWC({id:'new222',n:'くつみがきのバフィー',f:'sa',r:'N',c:1,a:1,h:1,em:'👞',stage:'mafia',s:'ピカピカに しますよ〜',lines:['ブラシ…おとした…','ピカピカ？','ピッカピカ！','…くつずみ こぼした'],note:'見参！：うわさを聞いた！敵の手札を1枚 見やぶる',bc:'scout'});
-NEWC({id:'new223',n:'ニセ警官ボビー',f:'mf',r:'N',c:2,a:2,h:2,em:'👮',stage:'mafia',s:'ほらほら、ケーサツだぞ〜',lines:['バレちゃった〜','バッジ、ホンモノっぽい？','そっくり！','…おもちゃの バッジ'],note:'見参！：敵の保安官1体を だまして1回休み',bc:'stun'}); // 単純化：保安官限定なし
+NEWC({id:'new222',n:'くつみがきのピカット',f:'sa',r:'N',c:1,a:1,h:1,em:'👞',stage:'mafia',s:'ピカピカに しますよ〜',lines:['ブラシ…おとした…','ピカピカ？','ピッカピカ！','…くつずみ こぼした'],note:'見参！：うわさを聞いた！敵の手札を1枚 見やぶる',bc:'scout'});
+NEWC({id:'new223',n:'ニセ警官ポリポリ',f:'mf',r:'N',c:2,a:2,h:2,em:'👮',stage:'mafia',s:'ほらほら、ケーサツだぞ〜',lines:['バレちゃった〜','バッジ、ホンモノっぽい？','そっくり！','…おもちゃの バッジ'],note:'見参！：敵の保安官1体を だまして1回休み',bc:'stun'}); // 単純化：保安官限定なし
 NEWC({id:'new224',n:'マシンガンねこ ダダニャ',f:'mf',r:'N',c:3,a:2,h:2,em:'🐈',stage:'mafia',s:'ダダダニャ〜！',lines:['ダダ…ニャ…','ニャ？','ダダダダニャー！','…たまぎれニャ'],note:'見参！：ダダダ！ランダムな敵に1ダメージを3回',bc:'bomb',v:3}); // 単純化：ランダムな敵1体に3
-NEWC({id:'new225',n:'ウラ帳簿のスペックス',f:'mf',r:'N',c:2,a:1,h:3,em:'📒',stage:'mafia',s:'数字は ウソを つかない…たぶん',lines:['帳簿…バレた…','メガネ ふいて','がっぽり！','…計算ミス'],note:'見参！：このターン出した仲間の数だけ コイン+1',bc:'coin',v:1}); // 単純化：コイン+1
+NEWC({id:'new225',n:'ウラ帳簿のメガネ',f:'mf',r:'N',c:2,a:1,h:3,em:'📒',stage:'mafia',s:'数字は ウソを つかない…たぶん',lines:['帳簿…バレた…','メガネ ふいて','がっぽり！','…計算ミス'],note:'見参！：このターン出した仲間の数だけ コイン+1',bc:'coin',v:1}); // 単純化：コイン+1
 NEWC({id:'new226',n:'路地裏のノラネコ団',f:'an',r:'N',c:3,a:1,h:1,em:'🐾',stage:'mafia',s:'ニャ〜ニャ〜ニャ〜！',lines:['ニャ…（ちらばった）','ニャ？','ニャニャニャニャ！','…みんな ねてる'],note:'見参！：ノラネコ（1/1）を場がいっぱいになるまで よぶ。つぎのターン ぜんぶ散歩にいく（退場）',bc:'summon',tok:'straycatT',v:6});
 NEWC({id:'new227',n:'ボディガードの石頭 ガンコ',f:'mf',r:'N',c:4,a:2,h:6,em:'🗿',stage:'mafia',s:'ボスに ちかよるな',lines:['石頭…われた…','かたく してくれ','カッチカチ！','…ゴツン'],note:'かばう：敵はまずこのキャラを攻撃しないといけない',kw:'taunt'});
-NEWC({id:'new228',n:'金庫番のスクアード',f:'mf',r:'N',c:2,a:1,h:3,em:'🔑',stage:'mafia',s:'カギは わたさないわ',lines:['金庫が…あいちゃう…','カギ、なくさないでね','カギ ふえた！','…カギ どこ？'],note:'やられたら：金庫があく！金塊を3つ落とす',dr:'gold',dv:3});
-NEWC({id:'new229',n:'ぼうしの中のハト クーパー',f:'an',r:'N',c:1,a:1,h:1,em:'🕊️',stage:'mafia',s:'クルッポー！',lines:['クル…ぼうしへ…','クル？','クルッポッポー！','…ぼうし からっぽ'],note:'やられたら：ぼうしからもう1羽（1/1）',dr:'summon',tok:'pigeonT',dv:1});
+NEWC({id:'new228',n:'金庫番のカギ子',f:'mf',r:'N',c:2,a:1,h:3,em:'🔑',stage:'mafia',s:'カギは わたさないわ',lines:['金庫が…あいちゃう…','カギ、なくさないでね','大成功じゃない♡','…カギ どこ？'],note:'やられたら：金庫があく！金塊を3つ落とす',dr:'gold',dv:3});
+NEWC({id:'new229',n:'ぼうしの中のハト クルッポ',f:'an',r:'N',c:1,a:1,h:1,em:'🕊️',stage:'mafia',s:'クルッポー！',lines:['クル…ぼうしへ…','クル？','クルッポッポー！','…（ぼうしが からっぽだ）'],note:'やられたら：ぼうしからもう1羽（1/1）',dr:'summon',tok:'pigeonT',dv:1});
 NEWC({id:'new230',n:'新聞記者スクープ',f:'gu',r:'N',c:2,a:1,h:2,em:'📸',stage:'mafia',s:'とくダネ いただき！',lines:['記事が…ボツ…','いい写真 とれるかな','一面トップ！','…ピンぼけ'],note:'見参！：スキャンダル！いちばん強い敵が はずかしくて1回休み',bc:'stun'});
-NEWC({id:'new231',n:'あやしいジュースの運び屋 ボトルズ',f:'mf',r:'R',c:3,a:2,h:3,em:'🍾',stage:'mafia',s:'とくべつな ジュースだよ',lines:['ビン…われた…','ふらないでね','とびきり あやしい！','…ただの 水'],note:'見参！：あやしいジュースを くばる！ランダムな敵2体が 酔っぱらう',bc:'stun'}); // 単純化：2体 → いちばん強い1体
-NEWC({id:'new232',n:'そっくりさん ツイニー',f:'ou',r:'R',c:4,a:3,h:3,em:'🎭',stage:'mafia',s:'どっちが ホンモノ？',lines:['バレた〜','だれに なろうかな','うりふたつ！','…にてない'],note:'見参！：仲間のレジェンド1体のそっくりさんに変身（同じ効果）',bc:'draw',v:1}); // 単純化：なかまを1人ひく
+NEWC({id:'new231',n:'あやしいジュースの運び屋 ボトルズ',f:'mf',r:'R',c:3,a:2,h:3,em:'🍾',stage:'mafia',s:'とくべつな ジュースだよ',lines:['ビン…われた…','ふらないでね','とびきり あやしい！','…ただの 水になっちゃった'],note:'見参！：あやしいジュースを くばる！ランダムな敵2体が 酔っぱらう',bc:'stun'}); // 単純化：2体 → いちばん強い1体
+NEWC({id:'new232',n:'そっくりさん マネマネ',f:'ou',r:'R',c:4,a:3,h:3,em:'🎭',stage:'mafia',s:'どっちが ホンモノ？',lines:['バレた〜','だれに なろうかな','うりふたつ！','…にてない'],note:'見参！：仲間のレジェンド1体のそっくりさんに変身（同じ効果）',bc:'draw',v:1}); // 単純化：なかまを1人ひく
 NEWC({id:'new233',n:'夜の歌姫 ジャズミン',f:'sa',r:'R',c:3,a:2,h:3,em:'🎷',stage:'mafia',s:'今夜は ジャズで いきましょ',lines:['アンコールは…なし…','声を ととのえて','スウィ〜ング！','…音が はずれた'],note:'連携：となりの仲間が攻撃すると、いっしょに1ダメージ（左右どちらも）',aura:'link'});
 NEWC({id:'new234',n:'ギャング街の顔役 ドン・パスタッチオ',f:'mf',r:'L',c:6,a:5,h:6,em:'🍝',stage:'mafia',s:'この街で わしを 知らんのか？',lines:['わしの…パスタが…','ていねいに たのむぞ','ボーノ！最高じゃ','…パスタ のびた'],note:'見参！：敵の手札から1枚うばう / いるあいだ：子分（マフィア）がやられるたび コイン+1',steal:1,aura:'coin'}); // 単純化：攻撃したら1まいぬすむ＋毎ターンコイン+1
 
@@ -5902,8 +5937,8 @@ const CB2=[
   {id:'triple',ic:'💥',n:'3れんさ',d:'1ターンで 敵を 3体 たおす'},
   {id:'perfect',ic:'💎',n:'ノーダメージ',d:'ダメージを うけずに 戦いに 勝つ'},
   {id:'close',ic:'😰',n:'ギリギリセーフ',d:'体力3いかで 戦いに 勝つ'},
-  {id:'bosscatch',ic:'🪢',n:'ボスを つかまえた',d:'ボスを 投げ縄で つかまえる'},
-  {id:'elitecatch',ic:'🪢',n:'賞金首 つかまえた',d:'賞金首を 投げ縄で つかまえる'},
+  {id:'bosscatch',ic:'🪢',n:'ボスを つかまえた',d:'ボスを 投げなわで つかまえる'},
+  {id:'elitecatch',ic:'🪢',n:'賞金首 つかまえた',d:'賞金首を 投げなわで つかまえる'},
   {id:'heal8',ic:'💚',n:'いやしの ちから',d:'1ターンで なかまを あわせて8いじょう いやす'},
   {id:'poison3',ic:'☠️',n:'ドクドク',d:'敵1体に 毒が 3つ いじょう',ev:'foe',t:f=>f.some(m=>m.poison>=3)},
   {id:'coin10',ic:'💰',n:'大判ぶるまい',d:'1ターンで コインを 10まい つかう'},
@@ -5935,8 +5970,8 @@ const cbHit=id=>{const c=CB.find(x=>x.id===id);if(c)comboFound(c)};
    「敵にも 引かせる」カード（ケッチャムの覚醒と シナジー）
    ===================================================================== */
 NEWC({id:'post',n:'おしゃべり郵便屋 ポスト',f:'gu',r:'N',c:2,a:2,h:2,em:'📮',stages:['train','saloon'],bc:'drawboth',v:2,s:'お手紙で〜す！ みんなに 2通ずつ！',lines:['あ…配達が…','ドキドキ…お手紙みたい','速達で つよくなった！','…あて先ふめい'],note:'見参！：おたがいに2まいひく'});
-NEWC({id:'baramaki',n:'ばらまき富豪 スペンダー',f:'mf',r:'R',c:3,a:3,h:3,em:'💸',stages:['mafia','train'],bc:'foedraw',v:2,s:'ほれほれ、ひろいたまえ！',lines:['わしの金が〜','ドキドキ…投資かね？','もうかった！','…損した'],note:'見参！：敵に2まいひかせる。自分+2/+2'});
-NEWC({id:'pigeon2',n:'てがみ配達 ポスティ',f:'an',r:'N',c:1,a:1,h:1,em:'🕊️',stages:['train','ranch'],dr:'drawboth',dv:1,s:'ポッポー！ おとどけもの！',lines:['ポ…ポー…','ドキドキ…ポ？','ポッポー！','…ポ'],note:'やられたら：おたがいに1まいひく'});
+NEWC({id:'baramaki',n:'ばらまき富豪 バラマキン',f:'mf',r:'R',c:3,a:3,h:3,em:'💸',stages:['mafia','train'],bc:'foedraw',v:2,s:'ほれほれ、ひろいたまえ！',lines:['ぼくちゃんの金が〜','ドキドキ…投資かね？','もうかった！','大損こいた…'],note:'見参！：敵に2まいひかせる。自分+2/+2'});
+NEWC({id:'pigeon2',n:'てがみ配達ハト',f:'an',r:'N',c:1,a:1,h:1,em:'🕊️',stages:['train','ranch'],dr:'drawboth',dv:1,s:'ポッポー！ おとどけもの！',lines:['ポ…ポー…','ドキドキ…ポ？','ポッポー！','…ポ'],note:'やられたら：おたがいに1まいひく'});
 Object.assign(KW_COL,{dboth:'#2a9a8a',fdraw:'#c0a020'});
 {const _el=effList;effList=function(id,lv){const L=_el.apply(this,arguments);const d=C[id];if(!d)return L;
   const put=(key,row)=>{const i=L.findIndex(x=>x[1]===key);if(i>=0)L[i]=row;else L.push(row)};
@@ -5967,7 +6002,7 @@ const AWN={
   eagle:['天空の大捕物','見参！：敵キャラ ぜんいんに 手配書を はって、2ダメージを 2回'],
   mustache:['グランドサロン貸し切りナイト','見参！：敵は つぎのターン コインが 0。敵が 出した子は 攻撃-1'],
   bunyan:['ジャイアント・ティンバー','見参！：敵キャラ ぜんいんと 敵の親分に 5ダメージ。丸太のかべを 2本'],
-  nanashi:['サイレント・ハイヌーン','見参！：99/99に なる。かわりに 山札・手札・ほかの なかまを ぜんぶ すてる'],
+  nanashi:['サイレント・ハイヌーン','見参！：99/99に なる。かわりに デッキ・手札・ほかの なかまを ぜんぶ すてる'],
   ketcham:['ファントム・グランドスティール','見参！：敵の手札から 2まい えらんで、自分の場に 出す'],
   ruler:['スチームタウン総動員','見参！：場が いっぱいに なるまで スチームタウンの あらくれが かけつける'],
   ma:['バーカー一家 総出撃','見参！：子分（3/3）を 2人 よぶ。子分が やられると のこりの 攻撃×2'],
@@ -6043,7 +6078,7 @@ const AWN_COOL={
 for(const id in AWN_COOL)if(AWN[id])AWN[id][1]=AWN_COOL[id];
 /* ボス戦の 力の説明も イキに */
 const BX_COOL={zombino:'敵のターンの終わりに ファミリー（ゾンビ2体）が かけつける。ファミリーが いるかぎり ドンは 不死身',
-  capone:'ラスボス。子分の枠は 5体、山札は たっぷり、にげも かくれも しない。毎ターン ニャンコが 2体。4ターンに1回「集合！」',
+  capone:'ラスボス。子分の枠は 5体、デッキは たっぷり、にげも かくれも しない。毎ターン ニャンコが 2体。4ターンに1回「集合！」',
   nanashi:'何をしてくるか 見えている。でも 止められるかな？ みだれうち／ねらいうち／リロード',
   ice:'敵のターンの終わりに あなたの なかまが 1体 カチコチ。さわられると こなごな。体力が半分で キレる'};
 for(const id in BX_COOL)if(BX[id])BX[id].d=BX_COOL[id];
@@ -6073,7 +6108,7 @@ const FLAV={
  zombie3:{"見参！": "ゾンビ（{1}/{2}）を{3}匹よぶ"},
  akudo2:{"見参！": "いちばん強い敵キャラに{1}ダメージ（いなければ敵ヒーロー）"},
  akudo3:{"見参！": "子分たち 出番だ！ 子分（{1}/{2}）を{3}匹よぶ"},
- juko:{"いるあいだ": "投げ縄+{1}%"},
+ juko:{"いるあいだ": "投げなわ+{1}%"},
  wyatt:{"見参！": "OK牧場へ！ 仲間ぜんいんの攻撃+{1}"},
  bruno:{"見参！": "いちばん強い敵を酔っぱらわせる（{1}回休み）"},
  ranger:{"見参！": "隊長命令！ ほかの仲間{1}体に+{2}/+{3}"},
@@ -6081,7 +6116,7 @@ const FLAV={
  gaga:{"やられたら": "アヒルのおもちゃ（{1}/{2}）を{3}匹よぶ"},
  mia:{"見参！": "敵の手札を見やぶる＋なかまを{1}人 ひく"},
  adara:{"いるあいだ": "聖なる 光で ほかの仲間の 攻撃+{1}"},
- bass:{"見参！": "にがさない！ この戦いのあいだ、投げ縄+{1}%"},
+ bass:{"見参！": "にがさない！ この戦いのあいだ、投げなわ+{1}%"},
  pork:{"見参！": "早撃ち勝負！勝ったらいちばん強い敵キャラに{1}ダメージ"},
  tenshu:{"見参！": "いらっしゃい！ このターン、コイン+{1}"},
  kifujin:{"見参！": "いちばん強い敵を酔っぱらわせる（{1}回休み）"},
@@ -6114,7 +6149,7 @@ const FLAV={
  pony:{"見参！": "速達でーす！ なかまを{1}人 ひく"},
  garasan:{"見参！": "シャーッ！ 子ヘビ（{1}/{2}）を{3}匹よぶ"},
  dog:{"見参！": "キャン！ 敵の手札を見やぶる＋なかまを{1}人 ひく"},
- eagle:{"見参！": "敵の手札を ぜんぶ 見る。それから 山札から 1まい ひく"},
+ eagle:{"見参！": "敵の手札を ぜんぶ 見る。それから デッキから 1まい ひく"},
  serpentia:{"見参！": "王妃の キバ！ いちばん強い敵キャラに毒×{1}"},
  grizzly:{"見参！": "お肉タップタプ！{1}回ごとに+{2}/+{3}"},
  funkoro:{"見参！": "敵がウンチをふんだ！{1}ターン敵の攻撃-{2}"},
@@ -6168,7 +6203,7 @@ const FLAV={
  goblins:{"見参！": "兄貴の ために！ ゴブリン（{1}/{2}）を{3}匹よぶ"},
  mole:{"見参！": "お宝発見！旅の賞金+＄{1}"},
  pickey:{"見参！": "へへっ 兄貴〜！ いちばん強い仲間に+{1}/+{2}"},
- capone:{"いるあいだ": "ワシの 街の あがり。毎ターン コイン+{1}"},
+ capone:{"いるあいだ": "ミャーの 街の あがり。毎ターン コイン+{1}"},
  ma:{"いるあいだ": "うちの子の ためさ。毎ターン {1}枚 多く ひく"},
  zombino:{"いるあいだ": "ほかの ゾンビの 攻撃+{1}。ファミリーは 強い", "やられたら": "たおれても ファミリー（{1}/{2}）が {3}人 かけつける"},
  new04:{"見参！": "ガタガタ〜！ ランダムな敵キャラ{1}体を手札に追い返す"},
@@ -6199,7 +6234,7 @@ const FLAV={
  new47:{"手配書": "見参！：いちばん強い敵に手配書。たおすと＄{1}＋{2}人ひく"},
  new49:{"見参！": "早撃ち勝負！勝ったらいちばん強い敵キャラに{1}ダメージ"},
  new50:{"見参！": "どれが ほんもの？ ニセモノ（{1}/{2}）を{3}匹よぶ"},
- new51:{"いるあいだ": "投げ縄+{1}%"},
+ new51:{"いるあいだ": "投げなわ+{1}%"},
  new52:{"牢屋": "見参！：いちばん強い敵を {1}ターン 牢屋へ"},
  new53:{"やられたら": "ワウ〜… ほね（{1}/{2}）を{3}匹よぶ"},
  new55:{"見参！": "アー♪ ゾンビ（{1}/{2}）を{3}匹よぶ"},
@@ -6251,7 +6286,7 @@ const FLAV={
  new120:{"見参！": "敵キャラぜんいんに{1}ダメージ"},
  new121:{"天気": "見参！で「あめ」を {1}つ よぶ（同じ天気は たまる）"},
  new122:{"いるあいだ": "ほかの仲間の攻撃+{1}"},
- new123:{"見参！": "パチン！ いちばん強い敵を酔っぱらわせる（{1}回休み）"},
+ new123:{"見参！": "切符違反！ いちばん強い あいてを 2ターン 牢屋へ"},
  new124:{"見参！": "仲間ぜんいんとあなたの体力を{1}いやす"},
  new125:{"見参！": "カァ！ いちばん強い敵キャラに{1}ダメージ（いなければ敵ヒーロー）"},
  new126:{"やられたら": "なかまを{1}人 ひく"},
@@ -6343,8 +6378,8 @@ const FLAV={
   return L.map(x=>{const t=F[x[1]];if(!t)return x;const nums=(String(x[2]).match(/\d+/g)||[]);const out=t.replace(/\{(\d+)\}/g,(m,k)=>nums[+k-1]??m);return [x[0],x[1],out,...x.slice(3)]})}}
 
 /* ふつうの言い方を わかりやすく（動詞を はっきり） */
-const PLAIN=t=>String(t).replace(/敵の手札を見やぶる＋なかまを(\d+)人 ひく/g,'敵の手札を ぜんぶ 見る。それから 山札から $1まい ひく')
-  .replace(/なかまを(\d+)人 ひいて/g,'山札から $1まい ひいて').replace(/なかまを(\d+)人 ひく/g,'山札から $1まい ひく').replace(/(\d+)人ひく/g,'山札から $1まい ひく');
+const PLAIN=t=>String(t).replace(/敵の手札を見やぶる＋なかまを(\d+)人 ひく/g,'敵の手札を ぜんぶ 見る。それから デッキから $1まい ひく')
+  .replace(/なかまを(\d+)人 ひいて/g,'デッキから $1まい ひいて').replace(/なかまを(\d+)人 ひく/g,'デッキから $1まい ひく').replace(/(\d+)人ひく/g,'デッキから $1まい ひく');
 {const _el=effList;effList=function(id,lv){return _el.apply(this,arguments).map(x=>[x[0],x[1],PLAIN(x[2]),...x.slice(3)])}}
 {const _ct=cardText;cardText=function(id,lv){return PLAIN(_ct.apply(this,arguments))}}
 
@@ -6772,7 +6807,7 @@ if(AWN.nanashi)AWN.nanashi[1]=AWN_COOL.nanashi;
 `;document.head.appendChild(st)})();
 {const _s=say;say=function(t){if(typeof t==='string'&&t.includes('すべてを すてた'))t='名無しのガンマン「……」 荒野に 風が ふく…';return _s.call(this,t)}}
 (()=>{const st=document.createElement('style');st.textContent=`body:has(.nnann) .cbpop,body:has(.nnann) .hintpop,body:has(.nnann) .saypop{visibility:hidden}`;document.head.appendChild(st)})();
-/* ---- 投げ縄：つかまえた時の 輪が まるく くりぬかれない ---- */
+/* ---- 投げなわ：つかまえた時の 輪が まるく くりぬかれない ---- */
 (()=>{const st=document.createElement('style');st.textContent=`.lasloop.wrap,.limg.wrap{border-radius:0!important;overflow:visible!important}
 img.ico-lasso{height:1.15em;width:auto;vertical-align:-.22em;display:inline-block}`;document.head.appendChild(st)})();
 /* ---- 🪢 の 絵文字は 画像アイコンに ---- */
@@ -7008,7 +7043,7 @@ if(BX.amelie)BX.amelie.d=BX.amelie.d.replace('ターンの はじめに','アメ
 /* ===== 覚醒の せつめいの さいごの ひとことは、その子の セリフ「」に（10/26） ===== */
 {const Q={bibiri:'こ、こ、こわくなんか ないぞ！',zombino:'ファミリーは… ずっと ファミリー…',eagle:'空の上から、すべて 見えておる',mustache:'今夜は 貸し切りよ',
   bunyan:'山ひとつ、ひとふりで たおしてやろう',nanashi:'…名乗るほどの者じゃない',ketcham:'汽笛が なったら、仕事の時間だ',ruler:'この街で ワシに さからうとは いい度胸じゃ',
-  ma:'うちの子に 手を出したね？',ice:'氷づけと 雪だるま、どっちが いい？',ikoku:'同志たちよ、我に続け！',adara:'そなたに 聖なる 力を！',amelie:'満月の夜は、わたしの 時間です',capone:'ワシの 街で すきには させん'};
+  ma:'うちの子に 手を出したね？',ice:'氷づけと 雪だるま、どっちが いい？',ikoku:'同志たちよ、我に続け！',adara:'そなたに 聖なる 力を！',amelie:'満月の夜は、わたしの 時間です',capone:'ミャーの 街で すきには させん'};
  for(const id in Q){let t=AWN_COOL[id]||(AWN[id]&&AWN[id][1]);if(!t)continue;t=t.trim();
    if(/」$/.test(t))t=t.replace(/「[^「」]*」$/,'').trim();
    else if(/）$/.test(t)){}else{const i=t.lastIndexOf('。');if(i>=0&&i<t.length-1)t=t.slice(0,i+1)}
@@ -7050,7 +7085,7 @@ const ART_HOME={"coyote":"wild","belle":"wild","bibiri":"wild","iguana":"wild","
 
 
 /* =====================================================================
-   10/26：「山札から1まい ひく」などが 多すぎるので、わかりやすくて「え、そうなるの！？」な 見参に いれかえ
+   10/26：「デッキから1まい ひく」などが 多すぎるので、わかりやすくて「え、そうなるの！？」な 見参に いれかえ
    ===================================================================== */
 const NEWBC_T={
   trade:'じぶんの 手札と 敵の 手札を ぜんぶ とりかえる',
@@ -7061,7 +7096,7 @@ const NEWBC_T={
   wish:'手札で いちばん コストの高い なかまを、ただで 場に出す',
   swap:'いちばん弱い なかまと、いちばん強い 敵が 入れかわる',
   party:'お祭りだ！ 場の ぜんいん（敵も なかまも）+1/+1',
-  kick:'いちばん強い 敵を、敵の 山札の いちばん下へ けっとばす',
+  kick:'いちばん強い 敵を、敵の デッキの いちばん下へ けっとばす',
   forge:'手札を 1まい とかして、そのコストぶん +○/+○',
   steal:'敵の 手札を 1まい もらう',
   echo:'つぎに 出す なかまの 見参が 2回 おきる',
@@ -7080,7 +7115,7 @@ const NEWBC={
   async swap(sd,m,c,o){const mine=sd.board.filter(x=>x!==m&&x.hp>0).sort((a,b)=>(a.atk+a.hp)-(b.atk+b.hp))[0];const t=strongest(o.board.filter(e=>e.hp>0));if(!mine||!t){if(HUMAN)say('🔀 …入れかえる 相手が いない！');return}
     sd.board[sd.board.indexOf(mine)]=t;o.board[o.board.indexOf(t)]=mine;t.sleep=true;mine.sleep=true;t.attacks=0;mine.attacks=0;if(HUMAN)say(`🔀 ${C[mine.id].n}と ${C[t.id].n}が 入れかわった！`)},
   async party(sd){[...B.me.board,...B.foe.board].forEach(u=>{if(u.hp>0){u.atk++;u.baseAtk=(u.baseAtk||0)+1;u.hp++;u.max++;floatAt(uEl(u),'🎉+1/+1','heal')}});if(HUMAN)say('🎉 お祭りだ！ みんな +1/+1')},
-  async kick(sd,m,c,o){const t=strongest(o.board.filter(e=>e.hp>0));if(!t){if(HUMAN)say('🦶 …けとばす 敵が いない！');return}o.board=o.board.filter(x=>x!==t);o.deck.push(t.card||{id:t.id,lv:t.lv||1,plus:0});if(HUMAN){burst(uEl(m),['💨'],6);say(`🦶 ${C[t.id].n}を 山札の いちばん下へ けとばした！`)}},
+  async kick(sd,m,c,o){const t=strongest(o.board.filter(e=>e.hp>0));if(!t){if(HUMAN)say('🦶 …けとばす 敵が いない！');return}o.board=o.board.filter(x=>x!==t);o.deck.push(t.card||{id:t.id,lv:t.lv||1,plus:0});if(HUMAN){burst(uEl(m),['💨'],6);say(`🦶 ${C[t.id].n}を デッキの いちばん下へ けとばした！`)}},
   async forge(sd,m){const h=sd.hand.slice().sort((a,b)=>C[b.id].c-C[a.id].c)[0];if(!h){if(HUMAN)say('🔨 …とかす カードが ない！');return}sd.hand.splice(sd.hand.indexOf(h),1);sd.grave.push(h);const k=C[h.id].c;m.atk+=k;m.baseAtk=(m.baseAtk||0)+k;m.hp+=k;m.max+=k;floatAt(uEl(m),`🔨+${k}/+${k}`,'heal');if(HUMAN)say(`🔨 ${C[h.id].n}を とかして、+${k}/+${k}！`)},
   async steal(sd,m,c,o){if(!o.hand.length){if(HUMAN)say('🫳 …敵の 手札が からっぽ！');return}const x=o.hand.splice(rnd(o.hand.length),1)[0];if(sd.hand.length<8){x._new=isMe(sd)?1:0;sd.hand.push(x)}if(HUMAN)say(isMe(sd)?`🫳 ${C[x.id].n}を もらった！`:`🫳 ${C[x.id].n}を とられた！`)},
   async echo(sd,m){sd._echo=1;if(HUMAN)say('📢 つぎの なかまの 見参が 2回 おきるよ！')},
@@ -7329,7 +7364,7 @@ if(window.MutationObserver)new MutationObserver(ms=>{for(const m of ms)for(const
     if(document.querySelector('.saypop')){n.style.visibility='hidden';let k=0;const w=setInterval(()=>{if(!document.querySelector('.saypop')||++k>25){clearInterval(w);n.style.visibility=''}},100)}}catch(e){}}}).observe(document.body,{childList:true});
 (()=>{const st=document.createElement('style');st.textContent=`.ok.okimg{background:none!important;border:0!important;box-shadow:none!important;padding:0!important}.ok.okimg img{width:30px;height:30px;display:block;filter:drop-shadow(0 2px 2px rgba(0,0,0,.4))}`;document.head.appendChild(st)})();
 {const _rbP=renderBattle;renderBattle=function(){const r=_rbP.apply(this,arguments);try{if(DRAWP.size)drawPileN()}catch(e){}return r}}
-/* 山札の のこり枚数を、山の 上に 数字で 出す */
+/* デッキの のこり枚数を、山の 上に 数字で 出す */
 {const _d3=deck3d;deck3d=function(el,n){_d3.apply(this,arguments);try{if(!el||el.classList.contains('red'))return;let b=el.querySelector('.dkn');if(!b){b=document.createElement('span');b.className='dkn';el.appendChild(b)}b.textContent=n}catch(e){}}}
 (()=>{const st=document.createElement('style');st.textContent=`.deckpile.d3 .dkn{position:absolute;left:50%;top:-13px;transform:translateX(-50%);z-index:3;min-width:22px;height:22px;padding:0 6px;box-sizing:border-box;border-radius:11px;background:#2b1a0f;border:2px solid #f3d9a4;color:#fff6e6!important;font:800 13px/18px var(--display,sans-serif)!important;text-align:center;text-shadow:none!important;pointer-events:none;box-shadow:0 2px 4px rgba(0,0,0,.45)}`;document.head.appendChild(st)})();
 /* ボス登場ムービーの 絵は、マップに 入った しゅんかんから 先に 読んでおく（ムービーが なかなか 始まらない対策） */
@@ -7591,7 +7626,7 @@ const BMOVES={
           {ic:'⚰️',n:'葬列の 行進',d:'敵ぜんいん 攻撃+1',async run(){bBuff(1,0)}},
           {ic:'🎩',n:'ゴッドファーザーの 命令',d:'いちばん強い なかまが 1回休み',async run(){bStun()}}],
   eagle:[{ic:'🦅',n:'空からの 一撃',d:'いちばん強い なかまに ダメージ',async run(){await bShoot(bDmg(2))}},
-         {ic:'🪢',n:'投げ縄 タイホ',d:'いちばん強い なかまが 1回休み',async run(){bStun()}},
+         {ic:'🪢',n:'投げなわ タイホ',d:'いちばん強い なかまが 1回休み',async run(){bStun()}},
          {ic:'⭐',n:'保安官の バッジ',d:'敵ぜんいんに バリア',async run(){bShieldAll()}}],
   mustache:[{ic:'💰',n:'チップの 雨',d:'体力を 3 かいふく',async run(){bHeal(3)}},
             {ic:'🎉',n:'貸し切りの 合図',d:'敵ぜんいん +1/+1',async run(){bBuff(1,1)}},
@@ -7653,20 +7688,20 @@ try{if(BX.bibiri){const _h=BX.bibiri.hurt;BX.bibiri.hurt=async function(){if(BTI
    ・前に つけた「ランダムな 特色」は やめる
    ===================================================================== */
 const LINEUP={
-  wild:{ic:'🤠',t:'早撃ちの 荒野',n:['荒野のガンマン ドリー','荒野のうま ハヤテ','決闘ネズミ ブラム','手配書はりのチャッピー','ビートルウッドの民兵','チンピラのピッキー','牛どろぼうコヨーテ','かくれんぼイグアナ','ちびサボ','かぶりトカゲ','ずさんな徴収係']},
-  hill:{ic:'👻',t:'おばけと ゾンビの 墓場',heavy:['ゾンビ将軍 ペニー','うたうゾンビ合唱団','ねぼけおばけ','ひとだま三姉妹','ゾンビ花よめ ヴェール','ポルターガイスト ガタゴト','てさぐりゾンビ'],n:['ゾンビ兵','ゾンビ将軍 ペニー','まずしいゾンビ','きびしいゾンビ','さびしいゾンビ','あつかましいゾンビ','てさぐりゾンビ','ゆうれいカウボーイ ヒュードロ','ポルターガイスト ガタゴト','シーツおばけ ふわり','ねぼけおばけ','ゾンビ犬ホネスキー','ねむたいゾンビ','うたうゾンビ合唱団','おはなおばけ デイジー','ちょうちんおばけ フリッカー','ふこうの手紙 ノロイ','ひとだま三姉妹','ゾンビ花よめ ヴェール','ゾンビ見習いのボーン太']},
-  canyon:{ic:'⭐',t:'保安官の 峡谷',n:['見習いポチ','保安官ポチ','マスタング巡査','テキサス・レンジャー隊','デピュティ・ガーガー','見はり番ドッグ','保安官長ポチ','おんこうな保安官 レオ','まじめな保安官 ネッド','ワイアット・アーフ','パット・ギャレッ亀','カギ番ブルーノ','ロイ・ビーン判事','たんていミーア','バージル・アーフ','バット・マスターソン','はやうちポーク']},
-  saloon:{ic:'🎵',t:'歌の 酒場',n:['歌姫リリー','バイオリンのコロ吉','ラグタイム・ケロ','ほろよい吟遊詩人 バラッド','ピアノ弾きのモグ','ゆうれいピアノ ポロン','カンカン・キャット','看板娘のピョン子','良心的な店主','バーテンのシェイク','ミルク好きスリム','ちょこまかアライ','鐘つきのベルトン']},
-  mine:{ic:'💰',t:'お宝の 金鉱山',n:['金ほり ナゲット','たんけん隊フェレット','金庫やぶりのツィッガー','つるはしゴブリン ノック','宝石ガニ ジェミー','金ぴかミミズ ニョロゴールド','ランタンもちのブライティ','金のガチョウ ゴルディ','ゴブリン三兄弟','ダイナマイト・ダン','ばくはつノーベルト','カナリアのピップ','トロッコのトロ吉','ヘルメットのゴツン','ほら穴こびと ドワ助','ダイナマイト倉庫番 ドカ男','トロッコ暴走団ご一行','クリスタルのせいれい プリズマ']},
+  wild:{ic:'🤠',t:'早撃ちの 荒野',n:['荒野のガンマン ドリー','荒野のうま ハヤテ','決闘ネズミ ズドン','手配書はりのチャッピー','ビートルウッドの民兵','チンピラのピッキー','牛どろぼうコヨーテ','かくれんぼイグアナ','ちびサボ','かぶりトカゲ','ずさんな徴収係']},
+  hill:{ic:'👻',t:'おばけと ゾンビの 墓場',heavy:['ゾンビ将軍','うたうゾンビ合唱団','ねぼけおばけ','ひとだま三姉妹','ゾンビ花よめ ヴェール','ポルターガイスト ガタゴト','てさぐりゾンビ'],n:['ゾンビ兵','ゾンビ将軍','まずしいゾンビ','きびしいゾンビ','さびしいゾンビ','あつかましいゾンビ','てさぐりゾンビ','ゆうれいカウボーイ ヒュードロ','ポルターガイスト ガタゴト','シーツおばけ ふわり','ねぼけおばけ','ゾンビ犬ホネスキー','ねむたいゾンビ','うたうゾンビ合唱団','おはなおばけ ハナコ','ちょうちんおばけ ボンボリ','ふこうの手紙 ノロイ','ひとだま三姉妹','ゾンビ花よめ ヴェール','ゾンビ見習いのボーン太']},
+  canyon:{ic:'⭐',t:'保安官の 峡谷',n:['見習いポチ','保安官ポチ','マスタング巡査','テキサス・レンジャー隊','デピュティ・ガーガー','見はり番ドッグ','保安官長ポチ','重厚な保安官','実直な保安官','ワイアット・アーフ','パット・ギャレッ亀','カギ番ブルーノ','ロイ・ビーン判事','たんていミーア','バージル・アーフ','バット・マスターソン','はやうちポーク']},
+  saloon:{ic:'🎵',t:'歌の 酒場',n:['歌姫リリー','バイオリンのコロ吉','ラグタイム・ケロ','酔いどれ吟遊詩人','ピアノ弾きのモグ','ゆうれいピアノ ポロン','カンカン・キャット','看板娘のピョン子','良心的な店主','バーテンのシェイク','ミルク好きスリム','ちょこまかアライ','鐘つきのゴーン']},
+  mine:{ic:'💰',t:'お宝の 金鉱山',n:['金ほりガンテツ','たんけん隊フェレット','金庫やぶりモグラ','ツルハシゴブリン','宝石ガニ キラキラ','金ぴかミミズ ニョロゴールド','ランタンもちのテラス','金のガチョウ ゴルディ','ゴブリン三兄弟','ダイナマイト・ダン','ばくはつノーベルト','カナリアのピヨ','トロッコのトロ吉','ヘルメットのゴツン','ほら穴こびと ドワ助','ダイナマイト倉庫番 ドカ男','トロッコ暴走団 ガタゴー','クリスタルのせいれい ギラリ']},
   ranch:{ic:'🐮',t:'どうぶつの 牧場',f:'an'},
-  train:{ic:'🚂',t:'列車強盗団',n:['荒野の大親分 ビリー','ロックバレーの悪童','荒野のならず者 ビリー','ジェシー・ジャムズ','ダルトン四兄弟','ブッチ＆サンダンス','ボニー＆クライド','ブラック・バート','列車強盗ジャック','列車強盗の子分 バンディ','ダイナマイト強盗 ドカン兄弟','屋根の上のカラス ネヴァー','車掌のポッポさん','きっぷ切りのクリッピー']},
+  train:{ic:'🚂',t:'列車強盗団',n:['荒野の大親分','ロックバレーの悪童','ならず者','ジェシー・ジャムズ','ダルトン四兄弟','ブッチ＆サンダンス','ボニー＆クライド','ブラック・バート','列車強盗ジャック','列車強盗の子分 マスクン','ダイナマイト強盗 ドカン兄弟','屋根の上のカラス クロスケ','車掌のポッポさん','きっぷ切りのパチン']},
   steam:{ic:'⚙️',t:'からくりロボの 街',f:'ro'},
-  bayou:{ic:'🐸',t:'どくと のろいの 沼',n:['ヒーラ・モンスター','ガラガラ三兄妹','キノコ魔女マッシュ','ぬまカエルのルイ王子','ヒルのチュー太','ぬまぬまゾンビ','きりおばけ ミスティ','どろんこガエル ペッタン','ぬま魔女見習い マーシャ','そうぎ屋カラス モーティマー','ゾンビワニ ガブリン','ワニのガブ郎','オタマのタマ']},
-  snow:{ic:'❄️',t:'カチコチの 雪山',n:['雪のせいれい スノウィ','ゆきだるまのポラリン','つららのせいれい アイシー','ペンギンのワドル','ゆきうさぎ シロップ','そりひき犬 ハスキン','シロクマ親分','雪男の子 イエッティ','スキー保安官 シュプール','なだれ呼びのヤッホー爺','マンモスの赤ちゃん パオ','ヘラジカのツノーブ','毛皮うりのペルト']},
-  oasis:{ic:'🏜️',t:'しんきろうと すなの オアシス',n:['砂のせいれい サラサラ','しんきろう売り ウェイヴィ','すなどけいのせいれい クロノ','砂クジラ モービー','フェネックのフェン','サソリ占い師 マダム・ピンサ','ヤシの実ざる ココ','サボ太','日がさトカゲ パラソル','ラクダのキャメリア','ハヤブサ使い テイロン','おどり子 ベリーナ','空とぶじゅうたん ソアリン','ニセ札メリー']},
-  volcano:{ic:'🔥',t:'ほのおの 火山',n:['マグマのせいれい フレイミー','ひくいどりのヒノ','ひのこ坊や フリッチー','溶岩ガメ ラーヴィ','ふいご番のベロウズ','火トカゲ サラマ','マグマゾンビ','ふんかまち ドッカン岩','黒こげ鉱夫 コゲタ','火の鳥のヒナ ヒヨノ','マグマゴーレム ラーヴァロン','噴火占いのボルカばば','けむりおばけ スモッグ','温泉ザル ソーキー']},
-  forest:{ic:'🔮',t:'魔法と サボテンの 森',n:['のろい人形ドゥー','ほねドクター','マダム・ホーホー','ニセ薬のスネーク','ミスト・マリー','ねむりの ナップ','はなげ仙人 ハーミット','もじばけ魔女バグーラ','叡智の話者','スターゲイザー教授','流れ星のステラ','おどるサボテン ラテン','サボテンのつぼみ ポッチ','サボテンの花 ピンキー','サボテン兄ちゃん スパイク','サボテン丸太 ゴロサボ','まりもサボ ロリー','ねむり花 ララ','サボテン用心棒 ガンサボ','ハリネズミのチック','キツツキのペック']},
-  mafia:{ic:'🎩',t:'ギャングの 街',n:['ドアマンのゴンゾ','ショーガールのルル','ちびドン','くつみがきのバフィー','ニセ警官ボビー','マシンガンねこ ダダニャ','ウラ帳簿のスペックス','路地裏のノラネコ団','ボディガードの石頭 ガンコ','金庫番のスクアード','新聞記者スクープ','あやしいジュースの運び屋 ボトルズ','そっくりさん ツイニー','夜の歌姫 ジャズミン','ばらまき富豪 スペンダー']}};
+  bayou:{ic:'🐸',t:'どくと のろいの 沼',n:['ヒーラ・モンスター','ガラガラ三兄妹','キノコ魔女マッシュ','ぬまのカエル王子','ヒルのチュー太','ぬまぬまゾンビ','きりおばけ モヤモヤ','どろんこガエル ペッタン','ぬま魔女見習い ドロリ','そうぎ屋カラス','ゾンビワニ ガブリン','ワニのガブ郎','オタマのタマ']},
+  snow:{ic:'❄️',t:'カチコチの 雪山',n:['雪のせいれい ユキミ','ゆきだるまのダルリン','つららのせいれい ピキ','ペンギンのペン太','ゆきうさぎ シロップ','そりひき犬 ハスキン','シロクマ親分','雪男の子 ユキッコ','スキー保安官 シュプール','なだれ呼びのヤッホー爺','マンモスの赤ちゃん パオ','ヘラジカのツノーブ','毛皮うりのモフ兵衛']},
+  oasis:{ic:'🏜️',t:'しんきろうと すなの オアシス',n:['砂のせいれい サラサラ','しんきろう売り ユラユラ','すなどけいのせいれい コチコチ','砂クジラ ボエー','フェネックのミミ丸','サソリ占い師 ハサミーナ','ヤシの実ざる ウキキ','サボ太','日がさトカゲ パラソル','ラクダのこぶ子','ハヤブサ使い タカミ','おどり子 ベリーナ','空とぶじゅうたん フワリン','ニセ札メリー']},
+  volcano:{ic:'🔥',t:'ほのおの 火山',n:['マグマのせいれい ゴウ','ひくいどりのヒノ','ひのこ坊や チリチリ','溶岩ガメ ノッシー','ふいご番のフーフー','火トカゲ サラマ','マグマゾンビ','ふんかまち ドッカン岩','黒こげ鉱夫 コゲタ','火の鳥のヒナ ヒヨノ','マグマゴーレム ドロドロン','噴火占いのボルカばば','けむりおばけ スモッグ','温泉ザル ポカポカ']},
+  forest:{ic:'🔮',t:'魔法と サボテンの 森',n:['のろい人形ドゥー','ほねドクター','マダム・ホーホー','ニセ薬のスネーク','ミスト・マリー','サンドマン','はなげ仙人','もじばけ魔女バグーラ','叡智の話者','スターゲイザー教授','流れ星のステラ','おどるサボテン ラテン','サボテンのつぼみ ポッチ','サボテンの花 ピンキー','サボテン兄ちゃん ニョキ','サボテン丸太 ゴロサボ','まりもサボ ころん','ねむり花 ユメミ','サボテン用心棒 ガンサボ','ハリネズミのチック','キツツキのコンコン']},
+  mafia:{ic:'🎩',t:'ギャングの 街',n:['ドアマンのゴンゾ','ショーガールのルル','ちびドン','くつみがきのピカット','ニセ警官ポリポリ','マシンガンねこ ダダニャ','ウラ帳簿のメガネ','路地裏のノラネコ団','ボディガードの石頭 ガンコ','金庫番のカギ子','新聞記者スクープ','あやしいジュースの運び屋 ボトルズ','そっくりさん マネマネ','夜の歌姫 ジャズミン','ばらまき富豪 バラマキン']}};
 const LINEUP_IDS={};
 (function(){if(typeof ART_HOME==='undefined')return;const BOSSES=new Set(Object.values(STAGES).map(s=>s.boss).filter(Boolean));const byN={};Object.keys(C).forEach(id=>{if(C[id]&&!C[id].token)byN[C[id].n]=byN[C[id].n]||id});
   for(const sid in LINEUP){const s=STAGES[sid];if(!s)continue;const L=LINEUP[sid];const ok=id=>id&&C[id]&&!C[id].token&&!BOSSES.has(id)&&!C[id].out&&ART_HOME[id]===sid;
@@ -7905,20 +7940,20 @@ new217:['さわって みな。チクッと するぜ','さわらないよ〜！
 new218:['ふわぁ… いい におい…','ね、ねむくなる〜… がんばれ わたし！'],
 new219:['森は おれが まもる！','わたしも 森は すき！ あらさないよ！'],
 /* ギャング */
-new27:['ここから 先は とおさねえ','とおして くれたら いい子 なのにな〜'],
-new28:['ショーの はじまりよ〜♪','わぁ、たのしそう！ …でも しょうぶ！'],
+new27:['ここから先は とおさねえ','自力で とおって みせるもん！'],
+new28:['ショーの はじまりよ〜♪','わぁ、たのしそう！ みせて みせて〜！'],
 new221:['いつか ボスに なるんだ！','いい ボスに なってね！'],
 new222:['ピカピカに しますよ〜','わたし はだし だよ？'],
 new223:['ほらほら、ケーサツだぞ〜','バッジ、おもちゃ でしょ！'],
 new224:['ダダダニャ〜！','ねこの パンチ れんぱつ！？'],
 new225:['数字は ウソを つかない… たぶん','たぶん って いった〜！'],
 new226:['ニャ〜ニャ〜ニャ〜！','ねこ いっぱい！ もふもふ だ〜！'],
-new228:['カギは わたさない わ','カギより なかまの ほうが だいじ！'],
+new228:['カギは わたさない わ','いただいちゃうもんね〜！'],
 new229:['クルッポー！','ぼうしから ハト！ てじな だ〜！'],
 new230:['とくダネ いただき！','かっこよく 書いてね！'],
 new227:['ボスに ちかよるな','ちかよらないと しょうぶ できないよ〜'],
 new231:['とくべつな ジュース だよ','あやしい… のまない！'],
-new232:['どっちが ホンモノ？','わたしが ホンモノ だよ！'],
+new232:['どっちが ホンモノ？','わかんないから まとめて あいてだ！'],
 new233:['今夜は ジャズで いきましょ','すてき！ リズムに のって しょうぶ！'],
 baramaki:['ほれほれ、ひろいたまえ！','ひろわない もん！ じぶんで かせぐ！']});
 /* かけあいが ない子：相手の ひとことに あわせて こたえる（「じゃまするなら…」は つかわない） */
@@ -7962,7 +7997,7 @@ const FLAV2={pochi:'がんばるワン！',pochi2:'見まわり いってきま�
  new161:'ガマの油、ぬりぬり〜',new172:'もふもふ あったか！',new175:'オーロラの ひかり〜',new179:'お水 わけて あげる〜',new191:'ボエ〜〜！',new196:'メラメラ〜！',new197:'いい 湯だな〜',
  new208:'いい におい〜',new222:'ピカピカに しますよ〜',new225:'数字は ウソつかない…たぶん',new228:'カギは わたさないわ！',new231:'とくべつな ジュースだよ〜',new234:'ここは わしの 街じゃ',
  new41:'すなあらしだ〜！'};
-const FLAV2N={'ひとだま三姉妹':'ふわふわ〜 3人 そろって！','墓場のオルガン弾き レクイエ':'パイプオルガン ジャーン♪','ひつじかい ラナ':'みんな〜 こっちだよ〜','ゾンビ将軍 ペニー':'われに つづけ… ウー…','路地裏のノラネコ団':'ニャ〜ニャ〜 しゅうごう！','おはなおばけ デイジー':'おはな、のこして いくね〜','千年サボテン サグアロ様':'たねを のこそう…','デピュティ・ガーガー':'ガーガー！ あとは たのんだ！','タンブルウィードくん':'コロコロ〜 なかまを よぶよ'};
+const FLAV2N={'ひとだま三姉妹':'ふわふわ〜 3人 そろって！','墓場のオルガン弾き レクイエ':'パイプオルガン ジャーン♪','ひつじかい モコ':'みんな〜 こっちだよ〜','ゾンビ将軍':'われに つづけ… ウー…','路地裏のノラネコ団':'ニャ〜ニャ〜 しゅうごう！','おはなおばけ ハナコ':'おはな、のこして いくね〜','千年サボテン オオトゲ様':'たねを のこそう…','デピュティ・ガーガー':'ガーガー！ あとは たのんだ！','タンブルウィードくん':'コロコロ〜 なかまを よぶよ'};
 Object.keys(C).forEach(id=>{const c=C[id];if(c&&FLAV2N[c.n]&&!FLAV2[id])FLAV2[id]=FLAV2N[c.n]});
 /* ---- 説明文を 動詞で おわらせる ---- */
 const CLAR=[
@@ -7996,11 +8031,11 @@ const CLAR=[
  [/コイン\+(\d+)$/,'コインが $1まい ふえる'],
  [/50%で＄1見つける/,'ときどき ＄1 みつける'],
  [/旅の賞金\+＄(\d+)/,'旅の 賞金が ＄$1 ふえる'],
- [/投げ縄\+(\d+)%/,'投げ縄が $1% 当たりやすく なる'],
+ [/投げなわ\+(\d+)%/,'投げなわが $1% 当たりやすく なる'],
  [/(\d+)ターンで退場$/,'$1ターン たつと いなくなる'],
  [/(\d+)ターンで燃料切れ/,'$1ターン たつと 燃料切れで いなくなる'],
  [/2ターン 牢屋へ$/,'2ターン 牢屋に 入れる'],
- [/に手配書。たおすと＄3＋山札から 1まい ひく/,'に 手配書を はる。その敵を たおすと ＄3 もらえて、山札から 1まい ひく'],
+ [/に手配書。たおすと＄3＋デッキから 1まい ひく/,'に 手配書を はる。その敵を たおすと ＄3 もらえて、デッキから 1まい ひく'],
  [/天気の数が \+1/,'天気が 1つ 多く たまる'],
  [/そのコストぶん \+コスト\/\+コスト/,'その カードの コストの ぶんだけ 自分が つよく なる']];
 function clarify(t){let s=String(t);for(const [re,to] of CLAR)s=s.replace(re,to);return s}
@@ -8054,7 +8089,7 @@ function wxPaint(){if(!HUMAN)return;const el=document.querySelector('.wxbadge');
 /* =====================================================================
    10/27：プレイメモの なおし
    ===================================================================== */
-/* なまけ助手 スナッズ：つよすぎ → 出た つぎの ターンも ねむる（2ターン ねむる） */
+/* なまけ助手 グータラ：つよすぎ → 出た つぎの ターンも ねむる（2ターン ねむる） */
 (function(){const d=C.new44;if(!d)return;d.bc='lazy';d.note='見参！：ふぁ〜… つぎの ターンも ねむくて うごけない'})();
 NEWBC_T.lazy='つぎの ターンも ねむくて うごけない（2ターン ねむる）';
 NEWBC.lazy=async function(sd,m){/* よっぱらいでは なく、つぎの ターンも ねむったまま（zzz） */m._lazy=1;if(HUMAN)try{floatAt(uEl(m),'ぐぅ〜… つぎの ターンも ねむる','info')}catch(e){}};
@@ -8242,7 +8277,7 @@ lootReward=function(title,extra){
   const t=String(title).replace(/^🎉\s*/,'');
   return new Promise(res=>{
     modal(`<div class="unlock"><h2>${t}</h2>${ex}${items.length?'<div class="loot" id="lt"></div>':''}<button class="btn big" id="ok">つぎへ</button></div>`);
-    if(items.length){items.forEach((k,i)=>$('lt').insertAdjacentHTML('beforeend',`<div class="li" style="animation-delay:${i*.18}s"><span class="ic">${ITEMS[k].ic}</span><b>${ITEMS[k].n}</b><small>${kept[i]?ITEMS[k].d:'ふくろが いっぱい → ＄5'}</small></div>`));setTimeout(()=>{try{SFX.sparkle()}catch(e){}},220)}
+    if(items.length){items.forEach((k,i)=>$('lt').insertAdjacentHTML('beforeend',`<div class="li" style="animation-delay:${i*.18}s"><span class="ic">${ITEMS[k].ic}</span><b>${ITEMS[k].n}</b><small>${kept[i]?ITEMS[k].d:'ふくろが いっぱい！ かわりに ＄5'}</small></div>`));setTimeout(()=>{try{SFX.sparkle()}catch(e){}},220)}
     try{SFX.coin()}catch(e){}
     $('ok').onclick=()=>{closeModal();res()}})};
 (function(){const st=document.createElement('style');st.textContent='.money .cnimg,.unlock .cnimg{width:30px;height:30px;object-fit:contain;vertical-align:-6px;margin-right:4px}';document.head.appendChild(st)})();
@@ -8302,7 +8337,7 @@ async function wantedFx(from,t){const a=uEl(from),b=uEl(t);if(!b)return;const ra
   try{onoma(b,'ペタッ！','#ffe08a')}catch(e){}await sleep(650);im.animate([{opacity:1},{opacity:0}],{duration:250,fill:'forwards'}).onfinish=()=>im.remove();await sleep(200)}
 {const _pf2=pillsFor;pillsFor=function(m){let h=_pf2.apply(this,arguments);try{if(m&&(m._wanted||m._wntA)){const pw='<i class="pill wanted" data-st="wanted"><img src="'+((typeof WANTED_UI!=='undefined'&&WANTED_UI[0].img)||'@@D14@@')+'" alt="">手配書</i>';h=h.includes('class="pills"')?h.replace('<div class="pills">','<div class="pills">'+pw):h+'<div class="pills">'+pw+'</div>'}}catch(e){}return h}}
 document.addEventListener('click',e=>{const p=e.target.closest&&e.target.closest('.pill.wanted');if(!p)return;e.stopPropagation();e.preventDefault();
-  tipBubble(p,'📜','手配書','この 敵を たおすと、ごほうびに ＄3 と 山札から 1まい もらえるよ！','#a0602a')},true);
+  tipBubble(p,'📜','手配書','この 敵を たおすと、ごほうびに ＄3 と デッキから 1まい もらえるよ！','#a0602a')},true);
 (function(){const st=document.createElement('style');st.textContent='.pill.wanted{background:#a0602a!important;color:#fff5d8!important;display:inline-flex;align-items:center;gap:2px;pointer-events:auto;cursor:pointer}.pill.wanted img{height:1.35em;width:auto;margin:-2px 0}';document.head.appendChild(st)})();
 /* =====================================================================
    敵の 考え（10/27）：だれでも つっこまない。攻撃0や 損な ぶつかりは まつ。たおせる子・強い子を ねらう。勝てるときは 顔へ
@@ -8401,8 +8436,8 @@ function nextEffUp(id,lv){const a=effTxt(id,lv);for(let L=lv+1;L<=MAX_LV;L++){co
     else if(/よぶ$/.test(nm)&&d.wx)t=num(t,/（(\d+)つ たまる）/,N_);
     else if(nm==='のろい')t=num(t,/攻撃を (\d+) さげる/,N_);
     else if(nm==='見参！'&&d.bc==='stun'&&N_)t=t.replace(/いちばん強い あいてを/,`強い あいて ${1+N_}体を `);
-    else if(nm==='見参！'&&d.bc==='scout')t=num(t,/山札から (\d+)まい/,N_);
-    else if(nm==='いるあいだ'&&d.aura==='lasso')t=num(t,/投げ縄が (\d+)%/,B_*5);
+    else if(nm==='見参！'&&d.bc==='scout')t=num(t,/デッキから (\d+)まい/,N_);
+    else if(nm==='いるあいだ'&&d.aura==='lasso')t=num(t,/投げなわが (\d+)%/,B_*5);
     else if(nm==='いるあいだ'&&(d.aura==='coinflip'||d.aura==='miner')&&N_)t=t.replace('半分の かくりつで',N_>=2?'かならず':'4回に3回の かくりつで');
     x[2]=t;return x})}}
 {const _cs=colSheet;colSheet=function(id){_cs.apply(this,arguments);try{const e=G.col[id];if(!e||e.lv>=MAX_LV)return;const u=nextEffUp(id,e.lv);const box=document.querySelector('#sheet .upline');if(!box)return;
@@ -8481,7 +8516,7 @@ peddler=function(){
 #modal .pdit em{font-style:normal;font-weight:900;color:#2f7d32}`;document.head.appendChild(st)})();
 
 
-/* 10/27：あいての 山札にも のこり まい数／自分も ぜんぶ なくなったら「こうさん！」 */
+/* 10/27：あいての デッキにも のこり まい数／自分も ぜんぶ なくなったら「こうさん！」 */
 {const _d3=deck3d;deck3d=function(el,n){_d3.apply(this,arguments);try{if(!el||!el.classList.contains('red'))return;let b=el.querySelector('.dkn');if(!b){b=document.createElement('span');b.className='dkn foen';el.appendChild(b)}b.textContent=n}catch(e){}}}
 async function myGiveUp(){if(!HUMAN)return;try{renderBattle()}catch(e){}const h=$('meHero');if(h){h.style.zIndex=40;h.insertAdjacentHTML('beforeend',`<img class="flag myflag" src="@@D19@@" alt=""><div class="mybub">${pick(['もう 出せる なかまが いないよ… こうさん！','みんな いなくなっちゃった… こうさん〜！','うぅ… こんかいは まいった！ こうさん！'])}</div>`)}SFX.lose&&SFX.lose();try{speak('こうさん','wippy')}catch(e){}await sleep(2400)}
 {const _cu=cleanup;cleanup=async function(){const r=await _cu.apply(this,arguments);try{if(B&&!B.over&&R&&B.me&&!B.me.deck.length&&!B.me.hand.length&&!B.me.board.filter(m=>m.hp>0).length&&!(typeof DRAWP!=='undefined'&&[...DRAWP].length)){B.over='lose';B.surrender=true;B.meGiveUp=true;await myGiveUp()}}catch(e){}return r}}
@@ -8571,7 +8606,7 @@ BX.zombino.d='2ターンに 1回、ゾンビが 1体 かけつける（2体ま�
 Object.assign(STAGES.hill,{bossHp:26});Object.assign(STAGES.mine,{bossHp:38});Object.assign(STAGES.steam,{bossHp:40});Object.assign(STAGES.bayou,{bossHp:50});
 Object.assign(TUNE.bossLvAdd,{hill:-2,canyon:-2,saloon:-4,mine:-3,ranch:-4,train:-2,steam:0,bayou:-2,snow:-2,oasis:1});TUNE.bossHpMul=.85;
 {const _mb=makeBoss;makeBoss=function(){const sp=_mb();if(sp&&sp.foe&&sp.foe.escape<100)sp.foe.escape=24+(hasRelic('badge')?2:0);return sp}}
-/* 10/28：山札を もどす しくみは なし。かわりに ボスの 子分の 数を へらして、もってる カードで 勝てるように */
+/* 10/28：デッキを もどす しくみは なし。かわりに ボスの 子分の 数を へらして、もってる カードで 勝てるように */
 {const _mb=makeBoss;makeBoss=function(){const sp=_mb();try{if(!TUT_RUN()){const idx=Object.keys(STAGES).indexOf(R.sid);const keep=6+Math.floor(idx/2);const self=sp.deck.filter(c=>c.bossSelf);let rest=sp.deck.filter(c=>!c.bossSelf);rest=rest.slice(0,keep);sp.deck=shuffle([...rest,...self]);sp.foe.hp=sp.foe.max=Math.max(8,Math.round(sp.foe.hp*.85))}}catch(e){}return sp}}
 Object.assign(STAGES.bayou,{bossHp:44});Object.assign(TUNE.bossLvAdd,{oasis:-1});
 
@@ -8788,7 +8823,7 @@ function awOnlyView(id){try{const sh=$('sheet');if(!sh)return;
   C[id]=n;try{return await _pc.apply(this,arguments)}finally{C[id]=o}}}
 /* 10/29：モーキン警部の 見参を「空から 見まもる 保安官」に。
    手札を 見る（保安検査）＋ かくれている あいてを 見やぶる ＋ なかま ぜんいんの 体力 +1（Lvで ふえる） */
-C.eagle.bc='skywatch';try{FLAV2.eagle='空から 見まもっておる！';FLAV.eagle={'見参！':'あいての 手札を ぜんぶ 見て（ほあん けんさ）、かくれている あいてを 見やぶる。なかま ぜんいんの 体力 +1'}}catch(e){}
+C.eagle.bc='skywatch';try{FLAV2.eagle='空から 見まもっておる！';FLAV.eagle={'見参！':'あいての 手札を ぜんぶ 見て（ほあん けんさ）、かくれている あいてを 見やぶる。なかま ぜんいんの 体力 +{1}'}/* 10/31：数字は いまの レベルの 数字（{1}） */}catch(e){}
 {const _bt=bcText;bcText=function(d,lv){if(d&&d.bc==='skywatch'){const n=1+(typeof lvN==='function'?lvN(lv||1):0);return `空から 見まもる！ あいての 手札を ぜんぶ 見て、かくれている あいてを 見やぶる。なかま ぜんいんの 体力 +${n}`}return _bt.apply(this,arguments)}}
 {const _bc=battlecry;battlecry=async function(sd,m,c){const d=C[c.id];if(!d||d.bc!=='skywatch')return _bc.apply(this,arguments);
   if(HUMAN&&typeof bcFx==='function')await bcFx(m);const me=isMe(sd),o=opp(sd),n=1+(typeof lvN==='function'?lvN(c.lv||1):0);
@@ -8955,7 +8990,7 @@ X('new129',{bc:async(sd,m)=>{const p=summon(sd,'parcelT',1);if(p)p.parcel=1}});
 X('new159',{bc:async sd=>{const t=strongest(xFoes(sd));if(t){t.miss=(t.miss||0)+1;xFl(t,'どろんこ！ つぎは はずれる','info')}}});
 X('new143',{bc:async sd=>{xFoes(sd).forEach(t=>{t.miss=(t.miss||0)+1;xFl(t,'まぶしい！','info')})}});
 X('new185',{bc:async sd=>{const c=sd.deck[0];if(!c)return;if(!isMe(sd)||!HUMAN){drawCard(sd,1);return}
-  const ok=await new Promise(res=>{modal(`<h2>つぎの カードは…</h2><div class="grid" id="fh1" style="justify-content:center"></div><div class="row" style="gap:8px;margin-top:10px"><button class="btn green" id="yes" style="flex:1">ひく！</button><button class="btn" id="no" style="flex:1">山札の 下へ</button></div>`);const el=cardEl(c.id,c.lv||1,{});el.style.setProperty('--cw','min(30vw,120px)');$('fh1').appendChild(el);$('yes').onclick=()=>{closeModal();res(1)};$('no').onclick=()=>{closeModal();res(0)}});
+  const ok=await new Promise(res=>{modal(`<h2>つぎの カードは…</h2><div class="grid" id="fh1" style="justify-content:center"></div><div class="row" style="gap:8px;margin-top:10px"><button class="btn green" id="yes" style="flex:1">ひく！</button><button class="btn" id="no" style="flex:1">デッキの 下へ</button></div>`);const el=cardEl(c.id,c.lv||1,{});el.style.setProperty('--cw','min(30vw,120px)');$('fh1').appendChild(el);$('yes').onclick=()=>{closeModal();res(1)};$('no').onclick=()=>{closeModal();res(0)}});
   if(ok)drawCard(sd,1);else sd.deck.push(sd.deck.shift())}});
 X('new225',{bc:async sd=>{const n=Math.max(1,B.playedThisTurn||1);sd.coin+=n;if(HUMAN)say(`コイン +${n}！`)}});
 X('new61',{dr:async sd=>{/* 10/30：ふこうの手紙 ポーカス。やられたら おジャマおばけ（1コイン1/1）が まざる。
@@ -9039,7 +9074,7 @@ XON.death.push(async(sd,m)=>{const o=opp(sd);const kfoe=isMe(o)?'me':'foe';
   B.deadFoes=B.deadFoes||{me:[],foe:[]};B.deadFoes[kfoe].push(m.id);
   /* ヨミジ：なかまが やられたら 特急へ */
   for(const y of sd.board)if(y.id==='new38'&&y.hp>0&&y!==m&&m.card){y.train=y.train||[];y.train.push(m.card);xFl(y,'🚃 ごあんない…','info')}
-  /* ハゲタカおばば マギー・ニャンゴールド：あいてが たおれたら コイン（金塊） */
+  /* ハゲタカおばば・ニャンゴールド：あいてが たおれたら コイン（金塊） */
   for(const b of o.board)if(b.hp>0&&!b.jailed&&(b.id==='new72'||b.id==='new94')){o.coin+=1;xFl(b,'金塊！ コイン+1','heal')}
   if(B.goldRush&&B.goldRush[kfoe]){o.coin+=1;if(isMe(o)&&R)R.money+=1}
   /* パスタッチオ：子分（マフィア）が やられたら コイン */
@@ -9063,9 +9098,9 @@ X('new163',{dr:async(sd,m)=>{if(m.belly&&roomOf(sd)>0){summon(sd,m.belly.id,m.be
 {const _dm2=damage;damage=async function(sd,t,n,o){if(t&&!t.hero&&t.id==='new105'&&!t.reflected&&o&&o.src&&!o.src.hero&&n>0){t.reflected=1;xFl(t,'はねかえし！','crit');const s=o.src;const ss=B.me.board.includes(s)?B.me:B.foe;return _dm2(ss,s,n,{quiet:true})}return _dm2.apply(this,arguments)}}
 /* ノラネコの さんぽ：1ターンで いなくなる（fuel） */
 
-/* ---------- 投げ縄名人：2回 なげられる ---------- */
+/* ---------- 投げなわ名人：2回 なげられる ---------- */
 XON.start.push(async sd=>{if(isMe(sd)&&xAlive(sd,'new51'))B.lasso2=1});
-/* 投げ縄を つかったあと、名人が いれば もう1回 */
+/* 投げなわを つかったあと、名人が いれば もう1回 */
 /* 10/30：場に いるあいだ、なげなわの 回数 +2。1ターンに 2回 なげられる（出したターンから） */
 setInterval(()=>{try{if(!B||B.over||!xAlive(B.me,'new51'))return;if(!B.lassoBonus){B.lassoBonus=2;if(HUMAN){say('ロープ婆「なげなわ、まかせな！」');if(!B.busy)try{renderBattle()}catch(e){}}}
   if(B.lassoUsed&&B.side===B.me&&B._l2t!==B.turn){B._l2t=B.turn;B.lassoUsed=false;if(HUMAN){say('ロープ婆「もう 1回 なげな！」');if(!B.busy)try{renderBattle()}catch(e){}}}}catch(e){}},400);
@@ -9107,7 +9142,7 @@ const XT={
  new110:[['aura','ターンの おわり、ミルクで あなたの 体力を 1 いやす']],
  new112:[['dr','どろを はねる！ たおした あいては 1回休み']],
  new113:[['kw','かかし','鳥の あいては こわがって この子を 攻撃できない']],
- new116:[['bc','いちばん強い あいてを 投げ縄で ひっぱる。その あいては かばう に なる']],
+ new116:[['bc','いちばん強い あいてを 投げなわで ひっぱる。その あいては かばう に なる']],
  new124:[['bc','「おべんとう」（0コイン：体力を 3 いやす）を 手札に 1まい']],
  new127:[['bc','なかまの ロボット1体を はやうちに（すぐ 攻撃できる）']],
  new129:[['bc','小包（0/2）を おく。小包が やられると 中から なかまを 1人 ひく']],
@@ -9137,7 +9172,7 @@ const XT={
  new99:[['kw','金塊こぼし','ダメージを うけるたび 金塊が こぼれる（コイン+1）']],
  new10:[['dr','ドカン！ あいて ぜんいんに 1ダメージ']],
  new115:[['bc','あばれる！ ランダムな キャラ（あいてか なかま）に 2ダメージ']],
- new117:[['bc','山札から 動物の なかまを 1人 ひく']],
+ new117:[['bc','デッキから 動物の なかまを 1人 ひく']],
  new12:[['aura','ほかの 動物の 攻撃+1']],
  new143:[['bc','花火ドーン！ あいて ぜんいん まぶしくて、つぎの 攻撃は はずれる']],
  new170:[['aura','なかまは こおらない']],
@@ -9153,7 +9188,7 @@ const XT={
  new90:[['bc','手にいれる！ ダイナマイトか 決闘の カードを 3まいから 1まい']],
  new107:[['aura','毎ターン 金の たまごを うむ（3つで ＄5）']],
  new134:[['bc','がったい！ ほかの ロボットに がったいする']],
- new161:[['bc','なかま1体を ヌルヌルに。投げ縄で つかまらない＆1回だけ ダメージ0']],
+ new161:[['bc','なかま1体を ヌルヌルに。投げなわで つかまらない＆1回だけ ダメージ0']],
  new162:[['aura','天気が「あめ」の日は 毎ターン 子ガエル（1/1）が ふえる']],
  new189:[['bc','いちばん強い なかまを のせて とぶ。その なかまは かばうを むしして 攻撃できる']],
  new190:[['bc','ゆらゆら ダンス！ あいて 2体を 酔っぱらわせる（1回休み）']],
@@ -9216,16 +9251,16 @@ function strongestOf(list){return (list||[]).slice().sort((a,b)=>b.atk-a.atk||b.
 /* 牢屋（見参）：いちばん強い あいてを 休眠に */
 {const _bc2=battlecry;battlecry=async function(sd,m,c){const d=C[c.id];if(!d||d.bc!=='jail')return _bc2.apply(this,arguments);
   if(HUMAN&&typeof bcFx==='function')await bcFx(m);const t=strongest(xFoes(sd));const n=c.id==='new93'?3:2;
-  if(t){xSleepIn(t,n,'jail');if(HUMAN){say(`🔒 ${C[t.id].n}を 牢屋に 入れた！（${n}ターン）`);SFX.lock&&SFX.lock()}}xRe()}}
+  if(t){xSleepIn(t,n,'jail');if(HUMAN){say(c.id==='new123'?`🎫 切符違反！ ${C[t.id].n}を 牢屋に とじこめた！（${n}ターン）`:`🔒 ${C[t.id].n}を 牢屋に 入れた！（${n}ターン）`);SFX.lock&&SFX.lock()}}xRe()}}
 /* 牢屋の せつめい（休眠） */
 try{if(typeof FLAV!=='undefined'){['new65','new93'].forEach(id=>{FLAV[id]=FLAV[id]||{};FLAV[id]['見参！']=FLAV[id]['見参！']||''})}}catch(e){}
-{const _el2=effList;effList=function(id,lv){const L=_el2.apply(this,arguments);try{if(C[id]&&C[id].bc==='jail'){const n=id==='new93'?3:2;return L.map(x=>x[1]==='見参！'&&/牢屋/.test(x[2])?[x[0],x[1],`いちばん強い あいてを ${n}ターン 牢屋へ`,x[3],x[4]]:x)}}catch(e){}return L}}
+{const _el2=effList;effList=function(id,lv){const L=_el2.apply(this,arguments);try{if(C[id]&&C[id].bc==='jail'){const n=id==='new93'?3:2;return L.map(x=>x[1]==='見参！'&&/牢屋/.test(x[2])?[x[0],x[1],(id==='new123'?'切符違反！ ':'')+`いちばん強い あいてを ${n}ターン 牢屋へ`,x[3],x[4]]:x)}}catch(e){}return L}}
 /* ダイナマイト（前の あいてに 3ダメージ）：fuses の front を 前の あいてに */
 /* 前の あいてに ドカン（ボム吉・ドカ男） */
 {const _st2=startTurn;startTurn=async function(sd){if(!B||!B.fuses)return _st2.apply(this,arguments);const fr=B.fuses.filter(f=>f.front&&f.side===sd);B.fuses=B.fuses.filter(f=>!(f.front&&f.side===sd));
   for(const f of fr){f.left--;if(f.left<=0){f.done=1;const o=opp(sd);const t=o.board.find(e=>e.hp>0&&!e.jailed);if(HUMAN){say('🧨 ドッカーン！');shakeApp&&shakeApp()}if(t)await damage(o,t,f.v,{quiet:true,fx:'enemy'});else await damage(o,heroOf(o),f.v,{quiet:true})}}
   const r=await _st2.apply(this,arguments);if(B){B.fuses=B.fuses||[];B.fuses.push(...fr.filter(f=>!f.done))}return r}}
-/* つるはしゴブリン ノック：ダメージを うけるたび 金塊（コイン+1） */
+/* ツルハシゴブリン：ダメージを うけるたび 金塊（コイン+1） */
 {const _dm3=damage;damage=async function(sd,t,n,o){const r=await _dm3.apply(this,arguments);try{if(B&&t&&!t.hero&&t.id==='new99'&&n>0){const s=B.me.board.includes(t)?B.me:B.foe;s.coin+=1;xFl(t,'金塊！ コイン+1','heal')}}catch(e){}return r}}
 /* ホタル：なかまの 攻撃は はずれない */
 {const _at2=attack;attack=async function(sd,m,t){if(m&&m.miss>0&&xAlive(sd,'new153'))m.miss=0;return _at2.apply(this,arguments)}}
@@ -9287,10 +9322,13 @@ const IMG={};const img=s=>{if(IMG[s])return IMG[s];const i=new Image();i.src=(wi
 const ui=n=>n.startsWith('fx:')?img('fx/'+n.slice(3)+'.webp'):img('ui/'+n+'.png');
 const E={o:t=>1-Math.pow(1-t,3),io:t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2,b:t=>{const c=1.9;return 1+(c+1)*Math.pow(t-1,3)+c*Math.pow(t-1,2)}};
 const cl=(x,a=0,b=1)=>Math.max(a,Math.min(b,x)),seg=(t,a,d)=>cl((t-a)/d);
-let cv=null,c=null,W=0,H=0,DPR=1,fx=[],T0=performance.now(),raf=0,dim=0,dimHoles=[],shX=0,shY=0,bs=0;const live=new Set();
+let cvb=null,cb=null;let cv=null,c=null,W=0,H=0,DPR=1,fx=[],T0=performance.now(),raf=0,dim=0,dimHoles=[],shX=0,shY=0,bs=0;const live=new Set();
 const now=()=>performance.now()-T0;
 const SP=()=>(typeof SPEED==='number'&&SPEED>0?SPEED:1);
-function fit(){if(!cv)return;DPR=Math.min(2,devicePixelRatio||1);W=innerWidth;H=innerHeight;cv.width=W*DPR;cv.height=H*DPR}
+function fit(){if(!cv)return;DPR=Math.min(2,devicePixelRatio||1);W=innerWidth;H=innerHeight;cv.width=W*DPR;cv.height=H*DPR;if(cvb){cvb.width=W*DPR;cvb.height=H*DPR}}
+/* 11/1 かしまさん「見参の放射がレイヤーの一番上」：カードの うしろに 描く キャンバス（#app の 中・z-index 3＝場の 列（4・5）より 下）。場の 列の はんいだけに 描く */
+function backOk(){const a=document.getElementById('app');if(!a)return false;if(!cvb){cvb=document.createElement('canvas');cvb.id='cfxb';cvb.style.cssText='position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:3';cb=cvb.getContext('2d');cvb.width=W*DPR;cvb.height=H*DPR}if(cvb.parentNode!==a)a.appendChild(cvb);return true}
+function boardClip(){let t=1e9,b=-1e9;document.querySelectorAll('#app>.bf').forEach(e=>{const r=e.getBoundingClientRect();if(r.height){t=Math.min(t,r.top);b=Math.max(b,r.bottom)}});return t<b?[t-6,b+6]:null}
 function ensure(){if(cv&&document.body.contains(cv))return true;if(!document.body)return false;cv=document.createElement('canvas');cv.id='cfx';cv.style.cssText='position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:84';document.body.appendChild(cv);c=cv.getContext('2d');fit();if(!ensure.on){ensure.on=1;addEventListener('resize',fit)}return true}
 /* 時間：はじめた しゅんかんを 0 として、ゲームの はやさ（SPEED）に あわせる */
 const tt0=t=>bs+t*SP(),dd=d=>d*SP();
@@ -9304,7 +9342,8 @@ function apply(u){const el=u.el;if(!el||!el.isConnected)return;if(!el.classList.
   const f=[];if(u.gray)f.push(`grayscale(${u.gray}) brightness(${1-u.gray*.35})`);if(u.glow>0)f.push(`drop-shadow(0 0 ${8+14*u.glow}px rgba(${u.glowC},${Math.min(1,u.glow)}))`);if(u.shadow>0)f.push(`drop-shadow(0 ${(34*u.shadow).toFixed(1)}px ${(6+6*u.shadow).toFixed(1)}px rgba(0,0,0,${(.45*u.shadow).toFixed(2)}))`);el.style.filter=f.join(' ');
   el.style.clipPath=u.clipB?`inset(-30% -30% ${(u.clipB*100).toFixed(1)}% -30%)`:'';
   let t=el.querySelector(':scope>.cfxt');if(u.tint){if(!t){t=document.createElement('i');t.className='cfxt';el.appendChild(t)}t.style.background=u.tint}else if(t)t.remove()}
-function reset(u){u.ox=u.oy=u.rot=u.gray=u.glow=u.clipB=u.shadow=0;u.sc=u.alpha=1;u.tint=null;apply(u);const el=u.el;if(el){el.classList.remove('cfxon');el.style.transform='';el.style.opacity='';el.style.filter='';el.style.clipPath=''}}
+function reset(u){const el0=u.el;/* 10/31：きえた（やられ・ふきとばし・けとばし）子は もとに もどさない（もどすと 一しゅん 見えて しまう） */if(el0&&el0._cfxGone){if(el0._cfxGone==='rm')el0.remove();else{el0.style.visibility='hidden';el0.style.opacity='0'}return}
+  u.ox=u.oy=u.rot=u.gray=u.glow=u.clipB=u.shadow=0;u.sc=u.alpha=1;u.tint=null;apply(u);const el=u.el;if(el){/* 10/31：登場の アニメ（enter）が cfxon を はずした しゅんかんに もう一回 はじまって 消えて見えたので、先に はずす */el.classList.remove('enter');el.classList.remove('cfxon');el.style.transform='';el.style.opacity='';el.style.filter='';el.style.clipPath=''}}
 const ext=(f,end)=>{f.end=end;return f};
 const add=f=>{fx.push(f);kick();return f};
 function at(t,fn){t=tt0(t);return add({t0:t,once:true,fn,end:t})}
@@ -9312,15 +9351,19 @@ function keyf(u,o){if(!u)return;const t=tt0(o.t||0),d=dd(o.d||400),fn=o.fn;u.n++
 function tween(u,o){if(!u)return;const {t=0,d=400,e=E.o,...p}=o;const from={};return keyf(u,{t,d,fn:(v,k)=>{for(const q in p){if(!(q in from))from[q]=v[q];v[q]=from[q]+(p[q]-from[q])*e(k)}}})}
 function overlay(u,o){const t=tt0(o.t||0),d=dd(o.d||1000);return add({end:t+d,draw(T){const e=T-t;if(e<0||e>d)return;const p=pos(u);o.draw(p.x,p.y,u,e/SP(),e/d)}})}
 function ring(x,y,o={}){const t=tt0(o.t||0),d=dd(o.d||650),{col='255,211,74',r0=10,r1=120,w=8}=o;add({end:t+d,draw(T){const k=seg(T,t,d);if(k<=0||k>=1)return;c.strokeStyle=`rgba(${col},${1-k})`;c.lineWidth=w*(1-k*.6);c.beginPath();c.arc(x,y,r0+(r1-r0)*E.o(k),0,7);c.stroke()}})}
-function rays(x,y,o={}){const t=tt0(o.t||0),d=dd(o.d||1400),{col='255,242,176',n=16,len=420,spin=.4,a=.45,hole=null}=o;add({end:t+d,draw(T){const k=seg(T,t,d);if(k<=0||k>=1)return;const al=Math.min(1,k*5,(1-k)*3)*a;c.save();c.translate(x,y);c.rotate(T/1000*spin);c.globalCompositeOperation='lighter';for(let i=0;i<n;i++){const a0=i/n*Math.PI*2;c.fillStyle=`rgba(${col},${al*(i%2?.9:.45)})`;c.beginPath();c.moveTo(0,0);c.arc(0,0,len,a0,a0+Math.PI/n/1.6);c.closePath();c.fill()}c.restore();
-  if(hole){const p=pos(hole);c.save();c.globalCompositeOperation='destination-out';c.beginPath();c.roundRect?c.roundRect(p.x-hole.rw/2,p.y-hole.rh/2,hole.rw,hole.rh,12):c.rect(p.x-hole.rw/2,p.y-hole.rh/2,hole.rw,hole.rh);c.fill();c.restore()}}})}
+function rays(x,y,o={}){const t=tt0(o.t||0),d=dd(o.d||1400),{col='255,242,176',n=16,len=420,spin=.4,a=.45,soft=false}=o;const back=!!o.back&&backOk();const hole=back?null:(o.hole||null);add({back:back?1:0,end:t+d,draw(T){const k=seg(T,t,d);if(k<=0||k>=1)return;const al=Math.min(1,k*5,(1-k)*3)*a;c.save();c.translate(x,y);c.rotate(T/1000*spin);c.globalCompositeOperation='lighter';for(let i=0;i<n;i++){const a0=i/n*Math.PI*2;const aa=al*(i%2?.9:.45);if(soft){const g=c.createRadialGradient(0,0,0,0,0,len);g.addColorStop(0,`rgba(${col},${aa})`);g.addColorStop(.55,`rgba(${col},${aa*.6})`);g.addColorStop(1,`rgba(${col},0)`);c.fillStyle=g}else c.fillStyle=`rgba(${col},${aa})`;c.beginPath();c.moveTo(0,0);c.arc(0,0,len,a0,a0+Math.PI/n/1.6);c.closePath();c.fill()}c.restore();
+  if(hole){const p=pos(hole),hw=hole.rw*(hole.sc||1)+4,hh=hole.rh*(hole.sc||1)+4;c.save();c.globalCompositeOperation='destination-out';c.beginPath();c.roundRect?c.roundRect(p.x-hw/2,p.y-hh/2,hw,hh,12):c.rect(p.x-hw/2,p.y-hh/2,hw,hh);c.fill();c.restore()}}})}
 function burst(x,y,o={}){const t=tt0(o.t||0),{n=18,im='x_spark',sp=7,g=.2,life=1100,sz=.25,add_=true,spread=Math.PI*2,dir=0,up=3,filter=null,orient=false}=o;const ims=Array.isArray(im)?im:[im];const sw=o.sway!=null?o.sway:(ims.some(q=>/star|spark/.test(q))?null:.22);const L=dd(life);
   const P_=[];const NN=o.angles?o.angles.length:n;for(let i=0;i<NN;i++){const a=o.angles?o.angles[i]:dir-spread/2+Math.random()*spread;P_.push({a,v:o.angles?sp:sp*(.5+Math.random()*.8),s:o.angles?sz:sz*(.6+Math.random()*.8),l:L*(.6+Math.random()*.6),sp:(Math.random()-.5)*.3,ph:Math.random()*6,im:ims[i%ims.length]})}
   add({end:t+L*1.3,draw(T){const e=T-t;if(e<0)return;for(const p of P_){if(e>p.l)continue;const f=e/16.7/SP(),dr=Math.pow(.95,f),dist=p.v*(1-dr)/.05;const px=x+Math.cos(p.a)*dist,py=y+Math.sin(p.a)*dist-up*(1-dr)/.05+g*f*f*.35;const I=ui(p.im);if(!I.complete)continue;const s=p.s*126*1.5*(o.shrink?Math.max(.12,1-e/p.l):1);c.save();c.globalAlpha=Math.min(1,(1-e/p.l)*2.5);if(add_)c.globalCompositeOperation='lighter';if(filter)c.filter=filter;c.translate(px,py);c.rotate(orient?p.a+Math.PI/2:(sw!=null?Math.sin(f*.09+p.ph)*sw:f*p.sp));c.drawImage(I,-s/2,-s/2,s,s);c.restore()}}})}
 function dots(x,y,o={}){const t=tt0(o.t||0),{n=16,col='255,224,138',sp=2,up=1.5,life=1200,r=3,area=60}=o;const L=dd(life);const P_=[];for(let i=0;i<n;i++)P_.push({x:x+(Math.random()-.5)*area,y:y+(Math.random()-.5)*area*.4,vx:(Math.random()-.5)*sp,vy:-up*(.4+Math.random()),l:L*(.5+Math.random()*.8),d:Math.random()*L*.3,r:r*(.5+Math.random())});
   add({end:t+L*1.4,draw(T){const e=T-t;if(e<0)return;c.save();c.globalCompositeOperation='lighter';for(const p of P_){const ee=e-p.d;if(ee<0||ee>p.l)continue;const f=ee/16.7/SP();c.fillStyle=`rgba(${col},${1-ee/p.l})`;c.beginPath();c.arc(p.x+p.vx*f,p.y+p.vy*f,p.r,0,7);c.fill()}c.restore()}})}
-function smoke(x,y,o={}){const t=tt0(o.t||0),{n=12,col='201,170,130',life=900,spread=90,r=16}=o;const L=dd(life);const P_=[];for(let i=0;i<n;i++){P_.push({a:Math.PI+Math.random()*Math.PI,v:spread*(.5+Math.random()*.6),l:L*(.7+Math.random()*.5)})}
-  add({end:t+L*1.3,draw(T){const e=T-t;if(e<0)return;for(const p of P_){if(e>p.l)continue;const k=e/p.l;c.fillStyle=`rgba(${col},${.55*(1-k)})`;c.beginPath();c.arc(x+Math.cos(p.a)*p.v*E.o(k),y+Math.sin(p.a)*p.v*.3*E.o(k),r+r*1.6*k,0,7);c.fill()}}})}
+/* 10/31：あいての 親分の 顔の 下はし（ここより 上に 演出を はみださせない） */
+/* 上の UI（目次ボタン）の 下はし。文字は これより 下に */
+const topUI=()=>{const e=document.getElementById('cktop');const r=e&&e.getBoundingClientRect();return r&&r.width?r.bottom+4:8};
+const heroBot=()=>{const e=document.querySelector('.fport');if(!e)return -1e9;const r=e.getBoundingClientRect();return r.width?r.bottom+4:-1e9};
+function smoke(x,y,o={}){const t=tt0(o.t||0),{n=12,col='201,170,130',life=900,spread=90,r=16,minY=null}=o;const L=dd(life);const P_=[];for(let i=0;i<n;i++){P_.push({a:Math.PI+Math.random()*Math.PI,v:spread*(.5+Math.random()*.6),l:L*(.7+Math.random()*.5)})}
+  add({end:t+L*1.3,draw(T){const e=T-t;if(e<0)return;for(const p of P_){if(e>p.l)continue;const k=e/p.l;c.fillStyle=`rgba(${col},${.55*(1-k)})`;const cy=y+Math.sin(p.a)*p.v*.3*E.o(k);let rr=r+r*1.6*k;if(minY!=null&&cy-rr<minY){rr=cy-minY;if(rr<2)continue}/* 親分の 顔に かからないよう 小さく（切り口を 出さない） */c.beginPath();c.arc(x+Math.cos(p.a)*p.v*E.o(k),cy,rr,0,7);c.fill()}}})}
 function flash(o={}){const t=tt0(o.t||0),d=dd(o.d||260),{col='255,255,255',a=1}=o;add({top:1,end:t+d,draw(T){const k=seg(T,t,d);if(k<=0||k>=1)return;c.fillStyle=`rgba(${col},${a*(1-k)})`;c.fillRect(-30,-30,W+60,H+60)}})}
 function tint(o={}){const t=tt0(o.t||0),d=dd(o.d||1400),{col='255,60,30',a=.22,inD=250,outD=600}=o;add({end:t+d,draw(T){const e=T-t;if(e<0||e>d)return;c.fillStyle=`rgba(${col},${a*Math.min(1,e/dd(inD),(d-e)/dd(outD))})`;c.fillRect(-30,-30,W+60,H+60)}})}
 function darken(o={}){const t=tt0(o.t||0),d=dd(o.d||1800),{a=.45,holes=[]}=o;add({under:1,end:t+d,draw(T){const e=T-t;if(e<0||e>d)return;const al=a*Math.min(1,e/dd(250),(d-e)/dd(350));c.save();c.fillStyle=`rgba(20,8,0,${al})`;c.fillRect(-30,-30,W+60,H+60);c.globalCompositeOperation='destination-out';for(const u of holes){if(!u)continue;const p=pos(u);c.beginPath();c.roundRect?c.roundRect(p.x-u.rw/2-4,p.y-u.rh/2-4,u.rw+8,u.rh+8,14):c.rect(p.x-u.rw/2,p.y-u.rh/2,u.rw,u.rh);c.fill()}c.restore()}})}
@@ -9328,12 +9371,29 @@ function shake(o={}){const t=tt0(o.t||0),d=dd(o.d||380),{p=8}=o;add({pre:1,end:t
 const readMs=(s,min)=>{if(!s||!/[ぁ-んァ-ン一-龥]/.test(s))return min;const n=s.replace(/\s/g,'').length;return Math.max(min,n<=22?1300+n*70:Math.max(3000,900+n*170))};
 function slam(str,x,y,o={}){const t=tt0(o.t||0),{size=56,grad=['#fffbe0','#ffe066','#ffb31a','#ff7a00'],stroke='#3e1a06',from=3,sub=null}=o;const d=dd(readMs((sub||'')+str,o.d||1500));
   add({txt:1,end:t+d,draw(T){const k=seg(T,t,dd(260)),e=T-t;if(e<0||e>d)return;const out=1-seg(T,t+d-dd(300),dd(300));const s=from-(from-1)*E.b(k);c.save();c.globalAlpha=Math.min(1,k*2)*out;c.translate(x,y);c.scale(s,s);c.font=`${size}px "Dela Gothic One"`;c.textAlign='center';c.textBaseline='middle';c.lineJoin='round';c.lineWidth=size*.2;c.strokeStyle=stroke;c.shadowColor='rgba(0,0,0,.6)';c.shadowOffsetY=5;c.shadowBlur=4;c.strokeText(str,0,0);c.shadowColor='transparent';const g=c.createLinearGradient(0,-size/2,0,size/2);grad.forEach((q,i)=>g.addColorStop(i/(grad.length-1),q));c.fillStyle=g;c.fillText(str,0,0);c.restore();
-    if(sub){const ks=seg(T,t+dd(250),dd(300));c.save();c.globalAlpha=ks*out;c.font='800 16px "M PLUS Rounded 1c"';c.textAlign='center';c.textBaseline='middle';c.lineJoin='round';c.lineWidth=6;c.strokeStyle=stroke;c.strokeText(sub,x,y+size*.75-8*(1-ks));c.fillStyle='#fff';c.fillText(sub,x,y+size*.75-8*(1-ks));c.restore()}}})}
-function floatTxt(str,x,y,o={}){const t=tt0(o.t||0),{col='#fff',size=18,stroke='#3e1a06',rise=30,rot=0}=o;let d=o.d||1100;if(/[ぁ-んァ-ン一-龥]/.test(str)&&str.length>=3)d=Math.max(d,readMs(str,0)*.8);d=dd(d);
+    if(sub){const ks=seg(T,t+dd(250),dd(300));c.save();c.globalAlpha=ks*out;c.font='800 18px "M PLUS Rounded 1c"';c.textAlign='center';c.textBaseline='middle';c.lineJoin='round';c.lineWidth=6;c.strokeStyle=stroke;c.strokeText(sub,x,y+size*.75-8*(1-ks));c.fillStyle='#fff';c.fillText(sub,x,y+size*.75-8*(1-ks));c.restore()}}})}
+/* 10/31：擬音（ななめの 文字）の 場所。ぶつかるときは まず 横へ 少し（40pxまで）ずらす。キャラから 50px より はなさない。
+   ほかの 列の カードと 数字（攻撃／体力・親分の 体力・コイン）には のせない。だめなら カードの 絵に かさなっても よい（数字は だめ） */
+function clearNum(str,x,y,size,rise,self){try{const w=String(str).length*size*1.05+8,h=size*1.2+rise;const R=q=>[...document.querySelectorAll(q)].map(e=>({e,r:e.getBoundingClientRect()})).filter(o=>o.r.width);
+  const own=self&&self.isConnected?self:null;/* 10/31：あいての 親分の 顔・体力（.fport 全体）も よける */const nums=R('.u .stat,.hero .hp,.fport,.fport .hp,#coins,.fside,.fleft,#cktop,.fside .coins,.u .float,.hero .float,.fport .float')/* 10/31：天気の わく（.fleft）・コイン/手札の わく（.fside）・目次ボタン（#cktop）も よける */.filter(o=>!own||!own.contains(o.e)||o.e.classList.contains('float')).map(o=>o.r);
+  const ownR=own?own.getBoundingClientRect():null;
+  /* 10/31：ダメージの 数字（ゲームの .float：カードの まんなか・上から 10%・36px のぼる）が 出る 場所も よける（同時に 出るので 先に よやく） */
+  if(ownR){const nx=ownR.left+ownR.width/2,ny=ownR.top+ownR.height*.1;nums.push({left:nx-38,right:nx+38,top:ny-46,bottom:ny+36})}
+  const cards=R('.u').filter(o=>o.e!==own&&(!ownR||Math.abs((o.r.top+o.r.bottom)/2-(ownR.top+ownR.bottom)/2)>ownR.height*.5)).map(o=>o.r);
+  const hit=(x,y,L)=>L.some(r=>x+w/2>r.left&&x-w/2<r.right&&y+size*.6>r.top&&y-h<r.bottom);
+  const C_=[];for(const dx of [0,-20,20,-40,40])for(const dy of [0,-12,12,-24,24,-36,36])if(Math.hypot(dx,dy)<=56)C_.push([dx,dy]);C_.sort((a,b)=>Math.hypot(a[0],a[1])-Math.hypot(b[0],b[1]));
+  /* 反対の ななめ（数字の 反対がわ）も ためす */const mx=ownR?2*(ownR.left+ownR.width/2)-x:null;
+  const C2=[];for(const dx of [-60,60,-50,50,-90,90])for(const dy of [0,-24,24,-36,48])C2.push([dx,dy]);
+  const cx=q=>Math.max(w/2+4,Math.min(W-w/2-4,q));const topY=topUI();const tryL=(L,bx,list)=>{for(const [dx,dy] of list){const X=cx(bx+dx),Y=y+dy;if(Y-h>topY&&!hit(X,Y,L))return [X,Y]}return null};
+  for(const L of [[...nums,...cards],nums]){let q=tryL(L,x,C_);if(q)return q;if(mx!=null){q=tryL(L,mx,C_);if(q)return q}}
+  const q=tryL(nums,x,C2);if(q)return q;/* さいごの 手：上の UI（親分の 顔・目次）の 下へ */const hb=Math.max(heroBot(),topUI());if(y-h<hb)return [cx(x),hb+h]}catch(e){}return [Math.max(20,Math.min(W-20,x)),Math.max(y,topUI()+size*1.3+rise)]}
+function floatTxt(str,x,y,o={}){const t=tt0(o.t||0),{col='#fff',size=18,stroke='#3e1a06',rise=30,rot=0}=o;if(rot){const q=clearNum(str,x,y,size*1.2,rise,o.self);x=q[0];y=q[1]}let d=o.d||1100;if(/[ぁ-んァ-ン一-龥]/.test(str)&&str.length>=3)d=Math.max(d,readMs(str,0)*.8);d=dd(d);
   add({txt:1,end:t+d,draw(T){const k=seg(T,t,d);if(k<=0||k>=1)return;const pop=E.b(seg(T,t,dd(220)));c.save();c.globalAlpha=1-seg(T,t+d*.6,d*.4);c.translate(x,y-rise*E.o(k));c.rotate(rot);c.scale(.4+.6*pop,.4+.6*pop);c.font=`900 ${size*1.2}px "M PLUS Rounded 1c"`;c.textAlign='center';c.textBaseline='middle';c.lineJoin='round';c.lineWidth=6;c.strokeStyle=stroke;c.strokeText(str,0,0);c.fillStyle=col;c.fillText(str,0,0);c.restore()}})}
 function icon(name,x,y,o={}){const t=tt0(o.t||0),d=dd(o.d||1200),{sz=64,bob=0,a=1}=o;add({top:1,end:t+d,draw(T){const e=T-t;if(e<0||e>d)return;const I=ui(name);if(!I.complete)return;const s=sz*1.35*E.b(seg(T,t,dd(300)));c.save();if(o.filter)c.filter=o.filter;c.globalAlpha=a*(1-seg(T,t+d-dd(250),dd(250)));c.translate(x,y+Math.sin(e/200)*bob);c.drawImage(I,-s/2,-s/2,s,s);c.restore()}})}
+/* 10/31 キズ 1つ（トゲの 反撃など）：x_slash を ほそく ななめに して 1本の ひっかききず */
+function scratch1(x,y,o={}){const t=tt0(o.t||0),d=dd(o.d||450),sz=o.sz||70;add({top:1,end:t+d,draw(T){const e=T-t;if(e<0||e>d)return;const I=ui('x_slash');if(!I.complete)return;const k=E.o(seg(T,t,dd(140)));c.save();c.globalAlpha=1-seg(T,t+d-dd(200),dd(200));c.translate(x,y);c.rotate(-.65);c.scale(.4,1);c.beginPath();c.rect(-sz,-sz/2,sz*2,sz*k);c.clip();c.drawImage(I,-sz/2,-sz/2,sz,sz);c.restore()}})}
 function shot(from,to,o={}){const t=tt0(o.t||0),d=dd(o.d||260);let {im='x_bullet',sz=26,arc=0,trail='255,230,150'}=o;const thrown=im!=='x_bullet';sz*=o.scale||(thrown?2.6:1.8);arc*=1.3;
-  add({end:t+d,draw(T){const k=seg(T,t,d);if(k<=0||k>=1)return;const x=from.x+(to.x-from.x)*k,y=from.y+(to.y-from.y)*k-Math.sin(k*Math.PI)*arc;
+  add({end:t+d,draw(T){const k=seg(T,t,d);if(k<=0||k>=1)return;const x=from.x+(to.x-from.x)*k,y=from.y+(to.y-from.y)*k-Math.sin(k*Math.PI)*arc-(o.bounce?Math.abs(Math.sin(k*Math.PI*4))*16:0);
     c.save();c.globalCompositeOperation='lighter';for(let i=1;i<6;i++){const kk=Math.max(0,k-i*.04);const tx=from.x+(to.x-from.x)*kk,ty=from.y+(to.y-from.y)*kk-Math.sin(kk*Math.PI)*arc;c.fillStyle=`rgba(${trail},${.35-i*.06})`;c.beginPath();c.arc(tx,ty,sz*.22*(1-i*.12),0,7);c.fill()}c.restore();
     const I=ui(im);if(I.complete&&I.naturalWidth){const a=Math.atan2(to.y-from.y,to.x-from.x);c.save();c.translate(x,y);c.rotate(thrown&&!o.aim?Math.sin(T/180)*.17+(o.tilt||0):a);const ar=I.naturalHeight/I.naturalWidth||1;if(o.filter)c.filter=o.filter;c.drawImage(I,-sz/2,-sz*ar/2,sz,sz*ar);c.restore()}}});return o.t+(o.d||260)}
 /* バリアの 画像を かけらに わって とばす */
@@ -9348,21 +9408,27 @@ function tornadoImg(o){const t=tt0(o.t||0),d=dd(o.d||2400),{y,x0,x1,h}=o;const T
   const D_=Array.from({length:16},(_,i)=>{const leaf=i%3!==2;return {o:i%2,leaf,r:leaf?LEAF[i%LEAF.length]:PEB[i%PEB.length],k:.08+Math.random()*.85,a:Math.random()*7,v:4+Math.random()*3,sz:leaf?(22+Math.random()*14):(10+Math.random()*7),spin:(Math.random()-.5)*12,ph:Math.random()*7}});
   const st={x:x0};const cx=e=>x0+(x1-x0)*(e/d)+Math.sin(e/150)*14;const fa=e=>Math.min(1,e/dd(250),(d-e)/dd(300));
   const drawD=(e,front)=>{const X=cx(e);for(const p of D_){const a=p.a+e/1000*p.v;const z=Math.sin(a);if((z>0)!==front)continue;const k=p.k+Math.sin(e/700+p.ph)*.05;const R_=h*(.12+.36*k);const I=p.leaf?(p.o?LO:LI):DI;if(!I.complete)continue;const [sx,sy,sw,sh]=[0,0,I.naturalWidth||1,I.naturalHeight||1];const w=p.sz*(.7+.4*(z+1)/2),hh=w*sh/sw;c.save();c.globalAlpha=(front?1:.6)*fa(e);c.translate(X+Math.cos(a)*R_,y-k*h+z*R_*.22);c.rotate(e/1000*p.spin);c.drawImage(I,sx,sy,sw,sh,-w/2,-hh/2,w,hh);c.restore()}};
-  add({end:t+d,draw(T){const e=T-t;if(e<0||e>d)return;st.x=cx(e);drawD(e,false);if(TI.complete){const X=cx(e);c.save();c.globalAlpha=.85*fa(e);c.translate(X,y);c.rotate(Math.sin(e/210)*.07);const w=h*TI.naturalWidth/TI.naturalHeight;const sl=6;for(let i=0;i<sl;i++){const k0=i/sl,k1=(i+1)/sl;const off=Math.sin(e/160+k0*2.4)*12*k0;c.drawImage(TI,0,TI.naturalHeight*(1-k1),TI.naturalWidth,TI.naturalHeight/sl+1,-w/2+off,-h*k1,w,h/sl+1)}c.restore()}drawD(e,true)}});return st}
+  add({end:t+d,draw(T){const e=T-t;if(e<0||e>d)return;st.x=cx(e);drawD(e,false);if(TI.complete){/* 10/31 メモ7：白い つなぎ目 → 6本の 帯を やめて、2pxずつの 細い 行を 整数の 位置に（回転なし・かたむきは ずらしで） */const X=cx(e);c.save();c.globalAlpha=.85*fa(e);const w=h*TI.naturalWidth/TI.naturalHeight,NW=TI.naturalWidth,NH=TI.naturalHeight,tl=Math.sin(e/210)*.07,Y0=Math.round(y),HH=Math.round(h),RW=2;for(let r=0;r<HH;r+=RW){const k=r/HH;const off=Math.sin(e/160+k*2.4)*12*k+tl*r;const sy=Math.max(0,NH*(1-(r+RW)/HH));c.drawImage(TI,0,sy,NW,NH*RW/HH,Math.round(X-w/2+off),Y0-r-RW,w,RW)}c.restore()}drawD(e,true)}});return st}
 /* ---- まわす ---- */
 function kick(){if(!raf)raf=requestAnimationFrame(frame)}
 function frame(){raf=0;if(!c)return;const T=now();c.setTransform(DPR,0,0,DPR,0,0);c.clearRect(0,0,W,H);
   for(const f of fx)if(f.once&&!f.done&&T>=f.t0){f.done=1;try{f.fn(T)}catch(e){}}
   for(const f of fx)if(f.pre)try{f.draw(T)}catch(e){}
   live.forEach(u=>{apply(u)});
+  if(cb){if(fx.some(f=>f.back)&&backOk()){cb.setTransform(DPR,0,0,DPR,0,0);cb.clearRect(0,0,W,H);const cl_=boardClip();const c0=c;c=cb;c.save();if(cl_){c.beginPath();c.rect(0,cl_[0],W,cl_[1]-cl_[0]);c.clip()}for(const f of fx)if(f.back)try{f.draw(T)}catch(e){}c.restore();c=c0}else{cb.setTransform(1,0,0,1,0,0);cb.clearRect(0,0,cvb.width,cvb.height)}}
   for(const f of fx)if(f.under)try{f.draw(T)}catch(e){}
-  for(const f of fx)if(f.draw&&!f.pre&&!f.under&&!f.top&&!f.txt)try{f.draw(T)}catch(e){}
+  for(const f of fx)if(f.draw&&!f.pre&&!f.under&&!f.top&&!f.txt&&!f.back)try{f.draw(T)}catch(e){}
   for(const f of fx)if(f.top)try{f.draw(T)}catch(e){}
   for(const f of fx)if(f.txt)try{f.draw(T)}catch(e){}
   fx=fx.filter(f=>!(f.end<T-50&&(!f.once||f.done)));
   live.forEach(u=>{if(!u.n){reset(u);live.delete(u)}});
-  if(fx.length||live.size)raf=requestAnimationFrame(frame);else c.clearRect(0,0,W,H)}
+  if(fx.length||live.size)raf=requestAnimationFrame(frame);else{c.clearRect(0,0,W,H);if(cb){cb.setTransform(1,0,0,1,0,0);cb.clearRect(0,0,cvb.width,cvb.height)}}}
 const wait=ms=>new Promise(r=>setTimeout(r,ms*SP()));
+/* 10/31：演出が ぜんぶ おわるまで まつ（ターンの 看板・コンボの おしらせの 前）。さいだい max ms */
+const busyNow=()=>fx.length>0||[...live].some(u=>u.n>0)||!!document.querySelector('.u .float,.hero .float,.fport .float');
+function idle(max=3000){return new Promise(res=>{const t0=performance.now();let ok=0;const ck=()=>{if(performance.now()-t0>max)return res(false);if(!busyNow()){if(++ok>=2)return res(true)}else ok=0;setTimeout(ck,100)};setTimeout(ck,150)})}
+/* 看板（あなたの ばん など）が 出ている あいだは 演出を 出さずに まつ（さいだい 3びょう） */
+const afterBanner=fn=>{let n=0;const ck=()=>{if(document.querySelector('.wsign2,.wsign')&&n++<25)return setTimeout(ck,120);fn()};ck()};
 /* ===== SE（ゲームの 音を つかう＋足りない 音は 作る） ===== */
 const S={
   safe(f){try{if(typeof HUMAN!=='undefined'&&!HUMAN)return;f()}catch(e){}},
@@ -9393,111 +9459,193 @@ const S={
 S.water=function(){S.safe(()=>{noise(.4,{vol:.2,freq:2500})})};
 ['glass','ice','bubble','boom','water'].forEach(k=>{const f=S[k];S[k]=function(){if(window.SEP&&typeof HUMAN!=='undefined'&&HUMAN&&SEP.play(k))return;return f.apply(this,arguments)}});
 /* ===== 演出 ===== */
+const ICE_HAND=700;/* 氷の かたまり：キャンバス → CSS に バトンタッチする 時間（ms） */
 const AMB=null,BOT=null;
 /* 当たった（キャラが 赤く ぶるっ） */
-function ono(u,str,t=0,o={}){at(t,()=>{const p=pos(u);const sd=p.x<W/2?1:-1;floatTxt(str,p.x+sd*u.rw*.78,p.y-u.rh*.7+(o.dy||0),{t,size:o.size||16,col:o.col||'#fff',rise:12,rot:sd*-.22})})}
-function hitU(u,t=0,im='x_hit',strong=1){if(!u)return;at(t,()=>{const p=pos(u);if(im)burst(p.x,p.y,{t,n:6+2*strong,im,sp:4,g:.1,life:450,sz:.22});keyf(u,{t,d:300,fn:(v,k)=>{v.ox=k>=1?0:(Math.random()-.5)*10*(1-k)*strong;v.tint=k>=1?null:`rgba(255,40,40,${.45*(1-k)})`}})})}
+/* 擬音の 場所：ななめ上。上の 列（あいて）は 上に 親分が いるので カードの 上はしの よこ（.45）、下の 列は .7 */
+const onoY=(p,u)=>p.y-u.rh*(p.y<H*.42?.45:.7);
+function ono(u,str,t=0,o={}){at(t,()=>{const p=pos(u);const sd=p.x<W/2?1:-1;floatTxt(str,p.x+sd*u.rw*.78,onoY(p,u)+(o.dy||0),{t,size:o.size||17,col:o.col||'#fff',rise:12,rot:sd*-.22,self:u.el})})}
+/* 10/31 ずかんに あわせる：当たりの つぶは 8こ・少し 大きく（hitAt と おなじ） */
+function hitU(u,t=0,im='x_hit',strong=1){if(!u)return;at(t,()=>{const p=pos(u);if(im)burst(p.x,p.y,{t,n:8,im,sp:5,g:.1,life:500,sz:.3});keyf(u,{t,d:300,fn:(v,k)=>{v.ox=k>=1?0:(Math.random()-.5)*10*(1-k)*strong;v.tint=k>=1?null:`rgba(255,40,40,${.45*(1-k)})`}})})}
+let lastA=null,lastT=null;/* さいごの こうげき（トゲの 向きに つかう） */
 function lunge(a,tg,t,o={}){const {d=180,back=380,frac=.85,windup=0}=o;const pa=pos(a),pt=pos(tg);const w0=windup?18:0;const sgn=pt.y<pa.y?1:-1;
   if(windup)keyf(a,{t,d:windup,fn:(u,k)=>{u.oy=w0*sgn*E.o(k);u.sc=1+.12*E.o(k)}});
   const t1=t+windup;keyf(a,{t:t1,d,fn:(u,k)=>{u.ox=(pt.x-pa.x)*frac*E.io(k);u.oy=w0*sgn+((pt.y-pa.y)*frac-w0*sgn)*E.io(k)}});
   keyf(a,{t:t1+d,d:back,fn:(u,k)=>{u.ox=(pt.x-pa.x)*frac*(1-E.o(k));u.oy=(pt.y-pa.y)*frac*(1-E.o(k));u.sc=1+(windup?.12:0)*(1-k)}});return t1+d}
 const AMAP={"sabota":"spike","pochi3":"fang","rookie2":"shoot","rookie3":"shoot","zombie3":"zombie","akudo2":"shoot","akudo3":"shoot","juko":"shoot","jitchoku":"shoot","wyatt":"shoot","masterson":"shoot","tink":"magic","bruno":"tackle","ranger":"shoot","roybean":"tackle","gaga":"dive","adara":"slash","bass":"lasso","pork":"shoot","kifujin":"water","doc":"bottle","pokerfox":"card","ragtime":"tongue","korokichi":"note","harry":"card","bard":"note","lily":"note","shaker":"ink","cancan":"claw","arai":"bottle","mustache":"bottle","mog":"note","ikoku":"slash","annie":"shoot","calamity":"shoot","nobel":"bomb","nanashi":"shoot","ferret":"claw","hammer":"tackle","hawk":"dive","gantetsu":"tackle","crockett":"shoot","owl":"dive","bunyan":"slash","pecos":"wind","guard":"dive","wolf":"fang","vulture":"dive","tumble":"tackle","pony":"tackle","garasan":"squeeze","eagle":"dive","serpentia":"squeeze","grizzly":"meat","funkoro":"bottle","fairy":"leaf","rainmaker":"water","chakka":"fireball","herb":"leaf","sandman":"magic","doo":"magic","mash":"magic","haboob":"wind","snakeoil":"squeeze","mist":"magic","stella":"magic","shadow":"slash","clover":"magic","bonedoc":"bone","amelie":"magic","carnelia":"magic","celestia":"water","bagura":"magic","hanage":"magic","seisei":"punch","kaikei":"card","geary":"punch","betty":"bottle","bolt":"punch","clock":"tackle","ruler":"punch","build":"shoot","kyu":"punch","sabishii":"zombie","crow":"dive","tesaguri":"zombie","coyote":"fang","belle":"shoot","tako":"ink","dalton":"shoot","bibiri":"shoot","cake":"bottle","butch":"shoot","bonnie":"shoot","soapy":"bottle","ketcham":"claw","sambass":"shoot","bignose":"tackle","axe":"punch","ice":"ice","narikin":"bottle","goblins":"tackle","mole":"gnaw","hyena":"fang","pickey":"tackle","capone":"claw","ma":"shoot","zombino":"zombie","new04":"ghost","new06":"dive","new07":"bottle","new08":"card","new10":"bomb","new12":"shoot","new14":"shoot","new15":"gnaw","new17":"tongue","new19":"ice","new22":"magic","new23":"fireball","new25":"spike","new26":"leaf","new28":"shoot","new30":"punch","new33":"punch","new34":"punch","new35":"punch","new37":"ghost","new38":"ghost","new39":"claw","new40":"shoot","new41":"tackle","new42":"bone","new43":"dive","new44":"shoot","new47":"shoot","new48":"spike","new49":"gnaw","new50":"claw","new51":"shoot","new52":"squeeze","new53":"bone","new55":"zombie","new56":"ghost","new57":"ghost","new58":"shoot","new59":"bone","new61":"tackle","new63":"zombie","new64":"ghost","new65":"ghost","new66":"tackle","new67":"claw","new68":"tackle","new69":"claw","new71":"shoot","new72":"claw","new75":"bomb","new76":"tackle","new77":"note","new78":"shoot","new79":"claw","new80":"claw","new81":"shoot","new82":"bottle","new83":"bottle","new84":"bottle","new85":"shoot","new86":"bottle","new87":"note","new89":"bottle","new90":"shoot","new91":"bottle","new92":"claw","new93":"shoot","new94":"claw","new95":"claw","new97":"shoot","new98":"claw","new99":"shoot","new102":"claw","new103":"claw","new104":"bomb","new105":"tackle","new106":"shoot","new107":"claw","new108":"shoot","new109":"claw","new110":"rush","new111":"shoot","new112":"claw","new113":"tackle","new114":"shoot","new115":"rush","new116":"shoot","new117":"fang","new119":"claw","new120":"shoot","new121":"tackle","new122":"claw","new123":"shoot","new124":"bottle","new125":"dive","new126":"gnaw","new127":"shoot","new128":"shoot","new129":"shoot","new130":"shoot","new131":"punch","new132":"ghost","new133":"bomb","new134":"punch","new135":"shoot","new136":"punch","new137":"punch","new138":"punch","new139":"punch","new140":"punch","new141":"punch","new142":"punch","new143":"fireball","new146":"tackle","new147":"tackle","new148":"punch","new150":"punch","new151":"zombie","new152":"claw","new153":"claw","new154":"ghost","new155":"claw","new156":"magic","new157":"claw","new159":"claw","new160":"shoot","new161":"magic","new162":"tackle","new163":"zombie","new164":"tongue","new165":"tackle","new166":"claw","new167":"claw","new168":"tackle","new169":"fang","new170":"bottle","new172":"shoot","new173":"ice","new174":"shoot","new175":"tackle","new176":"magic","new177":"claw","new178":"tackle","new179":"claw","new180":"claw","new181":"claw","new182":"magic","new183":"bottle","new184":"shoot","new185":"magic","new186":"tackle","new187":"shoot","new189":"magic","new190":"bottle","new191":"claw","new192":"magic","new193":"tackle","new194":"claw","new195":"shoot","new196":"fireball","new197":"claw","new200":"tackle","new202":"shoot","new204":"fireball","new205":"fireball","new206":"fireball","new207":"spike","new208":"spike","new210":"spike","new211":"claw","new212":"spike","new213":"leaf","new214":"spike","new215":"spike","new216":"tackle","new217":"spike","new218":"tackle","new219":"leaf","new220":"spike","new221":"shoot","new222":"bottle","new223":"shoot","new224":"claw","new225":"shoot","new226":"claw","new228":"shoot","new229":"rush","new230":"shoot","new231":"shoot","new232":"shoot","new233":"note","new234":"shoot","post":"shoot","baramaki":"shoot","pigeon2":"claw"};
 function kindOf(m){const k=AMAP[m.id];if(k)return k;const s=(typeof fxStyle==='function')?fxStyle(m.id):'tackle';return ({shoot:'shoot',lasso:'lasso',throw:'bottle',note:'note',card:'card',magic:'magic',fire:'fireball',bomb:'bomb',wind:'wind',water:'water',ice:'ice',claw:'claw',peck:'dive',slash:'slash',bite:'fang',tackle:'tackle',smash:'tackle',steam:'punch',zombie:'zombie'})[s]||'tackle'}
+const TXC={zombie:'#9dff7a',ice:'#d0f4ff',meat:'#ffd0a0',ghost:'#cfe3ff',note:'#ffc0e8',fireball:'#ffc090',bomb:'#ffb080',bottle:'#ffe0a0',magic:'#e0f0ff',water:'#c0e0ff',ink:'#d0c0ff'};
 const TXT={claw:'ザシュッ！',fang:'ガブッ！',zombie:'ガブッ！',punch:'ガシャーン！',meat:'ボヨン！',bone:'カコーン！',spike:'チクッ',ghost:'ヒヤッ…',note:'ジャーン♪',fireball:'ボウッ！',bomb:'ドッカーン！',bottle:'パリーン！',card:'シュパッ！',magic:'キラリーン！',ice:'つめた〜い！',water:'バシャッ！',ink:'ブシュッ！',tongue:'ペチッ',rush:'ドーン！',dive:'ツンツン！',slash:'ズバッ！',wind:'ビュオォ！',lasso:'グイッ！'};
-const THROW={shoot:{im:'x_bullet',sz:22,d:260},meat:{im:'fx:new/meat',sz:30,scale:1.8,arc:90,d:560,trail:'230,140,90'},leaf:{im:'fx:new/leaf_brown',sz:16,scale:1.8,arc:50,d:520,trail:'140,220,120',n:3},bone:{im:'fx:09_31',sz:30,scale:1.8,arc:70,d:520,trail:'240,230,210'},
-  spike:{im:'fx:new/needle',sz:30,scale:1.6,d:260,trail:'230,220,170',n:3,aim:true},note:{im:'fx:08_07',sz:18,scale:1.8,arc:40,d:520,trail:'255,160,220',n:3},fireball:{im:'fx:06_03',sz:34,scale:1.8,d:450,trail:'255,140,60'},bomb:{im:'fx:09_16',sz:30,scale:1.8,arc:110,d:620,trail:'120,120,120'},
-  bottle:{im:'fx:new/whisky',sz:34,scale:1.45,arc:70,d:560,trail:'230,160,70',filter:BOT},card:{im:'fx:09_25',sz:20,scale:1.8,d:340,trail:'255,255,255',n:2},magic:{im:'fx:03_20',sz:26,scale:1.8,d:420,trail:'200,230,255'},ice:{im:'fx:04_17',sz:16,scale:1.8,d:340,trail:'170,220,255',n:3},
-  water:{im:'fx:06_17',sz:12,scale:1.8,d:300,trail:'150,200,255',n:5},ink:{im:'fx:03_01',sz:26,scale:1.8,arc:40,d:450,trail:'40,30,60'},wind:{im:'x_tornado',sz:30,scale:1.6,d:450,trail:'230,230,220'},lasso:{im:'x_spin',sz:24,scale:1.6,d:380,trail:'230,180,100'},poison:{im:'fx:new/poison_flask',sz:30,scale:1.6,arc:60,d:520,trail:'170,90,230'}};
+/* 10/31 ずかんの 値（時間・数・大きさ）に そろえた */
+const THROW={shoot:{im:'x_bullet',sz:22,d:260},meat:{im:'fx:new/meat',sz:30,scale:1.8,arc:90,d:650,trail:'230,140,90'},leaf:{im:'fx:new/leaf_brown',sz:16,scale:1.8,arc:30,arcStep:25,tiltStep:.6,gap:130,d:600,trail:'140,220,120',n:4},bone:{im:'fx:09_31',sz:30,scale:1.8,arc:70,d:600,trail:'240,230,210'},
+  spike:{im:'fx:new/needle',sz:30,scale:1.6,d:280,trail:'230,220,170',n:3,aim:true},note:{im:'fx:08_07',sz:18,scale:1.8,arc:40,arcStep:-30,gap:170,d:620,trail:'255,160,220',n:3,bounce:1},fireball:{im:'fx:06_03',sz:34,scale:1.8,d:520,trail:'255,140,60'},bomb:{im:'fx:09_16',sz:30,scale:1.8,arc:110,d:750,trail:'120,120,120'},
+  bottle:{im:'fx:new/whisky',sz:34,scale:1.45,arc:70,d:650,trail:'230,160,70',filter:BOT},card:{im:'fx:09_25',sz:20,scale:1.8,d:380,gap:150,trail:'255,255,255',n:2},magic:{im:'fx:03_20',sz:26,scale:1.8,d:450,trail:'200,230,255'},ice:{im:'fx:04_17',sz:16,scale:1.8,d:380,trail:'170,220,255',n:3},
+  water:{im:'fx:06_17',sz:12,scale:1.8,d:320,gap:60,trail:'150,200,255',n:6},ink:{im:'fx:03_01',sz:26,scale:1.8,arc:40,d:500,trail:'40,30,60'},wind:{im:'x_tornado',sz:30,scale:1.6,d:450,trail:'230,230,220'},lasso:{im:'x_spin',sz:24,scale:1.6,d:380,trail:'230,180,100'},poison:{im:'fx:new/poison_flask',sz:30,scale:1.8,arc:60,d:700,trail:'170,90,230'}};
+/* 見参の 飛び道具（ずかんの bc_* の 値）：氷は 大きな かたまり 1つ・毒と ビンは ゆっくり */
+const BCSHOT={ice:{im:'fx:04_17',sz:30,scale:2.2,d:650,trail:'160,220,255',n:1},poison:{d:700},bottle:{d:700},shoot:{d:380}};
+const throwN=(o,from,to,t0)=>{const n=o.n||1,g=o.gap||110;let h=0;for(let i=0;i<n;i++)h=shot(from,to,Object.assign({},o,{t:t0+i*g,arc:(o.arc||0)+(o.arcStep||0)*i,tilt:o.tiltStep!=null?i*o.tiltStep:(i-(n-1)/2)*.4}));return h};
 const SND={claw:()=>SFX.swish&&SFX.swish(),fang:S.squish,zombie:S.squish,punch:S.thud,meat:S.squish,bone:S.clack,spike:S.swing,ghost:S.ghost,note:()=>{tone(784,.1,{vol:.08});tone(988,.1,{vol:.08,at:.08});tone(1175,.14,{vol:.08,at:.16})},fireball:()=>noise(.35,{vol:.25,freq:900}),bomb:S.boom,bottle:S.glass,card:()=>SFX.flip&&SFX.flip(),magic:()=>SFX.sparkle&&SFX.sparkle(),ice:S.ice,water:()=>S.water(),ink:S.squish,tongue:S.boing,rush:S.thud,dive:()=>SFX.swish&&SFX.swish(),slash:()=>SFX.swish&&SFX.swish(),wind:S.wind,lasso:()=>SFX.whoosh&&SFX.whoosh(),shoot:()=>SFX.shot&&SFX.shot(),gnaw:S.gnaw,squeeze:S.creak,leaf:S.wind};
 const snd=k=>S.safe(()=>{const f=SND[k];if(f)f()});
-/* こうげき：当たる しゅんかんで おわる（このあと ゲームが ダメージを 出す） */
-async function attack(m,el,tel,mine){if(!ensure()||!el||!tel)return;begin();const a=wrap(el),t=wrap(tel);const k=kindOf(m);const atk=(m.atk||0);let h=300;
-  if(THROW[k]){const o=THROW[k];if(k==='shoot'){keyf(a,{t:0,d:200,fn:(u,q)=>{u.oy=6*Math.sin(q*Math.PI)}});at(40,()=>{const p=pos(a);icon('x_muzzle',p.x,p.y-a.rh*.5*(mine?1:-1),{t:40,d:180,sz:44})})}
-    else keyf(a,{t:0,d:220,fn:(u,q)=>{u.sc=1+.08*Math.sin(q*Math.PI)}});
-    const n=o.n||1;for(let i=0;i<n;i++)h=shot(pos(a),pos(t),Object.assign({},o,{t:60+i*110,tilt:(i-(n-1)/2)*.4}));snd(k)}
-  else if(k==='tackle'||k==='rush'){const big=atk>=9||k==='rush',mid=atk>=5;if(big){darken({t:0,d:900,a:.3,holes:[a,t]});keyf(a,{t:0,d:320,fn:(u,q)=>{u.sc=1+.22*E.o(q);u.ox=q>=1?0:Math.sin(q*40)*2}})}
-    h=lunge(a,t,big?320:0,{windup:mid&&!big?180:0,d:big?140:170,frac:.82});const pt=pos(t);at(h,()=>{icon(big?'fx:07_01':mid?'x_pow':'x_hit',pt.x,pt.y,{t:h,d:big?450:360,sz:big?130:mid?84:56});if(big){flash({t:h,d:200,a:.6});shake({t:h,p:14,d:420});burst(pt.x,pt.y+t.rh*.4,{t:h,n:6,im:'fx:04_01',sp:4,g:.05,life:700,sz:.26,add_:false})}else shake({t:h,p:mid?8:3})});
-    S.safe(()=>{(big?S.thud:mid?SFX.drum:SFX.swish)&&(big?S.thud():mid?SFX.drum&&SFX.drum():SFX.swish&&SFX.swish())})}
-  else if(k==='dive'){const pa=pos(a),pt=pos(t);const mx=(pt.x-pa.x)*.5,my=(pt.y-pa.y)*.5-12;keyf(a,{t:0,d:340,fn:(u,q)=>{u.sc=1+.35*E.o(q);u.shadow=E.o(q);u.ox=mx*E.o(q);u.oy=my*E.o(q)}});keyf(a,{t:340,d:180,fn:(u,q,T)=>{u.ox=mx;u.oy=my+Math.sin(T/90)*3}});
-    keyf(a,{t:520,d:160,fn:(u,q)=>{u.sc=1.35-.35*E.io(q);u.shadow=1-q;u.ox=mx+((pt.x-pa.x)*.85-mx)*E.io(q);u.oy=my+((pt.y-pa.y)*.85-my)*E.io(q)}});h=680;
-    keyf(a,{t:h,d:380,fn:(u,q)=>{u.ox=(pt.x-pa.x)*.85*(1-E.o(q));u.oy=(pt.y-pa.y)*.85*(1-E.o(q));u.shadow=0}});at(h,()=>burst(pt.x,pt.y,{t:h,n:7,im:'fx:12_23',sp:4,g:.08,life:800,sz:.14,add_:false}));at(480,()=>snd(k))}
-  else if(k==='ghost'){const pa=pos(a),pt=pos(t);keyf(a,{t:0,d:200,fn:(u,q)=>{u.alpha=1-.6*q}});keyf(a,{t:200,d:420,fn:(u,q)=>{u.ox=(pt.x-pa.x)*1.1*E.io(q);u.oy=(pt.y-pa.y)*1.1*E.io(q)}});keyf(a,{t:620,d:380,fn:(u,q)=>{u.ox=(pt.x-pa.x)*1.1*(1-E.o(q));u.oy=(pt.y-pa.y)*1.1*(1-E.o(q));u.alpha=.4+.6*q}});h=440;
-    keyf(t,{t:h,d:600,fn:(u,q)=>{u.tint=q>=1?null:`rgba(120,170,255,${.35*(1-q)})`}});snd(k)}
-  else if(k==='squeeze'){h=lunge(a,t,0,{d:200,frac:.55,back:420});overlay(t,{t:h,d:900,draw:(x,y,u,e)=>{const I=ui('fx:new/snake_coil');if(!I.complete)return;const k=Math.min(1,e/220);const w=u.rw*1.7,hh=w*I.naturalHeight/I.naturalWidth;const sq=1-.06*Math.abs(Math.sin(e/300*Math.PI));c.save();c.globalAlpha=Math.min(1,(900-e)/200);c.translate(x,y);c.scale(sq*(.6+.4*k),1);c.drawImage(I,-w/2,-hh/2,w,hh*Math.min(1,k*1.2));c.restore()}});
-    keyf(t,{t:h,d:700,fn:(u,q)=>{u.sc=q>=1?1:1-.1*Math.abs(Math.sin(q*Math.PI*2))}});ono(t,'ギュッ',h,{size:15});h+=500;snd(k)}
-  else if(k==='tongue'){h=420;overlay(a,{t:60,d:520,draw:(x,y,u,e)=>{const pt=pos(t);const q=e<260?E.o(e/260):1-E.io((e-260)/260);const sy=y+(pt.y<y?-1:1)*u.rh*.15;const ex=x+(pt.x-x)*q,ey=sy+(pt.y-sy)*q;c.save();c.lineCap='round';c.strokeStyle='#e86a8a';c.lineWidth=10;c.beginPath();c.moveTo(x,sy);c.lineTo(ex,ey);c.stroke();c.fillStyle='#ff8aa8';c.beginPath();c.arc(ex,ey,10,0,7);c.fill();c.restore()}});at(h,()=>{const pt=pos(t);burst(pt.x,pt.y,{t:h,n:9,im:['x_sweat','fx:06_18'],sp:4,g:.22,up:2,life:600,sz:.12,add_:false})});snd(k)}
-  else {/* 近くで こうげき（キバ・ツメ・パンチ・ゾンビ・前歯・切る） */const slow=k==='zombie';h=lunge(a,t,0,{windup:slow?380:(k==='fang'||k==='punch'?160:0),d:slow?360:150,frac:.75,back:slow?520:380});const pt=pos(t);
-    at(h,()=>{if(k==='fang')icon('fx:07_08',pt.x,pt.y,{t:h,d:420,sz:100});else if(k==='claw')icon('fx:07_04',pt.x,pt.y,{t:h,d:380,sz:90});else if(k==='slash')burst(pt.x,pt.y,{t:h,n:6,im:'x_slash',sp:6,life:420,sz:.22,orient:true});else if(k==='punch'){icon('x_pow',pt.x,pt.y,{t:h,d:360,sz:84});burst(pt.x,pt.y,{t:h,n:5,im:['fx:02_25','fx:02_28','fx:02_31','fx:02_25','fx:02_28'],sp:4.5,g:.18,life:750,sz:.23,add_:false})}else if(k==='zombie'){tint({t:h-40,d:520,col:'90,220,90',a:.14,inD:60,outD:380});icon('fx:07_08',pt.x,pt.y,{t:h,d:420,sz:96,filter:'hue-rotate(95deg) saturate(1.3)'});burst(pt.x,pt.y,{t:h,n:7,im:'fx:new/poison_bubble',sp:3,g:-.04,life:650,sz:.12,add_:false});smoke(pt.x,pt.y,{t:h,n:8,col:'140,220,120',life:700,spread:50,r:12})}else if(k==='gnaw')icon('x_bite',pt.x,pt.y,{t:h,d:400,sz:k==='gnaw'?50:84});shake({t:h,p:k==='punch'?8:5})});snd(k)}
+/* こうげき：当たる しゅんかんで おわる（このあと ゲームが ダメージを 出す）。10/31 ずかんの a_* に あわせた */
+async function attack(m,el,tel,mine){if(!ensure()||!el||!tel)return;begin();const a=wrap(el),t=wrap(tel);lastA=el;lastT=tel;const k=kindOf(m);const atk=(m.atk||0);let h=300;
+  if(k==='magic'){/* 10/31 メモ32：なみうつ レーザービーム（エレクトリックな 光）→ 当たって 光の 玉が ほとばしる */const pa=pos(a),pt=pos(t);at(0,()=>burst(pa.x,pa.y-a.rh*.4,{t:0,n:6,im:'fx:02_05',sp:2,g:-.03,life:700,sz:.14}));const t0=150,D1=380,HO=300;h=t0+D1;
+    add({end:tt0(t0)+dd(D1+HO),draw(T){const e=(T-tt0(t0))/SP();if(e<0||e>D1+HO)return;const sx=pa.x,sy=pa.y-a.rh*.25*(pt.y<pa.y?1:-1),ex=pt.x,ey=pt.y;const L=Math.hypot(ex-sx,ey-sy)||1,ux=(ex-sx)/L,uy=(ey-sy)/L,nx=-uy,ny=ux;const reach=Math.min(1,e/D1);const fade=e>D1?1-(e-D1)/HO:1;
+      c.save();c.globalCompositeOperation='lighter';c.lineCap='round';c.lineJoin='round';
+      for(const [lw,cr,al,amp,ph] of [[18,'110,160,255',.22,10,0],[9,'150,205,255',.55,8,1.3],[3.5,'245,250,255',.95,6,2.1]]){c.strokeStyle=`rgba(${cr},${al*fade})`;c.lineWidth=lw;c.beginPath();const N=44;for(let i=0;i<=N;i++){const s=i/N*reach;const env=Math.sin(Math.PI*Math.min(1,s/Math.max(.05,reach)));const w=Math.sin(s*L/20-e/35+ph)*amp*env+(Math.random()-.5)*2.4*env;const x=sx+ux*s*L+nx*w,y=sy+uy*s*L+ny*w;i?c.lineTo(x,y):c.moveTo(x,y)}c.stroke()}
+      const hx=sx+ux*reach*L,hy=sy+uy*reach*L;const rg=c.createRadialGradient(hx,hy,0,hx,hy,24);rg.addColorStop(0,`rgba(255,255,255,${.95*fade})`);rg.addColorStop(1,'rgba(120,180,255,0)');c.fillStyle=rg;c.beginPath();c.arc(hx,hy,24,0,7);c.fill();c.restore()}});
+    at(h,()=>{flash({t:h,d:140,col:'200,230,255',a:.35});ring(pt.x,pt.y,{t:h,col:'170,215,255',r0:8,r1:Math.max(t.rw,t.rh)*.75,w:6,d:420});dots(pt.x,pt.y,{t:h,n:28,col:'200,230,255',sp:5,up:.6,life:750,r:4,area:24});burst(pt.x,pt.y,{t:h,n:10,im:'fx:02_05',sp:5.5,life:650,sz:.16})});snd(k)}
+  else if(k==='water'){/* 10/31 メモ34：水流。細い ほうが 自分がわ・太い ほうが あいてがわ。とちゅうで しぶきが ぱらぱら、先で ばしゃっ */const pa=pos(a),pt=pos(t);const t0=60,D1=260,HO=380,FO=300;h=t0+D1;keyf(a,{t:0,d:260,fn:(u,q)=>{u.sc=q>=1?1:1+.06*Math.sin(q*Math.PI)}});const PP=[];let lastE=0;
+    add({end:tt0(t0)+dd(D1+HO+FO+500),draw(T){const e=(T-tt0(t0))/SP();if(e<0||e>D1+HO+FO+500)return;const sx=pa.x,sy=pa.y-a.rh*.2*(pt.y<pa.y?1:-1),ex=pt.x,ey=pt.y;const L=Math.hypot(ex-sx,ey-sy)||1,ux=(ex-sx)/L,uy=(ey-sy)/L,nx=-uy,ny=ux;
+      const head=Math.min(1,e/D1),tail=e>D1+HO?Math.min(1,(e-D1-HO)/FO):0;const arcH=Math.min(50,L*.15);const P=s=>[sx+(ex-sx)*s,sy+(ey-sy)*s-Math.sin(s*Math.PI)*arcH];
+      if(head>tail){const N=40,Lf=[],Rt=[];for(let i=0;i<=N;i++){const s=tail+(head-tail)*i/N;const [bx,by]=P(s);const w=(1.5+13*s)*(1+.18*Math.sin(s*28-e/28))+Math.sin(s*16-e/40)*1.5;Lf.push([bx+nx*w,by+ny*w]);Rt.push([bx-nx*w,by-ny*w])}
+        c.save();const g=c.createLinearGradient(sx,sy,ex,ey);g.addColorStop(0,'rgba(185,228,255,.8)');g.addColorStop(1,'rgba(80,150,255,.92)');c.fillStyle=g;c.beginPath();Lf.forEach((q,i)=>i?c.lineTo(q[0],q[1]):c.moveTo(q[0],q[1]));for(let i=Rt.length-1;i>=0;i--)c.lineTo(Rt[i][0],Rt[i][1]);c.closePath();c.fill();
+        c.globalCompositeOperation='lighter';c.strokeStyle='rgba(255,255,255,.6)';c.lineWidth=2;c.setLineDash([10,14]);c.lineDashOffset=-e/3;c.beginPath();for(let i=0;i<=N;i++){const s=tail+(head-tail)*i/N;const [bx,by]=P(s);const w=(1.5+13*s)*.35;i?c.lineTo(bx+nx*w,by+ny*w):c.moveTo(bx+nx*w,by+ny*w)}c.stroke();c.setLineDash([]);c.restore()}
+      if(e<D1+HO){for(let q=lastE;q<e;q+=16){const s=Math.random()*head;const [bx,by]=P(s);PP.push({x:bx,y:by,vx:(Math.random()-.5)*1.6+ux*1.2,vy:-Math.random()*1.6,b:q,r:1.2+2.8*s});if(head>=1)for(let j=0;j<3;j++)PP.push({x:ex,y:ey,vx:(Math.random()-.5)*7,vy:-1.5-Math.random()*4.5,b:q,r:2.5+Math.random()*3.5})}}lastE=e;
+      c.save();c.fillStyle='rgb(205,236,255)';for(const p of PP){const ee=(e-p.b)/16.7;if(ee<0||ee>36)continue;c.globalAlpha=.9*(1-ee/36);c.beginPath();c.arc(p.x+p.vx*ee,p.y+p.vy*ee+.2*ee*ee,p.r,0,7);c.fill()}c.restore()}});
+    at(h,()=>keyf(t,{t:h,d:650,fn:(u,q)=>{u.tint=q>=1?null:`rgba(80,150,255,${.3*(1-q)})`;u.ox=q>=1?0:Math.sin(q*50)*3*(1-q)}}));snd(k)}
+  else if(THROW[k]){const o=THROW[k];let t0=60;if(k==='shoot'){keyf(a,{t:0,d:200,fn:(u,q)=>{u.oy=q>=1?0:8*Math.sin(q*Math.PI)}});at(40,()=>{const p=pos(a);icon('x_muzzle',p.x,p.y-a.rh*.5*(mine?1:-1),{t:40,d:180,sz:50})})}
+    else if(k==='note'){/* 10/29：楽器を ならす → 音の なみが ゆらゆら */const pa=pos(a),pt=pos(t);const ang=Math.atan2(pt.y-pa.y,pt.x-pa.x);keyf(a,{t:0,d:600,fn:(u,q)=>{u.rot=q>=1?0:Math.sin(q*Math.PI*4)*.08}});add({end:tt0(0)+dd(900),draw(T){const e=(T-tt0(0))/SP();if(e<0||e>900)return;c.save();c.translate(pa.x,pa.y);c.rotate(ang);c.lineCap='round';for(let i=0;i<3;i++){const ee=e-i*160;if(ee<0||ee>600)continue;const r=20+ee*.12,al=1-ee/600;c.strokeStyle=`rgba(255,190,235,${al})`;c.lineWidth=4;c.beginPath();for(let j=0;j<=12;j++){const th=-.6+1.2*j/12;const rr=r+Math.sin(j*1.3+e/60)*3;const X=Math.cos(th)*rr,Y=Math.sin(th)*rr;j?c.lineTo(X,Y):c.moveTo(X,Y)}c.stroke()}c.restore()}})}
+    else if(k==='magic'){/* ためる きらきら → 0.15びょう あとに なげる */at(0,()=>{const p=pos(a);burst(p.x,p.y-a.rh*.4,{t:0,n:6,im:'fx:02_05',sp:2,g:-.03,life:700,sz:.14})});t0=150}
+    else keyf(a,{t:0,d:220,fn:(u,q)=>{u.sc=q>=1?1:1+.08*Math.sin(q*Math.PI)}});
+    h=throwN(o,pos(a),pos(t),t0);snd(k)}
+  else if(k==='rush'){/* 突進：足を けって（土ぼこり 2回）→ ドーン */for(let i=0;i<2;i++)at(i*230,()=>{const p=pos(a);burst(p.x-a.rw*.2,p.y+a.rh*.45,{t:i*230,n:4,im:'fx:04_01',sp:2,g:.02,dir:Math.PI,spread:1,life:600,sz:.2,add_:false})});
+    keyf(a,{t:0,d:460,fn:(u,q)=>{u.ox=q>=1?0:Math.sin(q*Math.PI*4)*4;u.oy=q>=1?0:6*Math.abs(Math.sin(q*Math.PI*4))}});h=lunge(a,t,470,{d:140,frac:.9});const pt=pos(t);
+    at(h,()=>{icon('x_pow',pt.x,pt.y,{t:h,d:400,sz:110});burst(pt.x,pt.y+t.rh*.4,{t:h,n:6,im:'fx:04_01',sp:4,life:700,sz:.25,add_:false});shake({t:h,p:13})});S.safe(()=>S.thud())}
+  else if(k==='tackle'){const big=atk>=8,mid=atk>=4;/* 10/31 G7：小＝1〜3・中＝4〜7・大＝8いじょう */const pa=pos(a),pt=pos(t);
+    if(big){/* 大：暗く → ぐっと ためて（大きく）→ ドーン（自然な 土けむり） */darken({t:0,d:1800,a:.4,holes:[a,t]});const sg=pt.y<pa.y?1:-1;keyf(a,{t:0,d:500,fn:(u,q)=>{u.oy=26*sg*E.o(q);u.sc=1+.3*E.o(q);u.ox=q>=1?0:Math.sin(q*40)*2*q}});
+      keyf(a,{t:500,d:150,fn:(u,q)=>{u.ox=(pt.x-pa.x)*.85*E.io(q);u.oy=26*sg+((pt.y-pa.y)*.85-26*sg)*E.io(q)}});h=650;keyf(a,{t:h+10,d:450,fn:(u,q)=>{u.ox=(pt.x-pa.x)*.85*(1-E.o(q));u.oy=(pt.y-pa.y)*.85*(1-E.o(q));u.sc=1.3-.3*q}});
+      at(h,()=>{flash({t:h,d:220,a:.8});icon('fx:07_01',pt.x,pt.y,{t:h,d:500,sz:160});burst(pt.x,pt.y+t.rh*.4,{t:h,n:8,im:'fx:04_01',sp:5,g:.05,up:1,life:800,sz:.3,add_:false});shake({t:h,p:16,d:420})})}
+    else{h=lunge(a,t,0,{windup:mid?220:0,d:mid?160:170,frac:.85});at(h,()=>{icon(mid?'x_pow':'x_hit',pt.x,pt.y,{t:h,d:420,sz:mid?90:56});shake({t:h,p:mid?9:3})})}
+    S.safe(()=>{big?S.thud():mid?(SFX.drum&&SFX.drum()):(SFX.swish&&SFX.swish())})}
+  else if(k==='dive'){/* 急降下：まんなかへ 手前に 大きく（カードの 影）→ ふわふわ → 急降下で もとの 大きさ・影なし */const pa=pos(a),pt=pos(t);const mx=(pt.x-pa.x)*.5,my=(pt.y-pa.y)*.5-12;keyf(a,{t:0,d:380,fn:(u,q)=>{u.sc=1+.35*E.o(q);u.shadow=E.o(q);u.ox=mx*E.o(q);u.oy=my*E.o(q)}});keyf(a,{t:380,d:220,fn:(u,q,T)=>{u.ox=mx;u.oy=my+Math.sin(T/90)*3}});
+    keyf(a,{t:600,d:170,fn:(u,q)=>{u.sc=1.35-.35*E.io(q);u.shadow=1-q;u.ox=mx+((pt.x-pa.x)*.85-mx)*E.io(q);u.oy=my+((pt.y-pa.y)*.85-my)*E.io(q)}});h=770;
+    keyf(a,{t:h+10,d:450,fn:(u,q)=>{u.ox=(pt.x-pa.x)*.85*(1-E.o(q));u.oy=(pt.y-pa.y)*.85*(1-E.o(q));u.shadow=0}});at(h,()=>{burst(pt.x,pt.y,{t:h,n:8,im:'fx:12_23',sp:4,g:.08,life:900,sz:.14,add_:false});icon('x_hit',pt.x,pt.y,{t:h,d:420,sz:60})});at(560,()=>snd(k))}
+  else if(k==='ghost'){const pa=pos(a),pt=pos(t);keyf(a,{t:0,d:300,fn:(u,q)=>{u.alpha=1-.6*q}});keyf(a,{t:300,d:600,fn:(u,q)=>{u.ox=(pt.x-pa.x)*1.15*E.io(q);u.oy=(pt.y-pa.y)*1.15*E.io(q)+Math.sin(q*Math.PI*2)*8}});keyf(a,{t:900,d:500,fn:(u,q)=>{u.ox=(pt.x-pa.x)*1.15*(1-E.o(q));u.oy=(pt.y-pa.y)*1.15*(1-E.o(q));u.alpha=.4+.6*q}});h=620;
+    keyf(t,{t:h,d:700,fn:(u,q)=>{u.ox=q>=1?0:Math.sin(q*60)*3*(1-q);u.tint=q>=1?null:`rgba(120,170,255,${.35*(1-q)})`}});snd(k)}
+  else if(k==='squeeze'){h=lunge(a,t,0,{d:200,frac:.55,back:500});overlay(t,{t:h,d:1200,draw:(x,y,u,e)=>{const I=ui('fx:new/snake_coil');if(!I.complete)return;const q=Math.min(1,e/250);const w=u.rw*1.7,hh=w*I.naturalHeight/I.naturalWidth;const sq=1-.06*Math.abs(Math.sin(e/330*Math.PI));c.save();c.globalAlpha=Math.min(1,(1200-e)/200);c.translate(x,y);c.scale(sq*(.6+.4*q),1);c.drawImage(I,-w/2,-hh/2,w,hh*Math.min(1,q*1.2));c.restore()}});
+    keyf(t,{t:h,d:1200,fn:(u,q)=>{u.sc=q>=1?1:1-.1*Math.abs(Math.sin(q*Math.PI*3))}});[0,1,2].forEach(i=>ono(t,'ギュッ',h+200+i*330,{size:15,dy:i*14}));h+=900;snd(k)}
+  else if(k==='tongue'){h=320;overlay(a,{t:60,d:520,draw:(x,y,u,e)=>{const pt=pos(t);const q=e<260?E.o(e/260):1-E.io((e-260)/260);const sy=y+(pt.y<y?-1:1)*u.rh*.15;const ex=x+(pt.x-x)*q,ey=sy+(pt.y-sy)*q;c.save();c.lineCap='round';c.strokeStyle='#e86a8a';c.lineWidth=10;c.beginPath();c.moveTo(x,sy);c.lineTo(ex,ey);c.stroke();/* 10/31 メモ38：テカテカ（つやの 線と 先の 光） */const dl=Math.hypot(ex-x,ey-sy)||1,gx=-(ey-sy)/dl*2.6,gy=(ex-x)/dl*2.6;c.strokeStyle='rgba(255,235,245,.85)';c.lineWidth=3;c.beginPath();c.moveTo(x+gx,sy+gy);c.lineTo(ex+gx,ey+gy);c.stroke();c.fillStyle='#ff8aa8';c.beginPath();c.arc(ex,ey,10,0,7);c.fill();c.fillStyle='rgba(255,255,255,.9)';c.beginPath();c.ellipse(ex-3,ey-3.5,3.6,2.2,-.6,0,7);c.fill();c.restore()}});
+    at(h,()=>{const pt=pos(t);burst(pt.x,pt.y,{t:h,n:9,im:['x_sweat','fx:06_18'],sp:4,g:.22,up:2,life:600,sz:.12,add_:false});icon('x_hit',pt.x,pt.y,{t:h,d:400,sz:62});flash({t:h,d:90,col:'255,220,230',a:.25});shake({t:h,p:4,d:200})});snd(k)}
+  else if(k==='gnaw'){/* 前歯で カリカリ（3回 かじる）。10/29：うごく前に ちょこちょこ */keyf(a,{t:0,d:220,fn:(u,q)=>{u.ox=q>=1?0:Math.sin(q*Math.PI*6)*4;u.oy=q>=1?0:-Math.abs(Math.sin(q*Math.PI*3))*5}});h=lunge(a,t,220,{d:160,frac:.7,back:700});const pt=pos(t);for(let i=0;i<3;i++)at(h+i*170,()=>icon('x_bite',pt.x+(i-1)*14,pt.y+t.rh*.2,{t:h+i*170,d:220,sz:44}));ono(t,'カリカリ',h);h+=340;snd(k)}
+  else {/* 近くで こうげき（キバ・ツメ・パンチ・ゾンビ・切る） */const W_={zombie:500,fang:180,punch:200}[k]||0;const D_={zombie:420,fang:150,punch:140,claw:150}[k]||150;h=lunge(a,t,0,{windup:W_,d:D_,frac:k==='fang'?.7:.75,back:k==='zombie'?600:380});const pt=pos(t);
+    at(h,()=>{if(k==='fang'){icon('fx:07_08',pt.x,pt.y,{t:h,d:450,sz:110});keyf(t,{t:h,d:300,fn:(u,q)=>{u.sc=q>=1?1:1-.08*Math.sin(q*Math.PI)}})}else if(k==='claw')icon('fx:07_04',pt.x,pt.y,{t:h,d:400,sz:90});else if(k==='slash')burst(pt.x,pt.y,{t:h,n:6,im:'x_slash',sp:6,life:420,sz:.22,orient:true});else if(k==='punch'){icon('x_pow',pt.x,pt.y,{t:h,d:380,sz:90});burst(pt.x,pt.y,{t:h,n:5,im:['fx:02_25','fx:02_28','fx:02_31','fx:02_25','fx:02_28'],sp:4.5,g:.18,life:800,sz:.23,add_:false})}else if(k==='zombie'){tint({t:h-40,d:520,col:'90,220,90',a:.14,inD:60,outD:380});icon('fx:07_08',pt.x,pt.y,{t:h,d:420,sz:96,filter:'hue-rotate(95deg) saturate(1.3)'});burst(pt.x,pt.y,{t:h,n:7,im:'fx:new/poison_bubble',sp:3,g:-.04,life:650,sz:.12,add_:false})}
+      shake({t:h,p:k==='punch'?9:k==='fang'?8:k==='zombie'?5:6})});snd(k)}
   /* 当たった しゅんかんの 文字と きらり */
-  const tx=TXT[k];at(h,()=>{const p=pos(t);if(k==='bottle')burst(p.x,p.y,{t:h,n:10,im:['fx:new/amber_drops','fx:new/amber_splash'],sp:4.5,g:.2,life:480,sz:.22,add_:false,filter:null});if(k==='bomb'){flash({t:h,d:200,col:'255,200,120',a:.6});icon('fx:07_06',p.x,p.y,{t:h,d:520,sz:150});shake({t:h,p:13})}
-    if(k==='fireball'){tint({t:h-60,d:500,a:.12,inD:60,outD:380});burst(p.x,p.y,{t:h,n:6,im:'x_fire',sp:3,g:-.1,up:3,life:650,sz:.22})}if(k==='ice')burst(p.x,p.y,{t:h,n:8,im:'fx:04_17',sp:4,g:.2,life:500,sz:.1,add_:false});if(k==='water')burst(p.x,p.y,{t:h,n:8,im:'fx:06_18',sp:4,g:.2,life:480,sz:.2,add_:false});
-    if(k==='magic')burst(p.x,p.y,{t:h,n:8,im:'fx:02_05',sp:4,life:650,sz:.16});if(k==='leaf')burst(p.x,p.y,{t:h,n:8,im:'fx:new/leaf_brown',sp:3,g:.06,life:800,sz:.12,add_:false});if(k==='ink')keyf(t,{t:h,d:900,fn:(u,q)=>{u.tint=q>=1?null:`rgba(20,10,30,${.55*(1-q)})`}});
-    if(tx){const sd=p.x<W/2?1:-1;floatTxt(tx,p.x+sd*t.rw*.78,p.y-t.rh*.7,{t:h,size:16,rise:12,rot:sd*-.22,col:k==='zombie'?'#9dff7a':k==='ice'?'#d0f4ff':'#fff',stroke:k==='zombie'?'#1f4a12':'#3e1a06'})}});
+  const tx=TXT[k];at(h,()=>{const p=pos(t);if(k==='bottle')burst(p.x,p.y,{t:h,n:10,im:['fx:new/amber_drops','fx:new/amber_splash'],sp:4.5,g:.2,life:500,sz:.22,add_:false,filter:null});if(k==='bomb'){flash({t:h,d:220,col:'255,200,120',a:.7});icon('fx:07_06',p.x,p.y,{t:h,d:600,sz:170});burst(p.x,p.y+t.rh*.3,{t:h,n:6,im:'fx:04_01',sp:4,g:.05,life:800,sz:.25,add_:false});shake({t:h,p:15})}
+    if(k==='fireball'){tint({t:h-80,d:600,a:.12,inD:80,outD:450});burst(p.x,p.y,{t:h,n:6,im:'x_fire',sp:3,g:-.1,up:3,life:700,sz:.22})}if(k==='ice'){burst(p.x,p.y,{t:h,n:8,im:'fx:04_17',sp:4,g:.2,life:550,sz:.1,add_:false});/* 10/29：パキーン */flash({t:h,d:140,col:'220,245,255',a:.35});icon('x_ice',p.x,p.y,{t:h,d:380,sz:70});burst(p.x,p.y,{t:h,n:8,im:'x_spark',sp:6,life:420,sz:.15})}
+    if(k==='meat')icon('x_pow',p.x,p.y,{t:h,d:420,sz:70});if(k==='bone'||k==='card')icon('x_hit',p.x,p.y,{t:h,d:420,sz:k==='card'?56:60});
+    if(k==='leaf')burst(p.x,p.y,{t:h,n:8,im:'fx:new/leaf_brown',sp:3,g:.06,life:900,sz:.12,add_:false});if(k==='ink'){/* 10/31 メモ35：スモッグの ように モクモク → スミが べったり（たれる） */const hb=heroBot();smoke(p.x,p.y,{t:h,n:16,col:'45,30,70',life:1300,spread:60,r:22,minY:hb});smoke(p.x,p.y-10,{t:h+120,n:10,col:'75,60,100',life:1200,spread:85,r:18,minY:hb});const BL=Array.from({length:7},()=>({x:(Math.random()-.5)*.8,y:(Math.random()-.5)*.7,r:.08+Math.random()*.1,dr:.05+Math.random()*.22}));overlay(t,{t:h,d:1600,draw:(x,y,u,e)=>{const al=Math.min(1,e/120)*Math.min(1,(1600-e)/400);c.save();c.globalAlpha=.85*al;c.fillStyle='#1c1228';for(const b of BL){const R_=u.rw*b.r*Math.min(1,e/180);const bx=x+b.x*u.rw,by=y+b.y*u.rh;c.beginPath();c.arc(bx,by,R_,0,7);c.fill();const dl=Math.min(1,e/900)*u.rh*b.dr;c.beginPath();c.ellipse(bx,by+R_*.5+dl/2,R_*.3,dl/2+1,0,0,7);c.fill();c.beginPath();c.arc(bx,by+R_*.5+dl,R_*.32,0,7);c.fill()}c.restore()}});keyf(t,{t:h,d:1300,fn:(u,q)=>{u.tint=q>=1?null:`rgba(20,10,30,${.5*(1-q)})`}})}
+    if(tx){const sd=p.x<W/2?1:-1;floatTxt(tx,p.x+sd*t.rw*.78,onoY(p,t),{t:h+(k==='claw'||k==='fang'?100:0),size:17,rise:12,rot:sd*-.22,self:t.el,col:TXC[k]||'#fff',stroke:k==='zombie'?'#1f4a12':'#3e1a06'})}});
   await wait(h)}
 /* 当たった（ゲームの impact の かわり） */
 function hit(el,kind=''){if(!ensure()||!el)return;begin();const u=wrap(el);if(kind==='heal'){healU(u);return}if(kind==='poison'){poisonU(u,0);return}hitU(u,0,kind==='magic'?'x_spark':kind==='fire'?'x_fire':'x_hit')}
-function healU(u,t=0){const p=pos(u);at(t,()=>{dots(p.x,p.y+u.rh*.3,{t,n:20,col:'140,255,160',up:2.2,life:1000,area:u.rw});burst(p.x,p.y,{t,n:5,im:'x_heal',sp:2,g:-.1,life:950,sz:.2});keyf(u,{t,d:800,fn:(v,k)=>{v.glow=k>=1?0:Math.sin(k*Math.PI);v.glowC='140,255,160'}})})}
-function buffU(u,t=0){const p=pos(u);at(t,()=>{ring(p.x,p.y,{t,r1:70,col:'255,215,90',d:500});dots(p.x,p.y+u.rh*.3,{t,n:22,up:3,col:'255,220,120',life:850,area:u.rw});keyf(u,{t,d:900,fn:(v,k)=>{v.glow=k>=1?0:Math.sin(k*Math.PI);v.glowC='255,211,74';v.sc=k>=1?1:1+.15*Math.sin(k*Math.PI)}})})}
-function poisonU(u,t=0){const p=pos(u);at(t,()=>{burst(p.x,p.y,{t,n:12,im:'fx:new/poison_bubble',sp:4,g:.1,up:2,life:750,sz:.15,add_:false});icon('fx:new/poison_cloud',p.x,p.y,{t,d:600,sz:58,a:.55});keyf(u,{t,d:900,fn:(v,k)=>{v.tint=k>=1?null:`rgba(140,60,200,${.3*(1-k)})`}})});S.bubble()}
+function healU(u,t=0){const p=pos(u);at(t,()=>{dots(p.x,p.y+u.rh*.3,{t,n:22,col:'140,255,160',up:2.2,life:1100,area:u.rw});burst(p.x,p.y,{t,n:6,im:'x_heal',sp:2,g:-.1,life:1000,sz:.22,sway:.17});keyf(u,{t,d:800,fn:(v,k)=>{v.glow=k>=1?0:Math.sin(k*Math.PI);v.glowC='140,255,160'}})})}
+/* 10/31：バフ（攻撃+ など ぜんぶ 共通）。光の柱の 絵は 足もとに 置いたまま 下から じわっと 出す（うごかさない）。
+   キラキラは 別に 下から 上へ、キャラを ぐるっと つつみながら のぼる */
+function buffU(u,t=0){const p=pos(u);const I=ui('x_beam'),SPK=ui('x_spark');const D=1500,t1=tt0(t),d1=dd(D);
+  const fw=u.rw*1.45,fh=fw*(147/150),fx_=p.x,fy=p.y+u.rh*.5+fw*.06;
+  add({end:t1+d1,draw(T){const e=(T-t1)/SP();if(e<0||e>D||!I.complete)return;const rv=E.o(cl(e/450));const a=Math.min(1,e/300,(D-e)/400);
+    c.save();c.beginPath();c.rect(fx_-fw,fy-fh*rv,fw*2,fh*rv+4);c.clip();c.globalCompositeOperation='lighter';c.globalAlpha=.72*a;c.drawImage(I,fx_-fw/2,fy-fh,fw,fh);c.restore()}});
+  const N=14,P_=Array.from({length:N},(_,i)=>({a0:i/N*Math.PI*2,dl:(i%7)*70,sz:(.5+Math.random()*.5),sp:1+Math.random()*.4}));
+  add({top:1,end:t1+d1,draw(T){const e=(T-t1)/SP();if(e<0||e>D||!SPK.complete)return;const pp=pos(u);for(const q of P_){const ee=e-150-q.dl;if(ee<0)continue;const k=ee/900*q.sp;if(k>=1)continue;
+      const ang=q.a0+k*Math.PI*2.2,rx=u.rw*.62*(1-k*.35),z=Math.sin(ang);const x=pp.x+Math.cos(ang)*rx,y=pp.y+u.rh*.5-k*u.rh*1.2+z*6;const s=(10+12*q.sz)*(.75+.25*(z+1)/2)*(k>.75?(1-k)/.25:1);
+      c.save();c.globalCompositeOperation='lighter';c.globalAlpha=(z<0?.55:1)*Math.min(1,k*6);c.translate(x,y);c.rotate(k*2);c.drawImage(SPK,-s/2,-s/2,s,s);c.restore()}}});
+  keyf(u,{t:t+150,d:1100,fn:(v,k)=>{v.glow=k>=1?0:Math.sin(k*Math.PI)*.9;v.glowC='255,211,74'}})}
+/* 毒：毒の あわ・つぶが とびちる → 毒の くも → あわが のぼる・むらさき（ずかん bc_poison） */
+function poisonU(u,t=0){const p=pos(u);at(t,()=>{burst(p.x,p.y,{t,n:14,im:'fx:new/poison_bubble',sp:4,g:.1,up:2,life:800,sz:.16,add_:false});burst(p.x,p.y,{t,n:8,im:'fx:new/poison_bubbles',sp:3,g:-.05,life:900,sz:.16,add_:false});icon('fx:new/poison_cloud',p.x,p.y,{t,d:650,sz:62,a:.55});
+  overlay(u,{t,d:1900,draw:(x,y,uu,e)=>{const I=ui('fx:new/poison_bubble');if(!I.complete)return;const r=Math.min(uu.rw,uu.rh)/2;for(let i=0;i<5;i++){const k=((e/900)+i/5)%1;const s=10+8*Math.sin(k*Math.PI);c.save();c.globalAlpha=Math.sin(k*Math.PI);c.drawImage(I,x-r*.6+i*r*.3-s/2,y+r*.5-k*r*1.4-s/2,s,s);c.restore()}}});
+  keyf(u,{t,d:1900,fn:(v,k)=>{v.tint=k>=1?null:`rgba(140,60,200,${.22*Math.min(1,(1-k)*6)})`}})});S.bubble()}
+/* 10/31 大きな 文字（見参！・やられたら）の 場所：数字・親分の 顔・ふきだし・バー・その カードには ぜったい かぶせない。
+   カードの 絵には なるべく かぶせない（列の あいだ・あいている 所を えらぶ）。入らなければ 小さく する */
+function placeBig(sub,y0,own,o={}){const L=o.len||3;let best={x:o.x!=null?o.x:W/2,y:Math.max(70,Math.min(H-120,y0)),size:o.min||24},bs=1e9;try{const R=(q,m=0)=>[...document.querySelectorAll(q)].map(e=>e.getBoundingClientRect()).filter(r=>r.width).map(r=>({left:r.left-m,right:r.right+m,top:r.top-m,bottom:r.bottom+m}));
+  const hard=R('.u .stat,.hero,.hero *,.fport,.fport *,.bubble,.kobub,.sbub,.kwbub,#endt,.bar,#hand,#coins',6);if(own){const r=own.getBoundingClientRect();if(r.width)hard.push(r)}if(o.extraHard)hard.push(...o.extraHard);const soft=R('.u');
+  const ov=(a,r)=>Math.max(0,Math.min(a.r,r.right)-Math.max(a.l,r.left))*Math.max(0,Math.min(a.b,r.bottom)-Math.max(a.t,r.top));
+  const xs=o.x!=null?[o.x]:[W/2,W*.38,W*.62];
+  /* 列の すきま（親分 ↔ あいての 列・あいての 列 ↔ じぶんの 列）の まんなか */const GAPS=[];if(o.gaps){const us=R('.u').sort((a,b)=>a.top-b.top);const hp=R('.fport');if(us.length){const top=us[0].top,rows=[];us.forEach(r=>{const rw=rows.find(q=>Math.abs(q.top-r.top)<20);if(rw)rw.bottom=Math.max(rw.bottom,r.bottom);else rows.push({top:r.top,bottom:r.bottom})});if(hp.length)GAPS.push((hp[0].bottom+rows[0].top)/2);for(let i=0;i+1<rows.length;i++)GAPS.push((rows[i].bottom+rows[i+1].top)/2)}}
+  for(const size of (o.sizes||[50,44,38,32,28,24]))for(const cx of xs)for(let y=56;y<=H-100;y+=4){if(o.range&&Math.abs(y-y0)>o.range)continue;const sw=sub?sub.length*18:0,w=Math.max(L*size*1.05,sw)+10,top=y-size*.55,bot=y+size*.5+(sub?size*.45+14:0);
+    const box={l:cx-w/2,r:cx+w/2,t:top,b:bot};if(box.l<4||box.r>W-4)continue;if(hard.some(r=>ov(box,r)>0))continue;const so=soft.reduce((a,r)=>a+ov(box,r),0);
+    const gy=o.gaps&&GAPS.length?Math.min(...GAPS.map(g=>Math.abs((top+bot)/2-g))):Math.abs(y-y0);const sc=(o.artOK?so/600:so/40)+(50-size)*1.5+gy/(o.gaps?20:40)+Math.abs(cx-W/2)/30;if(sc<bs){bs=sc;best={x:cx,y,size}}}}catch(e){}return best}
 /* 見参！ */
-async function kenzan(m){if(!ensure())return;const el=uEl(m);if(!el)return;begin();const u=wrap(el);const p=pos(u);
+async function kenzan(m){if(!ensure())return;const el=uEl(m);if(!el)return;begin();/* 10/29：見参の あいだは Zzz を 出さない */document.body.classList.add('cfxkz');setTimeout(()=>document.body.classList.remove('cfxkz'),2000*SP());const u=wrap(el);const p=pos(u);
   let sub=null;try{const x=effList(m.id,m.lv).find(x=>x[1]==='見参！');if(x){const s=String(x[2]);const mm=s.match(/^(.{1,16}?[！!…〜♪？])(\s|$)/);if(mm)sub=mm[1]}}catch(e){}
-  darken({t:0,d:1700,a:.4,holes:[u]});try{const pp=document.createElement('div');pp.className='kwpop fx-bc';pp.style.setProperty('--k',(typeof KW_COL!=='undefined'&&KW_COL.bc)||'#e8a23a');pp.innerHTML='<span class="i"><img class="kwi" src="ui/u_k_bc.png" alt=""></span>';el.appendChild(pp);setTimeout(()=>pp.remove(),1100*SP())}catch(e){}burst(p.x,p.y,{t:0,n:8,im:['x_spark','x_star'],sp:5,sz:.16,life:800});flash({t:0,d:180,a:.5});
+  darken({t:0,d:1700,a:.4,holes:[u]});/* 10/31 光の 放射は カードの うしろ（カードの 形を くりぬく） *//* 11/1：放射は カードの うしろの キャンバス（暗くする幕の 下に なるので すこし こく） */rays(p.x,p.y,{t:0,d:1700,a:.7,len:Math.max(u.rw,u.rh)*1.05,n:14,soft:true,back:true,hole:u});try{const pp=document.createElement('div');pp.className='kwpop fx-bc';pp.style.setProperty('--k',(typeof KW_COL!=='undefined'&&KW_COL.bc)||'#e8a23a');pp.innerHTML='<span class="i"><img class="kwi" src="ui/u_k_bc.png" alt=""></span>';/* 10/31：見参の マークは カードの 上はしの 上に 小さく（カードの 絵に かぶせない） */pp.style.top='-30px';pp.style.zoom='.7';el.appendChild(pp);setTimeout(()=>pp.remove(),1100*SP())}catch(e){}burst(p.x,p.y,{t:0,n:8,im:['x_spark','x_star'],sp:5,sz:.16,life:800});flash({t:0,d:180,a:.5});
   keyf(u,{t:0,d:1300,fn:(v,k)=>{v.glow=k>=1?0:Math.sin(k*Math.PI);v.sc=k>=1?1:1+.12*Math.sin(Math.min(1,k*3)*Math.PI)}});
-  const y=Math.max(70,Math.min(H-120,p.y-u.rh*.9));slam('見参！',W/2,y,{t:80,d:1500,size:50,sub});S.kenzan();await wait(950)}
+  /* 10/31：見参！は 見参した カードと その マークには かぶせない。じぶんの 列なら あいての 列の 上（カードの 絵は よい）、あいての 列なら じぶんの 列の 上。40px いじょう */
+  const ur=el.getBoundingClientRect(),mine_=!(typeof B!=='undefined'&&B&&B.foe&&B.foe.board.includes(m));const others=[...document.querySelectorAll('.u')].map(e=>e.getBoundingClientRect()).filter(r=>r.width&&Math.abs(r.top-ur.top)>ur.height*.5&&(mine_?r.top<ur.top:r.top>ur.top));
+  let ty;if(others.length){const t0=Math.min(...others.map(r=>r.top)),b0=Math.max(...others.map(r=>r.bottom));ty=(t0+b0)/2}else{const fp=document.querySelector('.fport');const hb=fp?fp.getBoundingClientRect().bottom:110;ty=mine_?(hb+ur.top)/2:ur.bottom+ur.height*.9}
+  const pl=placeBig(sub,ty,null,{sizes:[50,46,42,40],artOK:1,range:Math.max(70,ur.height*.75),extraHard:[{left:ur.left-8,right:ur.right+8,top:ur.top-44,bottom:ur.bottom+8}]});
+  slam('見参！',pl.x,pl.y,{t:80,d:1500,size:pl.size,sub});S.kenzan();/* 10/31 G2：見参 → 効果の あいだに 一拍 */await wait(1250)}
 /* やられ（コピーを つかう：盤面が 書きかわっても のこる） */
 async function ko(m,el,mine){if(!ensure()||!el)return;begin();const r=el.getBoundingClientRect();m._pos=[r.left+r.width/2,r.top+r.height/2];const cpy=el.cloneNode(true);cpy.classList.remove('hit','flashhit','die','aiming','aimed');cpy.removeAttribute('data-u');cpy.querySelectorAll('.float,.bubble,.cfxt').forEach(x=>x.remove());
-  cpy.style.cssText=`position:fixed;left:${r.left}px;top:${r.top}px;width:${r.width}px;height:${r.height}px;margin:0;z-index:83;pointer-events:none`;document.body.appendChild(cpy);el.style.visibility='hidden';const u=wrap(cpy);
-  keyf(u,{t:0,d:450,fn:(v,k)=>{v.gray=k;v.ox=k>=1?0:(Math.random()-.5)*8;v.rot=k*.3}});tween(u,{t:450,d:280,sc:.2,alpha:0,e:E.io});
-  at(500,()=>{const p=pos(u);smoke(p.x,p.y,{t:500,n:14,col:'230,220,210',spread:70,r:18});burst(p.x,p.y,{t:500,n:6,im:'x_star',sp:4,g:.05,life:750,sz:.18})});S.ko();
-  setTimeout(()=>cpy.remove(),900*SP());await wait(780)}
-/* ふっかつ：たおれかけて → 天使の輪 → もう一度 立ち上がる */
+  cpy.style.cssText=`position:fixed;left:${r.left}px;top:${r.top}px;width:${r.width}px;height:${r.height}px;margin:0;z-index:83;pointer-events:none`;document.body.appendChild(cpy);el.style.visibility='hidden';m._koing=1;cpy._cfxGone='rm';const u=wrap(cpy);
+  keyf(u,{t:0,d:500,fn:(v,k)=>{v.gray=k;v.ox=k>=1?0:(Math.random()-.5)*8;v.rot=k*.3}});tween(u,{t:500,d:280,sc:.2,alpha:0,e:E.io});
+  at(560,()=>{const p=pos(u);smoke(p.x,p.y,{t:560,n:14,col:'230,220,210',spread:70,r:18});burst(p.x,p.y,{t:560,n:6,im:'x_star',sp:4,g:.05,life:800,sz:.2})});S.ko();
+  setTimeout(()=>cpy.remove(),950*SP());await wait(800)}
+/* ふっかつ：たおれかけて → 天使の輪 → もう一度 立ち上がる。10/31 ずかん kw_revive に あわせる：放射（リング）は 出さない・おわったら 色を もとに もどす */
 async function revive(m){if(!ensure())return;const el=uEl(m);if(!el)return;begin();const u=wrap(el);
-  keyf(u,{t:0,d:450,fn:(v,k)=>{v.gray=k;v.rot=.3*E.o(k);v.oy=14*E.o(k);v.sc=1-.08*k}});
-  at(500,()=>{const p=pos(u);icon('x_halo',p.x,p.y-u.rh/2-12,{t:500,d:1300,sz:52,bob:3});dots(p.x,p.y+u.rh*.4,{t:500,n:30,col:'255,240,200',up:3,life:1100,area:u.rw});flash({t:500,d:220,col:'255,245,210',a:.3})});S.revive();
-  keyf(u,{t:780,d:600,fn:(v,k)=>{v.gray=1-k;v.rot=.3*(1-E.o(k));v.oy=14*(1-E.o(k))-Math.sin(k*Math.PI)*16;v.sc=.92+.08*k+.1*Math.sin(k*Math.PI);v.glow=k>=1?0:Math.sin(k*Math.PI);v.glowC='255,240,180'}});
-  at(1150,()=>{const p=pos(u);ring(p.x,p.y,{t:1150,col:'255,240,180',r1:90});floatTxt('ふっかつ！',p.x,p.y-u.rh/2-26,{t:1150,col:'#ffe9a0',size:22})});await wait(1400)}
+  keyf(u,{t:0,d:550,fn:(v,k)=>{v.gray=k;v.rot=.35*E.o(k);v.oy=16*E.o(k);v.sc=1-.08*k}});
+  at(650,()=>{const p=pos(u);icon('x_halo',p.x,p.y-u.rh/2-12,{t:650,d:1500,sz:56,bob:3});dots(p.x,p.y+u.rh*.4,{t:650,n:36,col:'255,240,200',up:3,life:1300,area:u.rw});flash({t:650,d:250,col:'255,245,210',a:.35})});at(600,()=>S.revive());
+  keyf(u,{t:950,d:650,fn:(v,k)=>{v.gray=1-k;v.rot=.35*(1-E.o(k));v.oy=16*(1-E.o(k))-Math.sin(k*Math.PI)*18;v.sc=.92+.08*k+.12*Math.sin(k*Math.PI);v.glow=k>=1?0:Math.sin(k*Math.PI);v.glowC='255,240,180'}});
+  keyf(u,{t:1610,d:20,fn:v=>{v.gray=0;v.rot=0;v.oy=0;v.ox=0;v.sc=1;v.glow=0;v.tint=null;v.alpha=1}});
+  at(1350,()=>{const p=pos(u);floatTxt('ふっかつ！',p.x,p.y-u.rh*.3,{t:1350,col:'#ffe9a0',size:24,rise:16})});await wait(1650)}
 /* 見参の 飛び道具（ダメージ・毒・酔わせる など） */
-async function shotTo(fromEl,toEl,k='magic'){if(!ensure()||!fromEl||!toEl)return;begin();const a=wrap(fromEl),t=wrap(toEl);const o=THROW[k]||THROW.magic;let h=0;const n=o.n||1;for(let i=0;i<n;i++)h=shot(pos(a),pos(t),Object.assign({},o,{t:i*110}));snd(k);await wait(h)}
-async function bottleTo(fromEl,toEl){await shotTo(fromEl,toEl,'bottle');if(!toEl)return;begin();const t=wrap(toEl),p=pos(t);burst(p.x,p.y,{t:0,n:10,im:['fx:new/amber_drops','fx:new/amber_splash'],sp:4.5,g:.2,life:480,sz:.22,add_:false,filter:null});S.hiccup();
-  overlay(t,{t:0,d:1500,draw:(x,y,u,e)=>{const I=ui('x_dizzy');if(!I.complete)return;for(let i=0;i<3;i++){const a=e/400+i*2.1;c.drawImage(I,x+Math.cos(a)*u.rw*.45-14,y-u.rh*.62+Math.sin(a)*5-14,28,28)}}});
-  keyf(t,{t:0,d:1300,fn:(u,k)=>{u.rot=k>=1?0:Math.sin(k*18)*.12;u.tint=k>=1?null:'rgba(230,150,60,.16)'}});ono(t,'ヒック！',80,{col:'#ffd08a'})}
-function freezeU(el){if(!ensure()||!el)return;begin();const t=wrap(el),p=pos(t);flash({t:0,d:200,col:'200,240,255',a:.5});burst(p.x,p.y,{t:0,n:10,im:'fx:04_17',sp:5,g:.18,life:600,sz:.15,add_:false});burst(p.x,p.y,{t:0,n:6,im:'fx:08_13',sp:3,g:-.02,life:1000,sz:.11});ono(t,'カチコチ！',0,{col:'#bff4ff'});S.ice();
-  const I2=ui('fx:04_18'),I3=ui('fx:04_20');overlay(t,{t:0,d:1600,draw:(x,y,u,e)=>{const k=Math.min(1,e/400),a=Math.min(1,(1600-e)/300);c.save();c.globalAlpha=.95*k*a;if(I2.complete){const s=u.rw*.75;c.drawImage(I2,x-u.rw*.62,y+u.rh*.5-s*.75*k,s,s*.85*k)}if(I3.complete){const s=u.rw*.7;c.drawImage(I3,x+u.rw*.62-s,y+u.rh*.5-s*.8*k,s,s*.8*k)}c.restore()}})}
-async function blow(el,toEl){if(!ensure()||!el)return;begin();const t=wrap(el);const base=t.by+t.rh*.6,x0=-90,x1=W+90,D=1900;const tw=tornadoImg({t:0,d:D,y:base,x0,x1,h:t.rh*2.4});S.wind();
-  const hitT=D*((t.bx-x0)/(x1-x0))-150;keyf(t,{t:hitT,d:600,fn:(u,k,T)=>{const a=T/150;u.ox=(tw.x-u.bx)*Math.min(1,k*3)+Math.cos(a)*u.rw*.4*k;u.oy=-k*u.rh*1.1;u.rot=Math.sin(T/120)*.5;u.sc=1-k*.2}});
+async function shotTo(fromEl,toEl,k='magic'){if(!ensure()||!fromEl||!toEl)return;begin();const a=wrap(fromEl),t=wrap(toEl);const o=Object.assign({},THROW[k]||THROW.magic,BCSHOT[k]||{});if(k==='shoot')at(0,()=>{const p=pos(a);icon('x_muzzle',p.x,p.y-30*(p.y>H/2?1:-1),{t:0,d:200,sz:50})});const h=throwN(o,pos(a),pos(t),0);snd(k);await wait(h)}
+async function bottleTo(fromEl,toEl){await shotTo(fromEl,toEl,'bottle');if(!toEl)return;begin();const t=wrap(toEl),p=pos(t);burst(p.x,p.y,{t:0,n:12,im:['fx:new/amber_drops','fx:new/amber_splash'],sp:4.5,g:.2,life:520,sz:.24,add_:false,filter:null});S.hiccup();
+  overlay(t,{t:0,d:1700,draw:(x,y,u,e)=>{const I=ui('x_dizzy');if(!I.complete)return;const r=Math.min(u.rw,u.rh)/2;for(let i=0;i<3;i++){const a=e/400+i*2.1;c.drawImage(I,x+Math.cos(a)*r*.9-16,y-(r*1.25+6)+Math.sin(a)*6-16,32,32)}}});
+  keyf(t,{t:0,d:1700,fn:(u,k)=>{u.rot=k>=1?0:Math.sin(k*20)*.15;u.tint=k>=1?null:'rgba(230,150,60,.16)'}});ono(t,'ヒック！',100,{col:'#ffd08a'})}
+/* こおる：本番の 氷（キャラの形）＋氷の かたまり。上の つららは なし。かたまりは そのあと CSS（.iceblk）が ひきつぐ */
+function freezeU(el){if(!ensure()||!el)return;begin();const t=wrap(el),p=pos(t);flash({t:0,d:200,col:'200,240,255',a:.6});burst(p.x,p.y,{t:0,n:12,im:'fx:04_17',sp:5,g:.18,life:650,sz:.16,add_:false});burst(p.x,p.y,{t:0,n:8,im:'fx:08_13',sp:3,g:-.02,life:1100,sz:.12});ono(t,'カチコチ！',0,{col:'#bff4ff'});S.ice();
+  const I2=ui('fx:04_18'),I3=ui('fx:04_20');overlay(t,{t:0,d:ICE_HAND,draw:(x,y,u,e)=>{const k=Math.min(1,e/450);c.save();c.globalAlpha=.95*k;if(I2.complete){const s=u.rw*.75;c.drawImage(I2,x-u.rw*.62,y+u.rh*.5-s*.75*k,s,s*.85*k)}if(I3.complete){const s=u.rw*.7;c.drawImage(I3,x+u.rw*.62-s,y+u.rh*.5-s*.8*k,s,s*.8*k)}c.restore()}})}
+/* ふきとばす：たつまき（画像）が くねくね 左→右。落ち葉・小石が ぐるぐる。まきこまれて 手札へ（ずかん bc_blow の 時間） */
+async function blow(el,toEl){if(!ensure()||!el)return;begin();const t=wrap(el);const base=t.by+t.rh*.6,x0=-90,x1=W+90,D=2600;/* 10/31：たつまきの 高さは 親分の 顔の 下まで（切らずに 小さく） */const tw=tornadoImg({t:0,d:D,y:base,x0,x1,h:Math.max(t.rh*1.2,Math.min(t.rh*2.6,base-heroBot()-6))});S.wind();
+  const hitT=Math.max(0,D*((t.bx-x0)/(x1-x0))-180);at(hitT,()=>smoke(t.bx,base,{t:hitT,n:12,spread:100}));keyf(t,{t:hitT,d:900,fn:(u,k,T)=>{const a=T/150;u.ox=(tw.x-u.bx)*Math.min(1,k*3)+Math.cos(a)*u.rw*.5*k;u.oy=-k*u.rh*1.2+Math.sin(a)*8;u.rot=Math.sin(T/120)*.5;u.sc=1-k*.2}});
   const tr=toEl?toEl.getBoundingClientRect():{left:W/2,top:-60,width:0,height:0};const tx=tr.left+tr.width/2,ty=tr.top+tr.height/2;let sx=null,sy=0;
-  keyf(t,{t:hitT+600,d:500,fn:(u,k)=>{if(sx===null){sx=u.ox;sy=u.oy}u.ox=sx+(tx-u.bx-sx)*E.io(k);u.oy=sy+(ty-u.by-sy)*E.io(k);u.sc=.8-.6*k;u.rot=.5+k*2;u.alpha=1-k*.8}});await wait(hitT+1100)}
-function summonPop(el,zombie){if(!ensure()||!el)return;begin();const u=wrap(el),p=pos(u);if(zombie){ring(p.x,p.y,{t:0,col:'170,255,170',r1:60});smoke(p.x,p.y+20,{t:0,col:'150,200,150'})}else{burst(p.x,p.y+u.rh*.2,{t:0,n:8,im:'fx:new/white_smoke',sp:3.5,g:-.04,up:1,life:850,sz:.3,add_:false});icon('fx:new/white_smoke',p.x,p.y,{t:0,d:500,sz:66,a:.7})}
-  u.sc=0;tween(u,{t:60,d:400,sc:1,e:E.b});S.poof()}
-function shieldBreak(el){if(!ensure()||!el)return;begin();const u=wrap(el),p=pos(u);const s=Math.max(u.rw,u.rh)*1.3;breakImg('x_barrier',p.x,p.y,s,{t:0});shake({t:0,p:6});ono(u,'パリーン！',40,{col:'#e6f8ff'});S.glass()}
-function deadly(el){if(!ensure()||!el)return;begin();const u=wrap(el),p=pos(u);darken({t:0,d:1500,a:.6,holes:[u]});
-  at(120,()=>{flash({t:120,d:180,a:.7});icon('fx:new/issen',p.x,p.y,{t:120,d:420,sz:120});burst(p.x,p.y,{t:120,n:8,im:'x_slash',sp:7,life:450,sz:.22,orient:true});shake({t:120,p:7});S.deadly()});
-  at(480,()=>{icon('fx:new/deadly',p.x,p.y,{t:480,d:950,sz:96});S.safe(()=>tone(160,.6,{vol:.06,slide:90,type:'sine'}))});
-  return wait(1650)}
+  keyf(t,{t:hitT+900,d:700,fn:(u,k)=>{if(sx===null){sx=u.ox;sy=u.oy}u.ox=sx+(tx-u.bx-sx)*E.io(k);u.oy=sy+(ty-u.by-sy)*E.io(k);u.sc=.8-.6*k;u.rot=.5+k*2;u.alpha=k>=1?0:1-k*.6;if(k>=1)el._cfxGone='hide'}});await wait(hitT+1600)}
+function summonPop(el,zombie){if(!ensure()||!el)return;begin();const u=wrap(el),p=pos(u);if(zombie){ring(p.x,p.y,{t:0,col:'170,255,170',r1:Math.max(u.rw,u.rh)*.6});smoke(p.x,p.y+20,{t:0,col:'150,200,150'})}else{burst(p.x,p.y+u.rh*.2,{t:0,n:9,im:'fx:new/white_smoke',sp:3.5,g:-.04,up:1,life:900,sz:.32,add_:false});icon('fx:new/white_smoke',p.x,p.y,{t:0,d:550,sz:70,a:.7});burst(p.x,p.y,{t:200,n:6,im:'x_star',sp:3,life:700,sz:.16})}
+  u.sc=0;tween(u,{t:80,d:420,sc:1,e:E.b});S.poof()}
+function shieldBreak(el){if(!ensure()||!el)return;begin();const u=wrap(el),p=pos(u);const s=Math.max(u.rw,u.rh)*1.3;breakImg('x_barrier',p.x,p.y,s,{t:0});shake({t:0,p:7});burst(p.x,p.y,{t:0,n:10,im:'x_spark',sp:6,life:600,sz:.18});ono(u,'パリーン！',40,{col:'#e6f8ff'});S.glass()}
+/* 必殺：暗く → ズバッ（三日月は いろんな 向き）→ ドクロ（上の レイヤー）→ 明るく → きょろきょろ（切られたのに 気づいてない）→ このあと たおれる */
+function deadly(el){if(!ensure()||!el)return;begin();const u=wrap(el),p=pos(u);darken({t:0,d:1900,a:.6,holes:[u]});
+  at(60,()=>{flash({t:60,d:180,a:.7});icon('fx:new/issen',p.x,p.y,{t:60,d:420,sz:120});burst(p.x,p.y,{t:60,n:8,im:'x_slash',sp:7,life:450,sz:.24,orient:true});shake({t:60,p:7});S.deadly()});
+  at(410,()=>{icon('fx:new/deadly',p.x,p.y,{t:410,d:950,sz:96});S.safe(()=>tone(160,.6,{vol:.06,slide:90,type:'sine'}))});
+  keyf(u,{t:1950,d:500,fn:(v,k)=>{v.rot=k>=1?0:Math.sin(k*Math.PI*2)*.06}});
+  return wait(2550)}
 function aoe(els,style,cel){if(!ensure()||!els.length)return;begin();const us=els.map(wrap);const xs=us.map(u=>u.bx),ys=us.map(u=>u.by);const cx=(Math.min(...xs)+Math.max(...xs))/2,cy=ys.reduce((a,b)=>a+b,0)/ys.length;
   /* 10/29：やった子が うしろに 助走 → もとの 位置に もどる 瞬間に ドン */let O=0;if(cel){const cu=wrap(cel);const dir=Math.sign(cu.by-cy)||1;keyf(cu,{t:0,d:330,fn:(v,k)=>{v.oy=26*dir*E.io(k);v.sc=1-.06*k}});keyf(cu,{t:330,d:140,fn:(v,k)=>{v.oy=k>=1?0:26*dir*(1-E.o(k))-8*dir*Math.sin(k*Math.PI);v.sc=k>=1?1:.94+.1*Math.sin(k*Math.PI)+.06*k}});O=450}const ob=bs;bs+=dd(O);
-  if(style==='fire'){tint({t:0,d:1200,col:'255,70,20',a:.22});ring(cx,cy,{t:60,r1:W*.7,w:16,col:'255,140,60',d:650});us.forEach((u,i)=>burst(u.bx,u.by,{t:80+i*60,n:7,im:'x_fire',sp:4.5,g:.12,up:1.5,life:650,sz:.17,shrink:true}));if(!(window.SEP&&SEP.play('fire')))noise(.5,{vol:.25,freq:900});at(120,()=>window.SEP&&SEP.play('firewhoosh',.7))}
-  else if(style==='water'){tint({t:0,d:1200,col:'40,120,255',a:.22});for(let i=0;i<10;i++){const x=W*(.08+.84*Math.random());shot({x,y:cy-160},{x:x+10,y:cy+30*(Math.random()-.2)},{t:i*30,d:280,im:'fx:06_17',sz:10,trail:'150,200,255'})}ring(cx,cy,{t:300,r1:W*.65,w:12,col:'140,200,255',d:600});us.forEach((u,i)=>burst(u.bx,u.by,{t:300+i*60,n:8,im:'fx:06_18',sp:4,g:.18,life:650,sz:.26,add_:false}));if(!(window.SEP&&SEP.play('rain')))S.water();at(300,()=>S.water())}
-  else{ring(cx,cy,{t:0,r1:W*.75,w:16,col:'255,240,200',d:600});ring(cx,cy,{t:110,r1:W*.6,w:8,col:'255,255,255',d:550});smoke(cx,cy+40,{t:0,n:16,spread:W*.45,r:20});us.forEach((u,i)=>icon('x_pow',u.bx,u.by,{t:80+i*60,d:340,sz:70}));S.thud()}
-  shake({t:60,p:10,d:450});bs=ob;return O?wait(O+80):undefined}
-function textAt(el,s,col='#fff'){if(!ensure()||!el)return;begin();const u=wrap(el),p=pos(u);floatTxt(s,p.x,p.y-u.rh*.55,{t:0,size:16,col})}
+  /* 10/31 大きな リング（画面いっぱい）は なし。ずかん bc_aoe*：ふつうは 炎なし。炎は 画面を 少し 赤く、水は 少し 青く して もどす */
+  if(style==='fire'){tint({t:-50,d:1500,col:'255,70,20',a:.24});flash({t:0,d:200,col:'255,180,90',a:.5});us.forEach((u,i)=>burst(u.bx,u.by,{t:50+i*70,n:7,im:'x_fire',sp:4.5,g:.12,up:1.5,life:650,sz:.17,shrink:true}));shake({t:0,p:10,d:500});if(!(window.SEP&&SEP.play('fire')))noise(.5,{vol:.25,freq:900});at(70,()=>window.SEP&&SEP.play('firewhoosh',.7))}
+  else if(style==='water'){tint({t:-50,d:1600,col:'40,120,255',a:.24});const top=Math.min(...ys)-Math.max(...us.map(u=>u.rh))*1.4;for(let i=0;i<14;i++){const x=W*(.08+.84*Math.random());shot({x,y:top},{x:x+10,y:cy+30*(Math.random()-.2)},{t:i*35,d:300,im:'x_sweat',sz:10,trail:'150,200,255'})}/* 10/31：大きな リングは なし。しぶきは 半分の 大きさで 少なめ（カードが 読める） */shake({t:320,p:8,d:420});us.forEach((u,i)=>burst(u.bx,u.by,{t:320+i*60,n:5,im:'x_splash',sp:3.5,g:.18,life:650,sz:.14,add_:false}));if(!(window.SEP&&SEP.play('rain')))S.water();at(320,()=>S.water())}
+  else{flash({t:0,d:160,a:.45});smoke(cx,cy+40,{t:0,n:18,spread:W*.5,r:20});us.forEach((u,i)=>icon('x_pow',u.bx,u.by,{t:80+i*60,d:380,sz:80}));shake({t:0,p:11,d:450});S.thud()}
+  bs=ob;const extra=style==='water'?340:80;return wait(O+extra)}
+/* 10/31 バフの 文字（こうげき+1 など）：その カードの 上（まんなか −12%）に 出して 少し のぼる。数字よけ（clearNum）は つかわない（あいての 列まで 上がって しまうので） */
+function buffLabel(el,str){if(!ensure()||!el)return;begin();const r=el.getBoundingClientRect();if(!r.width)return;floatTxt(str,r.left+r.width/2,r.top+r.height*.38,{t:0,size:20,rise:14,col:'#ffe066'})}
+function textAt(el,s,col='#fff'){if(!ensure()||!el)return;begin();const u=wrap(el);ono(u,s,0,{col})}
 
 function kwFlair(el,k){if(!ensure()||!el)return;begin();const u=wrap(el),p=pos(u);
-  if(k==='taunt'){window.SEP&&SEP.play('taunt');ring(p.x,p.y,{t:0,col:'190,200,220',r1:80,w:10});keyf(u,{t:0,d:900,fn:(v,q)=>{v.glow=q>=1?0:.8*Math.sin(q*Math.PI);v.glowC='190,210,240'}})}
-  else if(k==='quick'){flash({t:0,d:120,col:'255,240,120',a:.3});keyf(u,{t:0,d:700,fn:(v,q)=>{v.glow=q>=1?0:1-q;v.glowC='255,230,80';v.oy=q>=1?0:-10*Math.sin(Math.min(1,q*2.5)*Math.PI)}})}
+  if(k==='taunt'){window.SEP&&SEP.play('taunt');ring(p.x,p.y,{t:0,col:'190,200,220',r1:Math.max(u.rw,u.rh)*.6,w:8});keyf(u,{t:0,d:900,fn:(v,q)=>{v.glow=q>=1?0:.8*Math.sin(q*Math.PI);v.glowC='190,210,240'}})}
+  else if(k==='quick'){flash({t:0,d:120,col:'255,240,120',a:.5});keyf(u,{t:0,d:1200,fn:(v,q)=>{v.glow=q>=1?0:1-q;v.glowC='255,230,80';v.oy=q>=1?0:-10*Math.sin(Math.min(1,q*4)*Math.PI)}})}
   else if(k==='twice'){burst(p.x,p.y,{t:0,n:6,im:'x_star',sp:3,life:700,sz:.16})}
   else if(k==='stealth'){smoke(p.x,p.y+10,{t:0,col:'200,200,220',n:10});keyf(u,{t:0,d:700,fn:(v,q)=>{v.alpha=q>=1?1:1-.5*Math.sin(q*Math.PI)}})}
-  else if(k==='shield'){window.SEP&&SEP.play('shield');S.safe(()=>{SFX.shieldUp&&SFX.shieldUp()});const s=Math.max(u.rw,u.rh)*1.5;overlay(u,{t:0,d:800,draw:(x,y,uu,e)=>{const I=ui('x_barrier');if(!I.complete)return;const q=Math.min(1,e/450);const a=Math.min(1,e/120)*(e>600?Math.max(0,(800-e)/200)*.6+.4:1);c.save();c.globalAlpha=.75*a;const ss=s*(1.45-.45*E.o(q));c.drawImage(I,x-ss/2,y-ss/2,ss,ss);c.restore()}});ring(p.x,p.y,{t:0,col:'140,220,255',r1:Math.max(u.rw,u.rh)*.9,w:6,d:500})}
+  else if(k==='shield'){window.SEP&&SEP.play('shield');S.safe(()=>{SFX.shieldUp&&SFX.shieldUp()});const s=Math.max(u.rw,u.rh)*1.5;overlay(u,{t:0,d:800,draw:(x,y,uu,e)=>{const I=ui('x_barrier');if(!I.complete)return;const q=Math.min(1,e/450);const a=Math.min(1,e/120)*(e>600?Math.max(0,(800-e)/200)*.6+.4:1);c.save();c.globalAlpha=.75*a;const ss=s*(1.45-.45*E.o(q));c.drawImage(I,x-ss/2,y-ss/2,ss,ss);c.restore()}});ring(p.x,p.y,{t:0,col:'140,220,255',r1:Math.max(u.rw,u.rh)*.6,w:6,d:500})}
   else if(k==='revive'){icon('x_halo',p.x,p.y-u.rh/2-10,{t:0,d:900,sz:44,bob:2})}
   else if(k==='deadly'){icon('x_skull',p.x,p.y,{t:0,d:600,sz:56,a:.8})}}
-function drFx(m){if(!ensure())return;const r=m&&m._lastRect;if(!r)return;begin();const x=r.left+r.width/2,y=r.top+r.height/2;ring(x,y,{t:0,col:'170,120,255',r1:90});
+function drFx(m){if(!ensure())return;const r=m&&m._lastRect;if(!r)return;begin();const x=r.left+r.width/2,y=r.top+r.height/2;icon('u_k_dr',x,y,{t:0,d:900,sz:70,bob:4});ring(x,y,{t:0,col:'170,120,255',r1:Math.max(r.width,r.height)*.6});
   let sub=null;try{const q=effList(m.id,m.lv).find(q=>q[1]==='やられたら');if(q){const mm=String(q[2]).match(/^(.{1,16}?[！!…〜♪？])(\s|$)/);if(mm)sub=mm[1]}}catch(e){}
-  slam('やられたら',W/2,Math.max(80,Math.min(H-140,y-r.height*.9)),{t:40,d:1400,size:38,grad:['#f0e0ff','#c99aff','#8a5ad0','#5a2aa0'],stroke:'#1e0a3a',sub})}
-function burn(el){if(!ensure()||!el)return;begin();const u=wrap(el),p=pos(u);keyf(u,{t:0,d:350,fn:(v,k)=>{v.tint=`rgba(255,60,20,${.35*k})`;v.glow=.8*k;v.glowC='255,80,30'}});at(400,()=>{burst(p.x,p.y,{t:400,im:'x_fire',angles:[-Math.PI/2-1.05,-Math.PI/2,-Math.PI/2+1.05],sp:3.2,g:.05,up:.6,life:650,sz:.26,shrink:true});noise(.3,{vol:.15,freq:900})});keyf(u,{t:725,d:500,fn:(v,k)=>{v.tint=k>=1?null:`rgba(255,60,20,${.35*(1-k)})`;v.glow=k>=1?0:.8*(1-k)}})}
-function thorn(el){if(!ensure()||!el)return;begin();const u=wrap(el),p=pos(u);burst(p.x,p.y-u.rh*.2,{t:0,n:7,im:'fx:new/needle_up',sp:5,g:.06,dir:-Math.PI/2,spread:2.2,life:480,sz:.2,orient:true,add_:false});
-  at(420,()=>{icon('x_claw',p.x,p.y,{t:420,d:420,sz:72});S.safe(()=>{SFX.swish?SFX.swish():noise(.12,{vol:.2,freq:3000,type:'highpass'})})});keyf(u,{t:420,d:1300,fn:(v,k)=>{v.tint=k>=1?null:`rgba(255,40,40,${.45*(k<.55?1:1-(k-.55)/.45)})`;v.ox=k>=1?0:(k<.5?Math.sin(k*140)*3.5*(1-k*2):0)}})}
-function auraPulse(el,targets){if(!ensure()||!el)return;begin();const u=wrap(el),p=pos(u);ring(p.x,p.y,{t:0,col:'255,215,90',r1:W*.4,w:8,d:850});ring(p.x,p.y,{t:160,col:'255,255,255',r1:W*.3,w:4,d:750});
+  /* 10/31：やられた カードの ちかく（ななめ上）に。親分の 顔・体力には かぶせない。入らなければ 小さく */
+  const sd=x<W/2?1:-1,cx2=Math.max(110,Math.min(W-110,x+sd*r.width*.35));const pl=placeBig(sub,y-r.height*.75,null,{x:cx2,len:5,sizes:[38,34,30,26],range:150});
+  slam('やられたら',cx2,pl.y,{t:40,d:1500,size:pl.size,grad:['#f0e0ff','#c99aff','#8a5ad0','#5a2aa0'],stroke:'#1e0a3a',sub})}
+/* やけど：赤くなる → ダメージ（火 3つが 3方向へ、どんどん 小さく）→ 赤さが もどる。みじかく */
+function burn(el){if(!ensure()||!el)return;begin();const u=wrap(el),p=pos(u);keyf(u,{t:0,d:350,fn:(v,k)=>{v.tint=`rgba(255,60,20,${.35*k})`;v.glow=.8*k;v.glowC='255,80,30'}});
+  at(400,()=>{burst(p.x,p.y,{t:400,im:'x_fire',angles:[-Math.PI/2-1.05,-Math.PI/2,-Math.PI/2+1.05],sp:3.2,g:.05,up:.6,life:650,sz:.26,shrink:true});noise(.3,{vol:.15,freq:900})});
+  keyf(u,{t:420,d:300,fn:(v,k)=>{v.ox=k>=1?0:(Math.random()-.5)*10*(1-k)}});
+  keyf(u,{t:725,d:500,fn:(v,k)=>{v.tint=k>=1?null:`rgba(255,60,20,${.35*(1-k)})`;v.glow=k>=1?0:.8*(1-k)}})}
+/* トゲ：トゲの子から まっすぐ 敵へ トゲ → 少し あとに 反撃（キズ 1つ＋ひっかく音＋-1）。敵は 赤く ぶるぶる（赤は 少し 長め） */
+function thorn(el){if(!ensure()||!el)return;begin();const u=wrap(el),p=pos(u);
+  const src=(lastA===el&&lastT&&lastT.isConnected)?lastT:null;if(src){const s=wrap(src),q=pos(s);const ang=Math.atan2(p.y-q.y,p.x-q.x);burst(q.x,q.y,{t:0,n:8,im:'fx:new/needle_up',sp:6,g:0,up:0,dir:ang,spread:.5,life:520,sz:.22,orient:true,add_:false})}
+  else burst(p.x,p.y+u.rh*.6,{t:0,n:8,im:'fx:new/needle_up',sp:6,g:0,up:0,dir:-Math.PI/2*(p.y<H/2?-1:1),spread:.5,life:520,sz:.22,orient:true,add_:false});
+  at(400,()=>{scratch1(p.x,p.y,{t:400,d:550,sz:96});S.safe(()=>{SFX.swish?SFX.swish():noise(.12,{vol:.2,freq:3000,type:'highpass'})})});ono(u,'トゲ！',400,{col:'#ffb0b0'});
+  keyf(u,{t:400,d:1800,fn:(v,k)=>{v.tint=k>=1?null:`rgba(255,40,40,${.45*(k<.55?1:1-(k-.55)/.45)})`;v.ox=k>=1?0:(k<.5?Math.sin(k*140)*3.5*(1-k*2):0)}})}
+function auraPulse(el,targets){if(!ensure()||!el)return;begin();const u=wrap(el),p=pos(u);dots(p.x,p.y,{t:0,n:20,col:'255,220,120',area:80,up:2});
   keyf(u,{t:0,d:850,fn:(v,k)=>{v.glow=k>=1?0:Math.sin(k*Math.PI);v.glowC='255,215,90'}});
   (targets||[]).forEach((te,j)=>{if(!te)return;const v=wrap(te),q=pos(v);shot(p,q,{t:100+j*70,d:300,im:'x_star',sz:18,scale:1.4,trail:'255,215,90'});at(420+j*70,()=>{burst(q.x,q.y,{t:420+j*70,n:5,im:'x_star',sp:3,g:-.05,life:800,sz:.15});keyf(v,{t:420+j*70,d:600,fn:(w,k)=>{w.glow=k>=1?0:Math.sin(k*Math.PI);w.sc=k>=1?1:1+.1*Math.sin(k*Math.PI)}})})});if(!(window.SEP&&SEP.play('aura')))S.buff()}
 
@@ -9511,8 +9659,8 @@ async function emerge(el,kind,foes){if(!ensure()||!el)return;begin();const u=wra
     (foes||[]).forEach((fe,i)=>{if(!fe)return;const v=wrap(fe);shot({x:u.bx,y:base},pos(v),{t:80+i*50,d:380,im:'fx:new/sand_wave',sz:50,scale:1.4,trail:'220,190,130'});at(460+i*50,()=>burst(v.bx,v.by+v.rh*.3,{t:460+i*50,n:6,im:'fx:04_08',sp:3,g:.12,life:650,sz:.16,add_:false}))});S.boom()}
   else{burst(u.bx,base,{t:0,n:10,im:'fx:new/mud_splash',sp:4,g:.2,up:3,life:800,sz:.22,add_:false,dir:-Math.PI/2,spread:2.4});shake({t:0,p:5});floatTxt('もどってきた！',u.bx,u.by-u.rh*.6,{t:300,size:18,col:'#c8ffb0'});S.squish()}
   keyf(u,{t:0,d:kind==='dig'?450:800,fn:(v,k)=>{v.clipB=0;v.oy=v.rh*.55*(1-E.o(k))-(kind==='dig'?Math.sin(k*Math.PI)*50:0);v.sc=1+(kind==='dig'?.15*Math.sin(k*Math.PI):0)}});await wait(kind==='dig'?520:850)}
-async function coin(heads){if(!ensure())return;begin();const cx=W/2,cy=H*.42;const I=ui('fx:09_18');add({top:1,end:tt0(0)+dd(2300),draw(T){const e=(T-tt0(0))/SP();if(e<0||e>2300||!I.complete)return;const k=Math.min(1,e/1000);const y=cy-Math.sin(k*Math.PI)*120;const s=72;c.save();c.globalAlpha=Math.min(1,(2300-e)/300);c.translate(cx,y);const ph=e/45,back=e<1000?(Math.floor(ph/Math.PI+.5)%2===1):!heads;const B_=ui('fx:new/coin_back'),F_=ui('fx:new/coin_front');const FC=back?(B_.complete&&B_.naturalWidth?B_:I):(F_.complete&&F_.naturalWidth?F_:I);if(e>=1000){c.drawImage(FC,-s/2,-s/2,s,s)}else{const cs=Math.cos(ph),ac=Math.max(.06,Math.abs(cs)),th=s*.09*Math.sqrt(Math.max(0,1-cs*cs)),sg=Math.sin(ph)>0?1:-1;c.save();c.filter='brightness(.62) saturate(1.2)';for(let q=4;q>=1;q--){c.save();c.translate(sg*th*q/4,0);c.scale(ac,1);c.drawImage(FC,-s/2,-s/2,s,s);c.restore()}c.restore();c.scale(ac,1);c.drawImage(FC,-s/2,-s/2,s,s)};c.restore()}});
-  S.safe(()=>{SFX.spin?SFX.spin():tone(1500,.06,{vol:.05})});at(1000,()=>{slam(heads?'おもて！':'うら…',cx,cy-50,{t:1000,d:1300,size:34,from:1.6,grad:heads?undefined:['#e0e8f0','#a0b0c0','#708090','#506070']});if(heads)burst(cx,cy,{t:1000,n:8,im:'x_star',sp:4,life:700,sz:.16});S.safe(()=>heads?(SFX.chime&&SFX.chime()):(SFX.bad&&SFX.bad()))});await wait(1900)}
+async function coin(heads){if(!ensure())return;begin();const cx=W/2,cy=H*.42;const I=ui('fx:09_18');/* 10/29：投げる あいだは 少し くらい 黄色。空の コインは ☆ */tint({t:0,d:1300,col:'90,70,0',a:.3,inD:200,outD:300});const ST=ui('x_star');add({top:1,end:tt0(0)+dd(2300),draw(T){const e=(T-tt0(0))/SP();if(e<0||e>2300||!I.complete)return;const k=Math.min(1,e/1000);const y=cy-Math.sin(k*Math.PI)*120;const s=72;c.save();c.globalAlpha=Math.min(1,(2300-e)/300);c.translate(cx,y);const ph=e/45,back=e<1000?(Math.floor(ph/Math.PI+.5)%2===1):!heads;const B_=ui('fx:new/coin_back'),F_=ui('fx:new/coin_front');/* 10/31 メモ42：まわっている あいだも コインの まま（星に しない） */const FC=(back?(B_.complete&&B_.naturalWidth?B_:I):(F_.complete&&F_.naturalWidth?F_:I));if(e>=1000){c.drawImage(FC,-s/2,-s/2,s,s)}else{const cs=Math.cos(ph),ac=Math.max(.06,Math.abs(cs)),th=s*.09*Math.sqrt(Math.max(0,1-cs*cs)),sg=Math.sin(ph)>0?1:-1;c.save();c.filter='brightness(.62) saturate(1.2)';for(let q=4;q>=1;q--){c.save();c.translate(sg*th*q/4,0);c.scale(ac,1);c.drawImage(FC,-s/2,-s/2,s,s);c.restore()}c.restore();c.scale(ac,1);c.drawImage(FC,-s/2,-s/2,s,s)};c.restore()}});
+  S.safe(()=>{SFX.spin?SFX.spin():tone(1500,.06,{vol:.05})});at(1000,()=>{slam(heads?'おもて！':'うら…',cx,cy-50,{t:1000,d:1300,size:34,from:1.6,grad:heads?undefined:['#e0e8f0','#a0b0c0','#708090','#506070']});if(heads)burst(cx,cy,{t:1000,n:8,im:'x_star',sp:4,life:700,sz:.16});/* 10/29：すぐ キャラから 星（パワーアップ） */try{const me_=CFX._m&&uEl(CFX._m);if(me_){const u2=wrap(me_),q=pos(u2);burst(q.x,q.y,{t:1000,n:10,im:'x_star',sp:4.5,g:-.04,life:900,sz:.18});keyf(u2,{t:1000,d:700,fn:(v,k)=>{v.glow=k>=1?0:Math.sin(k*Math.PI);v.sc=k>=1?1:1+.1*Math.sin(k*Math.PI)}})}}catch(x){}S.safe(()=>heads?(SFX.chime&&SFX.chime()):(SFX.bad&&SFX.bad()))});await wait(1900)}
 async function roulette(els,target){if(!ensure()||!els.length)return;begin();let t=0;const ord=[];for(let i=0;i<9;i++)ord.push(els[i%els.length]);ord.push(target);ord.forEach((e,j)=>{const d=70+j*j*7;const tt=t;at(tt,()=>{if(!e)return;const u=wrap(e),p=pos(u);icon('fx:13_05',p.x,p.y,{t:tt,d:d+(j===ord.length-1?500:0),sz:j===ord.length-1?84:70});S.safe(()=>tone(1200+j*40,.04,{vol:.05}))});t+=d});
   at(t,()=>{S.safe(()=>SFX.ding&&SFX.ding())});await wait(t+350)}
 /* 10/29：鼻毛 もじゃもじゃ。先が 細い 黒い 毛が、画面の はしと カードから ぐにょぐにょ 生える。ときどき スポッと ぬける（でも また 生える） */
@@ -9523,53 +9671,102 @@ function hanage(els,mine){if(!ensure())return;mine=mine||[];begin();const t0=tt0
  const H_=[];/* 画面の はし */for(let i=0;i<44;i++){const side=i%4,r1=R(i),r2=R(i+50);let x,y,a;if(side===0){x=r1*W;y=H+4;a=-Math.PI/2}else if(side===1){x=r1*W;y=-4;a=Math.PI/2}else if(side===2){x=-4;y=r1*H;a=0}else{x=W+4;y=r1*H;a=Math.PI}
    H_.push({x,y,a:a+(r2-.5)*.9,L:90+r2*Math.min(W,H)*.42,w:3+R(i+9)*3,sd:r1*9,d0:R(i+3)*500,pull:-1})}
  /* カードから（敵も 味方も） */[...els,...mine].forEach((el,j)=>{if(!el)return;const r=el.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2;for(let i=0;i<9;i++){const a=(i/9)*Math.PI*2+R(j*20+i)*.5,rx=r.width*.42,ry=r.height*.42;H_.push({x:cx+Math.cos(a)*rx,y:cy+Math.sin(a)*ry,a:a+(R(i+j)-.5)*.6,L:26+R(j*9+i)*34,w:2+R(i*3+j)*1.5,sd:R(i+j*7)*9,d0:250+j*140+R(i)*250,pull:-1})}});
- /* スポッと ぬく 毛 */const pulls=[{h:H_[1],t:1150},{h:H_[6],t:1650},{h:H_[3],t:2050}];pulls.forEach(q=>{q.h.pull=q.t;at(q.t,()=>{floatTxt('スポッ！',Math.max(40,Math.min(W-40,q.h.x+Math.cos(q.h.a)*q.h.L*.5)),Math.max(40,Math.min(H-40,q.h.y+Math.sin(q.h.a)*q.h.L*.5)),{t:q.t,size:18,rise:20,rot:(R(q.t)-.5)*.5});S.safe(()=>{tone(260,.07,{vol:.09,slide:1500,type:'sine'});noise(.05,{vol:.08,freq:2500,type:'highpass'})})})});
+ /* スポッと ぬく 毛 */const pulls=[{h:H_[1],t:1150},{h:H_[6],t:1650},{h:H_[3],t:2050}];/* 10/31 メモ45：ぐ〜っと のびて（260ms）→ スポッ！と ぬけて ゆっくり とんでいく */pulls.forEach(q=>{q.h.pull=q.t;at(q.t+260,()=>{floatTxt('スポッ！',Math.max(40,Math.min(W-40,q.h.x+Math.cos(q.h.a)*q.h.L*.5)),Math.max(40,Math.min(H-40,q.h.y+Math.sin(q.h.a)*q.h.L*.5)),{t:q.t+260,size:20,rise:22,rot:(R(q.t)-.5)*.5});S.safe(()=>{tone(260,.07,{vol:.09,slide:1500,type:'sine'});noise(.05,{vol:.08,freq:2500,type:'highpass'})})})});
  add({end:t0+dd(D),draw(T){const e=(T-t0)/SP();if(e<0||e>D)return;const out=1-Math.max(0,Math.min(1,(e-(D-450))/450));c.save();c.fillStyle='#120c08';c.globalAlpha=out;
    for(const h of H_){let g=Math.max(0,Math.min(1,(e-h.d0)/520));g=1-Math.pow(1-g,3);let x=h.x,y=h.y,a=h.a,L=h.L*g;
-     if(h.pull>=0&&e>h.pull){const k=(e-h.pull)/1;if(k<380){/* ぬけて とんでいく */const f=k/380;x+=Math.cos(h.a)*(f*h.L*1.6);y+=Math.sin(h.a)*(f*h.L*1.6)-f*f*30;a+=f*2.4;c.globalAlpha=out*(1-f);hair(x,y,a,h.L,h.w,e,h.sd);c.globalAlpha=out;continue}
-       /* また 生えてくる */L=h.L*Math.min(1,(k-380)/600)}
+     if(h.pull>=0&&e>h.pull){const k=(e-h.pull)/1;if(k<260){/* ぐ〜っと のびる */L=h.L*(1+.35*E.o(k/260));a+=Math.sin(k/16)*.07}else if(k<760){/* ぬけて とんでいく */const f=(k-260)/500;x+=Math.cos(h.a)*(f*h.L*1.6);y+=Math.sin(h.a)*(f*h.L*1.6)-f*f*30;a+=f*2.4;c.globalAlpha=out*(1-f);hair(x,y,a,h.L,h.w,e,h.sd);c.globalAlpha=out;continue}
+       else /* また 生えてくる */L=h.L*Math.min(1,(k-760)/600)}
      if(L>2)hair(x,y,a,L,h.w,e,h.sd)}c.restore()}});
  els.forEach((e,i)=>{if(!e)return;const u=wrap(e),p=pos(u);at(300+i*140,()=>floatTxt('ボーボー',p.x,p.y+u.rh*.15,{t:300+i*140,size:13,rise:12}));keyf(u,{t:300+i*140,d:400,fn:(v,k)=>{v.sc=k>=1?1:1+.12*Math.sin(k*Math.PI)}})});
  S.safe(()=>{for(let i=0;i<5;i++)tone(140+i*30,.22,{vol:.05,at:i*.09,slide:260+i*40,type:'triangle'});noise(.5,{vol:.05,freq:600})})}
 async function unko(fromEl,boardEl){if(!ensure()||!fromEl||!boardEl)return;begin();const a=wrap(fromEl);const r=boardEl.getBoundingClientRect();const to={x:r.left+r.width/2,y:r.top+r.height*.5};shot(pos(a),to,{t:0,im:'fx:11_01',sz:26,scale:1.5,arc:80,d:560,trail:'150,100,60'});
   at(560,()=>{const t0=tt0(560),fy=to.y+r.height*.3,fly=(i,T)=>{const e=(T-t0)/SP();if(e<0||e>1900)return;const I=ui('fx:11_02');if(!I.complete)return;const a2=e/300+i*3;c.save();c.globalAlpha=Math.min(1,(1900-e)/250);c.drawImage(I,to.x+Math.cos(a2)*36-10,fy-14+Math.sin(a2*1.3)*10-10,20,20);c.restore()};add({end:t0+dd(1900),draw(T){fly(0,T)}});icon('fx:11_01',to.x,fy,{t:560,d:1900,sz:56});add({top:1,end:t0+dd(1900),draw(T){fly(1,T)}});slam('ふんだ！',W/2,to.y-30,{t:620,d:1200,size:34,from:1.6,grad:['#fff0d0','#e0b070','#a06a30','#6a4020']});S.squish()});await wait(700)}
-function glitch(){if(!ensure())return;begin();slam('文字化け！',W/2,H*.42,{t:0,d:1300,size:38,grad:['#f0e0ff','#c99aff','#8a5ad0','#5a2aa0'],stroke:'#1e0a3a'});flash({t:0,d:220,col:'180,120,255',a:.4});const a=document.getElementById('app');if(a){let n=0;const iv=setInterval(()=>{a.style.filter=n%2?'':`hue-rotate(${(Math.random()*90-45)|0}deg)`;if(++n>8){clearInterval(iv);a.style.filter=''}},90)}S.safe(()=>{for(let i=0;i<6;i++)tone(200+Math.random()*1800,.05,{vol:.05,at:i*.06,type:'square'})})}
-function unlock(el){if(!ensure()||!el)return;begin();const u=wrap(el),p=pos(u);icon('fx:new/lock_open',p.x,p.y-u.rh*.15,{t:0,d:1000,sz:66});burst(p.x,p.y,{t:200,n:8,im:'x_spark',sp:4,life:700,sz:.16});S.safe(()=>{SFX.lock?SFX.lock():tone(1400,.08,{vol:.08,type:'square'});SFX.chime&&SFX.chime()})}
+function glitch(){if(!ensure())return;begin();slam('文字化け！',W/2,H*.42,{t:0,d:1300,size:38,grad:['#f0e0ff','#c99aff','#8a5ad0','#5a2aa0'],stroke:'#1e0a3a'});flash({t:0,d:220,col:'180,120,255',a:.4});
+  /* 10/31 メモ44：もっと バグっぽく（画面が ずれる・色が くるう・横すじ・化けた 文字が ちらつく） */const a=document.getElementById('app');if(a){let n=0;const iv=setInterval(()=>{const on=n%3!==2;a.style.filter=on?`hue-rotate(${(Math.random()*180-90)|0}deg) saturate(${(1+Math.random()*2).toFixed(2)}) contrast(${(1+Math.random()*.5).toFixed(2)})`:'';a.style.transform=on?`translate(${((Math.random()-.5)*14)|0}px,${((Math.random()-.5)*6)|0}px) skewX(${((Math.random()-.5)*8).toFixed(1)}deg)`:'';if(++n>17){clearInterval(iv);a.style.filter='';a.style.transform=''}},70)}
+  const D=1300,t1=tt0(0);add({top:1,end:t1+dd(D),draw(T){const e=(T-t1)/SP();if(e<0||e>D)return;const al=Math.min(1,(D-e)/300);c.save();for(let i=0;i<10;i++){if(Math.random()<.35)continue;const y=Math.random()*H,h_=4+Math.random()*26;c.fillStyle=`rgba(${Math.random()<.5?'255,0,200':'0,255,240'},${.22*al})`;c.fillRect(Math.random()*W*.3-20,y,W*(.5+Math.random()*.7),h_)}
+    c.fillStyle=`rgba(0,0,0,${.12*al})`;for(let y=(e/8)%4;y<H;y+=4)c.fillRect(0,y,W,1.5);c.font='bold 16px monospace';c.fillStyle=`rgba(200,255,200,${.75*al})`;for(let i=0;i<14;i++)c.fillText(String.fromCharCode(0x2580+((Math.random()*30)|0))+String.fromCharCode(0x30A2+((Math.random()*80)|0))+String.fromCharCode(0x4E00+((Math.random()*400)|0)),Math.random()*W,Math.random()*H);c.restore()}});
+  S.safe(()=>{for(let i=0;i<6;i++)tone(200+Math.random()*1800,.05,{vol:.05,at:i*.06,type:'square'})})}
 /* 10/29：キャラ専用 第2弾（とりかえっこ・けとばし・ねがいごと・もらう・ふうせん） */
 function rectOf(sel){const e=document.querySelector(sel);if(!e)return null;const r=e.getBoundingClientRect();if(!r.width)return null;return {x:r.left+r.width/2,y:r.top+r.height/2,w:r.width,h:r.height}}
-async function trade(){if(!ensure())return;begin();const mh=rectOf('#hand'),fh=rectOf('.fh');if(!mh||!fh)return;for(let i=0;i<4;i++){shot({x:mh.x+(i-1.5)*mh.w*.22,y:mh.y},{x:fh.x,y:fh.y},{t:i*80,d:560,im:'fx:09_25',sz:26,scale:1.6,arc:70,trail:'255,230,180',tilt:(i-1.5)*.3});shot({x:fh.x,y:fh.y},{x:mh.x+(i-1.5)*mh.w*.22,y:mh.y},{t:40+i*80,d:560,im:'w_cardback',sz:26,scale:1.6,arc:-70,trail:'200,200,255',tilt:(i-1.5)*-.3})}
-  S.safe(()=>{for(let i=0;i<6;i++)SFX.flip&&setTimeout(()=>SFX.flip(),i*90)});at(700,()=>{const c0={x:W/2,y:(mh.y+fh.y)/2};floatTxt('とりかえっこ！',c0.x,c0.y,{t:700,size:22,col:'#ffe066'})});await wait(1100)}
+async function trade(nA,nB){if(!ensure())return;begin();const mh=rectOf('#hand'),fh=rectOf('.fh');if(!mh||!fh)return;/* 10/31 メモ47：入れかえる 手札 1まいごとに ヒュッ */const n=Math.max(1,Math.min(7,Math.max(nA||4,nB||4))),G_=120;
+  for(let i=0;i<n;i++){const o=(i-(n-1)/2);shot({x:mh.x+o*mh.w*.12,y:mh.y},{x:fh.x,y:fh.y},{t:i*G_,d:560,im:'fx:09_25',sz:26,scale:1.6,arc:70,trail:'255,230,180',tilt:o*.2});shot({x:fh.x,y:fh.y},{x:mh.x+o*mh.w*.12,y:mh.y},{t:40+i*G_,d:560,im:'w_cardback',sz:26,scale:1.6,arc:-70,trail:'200,200,255',tilt:-o*.2});at(i*G_,()=>{try{window.SE2&&SE2.play('tradeCard','start',true)}catch(e){}})}
+  S.safe(()=>{for(let i=0;i<6;i++)SFX.flip&&setTimeout(()=>SFX.flip(),i*90)});const tl=n*G_+460;at(tl,()=>{const c0={x:W/2,y:(mh.y+fh.y)/2};floatTxt('とりかえっこ！',c0.x,c0.y,{t:tl,size:22,col:'#ffe066'})});await wait(tl+400)}
 async function kickOut(mEl,tEl){if(!ensure()||!mEl||!tEl)return;begin();const a=wrap(mEl),t=wrap(tEl),pa=pos(a),pt=pos(t);const dk=rectOf('.fside .deckpile')||{x:W-30,y:40};
   keyf(a,{t:0,d:160,fn:(u,q)=>{u.ox=(pt.x-pa.x)*.7*E.io(q);u.oy=(pt.y-pa.y)*.7*E.io(q)}});keyf(a,{t:170,d:300,fn:(u,q)=>{u.ox=(pt.x-pa.x)*.7*(1-E.o(q));u.oy=(pt.y-pa.y)*.7*(1-E.o(q))}});
   at(160,()=>{icon('x_pow',pt.x,pt.y,{t:160,d:300,sz:70});shake({t:160,p:7});S.thud()});
-  keyf(t,{t:180,d:700,fn:(u,q)=>{u.ox=(dk.x-pt.x)*E.io(q);u.oy=(dk.y-pt.y)*E.io(q)-Math.sin(q*Math.PI)*60;u.rot=q*7;u.sc=1-.82*q;u.alpha=q>=1?0:1-.3*q;if(q>=1)tEl.style.visibility='hidden'}});
+  keyf(t,{t:180,d:700,fn:(u,q)=>{u.ox=(dk.x-pt.x)*E.io(q);u.oy=(dk.y-pt.y)*E.io(q)-Math.sin(q*Math.PI)*60;u.rot=q*7;u.sc=1-.82*q;u.alpha=q>=1?0:1-.3*q;if(q>=1){tEl.style.visibility='hidden';tEl._cfxGone='hide'}}});
   at(200,()=>S.whoosh());await wait(950)}
-async function wish(){if(!ensure())return;begin();const mh=rectOf('#hand')||{x:W/2,y:H*.85};shot({x:-40,y:H*.12},{x:mh.x,y:mh.y-20},{t:0,d:650,im:'fx:03_28',sz:40,scale:1.6,trail:'255,240,180',aim:true});at(650,()=>{burst(mh.x,mh.y-20,{t:650,n:10,im:'x_star',sp:4,life:700,sz:.16});flash({t:650,d:160,col:'255,250,220',a:.35})});S.safe(()=>{tone(1568,.5,{vol:.05,slide:2400,type:'sine'});setTimeout(()=>SFX.sparkle&&SFX.sparkle(),650)});await wait(850)}
+/* 10/31 ねがいごと（作りなおし）：夜空になる → 大きな 流れ星 1つ＋小さな 流れ星 3つが ななめに。しっぽから にじ色の キラキラ → 手札に おちて にじ色に はじける → 夜が あける（約2.4びょう）
+   夜空の 絵は まだ ないので、キャンバスの グラデーション＋星の 点で 描く（仮） */
+async function wish(tg){if(!ensure())return;begin();const mh=rectOf('#hand')||{x:W/2,y:H*.85};/* 10/31 メモ48：大きな 流れ星は「場に 出る カード（手札で いちばん コストの 高い なかま）」に おちる */const tx=tg?tg.x:mh.x,ty=tg?tg.y:mh.y-20;const D=2900,t1=tt0(0),d1=dd(D);
+  const RB=['255,80,80','255,160,60','255,230,80','110,230,110','90,170,255','190,110,255'];const SI=ui('x_star'),SP_=ui('x_spark');
+  const rnd=(i,k)=>{const v=Math.sin(i*127.1+k*311.7)*43758.5453;return v-Math.floor(v)};
+  const SKY=Array.from({length:80},(_,i)=>({x:rnd(i,1)*W,y:rnd(i,2)*H*.8,r:.6+rnd(i,3)*1.6,ph:rnd(i,4)*7,sp:1.5+rnd(i,5)*3}));
+  const LAND=250+1300;
+  const STARS=[{t:250,d:1300,x0:W+60,y0:H*.04,x1:tx,y1:ty,big:1},{t:120,d:650,x0:W*.75,y0:-30,x1:-60,y1:H*.42},{t:480,d:600,x0:W+40,y0:H*.18,x1:W*.1,y1:H*.62},{t:820,d:620,x0:W*.55,y0:-40,x1:-50,y1:H*.32}];
+  const P=[];let lastE=0;
+  const pos_=(st,k)=>({x:st.x0+(st.x1-st.x0)*k,y:st.y0+(st.y1-st.y0)*k});
+  const star4=(x,y,r,col,al)=>{c.fillStyle=`rgba(${col},${al})`;c.beginPath();c.moveTo(x,y-r);c.quadraticCurveTo(x,y,x+r,y);c.quadraticCurveTo(x,y,x,y+r);c.quadraticCurveTo(x,y,x-r,y);c.quadraticCurveTo(x,y,x,y-r);c.fill()};
+  /* 夜空（ボードの 上・文字の 下） */
+  add({end:t1+d1,draw(T){const e=(T-t1)/SP();if(e<0||e>D)return;const a=Math.min(1,e/300,(D-e)/450);c.save();const g=c.createLinearGradient(0,0,0,H);g.addColorStop(0,`rgba(10,8,40,${.86*a})`);g.addColorStop(.6,`rgba(40,18,80,${.78*a})`);g.addColorStop(1,`rgba(70,30,100,${.6*a})`);c.fillStyle=g;c.fillRect(-30,-30,W+60,H+60);
+    c.globalCompositeOperation='lighter';for(const s of SKY){const tw=.45+.55*Math.abs(Math.sin(e/1000*s.sp+s.ph));c.fillStyle=`rgba(255,250,230,${a*tw})`;c.beginPath();c.arc(s.x,s.y,s.r,0,7);c.fill();if(s.r>1.7)star4(s.x,s.y,s.r*3*tw,'255,250,220',a*tw*.7)}c.restore()}});
+  /* 流れ星と にじ色の キラキラ */
+  add({end:t1+d1,draw(T){const e=(T-t1)/SP();if(e<0||e>D)return;
+    for(const st of STARS){for(let q=lastE;q<e;q+=16){const k=(q-st.t)/st.d;if(k<0||k>1)continue;const h=pos_(st,k);const n=st.big?3:1;for(let j=0;j<n;j++){const i=P.length;P.push({x:h.x,y:h.y,vx:(rnd(i,6)-.5)*1.4,vy:.3+rnd(i,7)*1.2,b:q,l:700+rnd(i,8)*700,col:RB[i%6],r:(st.big?5:3)*(.6+rnd(i,9)*.8),img:st.big&&i%5===0})}}}
+    if(lastE<LAND&&e>=LAND){for(let i=0;i<40;i++){const a=i/40*Math.PI*2,v=2.5+rnd(i,11)*3;P.push({x:tx,y:ty,vx:Math.cos(a)*v,vy:Math.sin(a)*v-1.5,b:LAND,l:900+rnd(i,12)*500,col:RB[i%6],r:5+rnd(i,13)*4,burst:1})}}
+    lastE=e;c.save();c.globalCompositeOperation='lighter';
+    for(const p of P){const ee=e-p.b;if(ee<0||ee>p.l)continue;const f=ee/16.7,k=ee/p.l;const x=p.x+p.vx*f*(p.burst?.9:1),y=p.y+p.vy*f+(p.burst?.04*f*f:.01*f*f);const al=(1-k)*(.6+.4*Math.abs(Math.sin(ee/90+p.r)));if(p.img&&SI.complete){/* キラキラの 星（ゲームの x_star）が ゆっくり おちる */const s=14*(1-k*.4);c.save();c.globalAlpha=al;c.translate(x,y+ee*.05);c.rotate(Math.sin(ee/150)*.17);c.drawImage(SI,-s/2,-s/2,s,s);c.restore();continue}star4(x,y,p.r*(1-k*.5),p.col,al);c.fillStyle=`rgba(${p.col},${al*.35})`;c.beginPath();c.arc(x,y,p.r*1.6,0,7);c.fill()}
+    for(const st of STARS){const k=(e-st.t)/st.d;if(k<0||k>1)continue;const ke=st.big?E.io(k):k;const h=pos_(st,ke);const dx=st.x1-st.x0,dy=st.y1-st.y0,L=Math.hypot(dx,dy),ux=dx/L,uy=dy/L;const tl=st.big?190:100;
+      const g=c.createLinearGradient(h.x,h.y,h.x-ux*tl,h.y-uy*tl);g.addColorStop(0,'rgba(255,255,240,.95)');g.addColorStop(.3,'rgba(255,230,140,.6)');g.addColorStop(1,'rgba(180,140,255,0)');c.strokeStyle=g;c.lineCap='round';c.lineWidth=st.big?9:4;c.beginPath();c.moveTo(h.x,h.y);c.lineTo(h.x-ux*tl,h.y-uy*tl);c.stroke();
+      const rg=c.createRadialGradient(h.x,h.y,0,h.x,h.y,st.big?34:16);rg.addColorStop(0,'rgba(255,255,230,.95)');rg.addColorStop(1,'rgba(255,220,140,0)');c.fillStyle=rg;c.beginPath();c.arc(h.x,h.y,st.big?34:16,0,7);c.fill();
+      if(SI.complete){const s=st.big?48:22;c.save();c.translate(h.x,h.y);c.rotate(Math.sin(e/120)*.17);c.drawImage(SI,-s/2,-s/2,s,s);c.restore()}}
+    c.restore()}});
+  at(LAND,()=>{flash({t:LAND,d:260,col:'255,245,220',a:.35});burst(tx,ty,{t:LAND,n:10,im:['x_star','x_spark'],sp:4.5,life:900,sz:.18});S.safe(()=>{SFX.chime?SFX.chime():(SFX.sparkle&&SFX.sparkle())})});
+  S.safe(()=>{tone(1568,.5,{vol:.05,slide:2400,type:'sine'});setTimeout(()=>SFX.sparkle&&SFX.sparkle(),650*SP())});await wait(LAND+350)}
 async function steal(mEl,mine){if(!ensure()||!mEl)return;begin();const a=wrap(mEl),pa=pos(a);const mh=rectOf('#hand')||{x:W/2,y:H*.85},fh=rectOf('.fh')||{x:W-30,y:50};const from=mine?fh:mh,to=mine?mh:fh;
   shot({x:from.x,y:from.y},pa,{t:0,d:420,im:mine?'w_cardback':'fx:09_25',sz:26,scale:1.6,arc:40,trail:'255,220,160'});shot(pa,{x:to.x,y:to.y},{t:520,d:420,im:mine?'w_cardback':'fx:09_25',sz:26,scale:1.6,arc:40,trail:'255,220,160'});
-  keyf(a,{t:380,d:260,fn:(u,q)=>{u.sc=q>=1?1:1+.1*Math.sin(q*Math.PI)}});at(420,()=>{floatTxt('もらった！',pa.x,pa.y-a.rh*.7,{t:420,size:16,col:'#ffe066'});S.safe(()=>SFX.swish&&SFX.swish())});await wait(1000)}
-function balloon(el){if(!ensure()||!el)return;begin();const u=wrap(el);const I=ui('fx:09_27');overlay(u,{t:0,d:1800,draw:(x,y,uu,e)=>{if(!I.complete)return;const k=Math.min(1,e/500);const s=46;c.save();c.globalAlpha=Math.min(1,(1800-e)/300);c.translate(x+Math.sin(e/300)*4,y-uu.rh*.55-30*k);c.rotate(Math.sin(e/350)*.12);c.drawImage(I,-s/2,-s*.6,s,s*1.2);c.restore()}});keyf(u,{t:0,d:1800,fn:(v,q)=>{v.oy=q>=1?0:-14*Math.sin(Math.min(1,q*1.6)*Math.PI/2)*(q>.8?(1-q)/.2:1)}});S.safe(()=>tone(700,.35,{vol:.05,slide:1100,type:'sine'}))}
+  keyf(a,{t:0,d:1500,fn:(u,q)=>{u.rot=q>=1?0:Math.sin(q*Math.PI*6)*.1;u.oy=q>=1?0:-Math.abs(Math.sin(q*Math.PI*6))*5}});at(420,()=>{floatTxt('もらった！',pa.x,pa.y-a.rh*.7,{t:420,size:16,col:'#ffe066'});S.safe(()=>SFX.swish&&SFX.swish())});
+  /* 10/29：ケケケ… */at(1050,()=>{ono(a,'ケケケ…',1050,{col:'#ffd0a0'})});await wait(1500)}
+function balloon(el){if(!ensure()||!el)return;begin();const u=wrap(el);const I=ui('fx:09_27');/* 10/29：頭に くっついて ぷく〜っと ふくらむ → ふわふわ。そのあと CSS（.cfxbal）が ずっと ひきつぐ */
+  overlay(u,{t:0,d:1400,draw:(x,y,uu,e)=>{if(!I.complete)return;const k=E.b(cl(e/900));const wob=e<900?1+Math.sin(e/45)*.06*(1-e/900):1;const s=40*(.25+.75*k)*wob;const fy=e>900?-Math.sin((e-900)/1400*Math.PI*2)*6:0;c.save();c.translate(x,y-uu.rh*.5-s*.55+fy);c.rotate(Math.sin(e/350)*.1);c.drawImage(I,-s/2,-s*.6,s,s*1.2);c.restore()}});
+  /* 10/31 メモ49：下に バウンスしない。ぷか〜っと 上へ うかんで そのまま（CSS の ふわふわが -8px から ひきつぐ） */keyf(u,{t:500,d:900,fn:(v,q)=>{v.oy=-8*E.io(q)}})}
 
 /* 10/29：コイン ちゃりーん（手に入れた コインが カウンターへ とぶ）・光の柱で ふっかつ */
 function coinFly(n,fromEl){if(!ensure())return;begin();const to=rectOf('#coins');if(!to)return;let from;if(fromEl){const r=fromEl.getBoundingClientRect();from={x:r.left+r.width/2,y:r.top+r.height/2}}else from={x:W/2,y:H*.45};
   const k=Math.min(6,Math.max(1,n));for(let i=0;i<k;i++)shot({x:from.x+(i-(k-1)/2)*14,y:from.y},{x:to.x-to.w*.3,y:to.y},{t:i*90,d:520,im:'fx:new/coin_tilt',sz:20,scale:1.4,arc:60,trail:'255,215,90'});
   at(520+(k-1)*90,()=>{burst(to.x-to.w*.3,to.y,{t:520+(k-1)*90,n:6,im:'x_star',sp:3,life:500,sz:.12});floatTxt('+'+n,to.x+to.w*.1,to.y-to.h*.9,{t:520+(k-1)*90,size:16,col:'#ffe066'})});
   for(let i=0;i<k;i++)at(520+i*90,()=>S.safe(()=>{SFX.coin?SFX.coin():tone(1568,.1,{vol:.06})}))}
-function pillar(el){if(!ensure()||!el)return;begin();const u=wrap(el),p=pos(u);const I=ui('fx:03_19');
-  add({end:tt0(0)+dd(1300),draw(T){const e=(T-tt0(0))/SP();if(e<0||e>1300||!I.complete)return;const a=Math.min(1,e/250,(1300-e)/400);const w=u.rw*1.3,h=H*.55;c.save();c.globalAlpha=a*.9;c.globalCompositeOperation='lighter';c.drawImage(I,p.x-w/2,p.y+u.rh*.45-h,w,h);c.restore()}});
-  shot({x:p.x+40,y:p.y-H*.35},{x:p.x,y:p.y},{t:200,d:700,im:'fx:03_08',sz:30,scale:1.4,arc:-40,trail:'200,230,255'});
+/* 10/29 光の柱：キャラの ちょうど まんなか。たましい（むらさきの 火）は なし。画面が 少し 白く → 光の 柱が 上から 下へ さ〜っと → キラキラが ふる */
+function pillar(el){if(!ensure()||!el)return;el.classList.remove('enter');begin();const u=wrap(el);const I=ui('fx:03_19');const D=1500,t1=tt0(0),d1=dd(D);
+  tint({t:0,d:D,col:'255,255,255',a:.28,inD:250,outD:450});
+  /* 10/31 メモ50：絵を 縦に のばさない（たて横の 比は そのまま）。絵の 地面の 輪（74%）を 足もとに。絵の 上から 画面の 上までは 光の すじで つなぐ */
+  add({end:t1+d1,draw(T){const e=(T-t1)/SP();if(e<0||e>D||!I.complete)return;const p=pos(u);const a=Math.min(1,(D-e)/400);const w=u.rw*1.7,ih=w*I.naturalHeight/I.naturalWidth,feet=p.y+u.rh*.45,iy=feet-ih*.74,rv=E.io(cl(e/550));c.save();c.beginPath();c.rect(p.x-w,0,w*2,(iy+ih)*rv);c.clip();c.globalAlpha=a*.9;c.globalCompositeOperation='lighter';
+    if(iy>0){const bw=w*.3,yb=iy+ih*.12;const g=c.createLinearGradient(0,0,0,yb);g.addColorStop(0,'rgba(255,240,190,.12)');g.addColorStop(1,'rgba(255,236,170,.5)');c.fillStyle=g;c.beginPath();c.moveTo(p.x-bw*.42,0);c.lineTo(p.x+bw*.42,0);c.lineTo(p.x+bw*.5,yb);c.lineTo(p.x-bw*.5,yb);c.closePath();c.fill()}
+    c.drawImage(I,p.x-w/2,iy,w,ih);c.restore()}});
+  const P=Array.from({length:22},(_,i)=>({x:(Math.random()-.5)*u.rw*1.4,d:120+i*40,v:2.2+Math.random()*1.8,s:10+Math.random()*12}));const SPK=ui('x_spark');
+  add({top:1,end:t1+d1,draw(T){const e=(T-t1)/SP();if(e<0||e>D||!SPK.complete)return;const p=pos(u);c.save();c.globalCompositeOperation='lighter';for(const q of P){const ee=e-q.d;if(ee<0||ee>900)continue;const y=-20+ee/16.7*q.v*3.2;if(y>p.y+u.rh*.5)continue;c.globalAlpha=Math.min(1,(900-ee)/300);c.drawImage(SPK,p.x+q.x-q.s/2,y-q.s/2,q.s,q.s)}c.restore()}});
   keyf(u,{t:0,d:900,fn:(v,q)=>{v.alpha=q>=1?1:Math.min(1,q*1.4);v.glow=q>=1?0:Math.sin(q*Math.PI);v.glowC='220,240,255'}});
-  at(900,()=>{burst(p.x,p.y,{t:900,n:8,im:'x_spark',sp:4,life:600,sz:.16})});S.safe(()=>{SFX.reviveUp?SFX.reviveUp():tone(880,.6,{vol:.05,slide:1760,type:'sine'})})}
+  at(700,()=>{const p=pos(u);burst(p.x,p.y,{t:700,n:10,im:'x_spark',sp:4,life:700,sz:.16})});S.safe(()=>{SFX.reviveUp?SFX.reviveUp():tone(880,.6,{vol:.05,slide:1760,type:'sine'})})}
 
 /* うたうゾンビ：3体で そろって ゆれて うたう → 音符が あいてへ */
-async function chorus(zs,fs){if(!ensure()||!zs.length)return;begin();const us=zs.map(wrap);
-  us.forEach((u,i)=>{keyf(u,{t:0,d:1700,fn:(v,q,T)=>{const e=q*1700;v.rot=q>=1?0:Math.sin(e/190)*.13;v.oy=q>=1?0:-Math.abs(Math.sin(e/190))*7;v.glow=q>=1?0:.6;v.glowC='160,255,170'}});
-    for(let j=0;j<4;j++)at(150+j*330,()=>{const p=pos(u);burst(p.x,p.y-u.rh*.4,{t:150+j*330,n:2,im:'fx:08_07',sp:2,g:-.06,up:2.5,life:900,sz:.14,add_:false})})});
-  S.safe(()=>{[[392,494,587],[440,554,659],[494,587,740]].forEach((ch,i)=>ch.forEach(f=>tone(f,.45,{vol:.04,at:i*.42,type:'triangle'})))});
-  const c0=pos(us[Math.floor(us.length/2)]);(fs||[]).forEach((te,i)=>{const t=wrap(te);shot(c0,pos(t),{t:1250+i*80,d:420,im:'fx:08_07',sz:20,scale:1.6,arc:50,trail:'170,255,190'})});
-  at(150,()=>floatTxt('アー♪ アー♪ アー♪',c0.x,c0.y-us[0].rh*.85,{t:150,size:18,col:'#c8ffd0',rise:20}));await wait(1750)}
+async function chorus(zs,fs){if(!ensure()||!zs.length)return;begin();const us=zs.map(wrap);const ST=300;/* 10/31 メモ51：1人ずつ ずれて うたいだす（ド・ミ・ソ）→ 3人で 和音。音符は 色ちがい */
+  us.forEach((u,i)=>{const s0=i*ST,D_=1900-s0;keyf(u,{t:s0,d:D_,fn:(v,q)=>{const e=q*D_;v.rot=q>=1?0:Math.sin(e/190+i)*.12;v.oy=q>=1?0:-Math.abs(Math.sin(e/190+i))*7-(e<220?9*Math.sin(e/220*Math.PI):0);v.sc=q>=1?1:1+.05*Math.abs(Math.sin(e/190));v.glow=q>=1?0:.6;v.glowC='160,255,170'}});
+    at(s0,()=>{const p=pos(u);floatTxt(['ド〜♪','ミ〜♪','ソ〜♪'][i%3],p.x,p.y-u.rh*.62,{t:s0,size:15,col:['#ffd0f0','#c8ffd0','#d0e4ff'][i%3],rise:18})});
+    for(let j=0;j<4;j++)at(s0+120+j*300,()=>{const p=pos(u);burst(p.x,p.y-u.rh*.4,{t:s0+120+j*300,n:2,im:'fx:08_07',sp:2,g:-.06,up:2.5,life:900,sz:.14,add_:false,filter:`hue-rotate(${i*110}deg)`})})});
+  const c0=pos(us[Math.floor(us.length/2)]);(fs||[]).forEach((te,i)=>{const t=wrap(te);shot(c0,pos(t),{t:1350+i*80,d:420,im:'fx:08_07',sz:20,scale:1.6,arc:50,trail:'170,255,190'})});
+  at(ST*us.length,()=>floatTxt('アー♪ アー♪ アー♪',c0.x,c0.y-us[0].rh*.95,{t:ST*us.length,size:18,col:'#c8ffd0',rise:20}));await wait(1850)}
 
-return {chorus,coinFly,pillar,trade,kickOut,wish,steal,balloon,burn,unlock,digIn,emerge,coin,roulette,hanage,unko,glitch,kwFlair,drFx,thorn,auraPulse,attack,hit,kenzan,ko,revive,shotTo,bottleTo,freezeU,blow,summonPop,shieldBreak,deadly,aoe,textAt,heal:el=>{if(!ensure()||!el)return;begin();healU(wrap(el));S.heal()},buff:el=>{if(!ensure()||!el)return;begin();buffU(wrap(el))},down:el=>{if(!ensure()||!el)return;begin();const u=wrap(el);keyf(u,{t:0,d:600,fn:(v,k)=>{v.tint=k>=1?null:`rgba(60,90,200,${.3*(1-k)})`;v.oy=k>=1?0:6*Math.sin(k*Math.PI)}});S.down()},poison:el=>{if(!ensure()||!el)return;begin();poisonU(wrap(el))},kindOf,on:true}})();
+/* 10/31：牢屋（10/29 指示）：牢屋の 絵は CSS の 1まいだけ（.u.jailed::after・カードの 上から 下まで）。カギは 絵の ちょうど まんなか（.jlock）。
+   上から 1回だけ ガシャン と おちる うごきも CSS（.jdrop、f91）。キャンバスは ゆれ・文字・くらくする だけ → いつも 牢屋は 1まい・数字より 下 */
+function jail(el){if(!ensure()||!el)return;begin();const u=wrap(el);
+  keyf(u,{t:0,d:420,fn:(v,k)=>{v.tint=k>=1?null:`rgba(10,5,0,${.5*Math.min(1,k*1.4)})`}});
+  at(320,()=>{const p=pos(u);shake({t:320,d:220,p:4});floatTxt('ガシャーン！',p.x+(p.x<W/2?1:-1)*u.rw*.78,onoY(p,u),{t:320,size:18,col:'#e8e8f0',rot:p.x<W/2?.2:-.2,self:u.el})})}
+/* 牢屋から 出る：牢屋の 絵は のこしたまま、まんなかの カギが あく（カギ入りの あいた 錠）→ おわってから 牢屋が すっと きえる */
+async function unlock(el){if(!ensure()||!el)return;begin();const u=wrap(el);const sp=SP();
+  setTimeout(()=>{if(el.isConnected)el.classList.add('jopen')},380*sp);at(400,()=>{const p=pos(u);burst(p.x,p.y,{t:400,n:8,im:'x_spark',sp:4,life:700,sz:.16})});
+  setTimeout(()=>{if(el.isConnected)el.classList.add('jfade')},950*sp);
+  S.safe(()=>{SFX.lock?SFX.lock():tone(1400,.08,{vol:.08,type:'square'});SFX.chime&&SFX.chime()});await wait(1250)}
+return {idle,busyNow,afterBanner,buffLabel,jail,chorus,coinFly,pillar,trade,kickOut,wish,steal,balloon,burn,unlock,digIn,emerge,coin,roulette,hanage,unko,glitch,kwFlair,drFx,thorn,auraPulse,attack,hit,kenzan,ko,revive,shotTo,bottleTo,freezeU,blow,summonPop,shieldBreak,deadly,aoe,textAt,heal:el=>{if(!ensure()||!el)return;begin();healU(wrap(el));S.heal()},buff:el=>{if(!ensure()||!el)return;begin();buffU(wrap(el))},down:el=>{if(!ensure()||!el)return;begin();const u=wrap(el);keyf(u,{t:0,d:600,fn:(v,k)=>{v.tint=k>=1?null:`rgba(60,90,200,${.3*(1-k)})`;v.oy=k>=1?0:6*Math.sin(k*Math.PI)}});S.down()},poison:el=>{if(!ensure()||!el)return;begin();poisonU(wrap(el))},kindOf,on:true}})();
 window.CFX=CFX;
 /* ---- ゲームへの つなぎ ---- */
 if(typeof battlecry==='function'){const _bcC=battlecry;battlecry=async function(sd,m,c){const d=C[c&&c.id]||{};const pm=CFX._m,pb=CFX._bc;CFX._m=m;CFX._bc=d.bc;
@@ -9580,8 +9777,8 @@ if(typeof battlecry==='function'){const _bcC=battlecry;battlecry=async function(
     if(s.startsWith('🧊')){CFX.freezeU(el);return}
     if(s==='バリア！'){CFX.shieldBreak(el);return}
     if(s.startsWith('👼')){return}
-    if(/^トゲ/.test(s)){CFX.thorn(el);const sp=(typeof SPEED==='number'&&SPEED>0)?SPEED:1;setTimeout(()=>_fa.call(this,el,s.replace(/^トゲ\s*/,''),cls),420*sp);return}
-    if(/^やけど/.test(s))CFX.burn(el);
+    if(/^トゲ/.test(s)){CFX.thorn(el);const sp=(typeof SPEED==='number'&&SPEED>0)?SPEED:1;setTimeout(()=>{_fa.call(this,el,s.replace(/^トゲ\s*/,''),cls);/* 10/29：赤く なるのは 1回だけ（ゲームの 赤い フラッシュ .hit は 出さない） */const e2=el.isConnected?el:null;if(e2)e2.classList.remove('hit')},400*sp);return}
+    if(/^やけど/.test(s)){CFX.burn(el);const sp=(typeof SPEED==='number'&&SPEED>0)?SPEED:1;setTimeout(()=>_fa.call(this,el,s,cls),420*sp);return}
     if(/^☠/.test(s)){CFX.poison(el);return _fa.call(this,el,s.replace(/^☠\s*/,'毒'),cls)}
     if(s.startsWith('🔥 '))return _fa.call(this,el,s.slice(2),cls);
     if(cls==='heal'&&/^\+\d+$/.test(s))CFX.heal(el);
@@ -9592,6 +9789,7 @@ if(typeof battlecry==='function'){const _bcC=battlecry;battlecry=async function(
 /* なかまを よぶ（トークン）：白い けむりから ぽんっ（ゾンビは みどり） */
 {const _sm=summon;summon=function(sd,id,lv,plus,card){const m=_sm.apply(this,arguments);try{if(m&&HUMAN&&!card&&C[id]&&(C[id].token||C[id].tok))m._cfxNew=1}catch(e){}return m}}
 {const _ue=unitEl;unitEl=function(sd,m,o){const el=_ue.apply(this,arguments);try{if(m&&m._cfxNew&&HUMAN){delete m._cfxNew;const zo=C[m.id]&&C[m.id].f==='zo';requestAnimationFrame(()=>{const e=uEl(m);if(e)CFX.summonPop(e,zo)})}}catch(e){}return el}}
+{const _ueK=unitEl;unitEl=function(sd,m,o){const el=_ueK.apply(this,arguments);try{if(el&&m&&m._koing&&m.hp<=0)el.style.visibility='hidden'}catch(e){}return el}}
 /* ねむい：すこし 青く くらく（動けない のが わかる） */
 (function(){const st=document.createElement('style');st.textContent=`.u .cfxt{position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:6}
 .cfxon{animation:none!important;transition:none!important}
@@ -9600,23 +9798,59 @@ if(typeof battlecry==='function'){const _bcC=battlecry;battlecry=async function(
 @keyframes cfxBar{50%{transform:scale(1.03)}}
 .u .iceov{z-index:1!important}
 .u .stat,.u .pills,.u .jcnt{z-index:6!important}
-.u.sleepy .art{filter:brightness(.88) saturate(.85)}`;document.head.appendChild(st)})();
+.u.sleepy .art{filter:brightness(.88) saturate(.85)}
+/* 10/31：出したときの 輪（sumring）は カードの 1.2ばいまで・カードの うしろ */
+.u .sumring{inset:-4px!important;z-index:-1!important;animation:cfxSumR .7s ease-out forwards!important}
+@keyframes cfxSumR{0%{transform:scale(.7);opacity:1}100%{transform:scale(1.2);opacity:0}}
+/* 10/31 ねむい（ずかん st_sleep）：Zzz の 絵が ずっと 1つずつ、ゆっくり ゆらゆら のぼって すこしずつ きえる。からだは ゆっくり こっくり */
+.u .zzz{right:22%;top:4%}
+.u .zzz b{width:36px;height:36px;margin:-18px 0 0 -18px;font-size:0!important;color:transparent!important;-webkit-text-stroke:0!important;text-shadow:none!important;background:url(ui/x_zzz.png) center/contain no-repeat;filter:drop-shadow(0 0 2px #fff) drop-shadow(0 1px 3px rgba(0,0,40,.7));animation:cfxZ 3.6s linear infinite!important}
+.u .zzz b:nth-child(2){animation-delay:1.2s!important}.u .zzz b:nth-child(3){animation-delay:2.4s!important}
+/* 10/29：Zzz は ゆれない（その場で 小・中・大の Z が じゅんばんに ふわっと 出て きえる） */
+/* 10/31 メモ13：前の アニメに もどす（Zzz が ゆらゆら のぼって すこしずつ きえる・3つ じかんさ）。音は なし */
+.u .zzz b{animation-name:cfxZold!important;left:0!important;bottom:0!important}
+.u.enter .zzz,body:has(.pshow) .u .zzz,body:has(.kwpop) .u .zzz,body:has(.kwbub) .u .zzz,body:has(#cutin) .u .zzz,body.cfxkz .u .zzz{visibility:hidden}
+@keyframes cfxZold{0%{opacity:0;transform:translate(0,0) rotate(0) scale(1)}8%{opacity:.7;transform:translate(6.4px,-5.6px) rotate(5.5deg) scale(1.07)}20%{opacity:1;transform:translate(12.6px,-14px) rotate(10.9deg) scale(1.18)}35%{opacity:.92;transform:translate(11.5px,-24.5px) rotate(9.3deg) scale(1.31)}50%{opacity:.78;transform:translate(3.9px,-35px) rotate(0) scale(1.44)}65%{opacity:.6;transform:translate(-.7px,-45.5px) rotate(-9.3deg) scale(1.57)}80%{opacity:.38;transform:translate(4.4px,-56px) rotate(-10.9deg) scale(1.7)}92%{opacity:.15;transform:translate(13.6px,-64.4px) rotate(-5.5deg) scale(1.81)}100%{opacity:0;transform:translate(19.9px,-70px) rotate(0) scale(1.88)}}
+.u.sleepy:not(.enter){animation:cfxDoze 5.6s ease-in-out infinite}
+@keyframes cfxDoze{0%,100%{transform:rotate(-3.4deg)}50%{transform:rotate(3.4deg) translateY(1px)}}
+/* こおる：氷の かたまり（ずっと のこる）。数字・マークより 下 */
+.u .iceblk{position:absolute;left:-12%;right:-12%;bottom:0;height:60%;pointer-events:none;z-index:5;background-repeat:no-repeat;background-position:0 100%,100% 100%;background-size:62% auto,58% auto}
+.u.icein .iceblk{opacity:0}`;document.head.appendChild(st)})();
+/* 氷の かたまりの 絵（確認モードでは FXD の データ）。はじめて こおった しゅんかんは キャンバスが 描くので すこし かくす */
+{const _ueI=unitEl;unitEl=function(sd,m,o){const el=_ueI.apply(this,arguments);try{if(el&&m){if(m.frozen>0&&m.fzType!=='drunk'){const now_=Date.now();if(!m._iceSeen)m._iceSeen=now_;const u=s=>{const k='fx/'+s+'.webp';return 'url("'+((window.FXD&&FXD[k])||k)+'")'};const b=document.createElement('i');b.className='iceblk';b.style.backgroundImage=u('04_18')+','+u('04_20');el.appendChild(b);const left=700-(now_-m._iceSeen);if(left>0){el.classList.add('icein');setTimeout(()=>{const e2=uEl(m);if(e2)e2.classList.remove('icein')},left)}}else if(m._iceSeen)delete m._iceSeen}}catch(e){}return el}}
 
 /* キーワードの お知らせ（出たとき）に キャンバスの かざり */
 if(typeof kwFx==='function'){const _kf=kwFx;kwFx=async function(m){try{if(HUMAN&&m&&m.kw){const el=uEl(m);const ks=['taunt','quick','twice','stealth','revive','deadly'].filter(k=>m.kw.has(k)).slice(0,2);ks.forEach((k,i)=>setTimeout(()=>{const e=uEl(m);if(e)CFX.kwFlair(e,k)},i*1150*(SPEED||1)))}}catch(e){}return _kf.apply(this,arguments)}}
 if(typeof drMark==='function'){const _dmk=drMark;drMark=async function(m){const sp=()=>(typeof SPEED==='number'&&SPEED>0?SPEED:1);const zz=ms=>new Promise(r=>setTimeout(r,ms/sp()));if(HUMAN)await zz(380);try{if(HUMAN)CFX.drFx(m)}catch(e){}const r=await _dmk.apply(this,arguments);if(HUMAN)await zz(750);return r}}
 /* いるあいだ：出した時と ターンの はじめに 力を くばる。もらっている子には ★マーク */
-const cfxAuraT=(sd,m)=>{const d=C[m.id]||{};if(!d.aura)return [];return sd.board.filter(b=>b!==m&&b.hp>0&&(d.aura==='atk'||d.aura==='regen'||(d.aura==='faction'&&b.f===m.f)))};
-function cfxAura(sd,only){if(!HUMAN||!B)return;const ms=sd.board.filter(m=>m.hp>0&&C[m.id]&&C[m.id].aura&&(!only||m===only));ms.forEach((m,i)=>setTimeout(()=>{const el=uEl(m);if(el)CFX.auraPulse(el,cfxAuraT(sd,m).map(uEl))},i*350))}
+/* 10/31：いるあいだ の 力を「もらっている」か（攻撃+ だけで なく、ダメージ-1・はやうち・回復・連携・おばけの 太鼓 なども） */
+const cfxFac=m=>m.f||(C[m.id]&&C[m.id].f);
+function cfxGives(sd,b,m){if(!b||b===m||b.hp<=0||b.jailed||m.hp<=0)return false;const d=C[b.id]||{};const id=b.id;
+  if(d.aura==='atk'||d.aura==='regen')return true;
+  if(d.aura==='faction')return d.af?cfxFac(m)===d.af:cfxFac(m)===cfxFac(b);
+  if(d.aura==='link'){const i=sd.board.indexOf(b),j=sd.board.indexOf(m);return Math.abs(i-j)===1}
+  if(id==='ikoku'||id==='adara'||id==='new122'||id==='new153'||id==='new170'||id==='new26')return true;
+  if(id==='new12')return cfxFac(m)==='an';if(id==='new59')return cfxFac(m)==='gh';if(id==='new136')return cfxFac(m)==='ro';
+  /* 10/31 メモ1：もれていた いるあいだ（回復・やられたとき・カエル・マフィア・金ほり など） */
+  if(['new87','new179','new208','new38','new56','ma'].includes(id))return true;
+  if(id==='new197'){const i=sd.board.indexOf(b),j=sd.board.indexOf(m);return Math.abs(i-j)===1}
+  if(id==='new164')return /カエル|ガエル|ケロ/.test((C[m.id]||{}).n||'');if(id==='new234')return cfxFac(m)==='mf';if(id==='new97')return (C[m.id]||{}).aura==='miner';
+  return false}
+/* いるあいだ の 効果を もつ 子か（あいてが いなくても 出した時・ターンの はじめに 光る） */
+const cfxAuraSrc=id=>{const d=C[id];if(!d)return false;if(d._ia==null){try{d._ia=!!effList(id,1).find(x=>x[1]==='いるあいだ')}catch(e){d._ia=false}}return d._ia};
+const cfxAuraT=(sd,m)=>sd.board.filter(b=>cfxGives(sd,m,b));
+const cfxGetsAura=(sd,m)=>{try{return sd.board.some(b=>cfxGives(sd,b,m))||(typeof auraBonus==='function'&&auraBonus(sd,m)>0)}catch(e){return false}};
+function cfxAura(sd,only){if(!HUMAN||!B)return;const ms=sd.board.filter(m=>m.hp>0&&!m.jailed&&(!only||m===only)&&(cfxAuraSrc(m.id)||cfxAuraT(sd,m).length));ms.forEach((m,i)=>setTimeout(()=>CFX.afterBanner(()=>{const el=uEl(m);if(el)CFX.auraPulse(el,cfxAuraT(sd,m).map(uEl))}),i*350))}
 if(typeof startTurn==='function'){const _st=startTurn;startTurn=async function(sd){const r=await _st.apply(this,arguments);try{if(HUMAN&&B&&!B.over)setTimeout(()=>cfxAura(sd),250)}catch(e){}return r}}
-if(typeof playCard==='function'){const _pc=playCard;playCard=async function(sd,i){const c=sd.hand[i];const r=await _pc.apply(this,arguments);try{if(r&&HUMAN&&c&&C[c.id]&&C[c.id].aura){const m=sd.board.find(x=>x.card===c)||sd.board[sd.board.length-1];setTimeout(()=>cfxAura(sd,m),200)}}catch(e){}return r}}
-{const _ue2=unitEl;unitEl=function(sd,m,o){const el=_ue2.apply(this,arguments);try{if(HUMAN&&B&&m&&el&&typeof auraBonus==='function'&&auraBonus(sd,m)>0)el.insertAdjacentHTML('beforeend','<i class="cfxm"></i>')}catch(e){}return el}}
-(function(){const st=document.createElement('style');st.textContent=`.u .cfxm{position:absolute;left:50%;top:-12px;width:22px;height:22px;transform:translateX(-50%);background:url(ui/x_star.png) center/contain no-repeat;filter:drop-shadow(0 1px 2px rgba(0,0,0,.6));pointer-events:none;z-index:7;animation:cfxmB 2.2s ease-in-out infinite}
-@keyframes cfxmB{0%,100%{transform:translateX(-50%) scale(1)}50%{transform:translateX(-50%) scale(1.15)}}`;document.head.appendChild(st)})();
+if(typeof playCard==='function'){const _pc=playCard;playCard=async function(sd,i){const c=sd.hand[i];const r=await _pc.apply(this,arguments);try{if(r&&HUMAN&&c&&C[c.id]){const m=sd.board.find(x=>x.card===c)||sd.board[sd.board.length-1];if(m&&(cfxAuraSrc(m.id)||cfxAuraT(sd,m).length))setTimeout(()=>cfxAura(sd,m),350)}}catch(e){}return r}}
+{const _ue2=unitEl;unitEl=function(sd,m,o){const el=_ue2.apply(this,arguments);try{if(HUMAN&&B&&m&&el&&cfxGetsAura(sd,m))el.insertAdjacentHTML('beforeend','<i class="cfxm"></i>')}catch(e){}return el}}
+(function(){const st=document.createElement('style');st.textContent=`/* 10/31：★は 下の まんなか（攻撃と 体力の あいだ）。上の「かくれ」マークや となりの こうげきマークと かさならない。かくれんぼ中でも はっきり 見える */
+.u .cfxm{position:absolute;left:calc(50% - 12px);bottom:-12px;width:24px;height:24px;background:url(ui/x_star.png) center/contain no-repeat;filter:drop-shadow(0 0 3px rgba(255,215,90,.95)) drop-shadow(0 1px 2px rgba(0,0,0,.6));pointer-events:none;z-index:7;opacity:1!important;animation:cfxmB 2.2s ease-in-out infinite}
+@keyframes cfxmB{0%,100%{transform:scale(1)}50%{transform:scale(1.15)}}`;document.head.appendChild(st)})();
 
 /* もぐる・しずむ：砂／ぬまの 下に いる あいだは 上だけ 見える */
-if(typeof xSleepIn==='function'){const _xs=xSleepIn;xSleepIn=function(m,turns,kind,onRel){const r=_xs.apply(this,arguments);try{if(HUMAN&&(kind==='dig'||kind==='sink')){const go=()=>{const e=uEl(m);if(e)CFX.digIn(e,kind)};if(uEl(m))go();else setTimeout(go,120)}}catch(e){}return r}}
-if(typeof xRelease==='function'){const _xr=xRelease;xRelease=async function(sd,m){try{const k0=m&&m.jailKind;if(HUMAN&&k0==='jail'){const e0=uEl(m);if(e0)CFX.unlock(e0)}}catch(e){}try{const k=m&&m.jailKind;if(HUMAN&&(k==='dig'||k==='sink')){const e=uEl(m);if(e){e.classList.remove('jailed','dig','sink');await CFX.emerge(e,k,k==='dig'?opp(sd).board.filter(x=>x.hp>0).map(uEl):[])}}}catch(e){}return _xr.apply(this,arguments)}}
+if(typeof xSleepIn==='function'){const _xs=xSleepIn;xSleepIn=function(m,turns,kind,onRel){const r=_xs.apply(this,arguments);try{if(HUMAN&&(kind==='dig'||kind==='sink')){const go=()=>{const e=uEl(m);if(e)CFX.digIn(e,kind)};if(uEl(m))go();else setTimeout(go,120)}if(HUMAN&&kind==='jail'){m._jailAt=performance.now();const e=uEl(m);if(e)CFX.jail(e)}}catch(e){}return r}}
+if(typeof xRelease==='function'){const _xr=xRelease;xRelease=async function(sd,m){try{const k0=m&&m.jailKind;if(HUMAN&&k0==='jail'){const e0=uEl(m);if(e0)await CFX.unlock(e0)}}catch(e){}try{const k=m&&m.jailKind;if(HUMAN&&(k==='dig'||k==='sink')){const e=uEl(m);if(e){e.classList.remove('jailed','dig','sink');await CFX.emerge(e,k,k==='dig'?opp(sd).board.filter(x=>x.hp>0).map(uEl):[])}}}catch(e){}return _xr.apply(this,arguments)}}
 (function(){const st=document.createElement('style');st.textContent=`.u.jailed.dig,.u.jailed.sink{filter:none!important;clip-path:inset(-40% -40% 58% -40%);transform:translateY(52%)}
 .u.jailed.dig::after,.u.jailed.sink::after{inset:auto -20% 54% -20%;height:30%;border-radius:0;box-shadow:none;background:url(fx/new/sand_fin.webp) center/contain no-repeat;animation:cfxDig 1.6s ease-in-out infinite}
 .u.jailed.sink::after{background-image:url(fx/new/swamp_pool.webp);animation:cfxSink 2s ease-in-out infinite}
@@ -9631,15 +9865,15 @@ if(typeof xRelease==='function'){const _xr=xRelease;xRelease=async function(sd,m
 
 /* 第2弾の フック */
 if(typeof NEWBC!=='undefined'){const W2=(name,pre,post)=>{const f=NEWBC[name];if(!f)return;NEWBC[name]=async function(sd,m,c,o){try{if(HUMAN&&window.CFX&&pre)await pre(sd,m,c,o)}catch(e){}const r=await f.apply(this,arguments);try{if(HUMAN&&window.CFX&&post)await post(sd,m,c,o)}catch(e){}return r}};
- W2('trade',async()=>{await CFX.trade()});
+ W2('trade',async(sd,m,c,o)=>{await CFX.trade(sd.hand.length,o&&o.hand?o.hand.length:4)});
  W2('kick',async(sd,m,c,o)=>{const t=strongest(o.board.filter(e=>e.hp>0));if(t)await CFX.kickOut(uEl(m),uEl(t))});
- W2('wish',async(sd,m)=>{if(roomOf(sd)>0&&sd.hand.some(x=>C[x.id]&&!C[x.id].spell))await CFX.wish()});
+ W2('wish',async(sd,m)=>{if(roomOf(sd)>0&&sd.hand.some(x=>C[x.id]&&!C[x.id].spell)){let tg=null;try{const h=sd.hand.filter(x=>C[x.id]&&!C[x.id].spell).sort((a,b)=>C[b.id].c-C[a.id].c)[0];const el=isMe(sd)?$('hand').children[sd.hand.indexOf(h)]:document.querySelector('.fh');if(el){const r=el.getBoundingClientRect();if(r.width)tg={x:r.left+r.width/2,y:r.top+r.height/2}}}catch(e){}await CFX.wish(tg)}});
  W2('steal',async(sd,m,c,o)=>{if(o.hand.length)await CFX.steal(uEl(m),isMe(sd))});
  W2('balloon',null,async(sd,m)=>{const t=sd.board.find(x=>x.hp>0&&x.kw&&x.kw.has('stealth')&&x!==m)||m;const e=uEl(t);if(e)CFX.balloon(e)});}
 
 /* コインが ふえたら カウンターへ ちゃりーん（ターンの はじめの 回復は のぞく） */
 {let lc=null,lb=null;if(typeof startTurn==='function'){const _st=startTurn;startTurn=async function(){if(B)B._refill=1;try{return await _st.apply(this,arguments)}finally{if(B){B._refill=0;lc=B.me.coin}}}}
- const _rb=renderBattle;renderBattle=function(){const r=_rb.apply(this,arguments);try{if(B&&HUMAN&&window.CFX){if(lb!==B){lb=B;lc=B.me.coin}else{const c=B.me.coin;if(lc!=null&&c>lc&&!B._refill){const src=CFX._m&&B.me.board.includes(CFX._m)?uEl(CFX._m):null;CFX.coinFly(c-lc,src)}lc=c}}}catch(e){}return r}}
+ const _rb=renderBattle;renderBattle=function(){const r=_rb.apply(this,arguments);try{if(B&&HUMAN&&window.CFX){if(lb!==B){lb=B;lc=B.me.coin}else{const c=B.me.coin;if(lc!=null&&c>lc&&!B._refill){const src=CFX._m&&B.me.board.includes(CFX._m)?uEl(CFX._m):null;const n_=c-lc;CFX.afterBanner(()=>CFX.coinFly(n_,src))}lc=c}}}catch(e){}return r}}
 /* よみがえる（raise・recall）は 光の柱 */
 {const _bcP=battlecry;battlecry=async function(sd,m,c){const d=C[c&&c.id]||{};const want=HUMAN&&(d.bc==='raise'||d.bc==='recall');const before=want?new Set(sd.board):null;const r=await _bcP.apply(this,arguments);try{if(want){const nu=sd.board.filter(x=>!before.has(x)&&x!==m&&x.hp>0);nu.forEach((x,i)=>setTimeout(()=>{const e=uEl(x);if(e)CFX.pillar(e)},i*250))}}catch(e){}return r}}
 
@@ -9745,7 +9979,8 @@ try{const M={flowerT:['（はらり…と ちった）','（ゆらゆら）','�
  const split=n=>{const s=n.lastIndexOf(' ');if(s>1&&s<n.length-1)return[n.slice(0,s),n.slice(s+1)];const k=n.lastIndexOf('の');if(k>=2&&n.length-k-1>=2)return[n.slice(0,k+1),n.slice(k+1)];return null};
  const _ce=cardEl;cardEl=function(id){const el=_ce.apply(this,arguments);try{const nm=el.querySelector('.nm');const n=nm&&nm.textContent||'';if(nm&&[...n].length>=11){const p=split(n);if(p&&[...p[1]].length<=9){nm.classList.remove('x3','x4','x5','xlong','long');nm.classList.add('two');nm.innerHTML=`<span class="n2"><small></small><b></b></span>`;const sm=nm.querySelector('small');sm.textContent=p[0];const L0=[...p[0]].length;if(L0>9)sm.style.fontSize=Math.max(.42,5.6/L0).toFixed(2)+'em';nm.querySelector('b').textContent=p[1]}}}catch(e){}return el}})();
 /* 10/30：カードの 絵の 位置（かしまさんが 直しチェックで ずらした 位置）。[よこ, たて, 大きさ] */
-const ART_POS2={"bison": [92.9, 100, 106], "boiler": [50, 64.3, 100], "capone": [50, 25.3, 100], "celestia": [86.4, 100, 122], "clover": [57.9, 100, 132], "dalton": [50, 100, 100], "doo": [50, 100, 100], "eagle": [50, 6, 100], "garasan": [50, 100, 100], "goliath": [63.4, 0, 108], "guard": [0, 57.9, 108], "haboob": [50, 100, 100], "ikoku": [50, 100, 100], "kishi": [0, 92.8, 104], "mary": [58.8, 100, 118], "new109": [0, 76.5, 112], "new122": [50, 6, 100], "new131": [50, 0, 100], "new136": [50, 39.7, 108], "new139": [50, 100, 100], "new179": [0, 71.6, 108], "new181": [50, 49.5, 100], "new200": [50, 100, 100], "new206": [50, 0, 100], "new207": [0, 100, 114], "new212": [50, 100, 100], "new234": [100, 22.5, 112], "new37": [0, 91.3, 104], "new64": [50, 67.6, 100], "new80": [100, 0, 116], "pochi": [0, 100, 106], "runner": [100, 55.9, 104], "sabota": [47.9, 100, 110], "tumble": [50, 100, 100], "vulture": [0, 0, 106]};
+const ART_POS2={"fakeT": [50, 88, 120], "pony": [85, 20, 110], "bison": [92.9, 100, 106], "boiler": [50, 64.3, 100], "capone": [50, 25.3, 100], "celestia": [86.4, 100, 122], "clover": [57.9, 100, 132], "dalton": [50, 100, 100], "doo": [50, 100, 100], "eagle": [50, 6, 100], "garasan": [50, 100, 100], "goliath": [63.4, 0, 108], "guard": [0, 57.9, 108], "haboob": [50, 100, 100], "ikoku": [50, 100, 100], "kishi": [0, 92.8, 104], "mary": [58.8, 100, 118], "new109": [0, 76.5, 112], "new122": [50, 6, 100], "new131": [50, 0, 100], "new136": [50, 39.7, 108], "new139": [50, 100, 100], "new179": [0, 71.6, 108], "new181": [50, 49.5, 100], "new200": [50, 100, 100], "new206": [50, 0, 100], "new207": [0, 100, 114], "new212": [50, 100, 100], "new234": [100, 22.5, 112], "new37": [0, 91.3, 104], "new64": [50, 67.6, 100], "new80": [100, 0, 116], "pochi": [0, 100, 106], "runner": [100, 55.9, 104], "sabota": [47.9, 100, 110], "tumble": [50, 100, 100], "vulture": [0, 0, 106]};
+/* 10/31：ニセモノ（fakeT）は 顔が まんなかに くるよう 絵を 上へ（場の キャラも 同じ） */try{if(typeof ART_POS!=='undefined')ART_POS.fakeT="background-size:120% auto;background-position:50% 88%"}catch(e){}
 {const _ceP=cardEl;cardEl=function(id){const el=_ceP.apply(this,arguments);try{const p=ART_POS2[id];const a=p&&el.querySelector('.art');if(a){a.style.backgroundSize=p[2]+'% auto';a.style.backgroundPosition=p[0]+'% '+p[1]+'%'}}catch(e){}return el}}
 /* 10/30：ふきだしの アイコンが 縦に のびない／ボスムービーの 上下の 黒い帯を なくす */
 (()=>{const st=document.createElement('style');st.textContent=`
@@ -9816,6 +10051,29 @@ colSheet=function(id){
 .pop.dim{filter:grayscale(.7) brightness(.75);opacity:.85}
 .cmpno{text-align:center;color:#e8d3b0}
 .kwbub .kh i:empty{display:none}`;document.head.appendChild(st)})();
+
+/* ===== 10/31 説明文の 数字は いつも ほんとうの 数字（レベル・合成で かわる ものは 効果と おなじ 計算で 出す） =====
+   ・よぶ子の（攻撃/体力）：ほんとうに 出てくる 強さ（statA/statH を その レベルで）
+   ・レベルで ふえる 数字を 書いていた 文を、効果と おなじ 式で 書きなおす */
+{const TOKN={};for(const id in C){const c=C[id];if(c&&c.token&&c.n&&!TOKN[c.n])TOKN[c.n]=id}
+ const esc=s=>s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');const names=Object.keys(TOKN).sort((a,b)=>b.length-a.length);
+ const RE=names.length?new RegExp('('+names.map(esc).join('|')+')（(\\d+)/(\\d+)）','g'):null;
+ const NOSCALE=new Set(['new129','new164','new226']);/* この 子たちは いつも Lv1 の 子を よぶ（効果の コードと おなじ） */
+ const LVFIX={
+   new07:{'見参！':(t,lv)=>t.replace(/\+0\/\+\d+/,'+0/+'+(2+lvN(lv)))},
+   new136:{'見参！':(t,lv)=>t.replace(/ぜんいんに\s*\d+ダメージ/,m=>m.replace(/\d+/,String(valX(C.new136.v,lv))))}};
+ const _elT=effList;effList=function(id,lv){const L=_elT.apply(this,arguments);lv=lv||1;try{const d=C[id];return L.map(x=>{if(typeof x[2]!=='string')return x;let t=x[2];
+   if(RE)t=t.replace(RE,(m,n)=>{const tid=TOKN[n];const L_=NOSCALE.has(id)?1:lv;const a=statA(tid,L_),h=statH(tid,L_);return `${n}（${a}/${h}）`});
+   if(d&&d.bc==='healone'&&x[1]!=='やられたら')t=t.replace(/を(\d+)いやす/,()=>'を'+((d.v||3)+lvB(lv))+'いやす');
+   const f=LVFIX[id]&&LVFIX[id][x[1]];if(f)t=f(t,lv);
+   /* 10/31：かくりつ（%）は 子ども向けに ことばで。のこった {1} も なくす。数字は 効果と おなじ 計算 */
+   if(x[1]==='いるあいだ'&&d&&(d.aura==='coinflip'||d.aura==='miner'||d.aura==='lasso')){const pre=(typeof FLAV2!=='undefined'&&FLAV2[id])?FLAV2[id]+' ':'';const N_=lvN(lv),B_=lvB(lv);
+     const how=N_>=2?'かならず':N_>=1?'よく':'ときどき';
+     if(d.aura==='coinflip')t=pre+`ターンの はじめに、${how} コインが 1まい ふえる`;
+     else if(d.aura==='miner')t=pre+`ターンの おわりに、${how} ＄1 見つける`;
+     else t=pre+(B_>=2?'なげなわが ずっと かかりやすく なる':B_>=1?'なげなわが もっと かかりやすく なる':'なげなわが すこし かかりやすく なる')}
+   t=t.replace(/\{\d+\}/g,'');
+   return t===x[2]?x:[x[0],x[1],t,...x.slice(3)]})}catch(e){return L}}}
 
 
 /* =====================================================================
@@ -9891,6 +10149,10 @@ aiAttack=async function(sd){const r=await _aa.apply(this,arguments);
 }catch(e){}return map}}
 
 
+/* 10/31：名前えらび（その1のOK分・やめた分の直し・その2）を反映 */
+(function(){const N={"baramaki": "ばらまき富豪 スペンダー", "boya": "ピーウィー・ザ・キッド", "chakka": "火の精霊エンバー", "fairy": "木の妖精 オーキー", "gantetsu": "金ほり ナゲット", "new03": "ゆうれいカウボーイ スプーク", "new05": "イワツバメのスウープ", "new09": "トロッコのカーティ", "new103": "宝石ガニ ジェミー", "new105": "クリスタルのせいれい プリズマ", "new106": "トロッコ暴走団ご一行", "new112": "どろんこブタ スロッピー", "new114": "ひつじかい ラナ", "new116": "なげなわ少年 ルーピー", "new120": "ガンコおやじ オックス", "new121": "ひつじ雲のせいれい ニンバス", "new122": "まぼろしの白馬 ブランシュ", "new123": "きっぷ切りのクリッピー", "new125": "屋根の上のカラス ネヴァー", "new126": "貨物ねずみ カーゴ", "new127": "石炭くべの コーリー", "new129": "郵便車のスタンピー", "new130": "列車強盗の子分 バンディ", "new131": "車輪ロボ ホイーリー", "new132": "トンネルおばけ グルーム", "new135": "じゃんけん車掌 パンチョ", "new139": "じょうきロボ モクリン", "new140": "ネジまきロボ ネジリー", "new142": "おそうじロボ ゴッシム", "new149": "蒸気ダンゴムシ ピルボ", "new154": "きりおばけ ミスティ", "new156": "ぬま魔女見習い マーシャ", "new157": "ワニのたまご ハッチ", "new160": "ぬまの釣り人 ボバー", "new162": "沼のせいれい バイユー", "new165": "ゆきだるまのポラリン", "new166": "ペンギンのワドル", "new168": "つららのせいれい アイシー", "new170": "山小屋番 ロッジ", "new171": "ヘラジカのアントラー", "new172": "毛皮うりのペルト", "new173": "雪男の子 イエッティ", "new175": "オーロラのせいれい ルミナ", "new179": "ラクダのキャメリア", "new180": "ヤシの実ざる ココ", "new181": "フェネックのフェン", "new182": "しんきろう売り ウェイヴィ", "new183": "水くみ娘 アイシャ", "new184": "キャラバン隊長 ダン・キャメル", "new185": "サソリ占い師 マダム・ピンサ", "new186": "すなどけいのせいれい クロノ", "new187": "ハヤブサ使い テイロン", "new189": "空とぶじゅうたん ソアリン", "new19": "雪のせいれい スノウィ", "new191": "砂クジラ モービー", "new193": "ひのこ坊や フリッチー", "new194": "溶岩ガメ ラーヴィ", "new197": "温泉ザル ソーキー", "new204": "マグマゴーレム ラーヴァロン", "new21": "砂のせいれい デューン", "new210": "サボテン兄ちゃん スパイク", "new211": "キツツキのペック", "new213": "森のふくろう オリバー", "new214": "サボテンミルク屋 スピーナ", "new215": "まりもサボ ロリー", "new216": "たね飛ばし スピッツ", "new218": "ねむり花 ララ", "new219": "森のレンジャー サグワード", "new220": "千年サボテン サグアロ様", "new222": "くつみがきのバフィー", "new223": "ニセ警官ボビー", "new225": "ウラ帳簿のスペックス", "new227": "ボディガードの石頭 ロッコ", "new228": "金庫番のスクアード", "new229": "ぼうしの中のハト クーパー", "new23": "マグマのせいれい フレイミー", "new232": "そっくりさん ツイニー", "new24": "ひくいどりのパイロ", "new26": "森の長老 エル・カルドン", "new36": "シーツおばけ フラッター", "new38": "おばけ特急の車掌 カロン", "new43": "見はりコンドル ガンミーナ", "new44": "なまけ助手 スナッズ", "new45": "荒野のうま ガスト", "new49": "決闘ネズミ ブラム", "new50": "まどわしの ウルスラ", "new56": "おはなおばけ デイジー", "new57": "ちょうちんおばけ フリッカー", "new59": "ガイコツ太鼓のラタタ", "new60": "こうもりのフラッピー", "new69": "こだまコウモリ ヨーデル", "new71": "まいごの探検家 ローミー", "new73": "キケンな スティンガー", "new74": "岩かげの山賊 ガルチ", "new75": "ダイナマイト見習い ブーミー", "new76": "峡谷の風の子 ゼフ", "new77": "こだま歌姫 ヨデリーナ", "new79": "ハヤブサのフォルカ", "new81": "看板ペンキ屋 ダブ", "new82": "そうじ屋モッピー", "new84": "床屋の バーバー・バート", "new86": "千鳥足の郵便屋 ティプシー", "new92": "まねっこオウム ポリー", "new95": "カナリアのピップ", "new97": "ランタンもちのブライティ", "pyonko": "看板娘のメイベル", "new113": "かかしのヘイウッド", "new195": "ふいご番のベロウズ", "new70": "つりばし番のクリーキー", "new93": "鐘つきのベルトン", "armadillo": "まるまるアルマジロ ディロ", "bard": "ほろよい吟遊詩人 バラッド", "chousyu": "徴収係 トール", "clock": "チクタク時計 ティッキー", "crow": "そうぎ屋カラス モーティマー", "eichi": "ものしりの ウィスカー", "juko": "おんこうな保安官 レオ", "kaikei": "会計士 カウント", "kerits": "ケリツツキ ペッカー", "kifujin": "海辺のきふじん マリーナ", "kishi": "ゆうかんな騎士 ナッツ", "minpei": "まんぷく民兵 ビートル", "narikin": "ずるい成金 ゴールディ", "new16": "スチームゴーレム ゴリアス", "new20": "シロクマ親分 ポーラ", "new201": "はいかぶりコウモリ アッシュ", "new72": "ハゲタカおばば マギー", "rookie": "ルーキーのティミー", "sandman": "ねむりの ナップ", "telegraph": "電信ロボ モールス", "vulture": "おこぼれバルチャー バズ", "zombie": "まずしいゾンビ ペニー", "akudo": "荒野の悪童 ビリー", "akudo2": "荒野のならず者 ビリー", "akudo3": "荒野の大親分 ビリー", "axe": "スチームタウンのバイク乗り", "gadget": "うるさラボ チャッター", "hanage": "はなげ仙人 ハーミット", "jitchoku": "まじめな保安官 ネッド", "mole": "金庫やぶりのツィッガー", "new17": "ぬまカエルのルイ王子", "new198": "まぐまぐゾンビ", "new99": "つるはしゴブリン ノック", "pigeon2": "てがみ配達 ポスティ", "rookie2": "ベテラン賞金稼ぎのティミー", "rookie3": "伝説のガンマン ティミー", "tenshu": "やさしい店主 マーサ", "zombie2": "ゾンビ兵 ペニー", "zombie3": "ゾンビ将軍 ペニー"};for(const id in N){if(typeof C!=='undefined'&&C[id])C[id].n=N[id]}})();
+
+
 /* =====================================================================
    おもしろ技ためし場（fun.html だけで動く）
    ・おもしろい技のキャラだけのデッキ ・毎ターン コイン10 ・体力999
@@ -9937,5 +10199,255 @@ async function funStart(setup){if(!window.FUNMODE)return;for(let i=0;i<40&&B&&B.
   R={sid:'wild',star:0,floor:5,floors:7,hp:999,maxhp:999,money:0,deck:shuffle(mine.map(id=>({id,lv:3,plus:0}))),skills:{lasso:0,atk:0,coin:0,draw:0},relics:[],caught:[],map:[]};
   if(!FUN.loaded){FUN.loaded=true;await loadAssets(FUN_IDS.map(cardArt).concat([STAGES.wild.bg,HERO.img]),'🎪')}
   B=null;const sp=makeFight(5);sp.foe=Object.assign({},sp.foe,{name:'おもしろ技の まと',hp:999});sp.deck=shuffle(FUN_IDS.map(id=>({id,lv:2,plus:0})));battle(sp)}
+
+
+/* ===== 10/31 新しい演出（CFX）の つなぎ・外がわ（CFX=1 の ビルドだけ） =====
+   BATTLE_SPEC.md（せんとう画面の 決まり）に あわせる：
+   ・文字（擬音・結果）は いつも いちばん上。数字・マークの 上には 置かない
+   ・見参 → ほかの マーク の 順。やられは 少し 間を おいてから */
+(function(){if(!window.CFX)return;
+/* うたうゾンビの 大合唱（f76 から 消えていた CFX.chorus を つけなおす） */
+try{if(typeof XD!=='undefined'&&XD.new55&&XD.new55.bc){const _b=XD.new55.bc;XD.new55.bc=async function(sd){const r=await _b.apply(this,arguments);
+  try{if(HUMAN&&B&&CFX.chorus){const z=sd.board.filter(b=>b.hp>0&&(b.f==='zo'||C[b.id].f==='zo'));if(z.length>=3)await CFX.chorus(z.slice(0,3).map(uEl).filter(Boolean),xFoes(sd).map(uEl).filter(Boolean))}}catch(e){}return r}}}catch(e){}
+})();
+
+/* ===== 10/31 確認モードの メモ（8件）の 直し（CFX=1 だけ。本番には 入らない） ===== */
+/* メモ1：山札が 50まい近く あっても わくから はみださない。あつみは 上限つき・カードの 大きさの 中に おさめる。数字は わくの 中 */
+(function(){if(typeof deck3d!=='function')return;const _d=deck3d;
+  deck3d=function(el,n){_d.apply(this,arguments);try{if(!el)return;const red=el.classList.contains('red');const dk=el.querySelector('.dk');if(!dk)return;
+    const T=n<=0?0:Math.min(red?4:5,1+Math.ceil(n/10));const L=n<=0?0:Math.min(n,T+1);let h='<b></b>';
+    if(!n)h+='<i class="ghost"></i>';else for(let k=0;k<L;k++){const o=L>1?(L-1-k)*T/(L-1):0;h+='<i class="'+(k===L-1?'top':'')+'" style="right:'+T+'px;bottom:'+T+'px;transform:translate('+o.toFixed(2)+'px,'+o.toFixed(2)+'px)"></i>'}
+    const keep=[...dk.parentNode.querySelectorAll(':scope>.dkn')];dk.innerHTML=h;el.classList.add('d3fit');keep.forEach(x=>el.appendChild(x))}catch(e){}}})();
+(function(){const st=document.createElement('style');st.textContent=`.deckpile.d3.d3fit .dk i{inset:0 auto auto 0;width:auto;height:auto}
+.deckpile.d3.d3fit .dk b{right:6px;bottom:6px}
+#pile.d3fit{height:58px;width:44px;align-self:center}
+#pile.d3fit .dkn{top:auto;bottom:3px}
+#foeStage .deckpile.red.d3fit .dkn{left:calc(100% + 4px);top:50%;transform:translateY(-50%)}`;document.head.appendChild(st)})();
+/* メモ2：手配書の マーク：文字が 見切れない（はばに よゆう・ちぢまない）。小さすぎて WANTED が 読めない 紙の 絵は やめて、手配書の アイコンに */
+(function(){const st=document.createElement('style');st.textContent=`.u .pills{width:max-content}
+.pill.wanted{flex:none;padding:0 7px 0 2px!important;white-space:nowrap}
+.pill.wanted img{height:1.5em!important;margin:-3px 1px -3px 0!important}`;document.head.appendChild(st);
+  if(typeof pillsFor==='function'){const _p=pillsFor;pillsFor=function(m){const h=_p.apply(this,arguments);try{if(h&&h.includes('pill wanted')){const src=(typeof UIIMG==='function'&&UIIMG('ui/u_k_wanted'))||'ui/u_k_wanted.png';return h.replace(/(<i class="pill wanted"[^>]*><img src=")[^"]*/,'$1'+src)}}catch(e){}return h}}})();
+/* メモ3：「たおれたら手札へ」の マークを ↩ の 矢印に（仮の絵。あとで 生成した 絵に さしかえる） */
+(function(){const D='data:image/webp;base64,UklGRqojAABXRUJQVlA4WAoAAAAQAAAAnwAAnwAAQUxQSFgKAAABJ8egbSNJFy9/1O/dIYiIfHqtu86ib6N0MlrIaOqgnRYtOqMT/ZZwGElu2/wDLwzQf8tJDgVE9H8CMJIkjhw1uftCanwTIenEoXaUpBszE1Z1YKaZn2z+J6hLlQFpmZunrABI0uRO9yEW3kB6IrqYAHFwbDk38L1t+yFJ9v9d9+sVWWqbo/Zo2bbtrbW21ltbtm39AbbNZXvsmZ62Xe2qynjdGxkZr0hEHsfai4gJ4LuFQqB+BoMnBCGRTJNB2Go3hehE79SyVauXr1g1W5CWbl65cvXatetXSnpDDGophQDQ2XDrtq1btm9cOTvdmQ4AS93uUndx/siJs8cPnuoAxKDWUQxAses99961be0aASkZJ0BIITgA5fz8X//U+24LQIhqEcUArHvlD/7xlw92cDdZCIGoNGAbhyIcO3b4y3/6vS+eA0JQOwQSbH7xS16wew4vGUk0bxt1xPyT3/7qoxchpvEXSKx84etfsSfQLSWJIUymCHSf+tLn7lskhPEWZHa/4w33TLOUFMRQygInQuTmdz71/5SE8aUIL3vvm7awlEJgCFVRs3QoOPTxvSRpPCnCc/7oLSu8qCD6C9xPPe4jsq2UmLr9Ix/eSRnGUYANP3T/sW4ZApWq6HWFGLDpTQve8J53ryOFcRPE7Mf+89jhZ6PoFfUNiOEgFotsfdvrA0HjRBHe/GcHju4/eJhKkW0xeANCKC5y91tfDHF8KLH7za+YWkBUilEXC3rFm9dhjQk5vuZVc4tE3CNG3wQvrXrdi0kaBzLbn3crqQgIxFg0KJbsecEMGj0lXnwPC1GIwapHFa7wICpDWCz2bgeNmJjdtxMCgxSIZg1uyvSGkp07SSMl2LIzLIrmhRi0cRN9JTbvkjVC5tbbSYFK5QkxnMYNSPSGpZkdy9HImL1baF5imO2s/irZspoRFXHj8q7UI2VJjEEByKxfPSJmhm6g12QKMYJSHggQzIbRmClANCoxqsqrFgqjMLuGailDYrwKEEUxbKKzCveITIkRVx6mVx4uQwQBZvzKzbBwDQ8R3S7YZEtjofmr8wytdeM6ptcZ49oV4sp1PCS6fgrRoMaJXKta5vy1MBRWOopoXcmwf0keAnjqWrR6XEfjz7YWHmEIzImzBaJthcFTRx8lDEqcOymj3lbBAIkHTw1KYf4oprWt9CniYCL3d1OLkToPrJEGEbjzeNFqoB8jDkKXd3ZK57g9DCSuP4CbC93Vu4Ccce86le4ceUyNyfM7gtumvgGSvnBSqRlrfvPakly3SmUqLv0XDcvFviRwvTZ0Di6++khIjXD29ikLUdetgLNC979KNRFudjZ3A5ktUd+Aiwc+p9QABzZGoYy2dJ2+/3gt5IUbNzaUor5bQ7UEOKw/hHLE08sDUjvlK225thBzYvfMxiTqm/aUMkhx5mkpQ4fCVItRS4DYcJBYL3B2Y4nrmRZXmp4n1BNhRSlaXHUEEFesRHUCO9Yh6qeWqS+Q17yVWCfyyTVdMt1iCFLxm4QaKjuvKZzT+vHlm5JqsPdua7JQuu0VhDqv2VBK9dQ+yqAsXiH3UVm8WAapzgSYXrQ+qQ+33tuVMBNlufVuQr+XbCjJVBspQ+WyF9HXvCRaSDVMywsQd3fKCqV19xARk6QgpHu2ESrYsaMbqK92Uh1A5fo7UNW+maR6pv2FUudeKs1dTIiqY4DbMaA0tWtSqC0Q26aTADZsIngiUB0gsG0DgNi2uSvqq62y0/p1qGfrXEKuYyZBoTS3sQc2gZgMVQfhcJsAcytiEpXZbiMv3z2hIJ6/wsLr1zChBu95gcX3/93tDpOCMpSmf++N6bZPbJ8yE+vm98bnrV8SuZoUjNK9t++YMROqQd5w+1o0qfR6avUyJlYBgsXJBUG4efoYQhOKsU4/e//lAMrwpCASj5x64KGQQPUmRdvq/r+v/9WSbE8Irgdp6lOfj+F//jmWTKImFft/c1Hy385HTyI4hc8e6JRJjzwRJhEDPq1ka/EQKcMTAbYWjtkAJwHXanHXwrp+BkCcAnAtt1al+hAune+BU8aoVmu7or/DpcsYzNkrkUnSfdD8Veg5fTI6w23lirpnFmSAc6dJuNZkKDhCABzKowCu5XZyBmHxAAYQj/XUb6ncFM8/RaV5/Kac0dLOcDh0FFc9u79IOW6l+sY8eiNUhYtPyuBarex6OHSfQFSKB4yp7/ajOPFNUpX51nwBuA5uH5OZ9NBRud+Bx2Mis4WyQ/pCCvSN/MixMge3jTLs4gubUb/Ai54kgdss0yR+nUB/qfjzqS6trlo2hKU3E2sQ+Shd57hdslPx0CpUR6zbH5NbTFnmM0RqB/6xUyqD1CbZqTj1KULOr87jHNweynL4ytOBTP3yFzupvZwVlv6dmBNT2pmiMto7ddYcJ1uc2FyYbLWDsoJvuVzGLMJid2upLLdDftmZOSLnwcG1hZXTzmLzyVI0GBYvby7l9lGW0uzS8eAm4MBsJ+EsjT3nhblnEI2qPLXRws7w2Mt2uebi5eBmrKPzs4m2LzudZ0TT0tr/OipQm8XyBc9LzRF464HFQJsrrX4RYoCBn59KQu0FL50djLTqbgLtLe+7rRQDDWzalNRWVrnx+YgBR7auK4VayFDGPQzlnatToKVvX2UNTu7cJRp1C2xcmwJDqLTxTiTlgceImxBrViGGUuzcXgbGuWl2dgViaO+YATXiMdGgwZ05hth0yoCbAGvk7CxTWTDkF64rNQNotBKZdtXiNTxc4uw8thvSCNlkiupQIoZcXLmIwU0AGhGbZk1nFjP05uI1et0IoOGzyZcEVjnNiC4sgQG7EdBQGdOsgDMXGdmyJBhAzQAaEmMatzh7gjAyLJwmpoEAGpgxA0wdTl5CjKx19eCl6JLBCtSYwQzSDhefmldilEN65HGmEzKoqWoBqmHADNSyU+Tgg2UsGekED/7vM4qlATSIgRtQPwMkF9cf2I/M6F/71Gevd5JlKjV8pq5MpbtF+vqnzmMz+ily/MuPoC4aEdNg6tI58Ln7KBLjMURW/sDhGLvJ9GqoTJMOU2c+v4NQMD4jfOrzlztFqkBDZPJdpqnu1/7nAB0xTtVh///8/4VOLKMADY3JL5nh/v+/jyIybsvI1/7q09eK1CWCRiSlWPDtf/liipSM30TBff/6mdetopsUVOEMVRhQlamdrA4L3/zb/7wcVDKeS0e++qLXv+bOaVLXICsDEKaP1c/YDh3KJ7/6xW/OE0sztktCYvXzXvGS3atiSCmBeoz69BeYaneJhSgP3/fZr59HRdeM9TKELqzc/crFZXNFVCqRRJXqVCcSCgWXzx544on7j0MkmfGvQAnTO+/cu2vn1lnoljZISFaVjYViBM4/ed+3DpxegEgybamAE0xt33HXXbetXT0HAtyrXirT2bPH9j/71P7roGgn2lVBpARat3ndpnVr1q1bPzfd6YSgVC7dXLhx+dyFs4ePnj6XQNEJ08ZCAZdUduaWzc7MFoFy6ea1G9cXluiNItm0uyRsTK4kbDM5ClTDYL5bCFZQOCAsGQAA0FgAnQEqoACgAD49GIlDIiGhGCmWxCADxLYAZxsIPyvo9O29y/KH8sflKrT9O/tH55/qH7Q/JTuo5w8sfl3/i/4D80PnH/qv9d7Gf0T/yvcC/T3/g/2z/Ce1b6t/2c/ID4D/s9+0HvP/8H1h/331Bv61/xfTR9jv94fYQ/cv0yv3M/+3yZ/tJ+3fwIfsR/9PYA///qAegB1wH0S/KLyI/Ifkp58+UT257nc0PrHxafj3975xf73w7+X2oR+Rf0H/W8Fjar0Hfbz7D+u/rO/RedH2i9gP9av+h5XfiWecewJ/M/7f/4P8p+R300f3X/s/1Poq/PP8v/5f858A/8q/p/++/uXtcezD9dPZF/Wl1g01xKQtwWcQ/X2xiReKkN9vrV/3mF2ZsIU4/Iuf+K1supyb/viPHxF1W20cbMERzT/JXBsn3ptxnqX8R8I+mZFJP6d04XnHek3LeCm5jKz9J3+DGOSfFEpr98bHqvET1Co+e8WalchDHPJiZOdCn+8lJWRZoK7uG+UQHOfBGdOLDKn/gLwtM3xbVvfjnYmvsqTSxAOiX+XrQMTuUDs38A5CWYngkV2FRLAHlyOAtrQ6QQwm6cotMEaVzmuYHcomlDOlPSZ/SGjC82t6jK9CwOHlrlZpwhPn42JehO9tAuW4jZdL+TEMsikpi0ZwyHp5EXwhgp866kHZkI7a5FbTLYzlegXuEylbQ5J03llMm/em5xKYdmSFILycvHNZ9z/DVC83DcPrw/tQ1vIO8OHCEe+3QKwf55wcLYfsaygGNIs/lQsfC3bDZRSRxft6dii09f6gUCHMxf8yfrCwgVuRvElhmoMr/76ISTBXtRUoAW//badIa8z8sORX5kKrvdCJcyHRpLMkDv108nV+zBwMmU+7Izh4/8E8D9evSo3yqCzXpA3EWkhe9f1cioetfOfpYF3VHo5P7MhVgonRef+S0wAA/v9gGCB1Sf/F0fcO4q4NYwGqgdazdPb5W6ssIYdFGiNLFYr1pO04okPlAPyih8YNOuL3d/YatLF3tPoemory2tMHkGPcMmexnbFMx/lao+MQmiBRewkqpbOdJQzsrDdReoEwC7KNR15h9V2Z8nTWXGZA/9dHby6qU5qh6ZBpebydn0AMUhijB6WEBStgundc0snv6/D0cNaitTKe34oU9KEp4tUaOIYDGGdWa+/6BNnHXgrVLoX/zlP7o/ewXVFjk1e76cu2L4Ebv2knZMaJVE8xEIw3o5fk8nZly9GW3oUnInnrxjcI+MI0IXa6j7OaFXigxgw/9IdYw7+N8Qnm3pc+mh43hGC+CMWLej0RTkem89GF88YHuBVPf4x5xvYwdylssxkAPWV4WxuINS//q3s8cMuVbwpv+IRWrRDiHgGr8sPgLVXCo+kCPXsTUyleKPhxgJXfWgftUK6j2ltNXKyYSThxwCAuQykGJIz1yDxs7jDXkEhtvXnIe4vihU6zedV4/zZ/B/eoun8+nuj/XcKglvimc0luxhC2TBmHeMn2PrFbWoS7lurfuaVKiggfY4qsLQbzCsdoK2jtwdAJDzO+zUYtETL8YYAXriMXUYXdGrMotJPdfAuXzpFjkQl7s6lmK6vcup35WP7tzZHggeH92YtXsL5ZWiUIb2EFRDuxpB2E1tE+BBLYenbXvImbfPZhd5+M1/zKfczhfeLzKj72SjGkt61eqPtzKkA3eIsggHH/R0nc4QEPqBoei8kraN5Fi71JDSbryEHyZDX/ch+2sm1kuTeO0sWOmy721SWD8Bz2uStRXZWCLfuXVSD6JlLoaZkkakNNO5UgZ26jtJz6DFhoF6X+RS4qIR2r55fhoh+MYLVgXgTEi/jqea1Kcj3XhwfB4p9o09X464WWnTtbLfVPTDmeeswaqi8KhABzug2+0oebi8RozTyujzjS9ywaFyazwW0MPoR36AcS2V7Awmv2EJmaVwnIyJISbwOFRyPcqwXsdCdsmu6flP1w4eKn8XDGBeFcbGYI/0lfGG2t+5HwteSlZQeK3GebBKJ5tTDAalNNB3LTBpPx074+7wtWTVucd7mi35syXTJw8odBflPXDdv9QxTSwc0+lMf/u8mlXG/9jpq46mYHtAXLEo/GSO9y1zHyfQ4YAR/r2ZmA8twQHTyPeAkc4NAHMF+Z8rIx77JX3WqbxYh5C45jbhvxDvmWNkqcX3UILxOz5lxo+7F/CKwL58CUidraATTwrhSLkkvnyly0HzbbyxvJLlW/7u6ZwIH5OLSNHkpwfGIovw/4iXjFsFjO+qXi/Etku7JWCu64igP3mR8CGG8rziLIynn5XeNQt/hSf0UUsD44CteYfufYOGPUTtdOHQTLZOw11VijE4JF+dPC6jVKI6ZCwAwTcQP2h4FUDsshxSYbo2OWPLZtVwvJdU7wHX8BGoM8AveSChFQpWz9hE6nyqrdXUj8WBU19lyhM2TqXzH5QU30EY3m6p37D5XMZ2okl/VKgPcdkwfXM+rx/C05rRb1vCmVVTjNrVjIxFsl9P50oIaJ9bL7fjs5BPA4foqFN+MGMBqa476BtySJ3WxuMEQnKrDCYxl/UYl8FFR8+1kuFLSBxOq4PULmY4hpYaGTWTqm3K3L9eBE5V953uEHowu9Tjt3TLLFuCTmi/YSulY9ovAisv96SYrv9RzWjBxULkpXUpP5e+KjJ79wH09zBfrlYJBjO76D6n0Gb317qwPiUswBPFO+2XyVpDqJfBvKp4zDkFPteE7jbx4+NkndG8LTL/hfvQ/2cOD5N/AsBCltwm6aiCNn/o1PjecXr/4PVfvzMLDhMDJ5zgV9FrAFqIqvDhcMN6xfFmA0W7Bft4z9D7yuKzjAWeu5dX1XiFcZDSKl/ejVZMS997S5CSfDExb/0OvdqR+jyPUawbzqVZpVAIsF9o45K4EyOhGFoEDqMSSH/2DJker5pwqG4ZOuRXjU3Gt8EdfjzRW7mw9uEYIq5XuKtAj70InsLNK4cfhmY7qoYmxoWVzas2Hm87ZUNH8EJgUyBQJH+for+5c2KIhlnVX9qFnx1DapuoKFXaU6XgBAjW+KDWkUcDMIWdHsuG+vwQy3coI0fiU1/9fP0tz7Yvb/goOc53aN2CW5LfDI9iMZDQ/qVePM/uPSkeYpfS98xY3FcH5Uc/nxMnQZlopzchbOggu0Vm3TYsOnV8rvvvY4peGfe72YyDgYA6x+RZUmg9N0N4ohVwjS0f2qEeIQ5wYN3vLJH4sg8YGuoIJK/2o7RE8eqRImMSrV0+rFJjAAzMMOfeh9X9uwdfeCiMcCsJ/L+TQGN9M3Mb/GRjAUoY5KhT97KWhK4lJ66EP5JYN66/nE63CYlI21prrjidhgxCr/0BeXbSqV1Ai33VXUtheWKrxvyYLSVPd9X74ifftkH6EalTjYu+JXALkoo2QFa0ysOnMvWpmy6167osdtV5KHLQ/CCXBnkENQdSlJToPSu5k07TkMdhXjOXaowbVXLPG3kcFjWPE/+FU72X3y22puyBU2nUTD7go9h0wqzdt3SyQibcn5b2LooQB05JHHj8Y+QFWGgDfb/3Dh5hq7P0keOFh2D2MzGvhErCHIcnSrxdunTw7FAj4D6rdfPhZrneA0nlWUbnm/fbwmJadnqbIsAYKPqNU03PJLR5OQFMVvz3gu/XyP49RZXwyCKjENpwoIGerdV7BwNLTbT1IQ+iwQucj0vwS6urwbc7ystbAnFy84CfTFDCPyxb5i1ShLrKZiu8jXc7k+UhpS2UDSXm4hAD4Na1xHIIgFJ7OP6k9MBYQ2lUsmMRes2hw+MwtYHBlsD+N6H8untDnyRT1fcz8caPREdrYEDca/GXmtSbZ1LQezwC52D8XYP5JRZOw3UUOeWfa+Bs3X47IVBd4b6XoUJSPkaPT3rclx/4sQM0pjjvPNji3ygCjHYRp7ow/YVMjtzV/mjODvEQMIyeSv2DnGyJAYVFuOnoL/gJyooG4n0QFiwhf/F36LqkCa1WpYTv+i5CJdx+mmzGZlELBo8S8vDry/JhVQ8J1m5g+o+w6FdQ7R3dGi13OsF8yHMnnQ6gXtJhstiSIT6RJEYJ/AnZJQJR9bO8nyehZUQ0S9YUcPkWfCe6xEacowWvjQom8L2Z/kNYrp/HKi5AX+RcwsAWeyzpKlu3PhxZzaRG1tj28J+HkkpN2wTP2zZNW1QXBQyEaqo2cq9t3pdJYV9Hf2zdhQNnknY22tCtHYXhQB2q5048jAWVqgZkNI/bgmM8YmoiE9JomtKl9DQgz52q73GmEd2D2j5lOBPoTV8ORRwRHzjQ7Jz84yCY9Vrk6ryI4VAd8CYyl8DhHA2iOQ+cDtkHneADGlp2QJ8hMXDrWzz0CLLdiOGcBWV1cITOMikZZkzVGiv2nk5+rjRM2rGf3uGZUb75lAvSWbQmKyfGEvxGlaSwmKbp9f3AICSxi/wvcfKvC/1eUi8o55CBwJZa6lG/oitSXSemLD4TKsuS3xF1W6c0UEClDBoC9hFAmTv/10ut9dj92KHuFn3/pg9vFkWo7fJEChyQyH7Qsy1n+LrFZ4d8jAlFunkFjeaIw9LASrEfShAHYP16wzdhT8FiNZOdiksLoXY393N20Zk5X+1JAtL9h9pfUkGUMGDA37WXiN3ZpUpidn4ifAmx5oc/uFx/+vxaTWUQeaoohCTxF65njc2lkF1dv7RbIQ5EbRZ6hHpVNC82gBtBH3yG3Ct+bj+HjaZpg5VpZhmn5b5A5IRUH2Mc63ngC4nAiZ3JzJHIS4uGmeXpWOiyBA9GgTkVB3MKkcTV1lEU3VybkbHPvJW4yjM27197D73ci9CDj5aLUQyUpdrOOSVTkl1R1ntckHG95ySjWWx03YvuSJP665vPebWSfBmoGUeoD4Qv/AONYUx+sNXGExanfMXoBbfBJssDPnWtFXwbBQnx8g7NCvvQjRszyycizOUHsBl5mL3sMRa4k0g8wC0jkWsadvPtSwRSeR1PN6dWp8q0fHoeb2onvfBEuzF8G9Ocsg450lz5BH2ruREQoYslA9btdgAGVpvNP/LfW1Rsrr94teszuOQPnQIVrgvGEB7v6HNHx2imUzWhDuCj0//7oIecpeL72aHwkplpKG0wCVKEQB9MCVo6+oqxCv+KBPmSSpAxhmFQB0MwAB+bGbQ9YvWfJV5mfdDrxUNOpFXNz9oqmD75VfQJMSD2ol39/xU1op7f1WOOuSrMAfgyrlyWqrhL+x9FdDlM6bGVfeICznx+MVtR4LLfE0X9Mb7wFBr5cb5+winzq6C6BxvHHseKgbYJXmt8+wykvPSN48UxH5O2X/vWfbbLA124M/6t7Geg8E41+HoqvWkByPmZH/BlDXK3x5IkD5ro1V5LKHEYnPOwrDguQFidaUyewHwatLnGk80qJCVDhd9jySuVM484UBDtK35zCVrv5i2onfvEhzg66xt/+6v5akpoqjpN2D9u6+Rz5/UZdLPNr1QuLX3ioPnPTBiKkInZuMaTcUSszrUZO869T31FhXa8A+2qvlBYvEpGQOEp/LqwT8PMVrw0Nxj9d+MTuuWFT8CMewiGhmMppjiusxtpY5QBsc+GXvqM9nPrnpS1Rec+0nzTFEgqIw5r9WSep7mrpQ8Vx3+VULWxo/en8NXK4XuqLLD73Zul8+7LT4HwRb/ZRa6G4IPiTYXabXR05fOXADcChRLe/u9bdkQEHyKNU5bjFM+sHsMEvS+3IaxGHLMYBH02pdrs/QhMy0vMCBigbVHPkKz8jADy8yLQTECOT6JfpXCjFfCdQJqkrGE/5+9t8WXmZZSJfnKn3CCK43ZA6dRH0MZb1QpGLZNAGEp5IE07FmiwkvkBOtDT0/G546GNYSQnVc7h57jX6rb2psu/fl0xxVY+mMMzczrt14RupJOgFbLD4c8iE+p1sugXWuQCEHMIRnM6t1eY1Lredj47ZBq4YCurlZuCRI7lb/59MkNpA9G8WSoByL1b7/fz54XYNR56ZKwdZEmcdZ7P4fzY8zvXegLSL+NT+kDOOxeZYM2/kr6YaD0YXT1tFPiH1I6ie8Jr0PrLtdfIzVUNL3dqLZBqIIVgOTa8fSHTFVy7fZPz+u/iBynLJemAD7Zom2UKn3t7F7JlPgp4YgMJH4J+kxDkpK2YNuMrOd02hwj2XVQSVZolvmMr6nsI7thlCcwpJ2Ci2t9+II0fEm+8+g82aJtN1+5msrG//ljGlSfJV99Mw2pl5890LVRsS7jkb4HTc9T1w+W2nB/s9fCkpi8Nnd1q3rnmZz0OkPXMLhrzStwdM8JlxYarRyWvIsvcJpSOvvwhG7HbY1wMfRe7J8VaLqXeybn1RLhvZepphPIEs0A9SC0pFhjT8P10QL6hJ78JnhDc5LvMPXoWdcA5CwyUaGzMErBGCRkwg32Y23kCs4idRljhCovTmHJ5YJruPiB6W+t5WuQxaE27dY1YLFiV/gsyJOopyX5zTlsRbJ71n8FOcKiMwfVW6gwiKTfzZv2DLt7i2m3l/h2ii3EnR3hheQGqL0I21rI7yN198XA1CwdoVKS2CK7pgHUGBLsOceZFZ3/Is7Iir3/31+wbd8Is0cxxR2q6fCsjcLstIb8vi01r8bYIJxUkpVfH8NeOiO1j7ha5W/tlbbGdm+FJ6xomFKfPoVEeXOz2y9zV7c/cbYZGdHYfaeTm3kvNIZmM+KCpdJyIvJXaquJh91Sh3Qbaa+D6zQjkIupfGQKsMdyhbmPCRKcXhLVGy+sJMId39N6/mA8fhmoPF64Lo2MJVEGBKo3esdDBk71tfF6LqReqPRYgf7rqNBad9zjhQz4YMiKst0cQVlNNJVKnZ0zT6p0fVOaGPzkfIaBvjSW9iujwp3k0b4j/Exu3V4xr1cYb6Sf46YJzgfBvksuDrFyrTTNswZn2l243ivkhdsLqmGaW7T7nIluD72g5Bqu/vn+gRg/p0ieU/6c/8Y8a5ZwyzNh34GYQSSJq8f7Hu+eYQN/8qco5e/ulmLvcI1qQWf07Ag35NMaJucuON2rLaLljtobWRzXXiuOxNdy2tNJbeIj89DIB3zXTzArC+IYuYPy3NTV4rLYG50ruIyxPM6Y9QYH1PGJF2j2jZItmhf4e0Ayu8f4zctir4jizlB0rCI2Bx0pD3/IbFo0a3PlglE/nn4YsRbSyTIP75P30MjSrcJTmQl3lr1AqW9h30yIntv7pcnIHcwKpnN6oZM/wAOXymHBzVlkU+nOgwYW+NjoiehPUsjKw3Z8Yw/URowo1oGLCLuHebHGihIDIzbv58f7+kY1OtfxBbW/UMNYELtqIr1NAe/86xLk7wyfd0+YG9ZO2pPELpWJJUS4ZCBsrkq7FExvmcYCN4uOiHSE7bLEteS+IjAOEJATgJ3eX3w/plYyd+BGphI9tUZVtbveA2ZTtZeeqN7G5C3r+Au7E1YsuOvRIZFel+oUF+ZAE3pAzQglgTHu7L2miQxWqDpSp1fDEqHcKHu0L1KxEvMR6fzIDyw+z+zexo5X/fOFL0ZQQilIRh6zffwRHM9F7prHrOK3fLj6Z6+Tzc/QfQkxV6HDsPEb9qTCQ2Gqn4AuBx9UW5LZlGqQHOAuTFpnlYVckZLDm/AyVH+8JVQ0Z/TKdX0WlENZm5e5K6NZaoXhKeHg5XBfNGh2p5GbyBhCNTTZoD+IwFDH6qa3BSFz2i6bNLjtblA7kV/mqJArl6zY8ykNaogcsD6+3EJ9ZRfCnPQttsXL4gFGMc2YHgj1pj2lCquUY+DHmttoib+tH+Dsxof49z9JjKQEuTwCBVBB9J/prJIIhBYLSV0JwySLNu8NqQ6miVFPA6h5z7HkXYGR3QBG0+s1WFahytA3ty9CK+P0AK2+LmiVSfEW4VXar/RhsEAvfhCX0+oImbRloqvvj9LETfsb4/J0inNenJq4iMzILpHin6nqB2txEaj8wk3/soQAerQAB2Zbhkh9kpdcTCitxhfksAxzIpkMbgH8EIq0jCO/+ET4ofGO24xiE0F24XKSNapOkGpbya7MnAwm9c3YfyEMGwktiVwVgTgOBXx059+CVIFKYG1si1u2dxFn9E9drEr8Smm3RwI1ZyoulkU+DJp517WLaFsIb5ShhL49oI9zDgDVUNb50gnbbrnPI5QH3qvTv4PxM/NTGE/xhLkn0p+kjx/tfJrorxD9otl9RE9lYobvv484dHAGn83ZfCwRpXwrj25ZNIKHD0+WVX8wzYvEyV2ea/YVD3Hvk6uZe+fkPT0AXMOTuLXUyqPu1tvO5sWY9oVGDIebaW1smzHMjC2ezcZA+JuNQqheGN1Rw2L22gX2J8B5YATCOXbyCDQ729/hE2dONDUAYt0B5FrEKZA+oS75fUWVdUXIwHijMMvVED58IujxsAasnxCeT6PwTCEOmibfCLuPJOcZR8K0dNgjGs7gJ2zln69uX8BH1YtA23cLy8pCGzV3FT4pXEXHXgLpZDhmioWXJ6BjM9+6V3wH10eemfTuFj9BhzN3H54Ra0nbSYDnwuKLs9u4s53Beful4UvcorN6ALv7YSwpk8oj3z+JxAM5eiLg54OszefKa6WoLglA0bNUVC6DkJ6X6s0CTcb//4pEAAAAAAA';
+  window.ARTD=window.ARTD||{};ARTD['ui/u_k_ret']=D;window.FXD=window.FXD||{};FXD['ui/u_k_ret']=D;
+  try{if(typeof KW_IMG!=='undefined')KW_IMG['たおれたら手札へ']='k_ret'}catch(e){}
+  if(typeof effList==='function'){const _e=effList;effList=function(){const L=_e.apply(this,arguments);try{return L.map(x=>typeof x[0]==='string'&&x[0].includes('ui/u_k_ret.png')?[x[0].replace('ui/u_k_ret.png',D),...x.slice(1)]:x)}catch(e){return L}}}
+  addEventListener('error',e=>{const t=e.target;if(t&&t.tagName==='IMG'&&/ui\/u_k_(ret|home)\.png$/.test(t.getAttribute('src')||''))t.src=D},true)})();
+/* メモ4：牢屋は 牢屋の 絵を そのまま 上に（キャラの 形に 切らない）。キャラだけ 暗く。数字・マークより 下 */
+(function(){const st=document.createElement('style');st.textContent=`.u.jailed:not(.dig):not(.sink){filter:none!important}
+.u.jailed:not(.dig):not(.sink) .art{filter:grayscale(.6) brightness(.45)}
+.u.jailed:not(.dig):not(.sink)::after{inset:-12% -12%!important;border-radius:0!important;box-shadow:none!important;background:url(fx/new/jail_bars.webp) center/100% 100% no-repeat!important;z-index:4!important}/* 10/31 メモ14：牢屋の 絵は カギより 下 */
+.u.jdrop::after{animation:cfxJDrop .34s cubic-bezier(.3,1.45,.5,1) both!important;animation-delay:var(--jd,0s)!important}
+.u.jdrop .jlock{animation:cfxJDropL .34s cubic-bezier(.3,1.45,.5,1) both;animation-delay:var(--jd,0s)}
+@keyframes cfxJDrop{0%{transform:translateY(-120%);opacity:0}25%{opacity:1}100%{transform:none;opacity:1}}
+@keyframes cfxJDropL{0%{transform:translate(-50%,-50%) translateY(-120%);opacity:0}25%{opacity:1}100%{transform:translate(-50%,-50%);opacity:1}}
+.u.jopen .jlock{background-image:url(fx/new/lock_open.webp);width:82%;aspect-ratio:239/219;animation:cfxJOpen .3s cubic-bezier(.3,1.6,.5,1) both}
+@keyframes cfxJOpen{0%{transform:translate(-50%,-50%) scale(.6)}100%{transform:translate(-50%,-50%) scale(1)}}
+.u.jfade::after,.u.jfade .jlock{transition:opacity .3s;opacity:0!important}
+/* 10/29：カギは 牢屋の 絵の ちょうど まんなか（数字より 下） */
+.u .jlock{position:absolute;left:50%;top:50%;width:62%;/* 10/31 メモ14：カギは 1.7ばい・牢屋の 絵より 上（数字よりは 下） */aspect-ratio:155/186;transform:translate(-50%,-50%);background:url(fx/new/lock_closed.webp) center/contain no-repeat;z-index:5;pointer-events:none;filter:drop-shadow(0 2px 3px rgba(0,0,0,.6))}`;document.head.appendChild(st);
+  const _rb=renderBattle;renderBattle=function(){const r=_rb.apply(this,arguments);try{if(B&&HUMAN)for(const s of [B.me,B.foe])for(const m of s.board){if(!m._jailAt)continue;const left=420-(performance.now()-m._jailAt);if(left<=0){delete m._jailAt;continue}const e=uEl(m);if(e){/* 10/29：おちる うごきは CSS で 1回だけ（かきなおしても つづきから） */e.classList.add('jdrop');e.style.setProperty('--jd',(-(420-left)/1000).toFixed(3)+'s')}}}catch(e){}return r}})();
+/* メモ7：こうげきできる子の マーク：古い UI（@@D2@@）は つかわない。いまの UI の こうげきアイコン（u_i_attack）に */
+(function(){const src=()=>(typeof UIIMG==='function'&&UIIMG('ui/u_i_attack'))||'ui/u_i_attack.png';
+  try{if(typeof EMO2!=='undefined'){EMO2['⚔️']='ui/u_i_attack';EMO2['⚔']='ui/u_i_attack'}}catch(e){}
+  const _ue=unitEl;unitEl=function(){const el=_ue.apply(this,arguments);try{const s=el&&el.querySelector('.sword');if(s)s.innerHTML='<img src="'+src()+'" alt="">'}catch(e){}return el};
+  try{if(typeof STAT_TIP!=='undefined'){const _a=STAT_TIP.a;STAT_TIP.a=n=>{const r=_a(n);r[0]='<img src="'+src()+'" alt="">';return r}}}catch(e){}
+  const st=document.createElement('style');st.textContent='.u .sword{font-size:0!important;left:-14px;top:-16px;z-index:8!important}.u .sword img{width:30px;height:30px;display:block}'/* 10/31：こうげきマークは かくれ（マーク・うすい絵）より 上 */;document.head.appendChild(st)})();
+/* メモ8：バフ（OK牧場ほか）：のぼっていく 光の柱は やめる。光は CFX.buff（足もとに 置いた 光＋のぼる キラキラ）に まとめる */
+(function(){if(typeof BC_FX==='undefined')return;
+  const soft=(name,txt)=>{const f=BC_FX[name];if(!f)return;BC_FX[name]=async function(sd,m,el){if(!cfxOn())return f.apply(this,arguments);try{[523,659,784,1047].forEach((q,i)=>tone(q,.25,{type:'square',vol:.03,at:i*.07}))}catch(e){}if(txt&&el)try{onomaL(el,txt,'#ffd34a')}catch(e){}await sleep(500)}};
+  soft('buffall','ピカーン！');
+  const fb=BC_FX.buff;if(fb)BC_FX.buff=async function(sd,m,el){if(!cfxOn())return fb.apply(this,arguments);const u=pick(ownUnits(sd).filter(x=>x!==el))||el;try{tone(784,.2,{vol:.05});tone(1175,.3,{vol:.05,at:.1});onomaL(u,'ムキッ！','#ffd34a')}catch(e){}await sleep(500)}})();
+/* 10/31 追加：バフの 文字（攻撃+1）が 2人いじょう 同時だと となりどうしで かさなる → 1つに まとめて まんなかの 子の 上に「みんな こうげき+1」。1人なら その子の 上に「こうげき+1」 */
+(function(){if(typeof floatAt!=='function')return;const _fa=floatAt;let Q=null;
+  /* 文字が となりの カードの 下に もぐらないよう、文字を 出す 子を しばらく 前に */
+  const top=el=>{try{el.classList.add('ftop');const sp=(typeof SPEED==='number'&&SPEED>0)?SPEED:1;setTimeout(()=>el.classList.remove('ftop'),1800*sp*((window.CK&&CK.rate)?1/CK.rate:1))}catch(e){}};
+  {const st=document.createElement('style');st.textContent='.u.ftop{z-index:30!important}';document.head.appendChild(st)}
+  floatAt=function(el,txt,cls){const s=String(txt);if(!HUMAN||!el||!window.CFX||!cfxOn()||!/^攻撃\+\d+$/.test(s))return _fa.apply(this,arguments);
+    if(!Q){Q=[];setTimeout(()=>{const q=Q;Q=null;try{
+      /* 10/31：文字は ひらがなの「こうげき+1」（撃は 小学校で ならわない 漢字）。キャンバスで その カードの 上に */
+      const hira=x=>x.replace(/^攻撃/,'こうげき');
+      const same=q.every(x=>x.s===q[0].s);if(q.length===1||!same){q.forEach(x=>{try{CFX.buff(x.el);CFX.buffLabel(x.el,hira(x.s))}catch(e){}});return}
+      q.forEach(x=>{try{CFX.buff(x.el)}catch(e){}});const els=q.map(x=>x.el).filter(e=>e.isConnected);const mid=els.sort((a,b)=>a.getBoundingClientRect().left-b.getBoundingClientRect().left)[Math.floor((els.length-1)/2)];
+      if(mid)CFX.buffLabel(mid,'みんな '+hira(q[0].s))}catch(e){}},0)}
+    Q.push({el,s,cls})}})();
+
+/* ===== 10/31 Round2：ターンの 看板・コンボの おしらせは、演出が おわってから（さいだい 3びょう まつ）。演出が 看板の 下に かくれない ===== */
+(function(){if(!window.CFX||!CFX.idle)return;
+  if(typeof turnBanner==='function'){const _tb=turnBanner;turnBanner=async function(){try{if(cfxOn())await CFX.idle(3000)}catch(e){}return _tb.apply(this,arguments)}}
+  if(typeof comboFound==='function'){const _cf=comboFound;comboFound=function(c){if(!cfxOn())return _cf.apply(this,arguments);const a=arguments,me=this;CFX.idle(3000).then(()=>CFX.afterBanner(()=>_cf.apply(me,a)))}}
+})();
+
+/* ===== 10/31 まんなかの おしらせ（saypop）は 手札の 上（画面の 66%）へ。盤面の 演出が かくれない（CFX=1 だけ） =====
+   カードの「あらわれた！」（.pshow）が 出ている あいだは say が まつ（f40）ので かさならない */
+(function(){const st=document.createElement('style');st.textContent='.saypop{top:66%!important;z-index:69!important}';document.head.appendChild(st)})();
+
+/* ===== 10/29 指示：牢屋の カギ・ふうせん（ずっと ふわふわ）・見参で ぶしゅっ を 出さない（CFX=1 だけ） ===== */
+(function(){if(!window.CFX)return;
+  const _ue=unitEl;unitEl=function(sd,m){const el=_ue.apply(this,arguments);try{if(el&&m){
+    if(m.jailed&&m.jailKind==='jail')el.insertAdjacentHTML('beforeend','<i class="jlock"></i>');
+    if(m._balloon&&m.kw&&m.kw.has('stealth')){el.classList.add('cfxfloat');el.insertAdjacentHTML('beforeend','<i class="cfxbal"></i>')}else if(m._balloon&&!(m.kw&&m.kw.has('stealth')))delete m._balloon}}catch(e){}return el};
+  const bal=(window.FXD&&FXD['fx/09_27.webp'])||'fx/09_27.webp';
+  const st=document.createElement('style');st.textContent=`.u.cfxfloat:not(.cfxon){animation:cfxFloat 2.6s ease-in-out infinite!important}
+@keyframes cfxFloat{0%,100%{transform:translateY(-4px)}50%{transform:translateY(-12px)}}
+.u .cfxbal{position:absolute;left:50%;bottom:calc(100% - 6px);width:40px;height:48px;margin-left:-20px;background:url("${bal}") center/contain no-repeat;pointer-events:none;z-index:6;transform-origin:50% 100%;animation:cfxBal 3s ease-in-out infinite}
+@keyframes cfxBal{0%,100%{transform:rotate(-6deg)}50%{transform:rotate(6deg)}}`;document.head.appendChild(st);
+  if(typeof NEWBC!=='undefined'&&NEWBC.balloon){const _b=NEWBC.balloon;NEWBC.balloon=async function(sd,m){const before=new Set(sd.board.filter(x=>x.kw&&x.kw.has('stealth')));const r=await _b.apply(this,arguments);try{sd.board.forEach(x=>{if(x.kw&&x.kw.has('stealth')&&!before.has(x))x._balloon=1})}catch(e){}return r}}
+  /* 見参（カードを 出した とき）の ぶしゅっ（ノイズ）を やめて、音階だけに */
+  if(typeof SFX!=='undefined'&&SFX.summon){SFX.summon=function(){try{tone(280,.3,{type:'sine',vol:.07,slide:950});[1047,1319,1568].forEach((f,i)=>tone(f,.2,{vol:.05,type:'sine',at:.2+i*.06}))}catch(e){}}}
+})();
+
+/* ===== 10/31 かしまさんの ずかんメモ（ゲームへの 反映） ===== */
+/* G4：体力が へっている 数字は すこし オレンジ。バフで 上がっている 数字（攻撃・体力）は もとの 緑（10/31 ユーザー変更：青→緑） */
+(function(){if(typeof mkMinion==='function'){const _mk=mkMinion;mkMinion=function(){const m=_mk.apply(this,arguments);try{if(m&&m._hp0==null)m._hp0=m.max}catch(e){}return m}}
+  const st=document.createElement('style');st.textContent=`.u .stat.a.up,.u .stat.h.up,.card .stat.up{color:#7dff9a!important}
+.u .stat.h.hurt{color:#ffad5c!important}`;document.head.appendChild(st);
+  const _ue=unitEl;unitEl=function(sd,m){const el=_ue.apply(this,arguments);try{if(el&&m){const h=el.querySelector('.stat.h');if(h&&!h.classList.contains('hurt')&&m._hp0!=null&&m.hp>m._hp0)h.classList.add('up')}}catch(e){}return el}})();
+/* G5：やられたら 1匹 出す子は「自分の いた 位置」に そのまま 出す（ガーガーの アヒルも） */
+(function(){if(typeof cleanup!=='function'||typeof summon!=='function')return;
+  const _cu=cleanup;cleanup=async function(){if(!B)return _cu.apply(this,arguments);const outer=!B._cuSnap;if(outer){B._cuSnap=new Map();for(const sd of [B.me,B.foe])B._cuSnap.set(sd,[...sd.board])}
+    try{return await _cu.apply(this,arguments)}finally{if(outer&&B)B._cuSnap=null}};
+  const _sm=summon;summon=function(sd,id,lv,plus,card){const m=_sm.apply(this,arguments);try{const sn=B&&B._cuSnap&&B._cuSnap.get(sd);if(m&&sn&&!card&&sd.board[sd.board.length-1]===m){const gone=sn.filter(x=>x.hp<=0&&!sd.board.includes(x));const dead=gone[gone.length-1];
+      if(dead){sd.board.pop();let at;if(dead._tokLast&&sd.board.includes(dead._tokLast))at=sd.board.indexOf(dead._tokLast)+1;else{const i=sn.indexOf(dead);let left=null;for(let j=i-1;j>=0;j--)if(sd.board.includes(sn[j])){left=sn[j];break}at=left?sd.board.indexOf(left)+1:0}sd.board.splice(at,0,m);dead._tokLast=m;if(HUMAN)m._drSpawn=1}}}catch(e){}return m}})();
+/* G2：やられた → 出てくる の あいだに 一拍 */
+(function(){if(typeof drMark!=='function')return;const _d=drMark;drMark=async function(m){const r=await _d.apply(this,arguments);try{if(HUMAN&&C[m.id]&&C[m.id].dr==='summon')await new Promise(res=>setTimeout(res,300*((typeof SPEED==='number'&&SPEED>0)?SPEED:1)))}catch(e){}return r}})();
+/* メモ2：いるあいだの 力を もらっている 子を 長おしすると、だれの どんな 力か 1〜2行 出す（もらっている あいだだけ） */
+(function(){if(typeof sheetCard!=='function')return;let lastU=null;
+  document.addEventListener('pointerdown',e=>{const u=e.target.closest&&e.target.closest('.u[data-u]');if(u)lastU={el:u,t:performance.now()}},true);
+  const short=n=>{n=String(n||'');const sp=n.split(/[\s　]+/);if(sp.length>1)return sp[sp.length-1];const k=n.lastIndexOf('の');return k>0&&k<n.length-1?n.slice(k+1):n};
+  const kj=s=>{try{return typeof kjFix==='function'?kjFix(s):s}catch(e){return s}};
+  const effOf=(b)=>{try{const x=effList(b.id,b.lv).find(q=>q[1]==='いるあいだ');if(!x)return null;let t=String(x[2]).replace(/<[^>]+>/g,'').trim();const m=t.match(/^[^\s]{1,14}?[！!♪〜…]+\s+(.+)$/);if(m)t=m[1];return {t:t.replace(/攻撃/g,'こうげき'),ic:x[0],col:x[3]}}catch(e){return null}};
+  window.auraInfo=function(sd,m){try{if(!sd||!m||typeof cfxGives!=='function')return [];return sd.board.filter(b=>cfxGives(sd,b,m)).map(b=>Object.assign({n:short(C[b.id].n)},effOf(b)||{})).filter(x=>x.t)}catch(e){return []}};
+  const _sc=sheetCard;sheetCard=function(id,lv){const r=_sc.apply(this,arguments);try{if(B&&lastU&&performance.now()-lastU.t<2500&&lastU.el.dataset.cid===id){const uid=lastU.el.dataset.u;let sd=null,m=null;for(const s of [B.me,B.foe]){const x=s.board.find(q=>String(q.uid)===String(uid));if(x){sd=s;m=x;break}}
+      const L=m?auraInfo(sd,m):[];const box=document.querySelector('#sheet .kwlist');if(L.length&&box){const rows=L.slice(0,2).map(x=>`<div class="aurainfo"><i style="background:${x.col||'#e8a23a'}">${x.ic||'★'}</i><span><b>${kj(x.n+'の いるあいだ')}</b>：${kj(x.t)}</span></div>`).join('')+(L.length>2?`<div class="aurainfo small">${kj('ほかにも '+(L.length-2)+'人から 力を もらっている')}</div>`:'');box.insertAdjacentHTML('beforeend',rows)}}}catch(e){}return r};
+  const st=document.createElement('style');st.textContent='.kwlist .aurainfo{background:rgba(255,215,90,.16);border-radius:8px;padding:2px 4px}.kwlist .aurainfo.small{font-size:12px;opacity:.85}';document.head.appendChild(st)})();
+
+/* 10/31 ストレステスト：DOM の 擬音（onomaX・onomaL：ヒック！・ムキッ！ など）も 画面の 中・上の UI の 下・親分の 顔／天気／コイン手札の わく／目次ボタンを よける */
+(function(){if(typeof onomaX!=='function')return;const _o=onomaX;
+  const obs=()=>[...document.querySelectorAll('#cktop,.fport,.fleft,.fside,#coins,.u .stat')].map(e=>e.getBoundingClientRect()).filter(r=>r.width);
+  onomaX=function(el,txt,col){if(!HUMAN||!el)return;let r;try{r=el.getBoundingClientRect()}catch(e){return _o.apply(this,arguments)}const x0=r.left+r.width/2,y0=r.top+r.height/2-24;
+    const w=String(txt).length*22+16,h=34;const L=obs();const top=(()=>{const c=document.getElementById('cktop');const q=c&&c.getBoundingClientRect();return q&&q.width?q.bottom+4:8})();
+    const ok=(x,y)=>x-w/2>=4&&x+w/2<=innerWidth-4&&y-h/2>=top&&!L.some(q=>x+w/2>q.left&&x-w/2<q.right&&y+h/2>q.top&&y-h/2<q.bottom);
+    let best=null;for(const dy of [0,24,-24,48,72,96])for(const dx of [0,-40,40,-80,80,-120,120]){const x=x0+dx,y=y0+dy;if(ok(x,y)){best=[x,y];break}}if(!best)for(const dy of [0,24,48,72,96]){const y=y0+dy;if(y-h/2>=top){best=[x0,y];break}}
+    if(!best)best=[x0,Math.max(y0,top+h/2)];best[0]=Math.max(w/2+4,Math.min(innerWidth-w/2-4,best[0]));
+    const f={getBoundingClientRect:()=>({left:best[0]-1,top:best[1]+24-1,width:2,height:2,right:best[0]+1,bottom:best[1]+24+1})};
+    return _o.call(this,f,txt,col)}})();
+/* 10/31：ui/u_k_*.png の うち 絵の まとめ（art chunk）に ある ものは ファイルを 直接 読まない（404 を 出さない）。まだ 読めていない ときは 透明の 絵を 置いて、読めたら さしかえる */
+(function(){if(typeof effList!=='function'||typeof ART_CH==='undefined')return;const BLANK='data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
+  const fix=h=>typeof h!=='string'?h:h.replace(/src="(ui\/u_[ki]_\w+)\.png"/g,(m,k)=>{if(window.ARTD&&ARTD[k])return 'src="'+ARTD[k]+'"';if(ART_CH[k]!==undefined){try{artChunk(ART_CH[k]).then(swap)}catch(e){}return 'src="'+BLANK+'" data-ak="'+k+'"'}return m});
+  const swap=()=>{try{document.querySelectorAll('img[data-ak]').forEach(i=>{const a=window.ARTD&&ARTD[i.dataset.ak];if(a){i.src=a;i.removeAttribute('data-ak')}})}catch(e){}};
+  const _e=effList;effList=function(){const L=_e.apply(this,arguments);try{return L.map(x=>typeof x[0]==='string'&&x[0].includes('src="ui/u_')?[fix(x[0]),...x.slice(1)]:x)}catch(e){return L}};
+  if(typeof pillsFor==='function'){const _p=pillsFor;pillsFor=function(){return fix(_p.apply(this,arguments))}}
+  setInterval(()=>{if(document.querySelector('img[data-ak]'))swap()},700)})();
+
+
+/* ===== 10/31 技ごとの SE（CFX=1 の ビルドだけ。本番には 入らない） =====
+   ・わりあては se_assign.json（scratchpad/se2tool/assign_src.py から つくる）→ se2/se2.js（SE2MAP と mp3）
+   ・1つの 技に 1つの 音。当たった しゅんかん（hit）か 技の はじめ（start）に 鳴らす
+   ・その技の あいだは 前の 合成音（tone/noise）を だまらせて、音が かさならないように する
+   ・se2/se2.js が ない ところ（ステージングなど）では なにもしない（いままでの 音のまま） */
+(function(){if(!window.CFX)return;
+const SE2=window.SE2={map:{},data:null,buf:{},ovBuf:{},hn:0,hu:0,kwN:0,ready:false,last:'',lastAt:0,count:{},onplay:null};
+const now=()=>performance.now();
+const human=()=>typeof HUMAN!=='undefined'&&HUMAN;
+const muted=()=>typeof MUTED!=='undefined'&&MUTED;
+SE2.has=k=>!!(k&&(SE2.ovBuf[k]||(SE2.map[k]&&SE2.map[k].cues&&SE2.map[k].cues.length)));
+SE2.hushed=()=>SE2.hn>0||now()<SE2.hu;
+/* 読みこみ（ファイル1つ） */
+(function(){const s=document.createElement('script');s.src='lab/game/se2/se2.js';s.onload=()=>{SE2.map=window.SE2MAP||{};SE2.data=window.SE2DATA||{};SE2.ready=true};s.onerror=()=>{};document.head.appendChild(s)})();
+let decoding=false;
+function b64buf(u){const i=u.indexOf(',');const bin=atob(u.slice(i+1));const n=bin.length,a=new Uint8Array(n);for(let j=0;j<n;j++)a[j]=bin.charCodeAt(j);return a.buffer}
+function decodeAll(){if(decoding||!SE2.data)return;const a=typeof ac==='function'&&ac();if(!a)return;decoding=true;
+  Object.keys(SE2.data).forEach(f=>{try{const p=a.decodeAudioData(b64buf(SE2.data[f]),b=>{SE2.buf[f]=b},()=>{});if(p&&p.then)p.then(b=>{SE2.buf[f]=b},()=>{})}catch(e){}})}
+SE2.decodeAll=decodeAll;
+['pointerdown','touchend','keydown'].forEach(ev=>document.addEventListener(ev,()=>{if(SE2.ready)decodeAll()},{passive:true}));
+/* 合成音（ライブラリに ない もの） */
+const _tone=tone,_noise=noise;
+const SYN={
+  peen(at){_tone(2637,.38,{type:'sine',vol:.09,at});_tone(5274,.22,{type:'sine',vol:.025,at})},
+  /* 10/29 指示の 合成音（ライブラリに ない もの） */
+  gun(at){const a=ac();if(!a)return;_noise(.12,{vol:.5,freq:2600,at});_noise(.35,{vol:.35,freq:500,at:at+.01});_tone(140,.18,{type:'sine',vol:.18,slide:50,at})},
+  bird(at){for(let i=0;i<5;i++){_tone(2600+(i%2)*500,.07,{type:'sine',vol:.06,slide:3800-(i%2)*600,at:at+i*.09})}_tone(3100,.12,{type:'sine',vol:.05,slide:2200,at:at+.55})},
+  jingle(at){/* 鈴（シャンシャン）＋ベルの メロディ */for(let k=0;k<8;k++){const t=at+k*.13;_noise(.06,{vol:.08,freq:7000,type:'highpass',at:t});_tone(4200+(k%3)*350,.08,{type:'sine',vol:.025,at:t})}
+    [1568,1760,2093,2349,2637].forEach((f,i)=>{_tone(f,.45,{type:'sine',vol:.05,at:at+.2+i*.17});_tone(f*2,.25,{type:'sine',vol:.015,at:at+.2+i*.17})})},
+  whistle(at,dur=.7){_tone(2400,dur,{type:'sine',vol:.07,slide:500,at})},
+  inflate(at,dur=1.2){_tone(180,dur,{type:'triangle',vol:.06,slide:720,at});_tone(360,dur,{type:'sine',vol:.03,slide:1440,at});_tone(900,.08,{type:'sine',vol:.05,slide:1400,at:at+dur})},
+  rumble(at,dur=1.4){const a=ac();if(!a)return;for(let i=0;i<6;i++)_noise(.4,{vol:.35,freq:160,at:at+i*dur/6});_tone(55,dur,{type:'sawtooth',vol:.05,slide:40,at})},
+  /* 10/31 ずかんメモの 合成音（ライブラリに ない もの。あとで 本物に さしかえ） */
+  ghost(at){_tone(300,.8,{vol:.06,slide:180,type:'sine',at});_tone(450,.8,{vol:.035,slide:260,type:'sine',at:at+.1})},
+  flap(at,dur=.45){for(let i=0;i<3;i++){_noise(.09,{vol:.4,freq:520,at:at+i*.14});_noise(.05,{vol:.12,freq:1800,at:at+i*.14+.02})}},
+  whoosh(at,dur=.35,v=1){const a=ac();if(!a)return;const t=a.currentTime+at,n=Math.floor(a.sampleRate*dur),bf=a.createBuffer(1,n,a.sampleRate),d=bf.getChannelData(0);for(let i=0;i<n;i++)d[i]=Math.random()*2-1;const s=a.createBufferSource(),f=a.createBiquadFilter(),g=a.createGain();s.buffer=bf;f.type='bandpass';f.Q.value=1.4;f.frequency.setValueAtTime(350,t);f.frequency.exponentialRampToValueAtTime(2600,t+dur*.6);f.frequency.exponentialRampToValueAtTime(900,t+dur);
+    g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.5*v,t+dur*.45);g.gain.linearRampToValueAtTime(0,t+dur);s.connect(f).connect(g).connect((typeof sfxOut==='function'&&sfxOut())||a.destination);s.start(t);s.stop(t+dur+.02)},
+  strings(at,dur=.6,v=1){const a=ac();if(!a)return;const t=a.currentTime+at,out=(typeof sfxOut==='function'&&sfxOut())||a.destination,lp=a.createBiquadFilter(),g=a.createGain();lp.type='lowpass';lp.frequency.value=2600;lp.connect(g).connect(out);g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.05*v,t+.08);g.gain.setValueAtTime(.05*v,t+dur-.15);g.gain.linearRampToValueAtTime(0,t+dur);
+    [[392,0],[392*1.003,0],[587,-.4]].forEach(([f,dt])=>{const o=a.createOscillator(),l=a.createOscillator(),lg=a.createGain();o.type='sawtooth';o.frequency.setValueAtTime(f*.94,t);o.frequency.exponentialRampToValueAtTime(f,t+.12);o.frequency.setValueAtTime(f,t+dur*.55);o.frequency.exponentialRampToValueAtTime(f*1.335,t+dur);o.detune.value=dt*10;l.frequency.value=6;lg.gain.value=f*.012;l.connect(lg).connect(o.frequency);o.connect(lp);o.start(t);l.start(t);o.stop(t+dur+.05);l.stop(t+dur+.05)})},
+  choir(at,dur=1.9,v=1){const a=ac();if(!a)return;const out=(typeof sfxOut==='function'&&sfxOut())||a.destination;[523,659,784].forEach((f,i)=>{const t=a.currentTime+at+i*.3,d=dur-i*.3;const o=a.createOscillator(),l=a.createOscillator(),lg=a.createGain(),g=a.createGain(),f1=a.createBiquadFilter(),f2=a.createBiquadFilter();o.type='sawtooth';o.frequency.value=f;l.frequency.value=5.2;lg.gain.value=f*.01;l.connect(lg).connect(o.frequency);
+    f1.type='bandpass';f1.frequency.value=800;f1.Q.value=5;f2.type='bandpass';f2.frequency.value=1200;f2.Q.value=6;o.connect(f1).connect(g);o.connect(f2).connect(g);g.connect(out);g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.16*v,t+.12);g.gain.setValueAtTime(.16*v,t+d-.25);g.gain.linearRampToValueAtTime(0,t+d);o.start(t);l.start(t);o.stop(t+d+.05);l.stop(t+d+.05)})},
+  arabian(at,dur=1.3,v=1){const a=ac();if(!a)return;const out=(typeof sfxOut==='function'&&sfxOut())||a.destination;const N=[587,622,740,784,880,784,740,622,587,622,740,622];const st=dur/N.length;N.forEach((f,i)=>{const t=a.currentTime+at+i*st,o=a.createOscillator(),g=a.createGain(),bp=a.createBiquadFilter();o.type='square';o.frequency.setValueAtTime(f*(i%3===0?.97:1),t);o.frequency.exponentialRampToValueAtTime(f,t+.04);bp.type='bandpass';bp.frequency.value=1500;bp.Q.value=2;g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.06*v,t+.015);g.gain.exponentialRampToValueAtTime(.002,t+st*1.1);o.connect(bp).connect(g).connect(out);o.start(t);o.stop(t+st*1.2)});_tone(147,dur,{type:'sawtooth',vol:.025,at})},
+  buzz(at,dur=1.4,v=1){const a=ac();if(!a)return;const t=a.currentTime+at,o=a.createOscillator(),l=a.createOscillator(),lg=a.createGain(),g=a.createGain(),f=a.createBiquadFilter();
+    o.type='sawtooth';o.frequency.value=185;l.frequency.value=26;lg.gain.value=22;l.connect(lg).connect(o.frequency);f.type='bandpass';f.frequency.value=900;f.Q.value=1.2;
+    g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.05*v,t+.08);g.gain.setValueAtTime(.05*v,t+dur-.25);g.gain.linearRampToValueAtTime(0,t+dur);
+    o.connect(f).connect(g).connect((typeof sfxOut==='function'&&sfxOut())||a.destination);o.start(t);l.start(t);o.stop(t+dur+.05);l.stop(t+dur+.05)}};
+/* 10/31 G1：音の おわりは プッツン切らず 短く フェードアウト（ファイルにも 0.12秒 フェード済み。ここでも 念のため） */
+function src(buf,at,v){const a=ac();if(!a||!buf)return;const s=a.createBufferSource(),g=a.createGain();s.buffer=buf;const t=a.currentTime+Math.max(0,at),L=buf.duration,fd=Math.min(.12,L*.3);g.gain.setValueAtTime(.9*v,t);g.gain.setValueAtTime(.9*v,t+Math.max(0,L-fd));g.gain.linearRampToValueAtTime(0,t+L);s.connect(g).connect((typeof sfxOut==='function'&&sfxOut())||a.destination);s.start(t);s.stop(t+L+.02)}
+/* when：'start' か 'hit'。ためしの 差しかえ（SEメニュー）が あれば そっちを 1回 */
+const lastPlay={};
+SE2.play=function(k,when,force){if(!SE2.has(k))return false;/* 10/31：同じ 音が 150ms いないに かさなったら 1回だけ（みんな こうげき+1 など）。force＝1まいごとに 鳴らす もの */{const key=k+'|'+when,t=now();if(!force&&lastPlay[key]&&t-lastPlay[key]<150)return true;lastPlay[key]=t}const e=SE2.map[k]||{cues:[]};const ov=SE2.ovBuf[k];
+  /* 10/31：base＝ほかの 技の 音に 足す（ぜんたい＋炎 など） */if(e.base&&!ov&&SE2.map[e.base])try{playCues(SE2.map[e.base],when)}catch(x){}
+  const hasHit=e.cues.some(c=>c.when==='hit');
+  if(ov){if((hasHit?'hit':'start')!==when)return true}
+  else if(!e.cues.some(c=>c.when===when))return true;
+  SE2.last=k;SE2.lastAt=Date.now();SE2.count[k]=(SE2.count[k]||0)+1;try{SE2.onplay&&SE2.onplay(k)}catch(x){}
+  if(muted()||!human())return true;
+  const sp=(typeof SPEED==='number'&&SPEED>0)?SPEED:1;
+  try{if(ov){src(ov.buf,0,ov.v||1);return true}
+    playCues(e,when)}catch(x){}
+  return true};
+function playCues(e,when){if(muted()||!human())return;const sp=(typeof SPEED==='number'&&SPEED>0)?SPEED:1;if(!Object.keys(SE2.buf).length)decodeAll();
+    e.cues.filter(c=>c.when===when).forEach(c=>{const at=(c.at||0)*sp;
+      if(c.f.startsWith('synth:')){const n=c.f.slice(6);SYN[n]&&SYN[n](at,c.dur,c.v);return}
+      src(SE2.buf[c.f],at,c.v||1)})}
+/* 試聴（SEメニューから。ぜんぶの cue を じゅんばんに） */
+SE2.preview=function(k){const e=SE2.map[k];if(!e)return;decodeAll();const go=()=>{const a=ac();if(a&&a.state!=='running'){try{a.resume()}catch(x){}}
+  const ov=SE2.ovBuf[k];if(ov){src(ov.buf,0,ov.v||1);return}if(e.base&&SE2.map[e.base])SE2.map[e.base].cues.forEach(c=>{if(c.f.startsWith('synth:')){const n=c.f.slice(6);SYN[n]&&SYN[n](c.at||0,c.dur,c.v);return}src(SE2.buf[c.f],c.at||0,c.v||1)});let hitAt=e.cues.some(c=>c.when==='start'&&c.when!=='hit')&&e.cues.some(c=>c.when==='hit')?.35:0;
+  e.cues.forEach(c=>{const at=(c.at||0)+(c.when==='hit'?hitAt:0);if(c.f.startsWith('synth:')){const n=c.f.slice(6);SYN[n]&&SYN[n](at,c.dur,c.v);return}src(SE2.buf[c.f],at,c.v||1)})};
+  if(Object.keys(SE2.buf).length)go();else setTimeout(go,400)};
+/* 合成音を だまらせる（その技の あいだ） */
+{const _t=tone;tone=function(){if(SE2.hushed())return;return _t.apply(this,arguments)}}
+{const _n=noise;noise=function(o){if(SE2.hushed()&&!(arguments[1]&&arguments[1].ctx))return;return _n.apply(this,arguments)}}
+/* CFX の 技に つなぐ */
+function hook(name,keyOf,tail=500){const f=CFX[name];if(typeof f!=='function')return;
+  CFX[name]=function(...a){let k=null;try{k=keyOf?keyOf.apply(null,a):name}catch(e){}
+    if(!human()||!SE2.has(k))return f.apply(this,a);
+    SE2.play(k,'start');SE2.hn++;let r,ended=false;const done=()=>{if(ended)return;ended=true;SE2.hn--;SE2.hu=Math.max(SE2.hu,now()+tail);SE2.play(k,'hit')};
+    try{r=f.apply(this,a)}catch(e){done();throw e}
+    if(r&&typeof r.then==='function')return r.then(v=>{done();return v},e=>{done();throw e});
+    done();return r}}
+hook('attack',m=>{const k=CFX.kindOf(m);if(k==='tackle'){const a=m.atk||0;/* 10/31 G7：1〜3・4〜7・8いじょう */return a>=8?'atk_tackle_l':a>=4?'atk_tackle_m':'atk_tackle'}return 'atk_'+k},250);hook('jail',null,600);
+hook('shotTo',(a,b,k)=>'atk_'+(k||'magic'),250);
+hook('kenzan',null,300);hook('ko',null,500);hook('revive',null,300);
+hook('summonPop',(el,zo)=>{/* 10/31 G5：やられた 子の あとに 出てくる 子は ポヨン！ */try{const id=el&&el.dataset&&el.dataset.u;const m=id&&typeof B!=='undefined'&&B&&[...B.me.board,...B.foe.board].find(x=>String(x.uid)===String(id));if(m&&m._drSpawn){delete m._drSpawn;return 'drSpawn'}}catch(e){}return zo?'zombiePop':'summon'},700);hook('pillar',null,900);hook('drFx',()=>'lastWords',600);
+hook('heal',null,700);hook('buff',null,700);hook('down',null,600);hook('poison',null,800);hook('auraPulse',()=>'aura',800);
+hook('kwFlair',(el,k)=>'kw_'+k,700);hook('shieldBreak',null,600);hook('deadly',null,400);hook('freezeU',()=>'freeze',700);
+hook('thorn',null,400);hook('burn',null,1100);hook('bottleTo',()=>'drunk',500);hook('unlock',null,800);
+hook('coinFly',()=>'coinGet',900);hook('coin',()=>'coinToss',600);hook('hanage',null,3000);hook('unko',null,1200);
+hook('wish',null,800);hook('kickOut',()=>'pony',600);hook('steal',()=>'coyote',500);hook('balloon',()=>'betty',1800);
+hook('trade',null,500);hook('roulette',null,500);hook('glitch',null,1300);hook('chorus',null,300);
+hook('digIn',(el,kind)=>kind==='dig'?'whaleDig':'swampSink',1600);hook('emerge',(el,kind)=>kind==='dig'?'whaleUp':'swampUp',500);
+hook('blow',null,500);hook('aoe',(els,style)=>style==='fire'?'aoe_fire':style==='water'?'aoe_water':'aoe',1200);
+/* キーワードの おしらせ（kwFx）は 合成音を 出すので、CFX の かざり（kwFlair）の 音が ある ものは だまらせる */
+if(typeof kwFx==='function'){const _k=kwFx;kwFx=async function(){SE2.kwN++;try{return await _k.apply(this,arguments)}finally{SE2.kwN--}}}
+{const KK={tauntUp:'kw_taunt',zap:'kw_quick',sneaky:'kw_stealth',twiceUp:'kw_twice',reviveUp:'kw_revive',shieldUp:'kw_shield'};
+  for(const s in KK){const f=SFX[s];if(typeof f!=='function')continue;SFX[s]=function(){if(SE2.kwN>0&&human()&&SE2.has(KK[s]))return;return f.apply(this,arguments)}}}
+/* 10/31 メモ8・11・12：カードを ひく・手配書を はる・たおれたら 手札へ（ひゅ〜っ） */
+if(typeof SFX!=='undefined'&&SFX.draw){const _d=SFX.draw;SFX.draw=function(){if(human()&&SE2.play('draw','start'))return;return _d.apply(this,arguments)}}
+if(typeof wantedFx==='function'){const _w=wantedFx;wantedFx=async function(){if(!human()||!SE2.has('wanted'))return _w.apply(this,arguments);SE2.play('wanted','start');SE2.hn++;try{return await _w.apply(this,arguments)}finally{SE2.hn--;SE2.hu=Math.max(SE2.hu,now()+300)}}}
+if(typeof koFx==='function'){const _k=koFx;koFx=async function(m){const r=await _k.apply(this,arguments);try{if(human()&&m&&m.kw&&m.kw.has('home'))SE2.play('ret','start')}catch(e){}return r}}
+/* 早撃ち（はやうちポーク）：カチ・カチの あと さいごだけ 高い ピーン */
+try{if(typeof SPECIAL!=='undefined'&&SPECIAL.pork){const _p=SPECIAL.pork;SPECIAL.pork=async function(){if(human())SE2.play('quickdraw','start');return _p.apply(this,arguments)}}}catch(e){}
+/* 10/31：戦いの はじまりに 敵が 出る音。前は 合成の ノイズ（SFX.whoosh）で「パン！」に 聞こえた → 決闘の はじまりの 音に */
+if(typeof foeIntro==='function'){const _fi=foeIntro;foeIntro=async function(){if(!human()||!SE2.has('foeIntro'))return _fi.apply(this,arguments);const w=SFX.whoosh;let once=false;SFX.whoosh=function(){if(!once){once=true;SE2.play('foeIntro','start');return}return w&&w.apply(this,arguments)};try{return await _fi.apply(this,arguments)}finally{SFX.whoosh=w}}}
+})();
+
 
 
