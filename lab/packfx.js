@@ -229,8 +229,8 @@ function run(host,o){return new Promise(async resolve=>{
     let tgt=C.find(c=>!c.done&&c.state==='slot'&&Math.abs(p.x-c.x)<CB/2&&Math.abs(p.y-c.y)<CH/2);if(!tgt)tgt=C.find(c=>!c.done&&c.state==='slot');if(tgt)reveal(tgt)}
   function reveal(c){busy=true;c.done=true;const r=rr(c),now=performance.now();c.f0=now;
     if(r==='N'){c.state='flipN';S.flip()}
-    else if(r==='R'){c.state='flipR';S.tell('R')}
-    else{c.state='zoom';c.hold=0;c.hurry=0;c.xa=c.x;c.ya=c.y;S.tell('L');later(920,()=>S.pre(c.cd.awk));C.forEach(d=>{if(d!==c)d.dimT=1});pillars.push({card:c,col:r,t0:now+250})}}
+    else if(r==='R'){c.state='flipR';S.tell('R');S.rare()/* 11/1：おした しゅんかんに */}
+    else{c.state='zoom';c.hold=0;c.hurry=0;c.xa=c.x;c.ya=c.y;S.tell('L');S.legend(c.cd.awk)/* 11/1：おした しゅんかんに */;C.forEach(d=>{if(d!==c)d.dimT=1});pillars.push({card:c,col:r,t0:now+250})}}
   function revealDone(c){c.state='slot';busy=false;st.nextAuto=performance.now()+1400;if(C.every(d=>d.done&&d.state==='slot'))later(450,()=>{st.ph='end';st.endT=performance.now()})}
   let fin=false;function finish(){if(fin)return;fin=true;S.stop();R.style.opacity=0;timers.forEach(clearTimeout);setTimeout(()=>{cancelAnimationFrame(raf);resolve();if(!o.keep)R.remove()},260)}
   PFX._cur={finish,st,C};
@@ -247,13 +247,13 @@ function run(host,o){return new Promise(async resolve=>{
       if(c.state==='rise'){const k=E.cl(e/650);c.y=lerp(c.ya,c.yb,E.io(k))}
       else if(c.state==='fan'){const k=E.cl(e/560),q=E.back(k),sl=slots[c.i];c.x=lerp(c.xa,sl.x,E.io(k));c.y=lerp(c.ya,sl.y,E.io(k))-Math.sin(k*Math.PI)*30;c.s=lerp(c.sa,1,q);c.rz=lerp(c.rza,0,E.io(k));if(k>=1){c.state='slot';c.x=sl.x;c.y=sl.y;c.s=1;c.z=10+c.i}}
       else if(c.state==='flipN'){const k=E.cl(e/400);c.ry=180*E.io(k);c.s=1+.1*Math.sin(k*Math.PI);if(k>=1&&!c.fx){c.fx=1;sparkAt(c.x,c.y-CH*.2,6,'#fff6d8',SPK);S.sparkle();later(320,()=>revealDone(c))}}
-      else if(c.state==='flipR'){c.glow=Math.min(1,e/250)*.8;if(e<320){c.rz=Math.sin(e/22)*.03}else{c.rz=0;const k=E.cl((e-320)/420);c.ry=180*E.io(k);c.s=1+.12*Math.sin(k*Math.PI);if(k>=1&&!c.fx){c.fx=1;S.flip();S.rare();sweeps.push({card:c,t0:now,d:650});sparkAt(c.x,c.y,9,'#dff0ff',STAR);bursts.push({x:c.x,y:c.y,r:CB*1.1,col:'R',t0:now,d:700});labels.push({s:'レア！',card:c,below:slots[c.i].row===1,t0:now,d:1300,col:'#cfe6ff',size:20});later(700,()=>{c.glow=.0;revealDone(c)})}}}
+      else if(c.state==='flipR'){c.glow=Math.min(1,e/250)*.8;if(e<320){c.rz=Math.sin(e/22)*.03}else{c.rz=0;const k=E.cl((e-320)/420);c.ry=180*E.io(k);c.s=1+.12*Math.sin(k*Math.PI);if(k>=1&&!c.fx){c.fx=1;S.flip();sweeps.push({card:c,t0:now,d:650});sparkAt(c.x,c.y,9,'#dff0ff',STAR);bursts.push({x:c.x,y:c.y,r:CB*1.1,col:'R',t0:now,d:700});labels.push({s:'レア！',card:c,below:slots[c.i].row===1,t0:now,d:1300,col:'#cfe6ff',size:20});later(700,()=>{c.glow=.0;revealDone(c)})}}}
       else if(c.state==='zoom'){/* レジェンド：まんなかへ 大きく → めくる → ファンファーレ → もどる */
         const big=Math.min(1.75,(W*.52)/CB,(HH*.5)/CH),cx=W/2,cy=HH*.43;st.dim=Math.min(1,e/400);
         if(e<520){const k=E.io(E.cl(e/520));c.x=lerp(c.xa,cx,k);c.y=lerp(c.ya,cy,k);c.s=lerp(1,big,k);c.z=40;c.glow=k}
         else if(e<1000){c.rz=Math.sin(e/20)*.025*(1-(e-520)/480);c.glow=1}
         else if(!c.fx){c.rz=0;const k=E.cl((e-1000)/450);c.ry=180*E.io(k);c.s=big*(1+.08*Math.sin(k*Math.PI));
-          if(k>=1&&!c.fx){c.fx=1;const A=c.cd.awk;S.flip();S.legend(A);confetti(c.x,c.y-CH*big*.3);bursts.push({x:c.x,y:c.y,r:CB*big*1.1,col:A?'A':'L',t0:now,d:900,rays:12});sweeps.push({card:c,t0:now,d:A?1100:800,rainbow:!!A,loop:!!A});if(!A)sweeps.push({card:c,t0:now+300,d:800});
+          if(k>=1&&!c.fx){c.fx=1;const A=c.cd.awk;S.flip();confetti(c.x,c.y-CH*big*.3);bursts.push({x:c.x,y:c.y,r:CB*big*1.1,col:A?'A':'L',t0:now,d:900,rays:12});sweeps.push({card:c,t0:now,d:A?1100:800,rainbow:!!A,loop:!!A});if(!A)sweeps.push({card:c,t0:now+300,d:800});
             labels.push({s:A?'かくせい！':'レジェンド！',x:cx,y:Math.max(28,cy-CH*big/2-26),t0:now,d:2100,col:A?'#ffb0f0':'#ffe066',size:28});c.hold=now}}
         else if(c.hold&&(now-c.hold>2000||(c.hurry&&now-c.hold>500))){c.state='settle';c.f0=now;c.xb=c.x;c.yb=c.y;c.sb=c.s}}
       else if(c.state==='settle'){const k=E.io(E.cl(e/480)),sl=slots[c.i];c.x=lerp(c.xb,sl.x,k);c.y=lerp(c.yb,sl.y,k);c.s=lerp(c.sb,1,k);st.dim=1-k;c.glow=1-k*.6;if(k>=1){c.z=10+c.i;pillars.forEach(p=>{if(p.card===c)p.end=now});C.forEach(d=>d.dimT=0);c.glow=.4;revealDone(c)}}
