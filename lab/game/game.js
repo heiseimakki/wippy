@@ -21,18 +21,18 @@ def('pochi','見習いポチ','sh','N',1,1,2,'🐶',{bc:'draw',v:1,evo:'pochi2',
 def('pochi2','保安官ポチ','sh','N',2,2,3,'🐕',{st:2,kw:'taunt',bc:'draw',v:1,evo:'pochi3',s:'今日からオレが町を守るワン！'});
 def('pochi3','保安官長ポチ','sh','N',3,3,5,'🐕‍🦺',{st:3,kw:'taunt',aura:'atk',av:1,s:'全員、オレについてこいワン！'});
 def('rookie','ルーキー','gu','N',1,2,1,'🐨',{evo:'rookie2',s:'はじめての依頼、がんばります！'});
-def('rookie2','ベテラン賞金稼ぎ','gu','N',2,3,2,'🤠',{st:2,bounty:2,evo:'rookie3',s:'獲物のにおいがするぜ'});
-def('rookie3','伝説のガンマン','gu','N',3,3,3,'🌵',{st:3,kw:'twice',bounty:2,s:'…名を名乗るまでもない'});
+def('rookie2','ベテラン賞金稼ぎのティミー','gu','N',2,3,2,'🤠',{st:2,bounty:2,evo:'rookie3',s:'獲物のにおいがするぜ'});
+def('rookie3','伝説のガンマン ティミー','gu','N',3,3,3,'🌵',{st:3,kw:'twice',bounty:2,s:'…名を名乗るまでもない'});
 def('zombie','まずしいゾンビ','zo','N',1,1,1,'🧟',{kw:'revive',evo:'zombie2',s:'ウー…'});
 def('zombie2','ゾンビ兵','zo','N',2,2,3,'🧟‍♂️',{st:2,kw:'revive',evo:'zombie3',s:'アー…ウー…'});
-def('zombie3','ゾンビ将軍','zo','N',3,2,4,'🧛',{st:3,kw:'revive',bc:'summon',tok:'zombieT',v:1,s:'われらは、何度でも立ち上がる…'});
+def('zombie3','ゾンビ将軍 ペニー','zo','N',3,2,4,'🧛',{st:3,kw:'revive',bc:'summon',tok:'zombieT',v:1,s:'われらは、何度でも立ち上がる…'});
 def('akudo','ロックバレーの悪童','ou','N',1,2,1,'img:IMG_6719',{evo:'akudo2',s:'へへっ、いたずらしちゃうぞ！'});
-def('akudo2','ならず者','ou','N',2,2,3,'img:IMG_6719',{st:2,bc:'dmg',v:1,evo:'akudo3',s:'オレのなわばりで何してやがる'});
-def('akudo3','荒野の大親分','ou','N',4,2,2,'img:IMG_6719',{st:3,bc:'summon',tok:'goonT',v:2,s:'子分たち、やっちまえ！'});
+def('akudo2','荒野のならず者 ビリー','ou','N',2,2,3,'img:IMG_6719',{st:2,bc:'dmg',v:1,evo:'akudo3',s:'オレのなわばりで何してやがる'});
+def('akudo3','荒野の大親分 ビリー','ou','N',4,2,2,'img:IMG_6719',{st:3,bc:'summon',tok:'goonT',v:2,s:'子分たち、やっちまえ！'});
 
 /* ---- 保安官 ---- */
-def('juko','重厚な保安官','sh','R',3,2,4,'img:IMG_6711',{kw:'taunt',aura:'lasso',s:'まぁ座れ。まずは話を聞こう'});
-def('jitchoku','実直な保安官','sh','N',2,2,2,'img:IMG_2350',{bounty:2,s:'アナタ怪シイ！逮捕デス'});
+def('juko','おんこうな保安官 レオ','sh','R',3,2,4,'img:IMG_6711',{kw:'taunt',aura:'lasso',s:'まぁ座れ。まずは話を聞こう'});
+def('jitchoku','まじめな保安官 ネッド','sh','N',2,2,2,'img:IMG_2350',{bounty:2,s:'アナタ怪シイ！逮捕デス'});
 def('wyatt','ワイアット・アーフ','sh','R',4,2,3,'🎖️',{bc:'buffall',v:1,s:'兄弟たち、OK牧場へ行くぞ'});
 def('masterson','バット・マスターソン','sh','N',2,2,3,'🎩',{bounty:2,s:'ペンも銃も、オレの武器さ'});
 def('garrett','パット・ギャレッ亀','sh','N',4,3,5,'🐢',{kw:'taunt',s:'キッド、年貢の納め時だ'});
@@ -50,7 +50,7 @@ def('pork','はやうちポーク','sh','R',2,2,1,'🐷',{kw:'quick',bc:'quickmg
 
 /* ---- 酒場 ---- */
 def('tenshu','良心的な店主','sa','N',1,1,1,'img:IMG_2352',{bc:'coin',v:1,s:'笑顔と飲み物がお出迎えよ！'});
-def('kifujin','岩礁の貴婦人','sa','R',3,2,4,'img:IMG_6718',{bc:'stun',s:'波に のって あそびましょ♪'});
+def('kifujin','海辺のきふじん マリーナ','sa','R',3,2,4,'img:IMG_6718',{bc:'stun',s:'波に のって あそびましょ♪'});
 def('doc','ドク・ホリデー','sa','N',3,2,3,'🩺',{bc:'healall',v:3,s:'はい、あーんして'});
 def('pokerfox','ポーカーぎつね','sa','N',2,1,2,'🦊',{bc:'flipdraw',v:2,s:'勝負はいつも一発勝負さ'});
 def('ragtime','ラグタイム・ケロ','sa','R',3,2,3,'🐸',{bc:'recall',s:'今夜もいい曲、弾かせてもらうケロ'});
@@ -59,7 +59,7 @@ def('slim','ミルク好きスリム','sa','N',2,3,2,'🥛',{kw:'nostun',s:'ミ�
 def('pyonko','看板娘のピョン子','sa','N',2,1,3,'🐰',{bc:'draw',v:1,s:'いらっしゃいませ〜！'});
 def('korokichi','バイオリンのコロ吉','sa','N',2,1,3,'🦗',{aura:'faction',av:1,s:'リーリー♪ 一曲いかが？'});
 def('harry','ルーレット・ハリー','sa','R',4,3,4,'🎰',{bc:'bounce',s:'赤か黒か、運命のルーレット！'});
-def('bard','酔いどれ吟遊詩人','sa','N',2,1,2,'🎻',{bc:'selfatk',v:3,s:'ヒック…いい歌ができそうだ'});
+def('bard','ほろよい吟遊詩人 バラッド','sa','N',2,1,2,'🎻',{bc:'selfatk',v:3,s:'ヒック…いい歌ができそうだ'});
 def('lily','歌姫リリー','sa','N',3,2,3,'🎤',{bc:'draw',v:1,s:'今夜は判事さんのために歌うわ'});
 def('shaker','タコのシェイカー','sa','N',4,2,5,'🐙',{aura:'regen',av:1,s:'ご注文は8つまで同時にどうぞ'});
 def('cancan','カンカン・キャット','sa','N',1,1,1,'💃',{bc:'stun',s:'ラインダンスで目が回るわよ'});
@@ -79,7 +79,7 @@ def('nanashi','名無しのガンマン','gu','R',5,6,5,'🤠',{s:'…名乗る�
 def('ferret','たんけん隊フェレット','gu','N',1,1,1,'🐾',{bc:'treasure',v:2,s:'この先、宝の匂いがするぜ'});
 def('hammer','鍛冶屋のハンマ','gu','N',3,1,3,'🔨',{bc:'buff',v:2,s:'いい鉄はいい仕事をする'});
 def('hawk','バウンティ・ホーク','gu','N',2,2,2,'🦅',{bounty:2,s:'獲物は逃がさない'});
-def('gantetsu','金ほりガンテツ','gu','N',3,2,4,'⛏️',{aura:'miner',s:'ツルハシは裏切らねぇ'});
+def('gantetsu','金ほり ナゲット','gu','N',3,2,4,'⛏️',{aura:'miner',s:'ツルハシは裏切らねぇ'});
 def('boya','ボウヤ・ザ・キッド','gu','N',1,1,1,'👦',{kw:'quick',s:'ボクだって一人前さ！'});
 def('highnoon','決闘屋ハイヌーン','gu','N',4,4,2,'🕛',{kw:'quick',s:'正午だ。抜きな'});
 def('digger','ダブル・ディガー','gu','R',4,3,4,'🔫',{kw:'twice',s:'右も左も、外さないぜ'});
@@ -101,7 +101,7 @@ def('bison','ブルドーザー・バイソン','an','R',6,6,6,'🦬',{kw:'taunt
 def('sabota','サボ太','an','N',2,1,3,'🌵',{kw:'thorns',s:'さわると痛いよ'});
 def('wolf','ローン・ウルフ','an','N',2,2,2,'🐺',{kw:'lone',s:'群れるのは、性に合わない'});
 def('jacka','ジャッカロープ','an','N',1,1,1,'🐇',{kw:'shield',s:'ぴょーん！'});
-def('vulture','おこぼれバルチャー','an','N',3,2,3,'🦅',{kw:'feed',s:'おこぼれちょうだい'});
+def('vulture','おこぼれバルチャー バズ','an','N',3,2,3,'🦅',{kw:'feed',s:'おこぼれちょうだい'});
 def('armadillo','まるまるアルマジロ','an','N',2,1,3,'🦔',{kw:'taunt',s:'まるまって、カチーン！'});
 def('runner','ロードランナー','an','N',2,2,1,'🐦',{kw:'quick',s:'ピピッ！'});
 def('tumble','タンブルウィードくん','an','N',1,1,2,'🌾',{dr:'summon',tok:'tumbleT',dv:1,s:'コロコロ〜'});
@@ -115,14 +115,14 @@ def('eagle','シェリフ・モーキン警部','an','L',6,5,6,'🦅',{bc:'scout
 def('serpentia','さばくの王妃 サーペンティア','an','L',5,4,5,'img:serpentia',{poison:2,bc:'poison',v:2,s:'わらわの しっぽに ついておいで'});
 def('grizzly','はらぺこグリズリー','an','R',4,3,4,'🐻',{bc:'meat',v:1,s:'お肉…お肉はどこだ…'});
 def('funkoro','フンコロがし','an','R',2,2,2,'🪲',{bc:'unko',v:1,s:'コロコロ…はい、どうぞ'});
-def('fairy','木の妖精 コダマ','an','R',2,1,2,'img:fairy',{aura:'regen',av:1,bc:'healall',v:1,s:'森のみんな、げんきになあれ'});
+def('fairy','木の妖精 オーキー','an','R',2,1,2,'img:fairy',{aura:'regen',av:1,bc:'healall',v:1,s:'森のみんな、げんきになあれ'});
 
 /* ---- 魔法使い ---- */
 def('rainmaker','レインメーカー','ma','N',3,2,4,'🌧️',{aura:'regen',av:1,s:'雨よ、降れ〜！'});
 def('hoho','マダム・ホーホー','ma','N',2,1,3,'🔮',{bc:'draw',v:1,s:'ホッホウ、見えるぞ…'});
-def('chakka','火の精霊チャッカ','ma','N',2,3,1,'🔥',{bc:'dmg',v:1,s:'アチチ、燃えてきた！'});
+def('chakka','火の精霊エンバー','ma','N',2,3,1,'🔥',{bc:'dmg',v:1,s:'アチチ、燃えてきた！'});
 def('herb','ハーブばあや','ma','N',3,1,4,'🌿',{bc:'healall',v:2,s:'薬草はいかが？'});
-def('sandman','サンドマン','ma','N',3,2,3,'💤',{bc:'weaken',v:2,s:'ふぁ〜あ、おやすみ'});
+def('sandman','ねむりの ナップ','ma','N',3,2,3,'💤',{bc:'weaken',v:2,s:'ふぁ〜あ、おやすみ'});
 def('doo','のろい人形ドゥー','ma','N',1,1,1,'🪆',{poison:1,s:'ひとりにしないで…'});
 def('stargazer','スターゲイザー教授','ma','N',4,2,4,'🔭',{bc:'draw',v:2,s:'星が告げている…'});
 def('mash','キノコ魔女マッシュ','ma','N',4,2,4,'🍄',{bc:'poison',v:2,s:'キノコスープはいかが？'});
@@ -137,11 +137,11 @@ def('amelie','月光の呪術師 アメリ','ma','L',6,4,5,'img:IMG_6717',{bc:'s
 def('carnelia','大空の姫君 カルネリア','ma','L',6,4,5,'img:carnelia',{bc:'blow',s:'つばさで ひとふき、ふわりっ！'});
 def('celestia','水滴みのセレスティア','ma','L',7,5,6,'img:IMG_6724',{bc:'raise',v:2,s:'おとなしくしていれば 手はださないわ'});
 def('bagura','もじばけ魔女バグーラ','ma','R',3,3,3,'🧙',{bc:'moji',s:'繧上◆縺励?繧ゅ§縺ー縺鯛?ｦ'});
-def('hanage','はなげ仙人','ma','R',2,2,2,'👃',{bc:'hanage',v:2,s:'ふぉっふぉっ、伸びるぞ〜'});
+def('hanage','はなげ仙人 ハーミット','ma','R',2,2,2,'👃',{bc:'hanage',v:2,s:'ふぉっふぉっ、伸びるぞ〜'});
 
 /* ---- スチームタウン ---- */
 def('seisei','スチームタウンの精製師','st','N',2,1,1,'img:IMG_6716',{bc:'buffr',v:2,s:'こんな色じゃったろうか？まあよいかの。'});
-def('kaikei','信頼できる会計士','st','N',2,1,2,'img:IMG_2354',{aura:'coinflip',s:'数字は僕の友達さ。'});
+def('kaikei','会計士 カウント','st','N',2,1,2,'img:IMG_2354',{aura:'coinflip',s:'数字は僕の友達さ。'});
 def('gadget','うるさいガジェット','st','N',1,1,2,'img:gadget',{bc:'draw',v:1,s:'♪♪♪♪♪'});
 def('telegraph','電信ロボ','st','N',3,1,3,'📠',{bc:'draw',v:2,s:'ツー・トン・ツー…オテガミデス'});
 def('boiler','ボイラー・ボイル','st','N',5,3,6,'♨️',{kw:'taunt',s:'シュゴォォォ…'});
@@ -152,7 +152,7 @@ def('geary','はぐるまギアリー','st','N',3,1,2,'⚙️',{bc:'buffr',v:2,s
 def('betty','ふうせんベティ','st','N',3,2,3,'🎈',{bc:'draw',v:1,s:'空から見ると、荒野も小さいわね'});
 def('ironhorse','アイアン・ホース','st','R',5,5,3,'🚃',{kw:'quick',s:'ブルルル…シュッシュッ！'});
 def('bolt','ポンコツ・ボルト','st','N',2,3,3,'🤖',{bc:'junk',s:'ガガガ…ピー…ダイジョウブ、タブン'});
-def('clock','チクタク時計','st','N',3,0,4,'⏰',{aura:'draw',s:'チクタク、時間ですよ〜'});
+def('clock','チクタク時計 ティッキー','st','N',3,0,4,'⏰',{aura:'draw',s:'チクタク、時間ですよ〜'});
 def('ruler','スチームタウン・ザ・ルーラー','st','L',6,5,6,'img:IMG_6723',{aura:'coin',s:'この街で ワシに さからうとは いい度胸じゃ'});
 def('build','鉄道王ビルド','st','L',5,4,5,'🎩',{aura:'faction',av:2,s:'線路は金の道だ'});
 def('kyu','キュウジュウキュウ号','st','R',4,99,5,'🚂',{kw:'noattack taunt',fuel:3,s:'ゴゴゴゴ…（動かない）'});
@@ -161,7 +161,7 @@ def('kyu','キュウジュウキュウ号','st','R',4,99,5,'🚂',{kw:'noattack 
 def('kibishii','きびしいゾンビ','zo','N',1,2,1,'🧟‍♀️',{poison:1,s:'アー…'});
 def('sabishii','さびしいゾンビ','zo','N',1,1,1,'🧟',{kw:'revive',s:'ウー…'});
 def('atsukama','あつかましいゾンビ','zo','N',1,1,1,'🧟‍♂️',{kw:'taunt revive',s:'アー…'});
-def('crow','そうぎ屋カラス','zo','N',3,2,3,'🐦‍⬛',{bc:'raise',v:1,s:'お別れには、まだ早いですな'});
+def('crow','そうぎ屋カラス モーティマー','zo','N',3,2,3,'🐦‍⬛',{bc:'raise',v:1,s:'お別れには、まだ早いですな'});
 def('tesaguri','てさぐりゾンビ','zo','R',2,1,2,'🙈',{bc:'mojis',s:'アー…どこ…？'});
 
 /* ---- お尋ね者・マフィア（捕まえると仲間になる） ---- */
@@ -182,15 +182,15 @@ OUT('sambass','サム・バス','ou','N',3,2,3,'💰',{dr:'healall',dv:1,s:'金�
 OUT('mary','ニセ札メリー','ou','N',1,1,1,'💵',{bc:'coin',v:1,s:'ホンモノそっくりでしょ？'});
 OUT('bignose','ビッグ・ノーズ・ジョージ','ou','R',9,7,9,'👃',{bc:'sneeze',v:3,s:'この鼻、すごいだろ〜！'});
 OUT('iguana','かくれんぼイグアナ','ou','N',2,2,2,'🦎',{kw:'stealth',s:'見つけられるもんなら、見つけてみな'});
-OUT('axe','スチームタウンの斧使い','ou','R',4,4,4,'img:IMG_6721',{kw:'splash',s:'どこまでも 追いかけるぜ！'});
+OUT('axe','スチームタウンのバイク乗り','ou','R',4,4,4,'img:IMG_6721',{kw:'splash',s:'どこまでも 追いかけるぜ！'});
 OUT('tokko','スチームタウンの特攻隊長','ou','N',3,3,1,'img:IMG_6722',{kw:'quick',s:'一発 おみまい してやるぜ！'});
 OUT('minpei','ビートルウッドの民兵','ou','N',1,1,2,'img:IMG_6712',{kw:'taunt',s:'食べきれる分しか持ってきてないってば〜！'});
 OUT('ice','氷魔術師 フォクシア','ou','L',5,4,5,'img:IMG_6720',{bc:'stun',s:'氷づけと 雪だるま、どっちがいい？'});
 OUT('chousyu','ずさんな徴収係','mf','N',1,1,1,'img:IMG_6713',{bc:'coin',v:1,s:'通行料、きっちり いただくぜ'});
-OUT('narikin','卑怯な成金','mf','N',3,1,3,'img:IMG_2353',{aura:'coin',s:'お金で 買えない ものは ない！'});
+OUT('narikin','ずるい成金 ゴールディ','mf','N',3,1,3,'img:IMG_2353',{aura:'coin',s:'お金で 買えない ものは ない！'});
 OUT('goblins','ゴブリン三兄弟','mf','N',3,1,1,'👺',{bc:'summon',tok:'goblinT',v:2,s:'兄貴のためなら！'});
 OUT('goliath','用心棒ゴリアテ','mf','N',4,3,5,'🦍',{kw:'taunt',s:'ボスには指一本ふれさせねぇ'});
-OUT('mole','金庫やぶりモグラ','mf','N',3,2,3,'🐀',{bc:'treasure',v:3,s:'なぜ銀行を掘るかって？そこに金があるからさ'});
+OUT('mole','金庫やぶりのツィッガー','mf','N',3,2,3,'🐀',{bc:'treasure',v:3,s:'なぜ銀行を掘るかって？そこに金があるからさ'});
 OUT('hyena','ベビーフェイス・ハイエナ','mf','N',3,4,2,'🐕',{onkill:'draw',s:'童顔だからってナメんなよ'});
 OUT('kerits','ケリツツキ','mf','N',4,2,4,'🐦',{kw:'twice',s:'ダダダダダッ！'});
 OUT('pickey','チンピラのピッキー','mf','N',1,1,1,'😼',{bc:'buff',v:1,s:'へへっ、兄貴〜！'});
@@ -1258,7 +1258,7 @@ const FACS={
     const ev={gold:'荒野で金鉱が見つかったらしい。「？」のマスでもうかるかも',storm:'近いうちに砂嵐が来るらしい。「？」のマスは気をつけな',party:'荒野のどこかで、流れの楽団がお祭りをしてるらしい',relic:'荒野に、だれかがお宝を落としたらしいぜ'}[r.event];
     const tips=['🛡かばうキャラがいると、敵はそいつを先に倒さないといけない','💤出したばかりのキャラは次のターンから攻撃できる。⚡はやうちは別だ',
       '賞金首は弱らせてから投げ縄。なぐりすぎると倒しちゃって、仲間にできないぞ','行商人では いらない どうぐを 売って お金に できるよ',
-      'はなげ仙人には気をつけな。画面が鼻毛だらけになるぞ…','合成はLv10まで。高いレベルほど成功しにくいが、Lv10は伝説の強さだ','Lv5になったら進化できる。進化するとLv1にもどるが、もっと強くなれる'];
+      'はなげ仙人 ハーミットには気をつけな。画面が鼻毛だらけになるぞ…','合成はLv10まで。高いレベルほど成功しにくいが、Lv10は伝説の強さだ','Lv5になったら進化できる。進化するとLv1にもどるが、もっと強くなれる'];
     app().innerHTML=`${head()}<div class="panel"><h2>🍺 酒場</h2><p class="muted">マスターがグラスをみがきながら、うわさ話を教えてくれる。</p></div>
       <div class="rumor">🗣️「荒野の<b>${r.floor}戦目あたり</b>に、賞金首<b>${C[r.elite].n}</b>が出るらしいぜ」</div>
       <div class="rumor">🗣️「雑貨屋のパックに、今だけ<b>${C[r.feature].n}</b>が入りやすいんだと」</div>
@@ -1711,7 +1711,7 @@ function foeDeck(f,n,elv){const s=STAGES[R.sid],maxCost=Math.min(foeCap(),TUT_RU
   if(G.runs<=2){const simple=pool.filter(id=>{const d=C[id];return !d.bc&&!d.dr&&!d.aura&&!d.poison&&!d.fuel&&d.kw.split(' ').filter(Boolean).every(k=>['taunt','shield','revive'].includes(k))});if(simple.length>=3)pool=simple}
   return shuffle(Array.from({length:n},()=>({id:pick(pool),lv:elv,plus:Math.floor(R.star/3)})))}
 function makeFight(f,foeId){
-  const elv=enemyLv(f);const names=[['ならず者のボス','😠'],['牛どろぼうの頭','🐮'],['荒野の用心棒','🤠'],['ゴブリンの親分','👺'],['ハゲワシ使い','🦅']];let [nm,em]=pick(names),img;const mk=foeId&&C[foeId]?foeId:pick((STAGES[R.sid].mooks||[]).filter(id=>C[id]&&C[id].img));if(mk){nm=C[mk].n;em=C[mk].em;img=C[mk].img}const cid=mk;
+  const elv=enemyLv(f);const names=[['荒野のならず者 ビリーのボス','😠'],['牛どろぼうの頭','🐮'],['荒野の用心棒','🤠'],['ゴブリンの親分','👺'],['ハゲワシ使い','🦅']];let [nm,em]=pick(names),img;const mk=foeId&&C[foeId]?foeId:pick((STAGES[R.sid].mooks||[]).filter(id=>C[id]&&C[id].img));if(mk){nm=C[mk].n;em=C[mk].em;img=C[mk].img}const cid=mk;
   return {kind:'fight',title:`${f}戦目：${nm}`,foe:{name:nm,em,img,cid,hp:Math.round((TUT_RUN()?4+f:6+f)*starHp())},deck:foeDeck(f,(TUT_RUN()?3:R.sid==='wild'?4:5)+Math.floor(f/(R.sid==='wild'?3:2)),elv),pay:3+Math.floor(f/2)+rnd(3)};
 }
 function makeElite(f,who){
@@ -2515,7 +2515,7 @@ const SPECIAL={
     await spAnim(h,[{transform:`translate(${ox}px,${oy}px) translate(0,-50%) rotate(${a}deg) scaleX(.2)`},{transform:`translate(${ox}px,${oy}px) translate(0,-50%) rotate(${a}deg) scaleX(${d/90})`}],520,'cubic-bezier(.3,1.4,.6,1)');
     onoma({getBoundingClientRect:()=>({left:tx-20,top:ty-20,width:40,height:40})},'ガシッ！','#c8a0ff');await sleep(380);
     await spAnim(h,[{opacity:1},{opacity:0}],250);document.body.classList.remove('spdark');spGone(h)},
-  /* はなげ仙人：大きな鼻から 鼻毛が くるくる */
+  /* はなげ仙人 ハーミット：大きな鼻から 鼻毛が くるくる */
   async hanage(sd,m,el){const [ox,oy]=ctr(el),[tx,ty,tw]=spZone(sd,'opp');const nose=spImg('nose',90);
     await spAnim(nose,[{transform:SPT(ox,oy-70,0)},{transform:SPT(ox,oy-70,1.15)},{transform:SPT(ox,oy-70,1)}],350,'cubic-bezier(.2,1.6,.5,1)');
     tone(220,.5,{type:'sawtooth',vol:.04,slide:520});
@@ -2572,7 +2572,7 @@ const SPECIAL={
     spAnim(mn,[{transform:SPT(tx,ty-150,0)},{transform:SPT(tx,ty-130,1)}],500,'ease-out');
     await spAnim(cr,[{transform:SPT(tx,ty,.2,0),opacity:0},{transform:SPT(tx,ty,1,240),opacity:1}],800,'ease-out');
     onoma({getBoundingClientRect:()=>({left:tx-20,top:ty-20,width:40,height:40})},'しびびび…','#c8a0ff');await sleep(300);document.body.classList.remove('spdark');spAnim(cr,[{opacity:1},{opacity:0}],300);spAnim(mn,[{opacity:1},{opacity:0}],300);spGone([mn,cr],320)},
-  /* サンドマン：ねむりの砂を さらさら */
+  /* ねむりの ナップ：ねむりの砂を さらさら */
   async sandman(sd,m,el){const [tx,ty]=spZone(sd,'opp');const sb=spImg('sandbag',90);noise(.9,{vol:.06,f0:6000,type:'highpass'});
     await spAnim(sb,[{transform:SPT(tx-40,ty-130,0,-20)},{transform:SPT(tx-30,ty-110,1,-30)}],300);
     for(let i=0;i<10;i++)setTimeout(()=>fxImg(tx+(Math.random()-.5)*120,ty-60+Math.random()*60,'x_spark',22,'fxup',700),i*60);
@@ -2582,11 +2582,11 @@ const SPECIAL={
     spAnim(w,[{transform:SPT(bx,by-60,.3),opacity:0},{transform:SPT(bx,by-80,1.1),opacity:1}],500);
     for(let i=0;i<6;i++){const f=spImg('feather',30);spAnim(f,[{transform:SPT(bx+(Math.random()-.5)*bw,by-160,1,0),opacity:0},{transform:SPT(bx+(Math.random()-.5)*bw,by+20,1,90),opacity:1}],1100,'ease-in-out',i*90);spGone(f,1400)}
     await sleep(1000);spAnim(w,[{opacity:1},{opacity:0}],300);spGone(w,320)},
-  /* そうぎ屋カラス：お墓から おばけが ふわ〜 */
+  /* そうぎ屋カラス モーティマー：お墓から おばけが ふわ〜 */
   async crow(sd,m,el){const [bx,by]=spZone(sd,'own');const gv=spImg('grave',80),gh=spImg('ghost',70);
     await spAnim(gv,[{transform:SPT(bx,by+40,0)},{transform:SPT(bx,by,1)}],350,'cubic-bezier(.2,1.6,.5,1)');tone(300,.8,{type:'sine',vol:.06,slide:600});
     await spAnim(gh,[{transform:SPT(bx,by,.3),opacity:0},{transform:SPT(bx+20,by-90,1),opacity:1}],700,'ease-out');onoma(el,'ふわ〜','#e8f4ff');await sleep(300);spAnim(gh,[{opacity:1},{opacity:0}],300);spAnim(gv,[{opacity:1},{opacity:0}],300);spGone([gv,gh],320)},
-  /* ゾンビ将軍：地面から 手が にょきっ */
+  /* ゾンビ将軍 ペニー：地面から 手が にょきっ */
   async zombie3(sd,m,el){const [bx,by,bw]=spZone(sd,'own');const hs=[0,1].map(()=>spImg('zhand',60));SFX.squish&&SFX.squish();
     await Promise.all(hs.map((h,i)=>spAnim(h,[{transform:SPT(bx+(i?1:-1)*bw*.2,by+60,1),clipPath:'inset(0 0 100% 0)'},{transform:SPT(bx+(i?1:-1)*bw*.2,by+10,1),clipPath:'inset(0 0 0 0)'}],500,'cubic-bezier(.2,1.6,.5,1)',i*150)));
     onoma(el,'にょきっ！','#9fe08a');await sleep(350);hs.forEach(h=>spAnim(h,[{opacity:1},{opacity:0}],250));spGone(hs,260)},
@@ -3117,12 +3117,12 @@ const SP0={
     S0.bub(x,y-60,'が、が、がんばります！',1300);await sleep(500);const b=S0.img('x_bullet',26);
     await spAnim(b,[{transform:SPT(x+20,y,1,0)},{transform:SPT(x+40,y+70,1,200),offset:.5},{transform:SPT(x+55,y+50,1,300),offset:.7},{transform:SPT(x+65,y+70,1,400)}],600,'ease-in');
     tone(1800,.05,{type:'square',vol:.04});tone(1600,.05,{type:'square',vol:.03,at:.18});onoma(fakeEl(x+65,y+60),'コロン…','#ddd');await sleep(450);spGone(b)},
-  /* ベテラン賞金稼ぎ：スコープが 敵をクンクンさがして ピタッ */
+  /* ベテラン賞金稼ぎのティミー：スコープが 敵をクンクンさがして ピタッ */
   async rookie2(sd,m,el){const [x,y]=ctr(el),[tx,ty,tw]=spZone(sd,'opp');const sc=S0.img('scope',80);
     onoma(el,'クンクン…','#d8c39a');nz(.5,{vol:.05,f0:1500,type:'bandpass',q:3});
     await spAnim(sc,[{transform:SPT(x,y-40,.4),opacity:0},{transform:SPT(tx-tw*.4,ty,1),opacity:1,offset:.35},{transform:SPT(tx+tw*.4,ty-10,1),offset:.7},{transform:SPT(tx,ty,1.15)}],1000,'ease-in-out');
     tone(1760,.08,{type:'sine',vol:.06});tone(2350,.12,{type:'sine',vol:.05,at:.08});S0.bub(x,y-60,'獲物のにおいがするぜ');await sleep(600);spAnim(sc,[{opacity:1},{opacity:0}],200);spGone(sc,220)},
-  /* 伝説のガンマン：スポットライト… 2連射バンバン */
+  /* 伝説のガンマン ティミー：スポットライト… 2連射バンバン */
   async rookie3(sd,m,el){const [x,y]=ctr(el),[tx,ty]=spZone(sd,'opp');const d=S0.dark(x,y);vo(110,{type:'sawtooth',dur:.9,vol:.03,lp:500});
     await sleep(700);
     for(let i=0;i<2;i++){S0.gun(0);S0.flash(120);fxImg(x+(i?30:-30),y-10,'x_muzzle',70,'fxpop',400);fxImg(tx+(i?40:-40),ty,'x_hit',70,'fxpop',500);await sleep(170)}
@@ -3143,18 +3143,18 @@ const SP0={
     await spAnim(p,[{transform:SPT(x,y-20,.5,0)},{transform:SPT((x+tx)/2,Math.min(y,ty)-120,1,360),offset:.5},{transform:SPT(tx,ty,1.1,720)}],650,'ease-in');
     nz(.25,{vol:.2,f0:500,type:'lowpass'});onoma(fakeEl(tx,ty),'ベチャッ！','#a57a3c');fxImg(tx,ty,'x_splash',80,'fxpop',500);
     S0.bub(x,y-60,'へへっ、いたずら大成功！');[0,.12,.24].forEach(a=>vo(600,{type:'square',at:a,dur:.08,vol:.03,lp:1800}));await sleep(700);spAnim(p,[{opacity:1},{opacity:0}],250);spGone(p,270)},
-  /* ならず者：つば…じゃなく 砂をけって ガンをとばす */
+  /* 荒野のならず者 ビリー：つば…じゃなく 砂をけって ガンをとばす */
   async akudo2(sd,m,el){const [x,y]=ctr(el),[tx,ty]=spZone(sd,'opp');fxImg(x+30,y-50,'x_anger',44,'fxpop',800);
     [0,.1,.2].forEach(a=>tone(200,.03,{type:'square',vol:.05,at:a}));onoma(el,'ポキポキ','#fff');await sleep(350);
     const d=S0.img('x_dust',90);nz(.4,{vol:.14,f0:1500,f1:400,type:'bandpass'});
     await spAnim(d,[{transform:SPT(x,y+30,.4),opacity:1},{transform:SPT(tx,ty,1.4),opacity:0}],600,'ease-out');
     S0.bub(x,y-60,'ア゛ァン？ やんのか？');await sleep(600);spGone(d)},
-  /* 重厚な保安官：ドスンと すわって コーヒーを ひとくち */
+  /* おんこうな保安官 レオ：ドスンと すわって コーヒーを ひとくち */
   async juko(sd,m,el){const [x,y]=ctr(el);await spAnim(el,[{transform:'translateY(-40px)'},{transform:'translateY(0) scale(1.08,.9)'},{transform:'none'}],380,'ease-in');
     S0.thud();shakeApp&&shakeApp();fxImg(x,y+40,'x_dust2',150,'fxpuff',800);onoma(el,'ドスン！','#c9a46a');await sleep(300);
     const c=S0.svg('cup',44);spAnim(c,[{transform:SPT(x+50,y-10,0)},{transform:SPT(x+50,y-10,1)}],250,'cubic-bezier(.2,1.6,.5,1)');fxImg(x+50,y-40,'x_steam',40,'fxup',900);
     nz(.3,{at:.2,vol:.05,f0:900,type:'bandpass'});S0.bub(x,y-60,'まぁ座れ。話を聞こう',1200);await sleep(1000);spAnim(c,[{opacity:1},{opacity:0}],200);spGone(c,220)},
-  /* 実直な保安官：ウーウー サイレン、敵にオリが ガシャーン */
+  /* まじめな保安官 ネッド：ウーウー サイレン、敵にオリが ガシャーン */
   async jitchoku(sd,m,el){const [x,y]=ctr(el),[tx,ty,tw]=spZone(sd,'opp');
     for(let i=0;i<4;i++)tone(i%2?660:880,.2,{type:'square',vol:.03,at:i*.2});const r=S0.svg('siren',52);spAnim(r,[{transform:SPT(x,y-70,0)},{transform:SPT(x,y-70,1.1)}],200);
     S0.bub(x,y-100,'アナタ怪シイ！タイホデス',1400);await sleep(600);const b=S0.img('bars',Math.min(220,tw));
@@ -3241,7 +3241,7 @@ const SP0={
     await Promise.all(ms.map((mm,i)=>{nz(.35,{at:i*.15,vol:.06,f0:2000,type:'bandpass',q:2});return spAnim(mm,[{transform:SPT(x,y+10,1,0)},{transform:SPT(bx+(i-1)*bw*.3,by,1,0)},{transform:SPT(bx+(i-1)*bw*.3,by,1,10),offset:.9},{transform:SPT(bx+(i-1)*bw*.3,by,1,0)}],550,'ease-out',i*150)}));
     for(let i=0;i<3;i++)tone(2200+i*200,.06,{type:'triangle',vol:.04,at:i*.07});fxImg(x,y-40,'x_coins',50,'fxup',800);await sleep(600);
     ms.forEach(mm=>spAnim(mm,[{opacity:1},{opacity:0}],250));spGone(ms,270)},
-  /* 岩礁の貴婦人：大波ザッパーン！ 貝がら ころり */
+  /* 海辺のきふじん マリーナ：大波ザッパーン！ 貝がら ころり */
   async kifujin(sd,m,el){const [x,y]=ctr(el),[tx,ty,tw]=spZone(sd,'opp');const w=S0.img('x_splash',180);
     nz(1,{vol:.18,f0:400,f1:1800,type:'lowpass'});S0.bub(x,y-60,'海は すべてを 洗い流すのよ',1300);
     await spAnim(w,[{transform:SPT(tx-tw*.8,ty+20,.4,-20),opacity:0},{transform:SPT(tx,ty-10,1.3,0),opacity:1,offset:.6},{transform:SPT(tx+tw*.7,ty,1.1,20),opacity:0}],900,'ease-in-out');
@@ -3370,7 +3370,7 @@ Object.assign(SPECIAL,{
     vo(1600,{type:'sine',dur:.4,vol:.05,slide:900,vib:20,vibF:14});await S1.fly(b,cx-40,cy-100,tx,ty,300,'ease-in',1,1.3,-20,30);
     fxImg(tx,ty,'x_claw',90,'fxpop',450);nz(.15,{vol:.12,f0:3000,f1:500});onomaX(S1.F(tx,ty),'ガシッ！','#ffd34a');await sleep(350);
     await S1.fly(b,tx,ty,tx+200,ty-260,400,'ease-out',1.3,.6);spGone(b)},
-  /* 金ほりガンテツ：ツルハシで ガッ！ガッ！ → 金塊ぽろり */
+  /* 金ほり ナゲット：ツルハシで ガッ！ガッ！ → 金塊ぽろり */
   async gantetsu(sd,m,el){const [ox,oy]=ctr(el);const pk=spSvg('pick',56);const rock=S1.I('ui/m_d_rocks.png',72);S1.pop(rock,ox,oy-40,1,200);
     for(let i=0;i<2;i++){spAnim(pk,[{transform:SPT(ox+40,oy-100,1,40)},{transform:SPT(ox+14,oy-50,1,-30)},{transform:SPT(ox+40,oy-100,1,40)}],320,'ease-in',i*340);
       setTimeout(()=>{fxImg(ox,oy-40,'x_dust',70,'fxpuff',500);nz(.12,{vol:.14,f0:1200,f1:300});tone(300,.08,{type:'square',vol:.05})},i*340+160)}
@@ -3462,7 +3462,7 @@ Object.assign(SPECIAL,{
   async jacka(sd,m,el){const [ox,oy]=ctr(el);const r=spArt('jacka',50);const xs=[ox-90,ox-30,ox+30,ox+90];
     for(let i=0;i<3;i++){vo(500+i*150,{type:'sine',dur:.18,vol:.06,slide:900+i*150,at:i*.3});await spAnim(r,[{transform:SPT(xs[i],oy-30,1)},{transform:SPT((xs[i]+xs[i+1])/2,oy-120,1.1,i%2?-15:15)},{transform:SPT(xs[i+1],oy-30,1)}],300,'ease-in-out')}
     fxImg(xs[3],oy-50,'x_shield',60,'fxpop',500);fxImg(xs[3],oy-60,'x_star',40,'fxring',500);S1.ring(0,1760);onomaX(S1.F(xs[3],oy-40),'ぴょーん！','#ffd0f0');await sleep(450);spGone(r)},
-  /* おこぼれバルチャー：上で ぐるぐる → 骨をくわえて ムシャ */
+  /* おこぼれバルチャー バズ：上で ぐるぐる → 骨をくわえて ムシャ */
   async vulture(sd,m,el){const [ox,oy]=ctr(el);const v=spArt('vulture',54);
     const pts=Array.from({length:9},(_,i)=>({transform:SPT(ox+Math.cos(i*.8)*70,oy-130+Math.sin(i*.8)*25,1,Math.cos(i*.8)*15)}));
     await spAnim(v,pts,700,'linear');for(let i=0;i<3;i++)vo(700,{type:'triangle',dur:.12,vol:.04,at:i*.3,slide:500});
@@ -3591,7 +3591,7 @@ Object.assign(SPECIAL,{
     const cs=[0,1,2].map(()=>spImg(sp2X('card'),46));tone(1200,.1,{type:'triangle',vol:.05});
     await Promise.all(cs.map((c,i)=>sp2fly(c,[ox,oy-70,.3],[ox+(i-1)*60,oy-140,1,(i-1)*18],350,'ease-out',i*80)));
     await sleep(200);document.body.classList.remove('spdark');[ball,eye,...cs].forEach(e=>spAnim(e,[{opacity:1},{opacity:0}],200));spGone([ball,eye,...cs],220)},
-  /* 火の精霊チャッカ：くるくる燃えて 火の玉ボッ！ */
+  /* 火の精霊エンバー：くるくる燃えて 火の玉ボッ！ */
   async chakka(sd,m,el){const [ox,oy]=ctr(el),[tx,ty]=spZone(sd,'oppHero');const f=spImg(sp2X('fire'),70);
     nz(.5,{vol:.1,f0:400,f1:1500,type:'bandpass'});await spAnim(f,[{transform:SPT(ox,oy-40,.3,0)},{transform:SPT(ox,oy-40,1.2,360)},{transform:SPT(ox,oy-40,1,720)}],500);
     const n=8;for(let i=0;i<n;i++)setTimeout(()=>fxImg(ox+(tx-ox)*i/n,oy-40+(ty-oy+40)*i/n,'x_fire',30,'fxpuff',400),i*40);
@@ -3706,7 +3706,7 @@ Object.assign(SPECIAL,{
     for(let i=0;i<8;i++){nz(.08,{at:i*.08,vol:.1,f0:2000,type:'highpass'});setTimeout(()=>fxImg(W-(W+120)*i/8+40,ty-20,'x_smokeb',60,'fxup',700),i*70)}
     shakeApp&&shakeApp();await spAnim(tr,[{transform:SPT(W+80,ty,1)},{transform:SPT(-80,ty,1)}],650,'ease-in');
     onoma(sp2fe(tx,ty),'ゴーーッ！','#fff');await sleep(250);[r1.d,r2.d].forEach(e=>e.animate([{opacity:1},{opacity:0}],{duration:200,fill:'forwards'}));spGone([tr,r1.d,r2.d],220)},
-  /* チクタク時計：針がぐるぐる → ジリリリ！ */
+  /* チクタク時計 ティッキー：針がぐるぐる → ジリリリ！ */
   async clock(sd,m,el){const [ox,oy]=ctr(el);const c=sp2art('alarm',56);await sp2fly(c,[ox,oy-60,.2],[ox,oy-80,1],250,'cubic-bezier(.2,1.6,.5,1)');
     for(let i=0;i<6;i++)tone(i%2?1800:1500,.03,{type:'square',vol:.05,at:i*.14});onoma(el,'チクタク…','#e0f0ff');
     const hand=sp2div('sp2-line',`width:30px;height:3px;background:#3a2410;transform:translate(${ox}px,${oy-80}px)`);
@@ -3747,7 +3747,7 @@ Object.assign(SPECIAL,{
 
 
 /* =====================================================================
-   おもしろ技アニメ その3（ゾンビ・ならず者・ギャングなど 28人）
+   おもしろ技アニメ その3（ゾンビ・荒野のならず者 ビリー・ギャングなど 28人）
    ===================================================================== */
 (()=>{if(document.getElementById('sp3css'))return;const s=document.createElement('style');s.id='sp3css';s.textContent=`
 .sp3-bub{position:fixed;z-index:91;pointer-events:none;background:#fffdf3;color:#3a2410;border:3px solid #3a2410;border-radius:16px;padding:5px 10px;font:900 14px/1.25 var(--display,sans-serif);white-space:nowrap;transform:translate(-50%,-100%);box-shadow:0 4px 0 rgba(0,0,0,.25);animation:sp3bub .25s cubic-bezier(.2,1.6,.5,1) both}
@@ -3887,7 +3887,7 @@ Object.assign(SPECIAL,{
     for(let i=0;i<4;i++){const q=S3.svg('q',30);const x=ox+(Math.random()-.5)*110,y=oy+(Math.random()-.5)*70;tone(900+i*100,.08,{type:'triangle',vol:.04});
       spAnim(q,[{transform:SPT(x,y,.2),opacity:0},{transform:SPT(x,y-10,1),opacity:1,offset:.4},{transform:SPT(x,y-26,.9),opacity:0}],600);spGone(q,620);await sleep(110)}
     await sleep(500)},
-  /* スチームタウンの斧使い：斧がブーメランみたいに てき全体を往復 */
+  /* スチームタウンのバイク乗り：斧がブーメランみたいに てき全体を往復 */
   async axe(sd,m,el){const [ox,oy]=ctr(el),[tx,ty,tw]=spZone(sd,'opp');const a=spImg('axe',54);S3.later(ox,oy-80,'どこまでも 追いかけるぜ！',800);
     for(let i=0;i<10;i++)nz(.07,{at:i*.08,vol:.06,f0:1800,type:'bandpass',q:4});
     const pts=[[tx-tw*.4,ty],[tx,ty+10],[tx+tw*.4,ty]];
@@ -3919,7 +3919,7 @@ Object.assign(SPECIAL,{
     for(let i=0;i<5;i++){const c=spImg('ui/x_coin.png',22);const x=ox+(Math.random()-.5)*60;tone(1400-i*120,.08,{type:'triangle',vol:.04,at:0});
       spAnim(c,[{transform:SPT(ox,oy-30,1)},{transform:SPT(x,oy+50,1,200)},{transform:SPT(x+10,oy+38,1,240),offset:.85},{transform:SPT(x+14,oy+50,1,260),opacity:0}],600,'ease-in');spGone(c,620);await sleep(90)}
     fxImg(ox+30,oy-40,'x_sweat',26,'fxpop',600);await sleep(500);spAnim(bar,[{opacity:1},{opacity:0}],200);spGone(bar,210)},
-  /* 卑怯な成金：お札を ばらまいて 「オーッホッホ」 金歯キラーン */
+  /* ずるい成金 ゴールディ：お札を ばらまいて 「オーッホッホ」 金歯キラーン */
   async narikin(sd,m,el){const [ox,oy]=ctr(el);S3.later(ox,oy-80,'お金で買えないものは ない！',900);
     for(let i=0;i<12;i++){const b=i%3?S3.svg('billg',38):spImg('ui/x_coins.png',30);const x=ox+(Math.random()-.5)*220;spAnim(b,[{transform:SPT(ox,oy-30,.3,0)},{transform:SPT((ox+x)/2,oy-130,1,180),offset:.4},{transform:SPT(x,oy+70,1,400),opacity:0}],900,'ease-out',i*40);spGone(b,1400)}
     [523,494,466,440,415].forEach((f,i)=>vo(f*1.5,{at:.1+i*.12,dur:.12,vol:.05,type:'triangle'}));S3.on(el,'オーッホッホ！','#ffd34a');
@@ -3929,7 +3929,7 @@ Object.assign(SPECIAL,{
     await el.animate([{transform:'translateY(-90px) scale(1.2)'},{transform:'translateY(0) scale(1.15,.85)',offset:.7},{transform:'none'}],{duration:450*SPEED,easing:'ease-in'}).finished.catch(()=>{});
     tone(60,.4,{type:'sine',vol:.2,slide:30});nz(.4,{vol:.12,f0:300,type:'lowpass'});shakeApp&&shakeApp();fxImg(ox,oy+30,'x_dust2',140,'fxpuff',900);S3.on(el,'ドスン！！','#c9a070');
     await sleep(350);fxImg(ox,oy,'x_barrier',120,'fxpop',900);vo(220,{dur:.5,vol:.06,type:'sawtooth',lp:600});await sleep(500)},
-  /* 金庫やぶりモグラ：地面をホリホリ、カチカチ…ガチャ！ お宝ザクザク */
+  /* 金庫やぶりのツィッガー：地面をホリホリ、カチカチ…ガチャ！ お宝ザクザク */
   async mole(sd,m,el){const [ox,oy]=ctr(el);el.animate([{transform:'none'},{transform:'translateY(40px) scale(.7)',opacity:.3,offset:.3},{transform:'translateY(40px) scale(.7)',opacity:.3,offset:.7},{transform:'none',opacity:1}],{duration:1300*SPEED});
     for(let i=0;i<5;i++){setTimeout(()=>fxImg(ox+(Math.random()-.5)*50,oy+20,'x_dust',50,'fxpuff',600),i*100);nz(.08,{at:i*.1,vol:.07,f0:400,type:'lowpass'})}
     await sleep(450);for(let i=0;i<4;i++){tone(2000,.03,{type:'square',vol:.04,at:i*.09})}S3.on(fakeEl(ox,oy+10),'カチカチ…','#c9c9c9');await sleep(420);
@@ -5357,16 +5357,16 @@ NEWC({id:'new13',n:'列車強盗ジャック',f:'ou',r:'N',c:2,a:2,h:2,em:'💰'
 NEWC({id:'new14',n:'車掌のポッポさん',f:'gu',r:'N',c:2,a:1,h:3,em:'🚂',stage:'train',s:'しゅっぱーつ しんこう〜！',lines:['','','',''],note:'見参！：なかまを1人 ひく（シートではスチームタウン。しゅぞくの見直し列で ギルド）',bc:'draw',v:1});
 NEWC({id:'new15',n:'ゼンマイねずみ チュウ',f:'ro',r:'N',c:1,a:1,h:1,em:'🐭',stage:'steam',s:'ジジジ…チュウ！',lines:['','','',''],note:'やられたら：なかまを1人 ひく（シートではスチームタウン。しゅぞくの見直し列で ロボット）',dr:'draw',dv:1});
 NEWC({id:'new16',n:'スチームゴーレム',f:'ro',r:'R',c:5,a:4,h:6,em:'🗿',stage:'steam',s:'シュー…マモル…',lines:['','','',''],note:'かばう：敵はまずこのキャラを攻撃しないといけない（シートではスチームタウン。しゅぞくの見直し列で ロボット）',kw:'taunt'});
-NEWC({id:'new17',n:'ぬまのカエル王子',f:'ma',r:'N',c:2,a:1,h:3,em:'🐸',stage:'bayou',s:'キスは いらないケロ',lines:['','','',''],note:'見参！：いちばん強い敵キャラに毒×1',bc:'poison',v:1});
+NEWC({id:'new17',n:'ぬまカエルのルイ王子',f:'ma',r:'N',c:2,a:1,h:3,em:'🐸',stage:'bayou',s:'キスは いらないケロ',lines:['','','',''],note:'見参！：いちばん強い敵キャラに毒×1',bc:'poison',v:1});
 NEWC({id:'new18',n:'ワニのガブ郎',f:'an',r:'N',c:4,a:4,h:5,em:'🐊',stage:'bayou',s:'ガブッと いくぞ〜',lines:['','','',''],note:'（効果なし）'});
-NEWC({id:'new19',n:'雪のせいれい ユキミ',f:'sp',r:'N',c:2,a:2,h:2,em:'❄️',stage:'snow',s:'ひんやり〜、こおっちゃえ！',lines:['','','',''],note:'見参！：いちばん強い敵を こおらせる（1回休み）',bc:'stun'});
+NEWC({id:'new19',n:'雪のせいれい スノウィ',f:'sp',r:'N',c:2,a:2,h:2,em:'❄️',stage:'snow',s:'ひんやり〜、こおっちゃえ！',lines:['','','',''],note:'見参！：いちばん強い敵を こおらせる（1回休み）',bc:'stun'});
 NEWC({id:'new20',n:'シロクマ親分',f:'an',r:'R',c:5,a:5,h:6,em:'🐻',stage:'snow',s:'寒いのは へっちゃらだ！',lines:['','','',''],note:'かばう：敵はまずこのキャラを攻撃しないといけない',kw:'taunt'});
 NEWC({id:'new21',n:'砂のせいれい サラサラ',f:'sp',r:'N',c:3,a:2,h:3,em:'🏜️',stage:'oasis',s:'サラサラ〜…どこに いるでしょう？',lines:['','','',''],note:'かくれんぼ：自分から攻撃するまで、ねらわれない',kw:'stealth'});
 NEWC({id:'new22',n:'ランプの魔人 ジニー',f:'sp',r:'L',c:6,a:5,h:5,em:'🧞',stage:'oasis',s:'ねがいごとは 3つまで だよ〜ん！',lines:['','','',''],note:'見参！：なかまを2人 ひいて、コイン+2',bc:'drawcoin',v:2});
-NEWC({id:'new23',n:'マグマのせいれい ゴウ',f:'sp',r:'N',c:3,a:3,h:2,em:'🌋',stage:'volcano',s:'あっちっち〜！ボコボコ〜！',lines:['','','',''],note:'見参！：ランダムな敵に2ダメージ',bc:'bomb',v:2});
+NEWC({id:'new23',n:'マグマのせいれい フレイミー',f:'sp',r:'N',c:3,a:3,h:2,em:'🌋',stage:'volcano',s:'あっちっち〜！ボコボコ〜！',lines:['','','',''],note:'見参！：ランダムな敵に2ダメージ',bc:'bomb',v:2});
 NEWC({id:'new24',n:'ひくいどりのヒノ',f:'an',r:'R',c:4,a:4,h:3,em:'🔥',stage:'volcano',s:'ひのたまキック〜！',lines:['','','',''],note:'はやうち：出したターンからすぐ攻撃できる',kw:'quick'});
 NEWC({id:'new25',n:'おどるサボテン ラテン',f:'ca',r:'N',c:2,a:1,h:3,em:'💃',stage:'forest',s:'♪チャッチャッ サボサボ〜',lines:['','','',''],note:'いるあいだ：ほかのサボテンの攻撃+1',aura:'faction',av:1});
-NEWC({id:'new26',n:'森の長老 サボじい',f:'ca',r:'L',c:6,a:4,h:7,em:'🌳',stage:'forest',s:'ほっほ、森は みんなの ものじゃ',lines:['','','',''],note:'かばう：敵はまずこのキャラを攻撃しないといけない / いるあいだ：ターンの終わり、仲間ぜんいんの体力を1いやす',kw:'taunt',aura:'regen',av:1});
+NEWC({id:'new26',n:'森の長老 エル・カルドン',f:'ca',r:'L',c:6,a:4,h:7,em:'🌳',stage:'forest',s:'ほっほ、森は みんなの ものじゃ',lines:['','','',''],note:'かばう：敵はまずこのキャラを攻撃しないといけない / いるあいだ：ターンの終わり、仲間ぜんいんの体力を1いやす',kw:'taunt',aura:'regen',av:1});
 NEWC({id:'new27',n:'ドアマンのゴンゾ',f:'mf',r:'N',c:2,a:1,h:3,em:'🚪',stage:'mafia',s:'ここから先は とおさねえ',lines:['','','',''],note:'かばう：敵はまずこのキャラを攻撃しないといけない',kw:'taunt'});
 NEWC({id:'new28',n:'ショーガールのルル',f:'mf',r:'N',c:3,a:2,h:3,em:'💋',stage:'mafia',s:'ショーの はじまりよ〜♪',lines:['','','',''],note:'見参！：なかまを1人 ひく',bc:'draw',v:1});
 NEWC({id:'new29',n:'スチームタウンのえんとつ小僧',f:'st',r:'N',c:1,a:1,h:1,em:'🧹',stage:'steam',s:'すすだらけで ごめんよ！',lines:['','','',''],note:'はやうち：出したターンからすぐ攻撃できる',kw:'quick'});
@@ -5378,28 +5378,28 @@ NEWC({id:'new34',n:'からくり大将 ギガボルト',f:'ro',r:'L',c:6,a:5,h:6
 NEWC({id:'new35',n:'くっつきボルトくん',f:'ro',r:'N',c:2,a:1,h:2,em:'🔩',stage:'steam',s:'カチッと くっつくよ！',lines:['','','',''],note:'くっつく：ロボットのとなりに出すと 合体して、数字と効果をそのロボットにたす',gattai:1});
 NEWC({id:'new36',n:'シーツおばけ ふわり',f:'gh',r:'N',c:1,a:1,h:1,em:'👻',stage:'hill',stages:['hill','bayou'],s:'ばぁ〜！…びっくりした？',lines:['','','',''],note:'かくれんぼ：自分から攻撃するまで、ねらわれない',kw:'stealth'});
 NEWC({id:'new37',n:'ねぼけおばけ',f:'gh',r:'R',c:5,a:3,h:3,em:'😪',stage:'hill',s:'ふぁ〜あ…まだ ねむい…',lines:['','','',''],note:'やられたら：「ほんきおばけ」（6／6・かくれんぼ）に化ける',dr:'summon',tok:'honkiT',dv:1});
-NEWC({id:'new38',n:'おばけ特急の車掌 ヨミジ',f:'gh',r:'L',c:6,a:4,h:6,em:'🚃',stage:'hill',stages:['hill','bayou'],s:'おのりのお客さま、ごあんないします…',lines:['','','',''],note:'いるあいだ：なかまがやられるたび、おばけ特急に乗せる／やられたら：乗せたなかまを ぜんぶよみがえらせる',dr:'summon',tok:'ghostT',dv:3}); // 単純化：やられたら ひとだま3つ
+NEWC({id:'new38',n:'おばけ特急の車掌 カロン',f:'gh',r:'L',c:6,a:4,h:6,em:'🚃',stage:'hill',stages:['hill','bayou'],s:'おのりのお客さま、ごあんないします…',lines:['','','',''],note:'いるあいだ：なかまがやられるたび、おばけ特急に乗せる／やられたら：乗せたなかまを ぜんぶよみがえらせる',dr:'summon',tok:'ghostT',dv:3}); // 単純化：やられたら ひとだま3つ
 NEWC({id:'new39',n:'かぶりトカゲ',f:'an',r:'N',c:1,a:1,h:2,em:'🦎',stage:'wild',s:'サボテン…じゃないよ、トカゲだよ',lines:['かぶりもの…とれちゃった…','なにを かぶろうかな？','ぴったり かぶれた！','…バケツだった'],note:'見参！：サボテンをかぶって、つぎのターンまで ねらわれない',kw:'stealth'}); // 単純化：かくれんぼ
 NEWC({id:'new40',n:'旅人ホコリン',f:'gu',r:'N',c:2,a:2,h:2,em:'🎒',stage:'wild',s:'ゲホゲホ、遠くから来たよ',lines:['ゲホ…旅も ここまで…','ほこりを はらって…','ピッカピカの旅人だ！','…またほこりだらけ'],note:'見参！：タンブルウィード（1/1）を1匹つれてくる',bc:'summon',tok:'tumbleT',v:1});
 NEWC({id:'new41',n:'ちいさな砂ぼうず',f:'sp',r:'N',c:1,a:1,h:1,em:'🌪️',stage:'wild',s:'くるくる〜、すなぼこり！',lines:['くる…くる…（ぱらぱら）','くるくる ドキドキ','くるくるくる〜っ！','…ただの砂だった'],note:'見参！：すなあらし+1',wx:'sand',wv:1});
 NEWC({id:'new42',n:'がい骨うし ホネモー',f:'gh',r:'N',c:2,a:1,h:3,em:'🐄',stage:'wild',s:'モ〜…ほねだけど げんきだモ〜',lines:['カラン…カラン…モ〜…','ほねまで ドキドキだモ〜','ほねが ツヤツヤだモ〜！','…ほねが 1本たりないモ〜'],note:'やられたら：ほね（0/1）を2本のこす',dr:'summon',tok:'boneT',dv:2});
-NEWC({id:'new43',n:'見はりコンドル ガンミ',f:'an',r:'N',c:3,a:2,h:3,em:'🦅',stage:'wild',s:'上から 見てるよ〜',lines:['見すぎて…目がまわった…','じーっ… ドキドキ','ぜんぶ 見えるぞ！','…めがねが くもった'],note:'見参！：敵がつぎに出すカードを のぞき見する',bc:'scout'});
-NEWC({id:'new44',n:'なまけ助手 グータラ',f:'sh',r:'N',c:2,a:3,h:3,em:'😴',stage:'wild',s:'ふぁ〜…逮捕は あしたでいい？',lines:['ぐぅ…（ねてるだけ）','おこさないでね〜','…ちょっと やる気でた','ぐぅ〜…'],note:'のんびり屋'}); // 単純化：ねぼすけは未実装（効果なしの大きい体）
+NEWC({id:'new43',n:'見はりコンドル ガンミーナ',f:'an',r:'N',c:3,a:2,h:3,em:'🦅',stage:'wild',s:'上から 見てるよ〜',lines:['見すぎて…目がまわった…','じーっ… ドキドキ','ぜんぶ 見えるぞ！','…めがねが くもった'],note:'見参！：敵がつぎに出すカードを のぞき見する',bc:'scout'});
+NEWC({id:'new44',n:'なまけ助手 スナッズ',f:'sh',r:'N',c:2,a:3,h:3,em:'😴',stage:'wild',s:'ふぁ〜…逮捕は あしたでいい？',lines:['ぐぅ…（ねてるだけ）','おこさないでね〜','…ちょっと やる気でた','ぐぅ〜…'],note:'のんびり屋'}); // 単純化：ねぼすけは未実装（効果なしの大きい体）
 NEWC({id:'new45',n:'荒野のうま ハヤテ',f:'an',r:'N',c:3,a:3,h:2,em:'🐎',stage:'wild',s:'ヒヒン！風より はやいよ！',lines:['ヒヒ…足が もつれた〜','ヒン？ はしっていい？','ヒヒーン！もっと はやく！','…ひと休み'],note:'はやうち：出したターンからすぐ攻撃できる',kw:'quick'});
 NEWC({id:'new46',n:'ちびツノ丸',f:'an',r:'N',c:1,a:2,h:1,em:'🐂',stage:'wild',s:'ツノで つんつん！',lines:['ツノ…まがった…','ツノ、のびるかな？','ツノ ピカピカ！','…ツノが とれた'],note:'（効果なし）'});
 NEWC({id:'new47',n:'手配書はりのチャッピー',f:'gu',r:'N',c:2,a:2,h:1,em:'📜',stage:'wild',s:'手配書 はりまーす！ 賞金首は だれかな〜？',lines:['手配書…風にとばされた〜','ぼくの手配書も つくって？','賞金 アップだ！','…顔が にてない'],note:'見参！：敵1体に手配書をはる。その敵をたおすと＄2',bc:'wanted'});
 NEWC({id:'new48',n:'サボテンのサボ子',f:'ca',r:'N',c:2,a:1,h:2,em:'🌵',stage:'wild',s:'うえてくれたら、のびるよ〜',lines:['しおしお〜…','お水 ちょうだい？','ぐんぐん のびた！','…ちょっと しおれた'],note:'うえるとそだつ：毎ターン すこしずつ 大きくなる（合成で のびる）',growT:1});
-NEWC({id:'new49',n:'決闘ネズミ ズドン',f:'ou',r:'R',c:3,a:3,h:2,em:'🐀',stage:'wild',s:'正午だチュー。ぬきなチュー',lines:['おそかった…チュー…','まだだチュー…まだだチュー…','いまだチュー！','…チュ〜'],note:'決闘：見参！で敵1体とにらみ合い。先にタップできたら 一発でたおす',bc:'quickmg',v:5}); // 単純化：一発でたおす → 勝ったら5ダメージ
-NEWC({id:'new50',n:'しんきろうギツネ ユラリ',f:'an',r:'R',c:3,a:2,h:3,em:'🦊',stage:'wild',s:'どれが ほんものでしょ〜？',lines:['ハズレ…じゃなかった〜','ほんものを えらんでね','ぜんぶ ほんもの！？','…ぜんぶ ニセモノだった'],note:'見参！：ニセモノ（1/1）を2匹よぶ。どれがホンモノかは ないしょ',bc:'summon',tok:'fakeT',v:2});
+NEWC({id:'new49',n:'決闘ネズミ ブラム',f:'ou',r:'R',c:3,a:3,h:2,em:'🐀',stage:'wild',s:'正午だチュー。ぬきなチュー',lines:['おそかった…チュー…','まだだチュー…まだだチュー…','いまだチュー！','…チュ〜'],note:'決闘：見参！で敵1体とにらみ合い。先にタップできたら 一発でたおす',bc:'quickmg',v:5}); // 単純化：一発でたおす → 勝ったら5ダメージ
+NEWC({id:'new50',n:'まどわしの ウルスラ',f:'an',r:'R',c:3,a:2,h:3,em:'🦊',stage:'wild',s:'どれが ほんものでしょ〜？',lines:['ハズレ…じゃなかった〜','ほんものを えらんでね','ぜんぶ ほんもの！？','…ぜんぶ ニセモノだった'],note:'見参！：ニセモノ（1/1）を2匹よぶ。どれがホンモノかは ないしょ',bc:'summon',tok:'fakeT',v:2});
 NEWC({id:'new51',n:'なげなわばあちゃん ロープ婆',f:'sh',r:'R',c:4,a:2,h:4,em:'👵',stage:'wild',s:'わしの投げ縄から にげられんよ',lines:['あらら…なわが ほどけた…','なわを ギュッと たのむよ','まだまだ 若いもんには まけん！','…こしが いたい'],note:'投げ縄名人：投げ縄を2回投げられる',aura:'lasso'}); // 単純化：投げ縄+15%
 NEWC({id:'new52',n:'荒野の大ヘビ ガラゴン',f:'an',r:'L',c:6,a:5,h:6,em:'🐍',stage:'wild',s:'シャ〜…荒野は わしのもの…',lines:['シャ…ほどけて…しまった…','シャ〜…ていねいに たのむぞ','シャシャ〜！ ながくなった！','…からまった'],note:'見参！：敵1体をぐるぐる巻き！2ターン動けない。そのあいだ毎ターン2ダメージ',bc:'jail',poison:2}); // 単純化：牢屋＋戦った相手に毒×2
 NEWC({id:'new53',n:'ゾンビ犬ホネスキー',f:'zo',r:'N',c:2,a:2,h:1,em:'🐕',stage:'hill',s:'ワウ〜…ほね ほしい…',lines:['ワウ…ほね…おいてく…','ワウ？ ほね くれる？','ワウワウ！ほね いっぱい！','…ほね、うめちゃった'],note:'やられたら：ほね（0/1）をのこす。つぎのゾンビが ひろうとパワーアップ',dr:'summon',tok:'boneT',dv:1});
 NEWC({id:'new54',n:'ねむたいゾンビ',f:'zo',r:'N',c:1,a:0,h:3,em:'🧟',stage:'hill',s:'アー…ねむい…',lines:['アー…おやすみ…','アー…おこさないで…','アー！ 目が さめた！','アー…ぐぅ…'],note:'かばう：敵はまずこのキャラを攻撃しないといけない',kw:'taunt'});
 NEWC({id:'new55',n:'うたうゾンビ合唱団',f:'zo',r:'N',c:4,a:1,h:1,em:'🎤',stage:'hill',s:'アー♪ アー♪ アー♪',lines:['アー…♪（ソロに なった）','アー♪ ハモって いい？','アー♪♪♪ 大合唱！','…音が はずれた'],note:'見参！：ゾンビ（1/1）を2匹よぶ。3体そろうと大合唱！敵ぜんいん1回休み',bc:'summon',tok:'zombieT',v:2}); // 単純化：大合唱は省略
-NEWC({id:'new56',n:'おはなおばけ ハナコ',f:'gh',r:'N',c:2,a:1,h:3,em:'🌸',stage:'hill',s:'おはな、いかが〜？',lines:['おはな…かれちゃった…','きれいに さかせてね','まんかい〜！','…つぼみのまま'],note:'いるあいだ：仲間がやられるたび、お花（0/1）がさく',dr:'summon',tok:'flowerT',dv:2}); // 単純化：自分がやられたら お花2つ
-NEWC({id:'new57',n:'ちょうちんおばけ ボンボリ',f:'gh',r:'N',c:2,a:2,h:2,em:'🏮',stage:'hill',s:'ぼんやり あかるいよ〜',lines:['ふっ…（あかりが きえた）','あかるく してね','ピカーッ！','…でんきぎれ'],note:'見参！：かくれんぼ中の敵を てらして見つける',bc:'shave'}); // 単純化：効果けし
+NEWC({id:'new56',n:'おはなおばけ デイジー',f:'gh',r:'N',c:2,a:1,h:3,em:'🌸',stage:'hill',s:'おはな、いかが〜？',lines:['おはな…かれちゃった…','きれいに さかせてね','まんかい〜！','…つぼみのまま'],note:'いるあいだ：仲間がやられるたび、お花（0/1）がさく',dr:'summon',tok:'flowerT',dv:2}); // 単純化：自分がやられたら お花2つ
+NEWC({id:'new57',n:'ちょうちんおばけ フリッカー',f:'gh',r:'N',c:2,a:2,h:2,em:'🏮',stage:'hill',s:'ぼんやり あかるいよ〜',lines:['ふっ…（あかりが きえた）','あかるく してね','ピカーッ！','…でんきぎれ'],note:'見参！：かくれんぼ中の敵を てらして見つける',bc:'shave'}); // 単純化：効果けし
 NEWC({id:'new58',n:'墓守りモグじい',f:'an',r:'N',c:3,a:2,h:4,em:'⛏️',stage:'hill',s:'ほっほ、なにか うまっとるぞ',lines:['穴に…かえるわい…','ほりだしもの、あるかの？','大当たりじゃ！','…石ころじゃった'],note:'手にいれる！：たおれた敵のカードから1枚えらんで手札へ',bc:'get',v:1}); // 単純化：同じしゅぞくを1まい
-NEWC({id:'new59',n:'ガイコツ太鼓のドンコ',f:'gh',r:'N',c:2,a:2,h:2,em:'🥁',stage:'hill',s:'ドンドコ ドン！',lines:['ドン…ドコ……','ドキドキ ドン？','ドンドンドーン！','…太鼓が やぶれた'],note:'いるあいだ：仲間のおばけが攻撃するたび ドン！敵ヒーローに1ダメージ',aura:'link'}); // 単純化：連携
+NEWC({id:'new59',n:'ガイコツ太鼓のラタタ',f:'gh',r:'N',c:2,a:2,h:2,em:'🥁',stage:'hill',s:'ドンドコ ドン！',lines:['ドン…ドコ……','ドキドキ ドン？','ドンドンドーン！','…太鼓が やぶれた'],note:'いるあいだ：仲間のおばけが攻撃するたび ドン！敵ヒーローに1ダメージ',aura:'link'}); // 単純化：連携
 NEWC({id:'new60',n:'こうもりのパタ',f:'an',r:'N',c:1,a:1,h:1,em:'🦇',stage:'hill',s:'パタパタ〜！',lines:['パタ…（ぽてっ）','パタ？','パタパタパタ〜！','…パタ'],note:'はやうち：出したターンからすぐ攻撃できる',kw:'quick'});
 NEWC({id:'new61',n:'ふこうの手紙 ポーカス',f:'gh',r:'N',c:2,a:1,h:1,em:'✉️',stage:'hill',s:'このてがみ、3人に まわしてね…',lines:['まわして…くれなかった…','てがみ、かきなおす？','とどいた〜！','…あて先ちがい'],note:'やられたら：たおした敵の手札に「のろい」（つかえないカード）を1枚まぜる',dr:'boom',dv:1}); // 単純化：のろい → ランダム1ダメージ×3
 NEWC({id:'new62',n:'ゾンビ見習いのボーン太',f:'zo',r:'N',c:2,a:2,h:3,em:'🦴',stage:'hill',s:'アー！ がんばるゾン！',lines:['アー…まだ見習いゾン…','アー、どきどきゾン','アー！ 一人前ゾン！','アー…修行ゾン…'],note:'（効果なし）'});
@@ -5409,80 +5409,80 @@ NEWC({id:'new65',n:'おばけ写真屋 パシャリ',f:'gh',r:'R',c:3,a:2,h:3,em
 NEWC({id:'new66',n:'墓場のオルガン弾き レクイエ',f:'gh',r:'L',c:6,a:4,h:6,em:'🎹',stage:'hill',s:'さあ、みんな おきて… 演奏会よ',lines:['演奏…おわり…','しずかに… 調律中よ','すばらしい ひびき！','…音が くるった'],note:'見参！：この戦いでたおれた仲間ぜんいんが、おばけ（1/1・かくれんぼ）になってもどってくる',bc:'summon',tok:'ghostT',v:3}); // 単純化：ひとだま3つ
 NEWC({id:'new67',n:'がけのぼりヤギ メルメル',f:'an',r:'N',c:2,a:2,h:2,em:'🐐',stage:'canyon',s:'メェ〜！がけも へっちゃら！',lines:['メェ…すべった〜','メェ？ のぼっていい？','メェェ〜！てっぺん！','…メェ（おちた）'],note:'とびこえ：かばうを むしして攻撃できる'}); // 単純化：とびこえは未実装
 NEWC({id:'new68',n:'いわのせいれい ゴロン',f:'sp',r:'N',c:3,a:2,h:4,em:'🪨',stage:'canyon',s:'ゴロ…ゴロン…',lines:['ゴロ…（かたまった）','ゴロ？ ゴロン？','ゴロゴロ〜ン！','…ひび はいった'],note:'やられたら：岩（0/3・かばう）になって のこる',dr:'summon',tok:'rockT',dv:1});
-NEWC({id:'new69',n:'こだまコウモリ ヤッホー',f:'an',r:'N',c:2,a:1,h:1,em:'🦇',stage:'canyon',s:'ヤッホー！',lines:['ヤッホー…ホー…ホー…','ヤッホー？','ヤッホーーー！！','…ホー'],note:'やられたら：ヤッホー！とこだまして、つぎのターン もどってくる',kw:'home'}); // 単純化：たおれたら手札へ
+NEWC({id:'new69',n:'こだまコウモリ ヨーデル',f:'an',r:'N',c:2,a:1,h:1,em:'🦇',stage:'canyon',s:'ヤッホー！',lines:['ヤッホー…ホー…ホー…','ヤッホー？','ヤッホーーー！！','…ホー'],note:'やられたら：ヤッホー！とこだまして、つぎのターン もどってくる',kw:'home'}); // 単純化：たおれたら手札へ
 NEWC({id:'new70',n:'つりばし番のギシギシ',f:'gu',r:'N',c:2,a:1,h:3,em:'🌉',stage:'canyon',s:'ここは ひとりずつ わたってね',lines:['ギシ…ギシ…おちる〜！','ゆらさないでね…','がっちり じょうぶ！','…ギシッ'],note:'かばう：敵はまずこのキャラを攻撃しないといけない',kw:'taunt'});
-NEWC({id:'new71',n:'まいごの探検家 マヨイ',f:'gu',r:'N',c:1,a:1,h:1,em:'🧭',stage:'canyon',s:'ここ…どこだっけ？',lines:['やっぱり…まいご〜…','ちず、さかさまかな？','道を 見つけた！','…また まいご'],note:'手にいれる！：ランダムな3枚から1枚えらんで手札へ',bc:'get',v:1});
-NEWC({id:'new72',n:'ハゲタカおばば',f:'an',r:'N',c:3,a:2,h:3,em:'🪶',stage:'canyon',s:'おや、いいにおいだねぇ',lines:['あらら…わたしが おこぼれかい…','ひっひっ、どうするんだい？','ごちそうさま！','…おなか すいたよ'],note:'いるあいだ：敵がたおれるたび コイン+1',aura:'coin'}); // 単純化：毎ターンコイン+1
+NEWC({id:'new71',n:'まいごの探検家 ローミー',f:'gu',r:'N',c:1,a:1,h:1,em:'🧭',stage:'canyon',s:'ここ…どこだっけ？',lines:['やっぱり…まいご〜…','ちず、さかさまかな？','道を 見つけた！','…また まいご'],note:'手にいれる！：ランダムな3枚から1枚えらんで手札へ',bc:'get',v:1});
+NEWC({id:'new72',n:'ハゲタカおばば マギー',f:'an',r:'N',c:3,a:2,h:3,em:'🪶',stage:'canyon',s:'おや、いいにおいだねぇ',lines:['あらら…わたしが おこぼれかい…','ひっひっ、どうするんだい？','ごちそうさま！','…おなか すいたよ'],note:'いるあいだ：敵がたおれるたび コイン+1',aura:'coin'}); // 単純化：毎ターンコイン+1
 NEWC({id:'new73',n:'サソリのハサミン',f:'an',r:'N',c:2,a:3,h:1,em:'🦂',stage:'canyon',s:'チョキチョキ！',lines:['チョキ…（ぱたっ）','チョキ？','チョキーン！','…ハサミ かけた'],note:'（効果なし）'});
 NEWC({id:'new74',n:'岩かげの山賊 ガケマル',f:'ou',r:'N',c:3,a:3,h:3,em:'🏔️',stage:'canyon',s:'へへっ、ここは おれの なわばりさ',lines:['見つかっちまった〜','かくれて まってるぜ','かくれんぼ 名人だ！','…見つかった'],note:'かくれんぼ：自分から攻撃するまで、ねらわれない',kw:'stealth'});
-NEWC({id:'new75',n:'ダイナマイト見習い ボム吉',f:'gu',r:'N',c:2,a:1,h:2,em:'🧨',stage:'canyon',s:'火、つけちゃった〜！',lines:['ドカン…（じぶんで）','ドキドキ…ちかちか…','ドッカーン！大せいこう！','…しけってた'],note:'ダイナマイト：見参！でダイナマイトをおく。3→2→1→ドカン！前の敵に3ダメージ',bc:'fuse',v:1}); // 単純化：前の敵に3 → 2ターン後 敵ぜんいんに1
-NEWC({id:'new76',n:'峡谷の風の子 ピュウ',f:'sp',r:'N',c:2,a:2,h:1,em:'💨',stage:'canyon',s:'ピュ〜ッ！',lines:['ピュ…（むかい風）','ピュ？','ピュピュ〜ッ！','…そよ風'],note:'見参！：すなあらし+1',wx:'sand',wv:1});
-NEWC({id:'new77',n:'こだま歌姫 ヤッホーナ',f:'sa',r:'R',c:3,a:2,h:3,em:'🎶',stage:'canyon',s:'ら〜♪ ら〜♪ ら〜♪',lines:['ら…♪（こだま だけ のこった）','いい声 でるかしら？','ら〜♪ 2ばいの ひびき！','…声が かれた'],note:'見参！：つぎに出す仲間の見参！が2回おきる',bc:'draw',v:1}); // 単純化：なかまを1人ひく
+NEWC({id:'new75',n:'ダイナマイト見習い ブーミー',f:'gu',r:'N',c:2,a:1,h:2,em:'🧨',stage:'canyon',s:'火、つけちゃった〜！',lines:['ドカン…（じぶんで）','ドキドキ…ちかちか…','ドッカーン！大せいこう！','…しけってた'],note:'ダイナマイト：見参！でダイナマイトをおく。3→2→1→ドカン！前の敵に3ダメージ',bc:'fuse',v:1}); // 単純化：前の敵に3 → 2ターン後 敵ぜんいんに1
+NEWC({id:'new76',n:'峡谷の風の子 ゼフ',f:'sp',r:'N',c:2,a:2,h:1,em:'💨',stage:'canyon',s:'ピュ〜ッ！',lines:['ピュ…（むかい風）','ピュ？','ピュピュ〜ッ！','…そよ風'],note:'見参！：すなあらし+1',wx:'sand',wv:1});
+NEWC({id:'new77',n:'こだま歌姫 ヨデリーナ',f:'sa',r:'R',c:3,a:2,h:3,em:'🎶',stage:'canyon',s:'ら〜♪ ら〜♪ ら〜♪',lines:['ら…♪（こだま だけ のこった）','いい声 でるかしら？','ら〜♪ 2ばいの ひびき！','…声が かれた'],note:'見参！：つぎに出す仲間の見参！が2回おきる',bc:'draw',v:1}); // 単純化：なかまを1人ひく
 NEWC({id:'new78',n:'がけっぷち用心棒 ガンロック',f:'mf',r:'R',c:4,a:3,h:5,em:'🧱',stage:'canyon',s:'ここから先は がけだぜ',lines:['きみも いっしょだ〜！','おとすなよ…','岩みたいに かたくなった','…ひやっとした'],note:'かばう：敵はまずこのキャラを攻撃しないといけない / やられたら：いちばん強い敵も いっしょに がけから おっこちる',kw:'taunt',dr:'boom',dv:2}); // 単純化：道づれ → ランダム2ダメージ×3
-NEWC({id:'new79',n:'ハヤブサのキラ',f:'an',r:'R',c:3,a:3,h:2,em:'🦅',stage:'canyon',s:'キラッ！みのがさないよ',lines:['キラ…おちる〜','キラ？ しんか できる？','キラーン！','…はね ぬけた'],note:'しんかする！：敵を3体たおすと「大ハヤブサ」（5/4・はやうち）に変身',evoK:3,evoF:{n:'大ハヤブサ',a:2,h:2,kw:'quick'}});
+NEWC({id:'new79',n:'ハヤブサのフォルカ',f:'an',r:'R',c:3,a:3,h:2,em:'🦅',stage:'canyon',s:'キラッ！みのがさないよ',lines:['キラ…おちる〜','キラ？ しんか できる？','キラーン！','…はね ぬけた'],note:'しんかする！：敵を3体たおすと「大ハヤブサ」（5/4・はやうち）に変身',evoK:3,evoF:{n:'大ハヤブサ',a:2,h:2,kw:'quick'}});
 NEWC({id:'new80',n:'峡谷の主 ゴンドルフ',f:'an',r:'L',c:7,a:6,h:7,em:'🦅',stage:'canyon',s:'峡谷の空は ぜんぶ わしのものだ',lines:['空が…とおい…','わしの つばさを たのむぞ','空の王者、ここにあり！','…風が わるい'],note:'見参！：敵1体をつかんで空へ！手札に追い返す / とびこえ：かばうを むしして攻撃できる',bc:'blow'}); // 単純化：とびこえは未実装
-NEWC({id:'new81',n:'看板ペンキ屋 ヌリヌリ',f:'gu',r:'N',c:1,a:1,h:1,em:'🎨',stage:'saloon',s:'ぬりぬり〜♪ なに色が いい？',lines:['ペンキ…こぼれた〜','きれいな色に してね','ピッカピカ！','…まだら もよう'],note:'見参！：敵1体をピンク色にぬる。ピンクの敵は かくれんぼできない',bc:'shave'}); // 単純化：効果けし
-NEWC({id:'new82',n:'そうじ屋ハタキ',f:'sa',r:'N',c:1,a:1,h:2,em:'🧹',stage:'saloon',s:'パタパタ〜、おそうじ おそうじ',lines:['ほこりに…まけた…','ちりひとつ のこさずね','ピカピカに なった！','…ほこり まみれ'],note:'見参！：場の毒を1つ消す',bc:'healone',v:1}); // 単純化：ちりょう1
+NEWC({id:'new81',n:'看板ペンキ屋 ダブ',f:'gu',r:'N',c:1,a:1,h:1,em:'🎨',stage:'saloon',s:'ぬりぬり〜♪ なに色が いい？',lines:['ペンキ…こぼれた〜','きれいな色に してね','ピッカピカ！','…まだら もよう'],note:'見参！：敵1体をピンク色にぬる。ピンクの敵は かくれんぼできない',bc:'shave'}); // 単純化：効果けし
+NEWC({id:'new82',n:'そうじ屋モッピー',f:'sa',r:'N',c:1,a:1,h:2,em:'🧹',stage:'saloon',s:'パタパタ〜、おそうじ おそうじ',lines:['ほこりに…まけた…','ちりひとつ のこさずね','ピカピカに なった！','…ほこり まみれ'],note:'見参！：場の毒を1つ消す',bc:'healone',v:1}); // 単純化：ちりょう1
 NEWC({id:'new83',n:'ミルクセーキ売り マロン',f:'sa',r:'N',c:2,a:1,h:3,em:'🥤',stage:'saloon',s:'あま〜いミルクセーキ、いかが？',lines:['こぼしちゃった〜…','まぜまぜ ドキドキ','とびきり あまい！','…しょっぱい'],note:'見参！：仲間1体とあなたの体力を2いやす',bc:'healone',v:2}); // 単純化：あなたの回復は省略
-NEWC({id:'new84',n:'床屋のチョキ松',f:'sa',r:'N',c:2,a:2,h:2,em:'💈',stage:'saloon',s:'おきゃくさん、ヒゲ のびてますよ',lines:['あっ…きりすぎた…','かっこよく してね','男前に なった！','…へんな かみがた'],note:'見参！：敵1体のヒゲをそる！その敵の効果がなくなる',bc:'shave'});
+NEWC({id:'new84',n:'床屋の バーバー・バート',f:'sa',r:'N',c:2,a:2,h:2,em:'💈',stage:'saloon',s:'おきゃくさん、ヒゲ のびてますよ',lines:['あっ…きりすぎた…','かっこよく してね','男前に なった！','…へんな かみがた'],note:'見参！：敵1体のヒゲをそる！その敵の効果がなくなる',bc:'shave'});
 NEWC({id:'new85',n:'金貨みがきのピカ子',f:'gu',r:'N',c:2,a:1,h:2,em:'🪙',stage:'saloon',s:'ピッカピカに みがくよ！',lines:['ピカ…くもった…','ピカピカに してね','ピッカーン！','…さびちゃった'],note:'やられたら：金塊を落とす（タップでコイン+1）',dr:'gold',dv:1});
-NEWC({id:'new86',n:'千鳥足の郵便屋 ヨロレ',f:'sa',r:'N',c:3,a:2,h:3,em:'📮',stage:'saloon',s:'ヒック…おてがみ でーす',lines:['ヒック…あて先…わすれた…','ヒック、とどくかな？','ヒック！ちゃんと とどいた！','…となりの家だった'],note:'見参！：なかまを 1人 ひく…でも ときどき 敵が ひいちゃう',bc:'flipdraw',v:1}); // 単純化：表なら1人ひく
+NEWC({id:'new86',n:'千鳥足の郵便屋 ティプシー',f:'sa',r:'N',c:3,a:2,h:3,em:'📮',stage:'saloon',s:'ヒック…おてがみ でーす',lines:['ヒック…あて先…わすれた…','ヒック、とどくかな？','ヒック！ちゃんと とどいた！','…となりの家だった'],note:'見参！：なかまを 1人 ひく…でも ときどき 敵が ひいちゃう',bc:'flipdraw',v:1}); // 単純化：表なら1人ひく
 NEWC({id:'new87',n:'ゆうれいピアノ ポロン',f:'gh',r:'N',c:3,a:2,h:3,em:'🎹',stage:'saloon',s:'ポロン♪ ひとりでに なっちゃう',lines:['ポロ…ン…','ポロン？ ドキドキ','ポロロ〜ン♪','…音が でない'],note:'いるあいだ：ターンの終わり、ポロン♪ 仲間1体の体力を1いやす',aura:'regen',av:1}); // 単純化：1体 → ぜんいん
 NEWC({id:'new88',n:'スイングドアのバタン',f:'sa',r:'N',c:2,a:2,h:3,em:'🚪',stage:'saloon',s:'バタン！いらっしゃい！',lines:['バタン…（しまった）','バタン？','バタンバタン！','…きしむ'],note:'（効果なし）'});
 NEWC({id:'new89',n:'ベルボーイ リンリン',f:'sa',r:'N',c:1,a:1,h:1,em:'🛎️',stage:'saloon',s:'リンリン♪ おにもつ おはこびします',lines:['リン…（ぽてっ）','リンリン？','リンリンリーン！','…にもつ おとした'],note:'見参！：仲間1体を手札にもどす（もう一回 見参！できる）',bc:'recall'}); // 単純化：たおれた仲間1枚を手札に
 NEWC({id:'new90',n:'ガンショップのバンおやじ',f:'gu',r:'N',c:4,a:3,h:4,em:'🔫',stage:'saloon',s:'いいの そろってるぜ',lines:['店じまいだ…','どれにする？','掘り出しもの だ！','…品切れだ'],note:'手にいれる！：ダイナマイトか決闘のカードを1枚',bc:'get',v:1});
 NEWC({id:'new91',n:'ディーラーのクラブ',f:'sa',r:'R',c:3,a:2,h:3,em:'🎰',stage:'saloon',s:'さあ、勝負と いきましょう',lines:['…負けました','カードを くばりますね','わたしの勝ち！','…イカサマが バレた'],note:'見参！：おたがい1枚ひいて、コストが高いほうが＄3',bc:'treasure',v:2}); // 単純化：勝負なしで旅の賞金+＄2
-NEWC({id:'new92',n:'まねっこオウム ペラペラ',f:'an',r:'R',c:2,a:1,h:2,em:'🦜',stage:'saloon',s:'ペラペラ〜 まねしちゃう！',lines:['ペラ…（だまった）','ペラ？ ペラペラ？','ペラペラペーラ！','…ことば わすれた'],note:'見参！：さいごに出た敵の見参！をまねする',bc:'scout'}); // 単純化：敵の手札を見やぶる＋1人ひく
-NEWC({id:'new93',n:'鐘つきのゴーン',f:'sh',r:'R',c:4,a:2,h:5,em:'🔔',stage:'saloon',s:'ゴーン！悪いやつは 牢屋だ',lines:['ゴ…ン…','ゴーン？','ゴーンゴーン！','…鐘が われた'],note:'牢屋：見参！で敵1体を牢屋へ（3ターン）。出てくる前に投げ縄でつかまえられる',bc:'jail'});
+NEWC({id:'new92',n:'まねっこオウム ポリー',f:'an',r:'R',c:2,a:1,h:2,em:'🦜',stage:'saloon',s:'ペラペラ〜 まねしちゃう！',lines:['ペラ…（だまった）','ペラ？ ペラペラ？','ペラペラペーラ！','…ことば わすれた'],note:'見参！：さいごに出た敵の見参！をまねする',bc:'scout'}); // 単純化：敵の手札を見やぶる＋1人ひく
+NEWC({id:'new93',n:'鐘つきのベルトン',f:'sh',r:'R',c:4,a:2,h:5,em:'🔔',stage:'saloon',s:'ゴーン！悪いやつは 牢屋だ',lines:['ゴ…ン…','ゴーン？','ゴーンゴーン！','…鐘が われた'],note:'牢屋：見参！で敵1体を牢屋へ（3ターン）。出てくる前に投げ縄でつかまえられる',bc:'jail'});
 NEWC({id:'new94',n:'金ピカ市長 ニャンゴールド',f:'gu',r:'L',c:6,a:5,h:5,em:'🐱',stage:'saloon',s:'この通りは ニャーのものだ！',lines:['金ピカが…はげた…','金ピカに たのむニャ','ニャハハ！金ピカ！','…メッキだったニャ'],note:'いるあいだ：敵がたおれるたび 金塊が落ちる / 見参！：仲間ぜんいんを金ピカに（1回だけダメージ0）',kw:'shield',aura:'coin'}); // 単純化：自分にバリア＋毎ターンコイン+1
-NEWC({id:'new95',n:'カナリアのピヨ',f:'an',r:'N',c:1,a:1,h:1,em:'🐤',stage:'mine',s:'ピヨピヨ！あぶないよ！',lines:['ピヨ…（くらくら）','ピヨ？','ピヨピヨ〜♪','…ピヨ'],note:'やられたら：危険をしらせる！なかまを1人ひく',dr:'draw',dv:1});
+NEWC({id:'new95',n:'カナリアのピップ',f:'an',r:'N',c:1,a:1,h:1,em:'🐤',stage:'mine',s:'ピヨピヨ！あぶないよ！',lines:['ピヨ…（くらくら）','ピヨ？','ピヨピヨ〜♪','…ピヨ'],note:'やられたら：危険をしらせる！なかまを1人ひく',dr:'draw',dv:1});
 NEWC({id:'new96',n:'トロッコ押しのオスオス',f:'gu',r:'N',c:2,a:2,h:3,em:'🛒',stage:'mine',s:'よいしょ よいしょ！',lines:['おもすぎた〜','おして いい？','スイスイ すすむ！','…脱線した'],note:'（効果なし）'});
-NEWC({id:'new97',n:'ランタンもちのテラス',f:'gu',r:'N',c:2,a:1,h:2,em:'🏮',stage:'mine',s:'てらすよ〜！',lines:['あかりが…きえた…','ちらちら ドキドキ','ピッカーン！','…あぶら ぎれ'],note:'いるあいだ：仲間の金ほり（＄が見つかる効果）が2倍',aura:'miner'}); // 単純化：金ほり
+NEWC({id:'new97',n:'ランタンもちのブライティ',f:'gu',r:'N',c:2,a:1,h:2,em:'🏮',stage:'mine',s:'てらすよ〜！',lines:['あかりが…きえた…','ちらちら ドキドキ','ピッカーン！','…あぶら ぎれ'],note:'いるあいだ：仲間の金ほり（＄が見つかる効果）が2倍',aura:'miner'}); // 単純化：金ほり
 NEWC({id:'new98',n:'金ぴかミミズ ニョロゴールド',f:'an',r:'N',c:1,a:0,h:2,em:'🪱',stage:'mine',s:'ニョロ〜、もぐるね',lines:['ニョロ…（ひからびた）','ニョロ？','ニョロピカ〜！','…ただの土'],note:'見参！：地面にもぐる。2ターン後に 金塊をもって出てくる',bc:'treasure',v:1}); // 単純化：旅の賞金+＄1
-NEWC({id:'new99',n:'ツルハシゴブリン',f:'mf',r:'N',c:2,a:2,h:2,em:'⛏️',stage:'mine',s:'ほった金は おれのもの！',lines:['おとしちまった〜','ほるぞ ほるぞ！','金が ザクザク！','…ツルハシ おれた'],note:'ダメージをうけるたび 金塊がこぼれる（タップでコイン+1）',dr:'gold',dv:1}); // 単純化：やられたら金塊
+NEWC({id:'new99',n:'つるはしゴブリン ノック',f:'mf',r:'N',c:2,a:2,h:2,em:'⛏️',stage:'mine',s:'ほった金は おれのもの！',lines:['おとしちまった〜','ほるぞ ほるぞ！','金が ザクザク！','…ツルハシ おれた'],note:'ダメージをうけるたび 金塊がこぼれる（タップでコイン+1）',dr:'gold',dv:1}); // 単純化：やられたら金塊
 NEWC({id:'new100',n:'ヘルメットのゴツン',f:'gu',r:'N',c:3,a:1,h:5,em:'⛑️',stage:'mine',s:'落盤注意！',lines:['ゴツン…きゅう〜','かたく してね','カッチカチ！','…へこんだ'],note:'かばう：敵はまずこのキャラを攻撃しないといけない',kw:'taunt'});
 NEWC({id:'new101',n:'ほら穴こびと ドワ助',f:'gu',r:'N',c:1,a:2,h:1,em:'🧔',stage:'mine',s:'ちいさくても ちからもち！',lines:['ふぅ…ここまで…','ドキドキ…','ちからもち パワー！','…こしが いたい'],note:'（効果なし）'});
 NEWC({id:'new102',n:'コウモリ大家族',f:'an',r:'N',c:3,a:1,h:1,em:'🦇',stage:'mine',s:'キキキッ！みんな いくよ！',lines:['キキ…ちりぢり〜','キキ？','キキキキーッ！','…1匹 まいご'],note:'見参！：コウモリ（1/1・はやうち）を2匹よぶ',bc:'summon',tok:'batT',v:2});
-NEWC({id:'new103',n:'宝石ガニ キラキラ',f:'an',r:'N',c:2,a:1,h:3,em:'🦀',stage:'mine',s:'キラキラ〜 きれいでしょ？',lines:['キラ…（こうらが…）','キラ？','ピッカピカ！','…くもった'],note:'やられたら：宝石を落とす！旅の賞金+＄2',dr:'gold',dv:2});
+NEWC({id:'new103',n:'宝石ガニ ジェミー',f:'an',r:'N',c:2,a:1,h:3,em:'🦀',stage:'mine',s:'キラキラ〜 きれいでしょ？',lines:['キラ…（こうらが…）','キラ？','ピッカピカ！','…くもった'],note:'やられたら：宝石を落とす！旅の賞金+＄2',dr:'gold',dv:2});
 NEWC({id:'new104',n:'ダイナマイト倉庫番 ドカ男',f:'gu',r:'N',c:4,a:2,h:4,em:'🧨',stage:'mine',s:'火気げんきん！…だよね？',lines:['ドッカーン…（まきこまれた）','ひ、火は ちかづけないで','ドカドカーン！','…しけってた'],note:'見参！：ダイナマイトを2本おく（3→2→1→ドカン！前の敵に3ダメージ）',bc:'fuse',v:2}); // 単純化：2ターン後 敵ぜんいんに2
-NEWC({id:'new105',n:'クリスタルのせいれい ギラリ',f:'sp',r:'R',c:4,a:3,h:4,em:'💎',stage:'mine',s:'キラリ…まぶしい？',lines:['パリン…','ていねいに みがいて','ギラーン！','…ヒビが はいった'],note:'はねかえし：さいしょにうけた攻撃を そのまま相手にかえす',kw:'shield thorns'}); // 単純化：バリア＋トゲ
-NEWC({id:'new106',n:'トロッコ暴走団 ガタゴー',f:'ou',r:'R',c:4,a:4,h:3,em:'🛤️',stage:'mine',s:'ブレーキ？ そんなもの ないぜ！',lines:['だっせん〜〜！','スピード だすぜ！','フルスピード！','…ブレーキ かかった'],note:'見参！：トロッコで つっこむ！ランダムな敵3体に2ダメージ',bc:'aoe',v:1}); // 単純化：敵キャラぜんいんに1
+NEWC({id:'new105',n:'クリスタルのせいれい プリズマ',f:'sp',r:'R',c:4,a:3,h:4,em:'💎',stage:'mine',s:'キラリ…まぶしい？',lines:['パリン…','ていねいに みがいて','ギラーン！','…ヒビが はいった'],note:'はねかえし：さいしょにうけた攻撃を そのまま相手にかえす',kw:'shield thorns'}); // 単純化：バリア＋トゲ
+NEWC({id:'new106',n:'トロッコ暴走団ご一行',f:'ou',r:'R',c:4,a:4,h:3,em:'🛤️',stage:'mine',s:'ブレーキ？ そんなもの ないぜ！',lines:['だっせん〜〜！','スピード だすぜ！','フルスピード！','…ブレーキ かかった'],note:'見参！：トロッコで つっこむ！ランダムな敵3体に2ダメージ',bc:'aoe',v:1}); // 単純化：敵キャラぜんいんに1
 NEWC({id:'new107',n:'金のガチョウ ゴルディ',f:'an',r:'R',c:3,a:1,h:4,em:'🥚',stage:'mine',s:'ガァ〜、金のたまご いる？',lines:['ガァ…たまご…','ガァ？ ドキドキ','ガァガァ！ピカピカ！','…ふつうの たまご'],note:'いるあいだ：毎ターン 金のたまごをうむ（3つで＄5）',aura:'miner'}); // 単純化：金ほり
 NEWC({id:'new108',n:'ほりあて大王 キンメッキー',f:'gu',r:'L',c:6,a:5,h:6,em:'👑',stage:'mine',s:'ここ ほれ ワッハッハ！',lines:['金を…のこして…いくぞ…','大王を ほりおこすのか？','金脈 だいはっけん！','…金メッキだった'],note:'見参！：この戦い、たおした敵ぜんぶが金塊を落とす / やられたら：旅の賞金+＄5',aura:'miner',dr:'gold',dv:5}); // 単純化：見参 → いるあいだ金ほり
 NEWC({id:'new109',n:'ひよこのピーコ',f:'an',r:'N',c:1,a:1,h:1,em:'🐥',stage:'ranch',s:'ピヨ！ピーコだよ！',lines:['ピ…ピヨ〜…','ピヨ？ コケ子に なれる？','コケッ！？','…ピヨのまま'],note:'しんかする！：敵を3体たおすと「にわとりコケ子」（3/3）に変身',evoK:3,evoF:{n:'にわとりコケ子',a:2,h:2}});
 NEWC({id:'new110',n:'ミルク牛のモーリー',f:'an',r:'N',c:2,a:1,h:4,em:'🐄',stage:'ranch',s:'モ〜、ミルク のむ？',lines:['モ〜…','モ〜？','モ〜〜♪ こいミルク！','…モ（しょぼん）'],note:'いるあいだ：ターンの終わり、ミルクで あなたの体力を1いやす',aura:'regen',av:1}); // 単純化：あなた → 仲間ぜんいん
 NEWC({id:'new111',n:'カウボーイ見習い ハット',f:'sh',r:'N',c:1,a:1,h:2,em:'🤠',stage:'ranch',s:'ぼうしだけは 一人前！',lines:['ぼうし…とんでった…','ドキドキ…','かっこいい？','…ぼうしが ぶかぶか'],note:'昇進：子分を3体たおすと「カウボーイ⭐」',rankK:3});
-NEWC({id:'new112',n:'どろんこブタ ドロ吉',f:'an',r:'N',c:2,a:2,h:2,em:'🐖',stage:'ranch',s:'ブヒッ、どろあそび しよ！',lines:['ブヒ〜…どろだらけ…','ブヒ？','ブヒヒッ！ピカピカ！','…また どろだらけ'],note:'やられたら：どろをはねる！たおした敵は 1回休み',kw:'thorns'}); // 単純化：トゲ（攻撃してきた相手に仕返し）
-NEWC({id:'new113',n:'かかしのワラ兵衛',f:'gh',r:'N',c:2,a:0,h:4,em:'🌾',stage:'ranch',s:'…（じーっと たってる）',lines:['ワラが…ちる…','…ドキドキ（してない）','…かっこよく なった','…ワラが ぬけた'],note:'かばう：敵はまずこのキャラを攻撃しないといけない / 鳥の敵は こわがって攻撃できない',kw:'taunt'}); // 単純化：鳥よけは省略
-NEWC({id:'new114',n:'ひつじかい モコ',f:'gu',r:'N',c:3,a:2,h:3,em:'🧶',stage:'ranch',s:'みんな〜、こっちだよ〜',lines:['まいごに…しないでね…','もこもこ ドキドキ','もっこもこ！','…ひつじが にげた'],note:'見参！：こひつじ（0/2・かばう）を2匹よぶ',bc:'summon',tok:'lambT',v:2});
+NEWC({id:'new112',n:'どろんこブタ スロッピー',f:'an',r:'N',c:2,a:2,h:2,em:'🐖',stage:'ranch',s:'ブヒッ、どろあそび しよ！',lines:['ブヒ〜…どろだらけ…','ブヒ？','ブヒヒッ！ピカピカ！','…また どろだらけ'],note:'やられたら：どろをはねる！たおした敵は 1回休み',kw:'thorns'}); // 単純化：トゲ（攻撃してきた相手に仕返し）
+NEWC({id:'new113',n:'かかしのヘイウッド',f:'gh',r:'N',c:2,a:0,h:4,em:'🌾',stage:'ranch',s:'…（じーっと たってる）',lines:['ワラが…ちる…','…ドキドキ（してない）','…かっこよく なった','…ワラが ぬけた'],note:'かばう：敵はまずこのキャラを攻撃しないといけない / 鳥の敵は こわがって攻撃できない',kw:'taunt'}); // 単純化：鳥よけは省略
+NEWC({id:'new114',n:'ひつじかい ラナ',f:'gu',r:'N',c:3,a:2,h:3,em:'🧶',stage:'ranch',s:'みんな〜、こっちだよ〜',lines:['まいごに…しないでね…','もこもこ ドキドキ','もっこもこ！','…ひつじが にげた'],note:'見参！：こひつじ（0/2・かばう）を2匹よぶ',bc:'summon',tok:'lambT',v:2});
 NEWC({id:'new115',n:'ロデオうし バッファ',f:'an',r:'N',c:3,a:4,h:2,em:'🐂',stage:'ranch',s:'ブモー！のれるもんなら のってみな！',lines:['ブモ…（ドスン）','ブモ？','ブモォーッ！','…ブモ'],note:'見参！：あばれる！ランダムなキャラ（敵か味方）に2ダメージ',bc:'bomb',v:2}); // 単純化：ランダムな敵だけ
-NEWC({id:'new116',n:'なげなわ少年 ヒュンヒュン',f:'sh',r:'N',c:2,a:1,h:2,em:'🪢',stage:'ranch',s:'ヒュンヒュン〜、つかまえた！',lines:['からまった〜','なわ、まわしていい？','ヒュヒュン！','…じぶんに からまった'],note:'見参！：敵1体を投げ縄でひっぱる。その敵は かばうになる',bc:'weaken',v:1}); // 単純化：ねらった敵の攻撃-1
+NEWC({id:'new116',n:'なげなわ少年 ルーピー',f:'sh',r:'N',c:2,a:1,h:2,em:'🪢',stage:'ranch',s:'ヒュンヒュン〜、つかまえた！',lines:['からまった〜','なわ、まわしていい？','ヒュヒュン！','…じぶんに からまった'],note:'見参！：敵1体を投げ縄でひっぱる。その敵は かばうになる',bc:'weaken',v:1}); // 単純化：ねらった敵の攻撃-1
 NEWC({id:'new117',n:'牧羊犬ボーダ',f:'an',r:'N',c:3,a:2,h:3,em:'🐕',stage:'ranch',s:'ワン！みんな あつめるよ！',lines:['クゥ〜ン…','ワン？','ワンワン！','…クゥン'],note:'見参！：動物のなかまを1人ひく',bc:'get',v:1});
 NEWC({id:'new118',n:'子牛のベビモー',f:'an',r:'N',c:1,a:1,h:2,em:'🐮',stage:'ranch',s:'モ〜…',lines:['モ…','モ？','モ〜！','…モ'],note:'（効果なし）'});
 NEWC({id:'new119',n:'おてんば馬 ジャジャ',f:'an',r:'R',c:3,a:3,h:3,em:'🐴',stage:'ranch',s:'ヒヒーン！じゃじゃ馬よ！',lines:['ヒヒン…あとは まかせた！','ヒン？','ヒヒーン！絶好調！','…ヒン（ぷいっ）'],note:'やられたら：のっていたカウボーイ（2/2）が とびおりる',dr:'summon',tok:'cowboyT',dv:1});
-NEWC({id:'new120',n:'ガンコおやじ ウシオ',f:'sh',r:'R',c:4,a:3,h:4,em:'🐃',stage:'ranch',s:'わしの牧場で なにしとる！',lines:['牛たちを…たのむ…','やさしく しろよ','ガハハ、元気が でた！','…ガンコは なおらん'],note:'見参！：牛の群れが走る！ランダムな敵3体に1ダメージ',bc:'aoe',v:1}); // 単純化：敵キャラぜんいんに1
-NEWC({id:'new121',n:'ひつじ雲のせいれい モクモク',f:'sp',r:'R',c:3,a:1,h:4,em:'☁️',stage:'ranch',s:'もくもく〜、雨ふらすよ〜',lines:['もく…（はれちゃった）','もくもく ドキドキ','もっくもく！','…ちぎれた'],note:'見参！：あめ+1',wx:'rain',wv:1});
-NEWC({id:'new122',n:'まぼろしの白馬 ハクウン',f:'an',r:'L',c:6,a:5,h:5,em:'🦄',stage:'ranch',s:'風に のって 来たよ',lines:['風に…かえる…','たてがみを ととのえて','どこまでも かけるよ！','…ひづめが いたい'],note:'はやうち：出したターンからすぐ攻撃できる / いるあいだ：仲間ぜんいん はやうち',kw:'quick',aura:'atk',av:1}); // 単純化：仲間ぜんいん攻撃+1
-NEWC({id:'new123',n:'きっぷ切りのパチン',f:'gu',r:'N',c:1,a:1,h:1,em:'🎫',stage:'train',s:'きっぷを はいけん！',lines:['パチン…（はさみ おとした）','きっぷ ある？','パチパチン！','…きりすぎた'],note:'見参！：敵1体に きっぷを切る！つぎのターン 攻撃できない',bc:'stun'});
+NEWC({id:'new120',n:'ガンコおやじ オックス',f:'sh',r:'R',c:4,a:3,h:4,em:'🐃',stage:'ranch',s:'わしの牧場で なにしとる！',lines:['牛たちを…たのむ…','やさしく しろよ','ガハハ、元気が でた！','…ガンコは なおらん'],note:'見参！：牛の群れが走る！ランダムな敵3体に1ダメージ',bc:'aoe',v:1}); // 単純化：敵キャラぜんいんに1
+NEWC({id:'new121',n:'ひつじ雲のせいれい ニンバス',f:'sp',r:'R',c:3,a:1,h:4,em:'☁️',stage:'ranch',s:'もくもく〜、雨ふらすよ〜',lines:['もく…（はれちゃった）','もくもく ドキドキ','もっくもく！','…ちぎれた'],note:'見参！：あめ+1',wx:'rain',wv:1});
+NEWC({id:'new122',n:'まぼろしの白馬 ブランシュ',f:'an',r:'L',c:6,a:5,h:5,em:'🦄',stage:'ranch',s:'風に のって 来たよ',lines:['風に…かえる…','たてがみを ととのえて','どこまでも かけるよ！','…ひづめが いたい'],note:'はやうち：出したターンからすぐ攻撃できる / いるあいだ：仲間ぜんいん はやうち',kw:'quick',aura:'atk',av:1}); // 単純化：仲間ぜんいん攻撃+1
+NEWC({id:'new123',n:'きっぷ切りのクリッピー',f:'gu',r:'N',c:1,a:1,h:1,em:'🎫',stage:'train',s:'きっぷを はいけん！',lines:['パチン…（はさみ おとした）','きっぷ ある？','パチパチン！','…きりすぎた'],note:'見参！：敵1体に きっぷを切る！つぎのターン 攻撃できない',bc:'stun'});
 NEWC({id:'new124',n:'おべんとうコック フライパン',f:'sa',r:'N',c:2,a:1,h:3,em:'🍳',stage:'train',s:'おべんとう いかが〜？',lines:['こげちゃった〜','なにを つくろうかな','とくせい おべんとう！','…しょっぱい'],note:'見参！：「おべんとう」（0コイン：体力を3いやす）を手札に1枚',bc:'healall',v:1}); // 単純化：仲間ぜんいんとあなたを1いやす
-NEWC({id:'new125',n:'屋根の上のカラス クロスケ',f:'an',r:'N',c:1,a:1,h:1,em:'🐦',stage:'train',s:'カァ！とびこむぜ！',lines:['カァ…おちた…','カァ？','カァカァ！','…カァ'],note:'見参！：屋根から とびこむ！敵1体に1ダメージ',bc:'dmg',v:1});
-NEWC({id:'new126',n:'貨物のねずみ ニモツ',f:'an',r:'N',c:1,a:1,h:1,em:'🐀',stage:'train',s:'チュ！にもつの中は ひみつ',lines:['チュ…にもつ…たのむ…','チュ？','チュチュ〜！','…からっぽ'],note:'やられたら：手にいれる！貨物の3枚から1枚',dr:'draw',dv:1}); // 単純化：やられたら1人ひく
-NEWC({id:'new127',n:'石炭くべの ススオ',f:'gu',r:'N',c:2,a:2,h:2,em:'⚫',stage:'train',s:'どんどん くべるぞ！',lines:['すす…まみれ…','あつくして くれ！','まっかに もえた！','…火が きえた'],note:'見参！：仲間のロボット1体を はやうちに',bc:'buffr',v:1}); // 単純化：ほかの仲間1体+1/+1
+NEWC({id:'new125',n:'屋根の上のカラス ネヴァー',f:'an',r:'N',c:1,a:1,h:1,em:'🐦',stage:'train',s:'カァ！とびこむぜ！',lines:['カァ…おちた…','カァ？','カァカァ！','…カァ'],note:'見参！：屋根から とびこむ！敵1体に1ダメージ',bc:'dmg',v:1});
+NEWC({id:'new126',n:'貨物ねずみ カーゴ',f:'an',r:'N',c:1,a:1,h:1,em:'🐀',stage:'train',s:'チュ！にもつの中は ひみつ',lines:['チュ…にもつ…たのむ…','チュ？','チュチュ〜！','…からっぽ'],note:'やられたら：手にいれる！貨物の3枚から1枚',dr:'draw',dv:1}); // 単純化：やられたら1人ひく
+NEWC({id:'new127',n:'石炭くべの コーリー',f:'gu',r:'N',c:2,a:2,h:2,em:'⚫',stage:'train',s:'どんどん くべるぞ！',lines:['すす…まみれ…','あつくして くれ！','まっかに もえた！','…火が きえた'],note:'見参！：仲間のロボット1体を はやうちに',bc:'buffr',v:1}); // 単純化：ほかの仲間1体+1/+1
 NEWC({id:'new128',n:'鉄橋の見はり ヤグラ',f:'sh',r:'N',c:3,a:2,h:4,em:'🔭',stage:'train',s:'あやしいやつ はっけん！',lines:['見のがした…','よく見ててね','まる見えだ！','…ねぼけてた'],note:'見参！：敵の手札を1枚 見やぶる',bc:'scout'});
-NEWC({id:'new129',n:'郵便車のペタ',f:'gu',r:'N',c:2,a:1,h:2,em:'📦',stage:'train',s:'お荷物 とどけまーす！',lines:['あて先…ふめい…','小包、ドキドキ','とどきました！','…まちがえた'],note:'見参！：小包（0/2）をおく。やられると中から なかまを1人ひく',bc:'summon',tok:'parcelT',v:1});
-NEWC({id:'new130',n:'列車強盗の子分 マスクン',f:'ou',r:'N',c:2,a:2,h:1,em:'🎭',stage:'train',s:'兄貴の ために！',lines:['コイン…おとした〜','ドキドキ…','ぬすみ 大成功！','…兄貴に おこられる'],note:'やられたら：ぬすんだコインを落とす（タップでコイン+1）',dr:'gold',dv:1});
-NEWC({id:'new131',n:'車輪ロボ クルクル',f:'ro',r:'N',c:3,a:3,h:2,em:'🛞',stage:'train',s:'クルクル〜！',lines:['クル…パンク…','クル？','クルクルクル〜！','…クル（とまった）'],note:'がったい！：ほかのロボットにがったいして 車輪になる。そのロボットは はやうち',gattai:1,kw:'quick'});
-NEWC({id:'new132',n:'トンネルおばけ クラヤミ',f:'gh',r:'N',c:3,a:2,h:3,em:'🌑',stage:'train',s:'まっくらだよ〜',lines:['あかるい…まぶしい…','くらいほうが すき','まっくらパワー！','…でんき ついた'],note:'いるあいだ：敵の攻撃が ときどき外れる（まっくら！）',wx:'sand',wv:1}); // 単純化：見参！ですなあらし+1
+NEWC({id:'new129',n:'郵便車のスタンピー',f:'gu',r:'N',c:2,a:1,h:2,em:'📦',stage:'train',s:'お荷物 とどけまーす！',lines:['あて先…ふめい…','小包、ドキドキ','とどきました！','…まちがえた'],note:'見参！：小包（0/2）をおく。やられると中から なかまを1人ひく',bc:'summon',tok:'parcelT',v:1});
+NEWC({id:'new130',n:'列車強盗の子分 バンディ',f:'ou',r:'N',c:2,a:2,h:1,em:'🎭',stage:'train',s:'兄貴の ために！',lines:['コイン…おとした〜','ドキドキ…','ぬすみ 大成功！','…兄貴に おこられる'],note:'やられたら：ぬすんだコインを落とす（タップでコイン+1）',dr:'gold',dv:1});
+NEWC({id:'new131',n:'車輪ロボ ホイーリー',f:'ro',r:'N',c:3,a:3,h:2,em:'🛞',stage:'train',s:'クルクル〜！',lines:['クル…パンク…','クル？','クルクルクル〜！','…クル（とまった）'],note:'がったい！：ほかのロボットにがったいして 車輪になる。そのロボットは はやうち',gattai:1,kw:'quick'});
+NEWC({id:'new132',n:'トンネルおばけ グルーム',f:'gh',r:'N',c:3,a:2,h:3,em:'🌑',stage:'train',s:'まっくらだよ〜',lines:['あかるい…まぶしい…','くらいほうが すき','まっくらパワー！','…でんき ついた'],note:'いるあいだ：敵の攻撃が ときどき外れる（まっくら！）',wx:'sand',wv:1}); // 単純化：見参！ですなあらし+1
 NEWC({id:'new133',n:'ダイナマイト強盗 ドカン兄弟',f:'ou',r:'R',c:4,a:2,h:3,em:'🧨',stage:'train',s:'ふたりで ドッカーン！',lines:['ドカン…（ふたりで）','火、つけていい？','ドッカーン！','…ふたりとも しけってた'],note:'見参！：敵の場にダイナマイトをおく（3→2→1→ドカン！敵ぜんいん2ダメージ）',bc:'fuse',v:2});
 NEWC({id:'new134',n:'連結ロボ ガチャン',f:'ro',r:'R',c:3,a:2,h:3,em:'⛓️',stage:'train',s:'ガチャン！つなぐよ！',lines:['ガチャ…はずれた…','ガチャン？','ガッチャーン！','…ネジ ゆるんだ'],note:'がったい！：となりの仲間2体を連結。片方がうけたダメージを2体でわける',gattai:1}); // 単純化：ふつうのがったい
-NEWC({id:'new135',n:'じゃんけん車掌 キップル',f:'sh',r:'R',c:3,a:3,h:2,em:'✊',stage:'train',s:'じゃんけん…ぽん！',lines:['あいこで…まけた…','グー？ チョキ？','勝った！','…パーだった'],note:'決闘：見参！で敵1体とじゃんけん勝負！勝てば4ダメージ',bc:'quickmg',v:4});
+NEWC({id:'new135',n:'じゃんけん車掌 パンチョ',f:'sh',r:'R',c:3,a:3,h:2,em:'✊',stage:'train',s:'じゃんけん…ぽん！',lines:['あいこで…まけた…','グー？ チョキ？','勝った！','…パーだった'],note:'決闘：見参！で敵1体とじゃんけん勝負！勝てば4ダメージ',bc:'quickmg',v:4});
 NEWC({id:'new136',n:'大陸横断ロボ特急 グレートレール',f:'ro',r:'L',c:7,a:6,h:7,em:'🚄',stage:'train',s:'シュゴォォ！はっしゃ しまーす！',lines:['終点…です…','点検 おねがいします','フルスピード！','…ブレーキ ききすぎ'],note:'見参！：線路をつっぱしる！敵ぜんいんに2ダメージ / いるあいだ：ほかのロボットは はやうち',bc:'aoe',v:2,aura:'faction',av:1}); // 単純化：ロボットはやうち → ほかのロボット攻撃+1
 NEWC({id:'new137',n:'スチームタウンのパン屋',f:'st',r:'N',c:1,a:1,h:2,em:'🍞',stage:'steam',s:'やきたて だよ〜！',lines:['こげ…ちゃった…','ふっくら してね','ふわっふわ！','…ぺちゃんこ'],note:'見参！：あつあつパン！仲間1体の体力を2いやす',bc:'healone',v:2});
 NEWC({id:'new138',n:'スチームタウンの新聞売り',f:'st',r:'N',c:1,a:1,h:1,em:'📰',stage:'steam',s:'号外 号外〜！',lines:['新聞…うりきれ…','どんな記事？','大スクープ！','…きのうの新聞'],note:'見参！：号外〜！敵の手札を1枚 見やぶる',bc:'scout'});
-NEWC({id:'new139',n:'ゆげロボ シューポン',f:'ro',r:'N',c:2,a:2,h:2,em:'♨️',stage:'steam',s:'シュー！ポン！',lines:['シュ〜…（しぼんだ）','シュー？','シュシュポン！','…ポン'],note:'やられたら：もくもく湯気！仲間ぜんいん1ターン かくれんぼ',dr:'healall',dv:1}); // 単純化：やられたら仲間ぜんいん1いやす
-NEWC({id:'new140',n:'ネジまきロボ キリキリ',f:'ro',r:'N',c:1,a:0,h:2,em:'⚙️',stage:'steam',s:'キリキリ…まいて〜',lines:['キリ…（とまった）','まいて まいて','キリキリ全開！','…まきすぎた'],note:'がったい！：ほかのロボットにがったい。そのロボットの見参！がもう1回',gattai:1});
+NEWC({id:'new139',n:'じょうきロボ モクリン',f:'ro',r:'N',c:2,a:2,h:2,em:'♨️',stage:'steam',s:'シュー！ポン！',lines:['シュ〜…（しぼんだ）','シュー？','シュシュポン！','…ポン'],note:'やられたら：もくもく湯気！仲間ぜんいん1ターン かくれんぼ',dr:'healall',dv:1}); // 単純化：やられたら仲間ぜんいん1いやす
+NEWC({id:'new140',n:'ネジまきロボ ネジリー',f:'ro',r:'N',c:1,a:0,h:2,em:'⚙️',stage:'steam',s:'キリキリ…まいて〜',lines:['キリ…（とまった）','まいて まいて','キリキリ全開！','…まきすぎた'],note:'がったい！：ほかのロボットにがったい。そのロボットの見参！がもう1回',gattai:1});
 NEWC({id:'new141',n:'スチームタウンの時計屋',f:'st',r:'N',c:3,a:2,h:3,em:'🕰️',stage:'steam',s:'チクタク、まきもどし〜',lines:['時間…ぎれ…','いま なんじ？','ぴったり！','…5分 おくれてる'],note:'見参！：時間をもどす！さいごにやられた仲間を手札にもどす',bc:'recall'});
-NEWC({id:'new142',n:'おそうじロボ ハキハキ',f:'ro',r:'N',c:2,a:1,h:3,em:'🧹',stage:'steam',s:'ゴミは すいこむよ！',lines:['ゴミが…つまった…','ピカピカに？','ブォーン！','…フィルター つまった'],note:'しんかする！：キャラが3体たおれたら「おそうじ大王」（5/5）に変身',evoK:3,evoF:{n:'おそうじ大王',a:4,h:2}}); // 単純化：キャラが3体たおれたら → 敵を3体たおすと
+NEWC({id:'new142',n:'おそうじロボ ゴッシム',f:'ro',r:'N',c:2,a:1,h:3,em:'🧹',stage:'steam',s:'ゴミは すいこむよ！',lines:['ゴミが…つまった…','ピカピカに？','ブォーン！','…フィルター つまった'],note:'しんかする！：キャラが3体たおれたら「おそうじ大王」（5/5）に変身',evoK:3,evoF:{n:'おそうじ大王',a:4,h:2}}); // 単純化：キャラが3体たおれたら → 敵を3体たおすと
 NEWC({id:'new143',n:'スチームタウンの花火師',f:'st',r:'N',c:3,a:2,h:2,em:'🎆',stage:'steam',s:'たまや〜！',lines:['ドーン…（自分に）','花火、ドキドキ','大輪の花！','…不発'],note:'見参！：花火ドーン！敵ぜんいんまぶしくて、つぎの攻撃は外れる',bc:'weakall',v:1}); // 単純化：敵ぜんいん攻撃-1
 NEWC({id:'new144',n:'ブリキの犬 ワンボルト',f:'ro',r:'N',c:2,a:2,h:2,em:'🐶',stage:'steam',s:'ワン・ボルト！',lines:['ワ…ン…','ワン？','ワンワン！ピカピカ！','…さびた'],note:'（効果なし）'});
 NEWC({id:'new145',n:'スチームタウンの見はり番',f:'st',r:'N',c:2,a:1,h:3,em:'👀',stage:'steam',s:'ここは とおさん！',lines:['見はり…しっぱい…','しっかり たのむ','ばっちり 見はるぞ','…いねむり してた'],note:'かばう：敵はまずこのキャラを攻撃しないといけない',kw:'taunt'});
@@ -5494,85 +5494,85 @@ NEWC({id:'new150',n:'スチームタウンの大時計塔 ボーンボーン',f:
 NEWC({id:'new151',n:'ぬまぬまゾンビ',f:'zo',r:'N',c:2,a:2,h:2,em:'🧟',stage:'bayou',s:'アー…ぬまぬま…',lines:['アー…ぶくぶく…','アー…ぬれてる…','アー！ ぬまパワー！','アー…しずんだ…'],note:'やられたら：ぬまに しずんで、2ターン後に もどってくる',kw:'revive'}); // 単純化：1回復活
 NEWC({id:'new152',n:'オタマのタマ',f:'an',r:'N',c:1,a:1,h:1,em:'🐸',stage:'bayou',s:'ぴちぴち！',lines:['ぴち…','カエルに なれる？','ケロッ！？','…オタマのまま'],note:'しんかする！：敵を3体たおすと「ガマ大将」（4/5）に変身',evoK:3,evoF:{n:'ガマ大将',a:3,h:4}});
 NEWC({id:'new153',n:'ホタルのチカ',f:'an',r:'N',c:1,a:1,h:1,em:'✨',stage:'bayou',s:'ピカッ、てらすよ',lines:['ふっ…','ピカ？','ピッカピカ！','…でんち ぎれ'],note:'いるあいだ：仲間の攻撃が外れない（すなあらし・まっくらでもOK）'}); // 単純化：未実装（効果なし）
-NEWC({id:'new154',n:'きりおばけ モヤモヤ',f:'gh',r:'N',c:2,a:1,h:3,em:'🌫️',stage:'bayou',s:'もや〜…どこ いくの？',lines:['もや…はれた…','もやもや ドキドキ','もやもや〜ん！','…はれちゃった'],note:'かくれんぼ：自分から攻撃するまで、ねらわれない / 見参！：敵1体が まいご（1回休み）',kw:'stealth',bc:'stun'});
+NEWC({id:'new154',n:'きりおばけ ミスティ',f:'gh',r:'N',c:2,a:1,h:3,em:'🌫️',stage:'bayou',s:'もや〜…どこ いくの？',lines:['もや…はれた…','もやもや ドキドキ','もやもや〜ん！','…はれちゃった'],note:'かくれんぼ：自分から攻撃するまで、ねらわれない / 見参！：敵1体が まいご（1回休み）',kw:'stealth',bc:'stun'});
 NEWC({id:'new155',n:'ヒルのチュー太',f:'an',r:'N',c:1,a:1,h:2,em:'💧',stage:'bayou',s:'チュ〜…いただきます',lines:['チュ…（ぽろっ）','チュ？','チュ〜♪ まんぷく','…チュ（しょぼん）'],note:'戦うたび あいてから体力を1すいとる',poison:1}); // 単純化：戦った相手に毒×1
-NEWC({id:'new156',n:'ぬま魔女見習い ドロリ',f:'ma',r:'N',c:4,a:2,h:3,em:'🧙',stage:'bayou',s:'ドロドロ〜、ケロケロに なれ〜！',lines:['じぶんが…カエルに…','じゅもん まちがえないでね','まほう 大成功！','…ケロッ（自分が）'],note:'見参！：敵1体を カエル（1/1）に変える',bc:'blow'}); // 単純化：いちばん強い敵を手札に吹き飛ばす
-NEWC({id:'new157',n:'ワニのたまご ゴロタマ',f:'an',r:'N',c:1,a:0,h:2,em:'🥚',stage:'bayou',s:'…コトコト',lines:['…パリン','…ドキドキ','…パキッ！','…コト'],note:'2ターンたつと われて「ワニっこ」（3/3）になる',growT:1}); // 単純化：うえるとそだつ+1
+NEWC({id:'new156',n:'ぬま魔女見習い マーシャ',f:'ma',r:'N',c:4,a:2,h:3,em:'🧙',stage:'bayou',s:'ドロドロ〜、ケロケロに なれ〜！',lines:['じぶんが…カエルに…','じゅもん まちがえないでね','まほう 大成功！','…ケロッ（自分が）'],note:'見参！：敵1体を カエル（1/1）に変える',bc:'blow'}); // 単純化：いちばん強い敵を手札に吹き飛ばす
+NEWC({id:'new157',n:'ワニのたまご ハッチ',f:'an',r:'N',c:1,a:0,h:2,em:'🥚',stage:'bayou',s:'…コトコト',lines:['…パリン','…ドキドキ','…パキッ！','…コト'],note:'2ターンたつと われて「ワニっこ」（3/3）になる',growT:1}); // 単純化：うえるとそだつ+1
 NEWC({id:'new158',n:'ナマズのヒゲじい',f:'an',r:'N',c:3,a:3,h:4,em:'🐟',stage:'bayou',s:'ほっほ、ヒゲが ゆれとる',lines:['ヒゲが…','ヒゲを ととのえて','りっぱな ヒゲじゃ！','…ヒゲが ちぢれた'],note:'（効果なし）'});
 NEWC({id:'new159',n:'どろんこガエル ペッタン',f:'an',r:'N',c:2,a:2,h:2,em:'🐸',stage:'bayou',s:'ペッタン！',lines:['ペタ…','ペッタン？','ペッタンペッタン！','…ペタ'],note:'見参！：敵1体にどろをかける。つぎの攻撃は外れる',bc:'weaken',v:2}); // 単純化：ねらった敵の攻撃-2
-NEWC({id:'new160',n:'ぬまの釣り人 ウキ太',f:'gu',r:'N',c:3,a:2,h:3,em:'🎣',stage:'bayou',s:'なにが つれるかな〜',lines:['にげられた…','ウキが うごいた！','大物だ〜！','…長ぐつ だった'],note:'手にいれる！：つりあげた3枚から1枚',bc:'get',v:1});
+NEWC({id:'new160',n:'ぬまの釣り人 ボバー',f:'gu',r:'N',c:3,a:2,h:3,em:'🎣',stage:'bayou',s:'なにが つれるかな〜',lines:['にげられた…','ウキが うごいた！','大物だ〜！','…長ぐつ だった'],note:'手にいれる！：つりあげた3枚から1枚',bc:'get',v:1});
 NEWC({id:'new161',n:'ガマの油売り ヌルリ',f:'ma',r:'R',c:3,a:2,h:3,em:'🧴',stage:'bayou',s:'さあさ、ガマの油だよ〜',lines:['ヌルッ…すべった…','ヌルヌル ドキドキ','ツルッツル！','…ベタベタ'],note:'見参！：仲間1体をヌルヌルに。投げ縄でつかまらない＆1回だけダメージ0',kw:'shield',bc:'buffr',v:1}); // 単純化：自分にバリア＋ほかの仲間1体+1/+1
-NEWC({id:'new162',n:'沼のせいれい ジメリ',f:'sp',r:'R',c:3,a:2,h:3,em:'🌧️',stage:'bayou',s:'じめじめ〜、いい天気',lines:['からからに…なる…','しっとり たのむわ','じめじめ 最高！','…はれちゃった'],note:'見参！：あめ+1 / いるあいだ：あめの日は 毎ターン子ガエル（1/1）がふえる',wx:'rain',wv:1,aura:'wxboost'}); // 単純化：子ガエル → 天気の名人
+NEWC({id:'new162',n:'沼のせいれい バイユー',f:'sp',r:'R',c:3,a:2,h:3,em:'🌧️',stage:'bayou',s:'じめじめ〜、いい天気',lines:['からからに…なる…','しっとり たのむわ','じめじめ 最高！','…はれちゃった'],note:'見参！：あめ+1 / いるあいだ：あめの日は 毎ターン子ガエル（1/1）がふえる',wx:'rain',wv:1,aura:'wxboost'}); // 単純化：子ガエル → 天気の名人
 NEWC({id:'new163',n:'ゾンビワニ ガブリン',f:'zo',r:'R',c:5,a:4,h:5,em:'🐊',stage:'bayou',s:'アー…ガブ…',lines:['アー…ペッ（はきだした）','アー…ガブ？','アー！ ガブガブ！','アー…はらいっぱい'],note:'戦ってたおした敵を まるのみ。やられたら そのキャラが あなたの仲間として出てくる',kw:'deadly'}); // 単純化：必殺
 NEWC({id:'new164',n:'沼の女王 ケロリーヌ',f:'an',r:'L',c:6,a:4,h:6,em:'👸',stage:'bayou',s:'ケロケロ、わらわの沼へ ようこそ',lines:['ケロ…わらわの…沼が…','やさしく あつかうケロ','ケロッホッホ！','…ケロ（ぷいっ）'],note:'見参！：子ガエル（1/1）を4匹よぶ / いるあいだ：カエルがやられるたび 敵ヒーローに1ダメージ',bc:'summon',tok:'frogT',v:4}); // 単純化：いるあいだは省略
-NEWC({id:'new165',n:'ゆきだるまのダルリン',f:'sp',r:'N',c:1,a:1,h:2,em:'⛄',stage:'snow',s:'ころころ〜、ゆきだるまだよ',lines:['とけ…ちゃう…','つめたく してね','まんまる！','…かたむいた'],note:'やられたら：ゆき+1',wx:'snow',wv:1}); // 単純化：やられたら → 見参！で
-NEWC({id:'new166',n:'ペンギンのペン太',f:'an',r:'N',c:1,a:1,h:1,em:'🐧',stage:'snow',s:'ペンッ！すべるよ〜',lines:['ペン…（ころん）','ペン？','ペンペーン！','…ころんだ'],note:'すべる：攻撃したあと、となりの敵にもぶつかる（1ダメージ）',kw:'splash'}); // 単純化：なぎはらい（となりに2）
+NEWC({id:'new165',n:'ゆきだるまのポラリン',f:'sp',r:'N',c:1,a:1,h:2,em:'⛄',stage:'snow',s:'ころころ〜、ゆきだるまだよ',lines:['とけ…ちゃう…','つめたく してね','まんまる！','…かたむいた'],note:'やられたら：ゆき+1',wx:'snow',wv:1}); // 単純化：やられたら → 見参！で
+NEWC({id:'new166',n:'ペンギンのワドル',f:'an',r:'N',c:1,a:1,h:1,em:'🐧',stage:'snow',s:'ペンッ！すべるよ〜',lines:['ペン…（ころん）','ペン？','ペンペーン！','…ころんだ'],note:'すべる：攻撃したあと、となりの敵にもぶつかる（1ダメージ）',kw:'splash'}); // 単純化：なぎはらい（となりに2）
 NEWC({id:'new167',n:'ゆきうさぎ シロップ',f:'an',r:'N',c:2,a:2,h:1,em:'🐇',stage:'snow',s:'ぴょこっ、見えないでしょ？',lines:['見つかっちゃった…','ぴょこ？','まっしろ ぴょん！','…どろが ついた'],note:'ゆきの日は かくれんぼ（ねらわれない）',kw:'stealth'}); // 単純化：いつでも かくれんぼ
-NEWC({id:'new168',n:'つららのせいれい ピキ',f:'sp',r:'N',c:2,a:2,h:2,em:'🧊',stage:'snow',s:'ピキピキ〜',lines:['ポタッ…','ピキ？','ピッキーン！','…とけた'],note:'見参！：ゆき+1',wx:'snow',wv:1});
+NEWC({id:'new168',n:'つららのせいれい アイシー',f:'sp',r:'N',c:2,a:2,h:2,em:'🧊',stage:'snow',s:'ピキピキ〜',lines:['ポタッ…','ピキ？','ピッキーン！','…とけた'],note:'見参！：ゆき+1',wx:'snow',wv:1});
 NEWC({id:'new169',n:'そりひき犬 ハスキン',f:'an',r:'N',c:2,a:2,h:2,em:'🐺',stage:'snow',s:'ワオン！いっしょに いこう！',lines:['ワ…ン…','ワン？','ワオーン！','…そり ひっくりかえった'],note:'連携：となりの仲間が攻撃すると、いっしょに1ダメージ',aura:'link'});
-NEWC({id:'new170',n:'山小屋番 ダンロ',f:'sa',r:'N',c:3,a:2,h:4,em:'🪵',stage:'snow',s:'あったまって いきなよ',lines:['火が…きえた…','まきを くべてね','ぽかぽか！','…けむい'],note:'いるあいだ：仲間は こおらない',kw:'nostun'}); // 単純化：自分だけ酔わない（こおらない）
+NEWC({id:'new170',n:'山小屋番 ロッジ',f:'sa',r:'N',c:3,a:2,h:4,em:'🪵',stage:'snow',s:'あったまって いきなよ',lines:['火が…きえた…','まきを くべてね','ぽかぽか！','…けむい'],note:'いるあいだ：仲間は こおらない',kw:'nostun'}); // 単純化：自分だけ酔わない（こおらない）
 NEWC({id:'new171',n:'ヘラジカのツノーブ',f:'an',r:'N',c:4,a:4,h:5,em:'🦌',stage:'snow',s:'ブォ〜！',lines:['ブォ…（ドスン）','ブォ？','ブォォ〜！','…ツノ ひっかかった'],note:'（効果なし）'});
-NEWC({id:'new172',n:'毛皮うりのモフ兵衛',f:'gu',r:'N',c:2,a:1,h:3,em:'🧣',stage:'snow',s:'もふもふ、あったかいよ',lines:['もふ…','もふもふ ドキドキ','もっふもふ！','…毛が ぬけた'],note:'見参！：仲間1体にマフラー！こおらなくなる',bc:'buffr',v:1}); // 単純化：ほかの仲間1体+1/+1
-NEWC({id:'new173',n:'雪男の子 ユキッコ',f:'an',r:'N',c:3,a:3,h:3,em:'🦍',stage:'snow',s:'ウホッ、ゆき大すき！',lines:['ウホ…さむい…','ウホ？ 大きく なれる？','ウホホーッ！','…ちいさいまま'],note:'しんかする！：敵を3体たおすと「大雪男」（6/6）に変身',evoK:3,evoF:{n:'大雪男',a:3,h:3}});
+NEWC({id:'new172',n:'毛皮うりのペルト',f:'gu',r:'N',c:2,a:1,h:3,em:'🧣',stage:'snow',s:'もふもふ、あったかいよ',lines:['もふ…','もふもふ ドキドキ','もっふもふ！','…毛が ぬけた'],note:'見参！：仲間1体にマフラー！こおらなくなる',bc:'buffr',v:1}); // 単純化：ほかの仲間1体+1/+1
+NEWC({id:'new173',n:'雪男の子 イエッティ',f:'an',r:'N',c:3,a:3,h:3,em:'🦍',stage:'snow',s:'ウホッ、ゆき大すき！',lines:['ウホ…さむい…','ウホ？ 大きく なれる？','ウホホーッ！','…ちいさいまま'],note:'しんかする！：敵を3体たおすと「大雪男」（6/6）に変身',evoK:3,evoF:{n:'大雪男',a:3,h:3}});
 NEWC({id:'new174',n:'スキー保安官 シュプール',f:'sh',r:'N',c:3,a:3,h:2,em:'⛷️',stage:'snow',s:'シャーッ！おいついたぞ！',lines:['ころんだ〜','すべって いい？','パーフェクト！','…木に ぶつかった'],note:'はやうち：出したターンからすぐ攻撃できる / 昇進：子分を3体たおすと⭐',kw:'quick',rankK:3});
-NEWC({id:'new175',n:'オーロラのせいれい ヒカリナ',f:'sp',r:'R',c:4,a:2,h:4,em:'🌌',stage:'snow',s:'ゆらゆら〜、きれいでしょ',lines:['ひかりが…きえる…','そっと してね','にじいろ〜！','…くもっちゃった'],note:'見参！：天気を消して、こおりを ぜんぶとかす。仲間ぜんいんの体力を2いやす',bc:'healall',v:2}); // 単純化：天気リセットは省略
+NEWC({id:'new175',n:'オーロラのせいれい ルミナ',f:'sp',r:'R',c:4,a:2,h:4,em:'🌌',stage:'snow',s:'ゆらゆら〜、きれいでしょ',lines:['ひかりが…きえる…','そっと してね','にじいろ〜！','…くもっちゃった'],note:'見参！：天気を消して、こおりを ぜんぶとかす。仲間ぜんいんの体力を2いやす',bc:'healall',v:2}); // 単純化：天気リセットは省略
 NEWC({id:'new176',n:'なだれ呼びのヤッホー爺',f:'ma',r:'R',c:5,a:3,h:4,em:'🏔️',stage:'snow',s:'ヤッホー！…あ、しまった',lines:['まきこまれた…','大きな声は だめじゃよ','ヤッホー！大成功！','…ゆきに うもれた'],note:'見参！：なだれ！敵ぜんいんに2ダメージ。仲間にも1ダメージ',bc:'aoe',v:2}); // 単純化：仲間へのダメージは省略
 NEWC({id:'new177',n:'マンモスの赤ちゃん パオ',f:'an',r:'R',c:4,a:3,h:5,em:'🐘',stage:'snow',s:'パオ〜！',lines:['パオ…','パオ？ 大きくなる？','パオォォーン！','…パオ（ちいさい）'],note:'しんかする！：敵を3体たおすと「マンモス」（7/7・かばう）に変身',evoK:3,evoF:{n:'マンモス',a:4,h:2,kw:'taunt'}});
 NEWC({id:'new178',n:'ふぶきの大せいれい ブリザーラ',f:'sp',r:'L',c:6,a:5,h:6,em:'🌨️',stage:'snow',s:'ひゅおぉ…ぜんぶ こおらせて あげる',lines:['とけて…しまう…','つめた〜く たのむわ','ぜんぶ まっしろ！','…春が きちゃった'],note:'見参！：ゆき+3 / いるあいだ：こおった敵は とけない',wx:'snow',wv:3,aura:'wxboost'}); // 単純化：とけない → 天気の名人
-NEWC({id:'new179',n:'ラクダのこぶ子',f:'an',r:'N',c:2,a:1,h:4,em:'🐫',stage:'oasis',s:'お水 わけてあげる〜',lines:['こぶが…ぺちゃんこ…','こぶ ドキドキ','こぶ ふたつ！','…こぶ へった'],note:'いるあいだ：こぶの水で、毎ターン仲間1体を1いやす',aura:'regen',av:1}); // 単純化：1体 → ぜんいん
-NEWC({id:'new180',n:'ヤシの実ざる ウキキ',f:'an',r:'N',c:1,a:1,h:1,em:'🐒',stage:'oasis',s:'ウキキッ、えいっ！',lines:['ウキ…（ゴツン）','ウキ？','ウキキーッ！','…ウキ'],note:'見参！：ヤシの実を投げる！ランダムな敵に1ダメージ',bc:'bomb',v:1});
-NEWC({id:'new181',n:'フェネックのミミ丸',f:'an',r:'N',c:1,a:1,h:1,em:'🦊',stage:'oasis',s:'ないしょ話、きこえたよ',lines:['みみ…ふさがれた…','みみ ピーン！','ぜんぶ きこえる！','…なにも きこえない'],note:'見参！：大きな耳で、敵の手札を1枚 見やぶる',bc:'scout'});
-NEWC({id:'new182',n:'しんきろう売り ユラユラ',f:'ma',r:'N',c:3,a:2,h:3,em:'🪞',stage:'oasis',s:'ゆらゆら〜、ふえちゃった',lines:['きえちゃった…','ゆらゆら ドキドキ','ゆらゆら〜ん！','…にせもの だった'],note:'見参！：手札のカード1枚のコピーをつくる',bc:'draw',v:1}); // 単純化：なかまを1人ひく
-NEWC({id:'new183',n:'水くみ娘 ミズホ',f:'sa',r:'N',c:2,a:1,h:3,em:'🪣',stage:'oasis',s:'おみず どうぞ〜',lines:['こぼれちゃった…','たっぷり くんでね','なみなみ！','…からっぽ'],note:'見参！：あめ+1',wx:'rain',wv:1});
-NEWC({id:'new184',n:'キャラバン隊長 ラクダン',f:'gu',r:'N',c:4,a:3,h:4,em:'🐪',stage:'oasis',s:'さあ、旅の 荷物を ひろげよう',lines:['キャラバン…ここまで…','いい品 あるかな？','大商い だ！','…ガラクタだった'],note:'手にいれる！：3枚から1枚を、2回',bc:'get',v:2});
-NEWC({id:'new185',n:'サソリ占い師 ハサミーナ',f:'ma',r:'N',c:2,a:2,h:2,em:'🔮',stage:'oasis',s:'うふふ、見えるわ…',lines:['見えなかった…','占って あげる','大吉よ！','…大凶だわ'],note:'見参！：つぎにひくカードを 先に見て、すきなら ひく',bc:'draw',v:1}); // 単純化：なかまを1人ひく
-NEWC({id:'new186',n:'すなどけいのせいれい コチコチ',f:'sp',r:'N',c:3,a:2,h:3,em:'⏳',stage:'oasis',s:'さらさら…コチコチ…',lines:['さら…（とまった）','ひっくりかえして？','さらさら〜！','…つまった'],note:'見参！：すなあらし+1',wx:'sand',wv:1});
-NEWC({id:'new187',n:'ハヤブサ使い タカミ',f:'gu',r:'N',c:3,a:2,h:2,em:'🦅',stage:'oasis',s:'いけっ、ハヤブサ！',lines:['もどって…こない…','いっしょに がんばろ','ナイス キャッチ！','…ハヤブサが ねてた'],note:'見参！：ハヤブサ（2/1・はやうち）をよぶ',bc:'summon',tok:'hawkT',v:1});
+NEWC({id:'new179',n:'ラクダのキャメリア',f:'an',r:'N',c:2,a:1,h:4,em:'🐫',stage:'oasis',s:'お水 わけてあげる〜',lines:['こぶが…ぺちゃんこ…','こぶ ドキドキ','こぶ ふたつ！','…こぶ へった'],note:'いるあいだ：こぶの水で、毎ターン仲間1体を1いやす',aura:'regen',av:1}); // 単純化：1体 → ぜんいん
+NEWC({id:'new180',n:'ヤシの実ざる ココ',f:'an',r:'N',c:1,a:1,h:1,em:'🐒',stage:'oasis',s:'ウキキッ、えいっ！',lines:['ウキ…（ゴツン）','ウキ？','ウキキーッ！','…ウキ'],note:'見参！：ヤシの実を投げる！ランダムな敵に1ダメージ',bc:'bomb',v:1});
+NEWC({id:'new181',n:'フェネックのフェン',f:'an',r:'N',c:1,a:1,h:1,em:'🦊',stage:'oasis',s:'ないしょ話、きこえたよ',lines:['みみ…ふさがれた…','みみ ピーン！','ぜんぶ きこえる！','…なにも きこえない'],note:'見参！：大きな耳で、敵の手札を1枚 見やぶる',bc:'scout'});
+NEWC({id:'new182',n:'しんきろう売り ウェイヴィ',f:'ma',r:'N',c:3,a:2,h:3,em:'🪞',stage:'oasis',s:'ゆらゆら〜、ふえちゃった',lines:['きえちゃった…','ゆらゆら ドキドキ','ゆらゆら〜ん！','…にせもの だった'],note:'見参！：手札のカード1枚のコピーをつくる',bc:'draw',v:1}); // 単純化：なかまを1人ひく
+NEWC({id:'new183',n:'水くみ娘 アイシャ',f:'sa',r:'N',c:2,a:1,h:3,em:'🪣',stage:'oasis',s:'おみず どうぞ〜',lines:['こぼれちゃった…','たっぷり くんでね','なみなみ！','…からっぽ'],note:'見参！：あめ+1',wx:'rain',wv:1});
+NEWC({id:'new184',n:'キャラバン隊長 ダン・キャメル',f:'gu',r:'N',c:4,a:3,h:4,em:'🐪',stage:'oasis',s:'さあ、旅の 荷物を ひろげよう',lines:['キャラバン…ここまで…','いい品 あるかな？','大商い だ！','…ガラクタだった'],note:'手にいれる！：3枚から1枚を、2回',bc:'get',v:2});
+NEWC({id:'new185',n:'サソリ占い師 マダム・ピンサ',f:'ma',r:'N',c:2,a:2,h:2,em:'🔮',stage:'oasis',s:'うふふ、見えるわ…',lines:['見えなかった…','占って あげる','大吉よ！','…大凶だわ'],note:'見参！：つぎにひくカードを 先に見て、すきなら ひく',bc:'draw',v:1}); // 単純化：なかまを1人ひく
+NEWC({id:'new186',n:'すなどけいのせいれい クロノ',f:'sp',r:'N',c:3,a:2,h:3,em:'⏳',stage:'oasis',s:'さらさら…コチコチ…',lines:['さら…（とまった）','ひっくりかえして？','さらさら〜！','…つまった'],note:'見参！：すなあらし+1',wx:'sand',wv:1});
+NEWC({id:'new187',n:'ハヤブサ使い テイロン',f:'gu',r:'N',c:3,a:2,h:2,em:'🦅',stage:'oasis',s:'いけっ、ハヤブサ！',lines:['もどって…こない…','いっしょに がんばろ','ナイス キャッチ！','…ハヤブサが ねてた'],note:'見参！：ハヤブサ（2/1・はやうち）をよぶ',bc:'summon',tok:'hawkT',v:1});
 NEWC({id:'new188',n:'日がさトカゲ パラソル',f:'an',r:'N',c:2,a:2,h:3,em:'⛱️',stage:'oasis',s:'日かげは いいね〜',lines:['あつい…','パラ？','パラーン！','…かさ やぶれた'],note:'（効果なし）'});
-NEWC({id:'new189',n:'空とぶじゅうたん フワリン',f:'ma',r:'R',c:3,a:2,h:2,em:'🪄',stage:'oasis',s:'のって のって〜！',lines:['おちる〜〜','ふわふわ ドキドキ','ふわり〜ん！','…ほつれた'],note:'見参！：仲間1体をのせて とぶ。そのなかまは かばうをむしして攻撃できる',bc:'buffr',v:1}); // 単純化：ほかの仲間1体+1/+1
+NEWC({id:'new189',n:'空とぶじゅうたん ソアリン',f:'ma',r:'R',c:3,a:2,h:2,em:'🪄',stage:'oasis',s:'のって のって〜！',lines:['おちる〜〜','ふわふわ ドキドキ','ふわり〜ん！','…ほつれた'],note:'見参！：仲間1体をのせて とぶ。そのなかまは かばうをむしして攻撃できる',bc:'buffr',v:1}); // 単純化：ほかの仲間1体+1/+1
 NEWC({id:'new190',n:'おどり子 ベリーナ',f:'sa',r:'R',c:3,a:2,h:3,em:'💃',stage:'oasis',s:'シャラララ〜ン♪',lines:['目が…まわった〜','ステップ ドキドキ','シャララーン！','…足が もつれた'],note:'見参！：ゆらゆらダンス！敵2体を酔っぱらわせる（1回休み）',bc:'stun'}); // 単純化：2体 → いちばん強い1体
-NEWC({id:'new191',n:'砂クジラ ボエー',f:'an',r:'R',c:5,a:4,h:6,em:'🐋',stage:'oasis',s:'ボエ〜〜〜',lines:['ボエ…（ひからびた）','ボエ？','ボエエ〜〜ッ！','…ボエ'],note:'見参！：砂にもぐる（2ターン ねらわれない）。出てくるとき 敵ぜんいんに2ダメージ',kw:'stealth',bc:'aoe',v:1}); // 単純化：かくれんぼ＋すぐ敵ぜんいんに1
+NEWC({id:'new191',n:'砂クジラ モービー',f:'an',r:'R',c:5,a:4,h:6,em:'🐋',stage:'oasis',s:'ボエ〜〜〜',lines:['ボエ…（ひからびた）','ボエ？','ボエエ〜〜ッ！','…ボエ'],note:'見参！：砂にもぐる（2ターン ねらわれない）。出てくるとき 敵ぜんいんに2ダメージ',kw:'stealth',bc:'aoe',v:1}); // 単純化：かくれんぼ＋すぐ敵ぜんいんに1
 NEWC({id:'new192',n:'しんきろうの王女 ミラージュナ',f:'ma',r:'L',c:6,a:4,h:5,em:'🏜️',stage:'oasis',s:'ほんものの わたくしは どれかしら？',lines:['まぼろしに…きえる…','うつくしく おねがい','まぼろしは えいえんよ','…まぼろし だったのね'],note:'見参！：敵1体のコピーを 仲間としてつくる / いるあいだ：すなあらし がずっとつづく',wx:'sand',wv:2,aura:'wxboost'}); // 単純化：コピーは省略、すなあらし2＋天気の名人
-NEWC({id:'new193',n:'ひのこ坊や チリチリ',f:'sp',r:'N',c:1,a:1,h:1,em:'🔥',stage:'volcano',s:'チリチリ〜、あったかいよ',lines:['ジュッ…','チリ？','メラッ！','…ジュッ'],note:'見参！：はれ+1',wx:'sun',wv:1});
-NEWC({id:'new194',n:'溶岩ガメ ノッシー',f:'an',r:'N',c:3,a:1,h:5,em:'🐢',stage:'volcano',s:'のっし…のっし…',lines:['のっし…（ひえた）','ゆっくり たのむよ','アッチアチ！','…ひえちゃった'],note:'アチアチ：攻撃されたら、攻撃してきた相手に1ダメージ',kw:'thorns'});
-NEWC({id:'new195',n:'ふいご番のフーフー',f:'gu',r:'N',c:2,a:1,h:3,em:'🌬️',stage:'volcano',s:'フーフー！もやすよ！',lines:['フー…いきぎれ…','フーフー ドキドキ','まっかっか！','…火が きえた'],note:'見参！：仲間1体を あつあつに。戦った相手が やけど（毎ターン1ダメージ）',bc:'buffr',v:1}); // 単純化：ほかの仲間1体+1/+1
+NEWC({id:'new193',n:'ひのこ坊や フリッチー',f:'sp',r:'N',c:1,a:1,h:1,em:'🔥',stage:'volcano',s:'チリチリ〜、あったかいよ',lines:['ジュッ…','チリ？','メラッ！','…ジュッ'],note:'見参！：はれ+1',wx:'sun',wv:1});
+NEWC({id:'new194',n:'溶岩ガメ ラーヴィ',f:'an',r:'N',c:3,a:1,h:5,em:'🐢',stage:'volcano',s:'のっし…のっし…',lines:['のっし…（ひえた）','ゆっくり たのむよ','アッチアチ！','…ひえちゃった'],note:'アチアチ：攻撃されたら、攻撃してきた相手に1ダメージ',kw:'thorns'});
+NEWC({id:'new195',n:'ふいご番のベロウズ',f:'gu',r:'N',c:2,a:1,h:3,em:'🌬️',stage:'volcano',s:'フーフー！もやすよ！',lines:['フー…いきぎれ…','フーフー ドキドキ','まっかっか！','…火が きえた'],note:'見参！：仲間1体を あつあつに。戦った相手が やけど（毎ターン1ダメージ）',bc:'buffr',v:1}); // 単純化：ほかの仲間1体+1/+1
 NEWC({id:'new196',n:'火トカゲ サラマ',f:'an',r:'N',c:2,a:2,h:2,em:'🦎',stage:'volcano',s:'メラメラ〜！',lines:['メラ…ジュッ','メラ？','メラメラメラ！','…しっぽ こげた'],note:'やられたら：火の粉をまく！敵ぜんいんに1ダメージ',dr:'boom',dv:1}); // 単純化：ランダム1ダメージ×3
-NEWC({id:'new197',n:'温泉ザル ポカポカ',f:'an',r:'N',c:2,a:1,h:3,em:'🐵',stage:'volcano',s:'いい湯だな〜',lines:['のぼせた〜…','ポカ？','ポカポカ〜♪','…ぬるい'],note:'いるあいだ：ターンの終わり、自分と となりの仲間を1いやす',aura:'regen',av:1}); // 単純化：仲間ぜんいん
+NEWC({id:'new197',n:'温泉ザル ソーキー',f:'an',r:'N',c:2,a:1,h:3,em:'🐵',stage:'volcano',s:'いい湯だな〜',lines:['のぼせた〜…','ポカ？','ポカポカ〜♪','…ぬるい'],note:'いるあいだ：ターンの終わり、自分と となりの仲間を1いやす',aura:'regen',av:1}); // 単純化：仲間ぜんいん
 NEWC({id:'new198',n:'マグマゾンビ',f:'zo',r:'N',c:3,a:3,h:2,em:'🧟',stage:'volcano',s:'アー…アチチ…',lines:['アー…ひえた…','アー…あつい…','アー！ メラメラ！','アー…プスン'],note:'1回復活：たおれても1回だけ体力1で立ち上がる（もえながら）',kw:'revive'});
 NEWC({id:'new199',n:'けむりおばけ スモッグ',f:'gh',r:'N',c:2,a:2,h:1,em:'💨',stage:'volcano',s:'けほけほ〜、どこでしょう？',lines:['ふっ…（きえた）','もくもく？','もっくもく！','…はれちゃった'],note:'かくれんぼ：自分から攻撃するまで、ねらわれない',kw:'stealth'});
 NEWC({id:'new200',n:'ふんかまち ドッカン岩',f:'sp',r:'N',c:4,a:3,h:3,em:'🌋',stage:'volcano',s:'ゴゴゴ…もうすぐ…',lines:['ドッカーン！（まんぞく）','ゴゴ？','ゴゴゴゴゴ！','…ぷすっ'],note:'3→2→1 で噴火！敵ぜんいんに2ダメージ。自分も退場',fuel:3,dr:'fuse',dv:2}); // 単純化：3ターンで退場＋やられたらドカン
 NEWC({id:'new201',n:'はいかぶりコウモリ',f:'an',r:'N',c:1,a:1,h:2,em:'🦇',stage:'volcano',s:'ケホッ、パタパタ',lines:['パタ…','パタ？','パタパタ！','…ケホ'],note:'（効果なし）'});
 NEWC({id:'new202',n:'黒こげ鉱夫 コゲタ',f:'gu',r:'N',c:3,a:2,h:3,em:'🪨',stage:'volcano',s:'アチチ、いい石 あるかな',lines:['まっくろけ…','なにが でるかな','火の石 ゲット！','…ただの炭'],note:'手にいれる！：火山の石3つから1つ',bc:'get',v:1});
 NEWC({id:'new203',n:'火の鳥のヒナ ヒヨノ',f:'an',r:'R',c:3,a:2,h:2,em:'🐣',stage:'volcano',s:'ピィ！もえてるよ！',lines:['ピ…まだ…おわらない…','ピィ？','ピィィッ！メラメラ！','…ピィ（ひえた）'],note:'やられたら：はいの中から 1回だけ よみがえる。はれの日は もう1回',kw:'revive'}); // 単純化：はれの日の2回目は省略
-NEWC({id:'new204',n:'マグマゴーレム ドロドロン',f:'sp',r:'R',c:5,a:5,h:5,em:'🔥',stage:'volcano',s:'ドロ…ドロ…',lines:['ドロ…かたまった…','ドロ？','ドロドローン！','…かちかち'],note:'いるあいだ：前の敵に 毎ターン1ダメージ（あつい！）',wx:'sun',wv:1}); // 単純化：見参！で はれ+1
+NEWC({id:'new204',n:'マグマゴーレム ラーヴァロン',f:'sp',r:'R',c:5,a:5,h:5,em:'🔥',stage:'volcano',s:'ドロ…ドロ…',lines:['ドロ…かたまった…','ドロ？','ドロドローン！','…かちかち'],note:'いるあいだ：前の敵に 毎ターン1ダメージ（あつい！）',wx:'sun',wv:1}); // 単純化：見参！で はれ+1
 NEWC({id:'new205',n:'噴火占いのボルカばば',f:'ma',r:'R',c:4,a:2,h:4,em:'🌋',stage:'volcano',s:'ひっひっ、山が うなっとる',lines:['よそう…ハズレた…','うらなって ほしいかい？','大当たりじゃ！','…ただの くしゃみ じゃった'],note:'見参！：噴火よそう！2ターン後、敵ぜんいんに3ダメージ',bc:'fuse',v:3});
 NEWC({id:'new206',n:'火山の大トカゲ王 イグニドン',f:'an',r:'L',c:7,a:6,h:6,em:'🦖',stage:'volcano',s:'グオォォ！火山の王の おでましだ！',lines:['たまごを…のこす…','わしを あつく してくれ','グオォ！もえあがれ！','…ひえてきた'],note:'見参！：噴火！敵ぜんいんに2ダメージ、はれ+2 / やられたら：たまごを1つのこす（2ターンで ふたたび生まれる）',bc:'aoe',v:2,wx:'sun',wv:2,dr:'summon',tok:'eggT',dv:1}); // 単純化：たまご＝0/2のそだつ子
 NEWC({id:'new207',n:'サボテンのつぼみ ポッチ',f:'ca',r:'N',c:1,a:0,h:2,em:'🌱',stage:'forest',s:'まだ つぼみだよ〜',lines:['しおしお…','さくかな？','ぐんぐん！','…さかなかった'],note:'うえるとそだつ：毎ターン すこしずつ 大きくなる（合成で のびる）',growT:1});
 NEWC({id:'new208',n:'サボテンの花 ピンキー',f:'ca',r:'N',c:2,a:1,h:3,em:'🌺',stage:'forest',s:'いいにおい でしょ？',lines:['はなびら…ちった…','きれいに さかせて','まんかい！','…しおれた'],note:'ちりょう：ターンの終わり、仲間1体を1いやす',aura:'regen',av:1}); // 単純化：1体 → ぜんいん
 NEWC({id:'new209',n:'ハリネズミのチック',f:'an',r:'N',c:2,a:2,h:2,em:'🦔',stage:'forest',s:'チクチクするよ！',lines:['チク…（まるまった）','さわっちゃ だめ','トゲ ピーン！','…トゲ ねた'],note:'トゲトゲ：攻撃されたら、攻撃してきた相手に1ダメージ',kw:'thorns'});
-NEWC({id:'new210',n:'サボテン兄ちゃん ニョキ',f:'ca',r:'N',c:2,a:2,h:2,em:'🌵',stage:'forest',s:'弟と いっしょだよ！',lines:['弟…たのんだ…','兄弟で ドキドキ','兄弟パワー！','…弟が まいご'],note:'見参！：弟（1/1・トゲトゲ）をよぶ',bc:'summon',tok:'broT',v:1});
-NEWC({id:'new211',n:'キツツキのコンコン',f:'an',r:'N',c:2,a:2,h:1,em:'🐦',stage:'forest',s:'コンコン、おじゃまします',lines:['コン…','コン？','コンコンコーン！','…くちばし いたい'],note:'サボテンのとなりに出すと かくれんぼ',kw:'stealth'}); // 単純化：いつでも かくれんぼ
+NEWC({id:'new210',n:'サボテン兄ちゃん スパイク',f:'ca',r:'N',c:2,a:2,h:2,em:'🌵',stage:'forest',s:'弟と いっしょだよ！',lines:['弟…たのんだ…','兄弟で ドキドキ','兄弟パワー！','…弟が まいご'],note:'見参！：弟（1/1・トゲトゲ）をよぶ',bc:'summon',tok:'broT',v:1});
+NEWC({id:'new211',n:'キツツキのペック',f:'an',r:'N',c:2,a:2,h:1,em:'🐦',stage:'forest',s:'コンコン、おじゃまします',lines:['コン…','コン？','コンコンコーン！','…くちばし いたい'],note:'サボテンのとなりに出すと かくれんぼ',kw:'stealth'}); // 単純化：いつでも かくれんぼ
 NEWC({id:'new212',n:'サボテン丸太 ゴロサボ',f:'ca',r:'N',c:3,a:2,h:4,em:'🪵',stage:'forest',s:'ゴロン、とおさないよ',lines:['ゴロ…ころがった…','ゴロ？','トゲトゲ ゴロン！','…トゲ おれた'],note:'かばう：敵はまずこのキャラを攻撃しないといけない / トゲトゲ：攻撃されたら、攻撃してきた相手に1ダメージ',kw:'taunt thorns'});
-NEWC({id:'new213',n:'森のふくろう ホウ助',f:'an',r:'N',c:3,a:2,h:3,em:'🦉',stage:'forest',s:'ホウ、ここに うえよう',lines:['ホウ…','ホウ？','ホウホウ！','…ホウ（ねむい）'],note:'見参！：手札のサボテンを1枚、すぐうえる（場に出す）',bc:'draw',v:1}); // 単純化：なかまを1人ひく
-NEWC({id:'new214',n:'サボテンミルク屋 トゲミ',f:'sa',r:'N',c:2,a:1,h:3,em:'🥛',stage:'forest',s:'トゲ ぬきミルク、どうぞ',lines:['トゲが…ささった…','まろやかに してね','まろやか〜！','…トゲ 入ってた'],note:'見参！：仲間ぜんいんとあなたの体力を1いやす',bc:'healall',v:1});
-NEWC({id:'new215',n:'まりもサボ ころん',f:'ca',r:'N',c:1,a:1,h:1,em:'🟢',stage:'forest',s:'ころん♪',lines:['ころ…ちくっ','ころん？','ころころ〜ん！','…ころん（ぺしゃ）'],note:'やられたら：トゲをまきちらす！ランダムな敵に1ダメージ',dr:'boom',dv:1}); // 単純化：1回 → 3回
-NEWC({id:'new216',n:'たね飛ばし タネタネ',f:'ca',r:'N',c:3,a:1,h:2,em:'🌾',stage:'forest',s:'ぽぽぽんっ！',lines:['たね…のこすね…','どこに まこう？','ぽぽぽぽーん！','…まきわすれた'],note:'見参！：たね（0/1・うえるとそだつ）を2つまく',bc:'summon',tok:'seedT',v:2});
+NEWC({id:'new213',n:'森のふくろう オリバー',f:'an',r:'N',c:3,a:2,h:3,em:'🦉',stage:'forest',s:'ホウ、ここに うえよう',lines:['ホウ…','ホウ？','ホウホウ！','…ホウ（ねむい）'],note:'見参！：手札のサボテンを1枚、すぐうえる（場に出す）',bc:'draw',v:1}); // 単純化：なかまを1人ひく
+NEWC({id:'new214',n:'サボテンミルク屋 スピーナ',f:'sa',r:'N',c:2,a:1,h:3,em:'🥛',stage:'forest',s:'トゲ ぬきミルク、どうぞ',lines:['トゲが…ささった…','まろやかに してね','まろやか〜！','…トゲ 入ってた'],note:'見参！：仲間ぜんいんとあなたの体力を1いやす',bc:'healall',v:1});
+NEWC({id:'new215',n:'まりもサボ ロリー',f:'ca',r:'N',c:1,a:1,h:1,em:'🟢',stage:'forest',s:'ころん♪',lines:['ころ…ちくっ','ころん？','ころころ〜ん！','…ころん（ぺしゃ）'],note:'やられたら：トゲをまきちらす！ランダムな敵に1ダメージ',dr:'boom',dv:1}); // 単純化：1回 → 3回
+NEWC({id:'new216',n:'たね飛ばし スピッツ',f:'ca',r:'N',c:3,a:1,h:2,em:'🌾',stage:'forest',s:'ぽぽぽんっ！',lines:['たね…のこすね…','どこに まこう？','ぽぽぽぽーん！','…まきわすれた'],note:'見参！：たね（0/1・うえるとそだつ）を2つまく',bc:'summon',tok:'seedT',v:2});
 NEWC({id:'new217',n:'サボテン用心棒 ガンサボ',f:'ca',r:'R',c:4,a:3,h:5,em:'🛡️',stage:'forest',s:'さわってみな。チクッと するぜ',lines:['トゲが…ぬけた…','トゲ とがらせて','トゲトゲ MAX！','…トゲ まるくなった'],note:'かばう：敵はまずこのキャラを攻撃しないといけない / トゲトゲ：攻撃してきた相手に2ダメージ',kw:'taunt thorns'}); // 単純化：トゲは1ダメージ
-NEWC({id:'new218',n:'ねむり花 ユメミ',f:'ca',r:'R',c:3,a:1,h:4,em:'🌼',stage:'forest',s:'ふわぁ…いいにおい…',lines:['ゆめ…さめた…','そっと してね','おやすみ〜♪','…じぶんが ねちゃった'],note:'見参！：あまい香り！敵2体が ねむる（1回休み）',bc:'stun'}); // 単純化：2体 → いちばん強い1体
-NEWC({id:'new219',n:'森のレンジャー サボ松',f:'sh',r:'R',c:3,a:3,h:3,em:'🌲',stage:'forest',s:'森は おれが まもる！',lines:['森を…たのむ…','バッジ もらえる？','⭐ゲット！','…バッジ なくした'],note:'昇進：子分を3体たおすと⭐。⭐になると 仲間のサボテンぜんいん トゲトゲ',rankK:3}); // 単純化：サボテンにトゲは省略
-NEWC({id:'new220',n:'千年サボテン オオトゲ様',f:'ca',r:'L',c:7,a:4,h:8,em:'🌵',stage:'forest',s:'ほっほ…千年 まっておったぞ',lines:['たねを…のこして…','そっと 水を くれ','千年ぶりに 花が さいた！','…あと 千年 まつかの'],note:'うえるとそだつ：毎ターン+1/+1 / トゲトゲ：攻撃してきた相手に2ダメージ / やられたら：たねを3つのこす',growT:1,kw:'thorns',dr:'summon',tok:'seedT',dv:3}); // 単純化：トゲは1ダメージ
+NEWC({id:'new218',n:'ねむり花 ララ',f:'ca',r:'R',c:3,a:1,h:4,em:'🌼',stage:'forest',s:'ふわぁ…いいにおい…',lines:['ゆめ…さめた…','そっと してね','おやすみ〜♪','…じぶんが ねちゃった'],note:'見参！：あまい香り！敵2体が ねむる（1回休み）',bc:'stun'}); // 単純化：2体 → いちばん強い1体
+NEWC({id:'new219',n:'森のレンジャー サグワード',f:'sh',r:'R',c:3,a:3,h:3,em:'🌲',stage:'forest',s:'森は おれが まもる！',lines:['森を…たのむ…','バッジ もらえる？','⭐ゲット！','…バッジ なくした'],note:'昇進：子分を3体たおすと⭐。⭐になると 仲間のサボテンぜんいん トゲトゲ',rankK:3}); // 単純化：サボテンにトゲは省略
+NEWC({id:'new220',n:'千年サボテン サグアロ様',f:'ca',r:'L',c:7,a:4,h:8,em:'🌵',stage:'forest',s:'ほっほ…千年 まっておったぞ',lines:['たねを…のこして…','そっと 水を くれ','千年ぶりに 花が さいた！','…あと 千年 まつかの'],note:'うえるとそだつ：毎ターン+1/+1 / トゲトゲ：攻撃してきた相手に2ダメージ / やられたら：たねを3つのこす',growT:1,kw:'thorns',dr:'summon',tok:'seedT',dv:3}); // 単純化：トゲは1ダメージ
 NEWC({id:'new221',n:'ちびドン',f:'mf',r:'N',c:1,a:1,h:1,em:'🎩',stage:'mafia',s:'いつか ボスに なるんだ！',lines:['ママ〜…','えらく なれる？','⭐もらった！','…まだ 下っぱ'],note:'昇進：子分を3体たおすと「幹部ちびドン⭐」',rankK:3});
-NEWC({id:'new222',n:'くつみがきのピカット',f:'sa',r:'N',c:1,a:1,h:1,em:'👞',stage:'mafia',s:'ピカピカに しますよ〜',lines:['ブラシ…おとした…','ピカピカ？','ピッカピカ！','…くつずみ こぼした'],note:'見参！：うわさを聞いた！敵の手札を1枚 見やぶる',bc:'scout'});
-NEWC({id:'new223',n:'ニセ警官ポリポリ',f:'mf',r:'N',c:2,a:2,h:2,em:'👮',stage:'mafia',s:'ほらほら、ケーサツだぞ〜',lines:['バレちゃった〜','バッジ、ホンモノっぽい？','そっくり！','…おもちゃの バッジ'],note:'見参！：敵の保安官1体を だまして1回休み',bc:'stun'}); // 単純化：保安官限定なし
+NEWC({id:'new222',n:'くつみがきのバフィー',f:'sa',r:'N',c:1,a:1,h:1,em:'👞',stage:'mafia',s:'ピカピカに しますよ〜',lines:['ブラシ…おとした…','ピカピカ？','ピッカピカ！','…くつずみ こぼした'],note:'見参！：うわさを聞いた！敵の手札を1枚 見やぶる',bc:'scout'});
+NEWC({id:'new223',n:'ニセ警官ボビー',f:'mf',r:'N',c:2,a:2,h:2,em:'👮',stage:'mafia',s:'ほらほら、ケーサツだぞ〜',lines:['バレちゃった〜','バッジ、ホンモノっぽい？','そっくり！','…おもちゃの バッジ'],note:'見参！：敵の保安官1体を だまして1回休み',bc:'stun'}); // 単純化：保安官限定なし
 NEWC({id:'new224',n:'マシンガンねこ ダダニャ',f:'mf',r:'N',c:3,a:2,h:2,em:'🐈',stage:'mafia',s:'ダダダニャ〜！',lines:['ダダ…ニャ…','ニャ？','ダダダダニャー！','…たまぎれニャ'],note:'見参！：ダダダ！ランダムな敵に1ダメージを3回',bc:'bomb',v:3}); // 単純化：ランダムな敵1体に3
-NEWC({id:'new225',n:'ウラ帳簿のメガネ',f:'mf',r:'N',c:2,a:1,h:3,em:'📒',stage:'mafia',s:'数字は ウソを つかない…たぶん',lines:['帳簿…バレた…','メガネ ふいて','がっぽり！','…計算ミス'],note:'見参！：このターン出した仲間の数だけ コイン+1',bc:'coin',v:1}); // 単純化：コイン+1
+NEWC({id:'new225',n:'ウラ帳簿のスペックス',f:'mf',r:'N',c:2,a:1,h:3,em:'📒',stage:'mafia',s:'数字は ウソを つかない…たぶん',lines:['帳簿…バレた…','メガネ ふいて','がっぽり！','…計算ミス'],note:'見参！：このターン出した仲間の数だけ コイン+1',bc:'coin',v:1}); // 単純化：コイン+1
 NEWC({id:'new226',n:'路地裏のノラネコ団',f:'an',r:'N',c:3,a:1,h:1,em:'🐾',stage:'mafia',s:'ニャ〜ニャ〜ニャ〜！',lines:['ニャ…（ちらばった）','ニャ？','ニャニャニャニャ！','…みんな ねてる'],note:'見参！：ノラネコ（1/1）を場がいっぱいになるまで よぶ。つぎのターン ぜんぶ散歩にいく（退場）',bc:'summon',tok:'straycatT',v:6});
 NEWC({id:'new227',n:'ボディガードの石頭 ガンコ',f:'mf',r:'N',c:4,a:2,h:6,em:'🗿',stage:'mafia',s:'ボスに ちかよるな',lines:['石頭…われた…','かたく してくれ','カッチカチ！','…ゴツン'],note:'かばう：敵はまずこのキャラを攻撃しないといけない',kw:'taunt'});
-NEWC({id:'new228',n:'金庫番のカギ子',f:'mf',r:'N',c:2,a:1,h:3,em:'🔑',stage:'mafia',s:'カギは わたさないわ',lines:['金庫が…あいちゃう…','カギ、なくさないでね','カギ ふえた！','…カギ どこ？'],note:'やられたら：金庫があく！金塊を3つ落とす',dr:'gold',dv:3});
-NEWC({id:'new229',n:'ぼうしの中のハト クルッポ',f:'an',r:'N',c:1,a:1,h:1,em:'🕊️',stage:'mafia',s:'クルッポー！',lines:['クル…ぼうしへ…','クル？','クルッポッポー！','…ぼうし からっぽ'],note:'やられたら：ぼうしからもう1羽（1/1）',dr:'summon',tok:'pigeonT',dv:1});
+NEWC({id:'new228',n:'金庫番のスクアード',f:'mf',r:'N',c:2,a:1,h:3,em:'🔑',stage:'mafia',s:'カギは わたさないわ',lines:['金庫が…あいちゃう…','カギ、なくさないでね','カギ ふえた！','…カギ どこ？'],note:'やられたら：金庫があく！金塊を3つ落とす',dr:'gold',dv:3});
+NEWC({id:'new229',n:'ぼうしの中のハト クーパー',f:'an',r:'N',c:1,a:1,h:1,em:'🕊️',stage:'mafia',s:'クルッポー！',lines:['クル…ぼうしへ…','クル？','クルッポッポー！','…ぼうし からっぽ'],note:'やられたら：ぼうしからもう1羽（1/1）',dr:'summon',tok:'pigeonT',dv:1});
 NEWC({id:'new230',n:'新聞記者スクープ',f:'gu',r:'N',c:2,a:1,h:2,em:'📸',stage:'mafia',s:'とくダネ いただき！',lines:['記事が…ボツ…','いい写真 とれるかな','一面トップ！','…ピンぼけ'],note:'見参！：スキャンダル！いちばん強い敵が はずかしくて1回休み',bc:'stun'});
 NEWC({id:'new231',n:'あやしいジュースの運び屋 ボトルズ',f:'mf',r:'R',c:3,a:2,h:3,em:'🍾',stage:'mafia',s:'とくべつな ジュースだよ',lines:['ビン…われた…','ふらないでね','とびきり あやしい！','…ただの 水'],note:'見参！：あやしいジュースを くばる！ランダムな敵2体が 酔っぱらう',bc:'stun'}); // 単純化：2体 → いちばん強い1体
-NEWC({id:'new232',n:'そっくりさん マネマネ',f:'ou',r:'R',c:4,a:3,h:3,em:'🎭',stage:'mafia',s:'どっちが ホンモノ？',lines:['バレた〜','だれに なろうかな','うりふたつ！','…にてない'],note:'見参！：仲間のレジェンド1体のそっくりさんに変身（同じ効果）',bc:'draw',v:1}); // 単純化：なかまを1人ひく
+NEWC({id:'new232',n:'そっくりさん ツイニー',f:'ou',r:'R',c:4,a:3,h:3,em:'🎭',stage:'mafia',s:'どっちが ホンモノ？',lines:['バレた〜','だれに なろうかな','うりふたつ！','…にてない'],note:'見参！：仲間のレジェンド1体のそっくりさんに変身（同じ効果）',bc:'draw',v:1}); // 単純化：なかまを1人ひく
 NEWC({id:'new233',n:'夜の歌姫 ジャズミン',f:'sa',r:'R',c:3,a:2,h:3,em:'🎷',stage:'mafia',s:'今夜は ジャズで いきましょ',lines:['アンコールは…なし…','声を ととのえて','スウィ〜ング！','…音が はずれた'],note:'連携：となりの仲間が攻撃すると、いっしょに1ダメージ（左右どちらも）',aura:'link'});
 NEWC({id:'new234',n:'ギャング街の顔役 ドン・パスタッチオ',f:'mf',r:'L',c:6,a:5,h:6,em:'🍝',stage:'mafia',s:'この街で わしを 知らんのか？',lines:['わしの…パスタが…','ていねいに たのむぞ','ボーノ！最高じゃ','…パスタ のびた'],note:'見参！：敵の手札から1枚うばう / いるあいだ：子分（マフィア）がやられるたび コイン+1',steal:1,aura:'coin'}); // 単純化：攻撃したら1まいぬすむ＋毎ターンコイン+1
 
@@ -5935,8 +5935,8 @@ const cbHit=id=>{const c=CB.find(x=>x.id===id);if(c)comboFound(c)};
    「敵にも 引かせる」カード（ケッチャムの覚醒と シナジー）
    ===================================================================== */
 NEWC({id:'post',n:'おしゃべり郵便屋 ポスト',f:'gu',r:'N',c:2,a:2,h:2,em:'📮',stages:['train','saloon'],bc:'drawboth',v:2,s:'お手紙で〜す！ みんなに 2通ずつ！',lines:['あ…配達が…','ドキドキ…お手紙みたい','速達で つよくなった！','…あて先ふめい'],note:'見参！：おたがいに2まいひく'});
-NEWC({id:'baramaki',n:'ばらまき富豪 バラマキン',f:'mf',r:'R',c:3,a:3,h:3,em:'💸',stages:['mafia','train'],bc:'foedraw',v:2,s:'ほれほれ、ひろいたまえ！',lines:['わしの金が〜','ドキドキ…投資かね？','もうかった！','…損した'],note:'見参！：敵に2まいひかせる。自分+2/+2'});
-NEWC({id:'pigeon2',n:'てがみ配達ハト',f:'an',r:'N',c:1,a:1,h:1,em:'🕊️',stages:['train','ranch'],dr:'drawboth',dv:1,s:'ポッポー！ おとどけもの！',lines:['ポ…ポー…','ドキドキ…ポ？','ポッポー！','…ポ'],note:'やられたら：おたがいに1まいひく'});
+NEWC({id:'baramaki',n:'ばらまき富豪 スペンダー',f:'mf',r:'R',c:3,a:3,h:3,em:'💸',stages:['mafia','train'],bc:'foedraw',v:2,s:'ほれほれ、ひろいたまえ！',lines:['わしの金が〜','ドキドキ…投資かね？','もうかった！','…損した'],note:'見参！：敵に2まいひかせる。自分+2/+2'});
+NEWC({id:'pigeon2',n:'てがみ配達 ポスティ',f:'an',r:'N',c:1,a:1,h:1,em:'🕊️',stages:['train','ranch'],dr:'drawboth',dv:1,s:'ポッポー！ おとどけもの！',lines:['ポ…ポー…','ドキドキ…ポ？','ポッポー！','…ポ'],note:'やられたら：おたがいに1まいひく'});
 Object.assign(KW_COL,{dboth:'#2a9a8a',fdraw:'#c0a020'});
 {const _el=effList;effList=function(id,lv){const L=_el.apply(this,arguments);const d=C[id];if(!d)return L;
   const put=(key,row)=>{const i=L.findIndex(x=>x[1]===key);if(i>=0)L[i]=row;else L.push(row)};
@@ -7653,20 +7653,20 @@ try{if(BX.bibiri){const _h=BX.bibiri.hurt;BX.bibiri.hurt=async function(){if(BTI
    ・前に つけた「ランダムな 特色」は やめる
    ===================================================================== */
 const LINEUP={
-  wild:{ic:'🤠',t:'早撃ちの 荒野',n:['荒野のガンマン ドリー','荒野のうま ハヤテ','決闘ネズミ ズドン','手配書はりのチャッピー','ビートルウッドの民兵','チンピラのピッキー','牛どろぼうコヨーテ','かくれんぼイグアナ','ちびサボ','かぶりトカゲ','ずさんな徴収係']},
-  hill:{ic:'👻',t:'おばけと ゾンビの 墓場',heavy:['ゾンビ将軍','うたうゾンビ合唱団','ねぼけおばけ','ひとだま三姉妹','ゾンビ花よめ ヴェール','ポルターガイスト ガタゴト','てさぐりゾンビ'],n:['ゾンビ兵','ゾンビ将軍','まずしいゾンビ','きびしいゾンビ','さびしいゾンビ','あつかましいゾンビ','てさぐりゾンビ','ゆうれいカウボーイ ヒュードロ','ポルターガイスト ガタゴト','シーツおばけ ふわり','ねぼけおばけ','ゾンビ犬ホネスキー','ねむたいゾンビ','うたうゾンビ合唱団','おはなおばけ ハナコ','ちょうちんおばけ ボンボリ','ふこうの手紙 ノロイ','ひとだま三姉妹','ゾンビ花よめ ヴェール','ゾンビ見習いのボーン太']},
-  canyon:{ic:'⭐',t:'保安官の 峡谷',n:['見習いポチ','保安官ポチ','マスタング巡査','テキサス・レンジャー隊','デピュティ・ガーガー','見はり番ドッグ','保安官長ポチ','重厚な保安官','実直な保安官','ワイアット・アーフ','パット・ギャレッ亀','カギ番ブルーノ','ロイ・ビーン判事','たんていミーア','バージル・アーフ','バット・マスターソン','はやうちポーク']},
-  saloon:{ic:'🎵',t:'歌の 酒場',n:['歌姫リリー','バイオリンのコロ吉','ラグタイム・ケロ','酔いどれ吟遊詩人','ピアノ弾きのモグ','ゆうれいピアノ ポロン','カンカン・キャット','看板娘のピョン子','良心的な店主','バーテンのシェイク','ミルク好きスリム','ちょこまかアライ','鐘つきのゴーン']},
-  mine:{ic:'💰',t:'お宝の 金鉱山',n:['金ほりガンテツ','たんけん隊フェレット','金庫やぶりモグラ','ツルハシゴブリン','宝石ガニ キラキラ','金ぴかミミズ ニョロゴールド','ランタンもちのテラス','金のガチョウ ゴルディ','ゴブリン三兄弟','ダイナマイト・ダン','ばくはつノーベルト','カナリアのピヨ','トロッコのトロ吉','ヘルメットのゴツン','ほら穴こびと ドワ助','ダイナマイト倉庫番 ドカ男','トロッコ暴走団 ガタゴー','クリスタルのせいれい ギラリ']},
+  wild:{ic:'🤠',t:'早撃ちの 荒野',n:['荒野のガンマン ドリー','荒野のうま ハヤテ','決闘ネズミ ブラム','手配書はりのチャッピー','ビートルウッドの民兵','チンピラのピッキー','牛どろぼうコヨーテ','かくれんぼイグアナ','ちびサボ','かぶりトカゲ','ずさんな徴収係']},
+  hill:{ic:'👻',t:'おばけと ゾンビの 墓場',heavy:['ゾンビ将軍 ペニー','うたうゾンビ合唱団','ねぼけおばけ','ひとだま三姉妹','ゾンビ花よめ ヴェール','ポルターガイスト ガタゴト','てさぐりゾンビ'],n:['ゾンビ兵','ゾンビ将軍 ペニー','まずしいゾンビ','きびしいゾンビ','さびしいゾンビ','あつかましいゾンビ','てさぐりゾンビ','ゆうれいカウボーイ ヒュードロ','ポルターガイスト ガタゴト','シーツおばけ ふわり','ねぼけおばけ','ゾンビ犬ホネスキー','ねむたいゾンビ','うたうゾンビ合唱団','おはなおばけ デイジー','ちょうちんおばけ フリッカー','ふこうの手紙 ノロイ','ひとだま三姉妹','ゾンビ花よめ ヴェール','ゾンビ見習いのボーン太']},
+  canyon:{ic:'⭐',t:'保安官の 峡谷',n:['見習いポチ','保安官ポチ','マスタング巡査','テキサス・レンジャー隊','デピュティ・ガーガー','見はり番ドッグ','保安官長ポチ','おんこうな保安官 レオ','まじめな保安官 ネッド','ワイアット・アーフ','パット・ギャレッ亀','カギ番ブルーノ','ロイ・ビーン判事','たんていミーア','バージル・アーフ','バット・マスターソン','はやうちポーク']},
+  saloon:{ic:'🎵',t:'歌の 酒場',n:['歌姫リリー','バイオリンのコロ吉','ラグタイム・ケロ','ほろよい吟遊詩人 バラッド','ピアノ弾きのモグ','ゆうれいピアノ ポロン','カンカン・キャット','看板娘のピョン子','良心的な店主','バーテンのシェイク','ミルク好きスリム','ちょこまかアライ','鐘つきのベルトン']},
+  mine:{ic:'💰',t:'お宝の 金鉱山',n:['金ほり ナゲット','たんけん隊フェレット','金庫やぶりのツィッガー','つるはしゴブリン ノック','宝石ガニ ジェミー','金ぴかミミズ ニョロゴールド','ランタンもちのブライティ','金のガチョウ ゴルディ','ゴブリン三兄弟','ダイナマイト・ダン','ばくはつノーベルト','カナリアのピップ','トロッコのトロ吉','ヘルメットのゴツン','ほら穴こびと ドワ助','ダイナマイト倉庫番 ドカ男','トロッコ暴走団ご一行','クリスタルのせいれい プリズマ']},
   ranch:{ic:'🐮',t:'どうぶつの 牧場',f:'an'},
-  train:{ic:'🚂',t:'列車強盗団',n:['荒野の大親分','ロックバレーの悪童','ならず者','ジェシー・ジャムズ','ダルトン四兄弟','ブッチ＆サンダンス','ボニー＆クライド','ブラック・バート','列車強盗ジャック','列車強盗の子分 マスクン','ダイナマイト強盗 ドカン兄弟','屋根の上のカラス クロスケ','車掌のポッポさん','きっぷ切りのパチン']},
+  train:{ic:'🚂',t:'列車強盗団',n:['荒野の大親分 ビリー','ロックバレーの悪童','荒野のならず者 ビリー','ジェシー・ジャムズ','ダルトン四兄弟','ブッチ＆サンダンス','ボニー＆クライド','ブラック・バート','列車強盗ジャック','列車強盗の子分 バンディ','ダイナマイト強盗 ドカン兄弟','屋根の上のカラス ネヴァー','車掌のポッポさん','きっぷ切りのクリッピー']},
   steam:{ic:'⚙️',t:'からくりロボの 街',f:'ro'},
-  bayou:{ic:'🐸',t:'どくと のろいの 沼',n:['ヒーラ・モンスター','ガラガラ三兄妹','キノコ魔女マッシュ','ぬまのカエル王子','ヒルのチュー太','ぬまぬまゾンビ','きりおばけ モヤモヤ','どろんこガエル ペッタン','ぬま魔女見習い ドロリ','そうぎ屋カラス','ゾンビワニ ガブリン','ワニのガブ郎','オタマのタマ']},
-  snow:{ic:'❄️',t:'カチコチの 雪山',n:['雪のせいれい ユキミ','ゆきだるまのダルリン','つららのせいれい ピキ','ペンギンのペン太','ゆきうさぎ シロップ','そりひき犬 ハスキン','シロクマ親分','雪男の子 ユキッコ','スキー保安官 シュプール','なだれ呼びのヤッホー爺','マンモスの赤ちゃん パオ','ヘラジカのツノーブ','毛皮うりのモフ兵衛']},
-  oasis:{ic:'🏜️',t:'しんきろうと すなの オアシス',n:['砂のせいれい サラサラ','しんきろう売り ユラユラ','すなどけいのせいれい コチコチ','砂クジラ ボエー','フェネックのミミ丸','サソリ占い師 ハサミーナ','ヤシの実ざる ウキキ','サボ太','日がさトカゲ パラソル','ラクダのこぶ子','ハヤブサ使い タカミ','おどり子 ベリーナ','空とぶじゅうたん フワリン','ニセ札メリー']},
-  volcano:{ic:'🔥',t:'ほのおの 火山',n:['マグマのせいれい ゴウ','ひくいどりのヒノ','ひのこ坊や チリチリ','溶岩ガメ ノッシー','ふいご番のフーフー','火トカゲ サラマ','マグマゾンビ','ふんかまち ドッカン岩','黒こげ鉱夫 コゲタ','火の鳥のヒナ ヒヨノ','マグマゴーレム ドロドロン','噴火占いのボルカばば','けむりおばけ スモッグ','温泉ザル ポカポカ']},
-  forest:{ic:'🔮',t:'魔法と サボテンの 森',n:['のろい人形ドゥー','ほねドクター','マダム・ホーホー','ニセ薬のスネーク','ミスト・マリー','サンドマン','はなげ仙人','もじばけ魔女バグーラ','叡智の話者','スターゲイザー教授','流れ星のステラ','おどるサボテン ラテン','サボテンのつぼみ ポッチ','サボテンの花 ピンキー','サボテン兄ちゃん ニョキ','サボテン丸太 ゴロサボ','まりもサボ ころん','ねむり花 ユメミ','サボテン用心棒 ガンサボ','ハリネズミのチック','キツツキのコンコン']},
-  mafia:{ic:'🎩',t:'ギャングの 街',n:['ドアマンのゴンゾ','ショーガールのルル','ちびドン','くつみがきのピカット','ニセ警官ポリポリ','マシンガンねこ ダダニャ','ウラ帳簿のメガネ','路地裏のノラネコ団','ボディガードの石頭 ガンコ','金庫番のカギ子','新聞記者スクープ','あやしいジュースの運び屋 ボトルズ','そっくりさん マネマネ','夜の歌姫 ジャズミン','ばらまき富豪 バラマキン']}};
+  bayou:{ic:'🐸',t:'どくと のろいの 沼',n:['ヒーラ・モンスター','ガラガラ三兄妹','キノコ魔女マッシュ','ぬまカエルのルイ王子','ヒルのチュー太','ぬまぬまゾンビ','きりおばけ ミスティ','どろんこガエル ペッタン','ぬま魔女見習い マーシャ','そうぎ屋カラス モーティマー','ゾンビワニ ガブリン','ワニのガブ郎','オタマのタマ']},
+  snow:{ic:'❄️',t:'カチコチの 雪山',n:['雪のせいれい スノウィ','ゆきだるまのポラリン','つららのせいれい アイシー','ペンギンのワドル','ゆきうさぎ シロップ','そりひき犬 ハスキン','シロクマ親分','雪男の子 イエッティ','スキー保安官 シュプール','なだれ呼びのヤッホー爺','マンモスの赤ちゃん パオ','ヘラジカのツノーブ','毛皮うりのペルト']},
+  oasis:{ic:'🏜️',t:'しんきろうと すなの オアシス',n:['砂のせいれい サラサラ','しんきろう売り ウェイヴィ','すなどけいのせいれい クロノ','砂クジラ モービー','フェネックのフェン','サソリ占い師 マダム・ピンサ','ヤシの実ざる ココ','サボ太','日がさトカゲ パラソル','ラクダのキャメリア','ハヤブサ使い テイロン','おどり子 ベリーナ','空とぶじゅうたん ソアリン','ニセ札メリー']},
+  volcano:{ic:'🔥',t:'ほのおの 火山',n:['マグマのせいれい フレイミー','ひくいどりのヒノ','ひのこ坊や フリッチー','溶岩ガメ ラーヴィ','ふいご番のベロウズ','火トカゲ サラマ','マグマゾンビ','ふんかまち ドッカン岩','黒こげ鉱夫 コゲタ','火の鳥のヒナ ヒヨノ','マグマゴーレム ラーヴァロン','噴火占いのボルカばば','けむりおばけ スモッグ','温泉ザル ソーキー']},
+  forest:{ic:'🔮',t:'魔法と サボテンの 森',n:['のろい人形ドゥー','ほねドクター','マダム・ホーホー','ニセ薬のスネーク','ミスト・マリー','ねむりの ナップ','はなげ仙人 ハーミット','もじばけ魔女バグーラ','叡智の話者','スターゲイザー教授','流れ星のステラ','おどるサボテン ラテン','サボテンのつぼみ ポッチ','サボテンの花 ピンキー','サボテン兄ちゃん スパイク','サボテン丸太 ゴロサボ','まりもサボ ロリー','ねむり花 ララ','サボテン用心棒 ガンサボ','ハリネズミのチック','キツツキのペック']},
+  mafia:{ic:'🎩',t:'ギャングの 街',n:['ドアマンのゴンゾ','ショーガールのルル','ちびドン','くつみがきのバフィー','ニセ警官ボビー','マシンガンねこ ダダニャ','ウラ帳簿のスペックス','路地裏のノラネコ団','ボディガードの石頭 ガンコ','金庫番のスクアード','新聞記者スクープ','あやしいジュースの運び屋 ボトルズ','そっくりさん ツイニー','夜の歌姫 ジャズミン','ばらまき富豪 スペンダー']}};
 const LINEUP_IDS={};
 (function(){if(typeof ART_HOME==='undefined')return;const BOSSES=new Set(Object.values(STAGES).map(s=>s.boss).filter(Boolean));const byN={};Object.keys(C).forEach(id=>{if(C[id]&&!C[id].token)byN[C[id].n]=byN[C[id].n]||id});
   for(const sid in LINEUP){const s=STAGES[sid];if(!s)continue;const L=LINEUP[sid];const ok=id=>id&&C[id]&&!C[id].token&&!BOSSES.has(id)&&!C[id].out&&ART_HOME[id]===sid;
@@ -7962,7 +7962,7 @@ const FLAV2={pochi:'がんばるワン！',pochi2:'見まわり いってきま�
  new161:'ガマの油、ぬりぬり〜',new172:'もふもふ あったか！',new175:'オーロラの ひかり〜',new179:'お水 わけて あげる〜',new191:'ボエ〜〜！',new196:'メラメラ〜！',new197:'いい 湯だな〜',
  new208:'いい におい〜',new222:'ピカピカに しますよ〜',new225:'数字は ウソつかない…たぶん',new228:'カギは わたさないわ！',new231:'とくべつな ジュースだよ〜',new234:'ここは わしの 街じゃ',
  new41:'すなあらしだ〜！'};
-const FLAV2N={'ひとだま三姉妹':'ふわふわ〜 3人 そろって！','墓場のオルガン弾き レクイエ':'パイプオルガン ジャーン♪','ひつじかい モコ':'みんな〜 こっちだよ〜','ゾンビ将軍':'われに つづけ… ウー…','路地裏のノラネコ団':'ニャ〜ニャ〜 しゅうごう！','おはなおばけ ハナコ':'おはな、のこして いくね〜','千年サボテン オオトゲ様':'たねを のこそう…','デピュティ・ガーガー':'ガーガー！ あとは たのんだ！','タンブルウィードくん':'コロコロ〜 なかまを よぶよ'};
+const FLAV2N={'ひとだま三姉妹':'ふわふわ〜 3人 そろって！','墓場のオルガン弾き レクイエ':'パイプオルガン ジャーン♪','ひつじかい ラナ':'みんな〜 こっちだよ〜','ゾンビ将軍 ペニー':'われに つづけ… ウー…','路地裏のノラネコ団':'ニャ〜ニャ〜 しゅうごう！','おはなおばけ デイジー':'おはな、のこして いくね〜','千年サボテン サグアロ様':'たねを のこそう…','デピュティ・ガーガー':'ガーガー！ あとは たのんだ！','タンブルウィードくん':'コロコロ〜 なかまを よぶよ'};
 Object.keys(C).forEach(id=>{const c=C[id];if(c&&FLAV2N[c.n]&&!FLAV2[id])FLAV2[id]=FLAV2N[c.n]});
 /* ---- 説明文を 動詞で おわらせる ---- */
 const CLAR=[
@@ -8054,7 +8054,7 @@ function wxPaint(){if(!HUMAN)return;const el=document.querySelector('.wxbadge');
 /* =====================================================================
    10/27：プレイメモの なおし
    ===================================================================== */
-/* なまけ助手 グータラ：つよすぎ → 出た つぎの ターンも ねむる（2ターン ねむる） */
+/* なまけ助手 スナッズ：つよすぎ → 出た つぎの ターンも ねむる（2ターン ねむる） */
 (function(){const d=C.new44;if(!d)return;d.bc='lazy';d.note='見参！：ふぁ〜… つぎの ターンも ねむくて うごけない'})();
 NEWBC_T.lazy='つぎの ターンも ねむくて うごけない（2ターン ねむる）';
 NEWBC.lazy=async function(sd,m){/* よっぱらいでは なく、つぎの ターンも ねむったまま（zzz） */m._lazy=1;if(HUMAN)try{floatAt(uEl(m),'ぐぅ〜… つぎの ターンも ねむる','info')}catch(e){}};
@@ -9039,7 +9039,7 @@ XON.death.push(async(sd,m)=>{const o=opp(sd);const kfoe=isMe(o)?'me':'foe';
   B.deadFoes=B.deadFoes||{me:[],foe:[]};B.deadFoes[kfoe].push(m.id);
   /* ヨミジ：なかまが やられたら 特急へ */
   for(const y of sd.board)if(y.id==='new38'&&y.hp>0&&y!==m&&m.card){y.train=y.train||[];y.train.push(m.card);xFl(y,'🚃 ごあんない…','info')}
-  /* ハゲタカおばば・ニャンゴールド：あいてが たおれたら コイン（金塊） */
+  /* ハゲタカおばば マギー・ニャンゴールド：あいてが たおれたら コイン（金塊） */
   for(const b of o.board)if(b.hp>0&&!b.jailed&&(b.id==='new72'||b.id==='new94')){o.coin+=1;xFl(b,'金塊！ コイン+1','heal')}
   if(B.goldRush&&B.goldRush[kfoe]){o.coin+=1;if(isMe(o)&&R)R.money+=1}
   /* パスタッチオ：子分（マフィア）が やられたら コイン */
@@ -9225,7 +9225,7 @@ try{if(typeof FLAV!=='undefined'){['new65','new93'].forEach(id=>{FLAV[id]=FLAV[i
 {const _st2=startTurn;startTurn=async function(sd){if(!B||!B.fuses)return _st2.apply(this,arguments);const fr=B.fuses.filter(f=>f.front&&f.side===sd);B.fuses=B.fuses.filter(f=>!(f.front&&f.side===sd));
   for(const f of fr){f.left--;if(f.left<=0){f.done=1;const o=opp(sd);const t=o.board.find(e=>e.hp>0&&!e.jailed);if(HUMAN){say('🧨 ドッカーン！');shakeApp&&shakeApp()}if(t)await damage(o,t,f.v,{quiet:true,fx:'enemy'});else await damage(o,heroOf(o),f.v,{quiet:true})}}
   const r=await _st2.apply(this,arguments);if(B){B.fuses=B.fuses||[];B.fuses.push(...fr.filter(f=>!f.done))}return r}}
-/* ツルハシゴブリン：ダメージを うけるたび 金塊（コイン+1） */
+/* つるはしゴブリン ノック：ダメージを うけるたび 金塊（コイン+1） */
 {const _dm3=damage;damage=async function(sd,t,n,o){const r=await _dm3.apply(this,arguments);try{if(B&&t&&!t.hero&&t.id==='new99'&&n>0){const s=B.me.board.includes(t)?B.me:B.foe;s.coin+=1;xFl(t,'金塊！ コイン+1','heal')}}catch(e){}return r}}
 /* ホタル：なかまの 攻撃は はずれない */
 {const _at2=attack;attack=async function(sd,m,t){if(m&&m.miss>0&&xAlive(sd,'new153'))m.miss=0;return _at2.apply(this,arguments)}}
