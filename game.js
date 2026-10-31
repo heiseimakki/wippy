@@ -853,7 +853,7 @@ function readCode(code){try{code=code.trim().replace(/\s/g,'');if(!code.startsWi
    音（効果音は合成。BGMは町＝曲ファイル、ほかは場所ごとの合成曲）
    ===================================================================== */
 let AC=null,MUTED=lsGet('wippy-mute')==='1';
-function ac(){if(!AC){try{if(navigator.audioSession)navigator.audioSession.type='playback';AC=new (window.AudioContext||window.webkitAudioContext)()}catch(e){}}if(AC&&AC.state==='suspended')AC.resume();return AC}
+function ac(){if(!AC){try{if(navigator.audioSession)navigator.audioSession.type='playback';AC=new (window.AudioContext||window.webkitAudioContext)()}catch(e){}}if(AC&&AC.state==='suspended')AC.resume().catch(()=>{});return AC}
 /* 効果音はぜんぶここを通す：コンプレッサーで音量をそろえて、全体を大きめに */
 let SFXOUT=null;function sfxOut(){const a=ac();if(!a)return null;if(!SFXOUT){const c=a.createDynamicsCompressor();c.threshold.value=-18;c.ratio.value=4;const g=a.createGain();g.gain.value=2.2;g.connect(c);c.connect(a.destination);SFXOUT=g}return SFXOUT}
 /* iPhoneは「タップ（指をはなした時）」でないと音が出ないので、そこで音をアンロック */
@@ -11298,6 +11298,9 @@ if(typeof foeIntro==='function'){const _fi=foeIntro;foeIntro=async function(){if
     if(h){const hurt=m.hp<m.max;h.classList.toggle('hurt',hurt);h.classList.toggle('up',!hurt&&m.max>bH)}};
   const _ue=unitEl;unitEl=function(sd,m){const el=_ue.apply(this,arguments);try{paint(el,m,sd)}catch(e){}return el};
   const _uu=updUnit;updUnit=function(m){const r=_uu.apply(this,arguments);try{paint(uEl(m),m)}catch(e){}return r}})();
+
+/* 11/01：とじた 音のしくみに resume すると エラーが 出る（作りなおしの すきま）→ 何もしない */
+try{const P=(window.AudioContext||window.webkitAudioContext).prototype,_r=P.resume;P.resume=function(){if(this.state==='closed')return Promise.resolve();const q=_r.apply(this,arguments);try{q&&q.catch&&q.catch(()=>{})}catch(e){}return q}}catch(e){}
 
 
 /* 11/01 f95：ゲームっぽい 効果を わかりやすく（かしまさん「わけがわかんない」）
