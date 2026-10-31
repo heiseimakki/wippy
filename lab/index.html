@@ -20,7 +20,7 @@ header p{margin:3px 0 0;font-size:12px;color:#e8d3b0}
 .it small{display:block;font-size:10.5px;color:#d9c4a0;line-height:1.35;margin-top:2px}
 .it.new{border-color:#ffcd3c;box-shadow:0 0 10px rgba(255,205,60,.4)}
 .it.soon{opacity:.45;pointer-events:none}
-#player{position:fixed;inset:0;display:none;flex-direction:column;background:#1d1108}
+#player{position:fixed;inset:0;z-index:20;display:none;flex-direction:column;background:#1d1108}
 #player.on{display:flex}
 .ptop{display:flex;align-items:center;gap:8px;padding:10px 12px 4px}
 .ptop button{font:900 14px inherit;border:2px solid #a07a4a;background:rgba(255,255,255,.08);color:#ffe9b0;border-radius:10px;padding:6px 12px}
@@ -52,6 +52,14 @@ header p{margin:3px 0 0;font-size:12px;color:#e8d3b0}
 #memo .mb{display:flex;align-items:center;gap:6px;margin-top:5px}#memo .mb small{flex:1;font-size:11px;line-height:1.3;color:#ffe9b0}
 #memo #msend{font:900 13px inherit;border:0;border-radius:999px;padding:6px 14px;color:#fff;background:linear-gradient(#7be08a,#2fa84a);box-shadow:0 3px 0 #1d6e30}#memo #msend:disabled{opacity:.5}
 #memo.min textarea,#memo.min .mb{display:none}#memo.min{width:auto}
+.tabs{display:flex;gap:6px;margin:4px 0 8px;position:sticky;top:0;z-index:2;background:#1d1108;padding:4px 0}
+.tabs button{flex:1;font:900 15px "M PLUS Rounded 1c",sans-serif;padding:9px 0;border-radius:999px;border:2px solid #6b4a2a;background:rgba(40,20,8,.88);color:#e8d3b0}
+.tabs button.on{background:linear-gradient(#ffd75a,#e8a23a);color:#3a2412;border-color:#ffcd3c}
+.pkh{margin:2px 2px 8px;font-size:12px;color:#e8d3b0;text-align:center}
+.pkgrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.pkb{background:var(--panel);border:2px solid #6b4a2a;border-radius:12px;padding:6px 4px;color:#fff;font:inherit;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px}
+.pkb img{width:84%;aspect-ratio:13/16;object-fit:contain;filter:drop-shadow(0 4px 6px rgba(0,0,0,.5))}
+.pkb small{font-size:10px;line-height:1.3;color:#ffe9b0;font-weight:800}
 </style></head><body>
 <div id="wrap">
   <header><b>キャンバス演出 ずかん</b><p>本番と おなじ バトル画面で 新しい 演出を 見られるよ（ゲームには まだ 入っていません）</p></header>
@@ -64,7 +72,7 @@ header p{margin:3px 0 0;font-size:12px;color:#e8d3b0}
 </div>
 <script>try{history.scrollRestoration='manual'}catch(e){}addEventListener('load',()=>{scrollTo(0,0);setTimeout(()=>scrollTo(0,0),300)});addEventListener('resize',()=>scrollTo(0,0))</script>
 <script>window.zr=window.zr||(p=>(window.ZKIMG&&ZKIMG[p])||p)</script><script src="fx.js"></script>
-<script src="se.js"></script>
+<script src="se.js"></script><script src="packdata.js"></script><script src="packfx.js"></script>
 <script>
 const F=FX,{P,E}=F;
 const U=i=>F.units()[i];
@@ -1677,6 +1685,7 @@ const LIST=[
    F.shot(r.p0,{x:fh.x,y:fh.y},{t:r.T+300,d:650,im:'fx:07_25',sz:16,scale:1.5,arc:70,trail:'255,240,210'});F.shot(r.p0,{x:hd.x,y:hd.y},{t:r.T+450,d:650,im:'fx:07_25',sz:16,scale:1.5,arc:70,trail:'255,240,210'});
    F.at(r.T+1100,tt=>{F.burst(hd.x,hd.y-20,{t:tt,n:8,im:'x_spark',sp:3,life:600,sz:.16});F.floatTxt('おたがい 1まい ひいた',F.dims().W/2,MID()+30,{t:tt,size:15,rise:6,col:'#ffe9b0'})})}},
  ]},
+ {cat:'パック開封',tab:'pack',items:(window.PACKDATA?Object.keys(PACKDATA):[]).map(sid=>({k:'pack_'+sid,n:'パック開封',d:'「'+PACKDATA[sid].n+'」 ゆびで なぞって やぶろう',pack:sid}))},
  {cat:'これから 作る',items:[
   {k:'s1',n:'キャラ専用 演出',d:'302人の リスト（演出リスト ページ）',soon:1},{k:'s2',n:'ボス登場',d:'',soon:1},{k:'s3',n:'勝った！／まけた',d:'',soon:1},{k:'s4',n:'合成・しんか・かくせい',d:'',soon:1},{k:'s5',n:'天気（はれ・あめ・ゆき・すな）',d:'',soon:1},{k:'s6',n:'お金・カードを 手に入れる',d:'',soon:1}]},
 ];
@@ -1772,8 +1781,15 @@ if(window.SE){const {S:SS,SFX:SX,SND,TXT,tone:TN,noise:NZ}=SE;const se=(t,f)=>F.
    pl.forEach(([k,st,hit])=>{if(!SE2Z.has(k))return;const atk=/^atk_/.test(k);let h=hit;if(atk&&h==null){const ts=NUMR.map(q=>q.t0).filter(v=>v>=st);h=ts.length?Math.min(...ts):st}
      SE2Z.win.push([st,atk?h+250:st+(SE2TL[k]||700)]);F.at(st,()=>SE2Z.play(k,'start'));F.at(atk?h:st,()=>SE2Z.play(k,'hit'))});return r}});
 }
-menu.innerHTML=LIST.map(c=>`<div class="cat">${c.cat}<i>${c.items.filter(i=>!i.soon).length?c.items.filter(i=>!i.soon).length+'こ':'じゅんび中'}</i></div><div class="grid">${c.items.map(i=>`<button class="it ${i.soon?'soon':''} ${i.nw?'new':''}" data-k="${i.k}"><b>${i.n}</b><small>${i.d||'じゅんび中'}</small></button>`).join('')}</div>`).join('')
+let TAB='fx';try{if(/^#pack_/.test(location.hash))TAB='pack'}catch(e){}
+function drawMenu(){const fx=LIST.filter(c=>!c.tab);const pk=LIST.find(c=>c.tab==='pack');
+ const tabs=`<div class="tabs"><button data-tab="fx" class="${TAB==='fx'?'on':''}">演出</button><button data-tab="pack" class="${TAB==='pack'?'on':''}">パック開封</button></div>`;
+ if(TAB==='pack'){menu.innerHTML=tabs+`<p class="pkh">あけたい パックを えらんでね（なんどでも あけられるよ）</p><div class="pkgrid">${pk.items.map(i=>`<button class="pkb" data-k="${i.k}"><img src="${zr('fx/pack/'+i.pack+'.webp')}" alt=""><small>${PACKDATA[i.pack].n}</small></button>`).join('')}</div>`}
+ else menu.innerHTML=tabs+fx.map(c=>`<div class="cat">${c.cat}<i>${c.items.filter(i=>!i.soon).length?c.items.filter(i=>!i.soon).length+'こ':'じゅんび中'}</i></div><div class="grid">${c.items.map(i=>`<button class="it ${i.soon?'soon':''} ${i.nw?'new':''}" data-k="${i.k}"><b>${i.n}</b><small>${i.d||'じゅんび中'}</small></button>`).join('')}</div>`).join('')
  +`<div class="cat" style="margin-top:16px">くらべる</div><div class="grid"><a class="it new" href="list.html" style="text-decoration:none"><b>演出リスト（302人）</b><small>キャラごとの こうげき・効果の 演出アイデア</small></a></div>`;
+ menu.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>{TAB=b.dataset.tab;drawMenu();menu.scrollTop=0});
+ menu.querySelectorAll('[data-k]').forEach(b=>b.onclick=()=>open(ALL.findIndex(x=>x.k===b.dataset.k)))}
+drawMenu();
 const pl=document.getElementById('player');let cur=0;
 /* ===== 10/31 メモ：いま 見ている 演出の 名前と 時間を つけて 送る（Claude の リンクで ひらいた ときだけ 送れる。ゲームの 確認モードと おなじ しくみ） ===== */
 let ZCL=null;async function zcapi(){if(ZCL)return ZCL;ZCL=(async()=>{const c=window.claude;if(!c||!c.use)return {db:null};const db=await c.use('db').catch(()=>null);return {db}})();return ZCL}
@@ -1806,9 +1822,16 @@ bfReady.then(()=>{const d=BDOC();let tm=null,sx=0,sy=0;
  d.addEventListener('pointerdown',e=>{const t=e.target.closest&&e.target.closest('.u');if(!t){close();return}sx=e.clientX;sy=e.clientY;clearTimeout(tm);tm=setTimeout(()=>{const u=F.units().find(v=>v.el===t);if(u)show(u)},450)});
  ['pointerup','pointercancel'].forEach(ev=>d.addEventListener(ev,()=>clearTimeout(tm)));d.addEventListener('pointermove',e=>{if(Math.hypot(e.clientX-sx,e.clientY-sy)>10)clearTimeout(tm)});
  const _op=F.play;F.play=function(){close();return _op.apply(this,arguments)}});
-function open(i){cur=(i+ALL.length)%ALL.length;const it=ALL[cur];document.getElementById('pt').textContent=it.n;document.getElementById('pd').textContent=it.d;pl.classList.add('on');try{history.replaceState(null,'','#'+it.k)}catch(e){}bfReady.then(()=>setTimeout(()=>{F.init(document.getElementById('cv'),BF);F.play(it,it.total||2600)},60))}
-menu.querySelectorAll('[data-k]').forEach(b=>b.onclick=()=>open(ALL.findIndex(x=>x.k===b.dataset.k)));
-document.getElementById('back').onclick=()=>{pl.classList.remove('on');try{history.replaceState(null,'',location.pathname)}catch(e){}};
+/* 11/01 パック開封（packfx.js：ゲームの f93_packfx.js と おなじ）。カードの 絵は ゲームの カードを そのまま 画像に したもの */
+function packRoll(sid){const D=PACKDATA[sid],pool=D.pool;const pk=a=>a[Math.floor(Math.random()*a.length)];
+ /* ゲームの rollSpack と おなじ：1まいめは レア以上、ボスは とても まれ（0.5%）、レジェンド 3.5%、レア 16.5% */
+ const one=forceR=>{if(Math.random()<.005)return D.awk?[D.boss+'_awk','L',1]:[D.boss,'L',0];const r=Math.random();const rar=r<.035?'L':(r<.2||forceR)?'R':'N';let p=pool.filter(x=>x[1]===rar);if(!p.length)p=pool.filter(x=>x[1]==='R');if(!p.length)p=pool;const c=pk(p);return [c[0],c[1],0]};
+ return Array.from({length:3},(_,i)=>one(i===0)).sort((a,b)=>'NRL'.indexOf(a[1])-'NRL'.indexOf(b[1]))}
+function packDemo(it){const st=document.getElementById('stage'),A=window.SE,X=A&&A.SFX;const z=p=>zr('fx/pack/'+p);const got=packRoll(it.pack);
+ PackFX.run(st,{z:4,padB:64,endBtn:'もう1パック',pack:z(it.pack+'.webp'),cards:got.map(([id,r,awk])=>({face:z('c/'+id+'.webp'),r,awk:!!awk})),img:{back:z('back.webp'),coin:z('x_coin.png'),star:z('x_star.png'),spark:z('x_spark.png')},
+  ac:()=>A&&A.ac(),muted:()=>!window.LABSE_ON,sfx:X?{flip:X.flip,fanfare:X.fanfare,sparkle:X.sparkle}:null,buf:f=>{if(!Object.keys(SE2Z.buf).length)se2decode();return SE2Z.buf[f]}}).then(()=>{if(ALL[cur]===it&&pl.classList.contains('on'))packDemo(it)}).catch(e=>console.error(e))}
+function open(i){cur=(i+ALL.length)%ALL.length;const it=ALL[cur];document.getElementById('pt').textContent=it.n;document.getElementById('pd').textContent=it.d;pl.classList.add('on');try{history.replaceState(null,'','#'+it.k)}catch(e){}document.querySelectorAll('.pfx-root').forEach(r=>r.remove());if(it.pack){packDemo(it);return}bfReady.then(()=>setTimeout(()=>{F.init(document.getElementById('cv'),BF);F.play(it,it.total||2600)},60))}
+document.getElementById('back').onclick=()=>{TAB=(ALL[cur]&&ALL[cur].pack)?'pack':'fx';drawMenu();document.querySelectorAll('.pfx-root').forEach(r=>r.remove());pl.classList.remove('on');try{history.replaceState(null,'',location.pathname)}catch(e){}};
 document.getElementById('again').onclick=()=>open(cur);document.getElementById('prev').onclick=()=>open(cur-1);document.getElementById('next').onclick=()=>open(cur+1);
 const h=location.hash.slice(1);if(h){const i=ALL.findIndex(x=>x.k===h);if(i>=0)open(i)}
 </script>
