@@ -189,11 +189,24 @@ function run(host,o){return new Promise(async resolve=>{
   function drawBursts(ctx,now,bursts=BU){for(let i=bursts.length-1;i>=0;i--){const b=bursts[i],e=now-b.t0;if(e>b.d){bursts.splice(i,1);continue}if(e<0)continue;const k=e/b.d,a=(k<.15?k/.15:1-(k-.15)/.85);
     ctx.save();ctx.globalCompositeOperation='lighter';ctx.translate(b.x,b.y);const r=b.r*(.6+.5*E.o(k));const g=ctx.createRadialGradient(0,0,0,0,0,r);g.addColorStop(0,tcol(b.col,.9*a,now));g.addColorStop(.35,tcol(b.col,.35*a,now));g.addColorStop(1,tcol(b.col,0,now));ctx.fillStyle=g;ctx.beginPath();ctx.arc(0,0,r,0,7);ctx.fill();
     if(b.rays){ctx.rotate(now/2600);for(let j=0;j<b.rays;j++){ctx.rotate(Math.PI*2/b.rays);const L=b.r*1.1*(.7+.3*E.o(k));const g2=ctx.createLinearGradient(0,0,0,-L);g2.addColorStop(0,tcol(b.col,.5*a,now));g2.addColorStop(1,tcol(b.col,0,now));ctx.fillStyle=g2;ctx.beginPath();ctx.moveTo(-3,0);ctx.lineTo(-b.r*.09,-L);ctx.lineTo(b.r*.09,-L);ctx.lineTo(3,0);ctx.fill()}}ctx.restore()}}
-  function drawPillars(ctx,now){for(let i=pillars.length-1;i>=0;i--){const p=pillars[i];const e=now-p.t0;const a=p.end?Math.max(0,1-(now-p.end)/500):Math.min(1,e/450);if(p.end&&a<=0){pillars.splice(i,1);continue}
-    const c=p.card,x=c.x,w=CB*c.s*1.35;ctx.save();ctx.globalCompositeOperation='lighter';const top=Math.max(0,1-e/500)*HH*.5;
-    let g=ctx.createLinearGradient(x-w,0,x+w,0);g.addColorStop(0,tcol(p.col,0,now));g.addColorStop(.3,tcol(p.col,.22*a,now));g.addColorStop(.5,`rgba(255,255,240,${.55*a})`);g.addColorStop(.7,tcol(p.col,.22*a,now));g.addColorStop(1,tcol(p.col,0,now));ctx.fillStyle=g;ctx.fillRect(x-w,top,w*2,H-top);
-    g=ctx.createRadialGradient(x,c.y,0,x,c.y,CB*c.s*1.3);g.addColorStop(0,tcol(p.col,.55*a,now));g.addColorStop(1,tcol(p.col,0,now));ctx.fillStyle=g;ctx.beginPath();ctx.arc(x,c.y,CB*c.s*1.3,0,7);ctx.fill();
-    /* のぼる 光のつぶ */for(let j=0;j<14;j++){const sd=(j*97.3)%1,yy=H-((e*.12+j*71)%H),xx=x+(Math.sin(j*12.9)*.8)*w*.6;ctx.globalAlpha=a*(.4+.6*Math.abs(Math.sin(e/300+j)));ctx.fillStyle=tcol(p.col,.9,now+j*40);ctx.beginPath();ctx.arc(xx,yy,1.4+sd*2,0,7);ctx.fill()}
+  /* 11/1 レジェンドの 光の 柱：下から のびない。さいしょから 上から下まで あって、
+     ① ネオンが つくように チカチカ → ② こどう（ドクン…ドクン）が だんだん はやく・つよく・太く → ③ めくれた しゅんかん カッと 光って 横に ひろがる → ④ ゆっくり いきづく */
+  const PFK=[[0,.85],[55,.12],[105,.7],[150,.08],[235,1],[280,.3],[345,1],[700,.55],[740,1]];
+  function drawPillars(ctx,now){for(let i=pillars.length-1;i>=0;i--){const p=pillars[i];const e=now-p.t0;if(e<0)continue;const fa=p.end?Math.max(0,1-(now-p.end)/500):1;if(p.end&&fa<=0){pillars.splice(i,1);continue}
+    const c=p.card,x=c.x,cw0=CB*c.s*1.35,FL=p.fl||1450;let I,wk,pk=0,beat=0;
+    if(e<FL){const k=e/FL;let f=1;for(const [t,v] of PFK)if(e>=t)f=v;
+      /* こどう：だんだん はやく（さいごは ほぼ つながる） */beat=Math.pow(.5+.5*Math.sin(Math.pow(k,1.7)*Math.PI*11-Math.PI/2),4)*k;
+      I=(.18+.5*k*k+.55*beat)*f;wk=.38+.32*k+.12*beat}
+    else{const d=e-FL;pk=Math.max(0,1-d/650);pk*=pk;I=.82+.1*Math.sin(now/260)+.05*Math.sin(now/97)+1.1*pk;wk=.78+.04*Math.sin(now/260)+.55*pk}
+    I*=fa;const w=cw0*wk;ctx.save();ctx.globalCompositeOperation='lighter';
+    /* うすい もや（ひろく） */let g=ctx.createLinearGradient(x-w*2.4,0,x+w*2.4,0);g.addColorStop(0,tcol(p.col,0,now));g.addColorStop(.5,tcol(p.col,.13*I,now));g.addColorStop(1,tcol(p.col,0,now));ctx.fillStyle=g;ctx.fillRect(x-w*2.4,0,w*4.8,H);
+    /* 柱（上から下まで） */g=ctx.createLinearGradient(x-w,0,x+w,0);g.addColorStop(0,tcol(p.col,0,now));g.addColorStop(.28,tcol(p.col,.2*I,now));g.addColorStop(.5,`rgba(255,255,240,${Math.min(.9,.5*I)})`);g.addColorStop(.72,tcol(p.col,.2*I,now));g.addColorStop(1,tcol(p.col,0,now));ctx.fillStyle=g;ctx.fillRect(x-w,0,w*2,H);
+    /* まんなかの 白い しん（ほそく するどく） */const cr=Math.max(1.5,w*.07);g=ctx.createLinearGradient(x-cr*3,0,x+cr*3,0);g.addColorStop(0,'rgba(255,255,255,0)');g.addColorStop(.5,`rgba(255,255,250,${Math.min(1,.75*I)})`);g.addColorStop(1,'rgba(255,255,255,0)');ctx.fillStyle=g;ctx.fillRect(x-cr*3,0,cr*6,H);
+    /* ふちの ほそい 光の 線（チカチカ） */const el=Math.min(.6,.28*I*(.7+.3*Math.sin(now/53)));ctx.fillStyle=tcol(p.col,el,now);[-1,1].forEach(s=>ctx.fillRect(x+s*w*.6-.8,0,1.6,H));
+    /* 光の なみ：上から 下へ ゆっくり ながれる（のぼらない） */for(let j=0;j<3;j++){const L=H*.32,yy=((e*.22+j*(H+L)/3)%(H+L))-L;g=ctx.createLinearGradient(0,yy,0,yy+L);g.addColorStop(0,'rgba(255,255,240,0)');g.addColorStop(.5,`rgba(255,255,240,${.12*I})`);g.addColorStop(1,'rgba(255,255,240,0)');ctx.fillStyle=g;ctx.fillRect(x-w*.55,yy,w*1.1,L)}
+    /* カードの うしろの まるい 光（こどうで ふくらむ） */const rr2=CB*c.s*(1.15+.25*beat+.4*pk);g=ctx.createRadialGradient(x,c.y,0,x,c.y,rr2);g.addColorStop(0,tcol(p.col,Math.min(.85,.5*I),now));g.addColorStop(1,tcol(p.col,0,now));ctx.fillStyle=g;ctx.beginPath();ctx.arc(x,c.y,rr2,0,7);ctx.fill();
+    /* めくれた しゅんかん：横に カッと のびる 光（レンズの ひかり） */if(pk>0){const hw=W*(.35+.65*(1-pk)),hh=Math.max(2,10*pk);g=ctx.createLinearGradient(x-hw,0,x+hw,0);g.addColorStop(0,'rgba(255,255,255,0)');g.addColorStop(.5,`rgba(255,255,245,${.9*pk*fa})`);g.addColorStop(1,'rgba(255,255,255,0)');ctx.fillStyle=g;ctx.fillRect(x-hw,c.y-hh/2,hw*2,hh);g=ctx.createLinearGradient(x-hw,0,x+hw,0);g.addColorStop(0,tcol(p.col,0,now));g.addColorStop(.5,tcol(p.col,.45*pk*fa,now));g.addColorStop(1,tcol(p.col,0,now));ctx.fillStyle=g;ctx.fillRect(x-hw,c.y-hh*2.5,hw*2,hh*5)}
+    /* 柱の 中で またたく 光のつぶ（その場で キラッ・ゆっくり ただよう） */for(let j=0;j<18;j++){const sd=(j*97.3)%1,yy=((j*0.618*H*1.7)%H)+Math.sin(e/900+j)*12,xx=x+Math.sin(j*12.9)*w*.55,tw=Math.max(0,Math.sin(e/(240+j*13)+j*2.1));ctx.globalAlpha=Math.min(1,I)*tw;ctx.fillStyle=tcol(p.col,.95,now+j*40);ctx.beginPath();ctx.arc(xx,yy,1.2+sd*2.2,0,7);ctx.fill()}
     ctx.restore()}}
   function drawSweeps(ctx,now){for(let i=sweeps.length-1;i>=0;i--){const s=sweeps[i],c=s.card,e=now-s.t0;if(e>s.d){if(s.loop&&(c.state==='zoom'||c.state==='awk')){s.t0=now}else{sweeps.splice(i,1);continue}}const k=e/s.d;
     const w=CB*c.s,h=CH*c.s;ctx.save();ctx.translate(c.x,c.y);ctx.rotate(c.rz);ctx.beginPath();ctx.roundRect(-w/2,-h/2,w,h,w*.07);ctx.clip();ctx.globalCompositeOperation=s.rainbow?'overlay':'lighter';
@@ -340,7 +353,7 @@ function run(host,o){return new Promise(async resolve=>{
     if(r==='N'){c.state='flipN';S.flip()}
     else if(r==='R'){c.state='flipR';S.tell('R');S.rare()/* 11/1：おした しゅんかんに */}
     else if(r==='A')awkStart(c);/* 11/1 覚醒：とくべつな 演出（下の awk） */
-    else{c.state='zoom';c.hold=0;c.hurry=0;c.xa=c.x;c.ya=c.y;S.tell('L');S.legend(c.cd.awk)/* 11/1：おした しゅんかんに */;C.forEach(d=>{if(d!==c)d.dimT=1});pillars.push({card:c,col:r,t0:now+250})}}
+    else{c.state='zoom';c.hold=0;c.hurry=0;c.xa=c.x;c.ya=c.y;S.tell('L');S.legend(c.cd.awk)/* 11/1：おした しゅんかんに */;C.forEach(d=>{if(d!==c)d.dimT=1});pillars.push({card:c,col:r,t0:now,fl:1450})}}
   function revealDone(c){c.state='slot';busy=false;st.nextAuto=performance.now()+1400;if(C.every(d=>d.done&&d.state==='slot'))later(450,()=>{st.ph='end';st.endT=performance.now()})}
   let fin=false;function finish(){if(fin)return;fin=true;S.stop();R.style.opacity=0;timers.forEach(clearTimeout);setTimeout(()=>{cancelAnimationFrame(raf);resolve();if(!o.keep)R.remove()},260)}
   PFX._cur={finish,st,C};
