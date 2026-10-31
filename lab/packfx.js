@@ -14,7 +14,11 @@ function loadImg(src){return new Promise(ok=>{if(!src)return ok(null);const i=ne
 /* ---------- 音 ---------- */
 /* 11/01 新しい SE：slice1-5＝シュパッ（ランダム・つづけて おなじ 音は なし）、tear＝やぶる（つぶを ちらして 速さで 音量・高さ）、shake＝ふる、
    draw＝すべり出る、deal＝とぶ／めくる、open1-2＝パックが ひらく、rare／legend＝レア・レジェンド、pre／preawk＝レジェンド・かくせいの ためる音 */
-const PSE_K=['slice1','slice2','slice3','slice4','slice5','tear','shake','draw','deal','open1','open2','rare','legend','pre','preawk'];
+const PSE_K=['slice1','slice2','slice3','slice4','slice5','tear','shake','draw','deal','open1','open2','rare','legend','pre','preawk',
+  /* 11/1 覚醒の 特別演出の 音（スロット）：awk_rumble＝ためる①ゴゴゴ（ずっと 下で）、awk_crack＝ためる②光の ヒビ（3回）、awk_charge＝ためる③画面が くらく、
+     awk_rise＝ためる④にじの 光が ふえる（ドン！に むけて 上がる）、awk_whoosh＝カードが まわって とぶ、awk_hit＝ドン！（まっ白）、awk_burst＝にじの ばくはつ、
+     awk_fanfare＝「覚」「醒」の ファンファーレ、awk_sparkle＝キラーン。さしかえ：/tmp/seana/build_packse.py の T の ファイル名を かえて 作りなおす */
+  'awk_rumble','awk_crack','awk_charge','awk_rise','awk_whoosh','awk_hit','awk_burst','awk_fanfare','awk_sparkle'];
 const PSE={ctx:null,buf:{},p:null,err:0},SELOG=[];
 function b64ab(u){const bin=atob(u.slice(u.indexOf(',')+1)),n=bin.length,ar=new Uint8Array(n);for(let i=0;i<n;i++)ar[i]=bin.charCodeAt(i);return ar.buffer}
 function pseLoad(o,a){if(!a)return null;if(PSE.ctx===a&&PSE.p)return PSE.p;PSE.ctx=a;PSE.buf={};PSE.err=0;
@@ -62,6 +66,19 @@ function Snd(o){const S={};const A=()=>{try{const a=o.ac&&o.ac();if(a&&a.state==
   S.rare=()=>{if(S.se('rare',{v:.55}))return;if(!S.smp('game2/ice magic appear.wav',.6,0,1.4))[1047,1319,1568,2093].forEach((f,i)=>S.tn(f,.5,{type:'triangle',vol:.06,at:i*.07}));S.tn(2637,.6,{vol:.03,at:.3})};
   S.pre=awk=>(awk&&S.se('preawk',{v:.5}))||S.se('pre',{v:.5});
   S.legend=awk=>{if(S.se('legend',{v:.6})){if(awk)for(let i=0;i<8;i++)S.tn(1800+i*220,.18,{vol:.03,at:.5+i*.05});return}if(!sfx('fanfare'))[[523,0],[659,.12],[784,.24],[1047,.4]].forEach(([f,at])=>{S.tn(f,.55,{type:'sawtooth',vol:.04,at});S.tn(f*2,.4,{type:'triangle',vol:.03,at})});S.smp('casual/Bless Sound.wav',.55,.15,2.2);if(awk)for(let i=0;i<8;i++)S.tn(1800+i*220,.18,{vol:.03,at:.5+i*.05})};
+  /* 11/1 とめられる 音（覚醒の ためる音。スキップで とめる） */
+  S.seh=(k,{v=.5,rate=1,fin=0,ofs=0}={})=>{if(off())return null;const a=A();if(!a)return null;const b=pb(k);if(!b)return null;const t=a.currentTime,L=(b.duration-ofs)/rate,fd=Math.min(.12,L*.25);const s=a.createBufferSource(),g=a.createGain();s.buffer=b;s.playbackRate.value=rate;
+    if(fin>0){g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(v,t+Math.min(fin,L-fd))}else g.gain.setValueAtTime(v,t);g.gain.setValueAtTime(v,t+Math.max(Math.min(fin,L-fd),L-fd));g.gain.linearRampToValueAtTime(0,t+L);s.connect(g).connect(dst(a));s.start(t,ofs);s.stop(t+L+.02);SELOG.push(k);if(SELOG.length>80)SELOG.shift();
+    return {stop:(f=.25)=>{try{const n=a.currentTime;g.gain.cancelScheduledValues(n);g.gain.setValueAtTime(g.gain.value,n);g.gain.linearRampToValueAtTime(0,n+f);s.stop(n+f+.03)}catch(e){}}}};
+  /* 11/1 覚醒の 特別演出の 音（ファイルが なければ 作った 音） */
+  S.awk={rumble:()=>S.seh('awk_rumble',{v:.55,fin:2.4})||(S.nz(5.4,{f:120,q:.7,type:'lowpass',vol:.25}),null),
+    crack:i=>{if(!S.se('awk_crack',{v:.42+i*.07,rate:1+i*.12})){S.nz(.22,{f:6000,f2:1800,q:3,vol:.22});S.tn(1800+i*400,.3,{type:'triangle',vol:.04})}},
+    charge:()=>{if(!S.se('awk_charge',{v:.55,rate:.85}))S.tn(140,1.3,{type:'sawtooth',vol:.04,slide:70})},
+    rise:()=>S.seh('awk_rise',{v:.6})||(S.tn(150,2.6,{type:'sawtooth',vol:.03,slide:1100}),S.tn(225,2.5,{type:'triangle',vol:.045,slide:1600}),null),
+    whoosh:()=>{if(!S.se('awk_whoosh',{v:.6}))S.whoosh()},
+    hit:()=>{if(!S.se('awk_hit',{v:.75})){S.nz(.6,{f:160,q:.6,type:'lowpass',vol:.5});S.tn(70,.5,{type:'sine',vol:.2,slide:40})}S.se('awk_burst',{v:.6,at:.01})},
+    fanfare:()=>{if(!S.se('awk_fanfare',{v:.6}))S.legend(1)},
+    sparkle:r=>{if(!S.se('awk_sparkle',{v:.5,rate:r||1}))S.sparkle()}};
   S.tell=r=>{if(r==='N')return;for(let i=0;i<(r==='R'?3:6);i++)S.tn(600+i*140,.14,{type:'triangle',vol:.035,at:i*.08})};
   S.stop=()=>S.tearOff();
   return S}
@@ -96,7 +113,7 @@ function run(host,o){return new Promise(async resolve=>{
   let fo=0;            // ゆびの たての ずれ（線に すこし のる）
   const st={ph:'in',t0:performance.now(),p:0,dir:0,relax:1,drag:null,tilt:0,shk:0,strip:null,packY:0,packA:1,dim:0,hint:0};
   const ps=[];          // つぶ
-  const bursts=[];      // 光の ばくはつ
+  const bursts=[],BU=bursts,bBursts=[];      // 光の ばくはつ（bBursts＝カードの うしろ）
   const pillars=[];     // 光の 柱（カードの うしろ）
   const sweeps=[];      // カードの つや
   const labels=[];      // 文字
@@ -113,8 +130,8 @@ function run(host,o){return new Promise(async resolve=>{
     return {bk:b,fc:f,ld:face&&face._ld,el:w,cd,i,x:PX,y:0,s:1,ry:0,rz:0,z:i,vis:0,state:'pack',done:false,f0:0,dimmed:0,glow:0,lift:0}});
   const rr=c=>c.cd.awk?'A':c.cd.r;
   const s0=PW*.66/CB;
-  function setCard(c){/* 光（filter）で 3Dが たいらに なっても うら・おもてが 正しく 見えるよう 自分で 切りかえ */const fr=c.ry>90;if(c._fr!==fr){c._fr=fr;c.bk.style.visibility=fr?'hidden':'visible';c.fc.style.visibility=fr?'visible':'hidden'}c.el.style.opacity=c.vis;c.el.style.zIndex=c.z;c.el.style.transform=`translate(${c.x-CB/2}px,${c.y-CH/2}px) rotate(${c.rz}rad) scale(${c.s}) perspective(${CB*7}px) rotateY(${c.ry}deg)`;
-    c.el.style.filter=(c.dimmed>0.01?`brightness(${1-c.dimmed*.5})`:'')+(c.glow>0.01?` drop-shadow(0 0 ${8+c.glow*14}px ${tcol(rr(c),.95,performance.now())})`:'')||'none'}
+  function setCard(c){/* 光（filter）で 3Dが たいらに なっても うら・おもてが 正しく 見えるよう 自分で 切りかえ */const ry=((c.ry%360)+360)%360,fr=ry>90&&ry<270;if(c._fr!==fr){c._fr=fr;c.bk.style.visibility=fr?'hidden':'visible';c.fc.style.visibility=fr?'visible':'hidden'}c.el.style.opacity=c.vis;c.el.style.zIndex=c.z;c.el.style.transform=`translate(${c.x-CB/2}px,${c.y-CH/2}px) rotate(${c.rz}rad) scale(${c.s}) perspective(${CB*7}px) rotateY(${c.ry}deg)`;
+    c.el.style.filter=(c.dimmed>0.01?`brightness(${1-c.dimmed*.5})`:'')+(c.wht>0.01?` brightness(${1+c.wht*2.4}) saturate(${1-c.wht*.6})`:'')+(c.glow>0.01?` drop-shadow(0 0 ${8+c.glow*14}px ${tcol(rr(c),.95,performance.now())})`:'')||'none'}
   /* ---- つぶ ---- */
   function addP(p){p.t0=p.t0||performance.now();ps.push(p)}
   function paperBits(x,y,dir){for(let i=0;i<16;i++){const a=-Math.PI/2+(Math.random()-.5)*2.2+dir*.4;const v=180+Math.random()*320;addP({x:x+(Math.random()-.5)*PW*.8,y,vx:Math.cos(a)*v,vy:Math.sin(a)*v,g:900,life:900+Math.random()*500,sz:3+Math.random()*5,rot:Math.random()*6,vr:(Math.random()-.5)*14,kind:'paper',col:Math.random()<.5?'#fff6e0':'#f2c75a'})}}
@@ -169,7 +186,7 @@ function run(host,o){return new Promise(async resolve=>{
     x.globalCompositeOperation='source-over';x.strokeStyle='#dfe6ee';x.lineWidth=1.6;x.beginPath();for(let i=0;i<NC;i++)x[i?'lineTo':'moveTo']((i+.5)*cw,ty[i]-.5);x.stroke();
     const fd=st.dir<0?-1:1;st.strip={c,h,x:PX,y:pTop()+st.packY+h/2,vx:fd*280,vy:-600,r:0,vr:fd*1.3,t0:performance.now()}}
   /* ---- 光（ばくはつ・柱・つや） ---- */
-  function drawBursts(ctx,now){for(let i=bursts.length-1;i>=0;i--){const b=bursts[i],e=now-b.t0;if(e>b.d){bursts.splice(i,1);continue}const k=e/b.d,a=(k<.15?k/.15:1-(k-.15)/.85);
+  function drawBursts(ctx,now,bursts=BU){for(let i=bursts.length-1;i>=0;i--){const b=bursts[i],e=now-b.t0;if(e>b.d){bursts.splice(i,1);continue}if(e<0)continue;const k=e/b.d,a=(k<.15?k/.15:1-(k-.15)/.85);
     ctx.save();ctx.globalCompositeOperation='lighter';ctx.translate(b.x,b.y);const r=b.r*(.6+.5*E.o(k));const g=ctx.createRadialGradient(0,0,0,0,0,r);g.addColorStop(0,tcol(b.col,.9*a,now));g.addColorStop(.35,tcol(b.col,.35*a,now));g.addColorStop(1,tcol(b.col,0,now));ctx.fillStyle=g;ctx.beginPath();ctx.arc(0,0,r,0,7);ctx.fill();
     if(b.rays){ctx.rotate(now/2600);for(let j=0;j<b.rays;j++){ctx.rotate(Math.PI*2/b.rays);const L=b.r*1.1*(.7+.3*E.o(k));const g2=ctx.createLinearGradient(0,0,0,-L);g2.addColorStop(0,tcol(b.col,.5*a,now));g2.addColorStop(1,tcol(b.col,0,now));ctx.fillStyle=g2;ctx.beginPath();ctx.moveTo(-3,0);ctx.lineTo(-b.r*.09,-L);ctx.lineTo(b.r*.09,-L);ctx.lineTo(3,0);ctx.fill()}}ctx.restore()}}
   function drawPillars(ctx,now){for(let i=pillars.length-1;i>=0;i--){const p=pillars[i];const e=now-p.t0;const a=p.end?Math.max(0,1-(now-p.end)/500):Math.min(1,e/450);if(p.end&&a<=0){pillars.splice(i,1);continue}
@@ -178,10 +195,10 @@ function run(host,o){return new Promise(async resolve=>{
     g=ctx.createRadialGradient(x,c.y,0,x,c.y,CB*c.s*1.3);g.addColorStop(0,tcol(p.col,.55*a,now));g.addColorStop(1,tcol(p.col,0,now));ctx.fillStyle=g;ctx.beginPath();ctx.arc(x,c.y,CB*c.s*1.3,0,7);ctx.fill();
     /* のぼる 光のつぶ */for(let j=0;j<14;j++){const sd=(j*97.3)%1,yy=H-((e*.12+j*71)%H),xx=x+(Math.sin(j*12.9)*.8)*w*.6;ctx.globalAlpha=a*(.4+.6*Math.abs(Math.sin(e/300+j)));ctx.fillStyle=tcol(p.col,.9,now+j*40);ctx.beginPath();ctx.arc(xx,yy,1.4+sd*2,0,7);ctx.fill()}
     ctx.restore()}}
-  function drawSweeps(ctx,now){for(let i=sweeps.length-1;i>=0;i--){const s=sweeps[i],c=s.card,e=now-s.t0;if(e>s.d){if(s.loop&&c.state==='zoom'){s.t0=now}else{sweeps.splice(i,1);continue}}const k=e/s.d;
+  function drawSweeps(ctx,now){for(let i=sweeps.length-1;i>=0;i--){const s=sweeps[i],c=s.card,e=now-s.t0;if(e>s.d){if(s.loop&&(c.state==='zoom'||c.state==='awk')){s.t0=now}else{sweeps.splice(i,1);continue}}const k=e/s.d;
     const w=CB*c.s,h=CH*c.s;ctx.save();ctx.translate(c.x,c.y);ctx.rotate(c.rz);ctx.beginPath();ctx.roundRect(-w/2,-h/2,w,h,w*.07);ctx.clip();ctx.globalCompositeOperation=s.rainbow?'overlay':'lighter';
     const cx=-w+k*w*2.2;const g=ctx.createLinearGradient(cx-w*.35,-h/2,cx+w*.35,h/2);
-    if(s.rainbow){['#ff4fd8','#ffd84f','#4fffb0','#4fb8ff','#b84dff'].forEach((col,j)=>g.addColorStop(.15+j*.175,col));g.addColorStop(0,'rgba(255,255,255,0)');g.addColorStop(1,'rgba(255,255,255,0)');ctx.globalAlpha=.75}
+    if(s.rainbow){['#ff4fd8','#ffd84f','#4fffb0','#4fb8ff','#b84dff'].forEach((col,j)=>g.addColorStop(.15+j*.175,col));g.addColorStop(0,'rgba(255,255,255,0)');g.addColorStop(1,'rgba(255,255,255,0)');ctx.globalAlpha=s.al||.75}
     else{g.addColorStop(0,'rgba(255,255,255,0)');g.addColorStop(.45,'rgba(220,235,255,.0)');g.addColorStop(.5,'rgba(255,255,255,.75)');g.addColorStop(.55,'rgba(220,235,255,0)');g.addColorStop(1,'rgba(255,255,255,0)')}
     ctx.fillStyle=g;ctx.fillRect(-w/2,-h/2,w,h);ctx.restore()}}
   function txt(ctx,s,x,y,{size=24,col='#ffe066',a=1,sc=1}={}){ctx.save();ctx.globalAlpha=a;ctx.translate(x,y);ctx.scale(sc,sc);ctx.font=`900 ${size}px "Dela Gothic One","M PLUS Rounded 1c",sans-serif`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.lineJoin='round';ctx.lineWidth=size*.26;ctx.strokeStyle='#2a1405';ctx.strokeText(s,0,0);ctx.fillStyle=col;ctx.fillText(s,0,0);ctx.restore()}
@@ -195,6 +212,7 @@ function run(host,o){return new Promise(async resolve=>{
     if(st.packA>0&&!st.strip){const t=now-st.t0;const base={N:.18,R:.32,L:.48,A:.5}[best];let I=st.ph==='in'?0:st.ph==='tell'?Math.min(1,t/900):1;I*=base*(1+.25*Math.sin(now/380))*(1+st.p*.8);
       ctx.save();ctx.globalCompositeOperation='lighter';const r=PW*.95;const g2=ctx.createRadialGradient(PX,PY+st.packY,PW*.2,PX,PY+st.packY,r);g2.addColorStop(0,tcol(best,I*st.packA,now));g2.addColorStop(1,tcol(best,0,now));ctx.fillStyle=g2;ctx.beginPath();ctx.arc(PX,PY+st.packY,r,0,7);ctx.fill();ctx.restore()}
     if(st.dim>0){ctx.fillStyle=`rgba(0,0,0,${st.dim*.45})`;ctx.fillRect(0,0,W,H)}
+    drawAwkBg(ctx,now);
     drawPillars(ctx,now)}
   /* ---- なぞる ガイド ---- */
   function drawGuide(ctx,now){if(st.ph!=='idle'&&!(st.ph==='tear'&&st.p<.04))return;const e=(now-st.hint0)%1900,k=E.io(E.cl(e/1300)),a=e<150?e/150:e>1300?Math.max(0,1-(e-1300)/400):1;
@@ -246,12 +264,82 @@ function run(host,o){return new Promise(async resolve=>{
     C.forEach((c,i)=>{c.s=s0;c.x=PX+(i-(n-1)/2)*3;c.y=top+TY+6+CH*s0/2;c.vis=1;c.z=10+i;c.state='rise';c.f0=now+i*130;c.ya=c.y;c.yb=top-CH*s0/2+TY-14-(n-1-i)*2;c.rz=(i-(n-1)/2)*.012})
     later(130*(n-1)+700,()=>{st.ph='drop';st.dropT=performance.now();later(480,fan)})}
   function fan(){st.ph='fan';const now=performance.now();S.fan(n);C.forEach((c,i)=>{c.state='fan';c.f0=now+i*70;c.xa=c.x;c.ya=c.y;c.sa=c.s;c.rza=c.rz});later(70*(n-1)+620,()=>{st.ph='flip';st.nextAuto=performance.now()+1300})}
+  /* ===== 11/1 覚醒カードの とくべつな 開封（レジェンドより レア）：うんと ためて → ドン！
+     ① まんなかへ（くらく）→ ② ゴゴゴ（ふるえる）→ ③ 光の ヒビが 3回（にじの 光が もれる）→ ④ もっと はげしく・画面が もっと くらく・にじの 光の すじが どんどん ふえる
+     → ⑤ カードが まわりながら とびあがる（白く 光る）→ ⑥ 画面 まっ白 → ドン！にじの オーラが はじける → ⑦「覚」「醒」→ ⑧ ホロの カードが おちつく。
+     ためている あいだに タップ → ⑤へ とばす。ぜんぶで 約9秒 ===== */
+  const AK={IN:700,CR:[2300,2950,3600],DK:3900,SPIN:5800,HIT:6900,HOLD:2700};
+  const hsl=(h,a,l=70)=>`hsla(${((h%360)+360)%360},100%,${l}%,${a})`;
+  let shakeOn=false;const shakeEls=()=>[lay,bg.canvas,fg.canvas];
+  function quake(){const q=st.qk||0;if(q>.2){const x=(Math.random()-.5)*2*q,y=(Math.random()-.5)*2*q;shakeEls().forEach(el=>el.style.transform=`translate(${x}px,${y}px)`);shakeOn=true}else if(shakeOn){shakeEls().forEach(el=>el.style.transform='');shakeOn=false}}
+  function mkCracks(){const L=[];for(let i=0;i<8;i++){const a=i*2.39996+Math.random()*.4;let x=(Math.random()-.5)*.08,y=(Math.random()-.5)*.08;const pts=[[x,y]];const n=6+Math.floor(Math.random()*4);
+      for(let j=0;j<n;j++){const aa=a+(Math.random()-.5)*.9,st2=.05+Math.random()*.05;x+=Math.cos(aa)*st2;y+=Math.sin(aa)*st2*1.35;pts.push([x,y])}
+      const br=[];for(let j=2;j<pts.length-1;j+=2){if(Math.random()<.6){const [bx,by]=pts[j];const ba=a+(Math.random()<.5?1:-1)*(.6+Math.random()*.6);br.push([[bx,by],[bx+Math.cos(ba)*.08,by+Math.sin(ba)*.1],[bx+Math.cos(ba)*.14,by+Math.sin(ba)*.17]])}}
+      L.push({pts,br,h:i*47})}return L}
+  function awkStart(c){const now=performance.now();c.state='awk';c.f0=now;c.xa=c.x;c.ya=c.y;c.hold=0;c.hurry=0;c.fx=0;c.cracks=mkCracks();c.snd={};st.awk=c;st.dark2=0;st.white=0;C.forEach(d=>{if(d!==c)d.dimT=1});
+    const A=S.awk;c.cues=[[AK.IN-150,()=>{c.snd.rum=A.rumble()}],[AK.CR[0],()=>A.crack(0)],[AK.CR[1],()=>A.crack(1)],[AK.CR[2],()=>A.crack(2)],[AK.DK,()=>A.charge()],
+      [AK.HIT-3100,()=>{c.snd.rise=A.rise()}],[AK.HIT-520,()=>A.whoosh()],[AK.HIT,()=>{const h=c.snd;['rum','rise'].forEach(k=>{if(h[k])h[k].stop(.18)});A.hit()}],
+      [AK.HIT+150,()=>A.sparkle(1)],[AK.HIT+260,()=>A.fanfare()],[AK.HIT+900,()=>A.sparkle(1.18)]].map(([t,f])=>({t,f,done:0}))}
+  function awkTap(c){const now=performance.now(),e=now-c.f0;
+    if(e<AK.SPIN-80){c.f0=now-AK.SPIN;c.cues.forEach(q=>{if(q.t<AK.SPIN)q.done=1});['rum','rise'].forEach(k=>{if(c.snd[k]){c.snd[k].stop(.15);c.snd[k]=null}})}
+    else if(e>AK.HIT+500)c.hurry=1}
+  function awkStep(c,now,e){c.cues.forEach(q=>{if(!q.done&&e>=q.t){q.done=1;try{q.f()}catch(_){}}});
+    const big=Math.min(1.75,(W*.52)/CB,(HH*.5)/CH),cx=W/2,cy=HH*.45;st.dim=Math.min(1,e/400);c.z=40;
+    if(e<AK.IN){const k=E.io(E.cl(e/AK.IN));c.x=lerp(c.xa,cx,k);c.y=lerp(c.ya,cy,k);c.s=lerp(1,big,k);c.glow=k*.6;st.qk=0}
+    else if(e<AK.SPIN){const b=(e-AK.IN)/(AK.SPIN-AK.IN),k3=E.cl((e-AK.DK)/(AK.SPIN-AK.DK));
+      /* ふるえ：だんだん はげしく（ヒビの たびに ぐっと） */let amp=e<AK.CR[0]?.8+1.2*E.cl((e-AK.IN)/1200):e<AK.DK?2.4:2.4+7*k3;AK.CR.forEach(t=>{const d=e-t;if(d>0&&d<260)amp+=6*(1-d/260)});
+      c.x=cx+(Math.random()-.5)*amp*1.6;c.y=cy+(Math.random()-.5)*amp*1.6;c.rz=(Math.random()-.5)*amp*.008;c.s=big*(1+.015*b+.012*Math.sin(e/70)*b);c.glow=.6+.4*b;c.ry=0;
+      st.qk=e<AK.DK?amp*.25:amp*.55;st.dark2=.62*E.io(k3);st.white=0;
+      if(!c.f1&&e>AK.DK){c.f1=1;bursts.push({x:cx,y:cy,r:CB*big*1.2,col:'A',t0:now,d:900,rays:0})}}
+    else if(e<AK.HIT){const k=(e-AK.SPIN)/(AK.HIT-AK.SPIN);
+      /* まわりながら とびあがる（だんだん はやく）。さいごは おもて（3回転半）*/c.ry=1260*k*k;c.x=cx;c.y=cy-E.o(k)*HH*.07;c.s=big*(1+.28*E.io(k));c.rz=0;c.wht=E.cl(k*1.3);c.glow=1;
+      st.qk=3+7*k;st.dark2=.62;st.white=e>AK.HIT-320?Math.pow((e-(AK.HIT-320))/320,2):0;c.yh=c.y;c.sh=c.s}
+    else{if(!c.fx){c.fx=1;c.ry=180;c.wht=0;const y=c.y;
+        bBursts.push({x:cx,y,r:Math.max(W,H)*.75,col:'A',t0:now,d:1500,rays:20});bBursts.push({x:cx,y,r:CB*big*1.4,col:'A',t0:now+120,d:1100,rays:12});bursts.push({x:cx,y,r:CB*big*.9,col:'A',t0:now,d:450});
+        confetti(cx,y-CH*big*.25);confetti(cx,y);sparkAt(cx,y,16,'#fff',STAR);sparkAt(cx,y,14,'#ffe9ff',SPK);
+        sweeps.push({card:c,t0:now+300,d:1300,rainbow:true,loop:true,al:.2});sweeps.push({card:c,t0:now+200,d:900});
+        const sz=Math.min(120,W*.27),sy=Math.max(sz*.62+6,cy-CH*big/2-sz*.3);slams.push({s:'覚',x:W*.33,y:sy,t0:now+260,d:1900,size:sz,from:3.2},{s:'醒',x:W*.67,y:sy,t0:now+420,d:1750,size:sz,from:3.2});
+        rings.push({x:cx,y,t0:now,d:800});rings.push({x:cx,y,t0:now+140,d:900});c.hold=now}
+      const eh=e-AK.HIT,k=E.cl(eh/520);c.x=cx;c.y=lerp(c.yh,cy,E.o(k));c.s=lerp(c.sh,big,E.back(k));c.glow=1;c.rz=0;
+      st.white=eh<130?1:Math.max(0,1-(eh-130)/750);st.qk=Math.max(0,15*(1-eh/520));st.dark2=lerp(.62,.45,E.cl(eh/600));
+      if(eh>AK.HOLD||(c.hurry&&eh>700)){st.qk=0;st.white=0;c.state='settle';c.f0=now;c.xb=c.x;c.yb=c.y;c.sb=c.s;st.awk=null}}}
+  const slams=[],rings=[];
+  function drawSlams(ctx,now){for(let i=slams.length-1;i>=0;i--){const L=slams[i],e=now-L.t0;if(e>L.d){slams.splice(i,1);continue}if(e<0)continue;
+    /* ゲームの 覚醒（f91 の slam）と おなじ 見た目：大きく → ドン、金の グラデ、こげ茶の ふち */const k=E.cl(e/260),out=1-E.cl((e-(L.d-300))/300),sc=L.from-(L.from-1)*E.back(k),z=L.size;
+    ctx.save();ctx.globalAlpha=Math.min(1,k*2)*out;ctx.translate(L.x,L.y);ctx.scale(sc,sc);
+    ctx.save();ctx.globalCompositeOperation='lighter';const gg=ctx.createRadialGradient(0,0,0,0,0,z*.95);gg.addColorStop(0,hsl(now/6+L.x,.55));gg.addColorStop(1,hsl(now/6+L.x,0));ctx.fillStyle=gg;ctx.beginPath();ctx.arc(0,0,z*.95,0,7);ctx.fill();ctx.restore();
+    ctx.font=`${z}px "Dela Gothic One","M PLUS Rounded 1c",sans-serif`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.lineJoin='round';ctx.lineWidth=z*.2;ctx.strokeStyle='#3e1a06';ctx.shadowColor='rgba(0,0,0,.6)';ctx.shadowOffsetY=5;ctx.shadowBlur=4;ctx.strokeText(L.s,0,0);ctx.shadowColor='transparent';
+    const g=ctx.createLinearGradient(0,-z/2,0,z/2);['#fffbe0','#ffe066','#ffb31a','#ff7a00'].forEach((q,j)=>g.addColorStop(j/3,q));ctx.fillStyle=g;ctx.fillText(L.s,0,0);ctx.restore()}}
+  /* うしろ：もっと くらく → にじの オーラ → 光の すじ（どんどん ふえる）→ ドン！で はじける */
+  function drawAwkBg(ctx,now){if(st.dark2>0){ctx.fillStyle=`rgba(0,0,0,${st.dark2})`;ctx.fillRect(0,0,W,H)}const c=st.awk;if(!c||c.state!=='awk'){if(bBursts.length)drawBursts(ctx,now,bBursts);return}const e=now-c.f0;if(e<AK.IN*.6)return;
+    const x=c.x,y=c.y,w=CB*c.s,Lm=Math.hypot(W,H),post=e>=AK.HIT,eh=e-AK.HIT;const b=E.cl((e-AK.IN)/(AK.HIT-AK.IN));
+    ctx.save();ctx.globalCompositeOperation='lighter';
+    /* オーラ */const ar=w*(post?1.1+1.6*E.o(E.cl(eh/700)):.75+.55*b+.05*Math.sin(e/90)),aa=post?.7*(1-E.cl(eh/1600))+.25:.18+.5*b;const g=ctx.createRadialGradient(x,y,w*.2,x,y,ar);g.addColorStop(0,hsl(now/5,aa));g.addColorStop(.5,hsl(now/5+120,aa*.5));g.addColorStop(1,hsl(now/5+240,0));ctx.fillStyle=g;ctx.beginPath();ctx.arc(x,y,ar,0,7);ctx.fill();
+    /* 光の すじ：ヒビ → 1本ずつ → どんどん ふえる */let n=0;AK.CR.forEach(t=>{if(e>t)n+=1});if(e>AK.DK)n=3+Math.floor(21*E.cl((e-AK.DK)/(AK.SPIN-AK.DK+300)));if(post)n=24;
+    for(let i=0;i<n;i++){const t0=i<3?AK.CR[i]:AK.DK+(i-3)/21*(AK.SPIN-AK.DK+300);const ee=post?9999:e-t0;const gr=E.o(E.cl(ee/450));const a0=i*2.39996+now/(i%2?2600:-3400);
+      const L=post?Lm*(.6+.6*E.o(E.cl(eh/500))):Lm*(.25+.6*gr)*(.6+.4*b),wd=(.03+((i*37)%7)/170)*(post?1.6:1),al=post?.75*(1-E.cl(eh/1300)):(.35+.45*b)*gr;if(al<=0)continue;
+      const g2=ctx.createLinearGradient(x,y,x+Math.cos(a0)*L,y+Math.sin(a0)*L);g2.addColorStop(0,`rgba(255,255,255,${al})`);g2.addColorStop(.35,hsl(i*47+now/4,al*.75));g2.addColorStop(1,hsl(i*47+now/4,0));ctx.fillStyle=g2;
+      ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+Math.cos(a0-wd)*L,y+Math.sin(a0-wd)*L);ctx.lineTo(x+Math.cos(a0+wd)*L,y+Math.sin(a0+wd)*L);ctx.closePath();ctx.fill()}
+    ctx.restore();drawBursts(ctx,now,bBursts)}
+  /* まえ：カードの うらの 光の ヒビ・しょうげき波 */
+  function drawAwkFg(ctx,now){for(let i=rings.length-1;i>=0;i--){const r=rings[i],e=now-r.t0;if(e>r.d){rings.splice(i,1);continue}if(e<0)continue;const k=e/r.d,rad=Math.max(W,H)*.7*E.o(k);
+      ctx.save();ctx.globalCompositeOperation='lighter';ctx.lineWidth=16*(1-k)+2;ctx.strokeStyle=hsl(now/3,.9*(1-k),80);ctx.shadowColor=hsl(now/3+90,1);ctx.shadowBlur=18;ctx.beginPath();ctx.arc(r.x,r.y,rad,0,7);ctx.stroke();ctx.restore()}
+    const c=st.awk;if(!c||c.state!=='awk'||!c.cracks)return;const e=now-c.f0;if(e<AK.CR[0]||e>AK.SPIN+250)return;
+    const w=CB*c.s,h=CH*c.s,fade=e>AK.SPIN?1-(e-AK.SPIN)/250:1;let n=0;AK.CR.forEach(t=>{if(e>t)n+=e>AK.DK?1:1});if(e>AK.DK)n=Math.min(8,3+Math.floor((e-AK.DK)/380));
+    ctx.save();ctx.translate(c.x,c.y);ctx.rotate(c.rz);ctx.beginPath();ctx.roundRect(-w/2,-h/2,w,h,w*.07);ctx.clip();ctx.globalCompositeOperation='lighter';ctx.lineJoin='round';ctx.lineCap='round';
+    for(let i=0;i<n;i++){const cr=c.cracks[i],t0=i<3?AK.CR[i]:AK.DK+(i-2)*380,gr=E.o(E.cl((e-t0)/180)),fl=1+.35*Math.sin(now/60+i*2);const m=Math.max(2,Math.ceil(cr.pts.length*gr));
+      const path=(pts,mm)=>{ctx.beginPath();for(let j=0;j<Math.min(mm,pts.length);j++)ctx[j?'lineTo':'moveTo'](pts[j][0]*w,pts[j][1]*h)};
+      ctx.shadowColor=hsl(cr.h+now/4,1);ctx.shadowBlur=14*fl;ctx.strokeStyle=hsl(cr.h+now/4,.95*fade);ctx.lineWidth=4.5*fl;path(cr.pts,m);ctx.stroke();cr.br.forEach(bp=>{if(gr>=1){path(bp,3);ctx.stroke()}});
+      ctx.shadowBlur=0;ctx.strokeStyle=`rgba(255,255,255,${fade})`;ctx.lineWidth=1.6;path(cr.pts,m);ctx.stroke();cr.br.forEach(bp=>{if(gr>=1){path(bp,3);ctx.stroke()}})}
+    /* ヒビの おくから もれる 光（まんなか） */if(n){const gl=ctx.createRadialGradient(0,0,0,0,0,w*.6);gl.addColorStop(0,hsl(now/4,.35*fade*Math.min(1,n/4),85));gl.addColorStop(1,hsl(now/4,0));ctx.fillStyle=gl;ctx.fillRect(-w/2,-h/2,w,h)}
+    ctx.restore()}
   let busy=false;
-  function tapFlip(p){if(busy){C.forEach(c=>{if(c.state==='zoom'&&c.hold)c.hurry=1});return}
+  function tapFlip(p){if(busy){C.forEach(c=>{if(c.state==='zoom'&&c.hold)c.hurry=1;if(c.state==='awk')awkTap(c)});return}
     let tgt=C.find(c=>!c.done&&c.state==='slot'&&Math.abs(p.x-c.x)<CB/2&&Math.abs(p.y-c.y)<CH/2);if(!tgt)tgt=C.find(c=>!c.done&&c.state==='slot');if(tgt)reveal(tgt)}
   function reveal(c){busy=true;c.done=true;const r=rr(c),now=performance.now();c.f0=now;
     if(r==='N'){c.state='flipN';S.flip()}
     else if(r==='R'){c.state='flipR';S.tell('R');S.rare()/* 11/1：おした しゅんかんに */}
+    else if(r==='A')awkStart(c);/* 11/1 覚醒：とくべつな 演出（下の awk） */
     else{c.state='zoom';c.hold=0;c.hurry=0;c.xa=c.x;c.ya=c.y;S.tell('L');S.legend(c.cd.awk)/* 11/1：おした しゅんかんに */;C.forEach(d=>{if(d!==c)d.dimT=1});pillars.push({card:c,col:r,t0:now+250})}}
   function revealDone(c){c.state='slot';busy=false;st.nextAuto=performance.now()+1400;if(C.every(d=>d.done&&d.state==='slot'))later(450,()=>{st.ph='end';st.endT=performance.now()})}
   let fin=false;function finish(){if(fin)return;fin=true;S.stop();R.style.opacity=0;timers.forEach(clearTimeout);setTimeout(()=>{cancelAnimationFrame(raf);resolve();if(!o.keep)R.remove()},260)}
@@ -261,7 +349,7 @@ function run(host,o){return new Promise(async resolve=>{
   function frame(now){raf=requestAnimationFrame(frame);const dt=Math.min(.05,(now-prev)/1000);prev=now;const t=now-st.t0;
     /* 段階 */
     if(st.ph==='in'&&t>700){st.ph='tell';st.t0=now;later(0,()=>{})}
-    if(st.ph==='tell'){const e=now-st.t0;const ks=[[150,0],[520,1],[890,2]];st.shk=0;ks.forEach(([s,i])=>{const k=(e-s)/260;if(k>0&&k<1){st.shk=Math.sin(k*Math.PI*5)*(1-k)*.05*(1+i*.3);if(!st['sh'+i]){st['sh'+i]=1;S.shake(i)}}});if(e>1350){st.ph='idle';st.shk=0;st.hint0=now}}
+    if(st.ph==='tell'){const e=now-st.t0;const ks=[[150,0],[520,1],[890,2]];st.shk=0;ks.forEach(([s,i])=>{const k=(e-s)/260;if(k>0&&k<1){st.shk=Math.sin(k*Math.PI*5)*(1-k)*.05*(1+i*.3)*(best==='A'?1.9:1);if(!st['sh'+i]){st['sh'+i]=1;S.shake(i)}}});if(e>1350){st.ph='idle';st.shk=0;st.hint0=now}}
     if(st.relaxT){const k=E.cl((now-st.relaxT)/260);st.relax=1-.22*E.o(k);if(k>=1)st.relaxT=0}
     if(st.ph==='drop'||st.ph==='fan'||st.ph==='flip'||st.ph==='end'){const k=E.cl((now-(st.dropT||now))/420);st.packY=E.io(k)*PH*.7;st.packA=1-k}
     /* カード */
@@ -278,7 +366,8 @@ function run(host,o){return new Promise(async resolve=>{
           if(k>=1&&!c.fx){c.fx=1;const A=c.cd.awk;S.flip();confetti(c.x,c.y-CH*big*.3);bursts.push({x:c.x,y:c.y,r:CB*big*1.1,col:A?'A':'L',t0:now,d:900,rays:12});sweeps.push({card:c,t0:now,d:A?1100:800,rainbow:!!A,loop:!!A});if(!A)sweeps.push({card:c,t0:now+300,d:800});
             labels.push({s:A?'かくせい！':'レジェンド！',x:cx,y:Math.max(28,cy-CH*big/2-26),t0:now,d:2100,col:A?'#ffb0f0':'#ffe066',size:28});c.hold=now}}
         else if(c.hold&&(now-c.hold>2000||(c.hurry&&now-c.hold>500))){c.state='settle';c.f0=now;c.xb=c.x;c.yb=c.y;c.sb=c.s}}
-      else if(c.state==='settle'){const k=E.io(E.cl(e/480)),sl=slots[c.i];c.x=lerp(c.xb,sl.x,k);c.y=lerp(c.yb,sl.y,k);c.s=lerp(c.sb,1,k);st.dim=1-k;c.glow=1-k*.6;if(k>=1){c.z=10+c.i;pillars.forEach(p=>{if(p.card===c)p.end=now});C.forEach(d=>d.dimT=0);c.glow=.4;revealDone(c)}}
+      else if(c.state==='awk')awkStep(c,now,e);
+      else if(c.state==='settle'){const k=E.io(E.cl(e/480)),sl=slots[c.i];if(st.dark2)st.dark2=Math.min(st.dark2,.45*(1-k));c.x=lerp(c.xb,sl.x,k);c.y=lerp(c.yb,sl.y,k);c.s=lerp(c.sb,1,k);st.dim=1-k;c.glow=1-k*.6;if(k>=1){c.z=10+c.i;pillars.forEach(p=>{if(p.card===c)p.end=now});C.forEach(d=>d.dimT=0);c.glow=.4;revealDone(c)}}
       if(c.state==='slot'&&c.done&&c.glow>0&&rr(c)!=='N')c.glow=Math.max(rr(c)==='R'?0:.35,c.glow-dt);
       const dT=c.dimT?1:0;c.dimmed+=(dT-c.dimmed)*Math.min(1,dt*8);setCard(c)});
     /* 自動で めくる（一拍 おいて） */
@@ -287,13 +376,15 @@ function run(host,o){return new Promise(async resolve=>{
     drawBg(bg,now);
     fg.clearRect(0,0,W,H);
     if(st.packA>0)drawPack(fg,now);
-    drawStrip(fg,now,dt);drawBursts(fg,now);drawSweeps(fg,now);drawP(fg,now,dt);drawGuide(fg,now);
+    drawStrip(fg,now,dt);drawBursts(fg,now);drawSweeps(fg,now);drawAwkFg(fg,now);drawP(fg,now,dt);drawGuide(fg,now);
     /* 文字（いちばん 上） */
     if(st.ph==='idle'||(st.ph==='tear'&&st.p<.25)){const y=Math.min(HH-24,PY+PH/2+44);txt(fg,'ゆびで なぞって やぶろう！',W/2,y,{size:19,col:'#fff3d0',a:.75+.25*Math.sin(now/300)})}
     if(st.ph==='end'){const e=now-st.endT;const lastY=slots[slots.length-1].y+CH/2,y=Math.min(HH-30,lastY+46),a=Math.min(1,e/300);
       if(o.endBtn){const bw=190,bh=48,sc=1+.03*Math.sin(now/260);st.btn={x:W/2,y,w:bw,h:bh};fg.save();fg.globalAlpha=a;fg.translate(W/2,y);fg.scale(sc,sc);const g=fg.createLinearGradient(0,-bh/2,0,bh/2);g.addColorStop(0,'#ffe27a');g.addColorStop(1,'#e8962a');fg.fillStyle='#7a4310';fg.beginPath();fg.roundRect(-bw/2,-bh/2+4,bw,bh,bh/2);fg.fill();fg.fillStyle=g;fg.beginPath();fg.roundRect(-bw/2,-bh/2,bw,bh,bh/2);fg.fill();fg.strokeStyle='#fff3c0';fg.lineWidth=2;fg.stroke();fg.restore();txt(fg,o.endBtn,W/2,y,{size:20,col:'#fffbe8',a})}
       else txt(fg,'カードを タップで せつめい',W/2,y,{size:16,col:'#fff3d0',a:a*(.7+.3*Math.sin(now/300))})}
-    drawLabels(fg,now)}
+    drawLabels(fg,now);drawSlams(fg,now);
+    if(st.white>0){fg.fillStyle=`rgba(255,255,250,${Math.min(1,st.white)})`;fg.fillRect(0,0,W,H)}
+    quake()}
   raf=requestAnimationFrame(frame)})}
 const PFX=window.PackFX={run,seLog:SELOG,se:PSE};
 })();

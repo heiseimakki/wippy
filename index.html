@@ -44,7 +44,7 @@ html,body{margin:0;background:#000}
 <div class="sheet" id="sheet" hidden></div>
 <div class="modal" id="modal" hidden></div>
 <svg id="hair" hidden></svg>
-<button class="mute" id="mute" aria-label="音のオン・オフ">🔊</button><button class="mute" id="vtog" aria-label="声のオン・オフ" style="bottom:calc(max(8px,env(safe-area-inset-bottom,0px)) + 46px)">🗣</button>
+<button class="mute" id="mute" aria-label="音のオン・オフ"></button><button class="mute" id="vtog" aria-label="声のオン・オフ" style="bottom:calc(max(8px,env(safe-area-inset-bottom,0px)) + 46px)"></button>
 <audio id="bgm" src="audio/bgm_town.mp3" loop preload="none"></audio>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
   <radialGradient id="cg" cx="38%" cy="32%" r="75%"><stop offset="0" stop-color="#fff2b0"/><stop offset=".45" stop-color="#ffcd3c"/><stop offset="1" stop-color="#d8920f"/></radialGradient>
@@ -80,11 +80,11 @@ addEventListener('pagehide',flush);
 </script>
 <script>
 /* 10/26：ダウンロードが とまったら、自動で やりなおす（3回まで）。それでも だめなら やさしく おしらせ */
-(function(){var T=3118473,V='ad767dca',bar=document.getElementById('pbf'),pc=document.getElementById('pbp'),best=0,tries=0,fin=false;
+(function(){var T=3237159,V='aa885150',bar=document.getElementById('pbf'),pc=document.getElementById('pbp'),best=0,tries=0,fin=false;
 function set(p){p=Math.max(.03,Math.min(1,p));if(p>best)best=p;bar.style.width=(best*100)+'%';pc.textContent='ゲームが はじまるよ  '+Math.floor(best*100)+'%'}
 function done(){var pb=document.getElementById('preboot');if(pb){pb.classList.add('done');setTimeout(function(){pb.parentNode&&pb.parentNode.removeChild(pb)},400)}}
 function run(t){if(fin)return;fin=true;var i=t.indexOf('\n'),D=JSON.parse(t.slice(0,i));t=t.slice(i+1).replace(/@@D(\d+)@@/g,function(m,k){return D[+k]});var go=function(){var s=document.createElement('script');s.text=t;document.body.appendChild(s);done()};var w=window.__cloudReady;if(w&&w.then){pc.textContent='セーブを たしかめてるよ…';w.then(go,go)}else go()}
-function sorry(){var l=document.querySelector('#preboot .pcl');if(!l)return;l.innerHTML='<div style="font-size:14px;line-height:1.8;text-align:center;color:#fff;letter-spacing:.05em">とまっちゃった みたい… ごめんね💦<br>ブラウザを 1回 こうしんして<br>もう一度 ためしてみてね！</div><button id="pbr" style="margin-top:10px;font:700 15px sans-serif;padding:10px 26px;border-radius:999px;border:0;background:#e9c46a;color:#3a2412">もう一度 よみこむ</button>';
+function sorry(){var l=document.querySelector('#preboot .pcl');if(!l)return;l.innerHTML='<div style="font-size:14px;line-height:1.8;text-align:center;color:#fff;letter-spacing:.05em">とまっちゃった みたい… ごめんね<br>ブラウザを 1回 こうしんして<br>もう一度 ためしてみてね！</div><button id="pbr" style="margin-top:10px;font:700 15px sans-serif;padding:10px 26px;border-radius:999px;border:0;background:#e9c46a;color:#3a2412">もう一度 よみこむ</button>';
   var b=document.getElementById('pbr');if(b)b.onclick=function(){location.reload()}}
 function attempt(){if(fin)return;tries++;var ctl=window.AbortController?new AbortController():null,last=Date.now(),got=0,ch=[];
   var wd=setInterval(function(){if(fin){clearInterval(wd);return}if(Date.now()-last>9000){clearInterval(wd);try{ctl&&ctl.abort()}catch(e){}retry()}},1000);
