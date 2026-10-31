@@ -146,9 +146,10 @@ function run(host,o){return new Promise(async resolve=>{
     if(st.p>0){let a=-1,b=-1;for(let i=0;i<NC;i++)if(torn(i)){if(a<0)a=i;b=i}
       if(a>=0){ctx.save();body();ctx.clip();for(let i=a;i<=b;i++){const L=st.strip?1:E.o(E.cl(distFront(i)/(PW*.13)))*st.relax;ctx.fillStyle=`rgba(30,10,0,${.38*L})`;ctx.fillRect(i*cw,ty[i],cw+.5,4+9*L)}ctx.restore();
         const xa=a*cw,xb=(b+1)*cw,mx=(xa+xb)/2,wx=(xb-xa)/2+12,inten=st.strip?Math.max(0,1-(now-st.strip.t0)/900):Math.min(1,st.p*1.4);
-        if(inten>0){ctx.save();ctx.globalCompositeOperation='lighter';ctx.translate(mx,TY);ctx.scale(1,(10+26*st.p)/wx);const g=ctx.createRadialGradient(0,0,0,0,0,wx);g.addColorStop(0,tcol(best,.95*inten,now));g.addColorStop(.5,tcol(best,.4*inten,now));g.addColorStop(1,tcol(best,0,now));ctx.fillStyle=g;ctx.beginPath();ctx.arc(0,0,wx,0,7);ctx.fill();ctx.restore()}
-        ctx.save();ctx.globalCompositeOperation='lighter';const sl=()=>{ctx.beginPath();for(let i=a;i<=b;i++)ctx[i===a?'moveTo':'lineTo']((i+.5)*cw,ty[i]-.5)};ctx.shadowColor=tcol(best,1,now);ctx.shadowBlur=10;ctx.strokeStyle=tcol(best,.9*Math.max(.4,inten),now);ctx.lineWidth=3;sl();ctx.stroke();ctx.shadowBlur=0;ctx.strokeStyle=`rgba(255,255,255,${Math.max(.5,inten)})`;ctx.lineWidth=1.2;sl();ctx.stroke();ctx.restore();
-        /* 中の 銀色の 層が すこし 見える */ctx.save();const sg2=ctx.createLinearGradient(0,0,PW,0);sg2.addColorStop(0,'#9aa3ad');sg2.addColorStop(Math.max(.05,Math.min(.95,.35+st.tilt*.3)),'#ffffff');sg2.addColorStop(1,'#cfd7e0');ctx.strokeStyle=sg2;ctx.lineWidth=1.5;ctx.beginPath();for(let i=a;i<=b;i++)ctx[i===a?'moveTo':'lineTo']((i+.5)*cw,ty[i]+1.4);ctx.stroke();ctx.restore()}}
+        if(inten>0){/* 11/01：光は 切れ目（列ごとの ty）に そって。ななめでも ずれない */ctx.save();ctx.globalCompositeOperation='lighter';ctx.lineJoin='round';const gh=10+26*st.p,gp=()=>{ctx.beginPath();ctx.moveTo(mx-wx,ty[a]);for(let i=a;i<=b;i++)ctx.lineTo((i+.5)*cw,ty[i]);ctx.lineTo(mx+wx,ty[b])};
+          [[2,.13],[1.4,.16],[.9,.2],[.5,.26],[.22,.3]].forEach(([k,al2])=>{const g=ctx.createLinearGradient(mx-wx,0,mx+wx,0);g.addColorStop(0,tcol(best,0,now));g.addColorStop(.5,tcol(best,al2*inten,now));g.addColorStop(1,tcol(best,0,now));ctx.strokeStyle=g;ctx.lineWidth=gh*k;gp();ctx.stroke()});ctx.restore()}
+        ctx.save();ctx.globalCompositeOperation='lighter';const sl=()=>{ctx.beginPath();for(let i=a;i<=b;i++)ctx[i===a?'moveTo':'lineTo']((i+.5)*cw,ty[i])};ctx.shadowColor=tcol(best,1,now);ctx.shadowBlur=10;ctx.strokeStyle=tcol(best,.9*Math.max(.4,inten),now);ctx.lineWidth=3;sl();ctx.stroke();ctx.shadowBlur=0;ctx.strokeStyle=`rgba(255,255,255,${Math.max(.5,inten)})`;ctx.lineWidth=1.2;sl();ctx.stroke();ctx.restore();
+        /* 中の 銀色の 層が すこし 見える */ctx.save();const sg2=ctx.createLinearGradient(0,0,PW,0);sg2.addColorStop(0,'#9aa3ad');sg2.addColorStop(Math.max(.05,Math.min(.95,.35+st.tilt*.3)),'#ffffff');sg2.addColorStop(1,'#cfd7e0');ctx.strokeStyle=sg2;ctx.lineWidth=1.5;ctx.beginPath();for(let i=a;i<=b;i++)ctx[i===a?'moveTo':'lineTo']((i+.5)*cw,ty[i]+1.8);ctx.stroke();ctx.restore()}}
     /* まだの ところ（たいら） */
     if(!st.strip){ctx.save();flat();ctx.clip();ctx.drawImage(Lc,0,0,PW,PH);ctx.restore();
       /* めくれた 帯（列ごとに 曲げる） */
@@ -203,11 +204,15 @@ function run(host,o){return new Promise(async resolve=>{
   R.addEventListener('pointerdown',e=>{e.preventDefault();const p=loc(e);try{R.setPointerCapture(e.pointerId)}catch(_){}S.tn(1,.01,{vol:0});
     if(st.ph==='idle'||st.ph==='tear'){st.drag={x0:p.x,y0:p.y,x:p.x,y:p.y,base:st.p};lastX=p.x;lastT=performance.now();st.relax=1}
     else if(st.ph==='flip')tapFlip(p);else if(st.ph==='end')endTap(p)});
-  /* 11/1：さいごは ボタンを おした ときだけ おわる。カードを タップすると 効果の まど */
+  /* 11/1：さいごは ボタンを おした ときだけ おわる。カードを タップすると いつもの せつめいの まど（o.cardTap）。うしろは うすく くらく、くらい ところを おすと とじる */
   function endTap(p){if(info){closeInfo();return}const hit=C.slice().sort((a,b)=>b.z-a.z).find(c=>Math.abs(p.x-c.x)<=CB*c.s/2&&Math.abs(p.y-c.y)<=CH*c.s/2);
     if(hit){showInfo(hit);return}const b=st.btn;if(b&&Math.abs(p.x-b.x)<=b.w/2+8&&Math.abs(p.y-b.y)<=b.h/2+8){finish();return}}
-  let info=null;function closeInfo(){if(info){info.remove();info=null}}
-  function showInfo(c){closeInfo();S.flip&&S.flip();const ix=C.indexOf(c);const w=document.createElement('div');w.className='pfx-info';
+  let info=null;function closeInfo(){if(info){const w=info;info=null;w.remove();if(w._close)try{w._close()}catch(e){}}}
+  function showInfo(c){closeInfo();S.flip&&S.flip();const ix=C.indexOf(c);
+    if(o.cardTap){const dim=document.createElement('div');dim.className='pfx-info';dim.style.cssText='position:absolute;inset:0;z-index:5;background:rgba(0,0,0,.45);touch-action:none';R.appendChild(dim);info=dim;
+      const done=()=>{if(info===dim){info=null;dim.remove()}};let cl=null;try{cl=o.cardTap(ix,c.cd,done)}catch(e){console.warn(e);cl=null}
+      if(typeof cl==='function'){dim._close=cl;dim.addEventListener('pointerdown',ev=>{ev.stopPropagation();ev.preventDefault();closeInfo()});return}
+      done()}const w=document.createElement('div');w.className='pfx-info';
     w.style.cssText='position:absolute;inset:0;z-index:5;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:rgba(10,6,2,.62);touch-action:none';
     const box=document.createElement('div');box.style.cssText='max-width:min(86vw,340px);display:flex;justify-content:center';
     let body=null;try{body=o.cardInfo?o.cardInfo(ix,c.cd):null}catch(e){body=null}
@@ -301,7 +306,13 @@ packCut=async function(sid,got,stage){if(typeof HUMAN!=='undefined'&&!HUMAN)retu
       if(awk){const P=(AWK[id]&&AWK[id].plus)||2;el=cardEl(id,lv,{plus:P,showTx:false});try{awArt(el,id);el.classList.add('awkf')}catch(e){}}else el=cardEl(id,lv,{showTx:false});
       return {face:el,r:C[id].r,awk:!!awk}});
     const U=n=>'ui/'+n;
-    await PackFX.run(document.body,{fixed:true,z:9000,keep:true,pack:(window.ARTD&&ARTD['pack/'+sid])||('art/pack/'+sid+'.webp'),cards,
+    await PackFX.run(document.body,{fixed:true,z:9000,keep:true,endBtn:'OK',
+      /* 11/01：カードを タップ → 長おしと おなじ いつもの シート（sheetCard）を パックの 上に。とじたら パックの 画面に もどる */
+      cardTap:(i,cd,done)=>{if(typeof sheetCard!=='function')return null;const id=got[i],s=document.getElementById('sheet');if(!s||!C[id])return null;const lv=(G.col&&G.col[id]&&G.col[id].lv)||1;
+        const plus=cd&&cd.awk?((typeof AWK!=='undefined'&&AWK[id]&&AWK[id].plus)||2):0;sheetCard(id,lv,'','',plus);if(s.hidden)return null;s.classList.add('top');s.style.zIndex='9100';
+        let k=document.getElementById('pfxKwZ');if(!k){k=document.createElement('style');k.id='pfxKwZ';k.textContent='body:has(.pfx-root) .kwbub{z-index:9200!important}';document.head.appendChild(k)}
+        const mo=new MutationObserver(()=>{if(s.hidden){mo.disconnect();s.style.zIndex='';done()}});mo.observe(s,{attributes:true,attributeFilter:['hidden']});
+        return ()=>{mo.disconnect();s.style.zIndex='';if(!s.hidden&&typeof closeSheet==='function')closeSheet()}},cardInfo:(i)=>{const id=got[i];const lv=(G.col&&G.col[id]&&G.col[id].lv)||1;const w=document.createElement('div');w.style.cssText='display:flex;flex-direction:column;align-items:center;gap:10px';const el=cardEl(id,lv,{});el.style.setProperty('--cw','min(58vw,240px)');el.style.pointerEvents='none';let L=[];try{L=effList(id,lv)||[]}catch(e){}const t=document.createElement('div');t.style.cssText='background:#fff8e6;color:#4a2a0c;border-radius:12px;padding:10px 14px;font:600 14px/1.55 sans-serif;max-width:min(80vw,320px)';t.innerHTML=L.length?L.map(x=>'<b>'+x[1]+'</b>：'+x[2]).join('<br>'):'効果なし';w.append(el,t);return w},pack:(window.ARTD&&ARTD['pack/'+sid])||('art/pack/'+sid+'.webp'),cards,
       img:{back:'ui/w_cardback.png',coin:U('x_coin.png'),star:U('x_star.png'),spark:U('x_spark.png')},
       ac:()=>typeof ac==='function'?ac():null,seJs:'packse.js',out:()=>typeof sfxOut==='function'?sfxOut():null,muted:()=>typeof MUTED!=='undefined'&&MUTED,sfx:typeof SFX!=='undefined'?{flip:SFX.flip,fanfare:SFX.fanfare||SFX.legend,sparkle:SFX.sparkle}:null,
       buf:f=>window.SE2&&SE2.buf&&SE2.buf[f]});
