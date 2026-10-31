@@ -17,7 +17,7 @@ function fit(){DPR=Math.min(2,devicePixelRatio||1);W=cv.clientWidth;H=cv.clientH
 let uc=null,ucv=null;
 function init(canvas,frameEl){cv=canvas;c=cv.getContext('2d');if(frameEl){BW=frameEl.contentWindow;ucv=BW.document.getElementById('under');uc=ucv&&ucv.getContext('2d')}fit();if(!init.on){init.on=1;addEventListener('resize',fit)}}
 /* ---- 場面 ---- */
-function unit(o){return Object.assign({x:.5,y:.7,r:34,art:'dog',atk:2,hp:3,alpha:1,sc:1,ox:0,oy:0,rot:0,tint:null,gray:0,glow:0,glowC:'255,211,74',hidden:false,status:[],marks:[]},o)}
+function unit(o){const u=Object.assign({x:.5,y:.7,r:34,art:'dog',atk:2,hp:3,alpha:1,sc:1,ox:0,oy:0,rot:0,tint:null,gray:0,glow:0,glowC:'255,211,74',hidden:false,status:[],marks:[]},o);u.a0=u.atk;u.h0=u.hp;return u}
 /* 本番の バトル画面（board.html）に 子分を ならべて、その 位置を つかう */
 function stage(spec){units=[];heroes={};bd=BW.BD.set(spec);const all=[...(spec.foes||[]).map(u=>Object.assign({side:'foe'},u)),...(spec.mine||[]).map(u=>Object.assign({side:'me'},u))];
   all.forEach((o,i)=>{const el=bd.units[i];const u=unit(o);u.el=el;units.push(u)});
@@ -31,7 +31,7 @@ function apply(u){const el=u.el;if(!el)return;const dx=u.x*W-u.bx+u.ox,dy=u.y*H-
   el.style.transform=`translate(${dx+shX}px,${dy+shY}px) rotate(${u.rot}rad) scale(${u.sc})`;el.style.opacity=u.hidden?0:u.alpha;el.style.clipPath=u.clipB?`inset(-30% -30% ${(u.clipB*100).toFixed(1)}% -30%)`:'';
   const f=[];if(u.gray)f.push(`grayscale(${u.gray}) brightness(${1-u.gray*.4})`);if(u.glow>0)f.push(`drop-shadow(0 0 ${8+14*u.glow}px rgba(${u.glowC},${Math.min(1,u.glow)}))`);if(u.shadow>0)f.push(`drop-shadow(0 ${(34*u.shadow).toFixed(1)}px ${(6+6*u.shadow).toFixed(1)}px rgba(0,0,0,${(.45*u.shadow).toFixed(2)}))`);el.style.filter=f.join(' ')||'none';
   const t=el.querySelector('.fxt');if(t)t.style.background=u.tint||'transparent';
-  const a=el.querySelector('.stat.a'),h=el.querySelector('.stat.h,.hp');if(a&&u.atk!=null&&a.textContent!=String(u.atk))a.textContent=u.atk;if(a)a.classList.toggle('up',!!u.up);if(h&&u.hp!=null&&h.textContent!=String(u.hp))h.textContent=u.hp;
+  const a=el.querySelector('.stat.a'),h=el.querySelector('.stat.h,.hp');if(a&&u.atk!=null&&a.textContent!=String(u.atk))a.textContent=u.atk;if(a){a.classList.toggle('up',!!u.up||u.atk>u.a0);a.classList.toggle('down',u.atk<u.a0)}if(h&&h.classList.contains('h')&&u.hp!=null){h.classList.toggle('hurt',u.hp<(u.mx!=null?u.mx:u.h0));h.classList.toggle('up',!!u.hb)}if(h&&u.hp!=null&&h.textContent!=String(u.hp))h.textContent=u.hp;
   const m=el.querySelector('.fxm');if(m){const k=u.marks.join(',');if(m.dataset.k!==k){m.dataset.k=k;m.innerHTML=u.marks.map(n=>`<img src="${n.startsWith('fx:')?'fx/'+n.slice(3)+'.webp':'../ui/'+n+'.png'}" alt="">`).join('')}}}
 /* ---- 演出の 部品（すべて 時間で 描く） ---- */
 const add=f=>{fx.push(f);return f};
