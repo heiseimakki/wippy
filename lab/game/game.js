@@ -1123,7 +1123,7 @@ document.addEventListener('pointerdown',e=>{if(e.target.closest&&e.target.closes
 
 
 /* バージョン：おおきい変更.機能を足した.小さな直し　（1.0.0 = 正式リリース） */
-const VERSION='0.82.0';
+const VERSION='0.83.0';
 /* =====================================================================
    タイトル・データ管理
    ===================================================================== */
@@ -1135,7 +1135,7 @@ function title(){
     <div id="slots" style="display:grid;gap:9px"></div>
     <div class="row" style="justify-content:center;margin-top:4px"><button class="btn ghost" id="mv">📦 引っこし（ほかのスマホへ）</button></div>
     <div class="fukugen"><input id="fk" placeholder="ふくげんコード" autocomplete="off" autocapitalize="off"><button class="btn" id="fkb">OK</button></div>
-    <p class="small" style="text-align:center;opacity:.75">ver ${VERSION}${'（ステージング 11/01 11:17）'}</p>`;
+    <p class="small" style="text-align:center;opacity:.75">ver ${VERSION}${'（ステージング 11/01 12:02）'}</p>`;
   for(let n=1;n<=3;n++){const g=readSlot(n),d=document.createElement('div');d.className='slot';
     d.innerHTML=`<div class="no">${n}</div><div class="info">${g?slotInfo(g):'<b>からっぽ</b><br>新しい賞金稼ぎをはじめる'}</div>
       ${g?`<div style="display:grid;gap:6px"><button class="btn" data-p>プレイ</button><button class="btn ghost" data-d>けす</button></div>`:`<button class="btn green" data-n>はじめから</button>`}`;
@@ -2076,7 +2076,7 @@ function renderBattle(){
     <div class="bar"><div class="hero" id="meHero"><div class="hart" style="background-image:url(${HERO.img})"></div><span class="hp">${Math.max(0,R.hp)}</span></div><span class="coins" id="coins">${coinIco}${me.coin}<small class="small">/${me.maxCoin}</small></span><span class="deckpile ${me.deck.length?'':'empty'}" id="pile">${me.deck.length}</span>
       <span class="sp"></span>${me.hanage?'<span title="鼻毛">👃</span>':''}${me.unko?'<span>💩</span>':''}${me.moji?'<span>文字化け</span>':''}
       ${lassoShow()?`<button class="btn red${B.acted?' off':''}" id="lasso" aria-label="投げなわ"${B.acted?' aria-disabled="true"':''}>🪢<b>${(n=>'★'.repeat(n)+'☆'.repeat(5-n))(Math.max(1,Math.min(5,Math.round(lassoChance()*5))))}</b><small>あと${lassoLeft()}回</small><i class="lend">${lassoFree()?'はずれても もう1回':'なげたら ターン おわり'}</i></button>`:''}
-      <button class="pop green" id="endt" style="font-size:15px;padding:10px 16px" ${myTurn?'':'disabled'}>ターン終了 ▶</button></div>
+      <button class="pop green" id="endt" style="font-size:15px;padding:10px 16px" ${myTurn?'':'disabled'}>ターン終了</button></div>
     <div class="hand" id="hand"></div>`;
   bindRelics();
   document.querySelectorAll('#foeStage [data-tip]').forEach(e=>e.onclick=ev=>{ev.stopPropagation();const t=FOE_TIPS[e.dataset.tip];if(t)tipBubble(e,...t(f))});
@@ -2120,7 +2120,7 @@ function nextActs(tg){const me=B.me;
   const rd=document.querySelector('#af .u.ready');if(rd)return{kind:'atk',t:'ひかってる なかまで アタック！',em:'<img class="iei" src="ui/x_pow.png" alt="">',el:rd};
   const pc=document.querySelector('#hand .card.can');if(pc)return{kind:'play',t:'コインで なかまを よぼう！',em:'<img class="iei" src="fx/new/coin_front.webp" alt="">',el:pc};
   if(canLasso())return{kind:'lasso',t:'なげなわで つかまえられるかも！',em:'🪢',el:$('lasso')};
-  return{kind:'end',t:'やれること ぜんぶ やった！',em:'<img class="iei" src="fav/f_smile.png" alt="">',sub:'ターン終了 ▶',el:$('endt')}}
+  return{kind:'end',t:'やれること ぜんぶ やった！',em:'<img class="iei" src="fav/f_smile.png" alt="">',sub:'ターン終了',el:$('endt')}}
 let IDLE=null;
 function idleClear(){clearTimeout(IDLE);IDLE=null;document.querySelectorAll('.idlehint').forEach(h=>{h.classList.add('out');setTimeout(()=>h.remove(),350)});document.querySelectorAll('.nudge').forEach(e=>e.classList.remove('nudge'))}
 function idleArm(){idleClear();if(!HUMAN||!B||B.over)return;IDLE=setTimeout(idleShow,5000)}
@@ -4036,6 +4036,7 @@ Object.assign(SPECIAL,{
    タイトル画面：ロゴ どーん！ ＋ タンブルウィード ＋ 砂あらし ＋ あそぶボタン ＋ おしらせ
    ===================================================================== */
 const CHANGELOG=[
+  {v:'0.83.0',d:'11/1',t:['なげなわの 演出が 新しく なったよ！ つかまる…？ どきどき！','なげなわは、なげたら その ターンは おわり。カードを 出したり こうげき したら、その ターンは もう なげられないよ','レジェンドの 光が かっこよく なったよ','カラス・宝石ガニ・きっぷ切り・ハット など、技の 演出を 直したよ','ハットは あいてを たおす たびに 昇進するように なったよ','イグニドンの 見参で、あいてに 2ダメージが 出るように なったよ','ビビリ・ザ・キッドが 1回目から 本気で くるよ','セレスティアの 名前が「水のおどり子 セレスティア」に なったよ']},
   {v:'0.82.0',d:'11/1',t:['ステージごとに 背景が うごくように なったよ！ 雪・火の粉・ホタル・ゆげ など','かくせいカードが パックから 出ると、とくべつな 演出が 見られるよ','カードの すみの 文字を なくしたよ','時計の 子は、あと 何ターンで 1まい 引けるか 見えるように なったよ','カラスの ふっかつ、カラミティの なげちらかし など、技の 演出が ふえたよ','グリズリーの 肉キャッチは 6びょうに なったよ','はやうちポークの 早打ち勝負など、ミニゲームは ルールが 先に 出るように なったよ','合体に 失敗すると、次は 成功しやすく なるよ','効果音の 大きさを ととのえて、文字を 読む 時間も ゆっくりに したよ']},
   {v:'0.81.0',d:'11/1',t:['たたかいの 演出が 新しく なったよ！ こうげき・見参・やられ・ふっかつ など','技ごとに ちがう 音が なるように なったよ','パックを ゆびで なぞって やぶれるように なったよ！ カードを タップすると 説明が 見られるよ','2体 よぶ 子は、自分の 左右に 出るように なったよ','やられたときの ことばを ふやしたよ','つづきから はじめると、地図の まきものの マスで すすめなくなるのを 直したよ','ことばの まちがいを 直したよ']},
   {v:'0.80.0',d:'10/31',t:['カードの 名前を 149人ぶん 新しく したよ。ぼくの なかまの 名前、おぼえてね']},
@@ -4163,7 +4164,7 @@ function titleSplash(){
       <span class="tl-star" style="left:23.3%;top:86.2%;rotate:8deg">★</span><span class="tl-star" style="left:78.7%;top:86.2%;rotate:-8deg;animation-delay:.8s">★</span></div></div>
     <button class="tplay" id="tplay"><span class="tpi">▶</span>あそぶ！</button>
     <div class="thint">タップして はじめよう</div>
-    <div class="tfoot"><span>ver ${VERSION}${'（ステージング 11/01 11:17）'}</span><button id="tnote">おしらせ${seen!==latest.v?'<span class="tnew">NEW</span>':''}</button></div>`;
+    <div class="tfoot"><span>ver ${VERSION}${'（ステージング 11/01 12:02）'}</span><button id="tnote">おしらせ${seen!==latest.v?'<span class="tnew">NEW</span>':''}</button></div>`;
   document.body.appendChild(s);
   const logo=s.querySelector('.tlogo'),inner=s.querySelector('.tl-in'),btn=s.querySelector('#tplay');
   const alive=()=>document.body.contains(s);
@@ -9390,6 +9391,10 @@ try{if(typeof FLAV!=='undefined'&&FLAV.calamity)FLAV.calamity['見参！']='大�
 /* 11/1 ずかんメモ17：お肉タップタプの せつめい（4びょう・5回ごとに こうげきか 体力 +x・30回まで） */
 {const _elG=effList;effList=function(id,lv){const L=_elG.apply(this,arguments);try{if(id==='grizzly'){const x=valX(C.grizzly.v,lv);return L.map(q=>q[1]==='見参！'?[q[0],q[1],`お肉タップタプ！ 6びょう あちこちに 出る お肉を タップ！ 5回ごとに 攻撃→体力→攻撃…の じゅんに +${x}（30回まで）`,q[3],q[4]]:q)}}catch(e){}return L}}
 try{if(typeof FLAV!=='undefined'&&FLAV.grizzly)FLAV.grizzly['見参！']='お肉タップタプ！5回ごとに 攻撃か体力+{1}'}catch(e){}
+/* 11/1 ずかんメモ：カウボーイ見習い ハット（new111）の 昇進が よわい → あいてを 1人 たおす たびに バッジが 1つ ついて +1/+1（2回まで。バッジの わくは 2つ） */
+try{if(C.new111){C.new111.rankK=1;C.new111.note='昇進：あいてを たおす たびに バッジが 1つ ついて +1/+1（2回まで）'}}catch(e){}
+{const _elH=effList;effList=function(id,lv){const L=_elH.apply(this,arguments);try{if(id==='new111')return L.map(x=>x[1]==='昇進'?[x[0],x[1],'めざせ 一人前！ あいてを たおす たびに バッジが 1つ ついて +1/+1（2回まで）',x[3],x[4]]:x)}catch(e){}return L}}
+try{if(typeof FLAV!=='undefined'&&FLAV.new111)FLAV.new111['昇進']='めざせ 一人前！ あいてを たおす たびに バッジが 1つ ついて +{2}/+{3}（{4}回まで）'}catch(e){}
 
 
 /* ===== 10/29 キャンバス演出（ずかんで 作った 演出を ゲームへ）=====
@@ -10133,7 +10138,8 @@ try{const KO={"nyaBari": "バリア… われたニャ〜", "nyaHaya": "はや�
 (function(){
   const cntUnit=m=>{const d=C[m&&m.id];if(!d)return [];const L=[];
     if(d.evoK)L.push(m.evolved?['✨','しんか ずみ！','✨ずみ']:['✨',`たおした数：${Math.min(m.kills||0,d.evoK)}／${d.evoK}（しんか まで）`,`✨${Math.min(m.kills||0,d.evoK)}/${d.evoK}`]);
-    if(d.rankK){const r=m.rank||0;L.push(r>=2?['⭐','昇進：⭐⭐ さいこう！','⭐⭐']:['⭐',`たおした数：${(m.kills||0)%d.rankK}／${d.rankK}（つぎの ⭐まで）`,`⭐${(m.kills||0)%d.rankK}/${d.rankK}`])}
+    if(d.rankK&&m.id==='new111'){/* 11/1：ハットは バッジの わく 2つ（カードの 上の バッジで 見せる） */const r=Math.min(2,m.rank||0);L.push(['',r>=2?'バッジ 2つ そろった！ 一人前！':`バッジ：${r}／2（あいてを たおすと 1つ つく）`,null])}
+    else if(d.rankK){const r=m.rank||0;L.push(r>=2?['⭐','昇進：⭐⭐ さいこう！','⭐⭐']:['⭐',`たおした数：${(m.kills||0)%d.rankK}／${d.rankK}（つぎの ⭐まで）`,`⭐${(m.kills||0)%d.rankK}/${d.rankK}`])}
     if(d.growT&&typeof growOf==='function'){const g=growOf(d,m.lv);L.push(['🌱',`そだった数：${Math.min(m.growN||0,g.n)}／${g.n}`,`🌱${Math.min(m.growN||0,g.n)}/${g.n}`])}
     if(m.fuel>0)L.push(['⛽',`燃料：あと ${m.fuel}ターン`,null]);
     if(m.jailed>0)L.push(['🔒',(m.jailKind==='jail'?'牢屋':'もどってくる')+`まで：あと ${m.jailed}ターン`,null]);
@@ -10148,6 +10154,10 @@ try{const KO={"nyaBari": "バリア… われたニャ〜", "nyaHaya": "はや�
       else{const cs=[...document.querySelectorAll('#hand .card,.hand .card')].filter(x=>!x.closest('#sheet'));const i=cs.indexOf(last.el);const c=B.me.hand[i];if(c&&c.id===id)L=cntHand(c)}
       const box=document.querySelector('#sheet .kwlist')||document.querySelector('#sheet');if(L.length&&box)box.insertAdjacentHTML('beforeend',L.map(x=>`<div class="cntline"><i>${x[0]}</i><b>${x[1]}</b></div>`).join(''))}}catch(e){}return r}}
   if(typeof renderBattle==='function'){const _rb=renderBattle;renderBattle=function(){const r=_rb.apply(this,arguments);try{if(B)for(const s of [B.me,B.foe])for(const m of s.board){const el=uEl(m);if(!el)continue;const b=cntUnit(m).map(x=>x[2]).filter(Boolean).join(' ');let i=el.querySelector(':scope>.cntb');if(b){if(!i){i=document.createElement('i');i.className='cntb';el.appendChild(i)}i.textContent=b}else if(i)i.remove()}}catch(e){}return r}}
+  /* 11/1：ハット（new111）の バッジの わく。まだの わくは くらい かげ、ついたら 1つずつ パチン！と はまる */
+  try{const st=document.createElement('style');st.textContent='.u .rkb{position:absolute;top:-13px;left:50%;transform:translateX(-50%);z-index:7;display:flex;gap:3px;pointer-events:none}.u .rkb img{width:22px;height:22px;object-fit:contain;filter:brightness(0) opacity(.55) drop-shadow(0 0 1px rgba(255,240,200,.8))}.u .rkb img.on{filter:drop-shadow(0 1px 2px rgba(0,0,0,.6)) drop-shadow(0 0 4px rgba(255,215,90,.9))}.u .rkb img.snap{animation:rkbSnap .55s cubic-bezier(.2,1.6,.4,1) both}@keyframes rkbSnap{0%{transform:scale(2.4) rotate(-25deg);opacity:.2}60%{transform:scale(.85) rotate(6deg);opacity:1}100%{transform:scale(1) rotate(0)}}';document.head.appendChild(st)}catch(e){}
+  if(typeof renderBattle==='function'){const _rb2=renderBattle;renderBattle=function(){const r=_rb2.apply(this,arguments);try{if(B)for(const s of [B.me,B.foe])for(const m of s.board){if(m.id!=='new111')continue;const el=uEl(m);if(!el)continue;const n=Math.min(2,m._rkHold!=null?m._rkHold:(m.rank||0));let w=el.querySelector(':scope>.rkb');if(!w){w=document.createElement('i');w.className='rkb';const bs=(typeof UIIMG==='function'&&UIIMG('ui/i_badge'))||'@@D6@@';w.innerHTML='<img src="'+bs+'" alt=""><img src="'+bs+'" alt="">';el.appendChild(w)}
+    const prev=+(w.dataset.n||(m._rkSeen!=null?m._rkSeen:n));[...w.children].forEach((im,k)=>{im.classList.toggle('on',k<n);if(k<n&&k>=prev){im.classList.remove('snap');void im.offsetWidth;im.classList.add('snap')}});w.dataset.n=n;m._rkSeen=n}}catch(e){}return r}}
 })();
 
 /* 11/1 かしまさん：荒野の大親分 ビリー（akudo3）の 子分は ゴブリンの すがた（つよさは 子分と おなじ 2/2。ボスの ママの 子分 goonT は そのまま） */
@@ -11255,9 +11265,9 @@ try{if(typeof XD!=='undefined'&&XD.new78&&XD.new78.dr){const _d=XD.new78.dr;XD.n
     K.at(TP,()=>{const p=K.pos(u);K.flash({t:TP,d:200,col:'255,240,200',a:.35});K.ring(p.x,p.y+u.rh*.08,{t:TP,d:650,col:'255,215,90',r0:12,r1:u.rw*1.3,w:7});K.burst(p.x,p.y+u.rh*.08,{t:TP,n:12,im:['x_star','x_spark'],sp:4.5,life:850,sz:.15});K.shake({t:TP,p:3,d:180});K.rays(p.x,p.y,{t:TP+100,d:1700,col:'255,226,140',n:14,len:Math.max(W,H)*.55,a:.38,back:1})});
     K.at(TP+1200,()=>{const p=K.pos(u);K.slam('昇進！',Math.max(80,Math.min(W-80,p.x)),Math.max(46,p.y-u.rh*.98),{t:TP+1200,d:1700,size:40,from:2,sub:'★ +1/+1'})});
     await K.wait(D)};
-  if(typeof attack==='function'){const _atP=attack;attack=async function(sd,m,t){const r0=(m&&m.rank)||0;let sup=false;try{if(HUMAN&&cfxOn()&&m&&C[m.id]&&C[m.id].rankK&&r0<2){CFX._noFl='⭐ 昇進！';sup=true}}catch(e){}
+  if(typeof attack==='function'){const _atP=attack;attack=async function(sd,m,t){const r0=(m&&m.rank)||0;let sup=false;try{if(HUMAN&&cfxOn()&&m&&C[m.id]&&C[m.id].rankK&&r0<2){CFX._noFl='⭐ 昇進！';sup=true;m._rkHold=r0/* 11/1：バッジの わくは 昇進の 演出の あとに パチン！と うまる */}}catch(e){}
     let res;try{res=await _atP.apply(this,arguments)}finally{if(sup&&CFX._noFl==='⭐ 昇進！')CFX._noFl=null}
-    try{if(m&&((m.rank||0)>r0)&&HUMAN&&cfxOn()&&B&&!B.over){const el=uEl(m);if(el)await CFX.promote(el)}}catch(e){}return res}}
+    try{if(m&&((m.rank||0)>r0)&&HUMAN&&cfxOn()&&B&&!B.over){const el=uEl(m);if(el)await CFX.promote(el)}}catch(e){}try{if(m&&m._rkHold!=null){const ch=(m.rank||0)!==m._rkHold;delete m._rkHold;if(ch&&HUMAN&&B)renderBattle()}}catch(e){}return res}}
   /* きっぷ切り：古い 西部の きっぷ（かりの 絵）→ パチン！で 穴 → 笛 →「いはんだ〜！」→ きっぷが あいてへ とぶ（このあと f76 が 牢屋に 入れる） */
   CFX.ticketPunch=async function(el,tel){if(!K.ensure()||!el||!tel)return;K.begin();const u=K.wrap(el),t=K.wrap(tel),{W,H}=K.dims(),PUN=650,FLY=3700,END=4150;let cy=H*.42;try{const a=document.querySelector('#ef'),b=document.querySelector('#af');if(a&&b)cy=(a.getBoundingClientRect().bottom+b.getBoundingClientRect().top)/2}catch(e){}cy-=10;const cx=W/2,TW=Math.min(230,W*.56),t1=K.tt0(0);
     K.add({top:1,end:t1+K.dd(END),draw(T){const e=(T-t1)/K.SP();if(e<0||e>END)return;const c=K.ctx(),A=TKT(),I=e>=PUN?A.b:A.a,s=TW*E.b(Math.min(1,e/280)),hh=s*A.h/A.w;let X=cx,Y=cy,sc=1,al=1,rot=-.08+Math.sin(e/240)*.05;if(e>PUN&&e<PUN+160)rot+=Math.sin((e-PUN)/18)*.05;
@@ -11460,7 +11470,7 @@ function txt(c,s,x,y,o){const {size=40,cols=['#fff'],stroke='#2a1404',sw=size*.2
 function bubble(c,s,x,y,tx,ty,a,sc){if(a<=0)return;c.save();c.globalAlpha=a;c.font=`800 16px ${FR}`;const w=Math.min(300,c.measureText(s).width+28),h=40;c.translate(x,y);c.scale(sc,sc);
   c.fillStyle='rgba(0,0,0,.25)';c.beginPath();c.roundRect?c.roundRect(-w/2+3,-h/2+4,w,h,18):c.rect(-w/2+3,-h/2+4,w,h);c.fill();
   c.fillStyle='#fff';c.strokeStyle='#3a2410';c.lineWidth=3;c.beginPath();c.roundRect?c.roundRect(-w/2,-h/2,w,h,18):c.rect(-w/2,-h/2,w,h);c.fill();c.stroke();
-  const ax=cl((tx-x)/sc,-w/2+22,w/2-22);c.beginPath();c.moveTo(ax-9,-h/2+1);c.lineTo((tx-x)/sc*.5+ax*.5,(ty-y)/sc*.6);c.lineTo(ax+9,-h/2+1);c.closePath();c.fill();c.stroke();c.fillStyle='#fff';c.fillRect(ax-8,-h/2+1,16,4);
+  /* 11/1 メモ：しっぽの ねもとに 線が のこる → ふちの 線を 白で けしてから、しっぽは 左右の 2本だけ 線を ひく */const ax=cl((tx-x)/sc,-w/2+22,w/2-22),px=(tx-x)/sc*.5+ax*.5,py=Math.min(-h/2-10,(ty-y)/sc*.6);c.beginPath();c.moveTo(ax-10,-h/2+3);c.lineTo(px,py);c.lineTo(ax+10,-h/2+3);c.closePath();c.fill();c.beginPath();c.moveTo(ax-10,-h/2);c.lineTo(px,py);c.lineTo(ax+10,-h/2);c.stroke();c.fillStyle='#fff';c.beginPath();c.moveTo(ax-8.2,-h/2+3);c.lineTo(ax-8.2+ (px-ax+10)*.12,-h/2-2.2);c.lineTo(ax+8.2-(ax+10-px)*.12,-h/2-2.2);c.lineTo(ax+8.2,-h/2+3);c.closePath();c.fill();
   c.fillStyle='#3a2410';c.textAlign='center';c.textBaseline='middle';c.fillText(s,0,1);c.restore()}
 
 /* ---- 1コマ ---- */

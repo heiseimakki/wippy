@@ -76,7 +76,7 @@ function txt(c,s,x,y,o){const {size=40,cols=['#fff'],stroke='#2a1404',sw=size*.2
 function bubble(c,s,x,y,tx,ty,a,sc){if(a<=0)return;c.save();c.globalAlpha=a;c.font=`800 16px ${FR}`;const w=Math.min(300,c.measureText(s).width+28),h=40;c.translate(x,y);c.scale(sc,sc);
   c.fillStyle='rgba(0,0,0,.25)';c.beginPath();c.roundRect?c.roundRect(-w/2+3,-h/2+4,w,h,18):c.rect(-w/2+3,-h/2+4,w,h);c.fill();
   c.fillStyle='#fff';c.strokeStyle='#3a2410';c.lineWidth=3;c.beginPath();c.roundRect?c.roundRect(-w/2,-h/2,w,h,18):c.rect(-w/2,-h/2,w,h);c.fill();c.stroke();
-  const ax=cl((tx-x)/sc,-w/2+22,w/2-22);c.beginPath();c.moveTo(ax-9,-h/2+1);c.lineTo((tx-x)/sc*.5+ax*.5,(ty-y)/sc*.6);c.lineTo(ax+9,-h/2+1);c.closePath();c.fill();c.stroke();c.fillStyle='#fff';c.fillRect(ax-8,-h/2+1,16,4);
+  /* 11/1 メモ：しっぽの ねもとに 線が のこる → ふちの 線を 白で けしてから、しっぽは 左右の 2本だけ 線を ひく */const ax=cl((tx-x)/sc,-w/2+22,w/2-22),px=(tx-x)/sc*.5+ax*.5,py=Math.min(-h/2-10,(ty-y)/sc*.6);c.beginPath();c.moveTo(ax-10,-h/2+3);c.lineTo(px,py);c.lineTo(ax+10,-h/2+3);c.closePath();c.fill();c.beginPath();c.moveTo(ax-10,-h/2);c.lineTo(px,py);c.lineTo(ax+10,-h/2);c.stroke();c.fillStyle='#fff';c.beginPath();c.moveTo(ax-8.2,-h/2+3);c.lineTo(ax-8.2+ (px-ax+10)*.12,-h/2-2.2);c.lineTo(ax+8.2-(ax+10-px)*.12,-h/2-2.2);c.lineTo(ax+8.2,-h/2+3);c.closePath();c.fill();
   c.fillStyle='#3a2410';c.textAlign='center';c.textBaseline='middle';c.fillText(s,0,1);c.restore()}
 
 /* ---- 1コマ ---- */
