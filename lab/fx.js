@@ -121,4 +121,6 @@ function frame(t){c.setTransform(DPR,0,0,DPR,0,0);c.clearRect(0,0,W,H);dim=0;shX
   c.save();for(const f of fx)if(f.pre)f.draw(t);for(const f of fx)if(f.under)f.draw(t);
   for(const u of units)apply(u);apply(heroes.foe);apply(heroes.me);if(uc){const mc=c;c=uc;c.setTransform(DPR,0,0,DPR,0,0);c.clearRect(0,0,W,H);for(const f of fx)if(f.low&&f.draw)f.draw(t);c=mc}const dm=BW.document.getElementById('dim');if(dm)dm.style.opacity=dim;
   for(const f of fx)if(f.draw&&!f.pre&&!f.under&&!f.top&&!f.low&&!f.txt)f.draw(t);for(const f of fx)if(f.top)f.draw(t);for(const f of fx)if(f.txt)f.draw(t);c.restore()}
-return {stop,tint,breakImg,tornadoImg,shatter,tornado,init,play,place,bd:()=>bd,ext,readMs,measure,ring,rays,burst,dots,smoke,flash,darken,shake,slam,floatTxt,icon,shot,tween,keyf,overlay,at,P,E,seg,units:()=>units,heroes:()=>heroes,ctx:()=>c,dims:()=>({W,H}),ui,img}})();
+/* 11/1 覚醒演出：好きな レイヤー（low/top/txt）に 描く・タップで スキップ（時間を とばす） */
+function seek(ms){T0=performance.now()-ms}function now(){return performance.now()-T0}
+return {add,seek,now,stop,tint,breakImg,tornadoImg,shatter,tornado,init,play,place,bd:()=>bd,ext,readMs,measure,ring,rays,burst,dots,smoke,flash,darken,shake,slam,floatTxt,icon,shot,tween,keyf,overlay,at,P,E,seg,units:()=>units,heroes:()=>heroes,ctx:()=>c,dims:()=>({W,H}),ui,img}})();

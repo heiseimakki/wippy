@@ -453,7 +453,276 @@ function lassoDemo(ok){const X=window.LassoFX;if(!X)return;const fh=F.heroes().f
  F.overlay(fh,{t:0,d:END,draw:(x,y,r,e)=>X.draw(F.ctx(),e,g,ok)});
  const mv=(u,f)=>F.keyf(u,{t:0,d:END,fn:(v,k)=>{const o=k>=1?{ox:0,oy:0,rot:0,sx:1,sy:1}:f(k*END,ok);v.ox=o.ox;v.oy=o.oy;v.rot=o.rot;v.sx=o.sx;v.sy=o.sy}});mv(fh,X.foe);mv(mh,X.me);
  X.cues(ok).forEach(q=>{if(q.f)ZS.f(q.t,q.f,q.v||1,q.maxd);else ZS.s(q.t,()=>{const a=se2ac();if(a){if(a.state==='suspended')a.resume();X.syn(q.syn,a,se2out()||a.destination,q)}})})}
+/* AWKBLOCK-START ===================================================================
+   11/1 覚醒演出（キャラごと）＝ 共通の ながれ ＋ キャラごとの 設定（AWC）
+   ながれ（約5.5びょう。1つずつ・あいだに 一拍）：
+     ① ためる：くらく → キャラが その子の 色で 光り、ぶるぶる（ゴゴゴ）→ その子の つぶが キャラへ あつまる
+     ② ワイプ：その子の 世界（ボスの 背景 boss_<stage>_1）へ。カードの うしろ（under の キャンバス）に 出す
+     ③ カットイン：覚醒の 絵（boss_<stage>_2）の おび ＋「覚醒」の 金の 文字 ＋ 名前 ＋ 技の 名前（金）
+     ④ 変身：カードの 絵が 覚醒の すがたに（ドン！）
+     ⑤ もどる：背景が もとの 場に もどる（おなじ ワイプの ぎゃく）
+   ・やる子は どちらの がわでも よい（ボス戦の 敵がわ／じぶんで 出した 味方がわ）。ワイプ・カットインの 向きは やる子の がわから
+   ・タップで スキップ → ④ の 直前へ とぶ（音は ならさない）
+   ・音は AWSE の スロット名で よぶ（あとで 本物の 音に さしかえやすく）。キャラごとの 音は AWC[id].se で 上書き
+   ゲームへの つなぎ方（まだ つながない）：
+     f30_awaken.js の playCard（awk を 出した とき）と f52_bossawk.js の ボス登場で、
+     AWX[id].start（f34 の AWS[id]）の 前に awakenSeq(やる子, AWC[id]) を await。そのあと AWSK[id]（技の 演出）→ 数字の 処理。
+     ゲームは DOM の CFX（f77_cfx.js）なので、ここの 部品を CFX に うつす（背景＝#app の --bgimg を いちじ かえる でも よい）
+   =================================================================== */
+const AWZ=p=>(window.ZKIMG&&ZKIMG[p.replace(/^\.\.\//,'')])||p;
+const AWIM=p=>p.startsWith('fx:')||/^x_/.test(p)?F.ui(p):F.img(AWZ(p));
+/* ---- 音の スロット（ここを かえれば ぜんいん かわる。f＝se2 の 音、syn＝合成） ---- */
+const AWSE={
+  charge:   {f:'magic/05 Transfiguration Spell 01.mp3',v:.8},  /* ① ためる（光が あつまる） */
+  rumble:   {syn:'rumble'},                                   /* ① ゴゴゴ…（地なり） */
+  wipe:     {f:'game2/epic trailer whoosh 1.wav',v:1},        /* ② 世界が かわる シュバッ */
+  world:    {f:'fantasy/power tile generation.wav',v:.7},     /* ② その子の 世界の 音（キャラごとに 上書き） */
+  cutin:    {f:'game2/whoosh hit 2.wav',v:.9},                /* ③ おびが すべりこむ */
+  title:    {f:'game2/gong1.wav',v:.6},                       /* ③ 技の 名前 ドン */
+  transform:{f:'fantasy/magic burst.wav',v:.9},               /* ④ 覚醒の すがたに */
+  back:     {f:'game2/epic whoosh soft.wav',v:.8}};           /* ⑤ もとの 場に もどる */
+function awSE(t,slot,cfg){const s=Object.assign({},AWSE[slot]||{},(cfg&&cfg.se&&cfg.se[slot])||{});
+  if(s.syn==='rumble')ZS.s(t,()=>{zNote(55,0,1.1,{type:'sawtooth',vol:.05,lp:300,slide:80});zNote(82,.05,1,{type:'square',vol:.025,lp:260})});
+  else if(s.f)ZS.f(t,s.f,s.v||1,s.max)}
+/* ---- キャラごとの 設定（背景・覚醒の 絵・色・つぶ・ワイプ・音） ----
+   gather＝①で あつまる つぶ、amb＝②の 世界で ただよう もの（mode: fall／rise／drift／roll／firefly／bokeh／chip）
+   wipe: diag（ななめ）／iris（まるく 広がる）／bars（よこの すじ）／split（まん中から ひらく）／vert（上から） */
+const AWC={
+  bibiri:{nm:'ビビリ・ザ・キッド',st:'wild',bg:'../art/boss/boss_wild_1.jpg',art:'../art/boss/boss_wild_2.jpg',sk:'ビビリ・パニックショット',col:'255,196,92',wipe:'diag',
+    gather:['fx:04_01','x_spark'],amb:[{im:'fx:04_01',mode:'drift',n:7,sz:46,sp:.8,a:.55},{im:'../bg/tumbleweed.png',mode:'roll',n:1,sz:70,sp:1}],se:{world:{f:'magic/19 Blowing Air Into Fire 02.mp3',v:.8}}},
+  zombino:{nm:'ドン・ゾンビーノ',st:'hill',bg:'../art/boss/boss_hill_1.jpg',art:'../art/boss/boss_hill_2.jpg',sk:'ゴッドファーザーの葬列',col:'140,255,150',wipe:'iris',
+    gather:['fx:new/white_smoke','x_spark'],gf:'sepia(1) hue-rotate(50deg) saturate(2.2) brightness(.95)',amb:[{im:'fx:03_07',mode:'drift',n:3,sz:56,sp:1.1},{mode:'firefly',n:16,col:'150,255,140'},{im:'fx:new/white_smoke',mode:'drift',n:3,sz:150,sp:.35,a:.2,f:'sepia(1) hue-rotate(50deg) saturate(2) brightness(.8)'}],se:{world:{f:'magic/35 Invisibility Cloak 02.mp3',v:.9}}},
+  eagle:{nm:'シェリフ・モーキン警部',st:'canyon',bg:'../art/boss/boss_canyon_1.jpg',art:'../art/boss/boss_canyon_2.jpg',sk:'天空の大捕物',col:'255,170,70',wipe:'vert',
+    gather:['fx:02_04','x_spark'],amb:[{im:'fx:02_04',mode:'fall',n:8,sz:40,sp:.9},{im:'fx:02_19',mode:'drift',n:3,sz:90,sp:2.2,a:.5}],se:{world:{f:'game2/diamond whoosh.wav',v:.9}}},
+  mustache:{nm:'マダム・ムスタッシュ',st:'saloon',bg:'../art/boss/boss_saloon_1.jpg',art:'../art/boss/boss_saloon_2.jpg',sk:'グランドサロン貸し切りナイト',col:'255,110,150',wipe:'split',
+    gather:['fx:09_18','x_spark'],amb:[{im:'fx:09_18',mode:'fall',n:9,sz:30,sp:1.1},{im:'x_confetti',mode:'fall',n:5,sz:40,sp:.8},{mode:'bokeh',n:10,col:'255,200,120'}],se:{world:{f:'essential/Celebration Small.mp3',v:.6,max:1.6}}},
+  bunyan:{nm:'ポール・バニヤン',st:'mine',bg:'../art/boss/boss_mine_1.jpg',art:'../art/boss/boss_mine_2.jpg',sk:'ジャイアント・ティンバー',col:'255,150,60',wipe:'diag',
+    gather:['fx:05_02','fx:04_13'],amb:[{mode:'chip',n:12},{im:'fx:05_02',mode:'fall',n:5,sz:34,sp:.8}],se:{world:{f:'fantasy/stones appear.wav',v:.9}}},
+  nanashi:{nm:'名無しのガンマン',st:'ranch',bg:'../art/boss/boss_ranch_1.jpg',art:'../art/boss/boss_ranch_2.jpg',sk:'サイレント・ハイヌーン',col:'255,120,60',wipe:'bars',
+    gather:['fx:04_01','x_spark'],amb:[{im:'fx:04_01',mode:'drift',n:6,sz:50,sp:.6,a:.5},{im:'../bg/tumbleweed.png',mode:'roll',n:1,sz:60,sp:.7}],se:{world:{f:'match3/Duel Challenge.wav',v:.8}}},
+  ketcham:{nm:'怪盗 キャッツ・ケッチャム',st:'train',bg:'../art/boss/boss_train_1.jpg',art:'../art/boss/boss_train_2.jpg',sk:'ファントム・グランドスティール',col:'190,150,255',wipe:'diag',
+    gather:['fx:09_25','x_spark'],amb:[{im:'fx:09_25',mode:'drift',n:6,sz:30,sp:1.6},{im:'x_steam',mode:'drift',n:4,sz:90,sp:.7,a:.4}],se:{world:{f:'magic/29 Invisibility Cloak 01.mp3',v:.9}}},
+  ruler:{nm:'スチームタウン・ザ・ルーラー',st:'steam',bg:'../art/boss/boss_steam_1.jpg',art:'../art/boss/boss_steam_2.jpg',sk:'スチームタウン総動員',col:'255,190,110',wipe:'bars',
+    gather:['fx:02_25','fx:02_28'],amb:[{im:'fx:02_26',mode:'rise',n:5,sz:44,sp:.6,spin:1},{im:'x_steam',mode:'rise',n:5,sz:100,sp:.8,a:.4}],se:{world:{f:'game2/mg_metal_button_take.wav',v:.9}}},
+  ma:{nm:'おっ母つぁん ママ・バーカー',st:'bayou',bg:'../art/boss/boss_bayou_1.jpg',art:'../art/boss/boss_bayou_2.jpg',sk:'バーカー一家 総出撃',col:'200,120,255',wipe:'iris',
+    gather:['fx:06_23','x_spark'],amb:[{mode:'firefly',n:22,col:'220,255,140'},{im:'fx:06_23',mode:'rise',n:4,sz:40,sp:.5,a:.7}],se:{world:{f:'game2/Rising Bubbles.wav',v:.8,max:1.4}}},
+  ice:{nm:'氷魔術師 フォクシア',st:'snow',bg:'../art/boss/boss_snow_1.jpg',art:'../art/boss/boss_snow_2.jpg',sk:'アブソリュート・ゼロ',col:'170,230,255',wipe:'iris',
+    gather:['fx:04_21','fx:04_28'],amb:[{im:'fx:04_21',mode:'fall',n:12,sz:26,sp:1},{im:'fx:04_22',mode:'fall',n:5,sz:44,sp:.7}],vig:'200,240,255',se:{world:{f:'game2/ice magic appear.wav',v:.9}}},
+  ikoku:{nm:'異国の王 アーサー',st:'oasis',bg:'../art/boss/boss_oasis_1.jpg',art:'../art/boss/boss_oasis_2.jpg',sk:'王命・全軍招集',col:'255,210,90',wipe:'split',
+    gather:['fx:02_07','x_spark'],amb:[{im:'fx:03_32',mode:'drift',n:6,sz:30,sp:.6},{im:'fx:05_06',mode:'fall',n:5,sz:34,sp:.6}],se:{world:{f:'game2/chorale.wav',v:.7,max:1.8}}},
+  adara:{nm:'聖域の勇者 アダラー',st:'volcano',bg:'../art/boss/boss_volcano_1.jpg',art:'../art/boss/boss_volcano_2.jpg',sk:'聖域の大結界',col:'120,255,160',wipe:'vert',
+    gather:['fx:02_05','x_spark'],amb:[{im:'fx:06_06',mode:'rise',n:7,sz:36,sp:.9},{mode:'firefly',n:12,col:'255,170,80'}],se:{world:{f:'casual/Holy Magic 1.wav',v:.9}}},
+  amelie:{nm:'月光の呪術師 アメリ',st:'forest',bg:'../art/boss/boss_forest_1.jpg',art:'../art/boss/boss_forest_2.jpg',sk:'満月のさかさま世界',col:'210,140,255',wipe:'iris',
+    gather:['fx:03_12','x_spark'],moon:{x:.44,y:.12},amb:[{im:'fx:03_12',mode:'fall',n:7,sz:28,sp:.5},{im:'fx:05_06',mode:'fall',n:5,sz:32,sp:.6,f:'hue-rotate(250deg) saturate(1.3)'}],se:{world:{f:'magic/06 Transfiguration Spell 02.mp3',v:.9}}},
+  capone:{nm:'悪の親玉 カポニャンコ',st:'mafia',bg:'../art/boss/boss_mafia_1.jpg',art:'../art/boss/boss_mafia_2.jpg',sk:'ニャンコ・ファミリー総会',col:'255,200,90',wipe:'bars',
+    gather:['fx:09_18','x_spark'],amb:[{mode:'bokeh',n:16,col:'255,210,130'},{im:'fx:09_18',mode:'fall',n:6,sz:28,sp:1}],se:{world:{f:'essential/Magic Item.mp3',v:.9}}},
+};
+const AWNM=id=>(AWC[id]&&AWC[id].nm)||id;
+const awCl=x=>Math.max(0,Math.min(1,x));
+/* やる子の がわ（敵がわなら 上・右から） */
+const awTop=u=>u.side?u.side==='foe':u===F.heroes().foe;/* 場の 位置では きめない（味方の 列も 画面の 上半分に あるため） */
+/* ---- 金の 文字（覚醒の 文字と おなじ 色）。sh＝キラッの 位置（0〜1） ---- */
+function awGold(c,str,x,y,size,o={}){c.save();c.font=`${size}px "Dela Gothic One"`;c.textAlign='center';c.textBaseline='middle';c.lineJoin='round';
+  c.lineWidth=size*.24;c.strokeStyle=o.stroke||'#3e1a06';c.shadowColor='rgba(0,0,0,.65)';c.shadowOffsetY=4;c.shadowBlur=5;c.strokeText(str,x,y);c.shadowColor='transparent';
+  const g=c.createLinearGradient(0,y-size*.5,0,y+size*.5);(o.grad||['#fffbe0','#ffe066','#ffb31a','#ff7a00']).forEach((s,i,a)=>g.addColorStop(i/(a.length-1),s));c.fillStyle=g;c.fillText(str,x,y);
+  if(o.sh>0&&o.sh<1){const w=c.measureText(str).width,sx=x-w/2-40+(w+80)*o.sh,gg=c.createLinearGradient(sx-34,0,sx+34,0);gg.addColorStop(0,'rgba(255,255,255,0)');gg.addColorStop(.5,'rgba(255,255,255,.95)');gg.addColorStop(1,'rgba(255,255,255,0)');c.fillStyle=gg;c.fillText(str,x,y)}
+  c.restore()}
+function awFit(c,str,max,w,font='Dela Gothic One'){let s=max;c.save();for(;s>14;s-=1){c.font=`${s}px "${font}"`;if(c.measureText(str).width<=w)break}c.restore();return s}
+/* ---- 絵を わくに cover で 描く ---- */
+function awCover(c,I,x,y,w,h,fy=.5,zoom=1){const iw=I.naturalWidth,ih=I.naturalHeight;if(!iw)return;const s=Math.max(w/iw,h/ih)*zoom,dw=iw*s,dh=ih*s;c.drawImage(I,x+(w-dw)/2,y+(h-dh)*fy,dw,dh)}
+/* ---- ① ためる ---- */
+function awCharge(cfg,u,t,d){const {W,H}=F.dims();F.darken({t,d:d+520,a:.62,inD:300,outD:250});
+  F.keyf(u,{t,d,fn:(v,k)=>{v.glow=k;v.glowC=cfg.col;v.ox=Math.sin(k*95)*3.2*k;v.sc=1+.07*E.io(k)}});
+  [[300,2],[620,3],[900,4.5]].forEach(([dt,p])=>F.shake({t:t+dt,d:300,p}));
+  const ims=cfg.gather||['x_spark'],N=16,P_=Array.from({length:N},(_,i)=>({a:i/N*Math.PI*2+Math.random()*.4,r:Math.max(W,H)*(.45+Math.random()*.2),t:t+120+i*42,im:ims[i%ims.length],s:22+Math.random()*16}));
+  F.ext(t+d);F.add({draw(tt){const e=tt-t;if(e<0||e>d+80)return;const c=F.ctx(),p=pos(u);c.save();c.globalCompositeOperation='lighter';
+    /* 光が あつまる（まるい 光が だんだん 強く） */const k=awCl(e/d),R=Math.max(u.rw,u.rh)*(1.6-.5*k),g=c.createRadialGradient(p.x,p.y,0,p.x,p.y,R);g.addColorStop(0,`rgba(${cfg.col},${.55*k})`);g.addColorStop(1,`rgba(${cfg.col},0)`);c.fillStyle=g;c.beginPath();c.arc(p.x,p.y,R,0,7);c.fill();
+    for(const q of P_){const ee=tt-q.t,D=620;if(ee<0||ee>D)continue;const kk=E.io(ee/D),rr=q.r*(1-kk),I=AWIM(q.im);if(!I.complete)continue;const s=q.s*(1-.6*kk);c.save();c.globalAlpha=Math.min(1,ee/120)*(1-Math.max(0,(kk-.85)/.15));if(cfg.gf&&/smoke/.test(q.im))c.filter=cfg.gf;c.translate(p.x+Math.cos(q.a)*rr,p.y+Math.sin(q.a)*rr);c.rotate(Math.sin(ee/160)*.17);c.drawImage(I,-s/2,-s/2,s,s);c.restore()}
+    c.restore()}})}
+/* ---- ② ワイプの 形（v＝0〜1 見える 量）。edge＝さかいめを 光らせる ---- */
+function awShape(c,type,v,u,flip){const {W,H}=F.dims();c.beginPath();
+  if(type==='iris'){const p=pos(u);c.arc(p.x,p.y,Math.max(1,v*Math.hypot(W,H)*1.05),0,7);return}
+  if(type==='bars'){const N=7,h=H/N;for(let i=0;i<N;i++){const vi=awCl(v*1.7-i/(N-1)*.7),w=vi*W,left=(i%2===0)!==!!flip;c.rect(left?0:W-w,i*h-1,w,h+2)}return}
+  if(type==='split'){const w=v*W/2;c.rect(W/2-w,-10,w*2,H+20);return}
+  if(type==='vert'){const y=v*(H+80)-40;if(flip){c.moveTo(-10,H+10);c.lineTo(W+10,H+10);c.lineTo(W+10,H-y-30);c.lineTo(-10,H-y+30)}else{c.moveTo(-10,-10);c.lineTo(W+10,-10);c.lineTo(W+10,y+30);c.lineTo(-10,y-30)}c.closePath();return}
+  /* diag */const X=y=>v*(W+H*.6)-y*.6;const fx=x=>flip?W-x:x;c.moveTo(fx(-10),-10);c.lineTo(fx(X(-10)),-10);c.lineTo(fx(X(H+10)),H+10);c.lineTo(fx(-10),H+10);c.closePath()}
+function awEdge(c,type,v,u,flip,col){if(v<=0||v>=1)return;const {W,H}=F.dims();c.save();c.globalCompositeOperation='lighter';c.strokeStyle=`rgba(${col},.95)`;c.shadowColor=`rgba(${col},1)`;c.shadowBlur=16;c.lineWidth=5;
+  awShape(c,type,v,u,flip);c.stroke();c.strokeStyle='rgba(255,255,255,.9)';c.lineWidth=2;c.stroke();c.restore()}
+/* ---- ② その子の 世界（背景）：tIn に 入って、tOut に もどる ---- */
+function awWorld(cfg,u,tIn,tOut){const {W,H}=F.dims(),I=AWIM(cfg.bg),DI=430,DO=420,flip=awTop(u);F.ext(tOut+DO);
+  const vis=tt=>tt<tIn?0:tt<tIn+DI?E.io((tt-tIn)/DI):tt<tOut?1:tt<tOut+DO?1-E.io((tt-tOut)/DO):0;
+  F.add({low:1,draw(tt){const v=vis(tt);if(v<=0)return;const c=F.ctx();c.save();awShape(c,cfg.wipe,v,u,flip);c.clip();
+    if(I.complete){const z=1.1-.08*E.o(awCl((tt-tIn)/3200));awCover(c,I,0,0,W,H,.55,z)}else{c.fillStyle='#000';c.fillRect(0,0,W,H)}
+    /* 下を 少し くらく（数字・カードを 読みやすく） */const g=c.createLinearGradient(0,0,0,H);g.addColorStop(0,'rgba(0,0,0,.05)');g.addColorStop(.55,'rgba(0,0,0,.22)');g.addColorStop(1,'rgba(0,0,0,.5)');c.fillStyle=g;c.fillRect(0,0,W,H);
+    if(cfg.vig){const r=c.createRadialGradient(W/2,H/2,Math.min(W,H)*.35,W/2,H/2,Math.hypot(W,H)*.6);r.addColorStop(0,`rgba(${cfg.vig},0)`);r.addColorStop(1,`rgba(${cfg.vig},.45)`);c.fillStyle=r;c.fillRect(0,0,W,H)}
+    c.restore()}});
+  /* 世界の なかで ただよう もの */
+  /* 満月：背景の 月が ぼうっと 明るく 光る（月の 絵を かさねない） */
+  if(cfg.moon)F.add({low:1,draw(tt){const v=vis(tt);if(v<=0)return;const c=F.ctx(),e=tt-tIn,k=E.o(awCl(e/1400)),mx=W*cfg.moon.x,my=H*cfg.moon.y,R=W*(.32+.04*Math.sin(e/300));c.save();awShape(c,cfg.wipe,v,u,flip);c.clip();c.globalCompositeOperation='lighter';const g=c.createRadialGradient(mx,my,0,mx,my,R);g.addColorStop(0,`rgba(235,215,255,${.55*k})`);g.addColorStop(.4,`rgba(210,160,255,${.25*k})`);g.addColorStop(1,'rgba(210,160,255,0)');c.fillStyle=g;c.fillRect(0,0,W,H);c.restore()}});
+  const L=[];(cfg.amb||[]).forEach(a=>{for(let i=0;i<(a.n||6);i++)L.push({a,x:Math.random()*W,y:Math.random()*H,ph:Math.random()*7,s:(a.sz||30)*(.65+Math.random()*.7),v:(a.sp||1)*(.6+Math.random()*.8),hue:Math.random()})});
+  F.add({low:1,draw(tt){const v=vis(tt);if(v<=0)return;const c=F.ctx(),e=tt-tIn,f=e/16.7;c.save();awShape(c,cfg.wipe,v,u,flip);c.clip();
+    for(const p of L){const a=p.a;let x=p.x,y=p.y,r=0,al=a.a!=null?a.a:1;
+      if(a.mode==='fall'){y=(p.y+f*p.v*1.3)%(H+60)-30;x=p.x+Math.sin(f*.04+p.ph)*22;r=Math.sin(f*.05+p.ph)*.17}
+      else if(a.mode==='rise'){y=H+30-((H-p.y+f*p.v*1.1)%(H+60));x=p.x+Math.sin(f*.04+p.ph)*14;r=a.spin?f*.02*(p.ph>3.5?1:-1):0}
+      else if(a.mode==='drift'){x=(p.x+f*p.v*1.6)%(W+120)-60;y=p.y+Math.sin(f*.03+p.ph)*10;r=Math.sin(f*.05+p.ph)*.17}
+      else if(a.mode==='roll'){x=-50+((f*p.v*3.2+p.ph*30)%(W+100));y=H*.58+Math.abs(Math.sin(f*.09))*-14;r=f*.09}
+      else if(a.mode==='firefly'){x=p.x+Math.sin(f*.02+p.ph)*30;y=p.y+Math.cos(f*.017+p.ph)*24;const b=.35+.65*Math.max(0,Math.sin(f*.08+p.ph*3));const R=6+4*p.hue;const g=c.createRadialGradient(x,y,0,x,y,R*2.2);g.addColorStop(0,`rgba(${a.col},${.95*b})`);g.addColorStop(1,`rgba(${a.col},0)`);c.save();c.globalCompositeOperation='lighter';c.fillStyle=g;c.beginPath();c.arc(x,y,R*2.2,0,7);c.fill();c.restore();continue}
+      else if(a.mode==='bokeh'){const R=14+22*p.hue,b=.18+.14*Math.sin(f*.05+p.ph);x=p.x;y=p.y*.7;const g=c.createRadialGradient(x,y,0,x,y,R);g.addColorStop(0,`rgba(${a.col},${b+.1})`);g.addColorStop(.7,`rgba(${a.col},${b})`);g.addColorStop(1,`rgba(${a.col},0)`);c.save();c.globalCompositeOperation='lighter';c.fillStyle=g;c.beginPath();c.arc(x,y,R,0,7);c.fill();c.restore();continue}
+      else if(a.mode==='chip'){/* 木くず：ななめに とんで ゆっくり 落ちる */x=(p.x+f*p.v*1.2)%(W+40)-20;y=(p.y+f*p.v*1.1)%(H+40)-20;r=f*.06*(p.ph>3.5?1:-1);c.save();c.translate(x,y);c.rotate(r);c.fillStyle=p.hue>.5?'#c98a4a':'#e7b878';c.strokeStyle='#6b3f1a';c.lineWidth=1.2;c.beginPath();c.ellipse(0,0,7+5*p.hue,3,0,0,7);c.fill();c.stroke();c.restore();continue}
+      const I=AWIM(a.im);if(!I.complete)continue;const ar=(I.naturalHeight/I.naturalWidth)||1;c.save();c.globalAlpha=al;if(a.f)c.filter=a.f;c.translate(x,y);c.rotate(r);c.drawImage(I,-p.s/2,-p.s*ar/2,p.s,p.s*ar);c.restore()}
+    c.restore()}});
+  /* さかいめの 光（入る とき・もどる とき） */
+  F.add({top:1,draw(tt){const v=vis(tt);if((tt>tIn&&tt<tIn+DI)||(tt>tOut&&tt<tOut+DO))awEdge(F.ctx(),cfg.wipe,v,u,flip,cfg.col)}});
+  return vis}
+/* ---- ③ カットイン：覚醒の 絵の おび ＋ 覚醒 ＋ 名前 ＋ 技の 名前 ---- */
+function awCutin(cfg,u,t,hold,o={}){const {W,H}=F.dims(),I=AWIM(cfg.art),IN=280,OUT=240,D=IN+hold+OUT,dir=awTop(u)?-1:1;F.ext(t+D);
+  const yc=o.yc||H*.4,bh=Math.min(H*.34,W*.66),sk=bh*.16,name=o.name||AWNM(o.id||'');
+  const off=tt=>{const e=tt-t,ki=E.o(awCl(e/IN)),ko=E.io(awCl((e-IN-hold)/OUT));return (1-ki)*W*1.25*(-dir)+ko*W*1.25*dir};
+  const band=(c,pad=0)=>{c.beginPath();c.moveTo(-20,yc-bh/2+sk-pad);c.lineTo(W+20,yc-bh/2-sk-pad);c.lineTo(W+20,yc+bh/2-sk+pad);c.lineTo(-20,yc+bh/2+sk+pad);c.closePath()};
+  F.add({top:1,draw(tt){const e=tt-t;if(e<0||e>D)return;const c=F.ctx(),X=off(tt);
+    /* まわりを 少し くらく */const da=Math.min(1,e/IN,(D-e)/OUT)*.45;c.fillStyle=`rgba(0,0,0,${da})`;c.fillRect(-20,-20,W+40,H+40);
+    c.save();c.translate(X,0);
+    /* 金の ふち（うしろに 太く） */c.save();band(c,7);c.fillStyle=`rgba(${cfg.col},.95)`;c.shadowColor=`rgba(${cfg.col},1)`;c.shadowBlur=18;c.fill();c.restore();
+    c.save();band(c,3);c.fillStyle='#2a1406';c.fill();c.restore();
+    c.save();band(c);c.clip();c.fillStyle='#120a04';c.fillRect(-20,yc-bh,W+40,bh*2);
+    if(I.complete){const iw=W*1.12,ih=iw*I.naturalHeight/I.naturalWidth,px=(e*.018)*dir;c.drawImage(I,(W-iw)/2+px,yc-ih*.32,iw,ih)}
+    /* スピード線 */c.globalCompositeOperation='lighter';for(let i=0;i<9;i++){const yy=yc-bh/2+((i*53)%bh),len=60+((i*37)%90),xx=((e*1.6*dir+i*97)%(W+200)+W+200)%(W+200)-100;c.fillStyle='rgba(255,255,255,.18)';c.fillRect(xx,yy,len,2)}
+    c.restore();c.restore()}});
+  /* 文字（いちばん 上） */
+  F.add({txt:1,draw(tt){const e=tt-t-160;if(e<0||tt-t>D)return;const c=F.ctx(),X=off(tt);c.save();c.translate(X,0);
+    /*「覚醒」の はんこ（左上） */{const k=awCl(e/240),s=1+1.4*(1-E.b(k)),sz=Math.min(46,W*.11);c.save();c.globalAlpha=Math.min(1,k*2);c.translate(W*.2,yc-bh/2+sk*.2+4);c.rotate(-.12);c.scale(s,s);awGold(c,'覚醒',0,0,sz,{sh:awCl((e-260)/520)});c.restore()}
+    /* 名前（おびの 下の ほう） */{const e2=e-180;if(e2>0){const k=E.o(awCl(e2/240)),ns=awFit(c,name,18,W*.8,'M PLUS Rounded 1c');c.save();c.globalAlpha=k;c.font=`900 ${ns}px "M PLUS Rounded 1c"`;c.textAlign='center';c.textBaseline='middle';c.lineJoin='round';c.lineWidth=6;c.strokeStyle='#2a1406';const y=yc+bh/2-sk*.1-26+8*(1-k);c.strokeText(name,W/2,y);c.fillStyle='#fff';c.fillText(name,W/2,y);c.restore()}}
+    /* 技の 名前（金・大きく・おびの ふちに またがる） */{const e3=e-320;if(e3>0){const sz=awFit(c,cfg.sk,38,W*.9),k=awCl(e3/260),s=1+1.2*(1-E.b(k));c.save();c.globalAlpha=Math.min(1,k*2);c.translate(W/2,yc+bh/2+sz*.35);c.scale(s,s);awGold(c,cfg.sk,0,0,sz,{sh:awCl((e3-300)/600)});c.restore()}}
+    c.restore()}});
+  return t+D}
+/* ---- ④ 変身：カードの 絵が 覚醒の すがたに ---- */
+function awTransform(cfg,u,t){const {W,H}=F.dims();F.keyf(u,{t:t-220,d:220,fn:(v,k)=>{v.tint=`rgba(255,255,255,${.9*k})`;v.glow=1}});
+  F.at(t,tt=>{try{const ar=u.el.querySelector('.art')||u.el.querySelector('.hart');if(ar){ar.classList.add('img');ar.textContent='';ar.style.backgroundImage=`url(${AWZ(cfg.art)})`;ar.style.backgroundSize='cover';ar.style.backgroundPosition='center 28%'}}catch(e){}
+    const p=pos(u);F.shake({t:tt,p:10,d:420});F.flash({t:tt,d:200,a:.5,col:cfg.col});F.ring(p.x,p.y,{t:tt,d:650,col:cfg.col,r1:Math.max(u.rw,u.rh)*1.2,w:10});
+    F.burst(p.x,p.y,{t:tt+30,n:14,im:['x_star','x_spark',...(cfg.gather||[]).slice(0,1)],sp:7,g:.06,up:1,life:1000,sz:.2,filter:cfg.gf||null});F.dots(p.x,p.y,{t:tt,n:26,col:cfg.col,up:2,life:1100,area:u.rw*1.4})});
+  F.keyf(u,{t,d:620,fn:(v,k)=>{v.tint=k>=1?null:`rgba(255,255,255,${.9*(1-E.o(k))})`;v.sc=k>=1?1:1+.28*(1-E.o(k));v.glow=k>=1?0:1-k;v.ox=0}});return t+620}
+/* ---- ぜんぶを つなぐ（共通の ながれ）。もどり値：それぞれの 時間（skip＝タップで とぶ 先） ---- */
+function awakenSeq(u,cfg,o={}){const t0=o.t||150,T={charge:t0};const CH=1150,BEAT=160;
+  awCharge(cfg,u,t0,CH);awSE(t0,'charge',cfg);awSE(t0+250,'rumble',cfg);
+  T.wipe=t0+CH+BEAT;T.cut=T.wipe+430+BEAT+60;const HOLD=o.hold||1500;T.tr=T.cut+280+HOLD+240+BEAT+220;
+  /* ためた 光を 変身まで たもつ（変身の 動きより 前に 入れる） */F.keyf(u,{t:t0+CH,d:T.tr-220-(t0+CH),fn:(v,k)=>{v.glow=1;v.glowC=cfg.col;v.sc=1.07;v.ox=0}});F.flash({t:T.wipe,d:220,a:.55,col:'255,255,255'});awSE(T.wipe,'wipe',cfg);awSE(T.wipe+220,'world',cfg);
+  awCutin(cfg,u,T.cut,HOLD,{id:o.id});awSE(T.cut,'cutin',cfg);awSE(T.cut+480,'title',cfg);
+  awTransform(cfg,u,T.tr);awSE(T.tr,'transform',cfg);
+  T.back=T.tr+620+BEAT;awWorld(cfg,u,T.wipe,T.back);awSE(T.back,'back',cfg);
+  T.end=T.back+420;T.skip=T.tr-240;return T}
+/* ---- タップで スキップ（ずかん）：④の 直前へ とぶ。とぶ あいだの 音は ならさない ---- */
+const AWKSKIP={t:null,k:null};
+function awSkipArm(k,t){AWKSKIP.k=k;AWKSKIP.t=t;const d=BDOC();if(d.__awk)return;d.__awk=1;d.addEventListener('pointerdown',()=>{try{if(!AWKSKIP.t||location.hash!=='#'+AWKSKIP.k)return;if(F.now()>=AWKSKIP.t)return;const on=window.LABSE_ON;window.LABSE_ON=false;F.seek(AWKSKIP.t);AWKSKIP.t=null;requestAnimationFrame(()=>requestAnimationFrame(()=>{window.LABSE_ON=on}))}catch(e){}})}
+
+/* ======== 技の 演出（覚醒の 技：AWS）。やる子 a は どちらの がわでも よい ======== */
+const awFoes=a=>F.units().filter(v=>v.side!==a.side&&!v.hidden);
+const awAllies=a=>F.units().filter(v=>v.side===a.side);
+const awFoeHero=a=>F.heroes()[a.side==='me'?'foe':'me'];
+/* 親分（顔）への ダメージ */
+function awHeroHit(h,t,n,o={}){F.at(t,tt=>{const p=pos(h);F.burst(p.x,p.y,{t:tt,n:o.n||8,im:o.im||'x_hit',sp:5,g:.1,life:500,sz:.3});h.hp=Math.max(0,(h.hp||0)-n);const el=h.el&&h.el.querySelector('.hp');if(el)el.textContent=h.hp;
+  F.floatTxt('-'+n,p.x+(o.dx||0),p.y-10+(o.dy||0),{t:tt,col:'#ffdddd',size:o.size||26,rise:o.rise==null?18:o.rise});F.keyf(h,{t:tt,d:300,fn:(v,k)=>{v.ox=k>=1?0:(Math.random()-.5)*10*(1-k);v.tint=k>=1?null:`rgba(255,40,40,${.45*(1-k)})`}})})}
+/* 技の 名前の おび（リボンの 絵）：はじめに 1回だけ。1.1びょう */
+function awBanner(cfg,t,o={}){const {W}=F.dims(),R=F.ui('fx:07_24'),D=1150;F.ext(t+D);const y=o.y||MID();
+  F.add({txt:1,draw(tt){const e=tt-t;if(e<0||e>D)return;const c=F.ctx(),k=E.b(awCl(e/260)),a=Math.min(1,e/120,(D-e)/220);c.save();c.globalAlpha=a;c.translate(W/2,y);c.scale(.5+.5*k,.5+.5*k);
+    if(R.complete){const w=W*.96,h=w*R.naturalHeight/R.naturalWidth;c.drawImage(R,-w/2,-h/2,w,h)}const sz=awFit(c,cfg.sk,30,W*.7);awGold(c,cfg.sk,0,-2,sz,{sh:awCl((e-250)/550)});c.restore()}});
+  awSE(t,'title',cfg);return t+D}
+/* じぶんの がわの 「あたらしい なかま」（かくして おいた 子）を 出す */
+const awHidden=a=>F.units().filter(v=>v.side===a.side&&v.hidden);
+
+const AWSK={
+  /* ビビリ：ひぃっ！ → めちゃくちゃに 10発（敵キャラと 親分に 1ダメージずつ） */
+  bibiri(a,t){const cfg=AWC.bibiri;let T=awBanner(cfg,t)+120;
+    F.keyf(a,{t:T,d:520,fn:(v,k)=>{v.ox=k>=1?0:Math.sin(k*Math.PI*26)*4}});ono(a,'ひぃぃっ！',T+40,{col:'#c8e0ff'});T+=640;
+    const ts=[...awFoes(a),awFoeHero(a)],cnt=new Map();let last=null;ono(a,'パンパンパンッ！',T+60,{col:'#ffe08a'});
+    for(let i=0;i<10;i++){let tg;do{tg=ts[Math.floor(Math.random()*ts.length)]}while(ts.length>1&&tg===last);last=tg;const k=cnt.get(tg)||0;cnt.set(tg,k+1);const ti=T+i*170;
+      F.keyf(a,{t:ti,d:120,fn:(v,kk)=>{v.oy=kk>=1?0:(awTop(a)?-5:5)*Math.sin(kk*Math.PI);v.rot=kk>=1?0:(i%2?.08:-.08)*Math.sin(kk*Math.PI)}});
+      F.at(ti,tt=>{const p=pos(a),q=pos(tg),ang=Math.atan2(q.y-p.y,q.x-p.x);F.icon('x_muzzle',p.x+Math.cos(ang)*a.rw*.45,p.y+Math.sin(ang)*a.rh*.42,{t:tt,d:140,sz:44})});
+      F.shot(pos(a),pos(tg),{t:ti+30,d:190,im:'x_bullet',sz:20,aim:true,trail:'255,230,150'});ZS.f(ti+20,'casual/Shot Sound 1.wav',.55,.4);
+      const th=ti+220,dx=(k%2?1:-1)*14*Math.min(k,2),dy=-k*10;
+      if(tg.el&&tg.el.classList.contains('u'))F.at(th,tt=>{const p=pos(tg);F.burst(p.x,p.y,{t:tt,n:4,im:'x_hit',sp:4,g:.1,life:420,sz:.24});F.floatTxt('-1',p.x+dx,p.y-20+dy,{t:tt,col:'#ffdddd',size:22,rise:awTop(tg)?12:34,d:800});tg.hp=Math.max(0,tg.hp-1);F.keyf(tg,{t:tt,d:220,fn:(v,kk)=>{v.ox=kk>=1?0:(Math.random()-.5)*8*(1-kk);v.tint=kk>=1?null:`rgba(255,40,40,${.4*(1-kk)})`}})});
+      else awHeroHit(tg,th,1,{n:4,size:22,dx,dy,rise:12})}
+    T+=10*170+500;F.keyf(a,{t:T,d:500,fn:(v,k)=>{v.sc=k>=1?1:1-.05*Math.sin(k*Math.PI)}});ono(a,'ハァ…ハァ…',T,{col:'#c8e0ff'});return T+1300},
+  /* ゾンビーノ：みどりの きりの なか、場が いっぱいに なるまで ゾンビ → ゾンビが いるあいだ ダメージを うけない */
+  zombino(a,t){const cfg=AWC.zombino;let T=awBanner(cfg,t)+120;const {W}=F.dims();
+    /* じぶんの 列に みどりの きり（カードの うしろ） */const fogT=T,fogD=99999;F.ext(T+600);F.add({low:1,draw(tt){const e=tt-fogT;if(e<0)return;const c=F.ctx(),p=pos(a),I=F.ui('fx:new/white_smoke');if(!I.complete)return;const k=awCl(e/600);c.save();c.globalAlpha=.55*k;c.filter='sepia(1) hue-rotate(50deg) saturate(2) brightness(.8)';for(let i=0;i<6;i++){const s=a.rh*1.3,x=((i*W/5+e*.03*(i%2?1:-1))%(W+s)+W+s)%(W+s)-s/2;c.drawImage(I,x-s/2,p.y+a.rh*.15-s/2,s,s*.7)}c.restore()}});
+    F.keyf(a,{t:T,d:500,fn:(v,k)=>{v.oy=k>=1?0:(awTop(a)?6:-6)*Math.sin(k*Math.PI);v.glow=k>=1?0:Math.sin(k*Math.PI);v.glowC='140,255,150'}});ono(a,'ファミリーよ…',T+80,{col:'#b9ffb0'});T+=900;
+    const zs=awHidden(a);zs.forEach((z,i)=>{popIn(z,T+i*380,true);ZS.f(T+i*380,'magic/35 Invisibility Cloak 02.mp3',.5,.6)});T+=zs.length*380+300;
+    if(zs.length)ono(zs[zs.length-1],'ウ〜…',T-200,{col:'#b9ffb0'});T+=500;
+    /* まもりの きり：ドン・ゾンビーノを みどりの 光の まくが つつむ */
+    F.overlay(a,{t:T,d:1700,draw:(x,y,r,e)=>{const c=F.ctx(),k=Math.min(1,e/300,(1700-e)/400);c.save();c.globalCompositeOperation='lighter';const R=Math.max(a.rw,a.rh)*.72;const g=c.createRadialGradient(x,y,R*.55,x,y,R);g.addColorStop(0,'rgba(140,255,150,0)');g.addColorStop(1,`rgba(140,255,150,${.5*k})`);c.fillStyle=g;c.beginPath();c.arc(x,y,R,0,7);c.fill();c.restore()}});
+    ZS.f(T,'casual/Bless Sound.wav',.7);F.at(T+250,tt=>{const p=pos(a),W_=F.dims().W;F.floatTxt('ダメージを うけない',Math.max(100,Math.min(W_-100,p.x)),p.y-a.rh*.12,{t:tt,size:20,rise:14,col:'#b9ffb0'})});return T+2100},
+  /* モーキン警部：敵キャラ ぜんいんに 手配書を はって → 空へ まいあがり → 急降下で 2ダメージ×2 */
+  eagle(a,t){const cfg=AWC.eagle;let T=awBanner(cfg,t)+120;bcss('cssWanted',WANTED_CSS);const fs=awFoes(a);
+    fs.forEach((f,i)=>{const ti=T+i*420;F.at(ti,tt=>{const p=pos(f);F.icon('u_k_wanted',p.x,p.y,{t:tt,d:420,sz:72});F.shake({t:tt,p:3})});wantedPill(f,ti+300,true);ZS.f(ti,'magic/30 Parchment Scroll 01.mp3',.8);if(i===0){ONOR.push({u:f,t:ti});F.at(ti,tt=>{const p=pos(f),sd=p.x<F.dims().W/2?1:-1;ftC('ペタッ！',p.x+sd*f.rw*.78,onoY(p,f),{t:tt,size:17,col:'#ffe9b0',rise:12,rot:sd*-.22,self:f.el})})}});
+    T+=fs.length*420+400;
+    /* まいあがる：自分と 敵の まんなかへ、手前に 大きく＋カード形の 影 */
+    const p0=pos(a),mid={x:F.dims().W/2,y:(p0.y+fs.reduce((s,f)=>s+pos(f).y,0)/Math.max(1,fs.length))/2};
+    F.keyf(a,{t:T,d:520,fn:(v,k)=>{const q=E.io(k);v.ox=(mid.x-p0.x)*q;v.oy=(mid.y-p0.y)*q;v.sc=1+.5*q;v.shadow=q}});ZS.f(T,'game2/diamond whoosh.wav',.8);
+    F.at(T+100,tt=>{const p=pos(a);F.burst(p.x,p.y,{t:tt,n:8,im:'fx:02_04',sp:4,g:.08,up:1,life:1000,sz:.2,add_:false})});T+=700;
+    /* 急降下：1まわりめ・2まわりめ（1人ずつ 2ダメージ） */
+    for(let round=0;round<2;round++){fs.forEach((f,i)=>{const pf=pos(f);F.keyf(a,{t:T,d:200,fn:(v,k)=>{const q=E.io(k);const fx_=v.__fx??mid.x,fy_=v.__fy??mid.y;const tx=pf.x,ty=pf.y+(awTop(f)?f.rh*.1:-f.rh*.1);v.ox=(fx_+(tx-fx_)*q)-p0.x;v.oy=(fy_+(ty-fy_)*q)-p0.y;v.sc=1.5-.5*q;v.shadow=1-q;if(k>=1){v.__fx=tx;v.__fy=ty}}});
+        const th=T+200;F.at(th,tt=>{const p=pos(f);F.icon('fx:07_03',p.x,p.y,{t:tt,d:300,sz:80});F.burst(p.x,p.y,{t:tt,n:5,im:'fx:02_04',sp:4,g:.1,life:700,sz:.16,add_:false})});ZS.f(th,'game2/whoosh hit 1.wav',.8);hitAt(f,th,2,{n:6});
+        F.keyf(a,{t:th,d:220,fn:(v,k)=>{const q=E.o(k);const fx_=v.__fx,fy_=v.__fy;v.ox=(fx_+(mid.x-fx_)*q)-p0.x;v.oy=(fy_+(mid.y-fy_)*q)-p0.y;v.sc=1+.5*q;v.shadow=q;if(k>=1){v.__fx=mid.x;v.__fy=mid.y}}});T=th+340});T+=200}
+    F.keyf(a,{t:T,d:450,fn:(v,k)=>{const q=E.io(k);v.ox=(mid.x-p0.x)*(1-q);v.oy=(mid.y-p0.y)*(1-q);v.sc=1.5-.5*q;v.shadow=1-q;if(k>=1){v.__fx=v.__fy=undefined}}});ono(a,'つかまえた！',T+500,{col:'#ffe08a'});return T+1900},
+  /* マダム・ムスタッシュ：「かしきり」の 札が ドン → 敵の コインを ぜんぶ いただき（つぎの ターン 0）→ 敵の 入場券：出した子は こうげき-1 */
+  mustache(a,t){const cfg=AWC.mustache;let T=awBanner(cfg,t)+120;const {W,H}=F.dims(),d=BDOC();
+    /* 札（木の かんばん）が 上から ゆれて おりてくる */const sg=F.ui('fx:07_25'),sy=MID(),ST=T;F.ext(T+1500);
+    F.add({txt:1,draw(tt){const e=tt-ST;if(e<0||e>1500)return;const c=F.ctx(),k=awCl(e/420),y=-80+(sy+80)*E.b(k),sw=Math.sin(e/160)*.12*(1-awCl(e/1200)),a_=Math.min(1,(1500-e)/250);if(!sg.complete)return;const w=W*.62,h=w*sg.naturalHeight/sg.naturalWidth;c.save();c.globalAlpha=a_;c.translate(W/2,y);c.rotate(sw);c.drawImage(sg,-w/2,-h/2,w,h);awGold(c,'かしきり',0,h*.02,Math.min(40,w*.17),{grad:['#ffe3ec','#ff8fb3','#e0306a','#a0103f'],stroke:'#3a0a14'});c.restore()}});
+    ZS.f(T+400,'game1/Arcade Click Wood.wav',1);F.at(T+420,tt=>F.shake({t:tt,p:5}));T+=1600;
+    /* 敵の コイン → マダムへ */const ce=a.side==='me'?(d.querySelector('.fside .coins')||F.bd().foeHand):d.getElementById('coins');const cp=ce?F.place(ce):pos(awFoeHero(a));
+    for(let i=0;i<5;i++){F.shot({x:cp.x,y:cp.y},pos(a),{t:T+i*110,d:520,im:'fx:09_18',sz:16,scale:1.6,arc:60,trail:'255,220,120'});ZS.f(T+i*110+520,'game2/collect_coin.wav',.5,.5)}
+    F.at(T,tt=>{F.floatTxt('コイン 0',cp.x,cp.y+(cp.y<H*.45?30:-30),{t:tt+200,col:'#ffe066',size:20,rise:10,d:1600})});T+=5*110+700;
+    /* 入場券：敵がわに */const fh=pos(awFoeHero(a));F.at(T,tt=>{const y=awTop(a)?(MID()+H*.12):(MID()-H*.12);F.icon('fx:11_31',W/2,y,{t:tt,d:1500,sz:64});F.floatTxt('出した子は こうげき-1',W/2,y+44,{t:tt+200,col:'#ffd0de',size:16,rise:6,d:1700})});ZS.f(T,'magic/31 Parchment Scroll 02.mp3',.8);
+    return T+2000},
+  /* ポール・バニヤン：大きな おのを ふりあげ → ドーン！ 敵キャラ ぜんいんと 敵の親分に 5ダメージ → 丸太の かべ 2本（白い けむり） */
+  bunyan(a,t){const cfg=AWC.bunyan;let T=awBanner(cfg,t)+120;const {W,H}=F.dims(),fs=awFoes(a),fh=awFoeHero(a),up=awTop(a)?1:-1;
+    const AX=F.ui('fx:09_10'),p0=pos(a),tgtY=fs.length?fs.reduce((s,f)=>s+pos(f).y,0)/fs.length:pos(fh).y;
+    F.keyf(a,{t:T,d:500,fn:(v,k)=>{v.oy=k>=1?14*up*-1:-14*up*E.o(k);v.sc=1+.08*E.o(k)}});ZS.f(T,'magic/19 Blowing Air Into Fire 02.mp3',.8);
+    /* 大きな おの：やる子の うしろで ふりあげ → 敵の 列へ ふりおろす */const AT=T,SW=900;F.ext(AT+SW+500);
+    /* おのの 絵は 柄の はしが 左下・刃が 右上 → 柄の はしを 中心に まわす。味方がわ：下に ふりかぶって 上の 敵へ／ボスがわ：その ぎゃく */
+    const r0=up<0?2.36:-.785,r1=up<0?-.785:2.36,sg=r1>r0?-1:1;
+    F.add({draw(tt){const e=tt-AT;if(e<0||e>SW+400||!AX.complete)return;const c=F.ctx(),s=Math.max(W*.32,Math.min(W*.6,Math.abs(tgtY-p0.y)/1.05));let ang,cx=W/2,cy;
+      if(e<500){const k=E.o(e/500);ang=r0+.3*sg*k;cy=p0.y}else{const k=E.io(awCl((e-500)/220));ang=r0+.3*sg+(r1-r0-.3*sg)*k;cy=p0.y}
+      const a_=e>SW?1-awCl((e-SW)/400):Math.min(1,e/150);c.save();c.globalAlpha=a_;c.translate(cx,cy);c.rotate(ang);c.drawImage(AX,-s*.08,-s*.92,s,s);c.restore()}});
+    T=AT+720;ZS.f(T,'casual/Explosion 2.wav',1);F.at(T,tt=>{F.shake({t:tt,p:14,d:520});F.flash({t:tt,d:160,a:.4,col:'255,220,170'});F.burst(W/2,tgtY,{t:tt,n:16,im:['fx:04_06','fx:04_13','fx:05_02'],sp:8,g:.25,up:3,life:1100,sz:.24,add_:false});F.smoke(W/2,tgtY+30,{t:tt,n:16,spread:W*.4,r:22})});
+    ono(fs[0]||fh,'ドーン！',T+60,{col:'#ffcf8a',size:20});
+    /* ドーン！の 文字が きえてから 数字（かさねない） */fs.forEach((f,i)=>hitAt(f,T+1050+i*130,5,{n:8}));awHeroHit(fh,T+1050+fs.length*130+80,5);T+=1050+fs.length*130+900;
+    F.keyf(a,{t:AT+720,d:300,fn:(v,k)=>{v.oy=k>=1?0:-14*up*(1-E.o(k));v.sc=k>=1?1:1.08-.08*k}});
+    /* 丸太の かべ（白い けむりから） */const logs=awHidden(a);logs.forEach((z,i)=>{popIn(z,T+i*380,false);ZS.wood(T+i*380+80)});T+=logs.length*380+300;
+    if(logs.length)F.at(T,tt=>buffLabel(logs[0],'丸太の かべ',tt));return T+1500},
+  /* フォクシア：画面が 青く → ふぶきが 通りぬける → 敵キャラを 1人ずつ カチコチに（本番の 氷）→「こうげき 1回で こなごな」 */
+  ice(a,t){const cfg=AWC.ice;let T=awBanner(cfg,t)+120;const {W,H}=F.dims(),fs=awFoes(a),dir=awTop(a)?-1:1;
+    F.keyf(a,{t:T,d:600,fn:(v,k)=>{v.glow=k>=1?0:Math.sin(k*Math.PI);v.glowC='170,230,255'}});ZS.f(T,'game2/ice magic appear.wav',.9);F.tint({t:T+200,d:2600,col:'120,200,255',a:.22,inD:300,outD:600});
+    /* ふぶき：雪の つぶが ななめに 画面を 通りぬける */const BT=T+300,BD=1300,N=46,S_=Array.from({length:N},()=>({y:Math.random()*H,d:Math.random()*.5,v:.8+Math.random()*.6,s:14+Math.random()*20,im:Math.random()<.7?'fx:04_21':'fx:04_22'}));F.ext(BT+BD);
+    F.add({draw(tt){const e=tt-BT;if(e<0||e>BD)return;const c=F.ctx();for(const p of S_){const k=(e/BD-p.d)*p.v*1.6;if(k<0||k>1)continue;const x=dir>0?-40+(W+80)*k:W+40-(W+80)*k,y=p.y+ (k-.5)*80,I=F.ui(p.im);if(!I.complete)continue;c.save();c.globalAlpha=.9;c.translate(x,y);c.rotate(Math.sin(e/200+p.y)*.17);c.drawImage(I,-p.s/2,-p.s/2,p.s,p.s);c.restore()}}});
+    ZS.f(BT,'magic/19 Blowing Air Into Fire 02.mp3',.7);T=BT+BD+150;
+    fs.forEach((f,i)=>{freezeOn(f,T+i*450);ZS.f(T+i*450,'fantasy/ice blocking movement.wav',.8)});T+=fs.length*450+500;
+    F.at(T,tt=>F.floatTxt('こうげき 1回で こなごな',W/2,MID()+(awTop(a)?40:-40),{t:tt,col:'#cff4ff',size:17,rise:6,d:1800}));return T+2100},
+};
+/* 技の 演出：ずかんの 場面（やる子の がわを えらべる）。extra＝じぶんの がわに かくして おく 子（よばれる 子） */
+function awSkStage(id,side,o={}){const me=side!=='foe';const actor={art:id,atk:o.atk||6,hp:o.hp||6};const hid=(o.hid||[]).map(art=>({art,atk:o.hidAtk??2,hp:o.hidHp??2,hidden:true}));const foesT=o.tg||[{art:'jab',atk:2,hp:7},{art:'iguana',atk:2,hp:7},{art:'kurogoke',atk:3,hp:7}];
+  return me?{foeHp:20,foes:foesT,mine:[actor,...hid]}:{foes:[actor,...hid],mine:foesT.map(x=>Object.assign({},x,{art:{jab:'dog',iguana:'juko',kurogoke:'wolf'}[x.art]||x.art}))}}
+const AWK_ITEMS=[];
+for(const id in AWC){const cfg=AWC[id];
+  AWK_ITEMS.push({k:'awk_'+id,nw:1,n:'覚醒演出：'+AWNM(id),d:'ためる → その子の 世界へ ワイプ → カットイン（覚醒・名前・「'+cfg.sk+'」）→ カードが 覚醒の すがたに → もとの 場に もどる（タップで スキップ）',
+    stage:{foes:S1.foes,mine:[{art:id,atk:5,hp:5}]},total:6000,build(){const u=U(2);const T=awakenSeq(u,cfg,{id});awSkipArm('awk_'+id,T.skip)}})}
+/* ボスがわ（敵が 覚醒する ときも おなじ。ワイプ・カットインは 上・右から） */
+AWK_ITEMS.push({k:'awk_boss_ice',nw:1,n:'覚醒演出：ボスがわ（れい：フォクシア）',d:'ボス戦で 敵が 覚醒する とき。おなじ ながれで、ワイプと カットインが 敵の がわから 来る',
+  stage:{foes:[{art:'ice',atk:5,hp:5}],mine:S1.mine},total:6000,build(){const u=U(0);const T=awakenSeq(u,AWC.ice,{id:'ice'});awSkipArm('awk_boss_ice',T.skip)}});
+/* 技の 演出（第1弾：ステージ順の はじめ 5人＋フォクシア）。味方がわ・ボスがわ 両方 */
+const AWSK_ST={bibiri:{},zombino:{hid:['zombieT','zombieT','zombieT'],tg:[{art:'jab',atk:2,hp:3},{art:'iguana',atk:2,hp:2}]},eagle:{tg:[{art:'jab',atk:2,hp:6},{art:'iguana',atk:2,hp:6}]},mustache:{tg:[{art:'jab',atk:2,hp:3},{art:'iguana',atk:2,hp:2}]},bunyan:{hid:['logT','logT'],hidAtk:0,hidHp:1},ice:{}};
+const AWSK_D={bibiri:'ひぃぃっ！ → めちゃくちゃに 10発（敵キャラと 親分に 1ずつ）→ ハァ…ハァ…',
+  zombino:'みどりの きり → みどりの けむりから ゾンビが 1人ずつ（場が いっぱいまで）→ みどりの まく「ダメージを うけない」',
+  eagle:'手配書を 1人ずつ ペタッ → 自分と 敵の まんなかへ まいあがる（大きく＋かげ）→ 急降下で 2ダメージを 2まわり',
+  mustache:'「かしきり」の かんばんが ゆれて おりる → 敵の コインが マダムへ（コイン 0）→ 入場券「出した子は こうげき-1」',
+  bunyan:'大きな おのを ふりあげ → ドーン！ 敵キャラと 親分に 5ずつ → 白い けむりから 丸太の かべ 2本',
+  ice:'画面が 青く → ふぶきが 通りぬける → 1人ずつ 本番の 氷で カチコチ →「こうげき 1回で こなごな」'};
+for(const id in AWSK)for(const side of ['me','foe']){const st=AWSK_ST[id]||{};AWK_ITEMS.push({k:'awks_'+id+(side==='foe'?'_b':''),nw:1,n:'覚醒の 技：'+AWC[id].sk+(side==='foe'?'（ボスがわ）':''),d:AWSK_D[id]+(side==='foe'?'（ボス戦で 敵が つかう とき）':''),
+  stage:awSkStage(id,side,st),total:6000,build(){const a=F.units().find(v=>v.art===id&&!v.hidden);AWSK[id](a,200)}})}
+UNCHECKED.push(...AWK_ITEMS.map(i=>i.k));
+/* AWKBLOCK-END */
 const LIST=[
+ {cat:'覚醒演出（キャラごと）',items:AWK_ITEMS},
  /* ===== 11/1 確認モードの メモ（ゲームと おなじ 見た目）。未チェックは UNCHECKED に 入れて 赤く 光らせる ===== */
  {cat:'11/1 あたらしい 演出（未チェック）',items:[
   /* 11/1 ドリーの 早撃ち（ゲームの f77_cfx の quickdraw と おなじ）*/
