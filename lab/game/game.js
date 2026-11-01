@@ -1135,7 +1135,7 @@ function title(){
     <div id="slots" style="display:grid;gap:9px"></div>
     <div class="row" style="justify-content:center;margin-top:4px"><button class="btn ghost" id="mv">📦 引っこし（ほかのスマホへ）</button></div>
     <div class="fukugen"><input id="fk" placeholder="ふくげんコード" autocomplete="off" autocapitalize="off"><button class="btn" id="fkb">OK</button></div>
-    <p class="small" style="text-align:center;opacity:.75">ver ${VERSION}${'（ステージング 11/01 12:02）'}</p>`;
+    <p class="small" style="text-align:center;opacity:.75">ver ${VERSION}${'（ステージング 11/01 18:06）'}</p>`;
   for(let n=1;n<=3;n++){const g=readSlot(n),d=document.createElement('div');d.className='slot';
     d.innerHTML=`<div class="no">${n}</div><div class="info">${g?slotInfo(g):'<b>からっぽ</b><br>新しい賞金稼ぎをはじめる'}</div>
       ${g?`<div style="display:grid;gap:6px"><button class="btn" data-p>プレイ</button><button class="btn ghost" data-d>けす</button></div>`:`<button class="btn green" data-n>はじめから</button>`}`;
@@ -4164,7 +4164,7 @@ function titleSplash(){
       <span class="tl-star" style="left:23.3%;top:86.2%;rotate:8deg">★</span><span class="tl-star" style="left:78.7%;top:86.2%;rotate:-8deg;animation-delay:.8s">★</span></div></div>
     <button class="tplay" id="tplay"><span class="tpi">▶</span>あそぶ！</button>
     <div class="thint">タップして はじめよう</div>
-    <div class="tfoot"><span>ver ${VERSION}${'（ステージング 11/01 12:02）'}</span><button id="tnote">おしらせ${seen!==latest.v?'<span class="tnew">NEW</span>':''}</button></div>`;
+    <div class="tfoot"><span>ver ${VERSION}${'（ステージング 11/01 18:06）'}</span><button id="tnote">おしらせ${seen!==latest.v?'<span class="tnew">NEW</span>':''}</button></div>`;
   document.body.appendChild(s);
   const logo=s.querySelector('.tlogo'),inner=s.querySelector('.tl-in'),btn=s.querySelector('#tplay');
   const alive=()=>document.body.contains(s);
@@ -9421,12 +9421,12 @@ const UM=new WeakMap();
 function wrap(el){if(!el)return null;let u=UM.get(el);if(!u){u={el,ox:0,oy:0,sc:1,rot:0,alpha:1,gray:0,glow:0,glowC:'255,211,74',tint:null,clipB:0,n:0};UM.set(el,u)}
   if(!u.n){const r=el.getBoundingClientRect();u.bx=r.left+r.width/2;u.by=r.top+r.height/2;u.rw=r.width;u.rh=r.height}live.add(u);return u}
 const pos=u=>({x:u.bx+u.ox,y:u.by+u.oy});
-function apply(u){const el=u.el;if(!el||!el.isConnected)return;if(!el.classList.contains('cfxon'))el.classList.add('cfxon');el.style.transform=(u.ox||u.oy||u.rot||u.sc!==1||shX)?`translate(${u.ox}px,${u.oy}px) rotate(${u.rot}rad) scale(${u.sc})`:'';el.style.opacity=u.alpha<1?u.alpha:'';
+function apply(u){const el=u.el;if(!el||!el.isConnected)return;if(!el.classList.contains('cfxon'))el.classList.add('cfxon');el.style.transform=(u.ox||u.oy||u.rot||u.sc!==1||(u.sx&&u.sx!==1)||(u.sy&&u.sy!==1)||shX)?`translate(${u.ox}px,${u.oy}px) rotate(${u.rot}rad) scale(${u.sc*(u.sx||1)},${u.sc*(u.sy||1)})`:'';/* 11/1：たて・よこ べつの のび（sx・sy。ずかんの あくび など） */el.style.opacity=u.alpha<1?u.alpha:'';
   const f=[];if(u.gray)f.push(`grayscale(${u.gray}) brightness(${1-u.gray*.35})`);if(u.glow>0)f.push(`drop-shadow(0 0 ${8+14*u.glow}px rgba(${u.glowC},${Math.min(1,u.glow)}))`);if(u.shadow>0)f.push(`drop-shadow(0 ${(34*u.shadow).toFixed(1)}px ${(6+6*u.shadow).toFixed(1)}px rgba(0,0,0,${(.45*u.shadow).toFixed(2)}))`);el.style.filter=f.join(' ');
   el.style.clipPath=u.clipB?`inset(-30% -30% ${(u.clipB*100).toFixed(1)}% -30%)`:'';
   let t=el.querySelector(':scope>.cfxt');if(u.tint){if(!t){t=document.createElement('i');t.className='cfxt';el.appendChild(t)}t.style.background=u.tint}else if(t)t.remove()}
 function reset(u){const el0=u.el;/* 10/31：きえた（やられ・ふきとばし・けとばし）子は もとに もどさない（もどすと 一しゅん 見えて しまう） */if(el0&&el0._cfxGone){if(el0._cfxGone==='rm')el0.remove();else{el0.style.visibility='hidden';el0.style.opacity='0'}return}
-  u.ox=u.oy=u.rot=u.gray=u.glow=u.clipB=u.shadow=0;u.sc=u.alpha=1;u.tint=null;apply(u);const el=u.el;if(el){/* 10/31：登場の アニメ（enter）が cfxon を はずした しゅんかんに もう一回 はじまって 消えて見えたので、先に はずす */el.classList.remove('enter');el.classList.remove('cfxon');el.style.transform='';el.style.opacity='';el.style.filter='';el.style.clipPath=''}}
+  u.ox=u.oy=u.rot=u.gray=u.glow=u.clipB=u.shadow=0;u.sc=u.alpha=u.sx=u.sy=1;u.tint=null;apply(u);const el=u.el;if(el){/* 10/31：登場の アニメ（enter）が cfxon を はずした しゅんかんに もう一回 はじまって 消えて見えたので、先に はずす */el.classList.remove('enter');el.classList.remove('cfxon');el.style.transform='';el.style.opacity='';el.style.filter='';el.style.clipPath=''}}
 const ext=(f,end)=>{f.end=end;return f};
 const add=f=>{fx.push(f);kick();return f};
 function at(t,fn){t=tt0(t);return add({t0:t,once:true,fn,end:t})}
@@ -9928,7 +9928,7 @@ async function michizure(tel){if(!ensure()||!tel||!tel.isConnected)return;begin(
   at(1950,()=>{burst(p0.x,gy,{t:1950,n:7,im:'x_dust',sp:2.5,g:.1,up:1.5,life:700,sz:.2,add_:false})});
   await wait(2150)}
 return {squeeze,miss,stealRoul,michizure,lastAtk:()=>({a:lastA,t:lastT}),idle,busyNow,afterBanner,buffLabel,jail,chorus,coinFly,pillar,trade,kickOut,wish,steal,balloon,burn,unlock,digIn,emerge,coin,roulette,hanage,unko,glitch,kwFlair,drFx,thorn,auraPulse,attack,hit,kenzan,ko,revive,shotTo,bottleTo,freezeU,blow,summonPop,shieldBreak,deadly,aoe,textAt,heal:el=>{if(!ensure()||!el)return;begin();healU(wrap(el));S.heal()},buff:el=>{if(!ensure()||!el)return;begin();buffU(wrap(el))},down:el=>{if(!ensure()||!el)return;begin();const u=wrap(el);keyf(u,{t:0,d:600,fn:(v,k)=>{v.tint=k>=1?null:`rgba(60,90,200,${.3*(1-k)})`;v.oy=k>=1?0:6*Math.sin(k*Math.PI)}});S.down()},poison:el=>{if(!ensure()||!el)return;begin();poisonU(wrap(el))},kindOf,on:true,
-  /* 11/1：f91 で 新しい 演出を 書くための 道具（中の 関数を そのまま わたす） */_k:{at,shot,burst,floatTxt,keyf,tween,wrap,pos,ensure,begin,wait,icon,flash,shake,tint,darken,overlay,rays,slam,dots,ring,add,ui,S,E,ono,healU,buffU,placeBig,dims:()=>({W,H}),ctx:()=>c,tt0,dd,SP,cl}}})();
+  /* 11/1：f91 で 新しい 演出を 書くための 道具（中の 関数を そのまま わたす） */_k:{smoke,tornadoImg,at,shot,burst,floatTxt,keyf,tween,wrap,pos,ensure,begin,wait,icon,flash,shake,tint,darken,overlay,rays,slam,dots,ring,add,ui,S,E,ono,healU,buffU,placeBig,dims:()=>({W,H}),ctx:()=>c,tt0,dd,SP,cl}}})();
 window.CFX=CFX;
 /* ---- ゲームへの つなぎ ---- */
 if(typeof battlecry==='function'){const _bcC=battlecry;battlecry=async function(sd,m,c){const d=C[c&&c.id]||{};const pm=CFX._m,pb=CFX._bc;CFX._m=m;CFX._bc=d.bc;
@@ -11648,6 +11648,25 @@ lassoFx=async function(ok){const meE=$('meHero'),fh=$('foeHero');if(!meE||!fh)re
 /* 11/01：とじた 音のしくみに resume すると エラーが 出る（作りなおしの すきま）→ 何もしない */
 try{const P=(window.AudioContext||window.webkitAudioContext).prototype,_r=P.resume;P.resume=function(){if(this.state==='closed')return Promise.resolve();const q=_r.apply(this,arguments);try{q&&q.catch&&q.catch(()=>{})}catch(e){}return q}}catch(e){}
 
+/* 11/01：かけあい画面の 放射が、iPhone で とちゅう 切れる（大きな 回転レイヤーの 描きもれ）→ キャンバスで 描く */
+(function(){
+  function draw(cv){const ctx=cv.getContext('2d');let raf=0,last=0;
+    const fit=()=>{const r=cv.parentNode.getBoundingClientRect(),d=Math.min(2,devicePixelRatio||1);cv.width=Math.max(1,r.width*d|0);cv.height=Math.max(1,r.height*d|0);};
+    fit();
+    const step=t=>{if(!cv.isConnected){cancelAnimationFrame(raf);return}raf=requestAnimationFrame(step);if(t-last<33)return;last=t;
+      if(cv.width!==(cv.parentNode.clientWidth*Math.min(2,devicePixelRatio||1)|0))fit();
+      const W=cv.width,H=cv.height,cx=W/2,cy=H/2,R=Math.hypot(W,H)*.75,a0=(t/14000)*Math.PI*2,n=18,w=Math.PI*2/n*0.4;
+      ctx.clearRect(0,0,W,H);ctx.save();ctx.translate(cx,cy);ctx.rotate(a0);ctx.fillStyle=cv._col||'rgba(255,220,120,.18)';ctx.beginPath();
+      for(let i=0;i<n;i++){const a=i*Math.PI*2/n;ctx.moveTo(0,0);ctx.arc(0,0,R,a,a+w);ctx.closePath()}ctx.fill();ctx.restore();
+      ctx.globalCompositeOperation='destination-in';const g=ctx.createRadialGradient(cx,cy,0,cx,cy,Math.hypot(W,H)/2);g.addColorStop(0,'rgba(0,0,0,1)');g.addColorStop(.12,'rgba(0,0,0,1)');g.addColorStop(.85,'rgba(0,0,0,0)');ctx.fillStyle=g;ctx.fillRect(0,0,W,H);ctx.globalCompositeOperation='source-over'};
+    raf=requestAnimationFrame(step)}
+  function fix(root){(root||document).querySelectorAll('.talk>.rays:not([data-cv])').forEach(el=>{el.dataset.cv=1;const cs=getComputedStyle(el);const m=/rgba?\([^)]*\)/.exec(cs.backgroundImage);
+    const cv=document.createElement('canvas');cv._col=m?m[0]:null;cv.style.cssText='position:absolute;inset:0;width:100%;height:100%;pointer-events:none';
+    el.style.cssText+=';background:none!important;-webkit-mask:none!important;mask:none!important;animation:none!important;transform:none!important;position:fixed!important;left:0!important;top:0!important;width:100vw!important;height:100vh!important;z-index:0';
+    el.appendChild(cv);draw(cv)})}
+  try{new MutationObserver(()=>fix()).observe(document.documentElement,{childList:true,subtree:true})}catch(e){}
+})();
+
 
 /* 11/01 f95：ゲームっぽい 効果を わかりやすく（かしまさん「わけがわかんない」）
    きまり：(a) はじまる 前に ルール (b) おす ところを はっきり (c) なぜ その 結果に なったかを 見せる（敵が つかった ときも）
@@ -12234,6 +12253,222 @@ setInterval(()=>{try{if(document.hidden||!HUMAN||typeof R==='undefined'||!R||!AM
 (function(){
 if(typeof playCard==='function'){const _pc=playCard;playCard=async function(sd,i){try{const c=sd&&sd.hand&&sd.hand[i];if(B&&!B.over&&sd===B.me&&c&&C[c.id]&&C[c.id].c<=sd.coin&&sd.board.length<bmax(sd))B.acted=true}catch(e){}return _pc.apply(this,arguments)}}
 if(typeof attack==='function'){const _at=attack;attack=async function(sd,m,t){try{if(B&&!B.over&&sd===B.me&&m&&canAttack(m))B.acted=true}catch(e){}return _at.apply(this,arguments)}}
+})();
+
+
+/* ===== 11/1 ずかんの キャラ専用演出（sp_*）を ゲームへ つなぐ 第1弾（CFX=1 の ビルドだけ） =====
+   ・ずかん（lab/index.html の sp_*）の build を ほぼ そのまま うごかす。時間は「見参の あと」を 0 に ずらす（SH）
+   ・じゅんばん：見参（ゲーム）→ この 演出（await）→ ゲームの 効果（ダメージ・数字・バフの 光など）
+   ・数字や「こうげき+1」などの 文字は ゲームが 出すので、ここでは 出さない（2重に しない）
+   ・ゲームの ふつうの 演出と かさなる ところ（酔わせる ビン・ぜんたいこうげき・ダメージの たま）は その子の ときだけ 止める */
+(function(){if(!window.CFX||!CFX._k||typeof battlecry!=='function')return;
+const K=CFX._k,E=K.E,cl=x=>Math.max(0,Math.min(1,x));
+const on=()=>typeof HUMAN!=='undefined'&&HUMAN&&window.CFX&&CFX.on&&typeof B!=='undefined'&&B&&!B.over;
+const rectC=el=>{if(!el)return null;const r=el.getBoundingClientRect();if(!r.width&&!r.height)return null;return {x:r.left+r.width/2,y:r.top+r.height/2,w:r.width,h:r.height}};
+/* ---- ずかんの 道具を ゲームの キャンバス（CFX）で うごかす：時間 t は ずかんの 時間（SH を ひく） ---- */
+function mkF(SH){K.ensure();K.begin();const base=K.tt0(0);
+  const T=t=>(base-K.tt0(0))/K.SP()+((t||0)-SH);
+  const wt=fn=>function(){const a=[...arguments];const i=a.length-1;const o=a[i]&&typeof a[i]==='object'?a[i]:{};a[i]=Object.assign({},o,{t:T(o.t||0)});return fn.apply(null,a)};
+  const F={E,T,
+    at:(t,fn)=>K.at(T(t),()=>{try{fn(t)}catch(e){console.warn(e)}}),
+    keyf:(u,o)=>u&&K.keyf(u,Object.assign({},o,{t:T(o.t||0)})),
+    tween:(u,o)=>u&&K.tween(u,Object.assign({},o,{t:T(o.t||0)})),
+    overlay:(u,o)=>u&&K.overlay(u,{t:T(o.t||0),d:o.d||1000,draw:(x,y,uu,e,k)=>{try{o.draw(x,y,Math.max(u.rw,u.rh)/2*(u.sc||1),e,k)}catch(er){}}}),
+    icon:wt(K.icon),shot:wt(K.shot),burst:wt(K.burst),dots:wt(K.dots),smoke:wt(K.smoke),floatTxt:wt(K.floatTxt),slam:wt(K.slam),darken:wt(K.darken),flash:wt(K.flash),shake:wt(K.shake),tint:wt(K.tint),ring:wt(K.ring),
+    tornadoImg:o=>K.tornadoImg(Object.assign({},o,{t:T(o.t||0)})),
+    ctx:()=>K.ctx(),ui:n=>K.ui(n),dims:()=>K.dims(),place:el=>rectC(el)||{x:K.dims().W/2,y:K.dims().H/2,w:60,h:40}};
+  return F}
+/* ずかんの 部品（ゲーム用） */
+function kit(F){const pos=u=>K.pos(u);
+  const onoY=(p,u)=>p.y-u.rh*(p.y<F.dims().H*.42?.45:.7);
+  const ono=(tg,s,t,o={})=>{if(!tg)return;F.at(t,tt=>{const p=pos(tg);const sd=p.x<F.dims().W/2?1:-1;F.floatTxt(s,p.x+sd*tg.rw*.78,onoY(p,tg)+(o.dy||0),{t:tt,size:o.size||17,col:o.col||'#fff',rise:12,rot:sd*-.22,self:tg.el})})};
+  const MID=()=>{try{const a=document.querySelector('#ef'),b=document.querySelector('#af');if(a&&b)return (a.getBoundingClientRect().bottom+b.getBoundingClientRect().top)/2}catch(e){}return F.dims().H*.42};
+  const zNote=(f,at,d,o={})=>{try{tone(f,d,{type:o.type||'triangle',vol:Math.min(.12,o.vol||.05),at:at||0,slide:o.slide||0})}catch(e){}};
+  const _N=(d,o={})=>{try{noise(d,{vol:o.vol||.1,freq:o.freq||1000,at:o.at||0})}catch(e){}};
+  const ZS={f:(t,file,v=1)=>F.at(t,()=>{try{CFX._pf&&CFX._pf(file,v,0)}catch(e){}}),s:(t,fn)=>F.at(t,()=>{try{if(!(typeof MUTED!=='undefined'&&MUTED))fn()}catch(e){}}),
+    wood:t=>ZS.f(t,'game1/Arcade Click Wood.wav',1),confetti:t=>ZS.f(t,'essential/Celebration Small.mp3',.8),bubbles:t=>ZS.f(t,'game2/Rising Bubbles.wav',.8),
+    poyon:t=>F.at(t,()=>{try{window.SE2&&SE2.has&&SE2.has('drSpawn')&&SE2.play('drSpawn','start',true)}catch(e){}})};
+  const ovF=(u,o)=>F.overlay(u,o);
+  const aimOn=(t,T0,d=700,sz=80)=>F.at(T0,tt=>{const p=pos(t);F.icon('fx:13_05',p.x,p.y,{t:tt,d,sz})});
+  const runupAt=(a,T0)=>{const {H}=F.dims();const dir=pos(a).y>H*.45?1:-1;F.keyf(a,{t:T0,d:330,fn:(u,k)=>{u.oy=26*dir*E.io(k);u.sc=1-.06*k}});F.keyf(a,{t:T0+330,d:140,fn:(u,k)=>{u.oy=k>=1?0:26*dir*(1-E.o(k))-8*dir*Math.sin(k*Math.PI);u.sc=k>=1?1:.94+.1*Math.sin(k*Math.PI)+.06*k}})};
+  const spotOn=(u,T0,D)=>{F.darken({t:T0,d:D,a:.45});ZS.s(T0,()=>{_N(.15,{vol:.12,freq:900});zNote(220,0,.2,{type:'square',vol:.03})});
+    F.overlay(u,{t:T0,d:D,draw:(x,y,r,e)=>{const c=F.ctx(),a=Math.min(1,e/250,(D-e)/300);c.save();c.globalCompositeOperation='lighter';const g=c.createRadialGradient(x,y-u.rh*.1,0,x,y,u.rw*1.1);g.addColorStop(0,`rgba(255,250,220,${.32*a})`);g.addColorStop(1,'rgba(255,240,200,0)');c.fillStyle=g;c.beginPath();c.moveTo(x-u.rw*.25,-20);c.lineTo(x+u.rw*.25,-20);c.lineTo(x+u.rw*1.0,y+u.rh*.6);c.lineTo(x-u.rw*1.0,y+u.rh*.6);c.closePath();c.fill();c.restore()}})};
+  const sleepOn=(u,t,d)=>F.overlay(u,{t,d,draw:(x,y,r,e)=>{const c=F.ctx();const I=F.ui('x_zzz');if(!I.complete)return;const fo=Math.min(1,(d-e)/400);for(let i=0;i<3;i++){if(e<i*1100)continue;const k=(((e-i*1100)%3300)+3300)%3300/3300;const a=k<.08?k/.08*.7:k<.2?.7+.3*(k-.08)/.12:1-.95*Math.max(0,(k-.2)/.8);const dx=Math.sin(k*Math.PI*1.6)*13,dy=-k*70,rt=Math.sin(k*Math.PI*1.6)*.19,sc=1+k*.9;const s=30*sc;c.save();c.globalAlpha=Math.max(0,a)*fo;c.shadowColor='#fff';c.shadowBlur=3;c.translate(x+u.rw*.22+dx,y-u.rh*.42+dy);c.rotate(rt);c.drawImage(I,-s/2,-s/2,s,s);c.restore()}}});
+  /* 酔わせる（ずかんの drunkOn）：こはく色の ウイスキーの ビン → しぶき → ヒック！ → ふらふら */
+  const drunkOn=(a,t,T0)=>{F.shot(pos(a),pos(t),{t:T0,d:650,im:'fx:new/whisky',sz:34,scale:1.45,arc:70,trail:'230,160,70'});
+    F.at(T0+650,tt=>{const p=pos(t);F.burst(p.x,p.y,{t:tt,n:12,im:['fx:new/amber_drops','fx:new/amber_splash'],sp:4.5,g:.2,life:520,sz:.24,add_:false});ono(t,'ヒック！',tt+100,{col:'#ffd08a'});try{window.SE2&&SE2.play&&SE2.play('atk_bottle','hit')}catch(e){}});
+    F.overlay(t,{t:T0+650,d:1700,draw:(x,y,r,e)=>{const c=F.ctx(),I=F.ui('x_dizzy');if(!I.complete)return;for(let i=0;i<3;i++){const a2=e/400+i*2.1;c.drawImage(I,x+Math.cos(a2)*t.rw*.45-14,y-t.rh*.62+Math.sin(a2)*5-14,28,28)}}});
+    F.keyf(t,{t:T0+650,d:1700,fn:(v,k)=>{v.rot=k>=1?0:Math.sin(k*20)*.15;v.tint=k>=1?null:'rgba(230,150,60,.16)'}});return T0+650};
+  return {pos,ono,onoY,MID,zNote,_N,ZS,ovF,aimOn,runupAt,spotOn,sleepOn,drunkOn}}
+/* ---- その子の 役わり（ゲームと おなじ えらびかた） ---- */
+const foesOf=sd=>opp(sd).board.filter(e=>e.hp>0);
+const mineOf=(sd,m)=>sd.board.filter(b=>b!==m&&b.hp>0);
+const W_=x=>{const el=x&&(x.nodeType?x:uEl(x));return el?K.wrap(el):null};
+const strongT=sd=>{const t=strongest(foesOf(sd));return t||null};
+/* ===== キャラごとの 演出（ずかん sp_<id> の うつし）=====
+   sh：ずかんで 見参が おわる 時間（そこを 0 に する） until：ゲームの 効果を はじめる 時間（ずかんの 時間）
+   q：止める ゲームの 演出（drunk＝酔わせる ビン・aoe＝ぜんたいこうげき・shot＝見参の たま・burst＝絵文字の つぶ・wanted＝前の 手配書） */
+const NSP={};
+/* チンピラのピッキー：兄貴の ところへ ぴょんぴょん → ハイタッチ パチン！ →（ゲーム：いちばん強い なかま +1/+1）→ もどる */
+NSP.pickey={sh:2470,until:3370,prep:(sd,m)=>{const v=strongest(mineOf(sd,m));return v?{v}:false},
+  run(F,H,u,x){const v=W_(x.v),T=2470;const dx=()=>(H.pos(v).x-u.bx)*.55;
+    F.keyf(u,{t:T,d:700,fn:(w,k)=>{w.ox=dx()*E.io(k);w.oy=k>=1?w.oy:-Math.abs(Math.sin(k*Math.PI*3))*12}});H.ZS.s(T,()=>{for(let i=0;i<3;i++)H.zNote(500+i*80,i*.23,.08,{type:'triangle',vol:.05,slide:800})});
+    F.at(T+300,tt=>{const p=H.pos(u);F.burst(p.x,p.y-u.rh*.45,{t:tt,n:4,im:'fx:08_06',sp:2,g:-.05,up:2,life:900,sz:.12,add_:false})});
+    F.at(T+720,tt=>{const pu=H.pos(u),pv=H.pos(v),mx=(pu.x+pv.x)/2,my=Math.min(pu.y,pv.y)-u.rh*.35;F.icon('x_spark',mx,my,{t:tt,d:350,sz:40});F.burst(mx,my,{t:tt,n:8,im:['x_spark','x_star'],sp:3.5,life:600,sz:.13})});H.ono(u,'パチン！',T+720,{col:'#ffe9b0'});H.ZS.f(T+720,'game2/volley ball hit.wav',.6);
+    F.keyf(u,{t:T+1200,d:500,fn:(w,k)=>{w.ox=dx()*(1-E.io(k));w.oy=k>=1?0:-Math.abs(Math.sin(k*Math.PI*2))*8;if(k>=1){w.ox=0;w.oy=0}}})}};
+/* 旅人ホコリン：すなぼこりが もわっ → ゲホゲホ →（ゲーム：白い けむりから タンブルウィード）→ コロコロ〜 */
+NSP.new40={sh:2610,until:3510,
+  run(F,H,u,x,sd){const T=2610;F.keyf(u,{t:T,d:900,fn:(w,k)=>{w.oy=k>=1?0:Math.abs(Math.sin(k*Math.PI*4))*5;w.rot=k>=1?0:Math.sin(k*Math.PI*4)*.06}});
+    for(let i=0;i<4;i++)F.at(T+i*200,tt=>{const p=H.pos(u);F.burst(p.x+(i%2?14:-14),p.y-u.rh*.1,{t:tt,n:5,im:'fx:04_01',sp:2.2,g:-.02,up:1,life:1100,sz:.24,add_:false})});H.ono(u,'ゲホゲホ',T,{col:'#ffe6b0'});H.ZS.s(T,()=>{[0,.2,.45,.62].forEach(d=>H._N(.12,{vol:.12,freq:900,at:d}))});
+    F.at(T+800,tt=>{const p=H.pos(u);F.smoke(p.x+u.rw*.9,p.y+u.rh*.2,{t:tt,n:12,col:'210,180,130',spread:60,r:16})})},
+  async post(sd,m){const z=sd.board.filter(b=>b.id==='tumbleT'&&b.hp>0).pop();const el=z&&uEl(z);if(!el)return;await K.wait(380);const F=mkF(0),H=kit(F),w=K.wrap(el);F.keyf(w,{t:0,d:700,fn:(v,k)=>{v.rot=k>=1?0:Math.sin(k*Math.PI*2)*.12}});H.ono(w,'コロコロ〜',50,{col:'#ffe6b0'});await K.wait(500)}};
+/* なまけ助手 スナッズ：大あくび → 少し 青く うす暗く（Zzz は ゲームの ねむりの しるし） */
+NSP.new44={sh:2400,until:3300,
+  run(F,H,u){const T=2400;F.keyf(u,{t:T,d:700,fn:(v,k)=>{v.sc=k>=1?1:1+.06*Math.sin(k*Math.PI);v.rot=k>=1?0:-.08*Math.sin(k*Math.PI)}});H.ono(u,'ふぁ〜あ',T,{col:'#d8e4ff'});
+    H.ZS.s(T,()=>{H.zNote(300,0,.5,{type:'triangle',vol:.07,slide:420});H.zNote(420,.5,.8,{type:'triangle',vol:.06,slide:220})});
+    F.keyf(u,{t:T+700,d:900,fn:(v,k)=>{v.tint=k>=1?null:`rgba(40,60,160,${.22*Math.sin(k*Math.PI)})`}});H.sleepOn(u,T+500,1400)}};
+/* 手配書はりのチャッピー：手配書が とんで ペタッ！ → 手配書の マーク（ゲーム） */
+NSP.new47={sh:2680,until:3480,q:{wanted:1},prep:sd=>{const t=strongT(sd);return t?{t}:false},
+  run(F,H,u,x){const t=W_(x.t),T=2680;F.shot(H.pos(u),H.pos(t),{t:T,d:500,im:'fx:10_05',sz:24,scale:1.6,arc:40,trail:'240,220,170'});
+    F.at(T+500,tt=>{const p=H.pos(t);F.icon('u_k_wanted',p.x,p.y,{t:tt,d:500,sz:70});F.shake({t:tt,p:4})});H.ono(t,'ペタッ！',T+500,{col:'#ffe08a'});H.ZS.f(T+500,'game1/Arcade Click Wood.wav',.6)}};
+/* ゾンビ将軍ペニー：地面から ゾンビの 手 →（ゲーム：みどりの けむりから ゾンビ）→ ウ〜… */
+NSP.zombie3={sh:2680,until:3380,
+  run(F,H,u){const T=2680;const r=rectC(u.el);const sd0=u.bx<F.dims().W/2?1:-1;const gx=r.x+sd0*r.w*1.05,gy=r.y+r.h*.45;
+    F.at(T,tt=>{F.burst(gx,gy,{t:tt,n:8,im:'fx:04_08',sp:2.5,g:.12,up:2,life:700,sz:.16,add_:false,dir:-Math.PI/2,spread:2});F.shake({t:tt,p:3,d:300})});
+    F.overlay(u,{t:T,d:900,draw:(x,y,rr,e)=>{const c=F.ctx(),I=F.ui('fx:12_27');if(!I.complete)return;const k=Math.min(1,e/450),s=r.w*.7;c.save();c.beginPath();c.rect(gx-s,gy-s*1.2,s*2,s*1.2);c.clip();c.globalAlpha=Math.min(1,(900-e)/200);c.translate(gx,gy+s*.5-s*.95*E.o(k));c.rotate(Math.sin(e/120)*.12);c.drawImage(I,-s/2,-s/2,s,s);c.restore()}});
+    H.ZS.f(T,'cartoon/Muddy Puddle Jump 02.mp3',.6)},
+  async post(sd){const z=sd.board.filter(b=>b.id==='zombieT'&&b.hp>0).pop();const el=z&&uEl(z);if(!el)return;await K.wait(450);const F=mkF(0),H=kit(F);H.ono(K.wrap(el),'ウ〜…',0,{col:'#9dff7a'});await K.wait(500)}};
+/* おばけ写真屋 パシャリ：ねらって 3・2・1 → パシャッ！ まっ白 → まぶしくて ふらっ →（ゲーム：牢屋へ） */
+NSP.new65={sh:2470,until:4170,prep:sd=>{const t=strongT(sd);return t?{t}:false},
+  run(F,H,u,x){const t=W_(x.t),T=2470;H.aimOn(t,T,900,84);[0,1,2].forEach(i=>F.at(T+i*260,tt=>{const p=H.pos(t);F.floatTxt(String(3-i),p.x+t.rw*.55,p.y-t.rh*.6,{t:tt,size:18,col:'#ffffff',rise:6,d:300})}));H.ZS.s(T,()=>{for(let i=0;i<3;i++)H.zNote(1200,i*.26,.05,{type:'square',vol:.04})});
+    F.at(T+800,tt=>{F.flash({t:tt,d:420,col:'255,255,255',a:.95});F.burst(H.pos(t).x,H.pos(t).y,{t:tt,n:10,im:'x_spark',sp:4.5,life:600,sz:.16})});H.ono(u,'パシャッ！',T+800,{col:'#ffffff'});H.ZS.s(T+800,()=>{try{if(SE2.has('cam_shutter'))SE2.play('cam_shutter','start',true);else noise(.08,{vol:.25,freq:3000,type:'highpass'})}catch(e){}});
+    F.keyf(t,{t:T+850,d:700,fn:(v,k)=>{v.rot=k>=1?0:Math.sin(k*Math.PI*3)*.1;v.tint=k>=1?null:`rgba(255,255,255,${.6*(1-k)})`}});H.ono(t,'まぶしい！',T+950,{col:'#fff8d0'})}};
+/* バス・リーブス：投げ縄が とんで シュルッ →（ゲーム：牢屋へ ガシャーン） */
+NSP.bass={sh:2400,until:3450,prep:sd=>{const t=strongT(sd);return t?{t}:false},
+  run(F,H,u,x){const t=W_(x.t),T=2400;F.shot(H.pos(u),H.pos(t),{t:T,d:520,im:'fx:13_04',sz:30,scale:1.5,arc:60,trail:'230,200,140'});
+    F.overlay(t,{t:T+520,d:500,draw:(xx,y,r,e)=>{const c=F.ctx(),I=F.ui('fx:13_04');if(!I.complete)return;const s=t.rw*1.2*(1-.25*Math.min(1,e/250));c.save();c.globalAlpha=Math.min(1,(500-e)/150);c.translate(xx,y+t.rh*.1);c.scale(1,.45);c.drawImage(I,-s/2,-s/2,s,s);c.restore()}});H.ono(t,'シュルッ',T+520,{col:'#ffe9b0'});H.ZS.s(T,()=>{try{SFX.whoosh&&SFX.whoosh()}catch(e){}})}};
+/* カギ番ブルーノ：カギを ジャラッ → ビンを なげて 酔わせる */
+NSP.bruno={sh:2610,until:4400,q:{drunk:1},prep:sd=>{const t=strongT(sd);return t?{t}:false},
+  run(F,H,u,x){const t=W_(x.t),T=2610;F.overlay(u,{t:T,d:700,draw:(xx,y,r,e)=>{const c=F.ctx(),I=F.ui('fx:09_23');if(!I.complete)return;const s=40;c.save();c.globalAlpha=Math.min(1,e/150,(700-e)/200);c.translate(xx+u.rw*.4,y-u.rh*.3);c.rotate(Math.sin(e/70)*.17);c.drawImage(I,-s/2,-s/2,s,s);c.restore()}});H.ono(u,'ジャラッ',T+50,{col:'#ffe9b0'});
+    H.ZS.s(T+50,()=>{for(let i=0;i<4;i++)tone(2400+i*300,.05,{type:'square',vol:.025,at:i*.05})});H.drunkOn(u,t,T+700)}};
+/* 海辺のきふじん マリーナ：ハートが ふわっ → 一拍 → ウイスキーの ビンで 酔わせる */
+NSP.kifujin={sh:2680,until:4900,q:{drunk:1},prep:sd=>{const t=strongT(sd);return t?{t}:false},
+  run(F,H,u,x){const t=W_(x.t),T=2680;F.at(T,tt=>{const p=H.pos(u);F.burst(p.x,p.y-u.rh*.3,{t:tt,n:5,im:'fx:08_06',sp:2,g:-.05,up:1.5,life:900,sz:.11,add_:false})});H.ZS.s(T,()=>{[1319,1760,2093].forEach((f,i)=>H.zNote(f,i*.08,.25,{type:'sine',vol:.05}))});H.ono(u,'うふっ',T+100,{col:'#ffc0e0'});
+    H.drunkOn(u,t,T+1300)}};
+/* カンカン・キャット：スポットライト → ハイヒールが じゅんばんに 上がったり 下がったり → 酔わせる */
+NSP.cancan={sh:2610,until:5600,q:{drunk:1},prep:sd=>{const t=strongT(sd);return t?{t}:false},
+  run(F,H,u,x){const t=W_(x.t),T=2610;H.spotOn(u,T,2400);H.ZS.s(T+100,()=>{for(let i=0;i<8;i++)H._N(.05,{vol:.12,freq:2500,at:i*.28})});F.keyf(u,{t:T+100,d:2200,fn:(v,k)=>{const e=k*2200;v.rot=k>=1?0:Math.sin(e/150)*.08;v.oy=k>=1?0:-Math.abs(Math.sin(e/150))*6}});
+    [-1,1].forEach(q=>F.overlay(u,{t:T+100,d:2200,draw:(xx,y,r,e)=>{const c=F.ctx(),I=F.ui('fx:13_09');if(!I.complete)return;const ph=Math.floor(e/300)%2===(q<0?0:1);const lift=ph?Math.sin((e%300)/300*Math.PI)*26:0;const s=40;c.save();c.globalAlpha=Math.min(1,e/150,(2200-e)/200);c.translate(xx+q*u.rw*.62,y+u.rh*.2-lift);c.scale(q<0?-1:1,1);c.rotate(ph?-.35*Math.sin((e%300)/300*Math.PI):0);c.drawImage(I,-s/2,-s/2,s,s);c.restore()}}));
+    H.ono(u,'ハイッ！ ハイッ！',T+300,{col:'#ffc0e8'});H.drunkOn(u,t,T+2600)}};
+/* ミスト・マリー：画面の はしから 白い きりが もくもく → あいてを つつむ → ビンで 酔わせる（きりは のこって ゆっくり うすく） */
+NSP.mist={sh:2690,until:5900,q:{drunk:1},prep:sd=>{const t=strongT(sd);return t?{t}:false},
+  run(F,H,u,x){const t=W_(x.t),T=2690;const {W,H:Hh}=F.dims(),D=5600,R_=(i,k)=>{const v=Math.sin(i*127.1+k*311.7)*43758.5;return v-Math.floor(v)};
+    const P=Array.from({length:26},(_,i)=>{const sd=i%4,r=R_(i,1);let px,py;if(sd===0){px=-40;py=r*Hh}else if(sd===1){px=W+40;py=r*Hh}else if(sd===2){px=r*W;py=Hh+40}else{px=r*W;py=-40}return {x:px,y:py,d0:R_(i,2)*600,s:110+R_(i,3)*110,ph:R_(i,4)*7,go:i%3===0}});
+    F.overlay(u,{t:T,d:D,draw:(x0,y0,r0,e)=>{const c=F.ctx(),I=F.ui('fx:new/mist_puff');const fa=Math.min(1,e/700)*Math.min(1,(D-e)/1500);
+      c.save();const g=c.createRadialGradient(W/2,Hh*.45,Math.min(W,Hh)*.15,W/2,Hh*.45,Math.max(W,Hh)*.75);g.addColorStop(0,`rgba(235,240,250,${.16*fa})`);g.addColorStop(1,`rgba(245,248,255,${.62*fa})`);c.fillStyle=g;c.fillRect(0,0,W,Hh);c.restore();
+      if(!I.complete)return;const b=H.pos(t);c.save();for(let i=0;i<P.length;i++){const p=P[i],k=cl((e-p.d0)/1300),q=E.o(k);let X=p.x+(W/2-p.x)*.28*q+Math.sin(e/600+p.ph)*14,Y=p.y+(Hh*.45-p.y)*.28*q+Math.cos(e/700+p.ph)*10;
+        if(p.go){const k2=E.io(cl((e-1100-p.d0*.5)/900));X=X+(b.x-X)*k2;Y=Y+(b.y-Y)*k2;if(k2>=1){const an=i+e/650;X=b.x+Math.cos(an)*t.rw*.45;Y=b.y+Math.sin(an)*t.rh*.3}}
+        const s=p.s*(p.go?1-.45*cl((e-1100)/900):1)*(1+.06*Math.sin(e/300+p.ph));const a_=.6*fa*cl((e-p.d0)/300);if(a_<=0)continue;c.globalAlpha=a_;const ar_=I.naturalHeight/I.naturalWidth||.89;c.drawImage(I,X-s/2,Y-s*ar_*.5,s,s*ar_)}c.restore()}});
+    H.ZS.f(T,'magic/29 Invisibility Cloak 01.mp3',.7);H.ZS.f(T+1100,'game2/epic whoosh soft.wav',.7);
+    F.keyf(t,{t:T+1300,d:1500,fn:(v,k)=>{v.alpha=k>=1?1:1-.55*Math.sin(k*Math.PI);v.ox=k>=1?0:Math.sin(k*Math.PI*4)*3}});H.ono(t,'もやもや…',T+1500,{col:'#eef4ff'});
+    H.drunkOn(u,t,T+2400)}};
+/* 大ワシのグレン：手前に 大きく うかんで（カード形の 影）→ 急降下 →（ゲーム：2ダメージ） */
+NSP.new06={sh:2260,until:3030,q:{shot:1},prep:sd=>({t:strongT(sd)}),
+  run(F,H,u,x,sd){const tel=x.t?uEl(x.t):heroEl(opp(sd));const t=W_(tel),T=2260;if(!t)return;const pa=H.pos(u),pt=H.pos(t);const mx=(pt.x-pa.x)*.5,my=(pt.y-pa.y)*.5-12;
+    F.keyf(u,{t:T,d:380,fn:(v,k)=>{v.sc=1+.35*E.o(k);v.shadow=E.o(k);v.ox=mx*E.o(k);v.oy=my*E.o(k)}});F.keyf(u,{t:T+380,d:220,fn:(v,k,tt)=>{v.ox=mx;v.oy=my+Math.sin(tt/90)*3}});
+    F.keyf(u,{t:T+600,d:170,fn:(v,k)=>{v.sc=1.35-.35*E.io(k);v.shadow=1-k;v.ox=mx+((pt.x-pa.x)*.85-mx)*E.io(k);v.oy=my+((pt.y-pa.y)*.85-my)*E.io(k)}});H.ZS.s(T+600,()=>{try{SFX.swish&&SFX.swish()}catch(e){}});
+    F.at(T+770,tt=>F.burst(pt.x,pt.y,{t:tt,n:8,im:'fx:12_23',sp:4,g:.08,life:900,sz:.14,add_:false}));H.ono(t,'ズドーン！',T+770);
+    F.keyf(u,{t:T+780,d:450,fn:(v,k)=>{v.ox=(pt.x-pa.x)*.85*(1-E.o(k));v.oy=(pt.y-pa.y)*.85*(1-E.o(k));v.shadow=0;v.sc=1}})}};
+/* ロイ・ビーン判事：木づちを ふりあげて カーン！ →（ゲーム：3ダメージ） */
+NSP.roybean={sh:2190,until:2790,q:{shot:1},prep:sd=>({t:strongT(sd)}),
+  run(F,H,u,x,sd){const tel=x.t?uEl(x.t):heroEl(opp(sd));const t=W_(tel),T=2190;if(!t)return;
+    F.overlay(t,{t:T,d:1100,draw:(xx,y,r,e)=>{const c=F.ctx(),I=F.ui('fx:09_12');if(!I.complete)return;const s=t.rw*1.05,gx=xx+.79*s,gy=y;let rr;if(e<380)rr=.61+.26*E.o(e/380);else if(e<560)rr=.87-1.83*E.io((e-380)/180);else rr=-.96+.06*Math.sin(Math.min(1,(e-560)/200)*Math.PI);c.save();c.globalAlpha=Math.min(1,e/120,(1100-e)/200);c.translate(gx,gy);c.rotate(rr);c.drawImage(I,-.85*s,-.95*s,s,s);c.restore()}});
+    H.ZS.wood(T+560);H.ZS.s(T+560,()=>H.zNote(120,0,.25,{type:'sine',vol:.12,slide:60}));F.at(T+560,tt=>{const p=H.pos(t);F.shake({t:tt,p:9,d:300});F.burst(p.x,p.y-t.rh*.2,{t:tt,n:8,im:'x_star',sp:4,life:600,sz:.14})});H.ono(t,'カーン！',T+600,{col:'#ffd27a'})}};
+/* テキサス・レンジャー隊：保安官の 星が とんで →（ゲーム：なかま1人 +1/+1） */
+NSP.ranger={sh:2330,until:3030,pickR:1,prep:(sd,m)=>{const L=mineOf(sd,m);if(!L.length)return false;const i=Math.floor(Math.random()*L.length);return {v:L[i],i,n:L.length}},
+  run(F,H,u,x){const v=W_(x.v),T=2330;F.keyf(u,{t:T,d:300,fn:(w,k)=>{w.oy=-8*Math.sin(k*Math.PI)}});F.shot(H.pos(u),H.pos(v),{t:T+250,d:450,im:'fx:10_06',sz:24,scale:1.5,arc:40,trail:'255,215,90'});H.ZS.s(T+250,()=>{try{SFX.sparkle&&SFX.sparkle()}catch(e){}})}};
+/* クロケット：相棒の 帽子が とんで ぽすっ →（ゲーム：なかま1人 +1/+1） */
+NSP.crockett={sh:2610,until:3360,pickR:1,prep:NSP.ranger.prep,
+  run(F,H,u,x){const v=W_(x.v),T=2610;F.shot(H.pos(u),{x:H.pos(v).x,y:H.pos(v).y-v.rh*.45},{t:T,d:520,im:'fx:12_11',sz:26,scale:1.6,arc:60,trail:'230,190,130'});
+    F.at(T+520,tt=>{F.icon('fx:12_11',H.pos(v).x,H.pos(v).y-v.rh*.45,{t:tt,d:900,sz:40})});H.ono(v,'ぽすっ',T+520,{col:'#ffe9b0'});H.ZS.s(T+520,()=>H._N(.08,{vol:.15,freq:700}))}};
+/* ワイアット・アーフ：保安官バッジが 光って →（ゲーム：なかま ぜんいん こうげき+1・足もとが 光る） */
+NSP.wyatt={sh:2400,until:2900,
+  run(F,H,u){const T=2400;F.at(T,tt=>{const p=H.pos(u);F.icon('fx:10_08',p.x,p.y-u.rh*.62,{t:tt,d:1200,sz:40,bob:3})});F.keyf(u,{t:T,d:900,fn:(v,k)=>{v.glow=k>=1?0:Math.sin(k*Math.PI);v.glowC='255,215,90'}});H.ZS.s(T,()=>{try{SFX.sparkle&&SFX.sparkle()}catch(e){}})}};
+/* ドク・ホリデー：くすりの ビンを なかま みんなと あなたに くばる →（ゲーム：体力+3） */
+NSP.doc={sh:2380,until:3500,
+  run(F,H,u,x,sd,m){const T=2380;const he=rectC(heroEl(sd));const TG=mineOf(sd,m).map(b=>({v:W_(b)})).filter(g=>g.v);TG.push({v:u,self:1});if(he)TG.push({p:{x:he.x,y:he.y-10}});
+    TG.forEach((g,j)=>{const t0=T+j*260;if(g.self)F.at(t0,tt=>{const p=H.pos(u);F.icon('fx:10_13',p.x,p.y-u.rh*.62,{t:tt,d:500,sz:30})});else F.shot(H.pos(u),g.p||H.pos(g.v),{t:t0,d:420,im:'fx:10_13',sz:20,scale:1.4,arc:40,trail:'200,255,210'})});
+    H.ZS.s(T,()=>{try{SFX.flip&&SFX.flip()}catch(e){}});NSP.doc.until=T+Math.max(1,TG.length)*260+300}};
+/* ソーピー・スミス：シャボン玉が ふわふわ → 足もとが あわだらけ → つるっ！ → あわが ぱちぱち →（ゲーム：こうげき-2） */
+NSP.soapy={sh:2680,until:4180,prep:sd=>{const t=strongT(sd);return t?{t}:false},
+  run(F,H,u,x){const t=W_(x.t),T=2680;const R_=(i,k)=>{const q=Math.sin(i*29.3+k*83.1)*43758.5;return q-Math.floor(q)};
+    F.overlay(u,{t:T,d:1700,draw:(xx,y,r,e)=>{const c=F.ctx(),I=F.ui('fx:06_23');if(!I.complete)return;const a0=H.pos(u),b0=H.pos(t);for(let i=0;i<9;i++){const ee=e-i*80;if(ee<0||e>1350+i*25)continue;const k=Math.min(1,ee/1000),tx=b0.x+(R_(i,1)-.5)*t.rw*1.4,ty=b0.y+t.rh*(.15+R_(i,2)*.3),X=a0.x+(tx-a0.x)*E.io(k)+Math.sin(ee/200+i)*10,Y=a0.y+(ty-a0.y)*E.io(k)-Math.sin(k*Math.PI)*70,s=(14+R_(i,3)*14)*(1+.05*Math.sin(ee/90));c.save();c.globalAlpha=Math.min(1,ee/150)*.9;c.translate(X,Y);c.drawImage(I,-s/2,-s/2,s,s);c.restore()}}});
+    H.ZS.f(T,'game2/Rising Bubbles.wav',.5);H.ono(u,'ふわふわ〜',T+100,{col:'#d0f0ff'});
+    F.keyf(t,{t:T+1150,d:700,fn:(v,k)=>{v.rot=k>=1?0:Math.sin(k*Math.PI*2)*.18;v.ox=k>=1?0:Math.sin(k*Math.PI)*10;v.oy=k>=1?0:Math.sin(k*Math.PI)*-6}});H.ono(t,'つるっ！',T+1150,{col:'#d0f0ff'});H.ZS.s(T+1150,()=>H.zNote(900,0,.3,{type:'sine',vol:.06,slide:300}));
+    F.at(T+1350,tt=>{const p=H.pos(t);F.burst(p.x,p.y+t.rh*.2,{t:tt,n:12,im:['fx:06_24','fx:06_23'],sp:3,g:-.03,life:700,sz:.1,add_:false})});[0,90,170,260].forEach(d=>H.ZS.f(T+1350+d,'game1/pop 2.wav',.35))}};
+/* ねむりの ナップ：ねむ〜い（Zzz・うす青く こっくり）→ ふぁぁ…と 大あくび → あくびの けむりが みょ〜んと あいてへ → まとわりついて こっくり →（ゲーム：こうげき-2） */
+NSP.sandman={sh:2610,until:5410,prep:sd=>{const t=strongT(sd);return t?{t}:false},
+  run(F,H,u,x){const t=W_(x.t),T=2610;H.sleepOn(u,T-400,5200);F.keyf(u,{t:T-400,d:4400,fn:(v,k)=>{const e_=k*4400;v.rot=k>=1?0:Math.sin(e_/900)*.05;v.oy=k>=1?0:Math.max(0,Math.sin(e_/900))*3}});
+    F.keyf(u,{t:T,d:1500,fn:(v,k)=>{const q=k<.55?E.io(k/.55):1-E.io((k-.55)/.45);v.sy=k>=1?1:1+.07*q;v.sx=k>=1?1:1+.04*q}});H.ono(u,'ふぁぁ…',T+500,{col:'#e8e0ff',size:19});
+    H.ZS.s(T+450,()=>{H.zNote(260,0,.55,{type:'triangle',vol:.09,slide:420});H.zNote(420,.55,1.0,{type:'triangle',vol:.09,slide:200});H._N(1.2,{vol:.04,freq:700})});
+    const S0=T+1300,DR=1300,N=11,HOLD=1500;
+    F.overlay(u,{t:S0,d:DR+HOLD+N*70,draw:(xx,y,r,e)=>{const c=F.ctx(),I=F.ui('fx:new/white_smoke');if(!I.complete)return;const a0=H.pos(u),b0=H.pos(t);a0.y-=u.rh*.25;const dx=b0.x-a0.x,dy=b0.y-a0.y,L=Math.hypot(dx,dy)||1,nx=-dy/L,ny=dx/L;const END=DR+HOLD+N*70;
+      c.save();for(let i=0;i<N;i++){const k=cl((e-i*70)/DR);if(e<i*70)continue;const q=E.io(k);let X=a0.x+dx*q+nx*Math.sin(q*Math.PI*3+i*.5)*22*(1-q*.6),Y=a0.y+dy*q+ny*Math.sin(q*Math.PI*3+i*.5)*22*(1-q*.6);
+        if(k>=1){const ee=e-i*70-DR,an=i/N*Math.PI*2+ee/700;X=b0.x+Math.cos(an)*t.rw*.42;Y=b0.y+Math.sin(an)*t.rh*.32+Math.sin(ee/260+i)*4}
+        const s=(26+18*q)*(1+.08*Math.sin(e/180+i));c.globalAlpha=.62*Math.min(1,(e-i*70)/200)*Math.min(1,(END-e)/500);c.drawImage(I,X-s/2,Y-s/2,s,s*.8)}c.restore()}});
+    H.ono(t,'みょ〜ん',S0+DR-200,{col:'#e8e0ff'});
+    const T2=S0+DR+200;F.at(T2,tt=>{const p=H.pos(t);F.burst(p.x,p.y,{t:tt,n:8,im:'x_spark',sp:2.5,g:-.03,life:900,sz:.12});F.icon('x_zzz',p.x+t.rw*.35,p.y-t.rh*.5,{t:tt,d:1600,sz:36,bob:3})});F.keyf(t,{t:T2,d:1700,fn:(v,k)=>{v.rot=k>=1?0:Math.sin(k*Math.PI*3)*.07;v.tint=k>=1?null:'rgba(40,60,160,.25)'}})}};
+/* ほろよい吟遊詩人バラッド：こはく色の しずくが はねて ヒック！ → じぶんの こうげき+3（ゲームは 数字だけ かえるので 光と 文字も ここで） */
+NSP.bard={sh:2260,until:2760,
+  run(F,H,u){const T=2260;F.at(T,tt=>{const p=H.pos(u);F.burst(p.x,p.y-u.rh*.2,{t:tt,n:8,im:['fx:new/amber_drops','fx:new/amber_splash'],sp:3,g:.15,up:2.5,life:600,sz:.18,add_:false})});H.ono(u,'ヒック！',T,{col:'#ffd08a'});
+    F.keyf(u,{t:T,d:600,fn:(v,k)=>{v.rot=k>=1?0:Math.sin(k*Math.PI*3)*.08}});H.ZS.s(T,()=>{try{SE2.play('atk_bottle','hit')}catch(e){}})},
+  async post(sd,m,c){const el=uEl(m);if(!el)return;try{CFX.buff(el);const x=valX(C[c.id].v,c.lv);K.ensure();K.begin();const u=K.wrap(el),p=K.pos(u);K.floatTxt('こうげき+'+x,p.x,p.y-u.rh*.12,{t:150,size:20,rise:14,col:'#ffe066'});if(typeof updUnit==='function')updUnit(m)}catch(e){}await K.wait(1000)}};
+/* ポール・バニヤン：助走 → 大きな オノを ぶんっ！（ゆっくり わたる）→ 土ぼこり →（ゲーム：あいて ぜんいんに 2ダメージ） */
+NSP.bunyan={sh:2540,until:2900,q:{aoe:1},
+  run(F,H,u,x,sd){const T=2540;const efEl=document.querySelector(isMe(sd)?'#ef':'#af');const ef=rectC(efEl)||{x:F.dims().W/2,y:F.dims().H*.3,w:200,h:100},{W}=F.dims();H.runupAt(u,T-470);
+    F.overlay(u,{t:T,d:700,draw:(xx,y,r,e)=>{const c=F.ctx(),I=F.ui('fx:09_10');if(!I.complete)return;const k=E.io(Math.min(1,e/450));const s_=u.rw*1.7;const X=W*.15+W*.7*k,Y=ef.y+20-Math.sin(k*Math.PI)*40;c.save();c.globalAlpha=Math.min(1,e/100,(700-e)/150);c.translate(X,Y);c.rotate(-1.2+2.4*k);c.drawImage(I,-s_/2,-s_/2,s_,s_);c.restore()}});
+    F.at(T+300,tt=>{F.shake({t:tt,p:11,d:450});F.flash({t:tt,d:160,a:.45});F.smoke(W/2,ef.y+ef.h*.45,{t:tt,n:18,spread:W*.5,r:20})});
+    foesOf(sd).map(W_).filter(Boolean).forEach((v,i)=>F.at(T+250+i*90,tt=>{const p=H.pos(v);F.burst(p.x,p.y,{t:tt,n:6,im:'x_slash',sp:5,life:450,sz:.2,orient:true})}));H.ono(u,'ブンッ！',T+250,{col:'#ffd27a'});H.ZS.s(T+200,()=>{try{SFX.swish&&SFX.swish();SFX.crit&&SFX.crit()}catch(e){}})}};
+/* たんけん隊フェレット：地図を ひろげて → お宝の ふくろ → コインが とびだす（旅の 賞金 ＄2） */
+NSP.ferret={sh:2330,until:4100,q:{burst:1},
+  run(F,H,u){const T=2330;F.overlay(u,{t:T,d:900,draw:(xx,y,r,e)=>{const c=F.ctx(),I=F.ui('fx:07_26');if(!I.complete)return;const k=E.b(Math.min(1,e/300)),s_=u.rw*.8;c.save();c.globalAlpha=Math.min(1,(900-e)/200);c.translate(xx+u.rw*.55,y-u.rh*.35);c.scale(k,1);c.drawImage(I,-s_/2,-s_/2,s_,s_);c.restore()}});H.ZS.s(T,()=>{try{SFX.flip&&SFX.flip()}catch(e){}});
+    F.at(T+800,tt=>{const p=H.pos(u);F.icon('fx:09_20',p.x,p.y-u.rh*.6,{t:tt,d:900,sz:50});F.burst(p.x,p.y-u.rh*.6,{t:tt,n:6,im:'x_star',sp:3,life:600,sz:.14})});
+    const co=rectC(document.getElementById('coins'))||{x:F.dims().W*.15,y:F.dims().H*.85,w:50,h:30};for(let i=0;i<2;i++)F.shot({x:H.pos(u).x+(i-.5)*14,y:H.pos(u).y-u.rh*.6},{x:co.x-co.w*.3,y:co.y},{t:T+1100+i*90,d:520,im:'fx:new/coin_tilt',sz:20,scale:1.4,arc:60,trail:'255,215,90'});
+    F.at(T+1700,tt=>{F.burst(co.x-co.w*.3,co.y,{t:tt,n:6,im:'x_star',sp:3,life:500,sz:.12})});H.ZS.s(T+1650,()=>{try{SFX.coin&&SFX.coin()}catch(e){}})}};
+/* ショーマン・オウル：クラッカー パーン！パーン！ → 紙ふぶき →（ゲーム：手札の なかま 2人が ステージへ） */
+NSP.owl={sh:2610,until:3300,
+  run(F,H,u){const T=2610;const {W}=F.dims(),my=H.MID();F.at(T,tt=>{F.icon('fx:13_12',W*.2,my,{t:tt,d:700,sz:60});F.icon('fx:13_12',W*.8,my,{t:tt+80,d:700,sz:60});F.burst(W/2,my,{t:tt,n:14,im:['fx:11_32','x_star','fx:13_11'],sp:6,g:.12,up:3,life:1100,sz:.14,add_:false})});
+    H.ono(u,'パン！パン！',T,{col:'#ffe066'});H.ZS.f(T,'game1/pop 2.wav',1.1);H.ZS.f(T+170,'game1/pop 2.wav',1.1);H.ZS.confetti(T+120)}};
+/* シェリフ・モーキン警部：虫めがねで あいての 手札を 見る → 見つけた！ →（ゲーム：かくれた あいてを 見やぶる・なかま 体力+1） */
+NSP.eagle={sh:2750,until:4400,
+  run(F,H,u,x,sd){const T=2750;const fh=rectC(isMe(sd)?document.querySelector('.fh')||document.querySelector('#foeStage'):document.getElementById('hand'))||{x:F.dims().W/2,y:60,w:160,h:40};
+    F.overlay(u,{t:T,d:1300,draw:(xx,y,r,e)=>{const c=F.ctx(),I=F.ui('fx:08_61');if(!I.complete)return;const s_=56;c.save();c.globalAlpha=Math.min(1,e/150,(1300-e)/200);c.translate(fh.x-fh.w*.4+fh.w*.8*(.5-.5*Math.cos(e/1300*Math.PI*2)),fh.y+6);c.drawImage(I,-s_/2,-s_/2,s_,s_);c.restore()}});
+    F.floatTxt('ほあん けんさ！',fh.x,fh.y+fh.h*.9,{t:T+100,size:15,col:'#ffe9b0',rise:10});
+    F.at(T+1400,tt=>{const q=H.pos(u);F.icon('fx:08_49',q.x,q.y-u.rh*.62,{t:tt,d:1000,sz:40});opp(sd).board.filter(e=>e.hp>0&&e.kw&&e.kw.has('stealth')).forEach(e=>{const r=rectC(uEl(e));if(r)F.smoke(r.x,r.y+10,{t:tt+150,col:'220,220,235',n:10})})});H.ono(u,'見つけた！',T+1450,{col:'#ffe066'});H.ZS.s(T+1400,()=>{try{SFX.sparkle&&SFX.sparkle()}catch(e){}})}};
+/* ---- 足りない 絵（確認モード用の fx リストにも 入れる） ---- */
+/* ---- ゲームへの つなぎ ---- */
+async function play(s,sd,m,c,x){const el=uEl(m);if(!el)return;try{(CFX._nspLog=CFX._nspLog||[]).push(c.id)}catch(e){}const F=mkF(s.sh),H=kit(F),u=K.wrap(el);s.run(F,H,u,x||{},sd,m,c);await K.wait(Math.max(0,s.until-s.sh))}
+/* 前の DOM 演出（SPECIAL）は この子たちでは 出さない */
+if(typeof spFor==='function'){const _sf=spFor;spFor=function(id){if(NSP[id]&&on())return null;return _sf.apply(this,arguments)}}
+const _bcW=battlecry;battlecry=async function(sd,m,c){const s=c&&NSP[c.id];if(!s||!on()||!m||!uEl(m))return _bcW.apply(this,arguments);
+  let x={};try{x=s.prep?s.prep(sd,m,c):{}}catch(e){x={}}
+  try{await bcFx(m)}catch(e){}m._bcfx=1;/* 見参は ここで すんだ（中の bcFx は 1回 とばす） */
+  if(x!==false){try{await play(s,sd,m,c,x)}catch(e){console.warn('spwire',c.id,e)}}
+  const q=(x!==false&&s.q)||{};B._nsp={m,q};if(q.shot)B._spShot=m;
+  const R0=Math.random;if(x&&s.pickR&&x.n){let used=0;Math.random=function(){if(!used){used=1;Math.random=R0;return (x.i+.5)/x.n}return R0()}}
+  let r;try{r=await _bcW.apply(this,arguments)}finally{if(Math.random!==R0&&s.pickR)Math.random=R0;if(B){B._nsp=null;if(B._spShot===m)B._spShot=null}if(m._bcfx===1)m._bcfx=0}
+  if(x!==false&&s.post&&on()){try{await s.post(sd,m,c)}catch(e){console.warn('spwire post',c.id,e)}}
+  return r};
+const qOn=k=>typeof B!=='undefined'&&B&&B._nsp&&B._nsp.q&&B._nsp.q[k];
+/* 酔わせる：ゲームの ビン（🍺）は この 演出で もう 出したので 出さない */
+if(typeof floatAt==='function'){const _fa=floatAt;floatAt=function(el,txt){if(qOn('drunk')&&String(txt)==='🍺')return;return _fa.apply(this,arguments)}}
+/* ぜんたいこうげき：ゲームの 助走・光（CFX.aoe）は この 演出で もう 出した */
+{const _ao=CFX.aoe;CFX.aoe=function(){if(qOn('aoe'))return Promise.resolve();return _ao.apply(this,arguments)}}
+/* 絵文字の つぶ（お宝の 💰 など）は 出さない */
+if(typeof burst==='function'){const _bu=burst;burst=function(){if(qOn('burst'))return;return _bu.apply(this,arguments)}}
+/* 前の 手配書の 演出は 出さない（マークは ゲームが つける） */
+if(typeof wantedFx==='function'){const _wf=wantedFx;wantedFx=async function(){if(qOn('wanted'))return;return _wf.apply(this,arguments)}}
+CFX._nsp=NSP;
 })();
 
 
