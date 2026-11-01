@@ -470,7 +470,16 @@ function lassoDemo(ok){const X=window.LassoFX;if(!X)return;const fh=F.heroes().f
      ゲームは DOM の CFX（f77_cfx.js）なので、ここの 部品を CFX に うつす（背景＝#app の --bgimg を いちじ かえる でも よい）
    =================================================================== */
 const AWZ=p=>(window.ZKIMG&&ZKIMG[p.replace(/^\.\.\//,'')])||p;
-const AWIM=p=>p.startsWith('fx:')||/^x_/.test(p)?F.ui(p):F.img(AWZ(p));
+/* 11/1 iPhone で とまる 対策：大きい 絵（世界・覚醒の 絵）は 小さい webp（img/awk）＋ さきに decode。いまの 演出の 分だけ もつ（前の 子の 絵は すてる） */
+const AWBIG={};
+function awBig(p){let I=AWBIG[p];if(I)return I;I=new Image();I.decoding='async';const ok=()=>{I._ok=1};I.onload=()=>{if(!I.decode)ok()};I.src=AWZ(p);try{I.decode().then(ok,()=>{I.onload=ok;if(I.complete)ok()})}catch(e){I.onload=ok}AWBIG[p]=I;return I}
+function awBigKeep(ps){for(const k in AWBIG)if(!ps.includes(k)){try{AWBIG[k].src=''}catch(e){}delete AWBIG[k]}ps.forEach(awBig)}
+const awSmall=p=>p.replace(/\.webp$/,'s.webp');/* カードの 中に 出す 覚醒の すがた（小さい 版） */
+const AWIM=p=>p.startsWith('fx:')||/^x_/.test(p)?F.ui(p):/img\/awk\//.test(p)?awBig(p):F.img(AWZ(p));
+/* 色を かえた 絵は 1回だけ 作って つかいまわす（canvas の filter を 毎フレーム つかうと 重い） */
+const AWTINT=new Map();
+function awTint(I,f){if(!f||!I||!I.complete||!I.naturalWidth)return I;const key=I.src.length+':'+I.src.slice(-60)+'|'+f;let cv=AWTINT.get(key);if(cv)return cv;
+  cv=document.createElement('canvas');const sc=Math.min(1,256/Math.max(I.naturalWidth,I.naturalHeight));cv.width=Math.max(1,Math.round(I.naturalWidth*sc));cv.height=Math.max(1,Math.round(I.naturalHeight*sc));const x=cv.getContext('2d');x.filter=f;x.drawImage(I,0,0,cv.width,cv.height);cv.complete=true;cv.naturalWidth=cv.width;cv.naturalHeight=cv.height;AWTINT.set(key,cv);return cv}
 /* ---- 音の スロット（ここを かえれば ぜんいん かわる。f＝se2 の 音、syn＝合成） ---- */
 const AWSE={
   charge:   {f:'magic/05 Transfiguration Spell 01.mp3',v:.8},  /* ① ためる（光が あつまる） */
@@ -488,33 +497,33 @@ function awSE(t,slot,cfg){const s=Object.assign({},AWSE[slot]||{},(cfg&&cfg.se&&
    gather＝①で あつまる つぶ、amb＝②の 世界で ただよう もの（mode: fall／rise／drift／roll／firefly／bokeh／chip）
    wipe: diag（ななめ）／iris（まるく 広がる）／bars（よこの すじ）／split（まん中から ひらく）／vert（上から） */
 const AWC={
-  bibiri:{nm:'ビビリ・ザ・キッド',st:'wild',bg:'../art/boss/boss_wild_1.jpg',art:'../art/boss/boss_wild_2.jpg',sk:'ビビリ・パニックショット',col:'255,196,92',wipe:'diag',
+  bibiri:{nm:'ビビリ・ザ・キッド',st:'wild',bg:'img/awk/boss_wild_1.webp',art:'img/awk/boss_wild_2.webp',sk:'ビビリ・パニックショット',col:'255,196,92',wipe:'diag',
     gather:['fx:04_01','x_spark'],amb:[{im:'fx:04_01',mode:'drift',n:7,sz:46,sp:.8,a:.55},{im:'../bg/tumbleweed.png',mode:'roll',n:1,sz:70,sp:1}],se:{world:{f:'magic/19 Blowing Air Into Fire 02.mp3',v:.8}}},
-  zombino:{nm:'ドン・ゾンビーノ',st:'hill',bg:'../art/boss/boss_hill_1.jpg',art:'../art/boss/boss_hill_2.jpg',sk:'ゴッドファーザーの葬列',col:'140,255,150',wipe:'iris',
+  zombino:{nm:'ドン・ゾンビーノ',st:'hill',bg:'img/awk/boss_hill_1.webp',art:'img/awk/boss_hill_2.webp',sk:'ゴッドファーザーの葬列',col:'140,255,150',wipe:'iris',
     gather:['fx:new/white_smoke','x_spark'],gf:'sepia(1) hue-rotate(50deg) saturate(2.2) brightness(.95)',amb:[{im:'fx:03_07',mode:'drift',n:3,sz:56,sp:1.1},{mode:'firefly',n:16,col:'150,255,140'},{im:'fx:new/white_smoke',mode:'drift',n:3,sz:150,sp:.35,a:.2,f:'sepia(1) hue-rotate(50deg) saturate(2) brightness(.8)'}],se:{world:{f:'magic/35 Invisibility Cloak 02.mp3',v:.9}}},
-  eagle:{nm:'シェリフ・モーキン警部',st:'canyon',bg:'../art/boss/boss_canyon_1.jpg',art:'../art/boss/boss_canyon_2.jpg',sk:'天空の大捕物',col:'255,170,70',wipe:'vert',
+  eagle:{nm:'シェリフ・モーキン警部',st:'canyon',bg:'img/awk/boss_canyon_1.webp',art:'img/awk/boss_canyon_2.webp',sk:'天空の大捕物',col:'255,170,70',wipe:'vert',
     gather:['fx:02_04','x_spark'],amb:[{im:'fx:02_04',mode:'fall',n:8,sz:40,sp:.9},{im:'fx:02_19',mode:'drift',n:3,sz:90,sp:2.2,a:.5}],se:{world:{f:'game2/diamond whoosh.wav',v:.9}}},
-  mustache:{nm:'マダム・ムスタッシュ',st:'saloon',bg:'../art/boss/boss_saloon_1.jpg',art:'../art/boss/boss_saloon_2.jpg',sk:'グランドサロン貸し切りナイト',col:'255,110,150',wipe:'split',
+  mustache:{nm:'マダム・ムスタッシュ',st:'saloon',bg:'img/awk/boss_saloon_1.webp',art:'img/awk/boss_saloon_2.webp',sk:'グランドサロン貸し切りナイト',col:'255,110,150',wipe:'split',
     gather:['fx:09_18','x_spark'],amb:[{im:'fx:09_18',mode:'fall',n:9,sz:30,sp:1.1},{im:'x_confetti',mode:'fall',n:5,sz:40,sp:.8},{mode:'bokeh',n:10,col:'255,200,120'}],se:{world:{f:'essential/Celebration Small.mp3',v:.6,max:1.6}}},
-  bunyan:{nm:'ポール・バニヤン',st:'mine',bg:'../art/boss/boss_mine_1.jpg',art:'../art/boss/boss_mine_2.jpg',sk:'ジャイアント・ティンバー',col:'255,150,60',wipe:'diag',
+  bunyan:{nm:'ポール・バニヤン',st:'mine',bg:'img/awk/boss_mine_1.webp',art:'img/awk/boss_mine_2.webp',sk:'ジャイアント・ティンバー',col:'255,150,60',wipe:'diag',
     gather:['fx:05_02','fx:04_13'],amb:[{mode:'chip',n:12},{im:'fx:05_02',mode:'fall',n:5,sz:34,sp:.8}],se:{world:{f:'fantasy/stones appear.wav',v:.9}}},
-  nanashi:{nm:'名無しのガンマン',st:'ranch',bg:'../art/boss/boss_ranch_1.jpg',art:'../art/boss/boss_ranch_2.jpg',sk:'サイレント・ハイヌーン',col:'255,120,60',wipe:'bars',
+  nanashi:{nm:'名無しのガンマン',st:'ranch',bg:'img/awk/boss_ranch_1.webp',art:'img/awk/boss_ranch_2.webp',sk:'サイレント・ハイヌーン',col:'255,120,60',wipe:'bars',
     gather:['fx:04_01','x_spark'],amb:[{im:'fx:04_01',mode:'drift',n:6,sz:50,sp:.6,a:.5},{im:'../bg/tumbleweed.png',mode:'roll',n:1,sz:60,sp:.7}],se:{world:{f:'match3/Duel Challenge.wav',v:.8}}},
-  ketcham:{nm:'怪盗 キャッツ・ケッチャム',st:'train',bg:'../art/boss/boss_train_1.jpg',art:'../art/boss/boss_train_2.jpg',sk:'ファントム・グランドスティール',col:'190,150,255',wipe:'diag',
+  ketcham:{nm:'怪盗 キャッツ・ケッチャム',st:'train',bg:'img/awk/boss_train_1.webp',art:'img/awk/boss_train_2.webp',sk:'ファントム・グランドスティール',col:'190,150,255',wipe:'diag',
     gather:['fx:09_25','x_spark'],amb:[{im:'fx:09_25',mode:'drift',n:6,sz:30,sp:1.6},{im:'x_steam',mode:'drift',n:4,sz:90,sp:.7,a:.4}],se:{world:{f:'magic/29 Invisibility Cloak 01.mp3',v:.9}}},
-  ruler:{nm:'スチームタウン・ザ・ルーラー',st:'steam',bg:'../art/boss/boss_steam_1.jpg',art:'../art/boss/boss_steam_2.jpg',sk:'スチームタウン総動員',col:'255,190,110',wipe:'bars',
+  ruler:{nm:'スチームタウン・ザ・ルーラー',st:'steam',bg:'img/awk/boss_steam_1.webp',art:'img/awk/boss_steam_2.webp',sk:'スチームタウン総動員',col:'255,190,110',wipe:'bars',
     gather:['fx:02_25','fx:02_28'],amb:[{im:'fx:02_26',mode:'rise',n:5,sz:44,sp:.6,spin:1},{im:'x_steam',mode:'rise',n:5,sz:100,sp:.8,a:.4}],se:{world:{f:'game2/mg_metal_button_take.wav',v:.9}}},
-  ma:{nm:'おっ母つぁん ママ・バーカー',st:'bayou',bg:'../art/boss/boss_bayou_1.jpg',art:'../art/boss/boss_bayou_2.jpg',sk:'バーカー一家 総出撃',col:'200,120,255',wipe:'iris',
+  ma:{nm:'おっ母つぁん ママ・バーカー',st:'bayou',bg:'img/awk/boss_bayou_1.webp',art:'img/awk/boss_bayou_2.webp',sk:'バーカー一家 総出撃',col:'200,120,255',wipe:'iris',
     gather:['fx:06_23','x_spark'],amb:[{mode:'firefly',n:22,col:'220,255,140'},{im:'fx:06_23',mode:'rise',n:4,sz:40,sp:.5,a:.7}],se:{world:{f:'game2/Rising Bubbles.wav',v:.8,max:1.4}}},
-  ice:{nm:'氷魔術師 フォクシア',st:'snow',bg:'../art/boss/boss_snow_1.jpg',art:'../art/boss/boss_snow_2.jpg',sk:'アブソリュート・ゼロ',col:'170,230,255',wipe:'iris',
+  ice:{nm:'氷魔術師 フォクシア',st:'snow',bg:'img/awk/boss_snow_1.webp',art:'img/awk/boss_snow_2.webp',sk:'アブソリュート・ゼロ',col:'170,230,255',wipe:'iris',
     gather:['fx:04_21','fx:04_28'],amb:[{im:'fx:04_21',mode:'fall',n:12,sz:26,sp:1},{im:'fx:04_22',mode:'fall',n:5,sz:44,sp:.7}],vig:'200,240,255',se:{world:{f:'game2/ice magic appear.wav',v:.9}}},
-  ikoku:{nm:'異国の王 アーサー',st:'oasis',bg:'../art/boss/boss_oasis_1.jpg',art:'../art/boss/boss_oasis_2.jpg',sk:'王命・全軍招集',col:'255,210,90',wipe:'split',
+  ikoku:{nm:'異国の王 アーサー',st:'oasis',bg:'img/awk/boss_oasis_1.webp',art:'img/awk/boss_oasis_2.webp',sk:'王命・全軍招集',col:'255,210,90',wipe:'split',
     gather:['fx:02_07','x_spark'],amb:[{im:'fx:03_32',mode:'drift',n:6,sz:30,sp:.6},{im:'fx:05_06',mode:'fall',n:5,sz:34,sp:.6}],se:{world:{f:'game2/chorale.wav',v:.7,max:1.8}}},
-  adara:{nm:'聖域の勇者 アダラー',st:'volcano',bg:'../art/boss/boss_volcano_1.jpg',art:'../art/boss/boss_volcano_2.jpg',sk:'聖域の大結界',col:'120,255,160',wipe:'vert',
+  adara:{nm:'聖域の勇者 アダラー',st:'volcano',bg:'img/awk/boss_volcano_1.webp',art:'img/awk/boss_volcano_2.webp',sk:'聖域の大結界',col:'120,255,160',wipe:'vert',
     gather:['fx:02_05','x_spark'],amb:[{im:'fx:06_06',mode:'rise',n:7,sz:36,sp:.9},{mode:'firefly',n:12,col:'255,170,80'}],se:{world:{f:'casual/Holy Magic 1.wav',v:.9}}},
-  amelie:{nm:'月光の呪術師 アメリ',st:'forest',bg:'../art/boss/boss_forest_1.jpg',art:'../art/boss/boss_forest_2.jpg',sk:'満月のさかさま世界',col:'210,140,255',wipe:'iris',
+  amelie:{nm:'月光の呪術師 アメリ',st:'forest',bg:'img/awk/boss_forest_1.webp',art:'img/awk/boss_forest_2.webp',sk:'満月のさかさま世界',col:'210,140,255',wipe:'iris',
     gather:['fx:03_12','x_spark'],moon:{x:.44,y:.12},amb:[{im:'fx:03_12',mode:'fall',n:7,sz:28,sp:.5},{im:'fx:05_06',mode:'fall',n:5,sz:32,sp:.6,f:'hue-rotate(250deg) saturate(1.3)'}],se:{world:{f:'magic/06 Transfiguration Spell 02.mp3',v:.9}}},
-  capone:{nm:'悪の親玉 カポニャンコ',st:'mafia',bg:'../art/boss/boss_mafia_1.jpg',art:'../art/boss/boss_mafia_2.jpg',sk:'ニャンコ・ファミリー総会',col:'255,200,90',wipe:'bars',
+  capone:{nm:'悪の親玉 カポニャンコ',st:'mafia',bg:'img/awk/boss_mafia_1.webp',art:'img/awk/boss_mafia_2.webp',sk:'ニャンコ・ファミリー総会',col:'255,200,90',wipe:'bars',
     gather:['fx:09_18','x_spark'],amb:[{mode:'bokeh',n:16,col:'255,210,130'},{im:'fx:09_18',mode:'fall',n:6,sz:28,sp:1}],se:{world:{f:'essential/Magic Item.mp3',v:.9}}},
 };
 const AWNM=id=>(AWC[id]&&AWC[id].nm)||id;
@@ -523,7 +532,7 @@ const awCl=x=>Math.max(0,Math.min(1,x));
 const awTop=u=>u.side?u.side==='foe':u===F.heroes().foe;/* 場の 位置では きめない（味方の 列も 画面の 上半分に あるため） */
 /* ---- 金の 文字（覚醒の 文字と おなじ 色）。sh＝キラッの 位置（0〜1） ---- */
 function awGold(c,str,x,y,size,o={}){c.save();c.font=`${size}px "Dela Gothic One"`;c.textAlign='center';c.textBaseline='middle';c.lineJoin='round';
-  c.lineWidth=size*.24;c.strokeStyle=o.stroke||'#3e1a06';c.shadowColor='rgba(0,0,0,.65)';c.shadowOffsetY=4;c.shadowBlur=5;c.strokeText(str,x,y);c.shadowColor='transparent';
+  c.lineWidth=size*.24;c.strokeStyle=o.stroke||'#3e1a06';c.strokeStyle='rgba(0,0,0,.45)';c.strokeText(str,x,y+4);c.strokeStyle=o.stroke||'#3e1a06';c.strokeText(str,x,y);/* 11/1 影は shadowBlur を つかわない（iPhone で 重い） */
   const g=c.createLinearGradient(0,y-size*.5,0,y+size*.5);(o.grad||['#fffbe0','#ffe066','#ffb31a','#ff7a00']).forEach((s,i,a)=>g.addColorStop(i/(a.length-1),s));c.fillStyle=g;c.fillText(str,x,y);
   if(o.sh>0&&o.sh<1){const w=c.measureText(str).width,sx=x-w/2-40+(w+80)*o.sh,gg=c.createLinearGradient(sx-34,0,sx+34,0);gg.addColorStop(0,'rgba(255,255,255,0)');gg.addColorStop(.5,'rgba(255,255,255,.95)');gg.addColorStop(1,'rgba(255,255,255,0)');c.fillStyle=gg;c.fillText(str,x,y)}
   c.restore()}
@@ -537,7 +546,7 @@ function awCharge(cfg,u,t,d){const {W,H}=F.dims();F.darken({t,d:d+520,a:.62,inD:
   const ims=cfg.gather||['x_spark'],N=16,P_=Array.from({length:N},(_,i)=>({a:i/N*Math.PI*2+Math.random()*.4,r:Math.max(W,H)*(.45+Math.random()*.2),t:t+120+i*42,im:ims[i%ims.length],s:22+Math.random()*16}));
   F.ext(t+d);F.add({draw(tt){const e=tt-t;if(e<0||e>d+80)return;const c=F.ctx(),p=pos(u);c.save();c.globalCompositeOperation='lighter';
     /* 光が あつまる（まるい 光が だんだん 強く） */const k=awCl(e/d),R=Math.max(u.rw,u.rh)*(1.6-.5*k),g=c.createRadialGradient(p.x,p.y,0,p.x,p.y,R);g.addColorStop(0,`rgba(${cfg.col},${.55*k})`);g.addColorStop(1,`rgba(${cfg.col},0)`);c.fillStyle=g;c.beginPath();c.arc(p.x,p.y,R,0,7);c.fill();
-    for(const q of P_){const ee=tt-q.t,D=620;if(ee<0||ee>D)continue;const kk=E.io(ee/D),rr=q.r*(1-kk),I=AWIM(q.im);if(!I.complete)continue;const s=q.s*(1-.6*kk);c.save();c.globalAlpha=Math.min(1,ee/120)*(1-Math.max(0,(kk-.85)/.15));if(cfg.gf&&/smoke/.test(q.im))c.filter=cfg.gf;c.translate(p.x+Math.cos(q.a)*rr,p.y+Math.sin(q.a)*rr);c.rotate(Math.sin(ee/160)*.17);c.drawImage(I,-s/2,-s/2,s,s);c.restore()}
+    for(const q of P_){const ee=tt-q.t,D=620;if(ee<0||ee>D)continue;const kk=E.io(ee/D),rr=q.r*(1-kk),I=AWIM(q.im);if(!I.complete)continue;const s=q.s*(1-.6*kk);c.save();c.globalAlpha=Math.min(1,ee/120)*(1-Math.max(0,(kk-.85)/.15));const J=cfg.gf&&/smoke/.test(q.im)?awTint(I,cfg.gf):I;c.translate(p.x+Math.cos(q.a)*rr,p.y+Math.sin(q.a)*rr);c.rotate(Math.sin(ee/160)*.17);c.drawImage(J,-s/2,-s/2,s,s);c.restore()}
     c.restore()}})}
 /* ---- ② ワイプの 形（v＝0〜1 見える 量）。edge＝さかいめを 光らせる ---- */
 function awShape(c,type,v,u,flip){const {W,H}=F.dims();c.beginPath();
@@ -546,13 +555,12 @@ function awShape(c,type,v,u,flip){const {W,H}=F.dims();c.beginPath();
   if(type==='split'){const w=v*W/2;c.rect(W/2-w,-10,w*2,H+20);return}
   if(type==='vert'){const y=v*(H+80)-40;if(flip){c.moveTo(-10,H+10);c.lineTo(W+10,H+10);c.lineTo(W+10,H-y-30);c.lineTo(-10,H-y+30)}else{c.moveTo(-10,-10);c.lineTo(W+10,-10);c.lineTo(W+10,y+30);c.lineTo(-10,y-30)}c.closePath();return}
   /* diag */const X=y=>v*(W+H*.6)-y*.6;const fx=x=>flip?W-x:x;c.moveTo(fx(-10),-10);c.lineTo(fx(X(-10)),-10);c.lineTo(fx(X(H+10)),H+10);c.lineTo(fx(-10),H+10);c.closePath()}
-function awEdge(c,type,v,u,flip,col){if(v<=0||v>=1)return;const {W,H}=F.dims();c.save();c.globalCompositeOperation='lighter';c.strokeStyle=`rgba(${col},.95)`;c.shadowColor=`rgba(${col},1)`;c.shadowBlur=16;c.lineWidth=5;
-  awShape(c,type,v,u,flip);c.stroke();c.strokeStyle='rgba(255,255,255,.9)';c.lineWidth=2;c.stroke();c.restore()}
+function awEdge(c,type,v,u,flip,col){if(v<=0||v>=1)return;const {W,H}=F.dims();c.save();c.globalCompositeOperation='lighter';awShape(c,type,v,u,flip);c.strokeStyle=`rgba(${col},.25)`;c.lineWidth=22;c.stroke();c.strokeStyle=`rgba(${col},.45)`;c.lineWidth=11;c.stroke();c.strokeStyle=`rgba(${col},.95)`;c.lineWidth=5;c.stroke();c.strokeStyle='rgba(255,255,255,.9)';c.lineWidth=2;c.stroke();c.restore()}
 /* ---- ② その子の 世界（背景）：tIn に 入って、tOut に もどる ---- */
 function awWorld(cfg,u,tIn,tOut){const {W,H}=F.dims(),I=AWIM(cfg.bg),DI=430,DO=420,flip=awTop(u);F.ext(tOut+DO);
   const vis=tt=>tt<tIn?0:tt<tIn+DI?E.io((tt-tIn)/DI):tt<tOut?1:tt<tOut+DO?1-E.io((tt-tOut)/DO):0;
   F.add({low:1,draw(tt){const v=vis(tt);if(v<=0)return;const c=F.ctx();c.save();awShape(c,cfg.wipe,v,u,flip);c.clip();
-    if(I.complete){const z=1.1-.08*E.o(awCl((tt-tIn)/3200));awCover(c,I,0,0,W,H,.55,z)}else{c.fillStyle='#000';c.fillRect(0,0,W,H)}
+    if(I._ok){const z=1.1-.08*E.o(awCl((tt-tIn)/3200));awCover(c,I,0,0,W,H,.55,z)}else{c.fillStyle='#000';c.fillRect(0,0,W,H)}
     /* 下を 少し くらく（数字・カードを 読みやすく） */const g=c.createLinearGradient(0,0,0,H);g.addColorStop(0,'rgba(0,0,0,.05)');g.addColorStop(.55,'rgba(0,0,0,.22)');g.addColorStop(1,'rgba(0,0,0,.5)');c.fillStyle=g;c.fillRect(0,0,W,H);
     if(cfg.vig){const r=c.createRadialGradient(W/2,H/2,Math.min(W,H)*.35,W/2,H/2,Math.hypot(W,H)*.6);r.addColorStop(0,`rgba(${cfg.vig},0)`);r.addColorStop(1,`rgba(${cfg.vig},.45)`);c.fillStyle=r;c.fillRect(0,0,W,H)}
     c.restore()}});
@@ -569,7 +577,7 @@ function awWorld(cfg,u,tIn,tOut){const {W,H}=F.dims(),I=AWIM(cfg.bg),DI=430,DO=4
       else if(a.mode==='firefly'){x=p.x+Math.sin(f*.02+p.ph)*30;y=p.y+Math.cos(f*.017+p.ph)*24;const b=.35+.65*Math.max(0,Math.sin(f*.08+p.ph*3));const R=6+4*p.hue;const g=c.createRadialGradient(x,y,0,x,y,R*2.2);g.addColorStop(0,`rgba(${a.col},${.95*b})`);g.addColorStop(1,`rgba(${a.col},0)`);c.save();c.globalCompositeOperation='lighter';c.fillStyle=g;c.beginPath();c.arc(x,y,R*2.2,0,7);c.fill();c.restore();continue}
       else if(a.mode==='bokeh'){const R=14+22*p.hue,b=.18+.14*Math.sin(f*.05+p.ph);x=p.x;y=p.y*.7;const g=c.createRadialGradient(x,y,0,x,y,R);g.addColorStop(0,`rgba(${a.col},${b+.1})`);g.addColorStop(.7,`rgba(${a.col},${b})`);g.addColorStop(1,`rgba(${a.col},0)`);c.save();c.globalCompositeOperation='lighter';c.fillStyle=g;c.beginPath();c.arc(x,y,R,0,7);c.fill();c.restore();continue}
       else if(a.mode==='chip'){/* 木くず：ななめに とんで ゆっくり 落ちる */x=(p.x+f*p.v*1.2)%(W+40)-20;y=(p.y+f*p.v*1.1)%(H+40)-20;r=f*.06*(p.ph>3.5?1:-1);c.save();c.translate(x,y);c.rotate(r);c.fillStyle=p.hue>.5?'#c98a4a':'#e7b878';c.strokeStyle='#6b3f1a';c.lineWidth=1.2;c.beginPath();c.ellipse(0,0,7+5*p.hue,3,0,0,7);c.fill();c.stroke();c.restore();continue}
-      const I=AWIM(a.im);if(!I.complete)continue;const ar=(I.naturalHeight/I.naturalWidth)||1;c.save();c.globalAlpha=al;if(a.f)c.filter=a.f;c.translate(x,y);c.rotate(r);c.drawImage(I,-p.s/2,-p.s*ar/2,p.s,p.s*ar);c.restore()}
+      let I=AWIM(a.im);if(!I.complete)continue;if(a.f)I=awTint(I,a.f);const ar=(I.naturalHeight/I.naturalWidth)||1;c.save();c.globalAlpha=al;c.translate(x,y);c.rotate(r);c.drawImage(I,-p.s/2,-p.s*ar/2,p.s,p.s*ar);c.restore()}
     c.restore()}});
   /* さかいめの 光（入る とき・もどる とき） */
   F.add({top:1,draw(tt){const v=vis(tt);if((tt>tIn&&tt<tIn+DI)||(tt>tOut&&tt<tOut+DO))awEdge(F.ctx(),cfg.wipe,v,u,flip,cfg.col)}});
@@ -582,10 +590,10 @@ function awCutin(cfg,u,t,hold,o={}){const {W,H}=F.dims(),I=AWIM(cfg.art),IN=280,
   F.add({top:1,draw(tt){const e=tt-t;if(e<0||e>D)return;const c=F.ctx(),X=off(tt);
     /* まわりを 少し くらく */const da=Math.min(1,e/IN,(D-e)/OUT)*.45;c.fillStyle=`rgba(0,0,0,${da})`;c.fillRect(-20,-20,W+40,H+40);
     c.save();c.translate(X,0);
-    /* 金の ふち（うしろに 太く） */c.save();band(c,7);c.fillStyle=`rgba(${cfg.col},.95)`;c.shadowColor=`rgba(${cfg.col},1)`;c.shadowBlur=18;c.fill();c.restore();
+    /* 金の ふち（うしろに 太く） */c.save();band(c,16);c.fillStyle=`rgba(${cfg.col},.22)`;c.fill();band(c,11);c.fillStyle=`rgba(${cfg.col},.4)`;c.fill();band(c,7);c.fillStyle=`rgba(${cfg.col},.95)`;c.fill();c.restore();
     c.save();band(c,3);c.fillStyle='#2a1406';c.fill();c.restore();
     c.save();band(c);c.clip();c.fillStyle='#120a04';c.fillRect(-20,yc-bh,W+40,bh*2);
-    if(I.complete){const iw=W*1.12,ih=iw*I.naturalHeight/I.naturalWidth,px=(e*.018)*dir;c.drawImage(I,(W-iw)/2+px,yc-ih*.32,iw,ih)}
+    if(I._ok){const iw=W*1.12,ih=iw*I.naturalHeight/I.naturalWidth,px=(e*.018)*dir;c.drawImage(I,(W-iw)/2+px,yc-ih*.32,iw,ih)}
     /* スピード線 */c.globalCompositeOperation='lighter';for(let i=0;i<9;i++){const yy=yc-bh/2+((i*53)%bh),len=60+((i*37)%90),xx=((e*1.6*dir+i*97)%(W+200)+W+200)%(W+200)-100;c.fillStyle='rgba(255,255,255,.18)';c.fillRect(xx,yy,len,2)}
     c.restore();c.restore()}});
   /* 文字（いちばん 上） */
@@ -597,7 +605,7 @@ function awCutin(cfg,u,t,hold,o={}){const {W,H}=F.dims(),I=AWIM(cfg.art),IN=280,
   return t+D}
 /* ---- ④ 変身：カードの 絵が 覚醒の すがたに ---- */
 function awTransform(cfg,u,t){const {W,H}=F.dims();F.keyf(u,{t:t-220,d:220,fn:(v,k)=>{v.tint=`rgba(255,255,255,${.9*k})`;v.glow=1}});
-  F.at(t,tt=>{try{const ar=u.el.querySelector('.art')||u.el.querySelector('.hart');if(ar){ar.classList.add('img');ar.textContent='';ar.style.backgroundImage=`url(${AWZ(cfg.art)})`;ar.style.backgroundSize='cover';ar.style.backgroundPosition='center 28%'}}catch(e){}
+  F.at(t,tt=>{try{const ar=u.el.querySelector('.art')||u.el.querySelector('.hart');if(ar){ar.classList.add('img');ar.textContent='';ar.style.backgroundImage=`url(${AWZ(awSmall(cfg.art))})`;ar.style.backgroundSize='cover';ar.style.backgroundPosition='center 28%'}}catch(e){}
     const p=pos(u);F.shake({t:tt,p:10,d:420});F.flash({t:tt,d:200,a:.5,col:cfg.col});F.ring(p.x,p.y,{t:tt,d:650,col:cfg.col,r1:Math.max(u.rw,u.rh)*1.2,w:10});
     F.burst(p.x,p.y,{t:tt+30,n:14,im:['x_star','x_spark',...(cfg.gather||[]).slice(0,1)],sp:7,g:.06,up:1,life:1000,sz:.2,filter:cfg.gf||null});F.dots(p.x,p.y,{t:tt,n:26,col:cfg.col,up:2,life:1100,area:u.rw*1.4})});
   F.keyf(u,{t,d:620,fn:(v,k)=>{v.tint=k>=1?null:`rgba(255,255,255,${.9*(1-E.o(k))})`;v.sc=k>=1?1:1+.28*(1-E.o(k));v.glow=k>=1?0:1-k;v.ox=0}});return t+620}
@@ -644,7 +652,7 @@ const AWSK={
     T+=10*170+500;F.keyf(a,{t:T,d:500,fn:(v,k)=>{v.sc=k>=1?1:1-.05*Math.sin(k*Math.PI)}});ono(a,'ハァ…ハァ…',T,{col:'#c8e0ff'});return T+1300},
   /* ゾンビーノ：みどりの きりの なか、場が いっぱいに なるまで ゾンビ → ゾンビが いるあいだ ダメージを うけない */
   zombino(a,t){const cfg=AWC.zombino;let T=awBanner(cfg,t)+120;const {W}=F.dims();
-    /* じぶんの 列に みどりの きり（カードの うしろ） */const fogT=T,fogD=99999;F.ext(T+600);F.add({low:1,draw(tt){const e=tt-fogT;if(e<0)return;const c=F.ctx(),p=pos(a),I=F.ui('fx:new/white_smoke');if(!I.complete)return;const k=awCl(e/600);c.save();c.globalAlpha=.55*k;c.filter='sepia(1) hue-rotate(50deg) saturate(2) brightness(.8)';for(let i=0;i<6;i++){const s=a.rh*1.3,x=((i*W/5+e*.03*(i%2?1:-1))%(W+s)+W+s)%(W+s)-s/2;c.drawImage(I,x-s/2,p.y+a.rh*.15-s/2,s,s*.7)}c.restore()}});
+    /* じぶんの 列に みどりの きり（カードの うしろ） */const fogT=T,fogD=99999;F.ext(T+600);F.add({low:1,draw(tt){const e=tt-fogT;if(e<0)return;const c=F.ctx(),p=pos(a),I=F.ui('fx:new/white_smoke');if(!I.complete)return;const k=awCl(e/600);const J=awTint(I,'sepia(1) hue-rotate(50deg) saturate(2) brightness(.8)');c.save();c.globalAlpha=.55*k;for(let i=0;i<6;i++){const s=a.rh*1.3,x=((i*W/5+e*.03*(i%2?1:-1))%(W+s)+W+s)%(W+s)-s/2;c.drawImage(J,x-s/2,p.y+a.rh*.15-s/2,s,s*.7)}c.restore()}});
     F.keyf(a,{t:T,d:500,fn:(v,k)=>{v.oy=k>=1?0:(awTop(a)?6:-6)*Math.sin(k*Math.PI);v.glow=k>=1?0:Math.sin(k*Math.PI);v.glowC='140,255,150'}});ono(a,'ファミリーよ…',T+80,{col:'#b9ffb0'});T+=900;
     const zs=awHidden(a);zs.forEach((z,i)=>{popIn(z,T+i*380,true);ZS.f(T+i*380,'magic/35 Invisibility Cloak 02.mp3',.5,.6)});T+=zs.length*380+300;
     if(zs.length)ono(zs[zs.length-1],'ウ〜…',T-200,{col:'#b9ffb0'});T+=500;
@@ -761,7 +769,7 @@ const AWSK={
     ono(a,'さかさまに なあれ！',T+200,{col:'#e6c8ff'});ZS.f(T,'magic/06 Transfiguration Spell 02.mp3',.9);T+=1300;
     const fs=awFoes(a);fs.forEach((f,i)=>{const ti=T+i*480;let sw=false;F.keyf(f,{t:ti,d:420,fn:(v,k)=>{v.sy=Math.cos(k*Math.PI*2)||.001;if(k>=.5&&!sw){sw=true;const x=v.atk;v.atk=v.hp;v.hp=Math.max(1,x)}if(k>=1)v.sy=1}});F.at(ti+210,tt=>{const p=pos(f);F.burst(p.x,p.y,{t:tt,n:6,im:'fx:03_12',sp:3,life:700,sz:.16})});ZS.f(ti,'casual/Swap Sound.wav',.7)});
     T+=fs.length*480+400;if(fs.length)F.at(T,tt=>F.floatTxt('こうげきと 体力が 入れかわった',W/2,MID()+(awTop(a)?36:-36),{t:tt,size:15,rise:6,col:'#e6c8ff',d:1700}));T+=1400;
-    const cl=awHidden(a);cl.forEach((z,i)=>{const ti=T+i*420;F.at(ti,tt=>{const p=pos(z);F.burst(p.x,p.y,{t:tt,n:8,im:['fx:03_12','x_spark'],sp:3,life:800,sz:.16})});popIn(z,ti,false);F.keyf(z,{t:ti+10,d:99999,fn:v=>{v.tint='rgba(170,110,255,.35)';v.alpha=.82}});ZS.f(ti,'magic/35 Invisibility Cloak 02.mp3',.6,.6)});
+    const cl=awHidden(a);cl.forEach((z,i)=>{const ti=T+i*420;F.at(ti,tt=>{const p=pos(z);F.burst(p.x,p.y,{t:tt,n:8,im:['fx:03_12','x_spark'],sp:3,life:800,sz:.16})});popIn(z,ti,false);F.keyf(z,{t:ti+10,d:40,fn:v=>{v.tint='rgba(170,110,255,.35)';v.alpha=.82}});ZS.f(ti,'magic/35 Invisibility Cloak 02.mp3',.6,.6)});
     T+=cl.length*420+300;if(cl.length)F.at(T,tt=>buffLabel(cl[0],'月夜の 分身',tt));return T+1700},
   /* カポニャンコ：ゴーン「総会を はじめる！」→ 場の わくが 5人に 広がる → ニャンコが かけつける → なかま ぜんいん こうげき+2（1人ずつ） */
   capone(a,t){const cfg=AWC.capone;let T=awBanner(cfg,t)+120;const {W}=F.dims();
@@ -775,12 +783,6 @@ const AWSK={
 function awSkStage(id,side,o={}){const me=side!=='foe';const actor={art:id,atk:o.atk||6,hp:o.hp||6};const ally=(o.ally||[]).map(art=>({art,atk:2,hp:3}));const hid=(o.hid||[]).map(art=>({art,atk:o.hidAtk??2,hp:o.hidHp??2,hidden:true}));const foesT=o.tg||[{art:'jab',atk:2,hp:7},{art:'iguana',atk:2,hp:7},{art:'kurogoke',atk:3,hp:7}];
   return me?{foeHp:20,foes:foesT,mine:[actor,...ally,...hid]}:{foes:[actor,...ally,...hid],mine:foesT.map(x=>Object.assign({},x,{art:{jab:'dog',iguana:'juko',kurogoke:'wolf'}[x.art]||x.art}))}}
 const AWK_ITEMS=[];
-for(const id in AWC){const cfg=AWC[id];
-  AWK_ITEMS.push({k:'awk_'+id,nw:1,n:'覚醒演出：'+AWNM(id),d:'ためる → その子の 世界へ ワイプ → カットイン（覚醒・名前・「'+cfg.sk+'」）→ カードが 覚醒の すがたに → もとの 場に もどる（タップで スキップ）',
-    stage:{foes:S1.foes,mine:[{art:id,atk:5,hp:5}]},total:6000,build(){const u=U(2);const T=awakenSeq(u,cfg,{id});awSkipArm('awk_'+id,T.skip)}})}
-/* ボスがわ（敵が 覚醒する ときも おなじ。ワイプ・カットインは 上・右から） */
-AWK_ITEMS.push({k:'awk_boss_ice',nw:1,n:'覚醒演出：ボスがわ（れい：フォクシア）',d:'ボス戦で 敵が 覚醒する とき。おなじ ながれで、ワイプと カットインが 敵の がわから 来る',
-  stage:{foes:[{art:'ice',atk:5,hp:5}],mine:S1.mine},total:6000,build(){const u=U(0);const T=awakenSeq(u,AWC.ice,{id:'ice'});awSkipArm('awk_boss_ice',T.skip)}});
 /* 技の 演出（第1弾：ステージ順の はじめ 5人＋フォクシア／第2弾：のこり 8人）。味方がわ・ボスがわ 両方 */
 const AWSK_ST={bibiri:{},zombino:{hid:['zombieT','zombieT','zombieT'],tg:[{art:'jab',atk:2,hp:3},{art:'iguana',atk:2,hp:2}]},eagle:{tg:[{art:'jab',atk:2,hp:6},{art:'iguana',atk:2,hp:6}]},mustache:{tg:[{art:'jab',atk:2,hp:3},{art:'iguana',atk:2,hp:2}]},bunyan:{hid:['logT','logT'],hidAtk:0,hidHp:1},ice:{},
   nanashi:{ally:['dog','juko']},ketcham:{hid:['kurogoke','wolf'],hidAtk:3,hidHp:3},ruler:{hid:['boiler','geary','seisei'],hidAtk:3,hidHp:3},ma:{hid:['goonT','goonT'],hidAtk:3,hidHp:3},
@@ -800,8 +802,14 @@ const AWSK_D={bibiri:'ひぃぃっ！ → めちゃくちゃに 10発（敵キ�
   adara:'剣を かかげて 光の 柱 → 足もとに 金の まほうじん → なかまに 1人ずつ バリア → 自分の たては 3回 たたかないと こわれない',
   amelie:'むらさきの 夜に 大きな 満月 → 敵が 1人ずつ くるっと さかさま（こうげきと 体力が 入れかわる）→ 月夜の 分身が 2人',
   capone:'ゴーン「総会を はじめる！」→ 場に 5人まで → ニャンコが かけつける → なかま ぜんいん 1人ずつ こうげき+2'};
-for(const id in AWSK)for(const side of ['me','foe']){const st=AWSK_ST[id]||{};AWK_ITEMS.push({k:'awks_'+id+(side==='foe'?'_b':''),nw:1,n:'覚醒の 技：'+AWC[id].sk+(side==='foe'?'（ボスがわ）':''),d:AWSK_D[id]+(side==='foe'?'（ボス戦で 敵が つかう とき）':''),
-  stage:st.stage?st.stage(side):awSkStage(id,side,st),total:6000,build(){const a=F.units().find(v=>v.art===id&&!v.hidden);AWSK[id](a,200)}})}
+/* 11/1 覚醒 → 一拍 → その子の 技 を 1つの 演出で（味方がわ／ボスがわ）。場は 両がわ（敵キャラ・敵の 親分・なかま）を 出す */
+const AWBEAT=650;
+for(const id in AWC)for(const side of ['me','foe']){const cfg=AWC[id],st=AWSK_ST[id]||{},k='awk_'+id+(side==='foe'?'_b':'');
+  AWK_ITEMS.push({k,nw:1,n:'覚醒演出：'+AWNM(id)+(side==='foe'?'（ボスがわ）':''),
+    d:'覚醒（ためる → 世界へ → カットイン → 変身 → もどる）→ 技「'+cfg.sk+'」：'+(AWSK_D[id]||'')+(side==='foe'?'（ボス戦で 敵が つかう とき）':'')+'（タップで 変身の 前まで スキップ）',
+    stage:st.stage?st.stage(side):awSkStage(id,side,st),total:6000,
+    build(){awBigKeep([cfg.bg,cfg.art,awSmall(cfg.art)]);const a=F.units().find(v=>v.art===id&&!v.hidden&&(side==='foe'?v.side==='foe':v.side!=='foe'))||F.units().find(v=>v.art===id&&!v.hidden);
+      const T=awakenSeq(a,cfg,{id});if(AWSK[id])AWSK[id](a,T.end+AWBEAT);awSkipArm(k,T.skip)}})}
 UNCHECKED.push(...AWK_ITEMS.map(i=>i.k));
 /* AWKBLOCK-END */
 const LIST=[
