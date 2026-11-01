@@ -115,8 +115,10 @@ function keyf(u,o){const {t=0,d=400,fn}=o;let done=false;ext(t+d);add({pre:1,dra
 function overlay(u,o){const {t=0,d=2000,draw:dr}=o;add({draw(tt){const e=tt-t;if(e<0||e>d)return;const {x,y}=P(u);dr(x,y,u.r*u.sc,e,e/d)}})}
 function play(builder,total=2600){const my=++run;fx=[];maxEnd=0;stage(builder.stage||{});builder.build&&builder.build();T0=performance.now();
   const loop=()=>{if(my!==run)return;const t=performance.now()-T0;frame(t);if(t<Math.max(total,maxEnd)+300)requestAnimationFrame(loop);else{dim=0;BW.document.getElementById('dim').style.opacity=0}};requestAnimationFrame(loop)}
+/* 11/01：とちゅうで もくじ・ほかの 演出へ うつったとき、のこった 絵（集中線・暗さ など）を ぜんぶ けす */
+function stop(){run++;fx=[];maxEnd=0;dim=0;shX=0;shY=0;try{if(c){c.setTransform(1,0,0,1,0,0);c.clearRect(0,0,cv.width,cv.height)}if(uc){uc.setTransform(1,0,0,1,0,0);uc.clearRect(0,0,ucv.width,ucv.height)}const dm=BW&&BW.document.getElementById('dim');if(dm)dm.style.opacity=0}catch(e){}}
 function frame(t){c.setTransform(DPR,0,0,DPR,0,0);c.clearRect(0,0,W,H);dim=0;shX=0;shY=0;for(const f of fx)if(f.once&&!f.done&&t>=f.t0){f.done=1;f.fn(t)}
   c.save();for(const f of fx)if(f.pre)f.draw(t);for(const f of fx)if(f.under)f.draw(t);
   for(const u of units)apply(u);apply(heroes.foe);apply(heroes.me);if(uc){const mc=c;c=uc;c.setTransform(DPR,0,0,DPR,0,0);c.clearRect(0,0,W,H);for(const f of fx)if(f.low&&f.draw)f.draw(t);c=mc}const dm=BW.document.getElementById('dim');if(dm)dm.style.opacity=dim;
   for(const f of fx)if(f.draw&&!f.pre&&!f.under&&!f.top&&!f.low&&!f.txt)f.draw(t);for(const f of fx)if(f.top)f.draw(t);for(const f of fx)if(f.txt)f.draw(t);c.restore()}
-return {tint,breakImg,tornadoImg,shatter,tornado,init,play,place,bd:()=>bd,ext,readMs,measure,ring,rays,burst,dots,smoke,flash,darken,shake,slam,floatTxt,icon,shot,tween,keyf,overlay,at,P,E,seg,units:()=>units,heroes:()=>heroes,ctx:()=>c,dims:()=>({W,H}),ui,img}})();
+return {stop,tint,breakImg,tornadoImg,shatter,tornado,init,play,place,bd:()=>bd,ext,readMs,measure,ring,rays,burst,dots,smoke,flash,darken,shake,slam,floatTxt,icon,shot,tween,keyf,overlay,at,P,E,seg,units:()=>units,heroes:()=>heroes,ctx:()=>c,dims:()=>({W,H}),ui,img}})();

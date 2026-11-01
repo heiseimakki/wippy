@@ -87,6 +87,7 @@ function Snd(o){const S={};const A=()=>{try{const a=o.ac&&o.ac();if(a&&a.state==
 function run(host,o){return new Promise(async resolve=>{
   const R=document.createElement('div');R.className='pfx-root';R.style.cssText=`position:${o.fixed?'fixed':'absolute'};inset:0;z-index:${o.z||50};touch-action:none;user-select:none;-webkit-user-select:none;overflow:hidden;opacity:0;transition:opacity .25s`;
   host.appendChild(R);
+  /* 11/1 メモ：覚醒の カードの おもてに かかる キラキラ（.awkf::after）は パックでは けす（文字が 読める）。うしろの 光は そのまま */if(!document.getElementById('pfxAwkCalm')){const cs=document.createElement('style');cs.id='pfxAwkCalm';cs.textContent='.pfx-root .card.awkf::after{display:none!important}';document.head.appendChild(cs)}
   const [P,BK,COIN,STAR,SPK]=await Promise.all([loadImg(o.pack),loadImg(o.img&&o.img.back),loadImg(o.img&&o.img.coin),loadImg(o.img&&o.img.star),loadImg(o.img&&o.img.spark)]);
   if(!P){R.remove();throw new Error('pack image')}
   const rc=R.getBoundingClientRect(),W=rc.width||Math.min(innerWidth,430),H=rc.height||innerHeight,padB=o.padB||0,HH=H-padB,dpr=Math.min(2.5,window.devicePixelRatio||1);
@@ -310,10 +311,10 @@ function run(host,o){return new Promise(async resolve=>{
     else{if(!c.fx){c.fx=1;c.ry=180;c.wht=0;const y=c.y;
         bBursts.push({x:cx,y,r:Math.max(W,H)*.75,col:'A',t0:now,d:1500,rays:20});bBursts.push({x:cx,y,r:CB*big*1.4,col:'A',t0:now+120,d:1100,rays:12});bursts.push({x:cx,y,r:CB*big*.9,col:'A',t0:now,d:450});
         confetti(cx,y-CH*big*.25);confetti(cx,y);sparkAt(cx,y,16,'#fff',STAR);sparkAt(cx,y,14,'#ffe9ff',SPK);
-        sweeps.push({card:c,t0:now+300,d:1300,rainbow:true,loop:true,al:.2});sweeps.push({card:c,t0:now+200,d:900});
+        /* 11/1 メモ：ドン！の あと カードの 上は しずかに（文字が 読める）。にじの 光は うしろだけ。白い 光が 1回 はしるだけ */sweeps.push({card:c,t0:now+200,d:900});
         const sz=Math.min(120,W*.27),sy=Math.max(sz*.62+6,cy-CH*big/2-sz*.3);slams.push({s:'覚',x:W*.33,y:sy,t0:now+260,d:1900,size:sz,from:3.2},{s:'醒',x:W*.67,y:sy,t0:now+420,d:1750,size:sz,from:3.2});
         rings.push({x:cx,y,t0:now,d:800});rings.push({x:cx,y,t0:now+140,d:900});c.hold=now}
-      const eh=e-AK.HIT,k=E.cl(eh/520);c.x=cx;c.y=lerp(c.yh,cy,E.o(k));c.s=lerp(c.sh,big,E.back(k));c.glow=1;c.rz=0;
+      const eh=e-AK.HIT,k=E.cl(eh/520);c.x=cx;c.y=lerp(c.yh,cy,E.o(k));c.s=lerp(c.sh,big,E.back(k));c.glow=lerp(1,.55,E.cl((eh-300)/900));c.rz=0;
       st.white=eh<130?1:Math.max(0,1-(eh-130)/750);st.qk=Math.max(0,15*(1-eh/520));st.dark2=lerp(.62,.45,E.cl(eh/600));
       if(eh>AK.HOLD||(c.hurry&&eh>700)){st.qk=0;st.white=0;c.state='settle';c.f0=now;c.xb=c.x;c.yb=c.y;c.sb=c.s;st.awk=null}}}
   const slams=[],rings=[];

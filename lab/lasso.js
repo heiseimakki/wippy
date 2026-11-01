@@ -83,8 +83,11 @@ function bubble(c,s,x,y,tx,ty,a,sc){if(a<=0)return;c.save();c.globalAlpha=a;c.fo
 LassoFX.draw=function(c,e,g,ok){const W=g.W,H_=g.H,f=g.foe,me=g.me,G=geo(g),END=LassoFX.total(ok);if(e<0||e>END)return;const img=g.img||LassoFX.img;
   c.save();
   /* 1) 暗く（親分と ウィピィの まわりは スポットライト）*/
-  let dim=.5*Eo(seg(e,0,300));if(e>T.land)dim+=.12*seg(e,T.land,400);if(ok&&e>T.okWin)dim-=.2*seg(e,T.okWin,300);if(!ok&&e>T.ngText)dim-=.1*seg(e,T.ngText,400);dim*=1-seg(e,END-400,400);
-  if(dim>0){c.fillStyle=`rgba(18,8,2,${dim})`;c.fillRect(0,0,W,H_);c.save();c.globalCompositeOperation='destination-out';
+  /* 11/01：荒野の ふんいき：すこし 暗く、セピア（茶色）っぽく。はじめに ふわっと 入って、さいごに ふわっと もどる */
+  let dim=.5*Eo(seg(e,0,500));if(e>T.land)dim+=.12*seg(e,T.land,400);if(ok&&e>T.okWin)dim-=.2*seg(e,T.okWin,300);if(!ok&&e>T.ngText)dim-=.1*seg(e,T.ngText,400);dim*=1-Eo(seg(e,END-600,600));
+  if(dim>0){c.fillStyle=`rgba(74,44,14,${dim})`;c.fillRect(0,0,W,H_);
+    /* まわりは もうすこし こい 茶色（ビネット）*/const vg=c.createRadialGradient(W/2,H_*.45,Math.min(W,H_)*.25,W/2,H_*.45,Math.hypot(W,H_)*.6);vg.addColorStop(0,'rgba(40,20,4,0)');vg.addColorStop(1,`rgba(40,20,4,${dim*.7})`);c.fillStyle=vg;c.fillRect(0,0,W,H_);
+    c.save();c.globalCompositeOperation='destination-out';
     const hole=(x,y,r,a)=>{const gr=c.createRadialGradient(x,y,r*.35,x,y,r);gr.addColorStop(0,`rgba(0,0,0,${a})`);gr.addColorStop(1,'rgba(0,0,0,0)');c.fillStyle=gr;c.beginPath();c.arc(x,y,r,0,7);c.fill()};
     hole(f.x,f.y,f.r*(e>T.land?2.1:2.6),.95);hole(me.x+14,me.y-40,me.r*4.2*(1-.5*seg(e,T.land,500)),.9);c.restore()}
   /* 2) 背景：ただよう 砂ぼこり（ずっと）*/
@@ -195,6 +198,7 @@ lassoFx=async function(ok){const meE=$('meHero'),fh=$('foeHero');if(!meE||!fh)re
   try{window.SE2&&SE2.decodeAll&&SE2.decodeAll()}catch(e){}
   const rc=el=>{const r=el.getBoundingClientRect();return {x:r.left+r.width/2,y:r.top+r.height/2,r:Math.min(r.width,r.height)/2}};
   const g={W:innerWidth,H:innerHeight,me:rc(meE),foe:rc(fh),tauntI:Math.floor(Math.random()*TAUNT.length)};
+  document.querySelectorAll('#lassocv').forEach(x=>x.remove());/* 11/01：前の のこりが あれば けす */
   const cv=document.createElement('canvas');cv.id='lassocv';cv.style.cssText='position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:86';document.body.appendChild(cv);
   const DPR=Math.min(2,devicePixelRatio||1);cv.width=g.W*DPR;cv.height=g.H*DPR;const c=cv.getContext('2d');
   const SP=()=>(typeof SPEED==='number'&&SPEED>0?SPEED:1);
@@ -203,11 +207,12 @@ lassoFx=async function(ok){const meE=$('meHero'),fh=$('foeHero');if(!meE||!fh)re
     if(q.syn)return LassoFX.syn(q.syn,a,out,q);const b=window.SE2&&SE2.buf&&SE2.buf[q.f];if(b)return LassoFX.buf(a,out,b,q.v,q.maxd);if(q.fb&&typeof SFX!=='undefined'&&SFX[q.fb])SFX[q.fb]()}catch(e){}};
   const setT=(el,o)=>{el.style.translate=(o.ox||o.oy)?`${o.ox.toFixed(1)}px ${o.oy.toFixed(1)}px`:'';el.style.rotate=o.rot?`${o.rot.toFixed(4)}rad`:'';el.style.scale=(o.sx!==1||o.sy!==1)?`${o.sx.toFixed(3)} ${o.sy.toFixed(3)}`:''};
   const END=LassoFX.total(ok),t0=performance.now();
-  await new Promise(res=>{const step=()=>{const e=(performance.now()-t0)/SP();
+  const fin=()=>{try{cv.remove()}catch(e){}[fh,meE].forEach(el=>{el.style.translate='';el.style.rotate='';el.style.scale=''})};
+  try{await new Promise(res=>{/* 11/01：コマが 止まっても（タブを うらに した など）かならず おわる */const sv=setTimeout(res,(END+1500)*Math.max(1,SP()));const done=()=>{clearTimeout(sv);res()};
+    const step=()=>{const e=(performance.now()-t0)/SP();
       while(ci<cues.length&&cues[ci].t<=e){const q=cues[ci++];if(e-q.t<400)play(q)}
       c.setTransform(DPR,0,0,DPR,0,0);c.clearRect(0,0,g.W,g.H);
-      if(e>=END||!cv.isConnected){res();return}
-      try{LassoFX.draw(c,e,g,ok);setT(fh,LassoFX.foe(e,ok));setT(meE,LassoFX.me(e))}catch(err){console.error(err);res();return}
-      requestAnimationFrame(step)};requestAnimationFrame(step)});
-  cv.remove();[fh,meE].forEach(el=>{el.style.translate='';el.style.rotate='';el.style.scale=''})};
+      if(e>=END||!cv.isConnected){done();return}
+      try{LassoFX.draw(c,e,g,ok);setT(fh,LassoFX.foe(e,ok));setT(meE,LassoFX.me(e))}catch(err){console.error(err);done();return}
+      requestAnimationFrame(step)};requestAnimationFrame(step)})}finally{fin()}};
 })();
