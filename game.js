@@ -1123,7 +1123,7 @@ document.addEventListener('pointerdown',e=>{if(e.target.closest&&e.target.closes
 
 
 /* バージョン：おおきい変更.機能を足した.小さな直し　（1.0.0 = 正式リリース） */
-const VERSION='0.84.0';
+const VERSION='0.85.0';
 /* =====================================================================
    タイトル・データ管理
    ===================================================================== */
@@ -4050,6 +4050,7 @@ Object.assign(SPECIAL,{
    タイトル画面：ロゴ どーん！ ＋ タンブルウィード ＋ 砂あらし ＋ あそぶボタン ＋ おしらせ
    ===================================================================== */
 const CHANGELOG=[
+  {v:'0.85.0',d:'11/2',t:['親分たちの 強さを ととのえたよ。そだてた なかまで いどもう！','名無しのガンマンは、さいしょから ひとりで 決とうを いどんで くるよ','はじめての 荒野の ビビリは、やさしく なったよ']},
   {v:'0.84.0',d:'11/2',t:['こうげきの 音が、当たる しゅんかんに ぴったり 鳴るように なったよ','見参の 文字や マークが、ずれずに 出るように なったよ','見参で たおした あいてが、いったん きえて また 出てくるのを なおしたよ','たたかいの 前に 絵と 音を 先に よみこんで、演出が きれいに 出るように なったよ','ゾンビの 大合唱が 3人で そろって 歌うように なったよ','かくせいできる 親分は、さいごに 自分で 出てくるよ！','かったとき・まけたとき、画面の 色が ふんわり かわるように なったよ','せっとくが おわると、町で 本人が しらせに くるよ','たたかう 前の 光の すじが、とちゅうで きれないように なったよ']},
   {v:'0.83.0',d:'11/1',t:['なげなわの 演出が 新しく なったよ！ つかまる…？ どきどき！','なげなわは、なげたら その ターンは おわり。カードを 出したり こうげき したら、その ターンは もう なげられないよ','レジェンドの 光が かっこよく なったよ','カラス・宝石ガニ・きっぷ切り・ハット など、技の 演出を 直したよ','ハットは あいてを たおす たびに 昇進するように なったよ','イグニドンの 見参で、あいてに 2ダメージが 出るように なったよ','ビビリ・ザ・キッドが 1回目から 本気で くるよ','セレスティアの 名前が「水のおどり子 セレスティア」に なったよ']},
   {v:'0.82.0',d:'11/1',t:['ステージごとに 背景が うごくように なったよ！ 雪・火の粉・ホタル・ゆげ など','かくせいカードが パックから 出ると、とくべつな 演出が 見られるよ','カードの すみの 文字を なくしたよ','時計の 子は、あと 何ターンで 1まい 引けるか 見えるように なったよ','カラスの ふっかつ、カラミティの なげちらかし など、技の 演出が ふえたよ','グリズリーの 肉キャッチは 6びょうに なったよ','はやうちポークの 早打ち勝負など、ミニゲームは ルールが 先に 出るように なったよ','合体に 失敗すると、次は 成功しやすく なるよ','効果音の 大きさを ととのえて、文字を 読む 時間も ゆっくりに したよ']},
@@ -4821,7 +4822,7 @@ setTimeout(()=>{try{Object.values(SMK).forEach(v=>{fetchLow(v.s)});Object.values
 const BOSS_PLUS={wild:2,hill:2,canyon:2,saloon:2,mine:2,ranch:3,train:3,steam:3,bayou:3,snow:3,oasis:4,volcano:4,forest:4,mafia:4};
 {const _mb=makeBoss;makeBoss=function(){const sp=_mb();
   /* 11/1「強くしておこう」：はじめての 旅でも ボス本人が 強い すがたで 出てくる（子分の レベル・体力・デッキの 数は はじめて用の まま） */
-  if(TUT_RUN()){const s=STAGES[R.sid];sp.deck=sp.deck.filter(c=>c.id!==s.boss);sp.bossSelfCard={id:s.boss,lv:MAX_LV,plus:(BOSS_PLUS[R.sid]||2),bossSelf:true};return sp}
+  if(TUT_RUN()){const s=STAGES[R.sid];sp.deck=sp.deck.filter(c=>c.id!==s.boss);sp.bossSelfCard={id:s.boss,lv:(BBAL.tut.self.lv||MAX_LV),plus:(BBAL.tut.self.plus!=null?BBAL.tut.self.plus:(BOSS_PLUS[R.sid]||2)),bossSelf:true};return sp}
   const s=STAGES[R.sid];sp.deck.forEach(c=>{c.lv=MAX_LV});
   sp.deck=sp.deck.filter(c=>c.id!==s.boss);
   sp.bossSelfCard={id:s.boss,lv:MAX_LV,plus:(BOSS_PLUS[R.sid]||2)+(R.star||0),bossSelf:true};
@@ -4836,6 +4837,17 @@ const BOSS_PLUS={wild:2,hill:2,canyon:2,saloon:2,mine:2,ranch:3,train:3,steam:3,
    ・出る 前に ボスの ひとこと。出る 前に こうさん しないよう、のこっている あいだは 「だれも いない こうさん」を まつ
    ===================================================================== */
 const BS_TURN=6;
+/* 11/2 ボスの バランス表（ボットで 調整）。hp＝ボスの 体力の 倍率／lv＝子分の レベル（＋−）／keep＝子分カードの 数（null＝そのまま）／sa,sh＝覚醒した ボス本人の 攻撃・体力（＋−）
+   nanashi.duel＝決とうの ときの 名無しの 攻撃/体力。tut＝はじめての 旅の ボス */
+var BBAL={
+  bibiri:{hp:.65,lv:0,keep:4,sa:-3,sh:-3},zombino:{hp:.5,lv:-3,keep:4,sa:-6,sh:-6,zcap:2},eagle:{hp:.8,lv:-3,keep:4,sa:-6,sh:-6},mustache:{hp:.8,lv:0,keep:null,sa:-3,sh:-3},
+  bunyan:{hp:.8,lv:-3,keep:6,sa:-3,sh:-3},nanashi:{hp:1,lv:0,keep:null,sa:0,sh:0,duel:{a:8,h:14}},ketcham:{hp:.65,lv:-4,keep:null,sa:-3,sh:-3},ruler:{hp:.65,lv:-4,keep:7,sa:0,sh:0},
+  ma:{hp:.8,lv:-6,keep:5,sa:-4,sh:-4,kidLv:3},ice:{hp:.45,lv:-6,keep:6,sa:0,sh:0},ikoku:{hp:.35,lv:-7,keep:4,sa:-11,sh:-11,steal:1},adara:{hp:.6,lv:-8,keep:4,sa:-11,sh:-11,shN:1},
+  amelie:{hp:.6,lv:-8,keep:5,sa:-4,sh:-4},capone:{hp:.4,lv:-10,keep:3,sa:-10,sh:-10},
+  tut:{hp:.67,lv:0,keep:4,turn:4,self:{lv:1,plus:0},sa:0,sh:0}};
+const bbalOf=id=>{try{return TUT_RUN()?BBAL.tut:BBAL[id]}catch(e){return null}};
+/* 名無しのガンマンは しょっぱなから 出てくる（ボスが 出てきた すぐ あと、あなたの さいしょの ターンの 前） */
+const bsOpener=id=>id==='nanashi';
 const BS_LINE={
   bibiri:'こ、こうなったら… おれさまが 自分で 出てやる！',
   zombino:'ファミリーの ドンが 出る ときが きたようだな…',
@@ -4853,7 +4865,7 @@ const BS_LINE={
   capone:'ニャンコ・ファミリーの ボスが 出る！ みんな 集まれ！'};
 const bsCard=()=>B&&B.spec&&B.spec.kind==='boss'&&B.spec.bossSelfCard&&!B._bsDone&&C[B.spec.bossSelfCard.id]?B.spec.bossSelfCard:null;
 const bsEmpty=()=>!B.foe.deck.length&&!B.foe.hand.length&&!B.foe.board.filter(m=>m.hp>0).length;
-const bsReady=()=>{if(!bsCard()||B.over||B.foe.hp<=0)return false;if(B.foe.hp<=B.foe.max/2)B._bsHalf=1;return !!(B._bsHalf||B.turn>=BS_TURN||bsEmpty())};
+const bsReady=()=>{if(!bsCard()||B.over||B.foe.hp<=0)return false;if(B.foe.hp<=B.foe.max/2)B._bsHalf=1;const bb=bbalOf(bsCard().id);return !!(B._bsHalf||B.turn>=((bb&&bb.turn)||BS_TURN)||bsEmpty())};
 async function bsWaitText(max=4500){if(!HUMAN)return;await sleep(350);let w=0;while(document.querySelector('.sbub,.saypop')&&w<max){await new Promise(r=>setTimeout(r,150));w+=150}}
 async function bossSelfCome(){const c=bsCard();if(!c)return false;const sd=B.foe,id=c.id;B._bsDone=1;
   try{if(HUMAN){try{renderBattle()}catch(e){}{let w=0;while(((typeof uiBusy==='function'&&uiBusy())||document.querySelector('.cbpop,.hintpop,.kobub,.saypop,.sbub,.nnann'))&&w++<40)await sleep(150)}/* ほかの 文字と かさねない */
@@ -4864,7 +4876,7 @@ async function bossSelfCome(){const c=bsCard();if(!c)return false;const sd=B.foe
         sd.board=sd.board.filter(x=>x!==w);if(w.card&&!w.card.bossSelf)sd.grave.push(w.card);if(HUMAN)try{renderBattle()}catch(e){}}}
     const m=summon(sd,id,c.lv||MAX_LV,c.plus||0,{...c});if(!m)return false;
     sd.board.splice(sd.board.indexOf(m),1);sd.board.splice(Math.floor(sd.board.length/2),0,m);/* まん中 */
-    m.awake=1;m.awT=0;m.bossSelf=1;const P=TUT_RUN()?0:((typeof AWK!=='undefined'&&AWK[id]&&AWK[id].plus)||2);/* はじめての 旅は 覚醒の ＋は つけない（いままでの 強さの まま） */m.atk+=P;m.hp+=P;m.max+=P;m.baseAtk=m.atk;
+    m.awake=1;m.awT=0;m.bossSelf=1;const P=TUT_RUN()?0:((typeof AWK!=='undefined'&&AWK[id]&&AWK[id].plus)||2);/* はじめての 旅は 覚醒の ＋は つけない（いままでの 強さの まま） */m.atk+=P;m.hp+=P;m.max+=P;m.baseAtk=m.atk;{const bb=bbalOf(id);if(bb){m.atk=Math.max(1,m.atk+(bb.sa||0));m.hp=m.max=Math.max(1,m.hp+(bb.sh||0));m.baseAtk=m.atk}}
     const wire=HUMAN&&window.CFX&&CFX._awkwire&&CFX.on;
     if(HUMAN){try{SFX.place()}catch(e){}try{renderBattle()}catch(e){}
       /* まず 見参（ふつうに 出した ときと おなじ ポンッ）→ 一拍 → 覚醒 */
@@ -4872,13 +4884,13 @@ async function bossSelfCome(){const c=bsCard();if(!c)return false;const sd=B.foe
       if(!wire){floatAt(uEl(m),'👑 覚醒！','crit');try{shakeApp()}catch(e){}try{SFX.legend&&SFX.legend()}catch(e){}
         if(window.CFX&&CFX.awaken&&uEl(m))try{await CFX.awaken(uEl(m))}catch(e){}}}
     if(id==='nanashi'){
-      /* ボスの 名無し：すべてを すてて、ただ ひとりの 決とう（99/99 だと 子どもが ぜったい 勝てないので、ボス がわは 7/25） */
+      /* ボスの 名無し：さいしょ（ボスが 出てきた すぐ あと）に 出て、すべてを すてて、ただ ひとりの 決とう（11/2：強さは BBAL.nanashi.duel） */
       if(wire&&CFX._awaken&&uEl(m))try{await CFX._awaken(uEl(m),'nanashi',sd)}catch(e){}
       const oth=sd.board.filter(x=>x!==m);
       if(HUMAN){say('名無しのガンマン「……」 すべてを すてて、ただ ひとりの 決とう！');await bsWaitText();
         for(const x of oth){const el=uEl(x);if(el){el.style.transition='opacity .4s,transform .4s,filter .4s';el.style.filter='grayscale(1)';el.style.opacity='0';el.style.transform='translateY(-14px)'}try{SFX.place()}catch(e){}await sleep(380)}if(oth.length)await sleep(250)}
       oth.forEach(x=>{if(x.card)sd.grave.push(x.card)});sd.board=[m];sd.grave.push(...sd.hand,...sd.deck);sd.hand=[];sd.deck=[];
-      m.atk=m.baseAtk=7;m.hp=m.max=25;if(HUMAN){try{renderBattle()}catch(e){}try{shakeApp()}catch(e){}floatAt(uEl(m),'7/25','heal');await sleep(900)}}
+      {const nv=TUT_RUN()?{a:4,h:12}:(BBAL.nanashi.duel||{a:8,h:14});m.atk=m.baseAtk=nv.a;m.hp=m.max=nv.h}if(HUMAN){try{renderBattle()}catch(e){}try{shakeApp()}catch(e){}floatAt(uEl(m),'しんの すがた！','crit');await sleep(900)}}
     else{const A=typeof AWX!=='undefined'&&AWX[id];if(A&&A.start)await A.start(sd,m)}
     /* マダム：「敵は コイン0」は ボス がわから だと あなたの コイン */
     if(id==='mustache'&&B&&B.foe._coinZero){B.foe._coinZero=0;B.me._coinZero=1}
@@ -4899,6 +4911,8 @@ function bsInstall(){if(bsInstall.done)return;bsInstall.done=1;
   /* ケッチャム（ボス がわ）：あなたの 手札から えらぶのは ボス（えらぶ 画面は 出さない） */
   if(typeof pickFromHand==='function'){const _pf=pickFromHand;pickFromHand=function(o,n){if(B&&o===B.me)return Promise.resolve([...o.hand].sort((a,b)=>C[b.id].c-C[a.id].c).slice(0,n));return _pf.apply(this,arguments)}}}
 {const _ft=foeTurn;foeTurn=async function(){bsInstall();return _ft.apply(this,arguments)}}
+/* しょっぱなに 出る ボス（名無し）：あなたの さいしょの ターンが はじまる 前に 出てくる */
+{const _st0=startTurn;startTurn=async function(sd){try{if(B&&sd===B.me&&B.turn===0&&!B.over){const c=bsCard();if(c&&bsOpener(c.id)){bsInstall();const bz=B.busy;B.busy=true;try{await bossSelfCome()}finally{if(B)B.busy=bz}}}}catch(e){console.warn('bsOpener',e)}if(!B||B.over)return;return _st0.apply(this,arguments)}}
 
 
 /* =====================================================================
@@ -6952,7 +6966,7 @@ AWS.ma=async function(sd,m){sd._maKids=0;const lv=m.lv||1;for(const id of ['maKi
 delete AWX.ma.turn;
 {const _cu=cleanup;cleanup=async function(){const dead=B?[B.me,B.foe].map(sd=>sd.board.filter(m=>m.hp<=0&&C[m.id]&&C[m.id].kid&&!(m.kw.has('revive')&&!m.revived)).length):[0,0];
   const r=await _cu.apply(this,arguments);if(B&&!B.over)[B.me,B.foe].forEach((sd,i)=>{if(!dead[i])return;sd._maKids=(sd._maKids||0)+dead[i];
-    if(sd._maKids>=3){sd._maKids=0;if(sd.hand.length<10){sd.hand.push({id:'ma',lv:7,plus:0,awake:1,_new:1});if(HUMAN&&sd===B.me){say('👑 ママ「よくも うちの子を…！」 覚醒した ママが 手札に もどってきた！');try{renderBattle()}catch(e){}}}}});return r}}
+    if(sd._maKids>=3){sd._maKids=0;/* 11/2：ボス戦の 敵がわは 1回だけ（なんども もどると 勝てない） */const bossFoe=sd===B.foe&&B.spec&&B.spec.kind==='boss';if(bossFoe&&B._maBackOnce)return;if(bossFoe)B._maBackOnce=1;if(sd.hand.length<10){sd.hand.push({id:'ma',lv:7,plus:0,awake:1,_new:1});if(HUMAN&&sd===B.me){say('👑 ママ「よくも うちの子を…！」 覚醒した ママが 手札に もどってきた！');try{renderBattle()}catch(e){}}}}});return r}}
 /* ---- ドゥー：毒 → のろい（攻撃した 相手の 攻撃-1。かさなる） ---- */
 if(C.doo){delete C.doo.poison;C.doo.curse=1}
 Object.assign(KW_COL,{curse:'#7a4aa8'});
@@ -8769,6 +8783,32 @@ Object.assign(TUNE.bossLvAdd,{hill:-2,canyon:-2,saloon:-4,mine:-3,ranch:-4,train
 /* 10/28：デッキを もどす しくみは なし。かわりに ボスの 子分の 数を へらして、もってる カードで 勝てるように */
 {const _mb=makeBoss;makeBoss=function(){const sp=_mb();try{if(!TUT_RUN()){const idx=Object.keys(STAGES).indexOf(R.sid);const keep=6+Math.floor(idx/2);const self=sp.deck.filter(c=>c.bossSelf);let rest=sp.deck.filter(c=>!c.bossSelf);rest=rest.slice(0,keep);sp.deck=shuffle([...rest,...self]);sp.foe.hp=sp.foe.max=Math.max(8,Math.round(sp.foe.hp*.85))}}catch(e){}return sp}}
 Object.assign(STAGES.bayou,{bossHp:44});Object.assign(TUNE.bossLvAdd,{oasis:-1});
+
+
+/* 11/2 ボスの バランス（表 BBAL は f19_boss.js）。ほかの ボス調整（f21・f68）の いちばん 外がわで かける
+   lv は 子分カードと、とちゅうで かけつける 子分（zl）の 両方に きく（TUNE.bossLvAdd に たす） */
+const BBAL_LV0={};
+{const _mb=makeBoss;makeBoss=function(){let bb=null,id=null;
+  try{id=STAGES[R.sid].boss;bb=TUT_RUN()?BBAL.tut:BBAL[id];
+    if(!TUT_RUN()&&typeof TUNE!=='undefined'&&TUNE.bossLvAdd){if(!(R.sid in BBAL_LV0))BBAL_LV0[R.sid]=TUNE.bossLvAdd[R.sid]||0;TUNE.bossLvAdd[R.sid]=BBAL_LV0[R.sid]+((bb&&bb.lv)||0)}}catch(e){}
+  const sp=_mb();try{if(!bb)return sp;
+    if(TUT_RUN()&&bb.lv)sp.deck.forEach(c=>{if(!c.bossSelf)c.lv=Math.max(1,Math.min(MAX_LV,(c.lv||1)+bb.lv))});
+    if(bb.hp&&bb.hp!==1)sp.foe.hp=sp.foe.max=Math.max(5,Math.round(sp.foe.hp*bb.hp));
+    if(bb.keep!=null){const self=sp.deck.filter(c=>c.bossSelf);sp.deck=[...sp.deck.filter(c=>!c.bossSelf).slice(0,bb.keep),...self]}
+  }catch(e){}return sp}}
+/* ドン・ゾンビーノ（ボス本人）：ゾンビが かけつけるのは 2ターンに 1回・1体（場の ゾンビは zcap 体まで）。なかまの 覚醒ゾンビーノは そのまま */
+if(typeof AWX!=='undefined'&&AWX.zombino&&AWX.zombino.end){const _ze=AWX.zombino.end;AWX.zombino.end=async function(sd,m){if(!(m&&m.bossSelf))return _ze.apply(this,arguments);
+  if(B.turn%2)return;const cap=(BBAL.zombino&&BBAL.zombino.zcap!=null)?BBAL.zombino.zcap:2;const z=sd.board.filter(x=>x.hp>0&&x.id==='zombieT').length;const n=Math.max(0,Math.min(1,room(sd),cap-z));
+  if(!n)return;const made=await riseSummon(sd,m,'zombieT',2,n);if(made.length&&HUMAN){say('ゾンビが かけつけた！');await sleep(500)}}}
+/* アダラー（ボス本人）：3ターンごとの「せいなるバリア」は ふつうの バリア（shN 回）。なかまの 覚醒アダラーは 3じゅうの まま */
+if(typeof AWX!=='undefined'&&AWX.adara&&AWX.adara.turn){const _at=AWX.adara.turn;AWX.adara.turn=function(sd,m){if(!(m&&m.bossSelf))return _at.apply(this,arguments);
+  if(m.awT%3===0){const n=(BBAL.adara&&BBAL.adara.shN)||1;sd.board.forEach(b=>{if(b.hp>0){b.kw.add('shield');b.shN=Math.max(b.shN||0,n)}});if(HUMAN)say('せいなるバリア！ なかま ぜんいんに バリア')}}}
+/* ママ（ボス本人）：手札に くる 子どもたちは ボスの 強さ（Lv10）ではなく kidLv（なかまの 覚醒ママは そのまま） */
+if(typeof AWS!=='undefined'&&AWS.ma){const _am=AWS.ma;AWS.ma=async function(sd,m){if(!(m&&m.bossSelf))return _am.apply(this,arguments);return _am.call(this,sd,{lv:(BBAL.ma&&BBAL.ma.kidLv)||3})}}
+/* 異国の王（ボス本人）：家来に する 敵は steal 人まで（なかまの 覚醒アーサーは 2人の まま） */
+if(typeof AWS!=='undefined'&&AWS.ikoku){const _ik=AWS.ikoku;AWS.ikoku=async function(sd,m){if(!(m&&m.bossSelf))return _ik.apply(this,arguments);
+  const n=(BBAL.ikoku&&BBAL.ikoku.steal!=null)?BBAL.ikoku.steal:2,had=Object.prototype.hasOwnProperty.call(sd,'maxB'),old=sd.maxB;
+  sd.maxB=Math.min(bmax(sd),sd.board.length+n);try{return await _ik.apply(this,arguments)}finally{if(had)sd.maxB=old;else delete sd.maxB}}}
 
 
 /* 10/28：ウィピィの 顔を セリフに あわせる（ねむい→ねむそう、こわい→こまり顔 …）
